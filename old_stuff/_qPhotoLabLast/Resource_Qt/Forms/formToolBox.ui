@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormToolBox</class>
+ <widget class="QWidget" name="FormToolBox">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>61</width>
+    <height>241</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>2</number>
+   </property>
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pBtnMove">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Resource/qFsResource.qrc">
+             <normaloff>:/AppSpecific/tb_hand.png</normaloff>
+             <normalon>:/AppSpecific/tb_hand-s.png</normalon>
+             <disabledon>:/AppSpecific/tb_hand-d.png</disabledon>:/AppSpecific/tb_hand.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pBtnZoom">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Resource/qFsResource.qrc">
+             <normaloff>:/AppSpecific/tb_magifier.png</normaloff>
+             <normalon>:/AppSpecific/tb_magifier-s.png</normalon>
+             <disabledon>:/AppSpecific/tb_magifier-d.png</disabledon>:/AppSpecific/tb_magifier.png</iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_03">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_04">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_05">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_06">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_07">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_08">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_09">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_10">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_11">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_12">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_13">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_14">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_15">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="qLib::qToolButton" name="m_pTb_16">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/AppSpecific/tb_tool.png</normalon>
+             <disabledon>:/AppSpecific/tb_tool-d.png</disabledon>
+            </iconset>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>102</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qLib::qToolButton</class>
+   <extends>QToolButton</extends>
+   <header location="global">qToolButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../Resource/qFsResource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
