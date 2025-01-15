@@ -11,7 +11,6 @@
 *  Detailed description starts here.
 *******************************************************************************/
 #pragma once
-
 #ifdef _USE_QT_
 
 
@@ -36,6 +35,9 @@ using namespace aLib::aMath;
 using namespace aLib::aWin;
 
 
+/*******************************************************************************
+* namespace
+*******************************************************************************/
 namespace aLib {
 namespace aGraphic {
 namespace SysQt {

@@ -16,7 +16,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMainWin.h"
+#include "aMdiMainWin.h"
 
 using namespace aLib::aWin;
 
@@ -25,7 +25,7 @@ using namespace aLib::aWin;
 /*******************************************************************************
 * class MainWin
 *******************************************************************************/
-class MainWin : public aMainWin
+class MainWin : public aMdiMainWin
 {
     public:
         MainWin();

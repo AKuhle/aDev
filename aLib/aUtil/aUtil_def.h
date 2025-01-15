@@ -21,6 +21,7 @@ namespace aUtil {
 *******************************************************************************/
 template <typename Tkey, typename T2> class aMap;
 template <typename T> class aVector;
+template <typename T> class aUniquePtrList;
 
 class aArgument;
 class aColor;

@@ -25,6 +25,7 @@
 #include <random>
 #include <string>
 
+#include <list>
 #include <map>
 #include <vector>
 
@@ -85,6 +86,35 @@ using	color_t			= float;			//!> data type for class Rgb
 #define PI_2                    1.570796326794896619    // Pi / 2
 #define PI_3                    1.047197551196597746    // Pi / 3
 #define PI_4                    0.785398163397448309    // Pi / 4
+
+
+/*******************************************************************************
+* modifiers
+*******************************************************************************/
+#define MODIFIER_NONE			0x0000
+#define MODIFIER_SHIFT			0x0001
+#define MODIFIER_CTRL			0x0002
+#define MODIFIER_ALT			0x0004
+#define MODIFIER_KEYPAD			0x0008
+
+
+/*******************************************************************************
+* enums
+*******************************************************************************/
+enum class enumPosition
+{
+    None,
+    North,
+    NorthEast,
+    East,
+    SouthEast,
+    South,
+    SouthWest,
+    West,
+    NorthWest,
+    Inside,
+    Outside
+}; // enumPosition
 
 
 /*******************************************************************************

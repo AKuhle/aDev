@@ -69,7 +69,7 @@ aDimension2D<s32> aLayoutObj::minSize() const
 *******************************************************************************/
 s32 aLayoutObj::minW() const
 {
-    return m_d2dMinSize.w();
+    return minSize().w();
 } // aLayoutObj::minW
 
 
@@ -78,7 +78,7 @@ s32 aLayoutObj::minW() const
 *******************************************************************************/
 s32 aLayoutObj::minH() const
 {
-    return m_d2dMinSize.h();
+    return minSize().h();
 } // aLayoutObj::minH
 
 
@@ -133,7 +133,7 @@ aDimension2D<s32> aLayoutObj::maxSize() const
 *******************************************************************************/
 s32 aLayoutObj::maxW() const
 {
-    return m_d2dMaxSize.w();
+    return maxSize().w();
 } // aLayoutObj::maxW
 
 
@@ -142,7 +142,7 @@ s32 aLayoutObj::maxW() const
 *******************************************************************************/
 s32 aLayoutObj::maxH() const
 {
-    return m_d2dMaxSize.h();
+    return maxSize().h();
 } // aLayoutObj::maxH
 
 

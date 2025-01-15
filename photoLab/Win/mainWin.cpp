@@ -39,7 +39,8 @@ MainWin::~MainWin()
 *******************************************************************************/
 bool MainWin::onCreate()
 {
-    setGeometry(50, 50, 300, 200);
+    setGeometry(50, 50, 640, 360);
+    setMinSize(480, 270);
 
     return true;
 } // MainWin::onCreate

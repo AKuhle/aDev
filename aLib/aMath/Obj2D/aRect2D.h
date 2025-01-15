@@ -17,9 +17,12 @@
 * includes
 *******************************************************************************/
 #include "aLib_def.h"
+
 #include "aUtil/aHelper.h"
+#include "aUtil/aMargin.h"
 
 #include "aMath/Obj2D/aMathObj2D.h"
+#include "aMath/Obj2D/aDimension2D.h"
 #include "aMath/Obj2D/aVector2D.h"
 
 using namespace aLib::aUtil;
@@ -105,6 +108,12 @@ class aRect2D : public aMathObj2D
         //										const T				_h);
 
         aRect2D<T>&             operator=(const aRect2D<T> &_rhs);
+
+        aRect2D<T>              operator+(const aMargin &_margin) const;
+        aRect2D<T>              operator-(const aMargin &_margin) const;
+
+        aRect2D<T>&             operator+=(const aMargin &_margin);
+        aRect2D<T>&             operator-=(const aMargin &_margin);
 
         bool					operator==(const aRect2D<T> &_rhs) const;
         bool 					operator!=(const aRect2D<T> &_rhs) const;

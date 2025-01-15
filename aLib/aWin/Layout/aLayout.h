@@ -34,9 +34,10 @@ class aLayout : public aLayoutObj
         aLayout();
         ~aLayout();
 
-        virtual void            layoutRect2ContentRect(aRect2D<s32> &_r2d);
+        virtual aDimension2D<s32>   minSize() const override;
 
-        virtual void            arrangeChilds(aRect2D<s32>  _r2d) = 0;
+        virtual aDimension2D<s32>   calculateMinSize() const = 0;
+        virtual void                arrangeChilds(aRect2D<s32>  _r2dLayout) = 0;
 }; // class aLayout
 
 

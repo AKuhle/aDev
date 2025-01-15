@@ -38,11 +38,12 @@ aLayout::~aLayout()
 
 
 /*******************************************************************************
-* aLayout::layoutRect2ContentRect
+* aLayout::minSize
 *******************************************************************************/
-void aLayout::layoutRect2ContentRect(aRect2D<s32> &/*_r2d*/)
+aDimension2D<s32> aLayout::minSize() const
 {
-} // aLayout::layoutRect2ContentRect
+    return calculateMinSize().max(aLayoutObj::minSize());
+} // aLayout::minSize
 
 
 } // namespace aWin

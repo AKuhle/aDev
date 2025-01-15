@@ -71,6 +71,8 @@ class aDimension2D : public aMathObj2D
         void					setEmpty();
         bool					isEmpty() const;
 
+        aDimension2D<T>         max(const aDimension2D<T> &_rhs) const;
+
         friend std::ostream& operator<<(std::ostream           &_os,
                                         const aDimension2D<T>  &_d2d)
         {

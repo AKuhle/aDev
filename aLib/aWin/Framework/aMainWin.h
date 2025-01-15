@@ -39,6 +39,8 @@ class aMainWin : public aBaseWin
     * aBaseWin interface
     *******************************************************************************/
     protected:
+        virtual aRect2D<s32>        contentRect() const;    // take dockareas into account
+        virtual aRect2D<s32>        layoutRect() const;
         virtual bool                onSysCreate();
 
 }; // class aMainWin

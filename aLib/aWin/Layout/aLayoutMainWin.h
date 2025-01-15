@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file qLayoutMainWin.h
+* \file aLayoutMainWin.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -11,42 +11,44 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "Win/winDefs.h"
-#include "Win/Layout/qLayout.h"
+#include "aWin/aWin_def.h"
 
+#include "aWin/Layout/aLayout.h"
 
 
 /*******************************************************************************
 * namespace
 *******************************************************************************/
-namespace qLib {
-namespace Win {
+namespace aLib {
+namespace aWin {
 
 
 /*******************************************************************************
-* class qLayoutMainWin
+* class aLayoutMainWin
 *******************************************************************************/
-class qLayoutMainWin : public qLayout
+class aLayoutMainWin : public aLayout
 {
     private:
-        qWin        *m_pTitleBar    { nullptr };
+        aTitleBar   *m_pTitleBar    { nullptr };
 
     public:
-        qLayoutMainWin();
-        ~qLayoutMainWin();
+        aLayoutMainWin();
+        ~aLayoutMainWin();
 
-        void                    setTitleBar(qWin *_pBar);
-        qWin*                   titleBar() const;
+        void                        setTitleBar(aTitleBar *_pBar);
+        aTitleBar*                  titleBar() const;
+
+        void                        shrinkContentSize(aRect2D<s32>  &_r2dContent) const;
 
 
     /*******************************************************************************
     * qLayout interfasce
     *******************************************************************************/
     public:
-        virtual void            adjustContentRect(qRect2D<s32> &_r2d) override;
-        virtual void            arrangeChilds(qRect2D<s32>  _r2d) override;
-}; // class qLayoutMainWin
+        virtual aDimension2D<s32>   calculateMinSize() const override;
+        virtual void                arrangeChilds(aRect2D<s32>  _r2dLayout) override;
+}; // class aLayoutMainWin
 
 
-} // namespace Win
-} // namespace qLib
+} // namespace aWin
+} // namespace aLib

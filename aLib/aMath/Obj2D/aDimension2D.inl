@@ -209,5 +209,16 @@ bool aDimension2D<T>::isEmpty() const
 } // aDimension2D<T>::isEmpty
 
 
+/*******************************************************************************
+* aDimension2D<T>::max
+*******************************************************************************/
+template<class T>
+aDimension2D<T> aDimension2D<T>::max(const aDimension2D<T> &_rhs) const
+{
+    return aDimension2D<T> (aUtil::max<T> (m_w, _rhs.m_w),
+                            aUtil::max<T> (m_h, _rhs.m_h));
+} // aDimension2D<T>::max
+
+
 } // namespace aMath
 } // namespace aLib

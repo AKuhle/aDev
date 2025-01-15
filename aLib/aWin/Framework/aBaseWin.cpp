@@ -22,6 +22,12 @@ namespace aWin {
 
 
 /*******************************************************************************
+* statics
+*******************************************************************************/
+unique_ptr<aWinStyleFactory> aBaseWin::m_pWinStyleFactory;
+
+
+/*******************************************************************************
 * aBaseWin::aBaseWin
 *******************************************************************************/
 aBaseWin::aBaseWin(aBaseWin  *_pParent  /* = nullptr */)
@@ -43,8 +49,27 @@ aBaseWin::~aBaseWin()
 *******************************************************************************/
 bool aBaseWin::create()
 {
-    return onSysCreate() && onCreate();
+    bool bSuccess = onSysCreate() && onCreate();
+
+    if (bSuccess)
+    {
+        if (m_pWinStyleFactory != nullptr)
+        {
+            m_pWinStyleFactory->setWinStyle(*this);
+        }
+    }
+
+    return bSuccess;
 } // aBaseWin::create
+
+
+/*******************************************************************************
+* aBaseWin::setWinStyleFactory
+*******************************************************************************/
+void aBaseWin::setWinStyleFactory(unique_ptr<aWinStyleFactory> _pWinStyleFactory)
+{
+    m_pWinStyleFactory = std::move(_pWinStyleFactory);
+} // aBaseWin::setWinStyleFactory
 
 
 /*******************************************************************************
@@ -84,6 +109,112 @@ bool aBaseWin::isVisible()
 
 
 /*******************************************************************************
+* aBaseWin::showMaximized
+*******************************************************************************/
+void aBaseWin::showMaximized()
+{
+    return _showMaximized();
+} // aBaseWin::showMaximized
+
+
+/*******************************************************************************
+* aBaseWin::showMinimized
+*******************************************************************************/
+void aBaseWin::showMinimized()
+{
+    return _showMinimized();
+} // aBaseWin::showMinimized
+
+
+/*******************************************************************************
+* aBaseWin::showNormal
+*******************************************************************************/
+void aBaseWin::showNormal()
+{
+    return _showNormal();
+} // aBaseWin::showNormal
+
+
+/*******************************************************************************
+* aBaseWin::toggleMaximized
+*******************************************************************************/
+void aBaseWin::toggleMaximized()
+{
+    if (isMaximized())
+    {
+        showNormal();
+    }
+    else
+    {
+        showMaximized();
+    }
+} // aBaseWin::toggleMaximized
+
+
+/*******************************************************************************
+* aBaseWin::isMaximized
+*******************************************************************************/
+bool aBaseWin::isMaximized() const
+{
+    return _isMaximized();
+} // aBaseWin::isMaximized
+
+
+/*******************************************************************************
+* aBaseWin::isMinimized
+*******************************************************************************/
+bool aBaseWin::isMinimized() const
+{
+    return _isMinimized();
+} // aBaseWin::isMinimized
+
+
+/*******************************************************************************
+* aBaseWin::modifiers
+*******************************************************************************/
+u32 aBaseWin::modifiers() const
+{
+    return _modifiers();
+} // aBaseWin::modifiers
+
+
+/*******************************************************************************
+* aBaseWin::mouseButton
+*******************************************************************************/
+u32 aBaseWin::mouseButton() const
+{
+    return _mouseButton();
+} // aBaseWin::mouseButton
+
+
+/*******************************************************************************
+* aBaseWin::localCursorPos
+*******************************************************************************/
+aVector2D<s32> aBaseWin::localCursorPos() const
+{
+    return _localCursorPos();
+} // aBaseWin::localCursorPos
+
+
+/*******************************************************************************
+* aBaseWin::globalCursorPos
+*******************************************************************************/
+aVector2D<s32> aBaseWin::globalCursorPos() const
+{
+    return _globalCursorPos();
+} // aBaseWin::globalCursorPos
+
+
+/*******************************************************************************
+* aBaseWin::setGeometry
+*******************************************************************************/
+void aBaseWin::setGeometry(const aRect2D<s32>  &_r2d)
+{
+    _setGeometry(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h());
+} // aBaseWin::setGeometry
+
+
+/*******************************************************************************
 * aBaseWin::setGeometry
 *******************************************************************************/
 void aBaseWin::setGeometry(s32  _x,
@@ -96,48 +227,92 @@ void aBaseWin::setGeometry(s32  _x,
 
 
 /*******************************************************************************
-* aBaseWin::margin
+* aBaseWin::geometry
 *******************************************************************************/
-const aMargin& aBaseWin::margin() const
+aRect2D<s32> aBaseWin::geometry() const
 {
-    return m_Margin;
-} // aBaseWin::margin
+    return _geometry();
+} // aBaseWin::geometry
 
 
 /*******************************************************************************
-* aBaseWin::margin
+* aBaseWin::w
 *******************************************************************************/
-aMargin& aBaseWin::margin()
+s32 aBaseWin::w() const
 {
-    return m_Margin;
-} // aBaseWin::margin
+    return _w();
+} // aBaseWin::w
 
 
 /*******************************************************************************
-* aBaseWin::border
+* aBaseWin::h
 *******************************************************************************/
-const aMargin& aBaseWin::border() const
+s32 aBaseWin::h() const
 {
-    return m_Border;
-} // aBaseWin::border
+    return _h();
+} // aBaseWin::h
+
 
 
 /*******************************************************************************
-* aBaseWin::border
+* aBaseWin::winRect
 *******************************************************************************/
-aMargin& aBaseWin::border()
+aRect2D<s32> aBaseWin::winRect() const
 {
-    return m_Border;
-} // aBaseWin::border
+    return aRect2D<s32> (0, 0, w(), h());
+} // aBaseWin::winRect
 
 
 /*******************************************************************************
-* aBaseWin::padding
+* aBaseWin::borderRect
 *******************************************************************************/
-const aMargin& aBaseWin::padding() const
+aRect2D<s32> aBaseWin::borderRect() const
 {
-    return m_Padding;
-} // aBaseWin::padding
+    aRect2D<s32>    r = winRect();
+
+    // maximized wins don't have a margin
+    if (!isMaximized())
+    {
+        r -= margin();
+    }
+
+    return r;
+} // aBaseWin::borderRect
+
+
+/*******************************************************************************
+* aBaseWin::paddingRect
+*******************************************************************************/
+aRect2D<s32> aBaseWin::paddingRect() const
+{
+    aRect2D<s32>    r = borderRect();
+
+    // maximized wins don't show a border
+    if (!isMaximized())
+    {
+        r -= border();
+    }
+
+    return r;
+} // aBaseWin::paddingRect
+
+
+/*******************************************************************************
+* aBaseWin::contentRect
+*******************************************************************************/
+aRect2D<s32> aBaseWin::contentRect() const
+{
+    return paddingRect() - padding();
+} // aBaseWin::contentRect
+
+
+/*******************************************************************************
+* aBaseWin::layoutRect
+*******************************************************************************/
+aRect2D<s32> aBaseWin::layoutRect() const
+{
+    return contentRect();
+} // aBaseWin::layoutRect
 
 
 /*******************************************************************************
@@ -150,13 +325,39 @@ void aBaseWin::setLayout(unique_ptr<aLayout> _pLayout)
 
 
 /*******************************************************************************
-* aBaseWin::padding
+* aBaseWin::parent
 *******************************************************************************/
-aMargin& aBaseWin::padding()
+aBaseWin* aBaseWin::parent() const
 {
-    return m_Padding;
-} // aBaseWin::padding
+    return dynamic_cast<aBaseWin *> (_parent());
+} // aBaseWin::parent
 
+
+/*******************************************************************************
+* aBaseWin::setParent
+*******************************************************************************/
+void aBaseWin::setParent(aBaseWin *_pParent)
+{
+    _setParent(_pParent);
+} // aBaseWin::setParent
+
+
+/*******************************************************************************
+* aBaseWin::setCursor
+*******************************************************************************/
+void aBaseWin::setCursor(const aCursor &_cursor)
+{
+    _setCursor(_cursor);
+} // aBaseWin::setCursor
+
+
+/*******************************************************************************
+* aBaseWin::setMouseTracking
+*******************************************************************************/
+void aBaseWin::setMouseTracking(bool _bEnable)
+{
+    _setMouseTracking(_bEnable);
+} // aBaseWin::setMouseTracking
 
 } // namespace aWin
 } // namespace aLib

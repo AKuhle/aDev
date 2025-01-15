@@ -107,6 +107,64 @@ aRect2D<T>& aRect2D<T>::operator=(const aRect2D<T>	&_rhs)
 
 
 /*******************************************************************************
+* aRect2D<T>::operator+
+*******************************************************************************/
+template<class T>
+aRect2D<T> aRect2D<T>::operator+(const aMargin &_margin) const
+{
+    return	aRect2D<T> (m_x - _margin.l(),
+                        m_y - _margin.t(),
+                        m_w + _margin.w(),
+                        m_h + _margin.h());
+} // aRect2D<T>::operator+
+
+
+/*******************************************************************************
+* aRect2D<T>::operator-
+*******************************************************************************/
+template<class T>
+aRect2D<T> aRect2D<T>::operator-(const aMargin &_margin) const
+{
+    return	aRect2D<T> (m_x + _margin.l(),
+                        m_y + _margin.t(),
+                        m_w - _margin.w(),
+                        m_h - _margin.h());
+} // aRect2D<T>::operator-
+
+
+/*******************************************************************************
+* aRect2D<T>::operator+=
+*******************************************************************************/
+template<class T>
+aRect2D<T>& aRect2D<T>::operator+=(const aMargin &_margin)
+{
+    m_x -= _margin.l();
+    m_y -= _margin.t();
+    m_w += _margin.w();
+    m_h += _margin.h();
+
+    return *this;
+} // aRect2D<T>::operator+=
+
+
+
+
+/*******************************************************************************
+* aRect2D<T>::operator-=
+*******************************************************************************/
+template<class T>
+aRect2D<T>& aRect2D<T>::operator-=(const aMargin &_margin)
+{
+    m_x += _margin.l();
+    m_y += _margin.t();
+    m_w -= _margin.w();
+    m_h -= _margin.h();
+
+    return *this;
+} // aRect2D<T>::operator-=
+
+
+/*******************************************************************************
 * aRect2D<T>::operator==
 *******************************************************************************/
 template<class T>

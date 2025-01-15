@@ -2,6 +2,7 @@
 * includes
 *******************************************************************************/
 #include "aWin/Framework/aTitleBar.h"
+#include "aWin/Tool/aParentControlTool.h"
 
 
 /*******************************************************************************
@@ -33,11 +34,11 @@ aTitleBar::~aTitleBar()
 *******************************************************************************/
 bool aTitleBar::onSysCreate()
 {
-    // setMinSize(30, 30);
+    setMinSize(30, 30);
 
-    // // start th eparent ctrl tool
-    // unique_ptr<qParentControlTool> pTool = make_unique<qParentControlTool> (this);
-    // setTool(std::move(pTool));
+    // start th eparent ctrl tool
+    unique_ptr<aParentControlTool> pTool = make_unique<aParentControlTool> (this);
+    setTool(std::move(pTool));
 
     return true;
 } // aTitleBar::onSysCreate

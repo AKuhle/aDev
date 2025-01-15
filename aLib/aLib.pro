@@ -56,6 +56,13 @@ HEADERS += \
     aApp/aMainWinApp_i.h \
     aApp/aMainWinApp_qt.h \
     aApp/main.h \
+    aGraphic/GraphicObj/aBorderObj.h \
+    aGraphic/GraphicObj/aBorderSolid.h \
+    aGraphic/GraphicObj/aFillObj.h \
+    aGraphic/GraphicObj/aFillSolid.h \
+    aGraphic/GraphicObj/aGraphicObj.h \
+    aGraphic/aCursor.h \
+    aGraphic/aCursor_qt.h \
     aGraphic/aGraphic_def.h \
     aGraphic/aPainter.h \
     aGraphic/aPainter_qt.h \
@@ -72,6 +79,8 @@ HEADERS += \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
     aUtil/Collection/aMap.h \
+    aUtil/Collection/aUniquePtrList.h \
+    aUtil/Collection/aUniquePtrList.inl \
     aUtil/Collection/aVector.h \
     aUtil/Collection/aVector.inl \
     aUtil/aArgument.h \
@@ -90,7 +99,15 @@ HEADERS += \
     aWin/Framework/aSysWin_qt.h \
     aWin/Framework/aTitleBar.h \
     aWin/Layout/aLayout.h \
+    aWin/Layout/aLayoutMainWin.h \
     aWin/Layout/aLayoutObj.h \
+    aWin/Style/aWinStyle.h \
+    aWin/Style/aWinStyleFactory.h \
+    aWin/Style/aWinStyleFactory_dark.h \
+    aWin/Tool/aBorderResizeTool.h \
+    aWin/Tool/aParentControlTool.h \
+    aWin/Tool/aToolBase.h \
+    aWin/Tool/aToolMgr.h \
     aWin/aWin_def.h \
     aLib.h \
     aLib_def.h
@@ -103,6 +120,12 @@ SOURCES += \
     aApp/aBaseApp.cpp \
     aApp/aMainWinApp_qt.cpp \
     aApp/main.cpp \
+    aGraphic/GraphicObj/aBorderObj.cpp \
+    aGraphic/GraphicObj/aBorderSolid.cpp \
+    aGraphic/GraphicObj/aFillObj.cpp \
+    aGraphic/GraphicObj/aFillSolid.cpp \
+    aGraphic/GraphicObj/aGraphicObj.cpp \
+    aGraphic/aCursor_qt.cpp \
     aGraphic/aPainter_qt.cpp \
     aGraphic/aPen_qt.cpp \
     aMath/Obj2D/aMathObj2D.cpp \
@@ -121,4 +144,12 @@ SOURCES += \
     aLib.cpp \
     aWin/Framework/aTitleBar.cpp \
     aWin/Layout/aLayout.cpp \
-    aWin/Layout/aLayoutObj.cpp
+    aWin/Layout/aLayoutMainWin.cpp \
+    aWin/Layout/aLayoutObj.cpp \
+    aWin/Style/aWinStyle.cpp \
+    aWin/Style/aWinStyleFactory.cpp \
+    aWin/Style/aWinStyleFactory_dark.cpp \
+    aWin/Tool/aBorderResizeTool.cpp \
+    aWin/Tool/aParentControlTool.cpp \
+    aWin/Tool/aToolBase.cpp \
+    aWin/Tool/aToolMgr.cpp

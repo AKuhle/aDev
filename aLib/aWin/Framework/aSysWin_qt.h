@@ -30,46 +30,79 @@ namespace SysQt {
 * class aSysWinQt
 *******************************************************************************/
 class aSysWinQt : private QWidget,
-                  public qSysWinI
+                  public aSysWinI
 {
     protected:
         aSysWinQt(aSysWinQt *_pParent = nullptr);
         virtual ~aSysWinQt();
 
 
+        virtual aSysWin*            _parent() const override;
+        virtual void                _setParent(aSysWin *_pParent) override;
+
+        virtual void                _setCursor(const aCursor &_cursor) override;
+
+        virtual void                _setMouseTracking(bool _bEnable) override;
+
+
     /*******************************************************************************
     * Qt specific
     *******************************************************************************/
     public:
-        QWidget*                getQWidget()            { return this; }
-        //     u32                     mouseButton(QMouseEvent *_pEvent) const;
+        QWidget*                    getQWidget()            { return this; }
 
 
     /*******************************************************************************
     * win state
     *******************************************************************************/
     protected:
-        virtual void            _show() override;
-        virtual void            _hide() override;
-        virtual bool            _isVisible() const override;
+        virtual void                _show() override;
+        virtual void                _hide() override;
+        virtual bool                _isVisible() const override;
+
+        virtual void                _showMaximized() override;
+        virtual void                _showMinimized() override;
+        virtual void                _showNormal() override;
+        virtual bool                _isMaximized() const override;
+        virtual bool                _isMinimized() const override;
+
+        virtual u32                 _modifiers() const override;
+        virtual u32                 _mouseButton() const override;
+        u32                         _mouseButton(QMouseEvent *_pEvent) const;
+        virtual aVector2D<s32>      _localCursorPos() const override;
+        virtual aVector2D<s32>      _globalCursorPos() const override;
 
 
     /*******************************************************************************
     * geometry
     *******************************************************************************/
     protected:
-        virtual void            _setGeometry(s32    _x,
-                                             s32    _y,
-                                             s32    _w,
-                                             s32    _h) override;
+        virtual void                _setGeometry(s32    _x,
+                                                 s32    _y,
+                                                 s32    _w,
+                                                 s32    _h) override;
+
+        virtual aRect2D<s32>        _geometry() const override;
+
+        virtual s32                 _w() const override;
+        virtual s32                 _h() const override;
+
 
     /*******************************************************************************
     * system events
     *******************************************************************************/
     private:
-        virtual void            resizeEvent(QResizeEvent *_pEvent) override;
-        virtual void            paintEvent(QPaintEvent *_pEvent) override;
+        virtual void                resizeEvent(QResizeEvent *_pEvent) override;
+        virtual void                paintEvent(QPaintEvent *_pEvent) override;
 
+        virtual void                enterEvent(QEnterEvent *_pEvent) override;
+        virtual void                leaveEvent(QEvent *_pEvent) override;
+
+        virtual void                wheelEvent(QWheelEvent *_pEvent) override;
+        virtual void                mouseDoubleClickEvent(QMouseEvent *_pEvent) override;
+        virtual void                mousePressEvent(QMouseEvent *_pEvent) override;
+        virtual void                mouseMoveEvent(QMouseEvent *_pEvent) override;
+        virtual void                mouseReleaseEvent(QMouseEvent *_pEvent) override;
 
 }; // class aSysWinQt
 

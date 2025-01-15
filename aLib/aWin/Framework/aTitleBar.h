@@ -36,7 +36,7 @@ class aTitleBar : public aBaseWin
     * aBaseWin interface
     *******************************************************************************/
     protected:
-        virtual bool                onSysCreate();
+        virtual bool                onSysCreate() override;
 };
 
 

@@ -12,8 +12,52 @@
 /*******************************************************************************
 * namespace
 *******************************************************************************/
+#include "aLib_def.h"
+
+
+/*******************************************************************************
+* namespace
+*******************************************************************************/
 namespace aLib {
 namespace aWin {
+
+
+/*******************************************************************************
+* mouse buttons
+*******************************************************************************/
+constexpr u16   MOUSE_BTN_NONE          = 0x0000;
+constexpr u16   MOUSE_BTN_LEFT          = 0x0001;
+constexpr u16   MOUSE_BTN_MIDDLE        = 0x0002;
+constexpr u16   MOUSE_BTN_RIGHT         = 0x0004;
+
+
+/*******************************************************************************
+* ToolBaseFunctions
+*******************************************************************************/
+constexpr u64   TBF_NONE                = 0x00000000;
+constexpr u64   TBF_LXOR_RECT           = 0x00000001;
+constexpr u64   TBF_USER                = 0xffffff00;
+
+
+/*******************************************************************************
+* tool id's
+*******************************************************************************/
+constexpr u32   TOOL_ID_PARENT_CONTROL  = 1;
+constexpr u32   TOOL_ID_BORDER_RESIZE   = 2;
+
+constexpr u32   TOOL_ID_USER            = 1000;
+
+
+/*******************************************************************************
+* enums
+*******************************************************************************/
+enum class enumToolResult
+{
+    Handled,
+    Unhandled,
+    Success,
+    Canceled
+}; // enumToolResult
 
 
 /*******************************************************************************
@@ -23,6 +67,8 @@ namespace aWin {
 class aLayoutObj;
 class aLayout;
 
+class aToolBase;
+class aToolMgr;
 
 // FrameWin
 #ifdef _USE_QT_
@@ -35,6 +81,10 @@ class aLayout;
 #endif // _USE_QT_
 
 class aSysWinI;
+
+class aWinStyleItem;
+class aWinStyle;
+class aWinStyleDark;
 
 class aBaseWin;
 class aMainWin;
