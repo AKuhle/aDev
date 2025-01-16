@@ -66,6 +66,8 @@ enum class enumToolResult
 // layout
 class aLayoutObj;
 class aLayout;
+class aLayoutMainWin;
+class aLayoutHoriVert;
 
 class aToolBase;
 class aToolMgr;
@@ -85,6 +87,11 @@ class aSysWinI;
 class aWinStyleItem;
 class aWinStyle;
 class aWinStyleDark;
+
+class aCtrlMgr;
+class aCtrl;
+class aButton;
+class aToolButton;
 
 class aBaseWin;
 class aMainWin;

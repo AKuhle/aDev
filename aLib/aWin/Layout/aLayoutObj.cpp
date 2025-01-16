@@ -183,5 +183,44 @@ void aLayoutObj::setMaxH(s32  _h)
 } // aLayoutObj::setMaxH
 
 
+/*******************************************************************************
+* aLayoutObj::setFixedSize
+*******************************************************************************/
+void aLayoutObj::setFixedSize(const aDimension2D<s32> &_d2dFixed)
+{
+    m_d2dMinSize = _d2dFixed;
+    m_d2dMaxSize = _d2dFixed;
+} // aLayoutObj::setFixedSize
+
+
+/*******************************************************************************
+* aLayoutObj::setFixedSize
+*******************************************************************************/
+void aLayoutObj::setFixedSize(s32  _w,
+                              s32  _h)
+{
+    m_d2dMinSize.set(_w, _h);
+    m_d2dMaxSize.set(_w, _h);
+} // aLayoutObj::setFixedSize
+
+
+/*******************************************************************************
+* aLayoutObj::isHoriExpandable
+*******************************************************************************/
+bool aLayoutObj::isHoriExpandable() const
+{
+    return m_d2dMaxSize.w() > m_d2dMinSize.w();
+} // aLayoutObj::isHoriExpandable
+
+
+/*******************************************************************************
+* aLayoutObj::isVertExpandable
+*******************************************************************************/
+bool aLayoutObj::isVertExpandable() const
+{
+    return m_d2dMaxSize.h() > m_d2dMinSize.h();
+} // aLayoutObj::isVertExpandable
+
+
 } // namespace aWin
 } // namespace aLib

@@ -101,6 +101,12 @@ using	color_t			= float;			//!> data type for class Rgb
 /*******************************************************************************
 * enums
 *******************************************************************************/
+enum class enumOrientation
+{
+    Hori,
+    Vert
+}; // enumOrientstion
+
 enum class enumPosition
 {
     None,

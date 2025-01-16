@@ -34,7 +34,7 @@ namespace SysQt {
 * aPainterQt::aPainterQt
 *******************************************************************************/
 aPainterQt::aPainterQt(aBaseWin *_pWin)
-: QPainter(_pWin->getQWidget())
+: QPainter(_pWin->sysWin())
 {
 } // aPainterQt::aPainterQt
 

@@ -46,5 +46,17 @@ aDimension2D<s32> aLayout::minSize() const
 } // aLayout::minSize
 
 
+/*******************************************************************************
+* aLayout::setGeometry
+*******************************************************************************/
+void aLayout::setGeometry(s32    _x,
+                          s32    _y,
+                          s32    _w,
+                          s32    _h)
+{
+    arrangeChilds(aRect2D<s32> (_x, _y, _w, _h));
+} // aLayout::setGeometry
+
+
 } // namespace aWin
 } // namespace aLib

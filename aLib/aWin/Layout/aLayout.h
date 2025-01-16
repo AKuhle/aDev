@@ -38,6 +38,16 @@ class aLayout : public aLayoutObj
 
         virtual aDimension2D<s32>   calculateMinSize() const = 0;
         virtual void                arrangeChilds(aRect2D<s32>  _r2dLayout) = 0;
+
+
+    /*******************************************************************************
+    * aLayoutObj interfasce
+    *******************************************************************************/
+    public:
+        virtual void                setGeometry(s32    _x,
+                                                s32    _y,
+                                                s32    _w,
+                                                s32    _h) override;
 }; // class aLayout
 
 

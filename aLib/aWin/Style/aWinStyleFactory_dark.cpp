@@ -22,6 +22,8 @@
 #include "aWin/Framework/aMainWin.h"
 #include "aWin/Framework/aTitleBar.h"
 
+#include "aWin/Ctrl/aToolButton.h"
+
 using namespace aLib::aGraphic;
 using namespace aLib::aUtil;
 
@@ -76,6 +78,13 @@ void aWinStyleFactoryDark::setWinStyle(aBaseWin &_win)
     {
         // content bg
         _win.setContentObj(make_unique<aFillSolid> (colDark0));
+    }
+
+    // aToolButton
+    else if (dynamic_cast<aToolButton *> (&_win) != nullptr)
+    {
+        // content bg
+        _win.setContentObj(make_unique<aFillSolid> (colYellow));
     }
 
     // aBaseWin

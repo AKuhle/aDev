@@ -17,6 +17,8 @@
 
 #include "aWin/Framework/aSysWin_i.h"
 
+using aSysWin_t = QWidget;
+
 
 /*******************************************************************************
 * namespace
@@ -24,6 +26,7 @@
 namespace aLib {
 namespace aWin {
 namespace SysQt {
+
 
 
 /*******************************************************************************

@@ -37,7 +37,7 @@ namespace aWin {
 /*******************************************************************************
 * class aBaseWin
 *******************************************************************************/
-class aBaseWin : public aSysWin,
+class aBaseWin : private aSysWin,
                  public aWinStyle,
                  public aLayoutObj,
                  public aToolMgr
@@ -58,6 +58,8 @@ class aBaseWin : public aSysWin,
     public:
         bool                        create();
         bool                        close();
+
+        aSysWin_t*                  sysWin();
 
 
     /*******************************************************************************
@@ -94,10 +96,12 @@ class aBaseWin : public aSysWin,
     public:
         // geometry is relativ to the parent
         void                        setGeometry(const aRect2D<s32>  &_r2d);
-        void                        setGeometry(s32    _x,
+
+        // implemetation from aLayoutObj
+        virtual void                setGeometry(s32    _x,
                                                 s32    _y,
                                                 s32    _w,
-                                                s32    _h);
+                                                s32    _h) override;
 
         aRect2D<s32>                geometry() const;
 

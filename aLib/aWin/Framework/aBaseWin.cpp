@@ -210,7 +210,7 @@ aVector2D<s32> aBaseWin::globalCursorPos() const
 *******************************************************************************/
 void aBaseWin::setGeometry(const aRect2D<s32>  &_r2d)
 {
-    _setGeometry(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h());
+    setGeometry(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h());
 } // aBaseWin::setGeometry
 
 

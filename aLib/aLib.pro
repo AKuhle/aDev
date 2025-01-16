@@ -79,6 +79,8 @@ HEADERS += \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
     aUtil/Collection/aMap.h \
+    aUtil/Collection/aPtrList.h \
+    aUtil/Collection/aPtrList.inl \
     aUtil/Collection/aUniquePtrList.h \
     aUtil/Collection/aUniquePtrList.inl \
     aUtil/Collection/aVector.h \
@@ -91,6 +93,10 @@ HEADERS += \
     aUtil/aString.h \
     aUtil/aUtil_def.h \
     aUtil/aVersionInfo.h \
+    aWin/Ctrl/aButton.h \
+    aWin/Ctrl/aCtrl.h \
+    aWin/Ctrl/aCtrlMgr.h \
+    aWin/Ctrl/aToolButton.h \
     aWin/Framework/aBaseWin.h \
     aWin/Framework/aMainWin.h \
     aWin/Framework/aMdiMainWin.h \
@@ -99,6 +105,7 @@ HEADERS += \
     aWin/Framework/aSysWin_qt.h \
     aWin/Framework/aTitleBar.h \
     aWin/Layout/aLayout.h \
+    aWin/Layout/aLayoutHoriVert.h \
     aWin/Layout/aLayoutMainWin.h \
     aWin/Layout/aLayoutObj.h \
     aWin/Style/aWinStyle.h \
@@ -136,6 +143,10 @@ SOURCES += \
     aUtil/aMargin.cpp \
     aUtil/aString.cpp \
     aUtil/aVersionInfo.cpp \
+    aWin/Ctrl/aButton.cpp \
+    aWin/Ctrl/aCtrl.cpp \
+    aWin/Ctrl/aCtrlMgr.cpp \
+    aWin/Ctrl/aToolButton.cpp \
     aWin/Framework/aBaseWin.cpp \
     aWin/Framework/aBaseWin_handler.cpp \
     aWin/Framework/aMainWin.cpp \
@@ -144,6 +155,7 @@ SOURCES += \
     aLib.cpp \
     aWin/Framework/aTitleBar.cpp \
     aWin/Layout/aLayout.cpp \
+    aWin/Layout/aLayoutHoriVert.cpp \
     aWin/Layout/aLayoutMainWin.cpp \
     aWin/Layout/aLayoutObj.cpp \
     aWin/Style/aWinStyle.cpp \

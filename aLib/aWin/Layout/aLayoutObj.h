@@ -51,7 +51,7 @@ class aLayoutObj
         aMargin                     &distance();
 
 
-        // size
+        // min size
         virtual aDimension2D<s32>   minSize() const;
         s32                         minW() const;
         s32                         minH() const;
@@ -62,6 +62,7 @@ class aLayoutObj
         void                        setMinH(s32  _h);
 
 
+        // max size
         virtual aDimension2D<s32>   maxSize() const;
         s32                         maxW() const;
         s32                         maxH() const;
@@ -70,6 +71,21 @@ class aLayoutObj
                                                s32  _h);
         void                        setMaxW(s32  _w);
         void                        setMaxH(s32  _h);
+
+        // fixes size
+        void                        setFixedSize(const aDimension2D<s32> &_d2dFixed);
+        void                        setFixedSize(s32  _w,
+                                                 s32  _h);
+
+        // expandable
+        bool                        isHoriExpandable() const; // true, if maxW > minW
+        bool                        isVertExpandable() const; // true, if maxH > minH
+
+        // interface
+        virtual void                setGeometry(s32    _x,
+                                                s32    _y,
+                                                s32    _w,
+                                                s32    _h) = 0;
 
 }; // class aLayoutObj
 
