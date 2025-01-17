@@ -68,6 +68,9 @@ HEADERS += \
     aGraphic/aPainter_qt.h \
     aGraphic/aPen.h \
     aGraphic/aPen_qt.h \
+    aGraphic/aPixmap.h \
+    aGraphic/aPixmap_i.h \
+    aGraphic/aPixmap_qt.h \
     aMath/Obj2D/aDimension2D.h \
     aMath/Obj2D/aDimension2D.inl \
     aMath/Obj2D/aMathObj2D.h \
@@ -96,6 +99,7 @@ HEADERS += \
     aWin/Ctrl/aButton.h \
     aWin/Ctrl/aCtrl.h \
     aWin/Ctrl/aCtrlMgr.h \
+    aWin/Ctrl/aHoriSpacer.h \
     aWin/Ctrl/aToolButton.h \
     aWin/Framework/aBaseWin.h \
     aWin/Framework/aMainWin.h \
@@ -112,6 +116,7 @@ HEADERS += \
     aWin/Style/aWinStyleFactory.h \
     aWin/Style/aWinStyleFactory_dark.h \
     aWin/Tool/aBorderResizeTool.h \
+    aWin/Tool/aButtonTool.h \
     aWin/Tool/aParentControlTool.h \
     aWin/Tool/aToolBase.h \
     aWin/Tool/aToolMgr.h \
@@ -135,6 +140,7 @@ SOURCES += \
     aGraphic/aCursor_qt.cpp \
     aGraphic/aPainter_qt.cpp \
     aGraphic/aPen_qt.cpp \
+    aGraphic/aPixmap_qt.cpp \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
@@ -146,6 +152,7 @@ SOURCES += \
     aWin/Ctrl/aButton.cpp \
     aWin/Ctrl/aCtrl.cpp \
     aWin/Ctrl/aCtrlMgr.cpp \
+    aWin/Ctrl/aHoriSpacer.cpp \
     aWin/Ctrl/aToolButton.cpp \
     aWin/Framework/aBaseWin.cpp \
     aWin/Framework/aBaseWin_handler.cpp \
@@ -162,6 +169,7 @@ SOURCES += \
     aWin/Style/aWinStyleFactory.cpp \
     aWin/Style/aWinStyleFactory_dark.cpp \
     aWin/Tool/aBorderResizeTool.cpp \
+    aWin/Tool/aButtonTool.cpp \
     aWin/Tool/aParentControlTool.cpp \
     aWin/Tool/aToolBase.cpp \
     aWin/Tool/aToolMgr.cpp

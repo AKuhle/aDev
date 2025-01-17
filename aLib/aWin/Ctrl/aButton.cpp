@@ -15,6 +15,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aWin/Tool/aButtonTool.h"
 #include "aWin/Ctrl/aButton.h"
 
 
@@ -48,33 +49,69 @@ aButton::~aButton()
 *******************************************************************************/
 bool aButton::onSysCreate()
 {
-    // // enable mouse tracking for border resize
-    // SetMouseTracking(true);
+    // enable mouse tracking for border resize
+    setMouseTracking(true);
 
-    // // start the border resize tool
-    // unique_ptr<qButtonTool> pTool = make_unique<qButtonTool> (this);
-    // SetTool(std::move(pTool));
+    // start the border resize tool
+    unique_ptr<aButtonTool> pTool = make_unique<aButtonTool> (this);
+    setTool(std::move(pTool));
 
     return true;
 } // aButton::onSysCreate
 
 
 /*******************************************************************************
-* aButton::GetPixmap
+* aButton::buttonStyle
 *******************************************************************************/
-// qPixmap* aButton::GetPixmap() const
-// {
-//     return m_pPixmap.get();
-// } // aButton::GetPixmap
+enumButtonStyle aButton::buttonStyle() const
+{
+    return m_eButtonStyle;
+} // aButton::buttonStyle
 
 
 /*******************************************************************************
-* aButton::SetPixmap
+* aButton::setButtonStyle
 *******************************************************************************/
-// void aButton::SetPixmap(const char    *_pRscName)
-// {
-//     m_pPixmap = make_unique<qPixmap> (_pRscName);
-// } // aButton::SetPixmap
+void aButton::setButtonStyle(enumButtonStyle _eStyle)
+{
+    m_eButtonStyle = _eStyle;
+} // aButton::setButtonStyle
+
+
+/*******************************************************************************
+* aButton::pixmap
+*******************************************************************************/
+aPixmap* aButton::pixmap() const
+{
+    return m_pPixmap.get();
+} // aButton::pixmap
+
+
+/*******************************************************************************
+* aButton::setPixmap
+*******************************************************************************/
+void aButton::setPixmap(const char    *_pRscName)
+{
+    m_pPixmap = make_unique<aPixmap> (_pRscName);
+} // aButton::setPixmap
+
+
+/*******************************************************************************
+* aButton::isSelected
+*******************************************************************************/
+bool aButton::isSelected() const
+{
+    return m_bSelected;
+} // aButton::isSelected
+
+
+/*******************************************************************************
+* aButton::setSelected
+*******************************************************************************/
+void aButton::setSelected(bool _bSelected)
+{
+    m_bSelected = _bSelected;
+} // aButton::setSelected
 
 
 } // namespace aWin

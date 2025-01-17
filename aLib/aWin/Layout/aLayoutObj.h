@@ -74,8 +74,8 @@ class aLayoutObj
                                                  s32  _h);
 
         // expandable
-        bool                        isHoriExpandable() const; // true, if maxW > minW
-        bool                        isVertExpandable() const; // true, if maxH > minH
+        virtual bool                isHoriExpandable() const; // true, if maxW > minW
+        virtual bool                isVertExpandable() const; // true, if maxH > minH
 
         // interface
         virtual void                setGeometry(s32    _x,

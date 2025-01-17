@@ -22,7 +22,7 @@
 #include "aWin/Framework/aMainWin.h"
 #include "aWin/Framework/aTitleBar.h"
 
-#include "aWin/Ctrl/aToolButton.h"
+#include "aWin/Ctrl/aCtrl.h"
 
 using namespace aLib::aGraphic;
 using namespace aLib::aUtil;
@@ -59,6 +59,11 @@ void aWinStyleFactoryDark::setWinStyle(aBaseWin &_win)
     aColor      colDark0(colGrey0);
     aColor      colDark1(colGrey15);
 
+    aColor      colHover(colGrey25);
+    aColor      colDisabled(colGrey30);
+    aColor      colNormal(colGrey60);
+    aColor      colSelected(colGrey90);
+
     // aMainWin
     if (dynamic_cast<aMainWin *> (&_win) != nullptr)
     {
@@ -80,14 +85,19 @@ void aWinStyleFactoryDark::setWinStyle(aBaseWin &_win)
         _win.setContentObj(make_unique<aFillSolid> (colDark0));
     }
 
-    // aToolButton
-    else if (dynamic_cast<aToolButton *> (&_win) != nullptr)
+    // aCtrl
+    else if ((dynamic_cast<aCtrl *> (&_win)) != nullptr)
     {
-        // set distance to 1
-        _win.distance().set(1);
+        aCtrl *pCtrl = dynamic_cast<aCtrl *> (&_win);
 
-        // content bg
-        _win.setContentObj(make_unique<aFillSolid> (colYellow));
+        pCtrl->distance().set(1);                                       // set distance to 1
+
+        pCtrl->setContentObj(make_unique<aFillSolid> (colYellow));      // content bg
+
+        pCtrl->setHoverColor(colHover);                                 // hover color
+        pCtrl->setDisabledColor(colDisabled);                           // disabled color
+        pCtrl->setNormalColor(colNormal);                               // normal color
+        pCtrl->setSelectedColor(colSelected);                           // selected color
     }
 
     // aBaseWin

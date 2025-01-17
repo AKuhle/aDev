@@ -91,6 +91,24 @@ aSysWin_t* aBaseWin::sysWin()
 
 
 /*******************************************************************************
+* aBaseWin::repaint
+*******************************************************************************/
+void aBaseWin::repaint()
+{
+    _repaint();
+} // aBaseWin::repaint
+
+
+/*******************************************************************************
+* aBaseWin::update
+*******************************************************************************/
+void aBaseWin::update()
+{
+    _update();
+} // aBaseWin::update
+
+
+/*******************************************************************************
 * aBaseWin::show
 *******************************************************************************/
 void aBaseWin::show()
@@ -115,6 +133,33 @@ bool aBaseWin::isVisible()
 {
     return _isVisible();
 } // aBaseWin::isVisible
+
+
+/*******************************************************************************
+* aBaseWin::setEnabled
+*******************************************************************************/
+void aBaseWin::setEnabled(bool _bEnabled)
+{
+    return _setEnabled(_bEnabled);
+} // aBaseWin::setEnabled
+
+
+/*******************************************************************************
+* aBaseWin::isEnabled
+*******************************************************************************/
+bool aBaseWin::isEnabled() const
+{
+    return _isEnabled();
+} // aBaseWin::isEnabled
+
+
+/*******************************************************************************
+* aBaseWin::isDisabled
+*******************************************************************************/
+bool aBaseWin::isDisabled() const
+{
+    return !_isEnabled();
+} // aBaseWin::isDisabled
 
 
 /*******************************************************************************
@@ -175,6 +220,15 @@ bool aBaseWin::isMaximized() const
 bool aBaseWin::isMinimized() const
 {
     return _isMinimized();
+} // aBaseWin::isMinimized
+
+
+/*******************************************************************************
+* aBaseWin::isHover
+*******************************************************************************/
+bool aBaseWin::isHover() const
+{
+    return m_bHover;
 } // aBaseWin::isMinimized
 
 
@@ -354,7 +408,7 @@ void aBaseWin::setLayout(unique_ptr<aLayout> _pLayout)
 *******************************************************************************/
 aBaseWin* aBaseWin::parent() const
 {
-    return dynamic_cast<aBaseWin *> (_parent());
+    return static_cast<aBaseWin *> (_parent());
 } // aBaseWin::parent
 
 

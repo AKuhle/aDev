@@ -42,7 +42,7 @@ class aLayoutMainWin : public aLayout
 
 
     /*******************************************************************************
-    * qLayout interfasce
+    * aLayout interfasce
     *******************************************************************************/
     public:
         virtual aDimension2D<s32>   calculateMinDim() const override;

@@ -7,6 +7,7 @@
 #include "aWin/Layout/aLayoutHoriVert.h"
 
 #include "aWin/Ctrl/aToolButton.h"
+#include "aWin/Ctrl/aHoriSpacer.h"
 
 
 /*******************************************************************************
@@ -38,23 +39,41 @@ aTitleBar::~aTitleBar()
 *******************************************************************************/
 bool aTitleBar::onSysCreate()
 {
+    aToolButton     *pBtn;
+    aHoriSpacer     *pSpacer;
+
     // create the layout
     unique_ptr<aLayoutHoriVert> pLayout = make_unique<aLayoutHoriVert> ();
 
-    aToolButton *pBtn = new aToolButton(this, 1234);
-    pBtn->create();
-    pBtn->setFixedDim(30, 30);
-    pLayout->addChild(pBtn);
+    pSpacer = new aHoriSpacer(this);
+    pSpacer->create();
+    pLayout->addChild(pSpacer);
 
-    pBtn = new aToolButton(this, 1234);
+    pBtn = new aToolButton(this, CTRL_ID_MINIMIZE);
     pBtn->create();
-    pBtn->setFixedDim(30, 30);
+    pBtn->setPixmap("Masked/minimize.png");
+    pBtn->setButtonStyle(enumButtonStyle::MASKED_ROUND_MODE);
+    pBtn->setFixedDim(22, 22);
     pLayout->addChild(pBtn);
+    // Register(pBtn);
 
-    pBtn = new aToolButton(this, 1234);
+    pBtn = new aToolButton(this, CTRL_ID_MAXIMIZE);
     pBtn->create();
-    pBtn->setFixedDim(30, 30);
+    pBtn->setEnabled(false);
+    pBtn->setPixmap("Masked/maximize.png");
+    pBtn->setButtonStyle(enumButtonStyle::MASKED_ROUND_MODE);
+    pBtn->setFixedDim(22, 22);
     pLayout->addChild(pBtn);
+    // Register(pBtn);
+
+    pBtn = new aToolButton(this, CTRL_ID_CLOSE);
+    pBtn->create();
+    pBtn->setHoverColor(colDarkRed);
+    pBtn->setPixmap("Masked/close.png");
+    pBtn->setButtonStyle(enumButtonStyle::MASKED_ROUND_MODE);
+    pBtn->setFixedDim(22, 22);
+    pLayout->addChild(pBtn);
+    // Register(pBtn);
 
     // set the layout
     setLayout(std::move (pLayout));

@@ -29,27 +29,42 @@ namespace aWin {
 /*******************************************************************************
 * mouse buttons
 *******************************************************************************/
-constexpr u16   MOUSE_BTN_NONE          = 0x0000;
-constexpr u16   MOUSE_BTN_LEFT          = 0x0001;
-constexpr u16   MOUSE_BTN_MIDDLE        = 0x0002;
-constexpr u16   MOUSE_BTN_RIGHT         = 0x0004;
+constexpr u16   MOUSE_BTN_NONE              = 0x0000;
+constexpr u16   MOUSE_BTN_LEFT              = 0x0001;
+constexpr u16   MOUSE_BTN_MIDDLE            = 0x0002;
+constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 
 
 /*******************************************************************************
 * ToolBaseFunctions
 *******************************************************************************/
-constexpr u64   TBF_NONE                = 0x00000000;
-constexpr u64   TBF_LXOR_RECT           = 0x00000001;
-constexpr u64   TBF_USER                = 0xffffff00;
+constexpr u64   TBF_NONE                    = 0x00000000;
+constexpr u64   TBF_LXOR_RECT               = 0x00000001;
+constexpr u64   TBF_USER                    = 0xffffff00;
 
 
 /*******************************************************************************
 * tool id's
 *******************************************************************************/
-constexpr u32   TOOL_ID_PARENT_CONTROL  = 1;
-constexpr u32   TOOL_ID_BORDER_RESIZE   = 2;
+constexpr u32   TOOL_ID_PARENT_CONTROL      = 1;
+constexpr u32   TOOL_ID_BORDER_RESIZE       = 2;
+constexpr u32   TOOL_ID_BUTTON              = 3;
 
-constexpr u32   TOOL_ID_USER            = 1000;
+constexpr u32   TOOL_ID_USER                = 1000;
+
+
+/*******************************************************************************
+* ctrl id's
+*******************************************************************************/
+constexpr u32   CTRL_ID_HORI_SPACER         = 1;
+constexpr u32   CTRL_ID_VERT_SPACER         = 2;
+constexpr u32   CTRL_ID_HORI_VERT_SPACER    = 3;
+
+constexpr u32   CTRL_ID_MINIMIZE            = 4;
+constexpr u32   CTRL_ID_MAXIMIZE            = 5;
+constexpr u32   CTRL_ID_CLOSE               = 6;
+
+constexpr u32   CTRL_ID_USER                = 1000;
 
 
 /*******************************************************************************
@@ -62,6 +77,12 @@ enum class enumToolResult
     Success,
     Canceled
 }; // enumToolResult
+
+enum class enumButtonStyle
+{
+    MASKED_MODE,
+    MASKED_ROUND_MODE
+}; // enumButtonStyle
 
 
 /*******************************************************************************

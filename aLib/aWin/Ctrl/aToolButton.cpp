@@ -15,6 +15,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aUtil/aColor.h"
+
+#include "aGraphic/aPainter.h"
+
 #include "aWin/Ctrl/aToolButton.h"
 
 
@@ -44,115 +48,111 @@ aToolButton::~aToolButton()
 
 
 /*******************************************************************************
-* aToolButton::OnPaintMarginBg
+* aToolButton::onPaintMargin
 *******************************************************************************/
-// void aToolButton::OnPaintMarginBg()
-// {
-//     // maximized wins don't have a margin
-//     if (!IsMaximized())
-//     {
-//         qStyleFillBase   *pStyle = GetMarginFillStyle();
+void aToolButton::onPaintMargin()
+{
+    // maximized wins don't have a margin
+    // if (!IsMaximized())
+    // {
+    //     qStyleFillBase   *pStyle = GetMarginFillStyle();
 
-//         if (pStyle != nullptr)
-//         {
-//             qRect2D<s32>    r = GetMarginRect();
-//             qPainter        p(this);
+    //     if (pStyle != nullptr)
+    //     {
+    //         qRect2D<s32>    r = GetMarginRect();
+    //         qPainter        p(this);
 
-//             pStyle->Draw(p, r);
-//         }
-//     }
-// } // aToolButton::OnPaintMarginBg
+    //         pStyle->Draw(p, r);
+    //     }
+    // }
+} // aToolButton::onPaintMargin
 
 
 /*******************************************************************************
-* aToolButton::OnPaintBorder
+* aToolButton::onPaintBorder
 *******************************************************************************/
-// void aToolButton::OnPaintBorder()
-// {
-//     // maximized wins don't show a border
-//     if (!IsMaximized())
-//     {
-//         qStyleBorderBase   *pStyle = GetBorderStyle();
+void aToolButton::onPaintBorder()
+{
+    // // maximized wins don't show a border
+    // if (!IsMaximized())
+    // {
+    //     qStyleBorderBase   *pStyle = GetBorderStyle();
 
-//         if (pStyle != nullptr)
-//         {
-//             qRect2D<s32>    r = GetBorderRect();
-//             qPainter        p(this);
+    //     if (pStyle != nullptr)
+    //     {
+    //         qRect2D<s32>    r = GetBorderRect();
+    //         qPainter        p(this);
 
-//             pStyle->Draw(p, r);
-//         }
-//     }
-// } // aToolButton::OnPaintBorder
+    //         pStyle->Draw(p, r);
+    //     }
+    // }
+} // aToolButton::onPaintBorder
 
 
 /*******************************************************************************
-* aToolButton::OnPaintPaddingBg
+* aToolButton::onPaintPaddingBg
 *******************************************************************************/
-// void aToolButton::OnPaintPaddingBg()
-// {
-//     qStyleFillBase   *pStyle = GetPaddingFillStyle();
+void aToolButton::onPaintPaddingBg()
+{
+    // qStyleFillBase   *pStyle = GetPaddingFillStyle();
 
-//     if (pStyle != nullptr)
-//     {
-//         qRect2D<s32>    r = GetPaddingRect();
-//         qPainter        p(this);
+    // if (pStyle != nullptr)
+    // {
+    //     qRect2D<s32>    r = GetPaddingRect();
+    //     qPainter        p(this);
 
-//         pStyle->Draw(p, r, &GetPaddingEdges());
-//     }
-// } // aToolButton::OnPaintPaddingBg
+    //     pStyle->Draw(p, r, &GetPaddingEdges());
+    // }
+} // aToolButton::onPaintPaddingBg
 
 
 /*******************************************************************************
-* aToolButton::OnPaintContentBg
+* aToolButton::onPaintContentBg
 *******************************************************************************/
-// void aToolButton::OnPaintContentBg()
-// {
-//     qRect2D<s32>    rContent   = GetContentRect();
+void aToolButton::onPaintContentBg()
+{
+    aRect2D<s32>    rContent   = contentRect();
 
-//     switch (GetButtonStyle())
-//     {
-//         default:
-//             qButtonBase::OnPaintContentBg();
-//             break;
+    switch (buttonStyle())
+    {
+        default:
+            //qButtonBase::OnPaintContentBg();
+            break;
 
-//         case enumButtonStyle::MASKED_MODE:
-//             return;
+        case enumButtonStyle::MASKED_MODE:
+            return;
 
-//         case enumButtonStyle::MASKED_ROUND_MODE:
-//         {
-//             if (IsHover())
-//             {
-//                 qPainter    p(this);
+        case enumButtonStyle::MASKED_ROUND_MODE:
+        {
+            if (isHover())
+            {
+                aPainter    p(this);
 
-//                 p.DrawFilledCircle(rContent.CenterPoint(),
-//                                    MU<s32>::Min(rContent.w / 2, rContent.h/2),
-//                                    &GetHoverColor());
-//                 return;
-//             }
-//             break;
-//         }
-//     } // switch
+                p.drawFilledCircle(rContent.centerPoint(),
+                                   aUtil::min<s32>(rContent.w() / 2, rContent.h() / 2),
+                                   &hoverColor());
+                return;
+            }
+            break;
+        }
+    } // switch
 
-// } // aToolButton::OnPaintContentBg
+} // aToolButton::onPaintContentBg
 
 
 /*******************************************************************************
-* aToolButton::OnPaintContent
+* aToolButton::onPaintContent
 *******************************************************************************/
-// void aToolButton::OnPaintContent()
-// {
-//     qPixmap *pPix = GetPixmap();
-//     CHECK_PRE_CONDITION_VOID(pPix != nullptr);
+void aToolButton::onPaintContent()
+{
+    aPixmap *pPixmap = pixmap();
 
-//     qPainter        p(this);
-//     qRect2D<s32>    r2dContent = GetContentRect();
+    aPainter        p(this);
+    aRect2D<s32>    r2dContent = contentRect();
 
-//     // resize the pixmap
-//     qPixmap             newPix  = pPix->Scale(r2dContent.Dimension());
-
-//     switch (GetButtonStyle())
-//     {
-//         case enumButtonStyle::MASKED_MODE:
+    switch (buttonStyle())
+    {
+        case enumButtonStyle::MASKED_MODE:
 //             if (IsDisabled())
 //                 newPix.Fill(GetDisabledColor());
 //             else if (IsSelected())
@@ -161,22 +161,34 @@ aToolButton::~aToolButton()
 //                 newPix.Fill(GetHoverColor());
 //             else
 //                 newPix.Fill(GetNormalColor());
-//             break;
+            break;
 
-//         case enumButtonStyle::MASKED_ROUND_MODE:
-//             if (IsDisabled())
-//                 newPix.Fill(GetDisabledColor());
-//             else if (IsSelected())
-//                 newPix.Fill(GetSelectedColor());
-//             else
-//                 newPix.Fill(GetNormalColor());
-//             break;
-//     } // switch
+        case enumButtonStyle::MASKED_ROUND_MODE:
+            // paint the pixmap
+            if (pPixmap != nullptr)
+            {
+                 aPixmap newPix  = pPixmap->scale(r2dContent.dimension());
 
-//     // draw the pixmap
-//     p.DrawPixmap(newPix, r2dContent.x, r2dContent.y);
+                if (isDisabled())
+                    newPix.fill(disabledColor());
+                else if (isSelected())
+                     newPix.fill(selectedColor());
+                else
+                    newPix.fill(normalColor());
 
-// } // aToolButton::OnPaintContent
+                 p.drawPixmap(newPix, r2dContent.x(), r2dContent.y());
+            }
+            // if (IsDisabled())
+            //     newPix.Fill(GetDisabledColor());
+            // else if (IsSelected())
+            //     newPix.Fill(GetSelectedColor());
+            // else
+            //     newPix.Fill(GetNormalColor());
+
+            break;
+    } // switch
+
+} // aToolButton::onPaintContent
 
 
 } // namespace aWin

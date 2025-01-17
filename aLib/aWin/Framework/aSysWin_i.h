@@ -43,6 +43,9 @@ class aSysWinI
 
         virtual void                _setMouseTracking(bool _bEnable) = 0;
 
+        virtual void                _repaint() = 0;
+        virtual void                _update() = 0;
+
 
     /*******************************************************************************
     * win state
@@ -51,6 +54,9 @@ class aSysWinI
         virtual void                _show() = 0;
         virtual void                _hide() = 0;
         virtual bool                _isVisible() const = 0;
+
+        virtual void                _setEnabled(bool _bEnabled) = 0;
+        virtual bool                _isEnabled() const = 0;
 
         virtual void                _showMaximized() = 0;
         virtual void                _showMinimized() = 0;

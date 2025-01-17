@@ -171,7 +171,6 @@ void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
         pDim->s32Size = pDim->minDim.w();
     } // for
 
-
     // finally set the childs to their positions
     for (shared_ptr<structDim> &pDim : allItems)
     {

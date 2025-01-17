@@ -191,6 +191,39 @@ bool aRect2D<T>::operator!=(const aRect2D<T>	&_rhs) const
 
 
 /*******************************************************************************
+* qRect2D<T, Tprec>::dimension
+*******************************************************************************/
+template<class T>
+aDimension2D<T> aRect2D<T>::dimension() const
+{
+    return aDimension2D<T> (m_w, m_h);
+} // qRect2D<T, Tprec>::dimension()
+
+
+/*******************************************************************************
+* qRect2D<T, Tprec>::centerPoint
+*******************************************************************************/
+template<class T>
+aVector2D<T> aRect2D<T>::centerPoint() const
+{
+    return aVector2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
+                         (T) (((dbl) m_y) + ((dbl) m_h)/2));
+} // qRect2D<T, Tprec>::GetCenterPoint()
+
+
+/*******************************************************************************
+* qRect2D<T, Tprec>::setCenterPoint
+*******************************************************************************/
+template<class T>
+void aRect2D<T>::setCenterPoint(const T	_x,
+                                const T	_y)
+{
+    m_x = _x - w/2;
+    m_y = _y - h/2;
+} // qRect2D<T, Tprec>::setCenterPoint
+
+
+/*******************************************************************************
 * aRect2D<T>::setEmpty
 *******************************************************************************/
 template<class T>

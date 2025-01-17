@@ -37,7 +37,6 @@ class aSysWinQt : private QWidget,
         aSysWinQt(aSysWinQt *_pParent = nullptr);
         virtual ~aSysWinQt();
 
-
         aSysWin_t*                  _sysWin() override;
 
         virtual aSysWin*            _parent() const override;
@@ -47,12 +46,15 @@ class aSysWinQt : private QWidget,
 
         virtual void                _setMouseTracking(bool _bEnable) override;
 
+        virtual void                _repaint() override;
+        virtual void                _update() override;
+
 
     /*******************************************************************************
     * Qt specific
     *******************************************************************************/
     public:
-        QWidget*                    getQWidget()            { return this; }
+        QWidget*                    getQWidget();
 
 
     /*******************************************************************************
@@ -62,6 +64,9 @@ class aSysWinQt : private QWidget,
         virtual void                _show() override;
         virtual void                _hide() override;
         virtual bool                _isVisible() const override;
+
+        virtual void                _setEnabled(bool _bEnabled) override;
+        virtual bool                _isEnabled() const override;
 
         virtual void                _showMaximized() override;
         virtual void                _showMinimized() override;

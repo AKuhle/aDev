@@ -109,11 +109,38 @@ void aSysWinQt::_setMouseTracking(bool _bEnable)
 
 
 /*******************************************************************************
+* aSysWinQt::_repaint
+*******************************************************************************/
+void aSysWinQt::_repaint()
+{
+    QWidget::repaint();
+} // aSysWinQt::_repaint
+
+
+/*******************************************************************************
+* aSysWinQt::_update
+*******************************************************************************/
+void aSysWinQt::_update()
+{
+    QWidget::update();
+} // aSysWinQt::_update
+
+
+/*******************************************************************************
+* aSysWinQt::getQWidget
+*******************************************************************************/
+QWidget* aSysWinQt::getQWidget()
+{
+    return this;
+} // aSysWinQt::getQWidget
+
+
+/*******************************************************************************
 * aSysWinQt::_show
 *******************************************************************************/
 void aSysWinQt::_show()
 {
-    show();
+    QWidget::show();
 } // aSysWinQt::_show
 
 
@@ -122,7 +149,7 @@ void aSysWinQt::_show()
 *******************************************************************************/
 void aSysWinQt::_hide()
 {
-    hide();
+    QWidget::hide();
 } // aSysWinQt::_hide
 
 
@@ -131,8 +158,26 @@ void aSysWinQt::_hide()
 *******************************************************************************/
 bool aSysWinQt::_isVisible() const
 {
-    return isVisible();
+    return QWidget::isVisible();
 } // aSysWinQt::_isVisible
+
+
+/*******************************************************************************
+* aSysWinQt::_setEnabled
+*******************************************************************************/
+void aSysWinQt::_setEnabled(bool _bEnabled)
+{
+    return QWidget::setEnabled(_bEnabled);
+} // aSysWinQt::_setEnabled
+
+
+/*******************************************************************************
+* aSysWinQt::_isEnabled
+*******************************************************************************/
+bool aSysWinQt::_isEnabled() const
+{
+    return QWidget::isEnabled();
+} // aSysWinQt::_isEnabled
 
 
 /*******************************************************************************

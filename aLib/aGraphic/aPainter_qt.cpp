@@ -12,14 +12,22 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aGraphic/aPen.h"
-#include "aGraphic/aPainter.h"
+#include "aUtil/aHelper.h"
 
+#include "aGraphic/aPen_qt.h"
+#include "aGraphic/aPainter_qt.h"
+#include "aGraphic/aPixmap_qt.h"
+
+#include "aMath/Obj2D/aDimension2D.h"
 #include "aMath/Obj2D/aVector2D.h"
+#include "aMath/Obj2D/aRect2D.h"
 
 #include "aUtil/aColor.h"
 
 #include "aWin/Framework/aBaseWin.h"
+
+using namespace aLib::aGraphic;
+using namespace aLib::aMath;
 
 
 /*******************************************************************************
@@ -50,15 +58,15 @@ aPainterQt::~aPainterQt()
 /*******************************************************************************
 * aPainterQt::drawLine
 *******************************************************************************/
-void aPainterQt::drawLine(s32          _s32StartX,
-                          s32          _s32StartY,
-                          s32          _s32EndX,
-                          s32          _s32EndY,
+void aPainterQt::drawLine(s32          _startX,
+                          s32          _startY,
+                          s32          _endX,
+                          s32          _endY,
                           const aPen   *_pPen /*= nullptr*/)
 {
     setPen(_pPen);
 
-    QPainter::drawLine(_s32StartX, _s32StartY, _s32EndX, _s32EndY);
+    QPainter::drawLine(_startX, _startY, _endX, _endY);
 } // aPainterQt::drawLine
 
 
@@ -98,20 +106,20 @@ void aPainterQt::drawFilledRect(s32             _x,
 /*******************************************************************************
 * aPainterQt::drawFilledRect
 *******************************************************************************/
-void aPainterQt::drawFilledRect(const aRect2D<s32>  &_r,
+void aPainterQt::drawFilledRect(const aRect2D<s32>  &_r2d,
                                 const aColor        *_pColor /*= nullptr*/)
 {
-    drawFilledRect(_r.x(), _r.y(), _r.w(), _r.h(), _pColor);
+    drawFilledRect(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h(), _pColor);
 } // aPainterQt::drawFilledRect
 
 
 /*******************************************************************************
 * aPainterQt::drawGradientRect
 *******************************************************************************/
-void aPainterQt::drawGradientRect(s32           _s32X,
-                                  s32           _s32Y,
-                                  s32           _s32W,
-                                  s32           _s32H,
+void aPainterQt::drawGradientRect(s32           _x,
+                                  s32           _y,
+                                  s32           _w,
+                                  s32           _h,
                                   s32           _s32GradStartX,
                                   s32           _s32GradStartY,
                                   s32           _s32GradEndX,
@@ -123,7 +131,7 @@ void aPainterQt::drawGradientRect(s32           _s32X,
     grad.setColorAt(0, to_QColor(_colStart));
     grad.setColorAt(1, to_QColor(_colEnd));
 
-    fillRect(_s32X, _s32Y, _s32W, _s32H, grad);
+    QPainter::fillRect(_x, _y, _w, _h, grad);
 } // aPainterQt::drawGradientRect
 
 
@@ -144,6 +152,56 @@ void aPainterQt::drawGradientRect(const aRect2D<s32>    &_r2d,
 
 
 /*******************************************************************************
+* aPainterQt::drawFilledCircle
+*******************************************************************************/
+void aPainterQt::drawFilledCircle(s32            _centerX,
+                                  s32            _centerY,
+                                  s32            _radius,
+                                  const aColor   *_pColor /*= nullptr*/)
+{
+    setPen(_pColor);
+    setBrush(_pColor);
+
+    QPainter::drawEllipse(_centerX-_radius, _centerY-_radius,
+                          _radius*2, _radius*2);
+} // aPainterQt::drawFilledCircle
+
+
+/*******************************************************************************
+* aPainterQt::drawFilledCircle
+*******************************************************************************/
+void aPainterQt::drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+                                  s32                    _radius,
+                                  const aColor           *_pColor /*= nullptr*/)
+{
+    drawFilledCircle(_v2dCenter.x(), _v2dCenter.y(), _radius, _pColor);
+} // aPainterQt::drawFilledCircle
+
+
+/*******************************************************************************
+* aPainterQt::drawFilledCircle
+*******************************************************************************/
+void aPainterQt::drawFilledCircle(const aRect2D<s32>   &_r2dBounding,
+                                  const aColor         *_pColor /*= nullptr*/)
+{
+    drawFilledCircle(_r2dBounding.centerPoint().x(), _r2dBounding.centerPoint().y(),
+                     aUtil::min<s32>(_r2dBounding.w() / 2, _r2dBounding.h() / 2),
+                     _pColor);
+} // aPainterQt::drawFilledCircle
+
+
+/*******************************************************************************
+* aPainterQt::drawPixmap
+*******************************************************************************/
+void aPainterQt::drawPixmap(const aPixmap   &_pixmap,
+                            s32             _x,
+                            s32             _y)
+{
+    QPainter::drawPixmap(_x, _y, _pixmap);
+} // aPainterQt::drawPixmap
+
+
+/*******************************************************************************
 * aPainterQt::setPen
 *******************************************************************************/
 void aPainterQt::setPen(const aPen *_pPen)
@@ -151,6 +209,17 @@ void aPainterQt::setPen(const aPen *_pPen)
     CHECK_PRE_CONDITION_VOID(_pPen != nullptr);
 
     QPainter::setPen(*_pPen);
+} // aPainterQt::setPen
+
+
+/*******************************************************************************
+* aPainterQt::setPen
+*******************************************************************************/
+void aPainterQt::setPen(const aColor *_pColor)
+{
+    CHECK_PRE_CONDITION_VOID(_pColor != nullptr);
+
+    QPainter::setPen(QPen(QColor::fromRgbF(_pColor->r(), _pColor->g(), _pColor->b(), _pColor->a())));
 } // aPainterQt::setPen
 
 

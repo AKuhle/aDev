@@ -46,11 +46,13 @@ enum class enumCursorShape
         class aCursorQt;
         class aPenQt;
         class aPainterQt;
+        class aPixmapQt;
     } // namespace SysQt
 
     using aCursor = aLib::aGraphic::SysQt::aCursorQt;
     using aPen = aLib::aGraphic::SysQt::aPenQt;
     using aPainter = aLib::aGraphic::SysQt::aPainterQt;
+    using aPixmap = aLib::aGraphic::SysQt::aPixmapQt;
 
     class qGraphicObj;
     class aFillObj;

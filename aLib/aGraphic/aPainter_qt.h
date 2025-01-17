@@ -57,10 +57,10 @@ class aPainterQt : private QPainter
         * uses/sets the current Pen!
         *******************************************************************************/
         public:
-            void            drawLine(s32         _s32StartX,
-                                     s32         _s32StartY,
-                                     s32         _s32EndX,
-                                     s32         _s32EndY,
+            void            drawLine(s32         _startX,
+                                     s32         _startY,
+                                     s32         _endX,
+                                     s32         _endY,
                                      const aPen  *_pPen = nullptr);
 
             void            drawLine(const aVector2D<s32>   &_v2dStart,
@@ -69,7 +69,7 @@ class aPainterQt : private QPainter
 
 
         /*******************************************************************************
-        * draw rect
+        * drawFilledRect
         * uses/sets the current Pen!
         *******************************************************************************/
         public:
@@ -79,7 +79,7 @@ class aPainterQt : private QPainter
                                            s32          _h,
                                            const aColor *_pColor = nullptr);
 
-            void            drawFilledRect(const aRect2D<s32>   &_r,
+            void            drawFilledRect(const aRect2D<s32>   &_r2d,
                                            const aColor         *_pColor = nullptr);
 
 
@@ -87,10 +87,10 @@ class aPainterQt : private QPainter
         * drawGradientRect
         *******************************************************************************/
         public:
-            void            drawGradientRect(s32            _s32X,
-                                             s32            _s32Y,
-                                             s32            _s32W,
-                                             s32            _s32H,
+            void            drawGradientRect(s32            _x,
+                                             s32            _y,
+                                             s32            _w,
+                                             s32            _h,
                                              s32            _s32GradStartX,
                                              s32            _s32GradStartY,
                                              s32            _s32GradEndX,
@@ -106,9 +106,38 @@ class aPainterQt : private QPainter
                                              const aColor           &_colEnd);
 
 
+        /*******************************************************************************
+        * DrawFilledCircle
+        * uses/sets the current pen and brush!
+        *******************************************************************************/
+        public:
+            void            drawFilledCircle(s32            _centerX,
+                                             s32            _centerY,
+                                             s32            _radius,
+                                             const aColor   *_pColor = nullptr);
+
+            void            drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+                                             s32                    _s32Radius,
+                                             const aColor           *_pColor = nullptr);
+
+            void            drawFilledCircle(const aRect2D<s32>  &_r2dBounding,
+                                             const aColor         *_pColor = nullptr);
+
+
+        /*******************************************************************************
+        * drawPixmap
+        *******************************************************************************/
+        public:
+            void            drawPixmap(const aPixmap    &_pixmap,
+                                       s32              _x,
+                                       s32              _y);
+
+
         private:
             void            setPen(const aPen *_pPen);
-            void            setBrush(const aColor   *_pColor);
+            void            setPen(const aColor *_pColor);
+
+            void            setBrush(const aColor *_pColor);
 
             QColor          to_QColor(const aColor &_color);
 

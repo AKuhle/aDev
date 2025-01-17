@@ -44,12 +44,12 @@ class aToolButton : public aButton
     * qWin interface
     *******************************************************************************/
     protected:
-        //virtual void                OnPaintMarginBg() override;
-        //virtual void                OnPaintBorder() override;
-        //virtual void                OnPaintPaddingBg() override;
+        virtual void                onPaintMargin() override;
+        virtual void                onPaintBorder() override;
+        virtual void                onPaintPaddingBg() override;
 
-        // virtual void                OnPaintContentBg() override;
-        // virtual void                OnPaintContent() override;
+        virtual void                onPaintContentBg() override;
+        virtual void                onPaintContent() override;
 
 }; // class aToolButton
 

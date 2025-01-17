@@ -118,13 +118,13 @@ class aRect2D : public aMathObj2D
         bool					operator==(const aRect2D<T> &_rhs) const;
         bool 					operator!=(const aRect2D<T> &_rhs) const;
 
-        // qDimension2D<s32>       Dimension() const;
+        aDimension2D<T>         dimension() const;
 
         // void 					Resize(Tprec _tFactor);
 
-        // aVector2D<T>			CenterPoint() const;
-//			void					SetCenterPoint(const T		_x,
-//												   const T		_y);
+        aVector2D<T>			centerPoint() const;
+        void					setCenterPoint(const T		_x,
+                                               const T		_y);
 
         void                    setEmpty();
         bool					isEmpty() const;

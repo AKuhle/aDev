@@ -36,19 +36,21 @@ namespace aWin {
 *******************************************************************************/
 class aToolBase
 {
-    aBaseWin    *m_pOwnerWin            { nullptr };
-    u32         m_u32ToolId             { 0 };
-    u64         m_u64ToolBaseFunction   { TBF_NONE };
-
     friend class aToolMgr;
 
     private:
-        u32             m_u32MouseButton        { MOUSE_BTN_NONE };
+        aBaseWin            *m_pOwnerWin                { nullptr };
+        u32                 m_u32ToolId                 { 0 };
+        u64                 m_u64ToolBaseFunction       { TBF_NONE };
 
-        aVector2D<s32>  m_v2dMoveStartLocal;
-        aVector2D<s32>  m_v2dMoveCurrentLocal;
-        aVector2D<s32>  m_v2dMoveStartGlobal;
-        aVector2D<s32>  m_v2dMoveCurrentGlobal;
+        u32                 m_u32MouseButton            { MOUSE_BTN_NONE };
+
+        aVector2D<s32>      m_v2dMoveStartLocal;
+        aVector2D<s32>      m_v2dMoveCurrentLocal;
+        aVector2D<s32>      m_v2dMoveStartGlobal;
+        aVector2D<s32>      m_v2dMoveCurrentGlobal;
+
+        bool                m_bAcceptDoubleClick        { false };
 
         // bool            m_bDrawXorRect          { false };
 
@@ -71,6 +73,10 @@ class aToolBase
     protected:
         aVector2D<s32>              moveDeltaLocal() const;
         aVector2D<s32>              moveDeltaGlobal() const;
+
+        // member to accept event to avoid delegation to the parent window
+        void                        acceptDoubleClick()     { m_bAcceptDoubleClick = true; }
+
 
     private:
         void                        setCursor();

@@ -17,8 +17,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin/aWin_def.h"
+#include "aGraphic/aPixmap.h"
 
+#include "aWin/aWin_def.h"
 #include "aWin/Ctrl/aCtrl.h"
 
 
@@ -34,12 +35,13 @@ namespace aWin {
 *******************************************************************************/
 class aButton : public aCtrl
 {
-    // DeclareTypeProperty(enumButtonStyle, e, ButtonStyle, enumButtonStyle::MASKED_MODE)
     // DeclareBoolProperty(Selectable, false)
-    // DeclareBoolProperty(Selected, false)
 
     private:
-        // unique_ptr<qPixmap>         m_pPixmap       { nullptr };
+        enumButtonStyle             m_eButtonStyle      { enumButtonStyle::MASKED_MODE };
+        unique_ptr<aPixmap>         m_pPixmap           { nullptr };
+
+        bool                        m_bSelected         { false };
 
 
     public:
@@ -47,8 +49,14 @@ class aButton : public aCtrl
                 u32         _u32Id);
         virtual ~aButton();
 
-        // qPixmap*                GetPixmap() const;
-        // void                    SetPixmap(const char    *_pRscName);
+        enumButtonStyle         buttonStyle() const;
+        void                    setButtonStyle(enumButtonStyle _eStyle);
+
+        aPixmap*                pixmap() const;
+        void                    setPixmap(const char    *_pRscName);
+
+        bool                    isSelected() const;
+        void                    setSelected(bool _bSelected);
 
 
     /*******************************************************************************

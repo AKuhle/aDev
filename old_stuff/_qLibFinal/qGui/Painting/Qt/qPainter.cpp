@@ -284,10 +284,10 @@ namespace qLib
     /*******************************************************************************
     * qPainter::DrawFilledCircle
     *******************************************************************************/
-    void qPainter::DrawFilledCircle(s32         _s32CenterX,
-                                    s32         _s32CenterY,
-                                    s32         _s32Radius,
-                                    const qColor *_pRgba /*= nullptr*/)
+    void qPainter::DrawFilledCircle(s32             _s32CenterX,
+                                    s32             _s32CenterY,
+                                    s32             _radius,
+                                    const qColor    *_pRgba /*= nullptr*/)
     {
         if (_pRgba != nullptr)
         {

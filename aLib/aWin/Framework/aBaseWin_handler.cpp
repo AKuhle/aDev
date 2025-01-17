@@ -257,6 +257,8 @@ bool aBaseWin::onEnterEvent(u32                     _u32Modifiers,
                             const aVector2D<s32>    &_v2dLocal,
                             const aVector2D<s32>    &_v2dGlobal)
 {
+    m_bHover = true;
+
     setCursor(aCursor(enumCursorShape::Arrow));
 
     // first call the handler of the tool, than of the win
@@ -270,6 +272,8 @@ bool aBaseWin::onEnterEvent(u32                     _u32Modifiers,
 *******************************************************************************/
 bool aBaseWin::onLeaveEvent(u32 _u32Modifiers)
 {
+    m_bHover = false;
+
     // first call the handler of the tool, than of the win
     return doToolMgrLeave(_u32Modifiers) ||
            onLeave(_u32Modifiers);

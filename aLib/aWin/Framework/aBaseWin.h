@@ -47,6 +47,8 @@ class aBaseWin : private aSysWin,
 
         unique_ptr<aLayout>                 m_pLayout;
 
+        bool                                m_bHover        { false };
+
 
     /*******************************************************************************
     * con-/destruction
@@ -55,11 +57,15 @@ class aBaseWin : private aSysWin,
         aBaseWin(aBaseWin *_pParent = nullptr);
         ~aBaseWin();
 
+
     public:
         bool                        create();
         bool                        close();
 
         aSysWin_t*                  sysWin();
+
+        void                        repaint();
+        void                        update();
 
 
     /*******************************************************************************
@@ -77,12 +83,18 @@ class aBaseWin : private aSysWin,
         void                        hide();
         bool                        isVisible();
 
+        void                        setEnabled(bool _bEnabled);
+        bool                        isEnabled() const;
+        bool                        isDisabled() const;
+
         void                        showMaximized();
         void                        showMinimized();
         void                        showNormal();
         void                        toggleMaximized();
         bool                        isMaximized() const;
         bool                        isMinimized() const;
+
+        bool                        isHover() const;
 
         u32                         modifiers() const;
         u32                         mouseButton() const;

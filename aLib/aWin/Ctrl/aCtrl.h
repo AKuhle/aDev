@@ -17,8 +17,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin/aWin_def.h"
+#include "aUtil/aColor.h"
 
+#include "aWin/aWin_def.h"
 #include "aWin/Framework/aBaseWin.h"
 
 
@@ -38,6 +39,11 @@ class aCtrl : public aBaseWin
         u32         m_u32CtrlId     { 0 };
         aCtrlMgr    *m_pCtrlMgr     { nullptr };
 
+        aColor      m_colHover;
+        aColor      m_colDisabled;
+        aColor      m_colNormal;
+        aColor      m_colSelected;
+
 
     public:
         aCtrl(aBaseWin  *_pParent,
@@ -49,6 +55,19 @@ class aCtrl : public aBaseWin
 
         void                setCtrlMgr(u32 *_u32CtrlId);
         u32*                ctrlId() const;
+
+        void                setHoverColor(const aColor  &_color);
+        const aColor&       hoverColor() const;
+
+        void                setDisabledColor(const aColor  &_color);
+        const aColor&       disabledColor() const;
+
+        void                setNormalColor(const aColor  &_color);
+        const aColor&       normalColor() const;
+
+        void                setSelectedColor(const aColor  &_color);
+        const aColor&       selectedColor() const;
+
 }; // class aCtrl
 
 

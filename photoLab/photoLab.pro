@@ -90,3 +90,20 @@ HEADERS += \
 SOURCES += \
     App/photoLabApp.cpp \
     Win/mainWin.cpp
+
+
+########################################################################
+# resources
+########################################################################
+RESOURCES += \
+    Resource/Resource_Qt/qLib.qrc
+
+DISTFILES += \
+    Resource/Resource_Qt/Masked/close.png \
+    Resource/Resource_Qt/Masked/file_open.png \
+    Resource/Resource_Qt/Masked/maximize.png \
+    Resource/Resource_Qt/Masked/minimize.png \
+    Resource/Resource_Qt/Masked/scrollBarDown.png \
+    Resource/Resource_Qt/Masked/scrollBarLeft.png \
+    Resource/Resource_Qt/Masked/scrollBarRight.png \
+    Resource/Resource_Qt/Masked/scrollBarUp.png
