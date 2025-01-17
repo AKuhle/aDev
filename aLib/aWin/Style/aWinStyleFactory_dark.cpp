@@ -83,6 +83,9 @@ void aWinStyleFactoryDark::setWinStyle(aBaseWin &_win)
     // aToolButton
     else if (dynamic_cast<aToolButton *> (&_win) != nullptr)
     {
+        // set distance to 1
+        _win.distance().set(1);
+
         // content bg
         _win.setContentObj(make_unique<aFillSolid> (colYellow));
     }

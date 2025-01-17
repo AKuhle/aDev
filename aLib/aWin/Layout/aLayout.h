@@ -34,11 +34,12 @@ class aLayout : public aLayoutObj
         aLayout();
         ~aLayout();
 
-        virtual aDimension2D<s32>   minSize() const override;
+        virtual aDimension2D<s32>   minDim() const override;
 
-        virtual aDimension2D<s32>   calculateMinSize() const = 0;
         virtual void                arrangeChilds(aRect2D<s32>  _r2dLayout) = 0;
 
+    protected:
+        virtual aDimension2D<s32>   calculateMinDim() const = 0;
 
     /*******************************************************************************
     * aLayoutObj interfasce

@@ -94,6 +94,9 @@ class aBaseWin : private aSysWin,
     * geometry
     *******************************************************************************/
     public:
+        // max of the minDimension and the dimension of the layout (if exist)
+        virtual aDimension2D<s32>   minDim() const;
+
         // geometry is relativ to the parent
         void                        setGeometry(const aRect2D<s32>  &_r2d);
 

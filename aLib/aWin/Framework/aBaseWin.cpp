@@ -82,6 +82,15 @@ bool aBaseWin::close()
 
 
 /*******************************************************************************
+* aBaseWin::sysWin
+*******************************************************************************/
+aSysWin_t* aBaseWin::sysWin()
+{
+    return _sysWin();
+} // aBaseWin::sysWin
+
+
+/*******************************************************************************
 * aBaseWin::show
 *******************************************************************************/
 void aBaseWin::show()
@@ -203,6 +212,22 @@ aVector2D<s32> aBaseWin::globalCursorPos() const
 {
     return _globalCursorPos();
 } // aBaseWin::globalCursorPos
+
+
+/*******************************************************************************
+* aBaseWin::minDim
+*******************************************************************************/
+aDimension2D<s32> aBaseWin::minDim() const
+{
+    aDimension2D<s32>   d2dMin = aLayoutObj::minDim();
+
+    if (m_pLayout != nullptr)
+    {
+        d2dMin = d2dMin.max(m_pLayout->minDim());
+    }
+
+    return d2dMin;
+} // aBaseWin::minDim
 
 
 /*******************************************************************************

@@ -45,7 +45,7 @@ class aLayoutMainWin : public aLayout
     * qLayout interfasce
     *******************************************************************************/
     public:
-        virtual aDimension2D<s32>   calculateMinSize() const override;
+        virtual aDimension2D<s32>   calculateMinDim() const override;
         virtual void                arrangeChilds(aRect2D<s32>  _r2dLayout) override;
 }; // class aLayoutMainWin
 

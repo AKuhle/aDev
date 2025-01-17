@@ -37,8 +37,8 @@ class aLayoutObj
         aMargin    m_Distance;
 
         // size
-        aDimension2D<s32>   m_d2dMinSize;
-        aDimension2D<s32>   m_d2dMaxSize    { S32_MAX, S32_MAX };
+        aDimension2D<s32>   m_d2dMin;
+        aDimension2D<s32>   m_d2dMax        { S32_MAX, S32_MAX };
 
 
     protected:
@@ -52,29 +52,25 @@ class aLayoutObj
 
 
         // min size
-        virtual aDimension2D<s32>   minSize() const;
-        s32                         minW() const;
-        s32                         minH() const;
-        void                        setMinSize(const aDimension2D<s32> &_d2dMin);
-        void                        setMinSize(s32  _w,
-                                               s32  _h);
+        virtual aDimension2D<s32>   minDim() const;
+        void                        setMinDim(const aDimension2D<s32> &_d2dMin);
+        void                        setMinDim(s32  _w,
+                                              s32  _h);
         void                        setMinW(s32  _w);
         void                        setMinH(s32  _h);
 
 
         // max size
-        virtual aDimension2D<s32>   maxSize() const;
-        s32                         maxW() const;
-        s32                         maxH() const;
-        void                        setMaxSize(const aDimension2D<s32> &_d2dMax);
-        void                        setMaxSize(s32  _w,
-                                               s32  _h);
+        virtual aDimension2D<s32>   maxDim() const;
+        void                        setMaxDim(const aDimension2D<s32> &_d2dMax);
+        void                        setMaxDim(s32  _w,
+                                              s32  _h);
         void                        setMaxW(s32  _w);
         void                        setMaxH(s32  _h);
 
         // fixes size
-        void                        setFixedSize(const aDimension2D<s32> &_d2dFixed);
-        void                        setFixedSize(s32  _w,
+        void                        setFixedDim(const aDimension2D<s32> &_d2dFixed);
+        void                        setFixedDim(s32  _w,
                                                  s32  _h);
 
         // expandable

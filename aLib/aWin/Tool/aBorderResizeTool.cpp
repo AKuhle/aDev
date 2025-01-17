@@ -214,10 +214,10 @@ enumToolResult aBorderResizeTool::onLMouseMove(u32                     /*_u32Mod
 
     aRect2D<s32>    newGeo  = m_r2dResizeStart;
 
-    s32             minW    = pOwner->minSize().w();
-    s32             maxW    = pOwner->maxSize().w();
-    s32             minH    = pOwner->minSize().h();
-    s32             maxH    = pOwner->maxSize().h();
+    s32             minW    = pOwner->minDim().w();
+    s32             maxW    = pOwner->maxDim().w();
+    s32             minH    = pOwner->minDim().h();
+    s32             maxH    = pOwner->maxDim().h();
 
     s32             moveX   = moveDeltaGlobal().x();
     s32             moveY   = moveDeltaGlobal().y();

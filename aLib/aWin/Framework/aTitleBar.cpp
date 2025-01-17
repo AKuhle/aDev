@@ -38,14 +38,23 @@ aTitleBar::~aTitleBar()
 *******************************************************************************/
 bool aTitleBar::onSysCreate()
 {
-    setMinSize(30, 30);
-
     // create the layout
     unique_ptr<aLayoutHoriVert> pLayout = make_unique<aLayoutHoriVert> ();
 
     aToolButton *pBtn = new aToolButton(this, 1234);
     pBtn->create();
-    pBtn->setFixedSize(30, 30);
+    pBtn->setFixedDim(30, 30);
+    pLayout->addChild(pBtn);
+
+    pBtn = new aToolButton(this, 1234);
+    pBtn->create();
+    pBtn->setFixedDim(30, 30);
+    pLayout->addChild(pBtn);
+
+    pBtn = new aToolButton(this, 1234);
+    pBtn->create();
+    pBtn->setFixedDim(30, 30);
+    pLayout->addChild(pBtn);
 
     // set the layout
     setLayout(std::move (pLayout));

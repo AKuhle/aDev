@@ -38,12 +38,12 @@ aLayout::~aLayout()
 
 
 /*******************************************************************************
-* aLayout::minSize
+* aLayout::minDim
 *******************************************************************************/
-aDimension2D<s32> aLayout::minSize() const
+aDimension2D<s32> aLayout::minDim() const
 {
-    return calculateMinSize().max(aLayoutObj::minSize());
-} // aLayout::minSize
+    return calculateMinDim().max(aLayoutObj::minDim());
+} // aLayout::minDim
 
 
 /*******************************************************************************

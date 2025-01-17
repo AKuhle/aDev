@@ -40,7 +40,7 @@ MainWin::~MainWin()
 bool MainWin::onCreate()
 {
     setGeometry(50, 50, 640, 360);
-    setMinSize(480, 270);
+    setMinDim(480, 270);
 
     return true;
 } // MainWin::onCreate

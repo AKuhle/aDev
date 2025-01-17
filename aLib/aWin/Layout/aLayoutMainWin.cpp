@@ -71,20 +71,20 @@ void aLayoutMainWin::shrinkContentSize(aRect2D<s32>  &_r2dContent) const
 
 
 /*******************************************************************************
-* aLayoutMainWin::calculateMinSize
+* aLayoutMainWin::calculateMinDim
 *******************************************************************************/
-aDimension2D<s32> aLayoutMainWin::calculateMinSize() const
+aDimension2D<s32> aLayoutMainWin::calculateMinDim() const
 {
     aDimension2D<s32>   d;
 
     // arrange the titlebar
     if (m_pTitleBar != nullptr)
     {
-        d.h() += m_pTitleBar->minH();
+        d.h() += m_pTitleBar->minDim().h();
     }
 
     return d;
-} // aLayoutMainWin::calculateMinSize
+} // aLayoutMainWin::calculateMinDim
 
 
 /*******************************************************************************
@@ -95,13 +95,15 @@ void aLayoutMainWin::arrangeChilds(aRect2D<s32>  _r2dLayout)
     // arrange the titlebar
     if (m_pTitleBar != nullptr)
     {
+        aDimension2D<s32>   min = m_pTitleBar->minDim();
+
         m_pTitleBar->setGeometry(_r2dLayout.x(),
                                  _r2dLayout.y(),
                                  _r2dLayout.w(),
-                                 m_pTitleBar->minH());
+                                 min.h());
 
-        _r2dLayout.y() += m_pTitleBar->minH();
-        _r2dLayout.h() -= m_pTitleBar->minH();
+        _r2dLayout.y() += min.h();
+        _r2dLayout.h() -= min.h();
     }
 } // aLayoutMainWin::arrangeChilds
 

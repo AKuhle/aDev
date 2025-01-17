@@ -56,49 +56,31 @@ aMargin& aLayoutObj::distance()
 
 
 /*******************************************************************************
-* aLayoutObj::minSize
+* aLayoutObj::minDim
 *******************************************************************************/
-aDimension2D<s32> aLayoutObj::minSize() const
+aDimension2D<s32> aLayoutObj::minDim() const
 {
-    return m_d2dMinSize;
-} // aLayoutObj::minSize
+    return m_d2dMin;
+} // aLayoutObj::minDim
 
 
 /*******************************************************************************
-* aLayoutObj::minW
+* aLayoutObj::setMinDim
 *******************************************************************************/
-s32 aLayoutObj::minW() const
+void aLayoutObj::setMinDim(const aDimension2D<s32> &_d2dMin)
 {
-    return minSize().w();
-} // aLayoutObj::minW
+    m_d2dMin = _d2dMin;
+} // aLayoutObj::setMinDim
 
 
 /*******************************************************************************
-* aLayoutObj::minH
+* aLayoutObj::setMinDim
 *******************************************************************************/
-s32 aLayoutObj::minH() const
+void aLayoutObj::setMinDim(s32  _w,
+                           s32  _h)
 {
-    return minSize().h();
-} // aLayoutObj::minH
-
-
-/*******************************************************************************
-* aLayoutObj::setMinSize
-*******************************************************************************/
-void aLayoutObj::setMinSize(const aDimension2D<s32> &_d2dMin)
-{
-    m_d2dMinSize = _d2dMin;
-} // aLayoutObj::setMinSize
-
-
-/*******************************************************************************
-* aLayoutObj::setMinSize
-*******************************************************************************/
-void aLayoutObj::setMinSize(s32  _w,
-                            s32  _h)
-{
-    m_d2dMinSize.set(_w, _h);
-} // aLayoutObj::setMinSize
+    m_d2dMin.set(_w, _h);
+} // aLayoutObj::setMinDim
 
 
 /*******************************************************************************
@@ -106,7 +88,7 @@ void aLayoutObj::setMinSize(s32  _w,
 *******************************************************************************/
 void aLayoutObj::setMinW(s32  _w)
 {
-    m_d2dMinSize.w() = _w;
+    m_d2dMin.w() = _w;
 } // aLayoutObj::setMinW
 
 
@@ -115,54 +97,36 @@ void aLayoutObj::setMinW(s32  _w)
 *******************************************************************************/
 void aLayoutObj::setMinH(s32  _h)
 {
-    m_d2dMinSize.h() = _h;
+    m_d2dMin.h() = _h;
 } // aLayoutObj::setMinH
 
 
 /*******************************************************************************
-* aLayoutObj::maxSize
+* aLayoutObj::maxDim
 *******************************************************************************/
-aDimension2D<s32> aLayoutObj::maxSize() const
+aDimension2D<s32> aLayoutObj::maxDim() const
 {
-    return m_d2dMaxSize;
-} // aLayoutObj::maxSize
+    return m_d2dMax;
+} // aLayoutObj::maxDim
 
 
 /*******************************************************************************
-* aLayoutObj::maxW
+* aLayoutObj::setMaxDim
 *******************************************************************************/
-s32 aLayoutObj::maxW() const
+void aLayoutObj::setMaxDim(const aDimension2D<s32> &_d2dMax)
 {
-    return maxSize().w();
-} // aLayoutObj::maxW
+    m_d2dMax = _d2dMax;
+} // aLayoutObj::setMaxDim
 
 
 /*******************************************************************************
-* aLayoutObj::maxH
+* aLayoutObj::setMaxDim
 *******************************************************************************/
-s32 aLayoutObj::maxH() const
+void aLayoutObj::setMaxDim(s32  _w,
+                           s32  _h)
 {
-    return maxSize().h();
-} // aLayoutObj::maxH
-
-
-/*******************************************************************************
-* aLayoutObj::setMaxSize
-*******************************************************************************/
-void aLayoutObj::setMaxSize(const aDimension2D<s32> &_d2dMax)
-{
-    m_d2dMaxSize = _d2dMax;
-} // aLayoutObj::setMaxSize
-
-
-/*******************************************************************************
-* aLayoutObj::setMaxSize
-*******************************************************************************/
-void aLayoutObj::setMaxSize(s32  _w,
-                            s32  _h)
-{
-    m_d2dMaxSize.set(_w, _h);
-} // aLayoutObj::setMaxSize
+    m_d2dMax.set(_w, _h);
+} // aLayoutObj::setMaxDim
 
 
 /*******************************************************************************
@@ -170,7 +134,7 @@ void aLayoutObj::setMaxSize(s32  _w,
 *******************************************************************************/
 void aLayoutObj::setMaxW(s32  _w)
 {
-    m_d2dMaxSize.w() = _w;
+    m_d2dMax.w() = _w;
 } // aLayoutObj::setMaxW
 
 
@@ -179,29 +143,29 @@ void aLayoutObj::setMaxW(s32  _w)
 *******************************************************************************/
 void aLayoutObj::setMaxH(s32  _h)
 {
-    m_d2dMaxSize.h() = _h;
+    m_d2dMax.h() = _h;
 } // aLayoutObj::setMaxH
 
 
 /*******************************************************************************
-* aLayoutObj::setFixedSize
+* aLayoutObj::setFixedDim
 *******************************************************************************/
-void aLayoutObj::setFixedSize(const aDimension2D<s32> &_d2dFixed)
+void aLayoutObj::setFixedDim(const aDimension2D<s32> &_d2dFixed)
 {
-    m_d2dMinSize = _d2dFixed;
-    m_d2dMaxSize = _d2dFixed;
-} // aLayoutObj::setFixedSize
+    m_d2dMin = _d2dFixed;
+    m_d2dMax = _d2dFixed;
+} // aLayoutObj::setFixedDim
 
 
 /*******************************************************************************
-* aLayoutObj::setFixedSize
+* aLayoutObj::setFixedDim
 *******************************************************************************/
-void aLayoutObj::setFixedSize(s32  _w,
-                              s32  _h)
+void aLayoutObj::setFixedDim(s32  _w,
+                             s32  _h)
 {
-    m_d2dMinSize.set(_w, _h);
-    m_d2dMaxSize.set(_w, _h);
-} // aLayoutObj::setFixedSize
+    m_d2dMin.set(_w, _h);
+    m_d2dMax.set(_w, _h);
+} // aLayoutObj::setFixedDim
 
 
 /*******************************************************************************
@@ -209,7 +173,7 @@ void aLayoutObj::setFixedSize(s32  _w,
 *******************************************************************************/
 bool aLayoutObj::isHoriExpandable() const
 {
-    return m_d2dMaxSize.w() > m_d2dMinSize.w();
+    return m_d2dMax.w() > m_d2dMin.w();
 } // aLayoutObj::isHoriExpandable
 
 
@@ -218,7 +182,7 @@ bool aLayoutObj::isHoriExpandable() const
 *******************************************************************************/
 bool aLayoutObj::isVertExpandable() const
 {
-    return m_d2dMaxSize.h() > m_d2dMinSize.h();
+    return m_d2dMax.h() > m_d2dMin.h();
 } // aLayoutObj::isVertExpandable
 
 

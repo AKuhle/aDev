@@ -12,6 +12,10 @@
 /*******************************************************************************
 * namespace
 *******************************************************************************/
+#ifdef _USE_QT_
+    #include <QWidget>
+#endif // _USE_QT_
+
 #include "aLib_def.h"
 
 
@@ -79,6 +83,7 @@ class aToolMgr;
         class aSysWinQt;
     } // namespace SysQt
 
+    using aSysWin_t = QWidget;
     using aSysWin = aLib::aWin::SysQt::aSysWinQt;
 #endif // _USE_QT_
 

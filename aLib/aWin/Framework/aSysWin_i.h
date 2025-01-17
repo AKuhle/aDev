@@ -34,6 +34,8 @@ namespace aWin {
 class aSysWinI
 {
     protected:
+        virtual aSysWin_t*          _sysWin() = 0;
+
         virtual aSysWin*            _parent() const = 0;
         virtual void                _setParent(aSysWin *_pParent) = 0;
 

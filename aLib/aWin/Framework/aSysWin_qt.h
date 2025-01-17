@@ -17,8 +17,6 @@
 
 #include "aWin/Framework/aSysWin_i.h"
 
-using aSysWin_t = QWidget;
-
 
 /*******************************************************************************
 * namespace
@@ -39,6 +37,8 @@ class aSysWinQt : private QWidget,
         aSysWinQt(aSysWinQt *_pParent = nullptr);
         virtual ~aSysWinQt();
 
+
+        aSysWin_t*                  _sysWin() override;
 
         virtual aSysWin*            _parent() const override;
         virtual void                _setParent(aSysWin *_pParent) override;

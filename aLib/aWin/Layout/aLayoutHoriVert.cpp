@@ -69,39 +69,39 @@ enumOrientation aLayoutHoriVert::orientation() const
 
 
 /*******************************************************************************
-* aLayoutHoriVert::minSizeHori
+* aLayoutHoriVert::minDimHori
 *******************************************************************************/
-aDimension2D<s32> aLayoutHoriVert::minSizeHori() const
+aDimension2D<s32> aLayoutHoriVert::minDimHori() const
 {
     aDimension2D<s32>   minDim;
 
     // arrange the top childs
     for (aLayoutObj *pLO : m_lstChilds)
     {
-        minDim.w() += pLO->distance().w() + pLO->minSize().w();
-        minDim.h() = aUtil::max<s32>(minDim.h(), pLO->distance().h() + pLO->minSize().h());
+        minDim.w() += pLO->distance().w() + pLO->minDim().w();
+        minDim.h() = aUtil::max<s32>(minDim.h(), pLO->distance().h() + pLO->minDim().h());
     }
 
     return minDim;
-} // aLayoutHoriVert::minSizeHori
+} // aLayoutHoriVert::minDimHori
 
 
 /*******************************************************************************
-* aLayoutHoriVert::minSizeVert
+* aLayoutHoriVert::minDimVert
 *******************************************************************************/
-aDimension2D<s32> aLayoutHoriVert::minSizeVert() const
+aDimension2D<s32> aLayoutHoriVert::minDimVert() const
 {
     aDimension2D<s32>   minDim;
 
     // arrange the top childs
     for (aLayoutObj *pLO : m_lstChilds)
     {
-        minDim.w() = aUtil::max<s32>(minDim.w(), pLO->distance().w() + pLO->minSize().w());
-        minDim.h() += pLO->distance().h() + pLO->minSize().h();
+        minDim.w() = aUtil::max<s32>(minDim.w(), pLO->distance().w() + pLO->minDim().w());
+        minDim.h() += pLO->distance().h() + pLO->minDim().h();
     }
 
     return minDim;
-} // aLayoutHoriVert::minSizeVert
+} // aLayoutHoriVert::minDimVert
 
 
 /*******************************************************************************
@@ -109,7 +109,7 @@ aDimension2D<s32> aLayoutHoriVert::minSizeVert() const
 *******************************************************************************/
 void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
 {
-    aDimension2D<s32>                   minDim      = minSizeHori();
+    aDimension2D<s32>                   minDim      = minDimHori();
     s32                                 restSpace   = _r2dLayout.w() - minDim.w();
     s32                                 x           = _r2dLayout.x();
 
@@ -126,7 +126,7 @@ void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
     for (aLayoutObj *pLO : m_lstChilds)
     {
         // multiple use of minDim => calculate just one time
-        shared_ptr<structDim>   pDim = make_shared<structDim> (pLO, pLO->minSize());
+        shared_ptr<structDim>   pDim = make_shared<structDim> (pLO, pLO->minDim());
 
         allItems.push_back(pDim);
 
@@ -143,7 +143,7 @@ void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
     // sort the expand list to the max size
     std::sort(expandItems.begin(), expandItems.end(), [] (const shared_ptr<structDim> &p1,
                                                           const shared_ptr<structDim> &p2)
-              { return p1->pLO->maxSize().w() < p2->pLO->maxSize().w(); });
+              { return p1->pLO->maxDim().w() < p2->pLO->maxDim().w(); });
 
 
     // calculate the expandable childs
@@ -157,7 +157,7 @@ void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
         w = pDim->minDim.w() + add;
 
         // set the size
-        pDim->s32Size = aUtil::min<s32>(w, pDim->pLO->maxSize().w());
+        pDim->s32Size = aUtil::min<s32>(w, pDim->pLO->maxDim().w());
 
         // adjust the rest size and decrement the number of expandable items
         // pDim->minDim.w is already in minSizeHori() => substract it here (doubled else)
@@ -190,7 +190,7 @@ void aLayoutHoriVert::arangeChildsHori(aRect2D<s32> _r2dLayout)
 *******************************************************************************/
 void aLayoutHoriVert::arangeChildsVert(aRect2D<s32> _r2dLayout)
 {
-    aDimension2D<s32>                   minDim      = minSizeVert();
+    aDimension2D<s32>                   minDim      = minDimVert();
     s32                                 restSpace   = _r2dLayout.h() - minDim.h();
     s32                                 y           = _r2dLayout.y();
 
@@ -207,7 +207,7 @@ void aLayoutHoriVert::arangeChildsVert(aRect2D<s32> _r2dLayout)
     for (aLayoutObj *pLO : m_lstChilds)
     {
         // multiple use of minDim => calculate just one time
-        shared_ptr<structDim>   pDim = make_shared<structDim> (pLO, pLO->minSize());
+        shared_ptr<structDim>   pDim = make_shared<structDim> (pLO, pLO->minDim());
 
         allItems.push_back(pDim);
 
@@ -224,7 +224,7 @@ void aLayoutHoriVert::arangeChildsVert(aRect2D<s32> _r2dLayout)
     // sort the expand list to the max size
     std::sort(expandItems.begin(), expandItems.end(), [] (const shared_ptr<structDim> &p1,
                                                           const shared_ptr<structDim> &p2)
-              {return p1->pLO->maxSize().h() < p2->pLO->maxSize().h(); });
+              {return p1->pLO->maxDim().h() < p2->pLO->maxDim().h(); });
 
 
     // calculate the expandable childs
@@ -238,7 +238,7 @@ void aLayoutHoriVert::arangeChildsVert(aRect2D<s32> _r2dLayout)
         h = pDim->minDim.h() + add;
 
         // set the size
-        pDim->s32Size = aUtil::min<s32>(h, pDim->pLO->maxSize().h());
+        pDim->s32Size = aUtil::min<s32>(h, pDim->pLO->maxDim().h());
 
         // adjust the rest size and decrement the number of expandable items
         // pDim->minDim.h is already in minSizeVert() => substract it here (doubled else)
@@ -267,19 +267,19 @@ void aLayoutHoriVert::arangeChildsVert(aRect2D<s32> _r2dLayout)
 
 
 /*******************************************************************************
-* aLayoutHoriVert::calculateMinSize
+* aLayoutHoriVert::calculateMinDim
 *******************************************************************************/
-aDimension2D<s32> aLayoutHoriVert::calculateMinSize() const
+aDimension2D<s32> aLayoutHoriVert::calculateMinDim() const
 {
     if (orientation() == enumOrientation::Hori)
     {
-        return minSizeHori();
+        return minDimHori();
     }
     else
     {
-        return minSizeVert();
+        return minDimVert();
     }
-} // aLayoutHoriVert::calculateMinSize
+} // aLayoutHoriVert::calculateMinDim
 
 
 /*******************************************************************************

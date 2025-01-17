@@ -70,8 +70,8 @@ class aLayoutHoriVert : public aLayout
         enumOrientation             orientation() const;
 
     private:
-        aDimension2D<s32>           minSizeHori() const;
-        aDimension2D<s32>           minSizeVert() const;
+        aDimension2D<s32>           minDimHori() const;
+        aDimension2D<s32>           minDimVert() const;
 
         void                        arangeChildsHori(aRect2D<s32> _r2dLayout);
         void                        arangeChildsVert(aRect2D<s32> _r2dLayout);
@@ -81,7 +81,7 @@ class aLayoutHoriVert : public aLayout
     * qLayout interfasce
     *******************************************************************************/
     public:
-        virtual aDimension2D<s32>   calculateMinSize() const override;
+        virtual aDimension2D<s32>   calculateMinDim() const override;
         virtual void                arrangeChilds(aRect2D<s32> _r2dLayout) override;
 }; // class aLayoutHoriVert
 
