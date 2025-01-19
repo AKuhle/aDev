@@ -51,6 +51,8 @@ class aSysWinI
     * win state
     *******************************************************************************/
     protected:
+        virtual void                _close() = 0;
+
         virtual void                _show() = 0;
         virtual void                _hide() = 0;
         virtual bool                _isVisible() const = 0;

@@ -457,11 +457,6 @@ enumToolResult aToolBase::doToolDoubleClick(u32                   _u32Modifiers,
                                             const aVector2D<s32>  &_v2dLocal,
                                             const aVector2D<s32>  &_v2dGlobal)
 {
-    // no default action if accepted
-    // this avoids delgation of the event to the parent window
-    CHECK_PRE_CONDITION(!m_bAcceptDoubleClick, enumToolResult::Handled);
-
-
     enumToolResult eResult  = enumToolResult::Unhandled;
 
     switch (_u32MouseButton)

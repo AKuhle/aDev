@@ -53,8 +53,8 @@ class aCtrl : public aBaseWin
         void                setCtrlMgr(aCtrlMgr *_pCtrlMgr);
         aCtrlMgr*           ctrlMgr() const;
 
-        void                setCtrlMgr(u32 *_u32CtrlId);
-        u32*                ctrlId() const;
+        void                setCtrlId(u32 _u32Id);
+        u32                 ctrlId() const;
 
         void                setHoverColor(const aColor  &_color);
         const aColor&       hoverColor() const;

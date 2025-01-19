@@ -16,6 +16,11 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aUtil/Collection/aPtrList.h"
+
+#include "aWin/Ctrl/aCtrl.h"
+
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -32,21 +37,21 @@ class aCtrlMgr
 {
     private:
         //qPtrList<qAction>   m_lstAction;
-        //qPtrList<qCtrlBase>    m_lstCtrls;
+        aPtrList<aCtrl>         m_lstCtrls;
 
     public:
         aCtrlMgr();
         virtual ~aCtrlMgr();
 
-        //void            UpdateAllCtrls();
+        void            updateAllCtrls();
 
-        //virtual void    OnRegisterCtrl() = 0;
-        //virtual void    OnUpdateCtrl(qCtrlBase *_pCtrl) = 0;
+        virtual void    onRegisterCtrl() = 0;
+        virtual void    onUpdateCtrl(aCtrl *_pCtrl) = 0;
 
-        //void            Register(qCtrlBase  *_pCtrl);
+        void            registerCtrl(aCtrl  *_pCtrl);
 
-        //void            SendCtrlMessage(qCtrlBase *_pCtrl,
-        //                                u32       _u32Mes);
+        void            sendCtrlMessage(aCtrl   *_pCtrl,
+                                        u32     _u32Mes);
 
         // void            Register(QAction        *_pAction,
         //                          s32            _s32ID,
@@ -67,7 +72,7 @@ class aCtrlMgr
     * handler
     *******************************************************************************/
     protected:
-        // virtual void    OnCtrlClicked(qCtrlBase *_pCtrl);
+        virtual void    onCtrlClicked(aCtrl *_pCtrl);
         // virtual void    OnCtrlValueChanged(qCtrlBase *_pCtrl);
 }; // class aCtrlMgr
 

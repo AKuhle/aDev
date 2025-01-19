@@ -114,5 +114,22 @@ void aButton::setSelected(bool _bSelected)
 } // aButton::setSelected
 
 
+/*******************************************************************************
+* aButton::isSelectable
+*******************************************************************************/
+bool aButton::isSelectable() const
+{
+    return m_bSelectable;
+} // aButton::isSelectable
+
+
+/*******************************************************************************
+* aButton::setSelectable
+*******************************************************************************/
+void aButton::setSelectable(bool _bSelectable)
+{
+    m_bSelectable = _bSelectable;
+} // setSelectable::setS
+
 } // namespace aWin
 } // namespace aLib

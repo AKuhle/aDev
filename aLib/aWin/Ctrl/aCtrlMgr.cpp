@@ -48,54 +48,54 @@ aCtrlMgr::~aCtrlMgr()
 } // aCtrlMgr::~aCtrlMgr
 
 
-// /*******************************************************************************
-// * aCtrlMgr::UpdateAllCtrls
-// *******************************************************************************/
-// void aCtrlMgr::UpdateAllCtrls()
-// {
-//     // // update all registered actions
-//     // for (qCtrlI *pCtrl : m_lstAction)
-//     // {
-//     //     OnUpdateCtrl(pCtrl);
-//     // }
+/*******************************************************************************
+* aCtrlMgr::updateAllCtrls
+*******************************************************************************/
+void aCtrlMgr::updateAllCtrls()
+{
+    // // update all registered actions
+    // for (qCtrlI *pCtrl : m_lstAction)
+    // {
+    //     OnUpdateCtrl(pCtrl);
+    // }
 
-//     // update all registered ctrls
-//     for (qCtrlBase *pCtrl : m_lstCtrls)
-//     {
-//         OnUpdateCtrl(pCtrl);
-//     }
-// } // aCtrlMgr::UpdateAllCtrls
-
-
-// /*******************************************************************************
-// * aCtrlMgr::Register
-// *******************************************************************************/
-// void aCtrlMgr::Register(qCtrlBase   *_pCtrl)
-// {
-//     m_lstCtrls.push_back(_pCtrl);
-
-//     _pCtrl->SetCtrlMgr(this);
-// } // aCtrlMgr::Register
+    // update all registered ctrls
+    for (aCtrl *pCtrl : m_lstCtrls)
+    {
+        onUpdateCtrl(pCtrl);
+    }
+} // aCtrlMgr::updateAllCtrls
 
 
-// /*******************************************************************************
-// * aCtrlMgr::SendCtrlMessage
-// *******************************************************************************/
-// void aCtrlMgr::SendCtrlMessage(qCtrlBase *_pCtrl,
-//                                u32       _u32Mes)
-// {
-//     switch (_u32Mes)
-//     {
-//         case MSG_CLICKED:
-//             OnCtrlClicked(_pCtrl);
-//             break;
+/*******************************************************************************
+* aCtrlMgr::registerCtrl
+*******************************************************************************/
+void aCtrlMgr::registerCtrl(aCtrl   *_pCtrl)
+{
+    m_lstCtrls.push_back(_pCtrl);
 
-//         case MSG_VALUE_CHANGED:
-//             OnCtrlValueChanged(_pCtrl);
-//             break;
-//     }
+    _pCtrl->setCtrlMgr(this);
+} // aCtrlMgr::registerCtrl
 
-// } // aCtrlMgr::SendCtrlMessage
+
+/*******************************************************************************
+* aCtrlMgr::sendCtrlMessage
+*******************************************************************************/
+void aCtrlMgr::sendCtrlMessage(aCtrl    *_pCtrl,
+                               u32      _u32Mes)
+{
+    switch (_u32Mes)
+    {
+        case MSG_CLICKED:
+             onCtrlClicked(_pCtrl);
+            break;
+
+        // case MSG_VALUE_CHANGED:
+        //     OnCtrlValueChanged(_pCtrl);
+        //     break;
+    }
+
+} // aCtrlMgr::sendCtrlMessage
 
 
 // /*******************************************************************************
@@ -127,12 +127,12 @@ aCtrlMgr::~aCtrlMgr()
 // // } // aCtrlMgr::Register
 
 
-// /*******************************************************************************
-// * aCtrlMgr::OnCtrlClicked
-// *******************************************************************************/
-// void aCtrlMgr::OnCtrlClicked(qCtrlBase  */*_pCtrl*/)
-// {
-// } // aCtrlMgr::OnCtrlClicked
+/*******************************************************************************
+* aCtrlMgr::onCtrlClicked
+*******************************************************************************/
+void aCtrlMgr::onCtrlClicked(aCtrl  */*_pCtrl*/)
+{
+} // aCtrlMgr::onCtrlClicked
 
 
 // /*******************************************************************************

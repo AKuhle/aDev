@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aWin/Framework/aBaseWin.h"
+#include "aWin/Ctrl/aCtrlMgr.h"
 
 
 /*******************************************************************************
@@ -49,13 +50,19 @@ aBaseWin::~aBaseWin()
 *******************************************************************************/
 bool aBaseWin::create()
 {
-    bool bSuccess = onSysCreate() && onCreate();
+    bool        bSuccess    = onSysCreate() && onCreate();
+    aCtrlMgr    *pCtrlMgr   = dynamic_cast<aCtrlMgr *> (this);
+
+    if (m_pWinStyleFactory != nullptr)
+    {
+        m_pWinStyleFactory->setWinStyle(*this);
+    }
 
     if (bSuccess)
     {
-        if (m_pWinStyleFactory != nullptr)
+        if (pCtrlMgr != nullptr)
         {
-            m_pWinStyleFactory->setWinStyle(*this);
+            pCtrlMgr->onRegisterCtrl();
         }
     }
 
@@ -77,7 +84,13 @@ void aBaseWin::setWinStyleFactory(unique_ptr<aWinStyleFactory> _pWinStyleFactory
 *******************************************************************************/
 bool aBaseWin::close()
 {
-    return true;
+    if (onClose())
+    {
+        _close();
+        return true;
+    }
+
+    return false;
 } // aBaseWin::close
 
 

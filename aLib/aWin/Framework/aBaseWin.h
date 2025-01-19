@@ -160,6 +160,7 @@ class aBaseWin : private aSysWin,
     protected:
         virtual bool                onSysCreate();
         virtual bool                onCreate();
+        virtual bool                onClose();
 
         virtual void                onSysResize(const aDimension2D<s32> &_d2dOld,
                                                 const aDimension2D<s32> &_d2dNew);      // usually resize childs, eg. titlebar etc

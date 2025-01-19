@@ -13,6 +13,7 @@
 * includes
 *******************************************************************************/
 #include "aWin/Framework/aBaseWin.h"
+#include "aWin/Ctrl/aCtrlMgr.h"
 
 
 /*******************************************************************************
@@ -25,7 +26,8 @@ namespace aWin {
 /*******************************************************************************
 * class aTitleBar
 *******************************************************************************/
-class aTitleBar : public aBaseWin
+class aTitleBar : public aBaseWin,
+                  public aCtrlMgr
 {
     public:
         aTitleBar(aBaseWin *_pParent = nullptr);
@@ -33,10 +35,20 @@ class aTitleBar : public aBaseWin
 
 
     /*******************************************************************************
+    * aCtrlMgr interface
+    *******************************************************************************/
+    protected:
+        void                        onRegisterCtrl() override;
+        void                        onUpdateCtrl(aCtrl *_pCtrl) override;
+
+        void                        onCtrlClicked(aCtrl *_pCtrl) override;
+
+
+    /*******************************************************************************
     * aBaseWin interface
     *******************************************************************************/
     protected:
-        virtual bool                onSysCreate() override;
+        bool                        onSysCreate() override;
 };
 
 

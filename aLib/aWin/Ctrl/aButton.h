@@ -35,13 +35,12 @@ namespace aWin {
 *******************************************************************************/
 class aButton : public aCtrl
 {
-    // DeclareBoolProperty(Selectable, false)
-
     private:
         enumButtonStyle             m_eButtonStyle      { enumButtonStyle::MASKED_MODE };
         unique_ptr<aPixmap>         m_pPixmap           { nullptr };
 
         bool                        m_bSelected         { false };
+        bool                        m_bSelectable       { false };
 
 
     public:
@@ -57,6 +56,9 @@ class aButton : public aCtrl
 
         bool                    isSelected() const;
         void                    setSelected(bool _bSelected);
+
+        bool                    isSelectable() const;
+        void                    setSelectable(bool _bSelectable);
 
 
     /*******************************************************************************

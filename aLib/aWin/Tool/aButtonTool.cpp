@@ -17,6 +17,7 @@
 *******************************************************************************/
 #include "aWin/Ctrl/aButton.h"
 
+#include "aWin/Ctrl/aCtrlMgr.h"
 #include "aWin/Tool/aButtonTool.h"
 
 
@@ -34,7 +35,6 @@ aButtonTool::aButtonTool(aBaseWin   *_pOwnerWin,
                          u32        _u32ToolId /*= TOOL_ID_BUTTON*/)
 : aToolBase(_pOwnerWin, _u32ToolId, TBF_NONE)
 {
-    acceptDoubleClick();
 } // aButtonTool::aButtonTool
 
 
@@ -78,6 +78,17 @@ enumToolResult aButtonTool::onLeave(u32                   /*_u32Modifiers*/)
 
 
 /*******************************************************************************
+* aButtonTool::onLDoubleClick
+*******************************************************************************/
+enumToolResult aButtonTool::onLDoubleClick(u32                     /*_u32Modifiers*/,
+                                          const aVector2D<s32>    &/*_v2dLocal*/,
+                                          const aVector2D<s32>    &/*_v2dGlobal*/)
+{
+    return enumToolResult::Handled;
+} // aButtonTool::onLDoubleClick
+
+
+/*******************************************************************************
 * aButtonTool::onMouseMove
 *******************************************************************************/
 enumToolResult aButtonTool::onMouseMove(u32                   /*_u32Modifiers*/,
@@ -118,22 +129,20 @@ enumToolResult aButtonTool::onLMousePress(u32                     /*_u32Modifier
 * aButtonTool::onLMouseMove
 *******************************************************************************/
 enumToolResult aButtonTool::onLMouseMove(u32                     /*_u32Modifiers*/,
-                                         const aVector2D<s32>    &/*_v2dLocal*/,
+                                         const aVector2D<s32>    &_v2dLocal,
                                          const aVector2D<s32>    &/*_v2dGlobal*/)
 {
     aButton *pOwner = dynamic_cast<aButton *> (ownerWin());
     CHECK_PRE_CONDITION(pOwner != nullptr, enumToolResult::Unhandled);
 
-    // bool bOn    = IsMouseOnButton(_v2dLocal);
-    // bool bNew = (bOn)?   !m_bSelectedBefore : m_bSelectedBefore;
+    bool bOn    = isMouseOnButton(_v2dLocal);
+    bool bNew   = (bOn)?   !m_bSelectedBefore : m_bSelectedBefore;
 
-    // pOwner->SetHover(bOn);
-
-    // if (bNew != pOwner->IsSelected())
-    // {
-    //     pOwner->SetSelected(bNew);
-    //     pOwner->Update();
-    // }
+    if (bNew != pOwner->isSelected())
+    {
+        pOwner->setSelected(bNew);
+        pOwner->update();
+    }
 
     return enumToolResult::Handled;
 } // aButtonTool::onLMouseMove
@@ -151,22 +160,22 @@ enumToolResult aButtonTool::onLMouseRelease(u32                     /*_u32Modifi
 
     if (isMouseOnButton(_v2dLocal))
     {
-    //     if (pOwner->IsSelectable())
-    //     {
-    //         // the button already has the correct selection state (from press/move event)
-    //         // just send the message
-    //         pOwner->GetCtrlMgr()->SendCtrlMessage(pOwner, MSG_CLICKED);
-    //     }
-    //     else
-    //     {
+        if (pOwner->isSelectable())
+        {
+            // the button already has the correct selection state (from press/move event)
+            // just send the message
+            pOwner->ctrlMgr()->sendCtrlMessage(pOwner, MSG_CLICKED);
+        }
+        else
+        {
             // the button is selected => set unselected and send the message
             pOwner->setSelected(false);
             pOwner->update();
             if (pOwner->ctrlMgr() != nullptr)
             {
-                //pOwner->ctrlMgr()->SendCtrlMessage(pOwner, MSG_CLICKED);
+                pOwner->ctrlMgr()->sendCtrlMessage(pOwner, MSG_CLICKED);
             }
-        // }
+        }
     }
 
     return enumToolResult::Handled;

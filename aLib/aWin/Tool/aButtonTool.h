@@ -54,6 +54,10 @@ class aButtonTool : public aToolBase
     protected:
         virtual enumToolResult      onLeave(u32 _u32Modifiers) override;
 
+        virtual enumToolResult      onLDoubleClick(u32                     _u32Modifiers,
+                                                   const aVector2D<s32>    &_v2dLocal,
+                                                   const aVector2D<s32>    &_v2dGlobal) override;
+
         virtual enumToolResult      onMouseMove(u32                     _u32Modifiers,
                                                 u32                     _u32MouseButton,
                                                 const aVector2D<s32>    &_v2dLocal,
