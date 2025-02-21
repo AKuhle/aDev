@@ -1,0 +1,4 @@
+Disabled dark:       20,  20,  20
+Disabled bright:     48   48,  48
+Enabled dark:        64,  64,  64
+Enabled bright:     216, 216, 216

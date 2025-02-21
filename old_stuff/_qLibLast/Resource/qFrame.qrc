@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Cursor/arrow.png</file>
+        <file>Cursor/beam.png</file>
+        <file>Cursor/flatHand.png</file>
+        <file>Cursor/sizeEW.png</file>
+        <file>Cursor/sizeNE.png</file>
+        <file>Cursor/sizeNS.png</file>
+        <file>Cursor/sizeNW.png</file>
+        <file>qPhotoLab/flipHori.png</file>
+        <file>qPhotoLab/flipVert.png</file>
+        <file>qPhotoLab/invert.png</file>
+        <file>qPhotoLab/rotate180.png</file>
+        <file>qPhotoLab/rotateCCW.png</file>
+        <file>qPhotoLab/rotateCW.png</file>
+        <file>LED/led_exit.png</file>
+        <file>LED/led_file_open.png</file>
+        <file>LED/led_maximize.png</file>
+        <file>LED/led_minimize.png</file>
+        <file>LED/led_scrollBarArrowDown.png</file>
+        <file>LED/led_scrollBarArrowLeft.png</file>
+        <file>LED/led_scrollBarArrowRight.png</file>
+        <file>LED/led_scrollBarArrowUp.png</file>
+    </qresource>
+</RCC>

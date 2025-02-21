@@ -1,0 +1,35 @@
+///////////////////////////////////////////////////////////////////////////////
+// include
+///////////////////////////////////////////////////////////////////////////////
+#pragma once
+
+												   
+//////////////////////////////////////////////////////////////////////////
+// includes
+//////////////////////////////////////////////////////////////////////////
+#include "poolVar_I.h"
+#include "qlRgba.h"
+
+
+///////////////////////////////////////////////////////////////////////////////
+// class PoolVarRgba
+///////////////////////////////////////////////////////////////////////////////
+namespace qlBase
+{
+    class PoolVarRgba : public PoolVarI<qlRgba>
+	{
+		public:
+            PoolVarRgba() = default;
+
+            PoolVarRgba(const qlRgba	&_rgbaValue,
+                        const qlRgba	&_rgbaDefault);
+
+            PoolVarRgba(const qlRgba	&_rgbaValue,
+                        const qlRgba	&_rgbaDefault,
+                        const qlRgba	&_rgbaMin,
+                        const qlRgba	&_rgbaMax);
+
+            PoolVarRgba&		operator=(const PoolVarRgba	&_rhs);
+    }; // class PoolVarRgba
+
+} // namespace qlBase

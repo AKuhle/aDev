@@ -1,0 +1,111 @@
+{
+    "cat_01": "Eloquenz",
+    "cat_02": "Hollywood",
+    "cat_03": "Kategorie 03",
+    "cat_04": "Kategorie 04",
+    "cat_05": "Kategorie 05",
+    "cat_06": "Kategorie 06",
+    "cat_07": "Kategorie 07",
+    "cat_08": "Kategorie 08",
+    "cat_09": "Kategorie 09",
+    "cat_10": "Kategorie 10",
+    "cat_11": "Kategorie 11",
+    "cat_12": "Kategorie 12",
+    "cat_13": "Kategorie 13",
+    "cat_14": "Kategorie 14",
+    "cat_15": "Kategorie 15",
+    "cat_16": "Kategorie 16",
+    "type_01": "LETTER_SUM",
+    "type_02": "MOSAIC",
+    "Eloquenz": {
+        "Wortsumme": {
+            "type": "LETTER_SUM",
+            "Points2Win": 7,
+            "buzzertimer_s": 5,
+            "comment": "name1#name2#... -> name == solution",
+            "example": "Alaaf",
+            "item_01": "Kobra#Wurst#Salat#Biene#Honig#Frost#Stadt#Mikro#Haare#Staub#Leder#Zuber#Gummi#Handy#Katze"
+        }
+    },
+    "Hollywood": {
+        "Filmlegenden": {
+            "type": "MOSAIC",
+            "Points2Win": 7,
+            "buzzertimer_s": 7,
+            "comment": "image file#name -> name == solution",
+            "example": "indy.jpg#Indiana Jones - Jäger des verlorenen Schatzes",
+            "item_01": "ben-hur.jpg#Ben-Hur",
+            "item_02": "herz_krone.jpg#Ein Herz und eine Krone"
+        }
+    },
+    "Kategorie 03": {
+        "Spiel 3": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 04": {
+        "Spiel 4": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 05": {
+        "Spiel 5": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 06": {
+        "Spiel 6": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 07": {
+        "Spiel 7": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 08": {
+        "Spiel 8": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 09": {
+        "Spiel 9": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 10": {
+        "Spiel 10": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 11": {
+        "Spiel 11": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 12": {
+        "Spiel 12": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 13": {
+        "Spiel 13": {
+            "type": "xxx"
+        }
+    },
+    "Kategorie 14": {
+        "Spiel 14": {
+            "type": "x"
+        }
+    },
+    "Kategorie 15": {
+        "Spiel 15": {
+            "type": "x"
+        }
+    },
+    "Kategorie 16": {
+        "Spiel 16": {
+            "type": "x"
+        }
+    }
+}

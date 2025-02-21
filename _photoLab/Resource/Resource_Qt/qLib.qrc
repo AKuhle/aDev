@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Masked/close.png</file>
+        <file>Masked/maximize.png</file>
+        <file>Masked/minimize.png</file>
+        <file>Masked/file_open.png</file>
+        <file>Masked/scrollBarDown.png</file>
+        <file>Masked/scrollBarLeft.png</file>
+        <file>Masked/scrollBarRight.png</file>
+        <file>Masked/scrollBarUp.png</file>
+        <file>PhotoLab/flipHori.png</file>
+        <file>PhotoLab/flipVert.png</file>
+        <file>PhotoLab/invert.png</file>
+        <file>PhotoLab/rotate180.png</file>
+        <file>PhotoLab/rotateCCW.png</file>
+        <file>PhotoLab/rotateCW.png</file>
+    </qresource>
+</RCC>

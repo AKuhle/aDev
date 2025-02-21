@@ -1,0 +1,88 @@
+{
+    "gameInfo": {
+        "game-00-Wortsumme": {
+            "gamepoints": 0,
+            "points2win": 7,
+            "winner": 0
+        },
+        "game-01-Filmlegenden": {
+            "gamepoints": 1,
+            "points2win": 7,
+            "winner": 2
+        },
+        "game-02-Spiel 3": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-03-Spiel 4": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-04-Spiel 5": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-05-Spiel 6": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-06-Spiel 7": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-07-Spiel 8": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-08-Spiel 9": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-09-Spiel 10": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-10-Spiel 11": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-11-Spiel 12": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-12-Spiel 13": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-13-Spiel 14": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-14-Spiel 15": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        },
+        "game-15-Spiel 16": {
+            "gamepoints": 0,
+            "points2win": 0,
+            "winner": 0
+        }
+    },
+    "teamInfo": {
+        "team1": "C:/Tools/Apps/GameData/Figures/Büffel.png",
+        "team2": "C:/Tools/Apps/GameData/Figures/Schlangen.png"
+    }
+}

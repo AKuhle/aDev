@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Masked/close.png</file>
+        <file>Masked/maximize.png</file>
+        <file>Masked/minimize.png</file>
+        <file>Masked/file_open.png</file>
+        <file>Masked/scrollBarDown.png</file>
+        <file>Masked/scrollBarLeft.png</file>
+        <file>Masked/scrollBarRight.png</file>
+        <file>Masked/scrollBarUp.png</file>
+    </qresource>
+</RCC>

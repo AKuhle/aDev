@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormMainWin</class>
+ <widget class="QMainWindow" name="FormMainWin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>787</width>
+    <height>464</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>qPhotoLab</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="m_pMenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>787</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFIle">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="m_pActionFileOpen"/>
+    <addaction name="separator"/>
+    <addaction name="m_pActionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="m_pActionToolBox"/>
+    <addaction name="m_pActionNavigator"/>
+    <addaction name="m_pActionProtocol"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuImage">
+    <property name="title">
+     <string>Image</string>
+    </property>
+    <widget class="QMenu" name="menuTransform">
+     <property name="title">
+      <string>Transform</string>
+     </property>
+     <addaction name="m_pActionFlipHori"/>
+     <addaction name="m_pActionFlipVert"/>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+     <addaction name="m_pActionRotCCW"/>
+     <addaction name="m_pActionRotCW"/>
+     <addaction name="m_pActionRot180"/>
+    </widget>
+    <widget class="QMenu" name="menuMode">
+     <property name="title">
+      <string>Mode</string>
+     </property>
+     <addaction name="m_pActionModeBitmap"/>
+     <addaction name="m_pActionModeGrayscale"/>
+     <addaction name="m_pActionModeRgb"/>
+     <addaction name="separator"/>
+     <addaction name="m_pActionMode8Bit"/>
+     <addaction name="m_pActionMode16Bit"/>
+    </widget>
+    <widget class="QMenu" name="menuCorrections">
+     <property name="title">
+      <string>Corrections</string>
+     </property>
+     <addaction name="m_pActionInvert"/>
+    </widget>
+    <addaction name="menuMode"/>
+    <addaction name="separator"/>
+    <addaction name="menuCorrections"/>
+    <addaction name="separator"/>
+    <addaction name="menuTransform"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="m_pActionUndo"/>
+    <addaction name="m_pActionRedo"/>
+   </widget>
+   <addaction name="menuFIle"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuImage"/>
+   <addaction name="menuView"/>
+  </widget>
+  <widget class="qLib::qToolBar" name="m_pTbStandard">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pActionFileOpen"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionToolBox"/>
+   <addaction name="m_pActionNavigator"/>
+   <addaction name="m_pActionProtocol"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionUndo"/>
+   <addaction name="m_pActionRedo"/>
+  </widget>
+  <widget class="qLib::qToolBar" name="m_pTbTransform">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_pActionFlipHori"/>
+   <addaction name="m_pActionFlipVert"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionRotCCW"/>
+   <addaction name="m_pActionRotCW"/>
+   <addaction name="m_pActionRot180"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionInvert"/>
+  </widget>
+  <action name="m_pActionFileOpen">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/fileOpen.png</normaloff>
+     <disabledoff>:/AppSpecific/fileOpen-d.png</disabledoff>:/AppSpecific/fileOpen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open File...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="m_pActionExit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/exit.png</normaloff>
+     <disabledoff>:/AppSpecific/exit-d.png</disabledoff>:/AppSpecific/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="m_pActionNavigator">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/navigator_off.png</normaloff>
+     <normalon>:/AppSpecific/navigator_on.png</normalon>:/AppSpecific/navigator_off.png</iconset>
+   </property>
+   <property name="text">
+    <string>Navigator</string>
+   </property>
+   <property name="toolTip">
+    <string>Toggle the Navigator</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+N</string>
+   </property>
+  </action>
+  <action name="m_pActionFlipHori">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/flipHori.png</normaloff>
+     <disabledoff>:/AppSpecific/flipHori-d.png</disabledoff>:/AppSpecific/flipHori.png</iconset>
+   </property>
+   <property name="text">
+    <string>Flip Horizontal</string>
+   </property>
+  </action>
+  <action name="m_pActionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/undo.png</normaloff>
+     <disabledoff>:/AppSpecific/undo-d.png</disabledoff>:/AppSpecific/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="m_pActionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/redo.png</normaloff>
+     <disabledoff>:/AppSpecific/redo-d.png</disabledoff>:/AppSpecific/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="m_pActionFlipVert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/flipVert.png</normaloff>
+     <disabledoff>:/AppSpecific/flipVert-d.png</disabledoff>:/AppSpecific/flipVert.png</iconset>
+   </property>
+   <property name="text">
+    <string>Flip Vertical</string>
+   </property>
+  </action>
+  <action name="m_pActionRotCCW">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/rotateCCW.png</normaloff>
+     <disabledoff>:/AppSpecific/rotateCCW-d.png</disabledoff>:/AppSpecific/rotateCCW.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rotate Counter Clockwise</string>
+   </property>
+  </action>
+  <action name="m_pActionRotCW">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/rotateCW.png</normaloff>
+     <disabledoff>:/AppSpecific/rotateCW-d.png</disabledoff>:/AppSpecific/rotateCW.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rotate Clockwise</string>
+   </property>
+  </action>
+  <action name="m_pActionRot180">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/rotate180.png</normaloff>
+     <disabledoff>:/AppSpecific/rotate180-d.png</disabledoff>:/AppSpecific/rotate180.png</iconset>
+   </property>
+   <property name="text">
+    <string>Rotate 180°</string>
+   </property>
+  </action>
+  <action name="m_pActionInvert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/invert.png</normaloff>
+     <disabledoff>:/AppSpecific/invert-d.png</disabledoff>:/AppSpecific/invert.png</iconset>
+   </property>
+   <property name="text">
+    <string>Invert Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="m_pActionToolBox">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/toolbox_off.png</normaloff>
+     <normalon>:/AppSpecific/toolbox_on.png</normalon>:/AppSpecific/toolbox_off.png</iconset>
+   </property>
+   <property name="text">
+    <string>Tool Box</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+T</string>
+   </property>
+  </action>
+  <action name="m_pActionProtocol">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qFsResource.qrc">
+     <normaloff>:/AppSpecific/protocol_off.png</normaloff>
+     <normalon>:/AppSpecific/protocol_on.png</normalon>:/AppSpecific/protocol_off.png</iconset>
+   </property>
+   <property name="text">
+    <string>Protocol</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+P</string>
+   </property>
+  </action>
+  <action name="m_pActionModeRgb">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>RGB-color</string>
+   </property>
+  </action>
+  <action name="m_pActionMode8Bit">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>8 Bit/Channel</string>
+   </property>
+  </action>
+  <action name="m_pActionMode16Bit">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>16 Bit/Channel</string>
+   </property>
+  </action>
+  <action name="m_pActionModeGrayscale">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Grayscale</string>
+   </property>
+  </action>
+  <action name="m_pActionModeBitmap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Bitmap</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qLib::qToolBar</class>
+   <extends>QToolBar</extends>
+   <header location="global">qToolBar.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../Resource/qFsResource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

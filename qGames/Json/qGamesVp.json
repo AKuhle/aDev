@@ -1,0 +1,48 @@
+{
+    "bool": {
+    },
+    "color": {
+        "1": {
+            "defaultA": 1,
+            "defaultB": 0.10000000149011612,
+            "defaultG": 0,
+            "defaultR": 0,
+            "maxA": 1,
+            "maxB": 0.10000000149011612,
+            "maxG": 0,
+            "maxR": 0,
+            "minA": 1,
+            "minB": 0.10000000149011612,
+            "minG": 0,
+            "minR": 0,
+            "valueA": 1,
+            "valueB": 0.10000000149011612,
+            "valueG": 0,
+            "valueR": 0
+        },
+        "2": {
+            "defaultA": 1,
+            "defaultB": 0.30000001192092896,
+            "defaultG": 0,
+            "defaultR": 0,
+            "maxA": 1,
+            "maxB": 0.30000001192092896,
+            "maxG": 0,
+            "maxR": 0,
+            "minA": 1,
+            "minB": 0.30000001192092896,
+            "minG": 0,
+            "minR": 0,
+            "valueA": 1,
+            "valueB": 0.30000001192092896,
+            "valueG": 0,
+            "valueR": 0
+        }
+    },
+    "dbl": {
+    },
+    "enum": {
+    },
+    "s32": {
+    }
+}
