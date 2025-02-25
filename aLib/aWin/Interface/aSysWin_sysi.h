@@ -12,6 +12,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aWin_def.h"
 #include "aUtil/aUtil_def.h"
 
 using namespace aLib::aUtil;
@@ -29,29 +30,31 @@ namespace aWin {
 *******************************************************************************/
 class aSysWin_sysi
 {
+    virtual void            _setParent(SysWinClass *_pParent) = 0;
+
+
     /*******************************************************************************
-    * con-/destruction
+    * window geometry
     *******************************************************************************/
     protected:
-        aSysWin_sysi()             = default;
-
-    public:
-        virtual ~aSysWin_sysi()    = default;
+        virtual void        _setMinSize(s32  _w,
+                                        s32  _h) = 0;
 
 
     /*******************************************************************************
     * window state
     *******************************************************************************/
-    public:
+    protected:
         // visibility
         virtual bool        _isVisible() const = 0;
         virtual void        _setVisible(bool _bVisible) = 0;
+
 
     /*******************************************************************************
     * handler
     *******************************************************************************/
     protected:
-        virtual void        onOsDropUrl(const aUrl  &_url) = 0;
+        virtual void        _onOsDropUrl(const aUrl  &_url) = 0;
 
 }; // class aSysWin_sysi
 

@@ -121,15 +121,16 @@ enum class enumFocusPolicy
 /*******************************************************************************
 * classes
 *******************************************************************************/
-template<class T> class aSysWin;
+template<class T> class aBaseWin;
 
-class aDoc;
 class aMainWin;
 class aMainWinMdi;
 class aMdiArea;
 class aMdiWin;
 class aPlainWin;
 class aScrollWin;
+
+class aDoc;
 class aView;
 
 } // namespace aWin

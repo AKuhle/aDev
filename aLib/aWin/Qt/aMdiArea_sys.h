@@ -19,8 +19,7 @@
 #include "aWin_def.h"
 
 #include "aMdiArea_sysi.h"
-
-#include "aSysWin.h"
+#include "aBaseWin.h"
 
 
 
@@ -34,8 +33,8 @@ namespace aWin {
 /*******************************************************************************
 * class aMdiArea_sys
 *******************************************************************************/
-class aMdiArea_sys : public aSysWin<QMdiArea>,
-                     public aMdiArea_sysi
+class aMdiArea_sys : public aBaseWin<QMdiArea>,
+                     private aMdiArea_sysi
 {
     /*******************************************************************************
     * con-/destruction
@@ -44,6 +43,7 @@ class aMdiArea_sys : public aSysWin<QMdiArea>,
         aMdiArea_sys(SysWinClass *_pParent = nullptr);
         ~aMdiArea_sys();
 
+        void                _addMdiWin(aMdiWin *_pMdiWin) override;
 }; // class aMdiArea_sys
 
 

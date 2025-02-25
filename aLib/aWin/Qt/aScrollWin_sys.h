@@ -19,7 +19,7 @@
 #include "aWin_def.h"
 
 #include "aScrollWin_sysi.h"
-#include "aSysWin.h"
+#include "aBaseWin.h"
 
 
 
@@ -33,7 +33,7 @@ namespace aWin {
 /*******************************************************************************
 * class aScrollWin_sys
 *******************************************************************************/
-class aScrollWin_sys : public aSysWin<QAbstractScrollArea>,
+class aScrollWin_sys : public aBaseWin<QAbstractScrollArea>,
                        public aScrollWin_sysi
 {
     /*******************************************************************************

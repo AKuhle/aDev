@@ -17,6 +17,7 @@
 *******************************************************************************/
 #include "aString.h"
 #include "mainWin.h"
+#include "amdiWin.h"
 
 using namespace aLib::aWin;
 using namespace std;
@@ -27,7 +28,7 @@ using namespace std;
 *******************************************************************************/
 bool MainWin::onCreate()
 {
-    cout << __PRETTY_FUNCTION__ << endl;
+    setMinSize(600, 400);
 
     return true;
 } // MainWin::onCreate
@@ -39,6 +40,11 @@ bool MainWin::onCreate()
 void MainWin::onDropUrl(const aUrl  &_url)
 {
     cout << _url.toLocalFile() << endl;
+
+    aMdiWin *pMdiWin = new aMdiWin(this);
+    pMdiWin->create();
+
+    addMdiWin(pMdiWin);
 } // MainWin::onDropUrl
 
 

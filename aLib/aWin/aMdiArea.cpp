@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aMdiArea.h"
+#include "aMdiWin.h"
 
 
 /*******************************************************************************
@@ -35,7 +36,18 @@ aMdiArea::aMdiArea(SysWinClass *_pParent /*= nullptr*/)
 *******************************************************************************/
 aMdiArea::~aMdiArea()
 {
-} // aMdiArea::aMdiArea
+} // aMdiArea::~aMdiArea
+
+
+/*******************************************************************************
+* aMdiArea::addMdiWin
+*******************************************************************************/
+void aMdiArea::addMdiWin(aMdiWin *_pMdiWin)
+{
+    //_pMdiWin->setParent(_pMdiWin);
+
+    _addMdiWin(_pMdiWin);
+} // aMdiArea::addMdiWin
 
 
 } // namespace aWin

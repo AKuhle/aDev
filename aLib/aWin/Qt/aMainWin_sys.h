@@ -20,7 +20,7 @@
 
 #include "aMainWin_sysi.h"
 
-#include "aSysWin.h"
+#include "aBaseWin.h"
 
 
 
@@ -34,15 +34,15 @@ namespace aWin {
 /*******************************************************************************
 * class aMainWin_sys
 *******************************************************************************/
-class aMainWin_sys : public aSysWin<QMainWindow>,
-                     public aMainWin_sysi
+class aMainWin_sys : public aBaseWin<QMainWindow>,
+                     private aMainWin_sysi
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
         aMainWin_sys(SysWinClass *_pParent = nullptr);
-        ~aMainWin_sys();
+        virtual ~aMainWin_sys();
 
 
     /*******************************************************************************
@@ -50,6 +50,7 @@ class aMainWin_sys : public aSysWin<QMainWindow>,
     *******************************************************************************/
     protected:
         void            _setCentralWin(SysWinClass *_pWin) override;
+        SysWinClass*    _centralWin() override;
 
 
 }; // class aMainWin_sys

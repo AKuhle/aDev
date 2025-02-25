@@ -139,6 +139,28 @@ HEADERS += \
     aUtil/aVersionInfo.h \
     aLib.h \
     aLib_def.h \
+    aWin/DocView/aDoc.h \
+    aWin/DocView/aView.h \
+    aWin/Interface/aMainWin_sysi.h \
+    aWin/Interface/aMdiArea_sysi.h \
+    aWin/Interface/aMdiWin_sysi.h \
+    aWin/Interface/aScrollWin_sysi.h \
+    aWin/Interface/aSysWin_sysi.h \
+    aWin/Qt/aMainWin_sys.h \
+    aWin/Qt/aMdiArea_sys.h \
+    aWin/Qt/aMdiWin_sys.h \
+    aWin/Qt/aPlainWin_sys.h \
+    aWin/Qt/aScrollWin_sys.h \
+    aWin/Qt/aSysWin_sys.h \
+    aWin/Qt/aSysWin_sys.inl \
+    aWin/aBaseWin.h \
+    aWin/aBaseWin.inl \
+    aWin/aMainWin.h \
+    aWin/aMainWinMdi.h \
+    aWin/aMdiArea.h \
+    aWin/aMdiWin.h \
+    aWin/aPlainWin.h \
+    aWin/aScrollWin.h \
     aWin/aWin_def.h
 
 
@@ -175,6 +197,19 @@ SOURCES += \
     aUtil/aString.cpp \
     aUtil/aUrl.cpp \
     aUtil/aVersionInfo.cpp \
-    aLib.cpp
+    aLib.cpp \
+    aWin/DocView/aDoc.cpp \
+    aWin/DocView/aView.cpp \
+    aWin/Qt/aMainWin_sys.cpp \
+    aWin/Qt/aMdiArea_sys.cpp \
+    aWin/Qt/aMdiWin_sys.cpp \
+    aWin/Qt/aPlainWin_sys.cpp \
+    aWin/Qt/aScrollWin_sys.cpp \
+    aWin/aMainWin.cpp \
+    aWin/aMainWinMdi.cpp \
+    aWin/aMdiArea.cpp \
+    aWin/aMdiWin.cpp \
+    aWin/aPlainWin.cpp \
+    aWin/aScrollWin.cpp
 
 DISTFILES +=

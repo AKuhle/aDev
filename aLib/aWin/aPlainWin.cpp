@@ -25,7 +25,7 @@ namespace aWin {
 * aPlainWin::aPlainWin
 *******************************************************************************/
 aPlainWin::aPlainWin(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin(_pParent)
+: aPlainWin_sys(_pParent)
 {
 } // aPlainWin::aPlainWin
 

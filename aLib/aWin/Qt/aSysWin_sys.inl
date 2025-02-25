@@ -36,6 +36,26 @@ aSysWin_sys<T>::~aSysWin_sys()
 
 
 /*******************************************************************************
+* aSysWin_sys<T>::_setParent
+*******************************************************************************/
+template<class T>
+void aSysWin_sys<T>::_setParent(SysWinClass *_pParent)
+{
+    T::setParent(_pParent);
+} // aSysWin_sys<T>::_setParent
+
+/*******************************************************************************
+* aSysWin_sys<T>::_setMinSize
+*******************************************************************************/
+template<class T>
+void aSysWin_sys<T>::_setMinSize(s32  _w,
+                                 s32  _h)
+{
+    T::setMinimumSize(_w, _h);
+} // aSysWin_sys<T>::_setMinSize
+
+
+/*******************************************************************************
 * aSysWin_sys<T>::_isVisible
 *******************************************************************************/
 template<class T>
@@ -101,7 +121,7 @@ void aSysWin_sys<T>::dropEvent(QDropEvent *_pEvent)
 \
         foreach (QUrl url, _pEvent->mimeData()->urls())
         {
-           onOsDropUrl(aUrl(url));
+           _onOsDropUrl(aUrl(url));
         }
     }
 } // aSysWin_sys<T>::dropEvent

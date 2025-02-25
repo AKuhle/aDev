@@ -13,6 +13,9 @@
 * includes
 *******************************************************************************/
 #include "aSysWin_sys.h"
+#include "aDimension2D.h"
+
+using namespace aLib::aMath;
 
 
 /*******************************************************************************
@@ -23,21 +26,31 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aSysWin
+* class aBaseWin
 *******************************************************************************/
 template<class T>
-class aSysWin : public aSysWin_sys<T>
+class aBaseWin : public aSysWin_sys<T>
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aSysWin(SysWinClass *_pParent = nullptr);
-        virtual ~aSysWin();
+        aBaseWin(SysWinClass *_pParent = nullptr);
+        virtual ~aBaseWin();
 
     public:
         bool                create();
 
+        void                setParent(SysWinClass *_pParent);
+
+
+    /*******************************************************************************
+    * window geometry
+    *******************************************************************************/
+    public:
+        void                setMinSize(aDimension2D<s32>  _dim);
+        void                setMinSize(s32  _w,
+                                       s32  _h);
 
     /*******************************************************************************
     * window state
@@ -54,23 +67,23 @@ class aSysWin : public aSysWin_sys<T>
     * handler
     *******************************************************************************/
     protected:
-        virtual bool        onSysCreate();
-        virtual bool        onCreate();
+        virtual bool        onSysCreate()                       { return true; }
+        virtual bool        onCreate()                          { return true; }
 
-        virtual void        onDropUrl(const aUrl  &_url);
+        virtual void        onDropUrl(const aUrl  &/*_url*/)    {}
 
 
     /*******************************************************************************
     * system events
     *******************************************************************************/
-    protected:
-        virtual void        onOsDropUrl(const aUrl  &_url) override;
+    private:
+        virtual void        _onOsDropUrl(const aUrl  &_url) override;
 
-}; // class aSysWin
+}; // class aBaseWin
 
 
 } // namespace aWin
 } // namespace aLib
 
 
-#include "aSysWin.inl"
+#include "aBaseWin.inl"

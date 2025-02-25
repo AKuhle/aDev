@@ -26,7 +26,7 @@ namespace aWin {
 * aScrollWin_sys::aScrollWin_sys
 *******************************************************************************/
 aScrollWin_sys::aScrollWin_sys(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin(_pParent)
+: aBaseWin(_pParent)
 {
 } // aScrollWin_sys::_isVisible
 

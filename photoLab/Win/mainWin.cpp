@@ -36,6 +36,9 @@ MainWin& getMainWin()
 *******************************************************************************/
 MainWin::MainWin()
 {
+    //QWidget     *newnew = new Qwidget;
+
+
 } // MainWin::MainWin
 
 

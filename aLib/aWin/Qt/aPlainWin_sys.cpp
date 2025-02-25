@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aMainWinMdi_sys.cpp
+* \file aPlainWin_sys.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,6 +10,12 @@
 
 
 /*******************************************************************************
+* includes
+*******************************************************************************/
+#include "aPlainWin_sys.h"
+
+
+/*******************************************************************************
 * namespace
 *******************************************************************************/
 namespace aLib {
@@ -17,25 +23,24 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aMainWinMdi_sys<T>::aMainWinMdi_sys
+* aPlainWin_sys::aPlainWin_sys
 *******************************************************************************/
-template<class T>
-aMainWinMdi_sys<T>::aMainWinMdi_sys(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin<T>(_pParent)
+aPlainWin_sys::aPlainWin_sys(SysWinClass *_pParent /*= nullptr*/)
+: aBaseWin(_pParent)
 {
-} // aMainWinMdi_sys<T>::_isVisible
+} // aPlainWin_sys::_isVisible
 
 
 /*******************************************************************************
-* aMainWinMdi_sys<T>::~aMainWinMdi_sys
+* aPlainWin_sys::~aPlainWin_sys
 *******************************************************************************/
-template<class T>
-aMainWinMdi_sys<T>::~aMainWinMdi_sys()
+aPlainWin_sys::~aPlainWin_sys()
 {
-} // aMainWinMdi_sys<T>::~aMainWinMdi_sys
+} // aPlainWin_sys::~aPlainWin_sys
 
 
 } // namespace aWin
 } // namespace aLib
+
 
 #endif //_USE_QT_

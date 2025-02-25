@@ -26,17 +26,9 @@ namespace aWin {
 *******************************************************************************/
 class aMainWin_sysi
 {
-    /*******************************************************************************
-    * con-/destruction
-    *******************************************************************************/
     protected:
-        aMainWin_sysi()             = default;
-
-    public:
-        virtual ~aMainWin_sysi()   = default;
-
-    protected:
-        virtual void        _setCentralWin(SysWinClass *_pWin) = 0;
+        virtual void            _setCentralWin(SysWinClass *_pWin) = 0;
+        virtual SysWinClass*    _centralWin() = 0;
 
 }; // class aMainWin_sysi
 

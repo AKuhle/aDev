@@ -19,8 +19,6 @@
 #include <QDragMoveEvent>
 #include <QDropEvent>
 
-#include "aWin_def.h"
-
 #include "aUrl.h"
 
 #include "aSysWin_sysi.h"
@@ -38,7 +36,7 @@ namespace aWin {
 * class aSysWin_sys
 *******************************************************************************/
 template<class T>
-class aSysWin_sys : private T,
+class aSysWin_sys : public T,
                     public aSysWin_sysi
 {
     /*******************************************************************************
@@ -50,7 +48,15 @@ class aSysWin_sys : private T,
     public:
         virtual ~aSysWin_sys();
 
-        T*                  ssysWinClass() { return this; }
+        virtual void        _setParent(SysWinClass *_pParent) override;
+
+
+    /*******************************************************************************
+    * window geometry
+    *******************************************************************************/
+    protected:
+        void                _setMinSize(s32  _w,
+                                        s32  _h) override;
 
 
     /*******************************************************************************

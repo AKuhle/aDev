@@ -26,15 +26,6 @@ namespace aWin {
 *******************************************************************************/
 class aScrollWin_sysi
 {
-    /*******************************************************************************
-    * con-/destruction
-    *******************************************************************************/
-    protected:
-        aScrollWin_sysi()           = default;
-
-    public:
-        virtual ~aScrollWin_sysi()  = default;
-
 }; // class aScrollWin_sysi
 
 

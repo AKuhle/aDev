@@ -12,11 +12,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin_def.h"
-
 #include "aMdiArea_sys.h"
-
-#include "aSysWin.h"
 
 
 
@@ -38,6 +34,8 @@ class aMdiArea : public aMdiArea_sys
     public:
         aMdiArea(SysWinClass *_pParent = nullptr);
         ~aMdiArea();
+
+        void                addMdiWin(aMdiWin *_pMdiWin);
 
 }; // class aMdiArea
 

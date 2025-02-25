@@ -50,6 +50,15 @@ void aMainWin::setCentralWin(SysWinClass *_pWin)
 
 
 /*******************************************************************************
+* aMainWin::centralWin
+*******************************************************************************/
+SysWinClass* aMainWin::centralWin()
+{
+    return _centralWin();
+} // aMainWin::centralWin
+
+
+/*******************************************************************************
 * aMainWin::sendUpdateCmd
 *******************************************************************************/
 void aMainWin::sendUpdateCmd(u64 _u64Cmd)

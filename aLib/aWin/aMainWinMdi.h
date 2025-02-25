@@ -12,8 +12,6 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin_def.h"
-#include "aMainWinMdi_sysi.h"
 #include "aMainWin.h"
 
 
@@ -36,6 +34,13 @@ class aMainWinMdi : public aMainWin
         aMainWinMdi(SysWinClass *_pParent = nullptr);
         ~aMainWinMdi();
 
+
+    /*******************************************************************************
+    * mdi win management
+    *******************************************************************************/
+    protected:
+        aMdiArea*           mdiArea();
+        void                addMdiWin(aMdiWin *_pMdiWin);
 
     /*******************************************************************************
     * aSysWin interface

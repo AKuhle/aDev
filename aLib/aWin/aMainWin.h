@@ -12,8 +12,6 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin_def.h"
-
 #include "aMainWin_sys.h"
 
 
@@ -38,6 +36,7 @@ class aMainWin : public aMainWin_sys
         ~aMainWin();
 
         void                setCentralWin(SysWinClass *_pWin);
+        SysWinClass*        centralWin();
 
 
     /*******************************************************************************

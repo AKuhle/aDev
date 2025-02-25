@@ -20,7 +20,7 @@
 
 #include "aMdiWin_sysi.h"
 
-#include "aSysWin.h"
+#include "aBaseWin.h"
 
 
 
@@ -34,8 +34,8 @@ namespace aWin {
 /*******************************************************************************
 * class aMdiWin_sys
 *******************************************************************************/
-class aMdiWin_sys : public aSysWin<QMdiSubWindow>,
-                    public aMdiWin_sysi
+class aMdiWin_sys : public aBaseWin<QMdiSubWindow>,
+                    private aMdiWin_sysi
 {
     /*******************************************************************************
     * con-/destruction

@@ -26,7 +26,7 @@ namespace aWin {
 * aMdiWin_sys::aMdiWin_sys
 *******************************************************************************/
 aMdiWin_sys::aMdiWin_sys(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin(_pParent)
+: aBaseWin(_pParent)
 {
 } // aMdiWin_sys::_isVisible
 

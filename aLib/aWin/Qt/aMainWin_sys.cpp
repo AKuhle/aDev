@@ -26,7 +26,7 @@ namespace aWin {
 * aMainWin_sys::aMainWin_sys
 *******************************************************************************/
 aMainWin_sys::aMainWin_sys(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin(_pParent)
+: aBaseWin(_pParent)
 {
 } // aMainWin_sys::_isVisible
 
@@ -42,14 +42,25 @@ aMainWin_sys::~aMainWin_sys()
 /*******************************************************************************
 * aMainWin_sys::_setCentralWin
 *******************************************************************************/
-void aMainWin_sys::_setCentralWin(SysWinClass */*_pWin*/)
+void aMainWin_sys::_setCentralWin(SysWinClass *_pWin)
 {
-    QWidget *pW = nullptr;
-    //QMainWindow *pMw = dynamic_cast<QMainWindow *> (sysWinClass());
-    // CHECK_PRE_CONDITION_VOID(pMw != nullptr);
+    QMainWindow *pMw = qobject_cast<QMainWindow *> (this);
+    CHECK_PRE_CONDITION_VOID(pMw != nullptr);
 
-    // pMw->setCentralWidget(_pWin);
+    pMw->setCentralWidget(_pWin);
 } // aMainWin_sys::_setCentralWin
+
+
+/*******************************************************************************
+* aMainWin_sys::_centralWin
+*******************************************************************************/
+SysWinClass* aMainWin_sys::_centralWin()
+{
+    QMainWindow *pMw = qobject_cast<QMainWindow *> (this);
+    CHECK_PRE_CONDITION(pMw != nullptr, nullptr);
+
+    return pMw->centralWidget();
+} // aMainWin_sys::
 
 
 } // namespace aWin

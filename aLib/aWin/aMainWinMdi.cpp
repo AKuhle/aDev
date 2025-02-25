@@ -40,15 +40,34 @@ aMainWinMdi::~aMainWinMdi()
 
 
 /*******************************************************************************
+* aMainWinMdi::mdiArea
+*******************************************************************************/
+aMdiArea* aMainWinMdi::mdiArea()
+{
+    return dynamic_cast<aMdiArea *> (centralWin());
+} // aMainWinMdi::mdiArea
+
+
+/*******************************************************************************
+* aMainWinMdi::addMdiWin
+*******************************************************************************/
+void aMainWinMdi::addMdiWin(aMdiWin *_pMdiWin)
+{
+    aMdiArea    *pMdiArea = mdiArea();
+    CHECK_PRE_CONDITION_VOID(pMdiArea != nullptr);
+
+    pMdiArea->addMdiWin(_pMdiWin);
+} // aMainWinMdi::addMdiWin
+
+
+/*******************************************************************************
 * aMainWinMdi::onSysCreate
 *******************************************************************************/
 bool aMainWinMdi::onSysCreate()
 {
-    // QWidget *pW = sysWinClass();
+    aMdiArea *pMdiArea = new aMdiArea(this);
 
-    // QWidget *pMdiArea = new aMdiArea(pW);
-
-    // setCentralWin(pMdiArea);
+    setCentralWin(pMdiArea);
 
     return true;
 } // aMainWinMdi::onSysCreate

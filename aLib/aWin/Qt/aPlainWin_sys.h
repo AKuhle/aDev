@@ -8,10 +8,18 @@
 *******************************************************************************/
 #pragma once
 
+#ifdef _USE_QT_
+
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QMainWindow>
+
+#include "aWin_def.h"
+
+#include "aBaseWin.h"
+
 
 
 /*******************************************************************************
@@ -22,21 +30,23 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMainWinMdi_sysi
+* class aPlainWin_sys
 *******************************************************************************/
-class aMainWinMdi_sysi
+class aPlainWin_sys : public aBaseWin<QWidget>
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWinMdi_sysi()          = default;
+        aPlainWin_sys(SysWinClass *_pParent = nullptr);
+        virtual ~aPlainWin_sys();
 
-    public:
-        virtual ~aMainWinMdi_sysi() = default;
 
-}; // class aMainWinMdi_sysi
+}; // class aPlainWin_sys
 
 
 } // namespace aWin
 } // namespace aLib
+
+
+#endif //_USE_QT_

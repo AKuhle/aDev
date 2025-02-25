@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aSysWin.cpp
+* \file aBaseWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -16,29 +16,29 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aSysWin::aSysWin
+* aBaseWin::aBaseWin
 *******************************************************************************/
 template<class T>
-aSysWin<T>::aSysWin(SysWinClass *_pParent /*= nullptr*/)
+aBaseWin<T>::aBaseWin(SysWinClass *_pParent /*= nullptr*/)
 : aSysWin_sys<T>(_pParent)
 {
-} // aSysWin::aSysWin
+} // aBaseWin::aBaseWin
 
 
 /*******************************************************************************
-* aSysWin::~aSysWin
+* aBaseWin::~aBaseWin
 *******************************************************************************/
 template<class T>
-aSysWin<T>::~aSysWin()
+aBaseWin<T>::~aBaseWin()
 {
-} // aSysWin::aSysWin
+} // aBaseWin::aBaseWin
 
 
 /*******************************************************************************
-* aSysWin::create
+* aBaseWin::create
 *******************************************************************************/
 template<class T>
-bool aSysWin<T>::create()
+bool aBaseWin<T>::create()
 {
     if (this->onSysCreate() && this->onCreate())
     {
@@ -46,86 +46,88 @@ bool aSysWin<T>::create()
     }
 
     return false;
-} // aSysWin::create
+} // aBaseWin::create
 
 
 /*******************************************************************************
-* aSysWin::isVisible
+* aBaseWin::setMinSize
 *******************************************************************************/
 template<class T>
-bool aSysWin<T>::isVisible() const
+void aBaseWin<T>::setMinSize(aDimension2D<s32>  _dim)
+{
+    this->_setMinSize(_dim.w(), _dim.h());
+} // aBaseWin::setMinSize
+
+
+/*******************************************************************************
+* aBaseWin::setParent
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::setParent(SysWinClass *_pParent)
+{
+    this->_setParent(_pParent);
+} // aBaseWin::setParent
+
+
+/*******************************************************************************
+* aBaseWin::setMinSize
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::setMinSize(s32  _w,
+                             s32  _h)
+{
+    this->_setMinSize(_w, _h);
+} // aBaseWin::setMinSize
+
+
+/*******************************************************************************
+* aBaseWin::isVisible
+*******************************************************************************/
+template<class T>
+bool aBaseWin<T>::isVisible() const
 {
     return this->_isVisible();
-} // aSysWin::isVisible
+} // aBaseWin::isVisible
 
 
 /*******************************************************************************
-* aSysWin::setVisible
+* aBaseWin::setVisible
 *******************************************************************************/
 template<class T>
-void aSysWin<T>::setVisible(bool _bVisible)
+void aBaseWin<T>::setVisible(bool _bVisible)
 {
     this->_setVisible(_bVisible);
-} // aSysWin::setVisible
+} // aBaseWin::setVisible
 
 
 /*******************************************************************************
-* aSysWin::show
+* aBaseWin::show
 *******************************************************************************/
 template<class T>
-void aSysWin<T>::show()
+void aBaseWin<T>::show()
 {
     this->_setVisible(true);
-} // aSysWin::show
+} // aBaseWin::show
 
 
 /*******************************************************************************
-* aSysWin::hide
+* aBaseWin::hide
 *******************************************************************************/
 template<class T>
-void aSysWin<T>::hide()
+void aBaseWin<T>::hide()
 {
     this->_setVisible(false);
-} // aSysWin::hide
+} // aBaseWin::hide
 
 
 /*******************************************************************************
-* aSysWin::onSysCreate
+* aBaseWin::_onOsDropUrl
 *******************************************************************************/
 template<class T>
-bool aSysWin<T>::onSysCreate()
-{
-    return true;
-} // aSysWin::onSysCreate
-
-
-/*******************************************************************************
-* aSysWin::onCreate
-*******************************************************************************/
-template<class T>
-bool aSysWin<T>::onCreate()
-{
-    return true;
-} // aSysWin::onCreate
-
-
-/*******************************************************************************
-* aSysWin::onDropUrl
-*******************************************************************************/
-template<class T>
-void aSysWin<T>::onDropUrl(const aUrl  &/*_url*/)
-{
-} // aSysWin::onDropUrl
-
-
-/*******************************************************************************
-* aSysWin::onOsDropUrl
-*******************************************************************************/
-template<class T>
-void aSysWin<T>::onOsDropUrl(const aUrl  &_url)
+void aBaseWin<T>::_onOsDropUrl(const aUrl  &_url)
 {
     onDropUrl(_url);
-} // aSysWin::onOsDropUrl
+} // aBaseWin::_onOsDropUrl
 
 
 } // namespace aWin

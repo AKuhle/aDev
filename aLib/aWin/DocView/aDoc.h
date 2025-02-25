@@ -32,10 +32,10 @@ namespace aWin {
 class aDoc
 {
     public:
-        virtual ~aDoc();
+        virtual ~aDoc();    // default does nothing
 
     protected:
-        aDoc();
+        aDoc();             // default does nothing
 }; // class aDoc
 
 
