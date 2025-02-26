@@ -44,6 +44,8 @@ class aMdiWin_sys : public aBaseWin<QMdiSubWindow>,
         aMdiWin_sys(SysWinClass *_pParent = nullptr);
         ~aMdiWin_sys();
 
+        virtual void            _setCentralWin(SysWinClass   *_pWin) override;
+        virtual SysWinClass*    _centralWin() const override;
 }; // class aMdiWin_sys
 
 

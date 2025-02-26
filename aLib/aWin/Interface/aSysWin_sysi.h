@@ -31,6 +31,7 @@ namespace aWin {
 class aSysWin_sysi
 {
     virtual void            _setParent(SysWinClass *_pParent) = 0;
+    virtual SysWinClass*    _parent() = 0;
 
 
     /*******************************************************************************

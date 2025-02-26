@@ -35,6 +35,9 @@ class aMdiWin : public aMdiWin_sys
         aMdiWin(SysWinClass *_pParent = nullptr);
         ~aMdiWin();
 
+        void                    setCentralWin(SysWinClass   *_pWin);
+        SysWinClass*            centralWin() const ;
+
 }; // class aMdiWin
 
 

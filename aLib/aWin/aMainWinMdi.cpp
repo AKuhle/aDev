@@ -13,6 +13,7 @@
 *******************************************************************************/
 #include "aMainWinMdi.h"
 #include "aMdiArea.h"
+#include "aMdiWin.h"
 
 
 /*******************************************************************************
@@ -57,6 +58,7 @@ void aMainWinMdi::addMdiWin(aMdiWin *_pMdiWin)
     CHECK_PRE_CONDITION_VOID(pMdiArea != nullptr);
 
     pMdiArea->addMdiWin(_pMdiWin);
+    _pMdiWin->show();
 } // aMainWinMdi::addMdiWin
 
 

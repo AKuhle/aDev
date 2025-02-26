@@ -48,15 +48,16 @@ class aSysWin_sys : public T,
     public:
         virtual ~aSysWin_sys();
 
-        virtual void        _setParent(SysWinClass *_pParent) override;
+        virtual void            _setParent(SysWinClass *_pParent) override;
+        virtual SysWinClass*    _parent() override;
 
 
     /*******************************************************************************
     * window geometry
     *******************************************************************************/
     protected:
-        void                _setMinSize(s32  _w,
-                                        s32  _h) override;
+        void                    _setMinSize(s32  _w,
+                                            s32  _h) override;
 
 
     /*******************************************************************************
@@ -64,17 +65,17 @@ class aSysWin_sys : public T,
     *******************************************************************************/
     public:
         // visibility
-        virtual bool        _isVisible() const override;
-        virtual void        _setVisible(bool _bVisible) override;
+        virtual bool            _isVisible() const override;
+        virtual void            _setVisible(bool _bVisible) override;
 
 
     /*******************************************************************************
     * handler
     *******************************************************************************/
     protected:
-        virtual void        dragEnterEvent(QDragEnterEvent *_pEvent) override;
-        virtual void        dragMoveEvent(QDragMoveEvent *_pEvent) override;
-        virtual void        dropEvent(QDropEvent   *_pEvent) override;
+        virtual void            dragEnterEvent(QDragEnterEvent *_pEvent) override;
+        virtual void            dragMoveEvent(QDragMoveEvent *_pEvent) override;
+        virtual void            dropEvent(QDropEvent   *_pEvent) override;
 
 }; // class aSysWin_sys
 

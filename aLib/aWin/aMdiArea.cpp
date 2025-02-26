@@ -44,8 +44,6 @@ aMdiArea::~aMdiArea()
 *******************************************************************************/
 void aMdiArea::addMdiWin(aMdiWin *_pMdiWin)
 {
-    //_pMdiWin->setParent(_pMdiWin);
-
     _addMdiWin(_pMdiWin);
 } // aMdiArea::addMdiWin
 

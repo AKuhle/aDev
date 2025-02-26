@@ -26,6 +26,8 @@ namespace aWin {
 *******************************************************************************/
 class aMdiWin_sysi
 {
+    virtual void            _setCentralWin(SysWinClass   *_pWin) = 0;
+    virtual SysWinClass*    _centralWin() const = 0;
 }; // class aMdiWin_sysi
 
 

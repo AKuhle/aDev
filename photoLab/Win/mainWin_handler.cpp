@@ -17,7 +17,8 @@
 *******************************************************************************/
 #include "aString.h"
 #include "mainWin.h"
-#include "amdiWin.h"
+#include "aMdiWin.h"
+#include "aScrollWin.h"
 
 using namespace aLib::aWin;
 using namespace std;
@@ -41,8 +42,14 @@ void MainWin::onDropUrl(const aUrl  &_url)
 {
     cout << _url.toLocalFile() << endl;
 
+    aScrollWin *pScrollWin = new aScrollWin(this);
+    pScrollWin->create();
+    pScrollWin->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    pScrollWin->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
     aMdiWin *pMdiWin = new aMdiWin(this);
     pMdiWin->create();
+    pMdiWin->setCentralWin(pScrollWin);
 
     addMdiWin(pMdiWin);
 } // MainWin::onDropUrl

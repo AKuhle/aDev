@@ -44,6 +44,17 @@ void aSysWin_sys<T>::_setParent(SysWinClass *_pParent)
     T::setParent(_pParent);
 } // aSysWin_sys<T>::_setParent
 
+
+/*******************************************************************************
+* aSysWin_sys<T>::_parent
+*******************************************************************************/
+template<class T>
+SysWinClass* aSysWin_sys<T>::_parent()
+{
+    return T::parentWidget();
+} // aSysWin_sys<T>::_parent
+
+
 /*******************************************************************************
 * aSysWin_sys<T>::_setMinSize
 *******************************************************************************/

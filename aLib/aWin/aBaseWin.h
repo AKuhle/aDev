@@ -42,6 +42,7 @@ class aBaseWin : public aSysWin_sys<T>
         bool                create();
 
         void                setParent(SysWinClass *_pParent);
+        SysWinClass*        parent() const;
 
 
     /*******************************************************************************

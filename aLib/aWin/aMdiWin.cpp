@@ -38,5 +38,23 @@ aMdiWin::~aMdiWin()
 } // aMdiWin::aMdiWin
 
 
+/*******************************************************************************
+* aMdiWin::setCentralWin
+*******************************************************************************/
+void aMdiWin::setCentralWin(SysWinClass   *_pWin)
+{
+    _setCentralWin(_pWin);
+} // aMdiWin::setCentralWin
+
+
+/*******************************************************************************
+* aMdiWin::centralWin
+*******************************************************************************/
+SysWinClass* aMdiWin::centralWin() const
+{
+    return _centralWin();
+} // aMdiWin::centralWin
+
+
 } // namespace aWin
 } // namespace aLib
