@@ -9,6 +9,11 @@
 
 
 /*******************************************************************************
+* includes
+*******************************************************************************/
+
+
+/*******************************************************************************
 * namespace
 *******************************************************************************/
 namespace aLib {
@@ -16,129 +21,201 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aBaseWin::aBaseWin
+* aBaseWin<T>::aBaseWin
 *******************************************************************************/
 template<class T>
-aBaseWin<T>::aBaseWin(SysWinClass *_pParent /*= nullptr*/)
-: aSysWin_sys<T>(_pParent)
+aBaseWin<T>::aBaseWin(SysWinClass    *_pParent)
+: aBaseWin_sys<T>(_pParent)
 {
-} // aBaseWin::aBaseWin
+} // aBaseWin<T>::aBaseWin
 
 
 /*******************************************************************************
-* aBaseWin::~aBaseWin
+* aBaseWin<T>::~aBaseWin
 *******************************************************************************/
 template<class T>
 aBaseWin<T>::~aBaseWin()
 {
-} // aBaseWin::aBaseWin
+} // aBaseWin<T>::aBaseWin
 
 
 /*******************************************************************************
-* aBaseWin::create
+* aBaseWin<T>::create
 *******************************************************************************/
 template<class T>
 bool aBaseWin<T>::create()
 {
-    if (this->onSysCreate() && this->onCreate())
+    if (onSysCreate() && onCreate())
     {
         return true;
     }
 
     return false;
-} // aBaseWin::create
+} // aBaseWin<T>::create
 
 
 /*******************************************************************************
-* aBaseWin::setMinSize
-*******************************************************************************/
-template<class T>
-void aBaseWin<T>::setMinSize(aDimension2D<s32>  _dim)
-{
-    this->_setMinSize(_dim.w(), _dim.h());
-} // aBaseWin::setMinSize
-
-
-/*******************************************************************************
-* aBaseWin::setParent
+* aBaseWin<T>::setParent
 *******************************************************************************/
 template<class T>
 void aBaseWin<T>::setParent(SysWinClass *_pParent)
 {
-    this->_setParent(_pParent);
-} // aBaseWin::setParent
+    aBaseWin_sys<T>::setParent(_pParent);
+} // aBaseWin<T>::setParent
 
 
 /*******************************************************************************
-* aBaseWin::parent
+* aBaseWin<T>::parent
 *******************************************************************************/
 template<class T>
 SysWinClass* aBaseWin<T>::parent() const
 {
-    return this->_parent();
-} // aBaseWin::parent
+    return aBaseWin_sys<T>::parent();
+} // aBaseWin<T>::parent
 
 
 /*******************************************************************************
-* aBaseWin::setMinSize
+* aBaseWin<T>::setVisible
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::setVisible(bool _bVisible)
+{
+    aBaseWin_sys<T>::setVisible(_bVisible);
+} // aBaseWin<T>::setVisible
+
+
+/*******************************************************************************
+* aBaseWin<T>::show
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::show()
+{
+    aBaseWin_sys<T>::setVisible(true);
+} // aBaseWin<T>::show
+
+
+/*******************************************************************************
+* aBaseWin<T>::hide
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::hide()
+{
+    aBaseWin_sys<T>::setVisible(false);
+} // aBaseWin<T>::hide
+
+
+/*******************************************************************************
+* aBaseWin<T>::isVisible
+*******************************************************************************/
+template<class T>
+bool aBaseWin<T>::isVisible() const
+{
+    return aBaseWin_sys<T>::isVisible();
+} // aBaseWin<T>::isVisible
+
+
+/*******************************************************************************
+* aBaseWin<T>::setMouseTracking
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::setMouseTracking(bool _bEnable)
+{
+    aBaseWin_sys<T>::setMouseTracking(_bEnable);
+} // aBaseWin<T>::setMouseTracking
+
+
+/*******************************************************************************
+* aBaseWin<T>::setMinSize
 *******************************************************************************/
 template<class T>
 void aBaseWin<T>::setMinSize(s32  _w,
                              s32  _h)
 {
-    this->_setMinSize(_w, _h);
-} // aBaseWin::setMinSize
+    aBaseWin_sys<T>::setMinSize(_w, _h);
+} // aBaseWin<T>::setMinSize
 
 
 /*******************************************************************************
-* aBaseWin::isVisible
+* aBaseWin<T>::setMinSize
 *******************************************************************************/
 template<class T>
-bool aBaseWin<T>::isVisible() const
+void aBaseWin<T>::setMinSize(const aDimension2D<s32> &_dim)
 {
-    return this->_isVisible();
-} // aBaseWin::isVisible
-
-
-/*******************************************************************************
-* aBaseWin::setVisible
-*******************************************************************************/
-template<class T>
-void aBaseWin<T>::setVisible(bool _bVisible)
-{
-    this->_setVisible(_bVisible);
-} // aBaseWin::setVisible
-
-
-/*******************************************************************************
-* aBaseWin::show
-*******************************************************************************/
-template<class T>
-void aBaseWin<T>::show()
-{
-    this->_setVisible(true);
-} // aBaseWin::show
-
-
-/*******************************************************************************
-* aBaseWin::hide
-*******************************************************************************/
-template<class T>
-void aBaseWin<T>::hide()
-{
-    this->_setVisible(false);
-} // aBaseWin::hide
-
-
-/*******************************************************************************
-* aBaseWin::_onOsDropUrl
-*******************************************************************************/
-template<class T>
-void aBaseWin<T>::_onOsDropUrl(const aUrl  &_url)
-{
-    onDropUrl(_url);
-} // aBaseWin::_onOsDropUrl
+    aBaseWin_sys<T>::setMinSize(_dim.w(), _dim.h());
+} // aBaseWin<T>::setMinSize
 
 
 } // namespace aWin
 } // namespace aLib
+
+
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::parent
+// *******************************************************************************/
+// template<class T>
+// SysWinClass* aBaseWin<T>::parent() const
+// {
+//     return this->_parent();
+// } // aBaseWin<T>::parent
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::update
+// *******************************************************************************/
+// template<class T>
+// void aBaseWin<T>::update()
+// {
+//     this->_update();
+// } // aBaseWin<T>::update
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::repaint
+// *******************************************************************************/
+// template<class T>
+// void aBaseWin<T>::repaint()
+// {
+//     this->_repaint();
+// } // aBaseWin<T>::repaint
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::clientRect
+// *******************************************************************************/
+// template<class T>
+// aRect2D<s32> aBaseWin<T>::clientRect() const
+// {
+//     return this->_clientRect();
+// } // aBaseWin<T>::clientRect
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::clientW
+// *******************************************************************************/
+// template<class T>
+// s32 aBaseWin<T>::clientW() const
+// {
+//     return this->_clientRect().w();
+// } // aBaseWin<T>::clientW
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::clientH
+// *******************************************************************************/
+// template<class T>
+// s32 aBaseWin<T>::clientH() const
+// {
+//     return this->_clientRect().h();
+// } // aBaseWin<T>::clientH
+
+
+// /*******************************************************************************
+// * aBaseWin<T>::isVisible
+// *******************************************************************************/
+// template<class T>
+// bool aBaseWin<T>::isVisible() const
+// {
+//     return this->_isVisible();
+// } // aBaseWin<T>::isVisible

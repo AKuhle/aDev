@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aMdiWin_sys.cpp
+* \file aMdiChild_sys.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -12,7 +12,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMdiWin_sys.h"
+#include "aMdiChild_sys.h"
 
 
 /*******************************************************************************
@@ -23,38 +23,38 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aMdiWin_sys::aMdiWin_sys
+* aMdiArea_sys::aMdiChild_sys
 *******************************************************************************/
-aMdiWin_sys::aMdiWin_sys(SysWinClass *_pParent /*= nullptr*/)
-: aBaseWin(_pParent)
+aMdiChild_sys::aMdiChild_sys(SysWinClass *_pParent /*= nullptr*/)
+: aBaseWin<QMdiSubWindow>(_pParent)
 {
-} // aMdiWin_sys::_isVisible
+} // aMdiChild_sys::_isVisible
 
 
 /*******************************************************************************
-* aMdiWin_sys::~aMdiWin_sys
+* aMdiChild_sys::~aMdiChild_sys
 *******************************************************************************/
-aMdiWin_sys::~aMdiWin_sys()
+aMdiChild_sys::~aMdiChild_sys()
 {
-} // aMdiWin_sys::~aMdiWin_sys
+} // aMdiChild_sys::~aMdiChild_sys
 
 
 /*******************************************************************************
-* aMdiWin_sys::_setCentralWin
+* aMdiChild_sys::setCentralWin
 *******************************************************************************/
-void aMdiWin_sys::_setCentralWin(SysWinClass *_pWin)
+void aMdiChild_sys::setCentralWin(SysWinClass *_pWin)
 {
     setWidget(_pWin);
-} // aMdiWin_sys::_setCentralWin
+} // aMdiChild_sys::setCentralWin
 
 
 /*******************************************************************************
-* aMdiWin_sys::_centralWin
+* aMdiChild_sys::centralWin
 *******************************************************************************/
-SysWinClass * aMdiWin_sys::_centralWin() const
+SysWinClass * aMdiChild_sys::centralWin()
 {
     return widget();
-} // aMdiWin_sys::_centralWin
+} // aMdiChild_sys::centralWin
 
 
 } // namespace aWin

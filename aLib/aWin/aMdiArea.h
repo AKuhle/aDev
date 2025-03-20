@@ -35,7 +35,7 @@ class aMdiArea : public aMdiArea_sys
         aMdiArea(SysWinClass *_pParent = nullptr);
         ~aMdiArea();
 
-        void                addMdiWin(aMdiWin *_pMdiWin);
+    void                addMdiChild(aMdiChild *_pMdiChild);
 
 }; // class aMdiArea
 

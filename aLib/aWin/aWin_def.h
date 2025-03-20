@@ -117,16 +117,21 @@ enum class enumFocusPolicy
     WheelFocus                  // like Qt::StrongFocus plus the widget accepts focus by using the mouse wheel.
 }; // enumButtonStyle
 
+enum class ScrollBarPolicy {
+    ScrollBarAsNeeded,
+    ScrollBarAlwaysOff,
+    ScrollBarAlwaysOn
+}; // ScrollBarPolicy
+
 
 /*******************************************************************************
 * classes
 *******************************************************************************/
-template<class T> class aBaseWin;
-
+template <typename T> class aBaseWin;
 class aMainWin;
 class aMainWinMdi;
 class aMdiArea;
-class aMdiWin;
+class aMdiChild;
 class aPlainWin;
 class aScrollWin;
 

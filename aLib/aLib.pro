@@ -52,6 +52,10 @@ DESTDIR = ../../../../Apps
 INCLUDEPATH += aApp
 INCLUDEPATH += aApp/Qt
 
+INCLUDEPATH += aGraphic
+INCLUDEPATH += aGraphic/Interface
+INCLUDEPATH += aGraphic/Qt
+
 INCLUDEPATH += aUtil
 INCLUDEPATH += aUtil/Cmds
 INCLUDEPATH += aUtil/Collection
@@ -78,7 +82,16 @@ HEADERS += \
     aApp/aAppBase.h \
     aApp/aApp_def.h \
     aApp/main.h \
+    aGraphic/Interface/aBrush_sysi.h \
+    aGraphic/Interface/aPainter_sysi.h \
+    aGraphic/Interface/aPen_sysi.h \
+    aGraphic/Qt/aBrush_sys.h \
+    aGraphic/Qt/aPainter_sys.h \
+    aGraphic/Qt/aPen_sys.h \
+    aGraphic/aBrush.h \
     aGraphic/aGraphic_def.h \
+    aGraphic/aPainter.h \
+    aGraphic/aPen.h \
     aMath/Obj2D/aDimension2D.h \
     aMath/Obj2D/aDimension2D.inl \
     aMath/Obj2D/aMathObj2D.h \
@@ -141,24 +154,25 @@ HEADERS += \
     aLib_def.h \
     aWin/DocView/aDoc.h \
     aWin/DocView/aView.h \
+    aWin/Interface/aBaseWin_sysi.h \
     aWin/Interface/aMainWin_sysi.h \
     aWin/Interface/aMdiArea_sysi.h \
-    aWin/Interface/aMdiWin_sysi.h \
+    aWin/Interface/aMdiChild_sysi.h \
     aWin/Interface/aScrollWin_sysi.h \
-    aWin/Interface/aSysWin_sysi.h \
+    aWin/Qt/aBaseWin_sys.h \
+    aWin/Qt/aBaseWin_sys.inl \
     aWin/Qt/aMainWin_sys.h \
     aWin/Qt/aMdiArea_sys.h \
-    aWin/Qt/aMdiWin_sys.h \
+    aWin/Qt/aMdiChild_sys.h \
     aWin/Qt/aPlainWin_sys.h \
     aWin/Qt/aScrollWin_sys.h \
-    aWin/Qt/aSysWin_sys.h \
-    aWin/Qt/aSysWin_sys.inl \
     aWin/aBaseWin.h \
     aWin/aBaseWin.inl \
+    aWin/aBaseWin_handler.inl \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
     aWin/aMdiArea.h \
-    aWin/aMdiWin.h \
+    aWin/aMdiChild.h \
     aWin/aPlainWin.h \
     aWin/aScrollWin.h \
     aWin/aWin_def.h
@@ -171,6 +185,12 @@ SOURCES += \
     aApp/Qt/aAppMainWin.cpp \
     aApp/aAppBase.cpp \
     aApp/main.cpp \
+    aGraphic/Qt/aBrush_sys.cpp \
+    aGraphic/Qt/aPainter_sys.cpp \
+    aGraphic/Qt/aPen_sys.cpp \
+    aGraphic/aBrush.cpp \
+    aGraphic/aPainter.cpp \
+    aGraphic/aPen.cpp \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
@@ -202,13 +222,13 @@ SOURCES += \
     aWin/DocView/aView.cpp \
     aWin/Qt/aMainWin_sys.cpp \
     aWin/Qt/aMdiArea_sys.cpp \
-    aWin/Qt/aMdiWin_sys.cpp \
+    aWin/Qt/aMdiChild_sys.cpp \
     aWin/Qt/aPlainWin_sys.cpp \
     aWin/Qt/aScrollWin_sys.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
     aWin/aMdiArea.cpp \
-    aWin/aMdiWin.cpp \
+    aWin/aMdiChild.cpp \
     aWin/aPlainWin.cpp \
     aWin/aScrollWin.cpp
 

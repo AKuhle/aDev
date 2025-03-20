@@ -12,7 +12,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMdiWin_sys.h"
+#include "aMdiChild_sys.h"
 
 
 
@@ -24,21 +24,21 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMdiWin
+* class aMdiChild
 *******************************************************************************/
-class aMdiWin : public aMdiWin_sys
+class aMdiChild : public aMdiChild_sys
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     public:
-        aMdiWin(SysWinClass *_pParent = nullptr);
-        ~aMdiWin();
+        aMdiChild(SysWinClass *_pParent = nullptr);
+        ~aMdiChild();
 
         void                    setCentralWin(SysWinClass   *_pWin);
-        SysWinClass*            centralWin() const ;
+        SysWinClass*            centralWin();
 
-}; // class aMdiWin
+}; // class aMdiChild
 
 
 } // namespace aWin

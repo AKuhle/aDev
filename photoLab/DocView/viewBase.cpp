@@ -19,18 +19,18 @@
 
 #include "aColor.h"
 #include "aPainter.h"
-#include "aFillSolid.h"
 
-#include "toolMove.h"
+//#include "toolMove.h"
 
 using namespace std;
 using namespace aLib;
+using namespace aLib::aGraphic;
 
 
 /*******************************************************************************
 * ViewBase::ViewBase
 *******************************************************************************/
-ViewBase::ViewBase(aBaseWin             *_pParent,
+ViewBase::ViewBase(SysWinClass          *_pParent,
                    shared_ptr<Document> _pDoc)
 : aView(_pParent, _pDoc)
 {
@@ -56,9 +56,6 @@ bool ViewBase::onCreate()
     // todo: use mode from toolDialog
     setEditMode(enumEditMode::Move);
 
-    // set backgroundstyle
-    setContentObj(make_unique<aFillSolid> (colGrey15));
-
     // enable mouse tracking
     setMouseTracking(true);
 
@@ -71,25 +68,25 @@ bool ViewBase::onCreate()
 *******************************************************************************/
 void ViewBase::setTool()
 {
-    unique_ptr<ToolMove> pTool;
+    // unique_ptr<ToolMove> pTool;
 
-    switch (m_eEditMode)
-    {
-        case enumEditMode::None:
-            break;
+    // switch (m_eEditMode)
+    // {
+    //     case enumEditMode::None:
+    //         break;
 
-        case enumEditMode::Zoom:
-            break;
+    //     case enumEditMode::Zoom:
+    //         break;
 
-        case enumEditMode::Move:
-            pTool = make_unique<ToolMove> (this);
-            break;
-    }
+    //     case enumEditMode::Move:
+    //         pTool = make_unique<ToolMove> (this);
+    //         break;
+    // }
 
-    if (pTool != nullptr)
-    {
-        aToolMgr::setTool(std::move(pTool));
-    }
+    // if (pTool != nullptr)
+    // {
+    //     aToolMgr::setTool(std::move(pTool));
+    // }
 } // ViewBase::setTool
 
 
@@ -127,29 +124,31 @@ void ViewBase::setEditMode(enumEditMode _eEditMode)
 
 
 /*******************************************************************************
-* ViewBase::onPaintContent
+* ViewBase::onPaint
 *******************************************************************************/
-void ViewBase::onPaintContent()
-{
-//    cout << __PRETTY_FUNCTION__ << endl;
+// bool ViewBase::onPaint()
+// {
+//     cout << __PRETTY_FUNCTION__ << endl;
 
-    // update the render parameter
-    updateRenderParams(m_renderParams);
+//     // update the render parameter
+//     updateRenderParams(m_renderParams);
 
-    // get the image
-    QImage *pImg = m_renderParams.createQImage();
+//     // get the image
+//     QImage *pImg = m_renderParams.createQImage();
 
-    // paint, if the image exists
-    if (pImg != nullptr)
-    {
-        aPainter        p(this);
-        aRect2D<s32>    vp = m_renderParams.viewPort_client();
+//     // paint, if the image exists
+//     if (pImg != nullptr)
+//     {
+//         aPainter        p(ToSysWin());
+//         aRect2D<s32>    vp = m_renderParams.viewPort_client();
 
-        p.drawQImg(*pImg, vp.x(), vp.y());
-    }
+//         p.drawQImg(*pImg, vp.x(), vp.y());
+//     }
 
-    // OnPaintMarker(m_renderParams);
-} // ViewBase::onPaintContent
+//     // OnPaintMarker(m_renderParams);
+
+//     return true;
+// } // ViewBase::onPaint
 
 
 

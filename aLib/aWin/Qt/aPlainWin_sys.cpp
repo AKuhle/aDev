@@ -25,8 +25,8 @@ namespace aWin {
 /*******************************************************************************
 * aPlainWin_sys::aPlainWin_sys
 *******************************************************************************/
-aPlainWin_sys::aPlainWin_sys(SysWinClass *_pParent /*= nullptr*/)
-: aBaseWin(_pParent)
+aPlainWin_sys::aPlainWin_sys(SysWinClass *_pParent)
+: aBaseWin<QWidget>(_pParent)
 {
 } // aPlainWin_sys::_isVisible
 
@@ -41,6 +41,5 @@ aPlainWin_sys::~aPlainWin_sys()
 
 } // namespace aWin
 } // namespace aLib
-
 
 #endif //_USE_QT_

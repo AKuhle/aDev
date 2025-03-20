@@ -1,49 +1,43 @@
 /*******************************************************************************
-* \file qWin.h
+* \file aPen_sysi.h
 * \author Andreas Kuhlewind
 *
 * \brief
+*
+* $Revision: 69 $
+* $LastChangedDate: 2010-08-17 14:10:45 +0200 (Di, 17 Aug 2010) $
+* $LastChangedBy: akuhlewi $
 *
 *  Detailed description starts here.
 *******************************************************************************/
 #pragma once
 
-#ifdef _USE_QT_
+
+/*******************************************************************************
+* includes
+*******************************************************************************/
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QWidget>
-
-#include "aWin_def.h"
-#include "aBaseWin.h"
 
 
 /*******************************************************************************
 * namespace
 *******************************************************************************/
 namespace aLib {
-namespace aWin {
+namespace aGraphic {
 
 
 /*******************************************************************************
-* class aPlainWin_sys
+* class aPen_sysi
 *******************************************************************************/
-class aPlainWin_sys : public aBaseWin<QWidget>
+class aPen_sysi
 {
-    /*******************************************************************************
-    * con-/destruction
-    *******************************************************************************/
-    protected:
-        aPlainWin_sys(SysWinClass *_pParent);
-        virtual ~aPlainWin_sys();
-
-}; // class aPlainWin_sys
+    public:
+}; // aPen_sysi
 
 
-} // namespace aWin
+} // namespace aGraphic
 } // namespace aLib
-
-
-#endif //_USE_QT_

@@ -45,7 +45,7 @@ aMainWin::~aMainWin()
 *******************************************************************************/
 void aMainWin::setCentralWin(SysWinClass *_pWin)
 {
-    _setCentralWin(_pWin);
+    aMainWin_sys::setCentralWin(_pWin);
 } // aMainWin::setCentralWin
 
 
@@ -54,7 +54,7 @@ void aMainWin::setCentralWin(SysWinClass *_pWin)
 *******************************************************************************/
 SysWinClass* aMainWin::centralWin()
 {
-    return _centralWin();
+    return aMainWin_sys::centralWin();
 } // aMainWin::centralWin
 
 
@@ -112,8 +112,8 @@ void aMainWin::sendUpdateCmd(u64    _u64Cmd,
 * aMainWin::sendUpdateCmd
 *******************************************************************************/
 void aMainWin::sendUpdateCmd(u64     _u64Cmd,
-                                s64     _s64Param1,
-                                s64     _s64Param2)
+                             s64     _s64Param1,
+                             s64     _s64Param2)
 {
     onUpdateCmd(_u64Cmd, nullptr, nullptr, _s64Param1, _s64Param2, 0, 0, 0.0, 0.0, 0.0, 0.0, nullptr, nullptr);
 } // aMainWin::sendUpdateCmd

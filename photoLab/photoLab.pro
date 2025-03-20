@@ -63,6 +63,10 @@ INCLUDEPATH += ../aLib
 INCLUDEPATH += ../aLib/aApp
 INCLUDEPATH += ../aLib/aApp/Qt
 
+INCLUDEPATH += ../aLib/aGraphic
+INCLUDEPATH += ../aLib/aGraphic/Interface
+INCLUDEPATH += ../aLib/aGraphic/Qt
+
 INCLUDEPATH += ../aLib/aUtil
 INCLUDEPATH += ../aLib/aUtil/Cmds
 INCLUDEPATH += ../aLib/aUtil/Collection
@@ -85,8 +89,10 @@ INCLUDEPATH += ../aLib/aWin/Qt
 # include PhotoLab
 ########################################################################
 INCLUDEPATH += App
-INCLUDEPATH += App
 INCLUDEPATH += Cmds
+INCLUDEPATH += Cmds/File_io
+INCLUDEPATH += DocView
+INCLUDEPATH += Tool
 INCLUDEPATH += Win
 
 
@@ -96,12 +102,16 @@ INCLUDEPATH += Win
 HEADERS += \
     App/photoLabApp.h \
     App/photoLab_defs.h \
+    Cmds/File_io/cmdOpenFile.h \
     Cmds/cmdBase.h \
     Cmds/cmdBase4EqualTiles.h \
     Cmds/cmdBase4Tiles.h \
     Cmds/tile.h \
     DocView/document.h \
+    DocView/editScrollWin.h \
+    DocView/editView.h \
     DocView/renderParams.h \
+    DocView/viewBase.h \
     DocView/zoomSteps.h \
     Win/mainWin.h
 
@@ -111,12 +121,17 @@ HEADERS += \
 ########################################################################
 SOURCES += \
     App/photoLabApp.cpp \
+    Cmds/File_io/cmdOpenFile.cpp \
     Cmds/cmdBase.cpp \
     Cmds/cmdBase4EqualTiles.cpp \
     Cmds/cmdBase4Tiles.cpp \
     Cmds/tile.cpp \
     DocView/document.cpp \
+    DocView/editScrollWin.cpp \
+    DocView/editView.cpp \
     DocView/renderParams.cpp \
+    DocView/viewBase.cpp \
+    DocView/viewBase_coordinates.cpp \
     DocView/zoomSteps.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp

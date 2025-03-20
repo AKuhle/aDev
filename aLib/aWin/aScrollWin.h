@@ -35,6 +35,17 @@ class aScrollWin : public aScrollWin_sys
         aScrollWin(SysWinClass *_pParent = nullptr);
         ~aScrollWin();
 
+        // central win
+        void                setCentralWin(SysWinClass *_pWin);
+        SysWinClass*        centralWin();
+
+        // policy
+        void                setScrollBarPolicy(ScrollBarPolicy _Ppolicy);       // for both scrollbars
+        void                setHoriScrollBarPolicy(ScrollBarPolicy _policy);
+        void                setVertScrollBarPolicy(ScrollBarPolicy _policy);
+
+    //     //bool                _onOsPaint();
+
 }; // class aScrollWin
 
 

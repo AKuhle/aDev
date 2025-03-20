@@ -27,7 +27,7 @@
 class EditView : public ViewBase
 {
     public:
-        EditView(aBaseWin                   *_pParent,
+        EditView(SysWinClass                *_pParent,
                  std::shared_ptr<Document>  _pDoc);
 
         virtual ~EditView();
@@ -46,12 +46,12 @@ class EditView : public ViewBase
     protected:
         bool            onCreate() override;
 
-        bool            onLeave(u32 _u32Modifiers) override;
+        // bool            onLeave(u32 _u32Modifiers) override;
 
-        bool            onMouseMove(u32                     _u32Modifiers,
-                                    u32                     _u32MouseButton,
-                                    const aVector2D<s32>    &_v2dLocal,
-                                    const aVector2D<s32>    &_v2dGlobal) override;
+        // bool            onMouseMove(u32                     _u32Modifiers,
+        //                             u32                     _u32MouseButton,
+        //                             const aVector2D<s32>    &_v2dLocal,
+        //                             const aVector2D<s32>    &_v2dGlobal) override;
 
 
 }; // class EditView

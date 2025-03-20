@@ -1,74 +1,78 @@
 /*******************************************************************************
-* \file Document.cpp
+* \file aBaseWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
-*
-* $Revision: 69 $
-* $LastChangedDate: 2010-08-17 14:10:45 +0200 (Di, 17 Aug 2010) $
-* $LastChangedBy: akuhlewi $
 *
 *  Detailed description starts here.
 *******************************************************************************/
 
 
-
 /*******************************************************************************
-* includes
+* namespace
 *******************************************************************************/
-#include "photoLab_defs.h"
-#include "mainWin.h"
-#include "document.h"
+namespace aLib {
+namespace aWin {
 
 
 /*******************************************************************************
-* Document::Document
+* aBaseWin::onSysCreate
 *******************************************************************************/
-Document::Document(shared_ptr<CmdBase> _pInitialCmd)
+template<class T>
+bool aBaseWin<T>::onSysCreate()
 {
-    setCmd(std::move(_pInitialCmd));
-} // Document::Documents
+    return true;
+} // aBaseWin::onSysCreate
 
 
 /*******************************************************************************
-* Document::~Document
+* aBaseWin::onCreate
 *******************************************************************************/
-Document::~Document()
+template<class T>
+bool aBaseWin<T>::onCreate()
 {
-} // Document::~Document
+    return true;
+} // aBaseWin::onCreate
 
 
 /*******************************************************************************
-* Document::activeLS
+* aBaseWin::onDropUrl
 *******************************************************************************/
-shared_ptr<SynchronizedLS> Document::activeLS() const
+template<class T>
+void aBaseWin<T>::onDropUrl(const aUrl  &/*_url*/)
 {
-    CmdBase *pCmd = dynamic_cast<CmdBase *> (activeCmd());
-    CHECK_PRE_CONDITION(pCmd != nullptr, nullptr);
-
-    return pCmd->postLS();
-} // Document::activeLS
+} // aBaseWin::onDropUrl
 
 
 /*******************************************************************************
-* Document::onCmdProcessingStart
+* aBaseWin::onPaint
 *******************************************************************************/
-void Document::onCmdProcessingStart(const shared_ptr<aCmdBase> &/*_pCmd*/)
+template<class T>
+bool aBaseWin<T>::onPaint()
 {
-    //MainWin &mw = getMainWin();
-
-    //mw.sendUpdateCmd(UPDATE_CMD_PROCESSING_START);
-    //mw.sendUpdateCmd(UPDATE_VIEWS_BY_DOC, this);
-} // Document::onCmdProcessingStart
+    return false;
+} // aBaseWin::onPaint
 
 
 /*******************************************************************************
-* Document::onCmdProcessingEnd
+* aBaseWin::_onOsDropUrl
 *******************************************************************************/
-void Document::onCmdProcessingEnd(const shared_ptr<aCmdBase> &/*_pCmd*/)
+template<class T>
+void aBaseWin<T>::_onOsDropUrl(const aUrl  &_url)
 {
-    //MainWin &mw = getMainWin();
+    onDropUrl(_url);
+} // aBaseWin::_onOsDropUrl
 
-    //mw.sendUpdateCmd(UPDATE_CMD_PROCESSING_END);
-    //mw.sendUpdateCmd(UPDATE_VIEWS_BY_DOC, this);
-} // Document::onCmdProcessingEnd
+
+/*******************************************************************************
+* aBaseWin::_onOsPaint
+*******************************************************************************/
+template<class T>
+bool aBaseWin<T>::_onOsPaint()
+{
+    return onPaint();
+} // aBaseWin::_onOsPaint
+
+
+} // namespace aWin
+} // namespace aLib

@@ -12,8 +12,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMdiArea.h"
-#include "aMdiWin.h"
+#include "aMdiArea_sys.h"
+#include "aMdiChild.h"
 
 
 /*******************************************************************************
@@ -26,8 +26,8 @@ namespace aWin {
 /*******************************************************************************
 * aMdiArea_sys::aMdiArea_sys
 *******************************************************************************/
-aMdiArea_sys::aMdiArea_sys(SysWinClass *_pParent /*= nullptr*/)
-: aBaseWin(_pParent)
+aMdiArea_sys::aMdiArea_sys(SysWinClass *_pParent)
+: aBaseWin<QMdiArea>(_pParent)
 {
 } // aMdiArea_sys::_isVisible
 
@@ -41,14 +41,12 @@ aMdiArea_sys::~aMdiArea_sys()
 
 
 /*******************************************************************************
-* aMdiArea_sys::_addMdiWin
+* aMdiArea_sys::addMdiChild
 *******************************************************************************/
-void aMdiArea_sys::_addMdiWin(aMdiWin *_pMdiWin)
+void aMdiArea_sys::addMdiChild(aMdiChild *_pMdiChild)
 {
-    CHECK_PRE_CONDITION_VOID(_pMdiWin != nullptr);
-
-    addSubWindow(_pMdiWin);
-} // aMdiArea_sys::_addMdiWin
+    addSubWindow(_pMdiChild);
+} // aMdiArea_sys::addMdiChild
 
 
 } // namespace aWin

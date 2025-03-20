@@ -14,14 +14,13 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QMimeData>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
 #include <QDropEvent>
+#include <QMimeData>
 
+#include "aBaseWin_sysi.h"
 #include "aUrl.h"
-
-#include "aSysWin_sysi.h"
 
 
 /*******************************************************************************
@@ -33,31 +32,24 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aSysWin_sys
+* class aBaseWin_sys
 *******************************************************************************/
 template<class T>
-class aSysWin_sys : public T,
-                    public aSysWin_sysi
+class aBaseWin_sys : public T,
+                     private aBaseWin_sysi
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aSysWin_sys(SysWinClass *_pParent = nullptr);
+        aBaseWin_sys(SysWinClass *_pParent);
 
     public:
-        virtual ~aSysWin_sys();
+        virtual ~aBaseWin_sys();
 
-        virtual void            _setParent(SysWinClass *_pParent) override;
-        virtual SysWinClass*    _parent() override;
-
-
-    /*******************************************************************************
-    * window geometry
-    *******************************************************************************/
-    protected:
-        void                    _setMinSize(s32  _w,
-                                            s32  _h) override;
+    public:
+        void                    setParent(SysWinClass *_pParent) override;
+        SysWinClass*            parent() const override;
 
 
     /*******************************************************************************
@@ -65,24 +57,36 @@ class aSysWin_sys : public T,
     *******************************************************************************/
     public:
         // visibility
-        virtual bool            _isVisible() const override;
-        virtual void            _setVisible(bool _bVisible) override;
+        void                    setVisible(bool _bVisible) override;
+        bool                    isVisible() const override;
+
+        void                    setMouseTracking(bool _bEnable) override;
 
 
     /*******************************************************************************
-    * handler
+    * window geometry
     *******************************************************************************/
-    protected:
-        virtual void            dragEnterEvent(QDragEnterEvent *_pEvent) override;
-        virtual void            dragMoveEvent(QDragMoveEvent *_pEvent) override;
-        virtual void            dropEvent(QDropEvent   *_pEvent) override;
+    public:
+        void                setMinSize(s32  _s32W,
+                                       s32  _s32H) override;
 
-}; // class aSysWin_sys
+
+    // /*******************************************************************************
+    // * qt handler
+    // *******************************************************************************/
+    protected:
+        void                    dragEnterEvent(QDragEnterEvent *_pEvent) override;
+        void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
+        void                    dropEvent(QDropEvent   *_pEvent) override;
+
+    //     void                    paintEvent(QPaintEvent *_pEvent) override;
+
+}; // class aBaseWin_sys
 
 
 } // namespace aWin
 } // namespace aLib
 
-#include "aSysWin_sys.inl"
+#include "aBaseWin_sys.inl"
 
 #endif //_USE_QT_

@@ -13,7 +13,7 @@
 *******************************************************************************/
 #include "aMainWinMdi.h"
 #include "aMdiArea.h"
-#include "aMdiWin.h"
+#include "aMdiChild.h"
 
 
 /*******************************************************************************
@@ -46,20 +46,21 @@ aMainWinMdi::~aMainWinMdi()
 aMdiArea* aMainWinMdi::mdiArea()
 {
     return dynamic_cast<aMdiArea *> (centralWin());
+    //return (aMdiArea *) (centralWin());
 } // aMainWinMdi::mdiArea
 
 
 /*******************************************************************************
-* aMainWinMdi::addMdiWin
+* aMainWinMdi::addMdiChild
 *******************************************************************************/
-void aMainWinMdi::addMdiWin(aMdiWin *_pMdiWin)
+void aMainWinMdi::addMdiChild(aMdiChild *_pMdiChild)
 {
     aMdiArea    *pMdiArea = mdiArea();
     CHECK_PRE_CONDITION_VOID(pMdiArea != nullptr);
 
-    pMdiArea->addMdiWin(_pMdiWin);
-    _pMdiWin->show();
-} // aMainWinMdi::addMdiWin
+    pMdiArea->addMdiChild(_pMdiChild);
+    _pMdiChild->show();
+} // aMainWinMdi::addMdiChild
 
 
 /*******************************************************************************
@@ -67,7 +68,8 @@ void aMainWinMdi::addMdiWin(aMdiWin *_pMdiWin)
 *******************************************************************************/
 bool aMainWinMdi::onSysCreate()
 {
-    aMdiArea *pMdiArea = new aMdiArea(this);
+    aMdiArea *pMdiArea = new aMdiArea();
+    pMdiArea->create();
 
     setCentralWin(pMdiArea);
 

@@ -41,7 +41,7 @@ class aMdiArea : public aBaseWin
         aMdiArea(aBaseWin *_pParent = nullptr);
         ~aMdiArea();
 
-        void                        addMdiWin(aMdiWin *_pMdiWin);
+        void                        addMdChild(aMdiWin *_pMdiWin);
 
         aMdiWin*                    activeMdiWin() const;
 

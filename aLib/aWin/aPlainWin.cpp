@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aMainWin.cpp
+* \file aPlainWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief

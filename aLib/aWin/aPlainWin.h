@@ -31,7 +31,7 @@ class aPlainWin : public aPlainWin_sys
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
-    public:
+    protected:
         aPlainWin(SysWinClass *_pParent = nullptr);
         ~aPlainWin();
 

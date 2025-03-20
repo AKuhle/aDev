@@ -12,7 +12,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aSysWin_sys.h"
+#include "aBaseWin_sys.h"
 #include "aDimension2D.h"
 
 using namespace aLib::aMath;
@@ -29,56 +29,64 @@ namespace aWin {
 * class aBaseWin
 *******************************************************************************/
 template<class T>
-class aBaseWin : public aSysWin_sys<T>
+class aBaseWin : public aBaseWin_sys<T>
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aBaseWin(SysWinClass *_pParent = nullptr);
-        virtual ~aBaseWin();
+        aBaseWin(SysWinClass *_pParent);
 
     public:
+        virtual ~aBaseWin();
+
         bool                create();
 
         void                setParent(SysWinClass *_pParent);
         SysWinClass*        parent() const;
 
+    //     void                update();
+    //     void                repaint();
 
-    /*******************************************************************************
-    * window geometry
-    *******************************************************************************/
-    public:
-        void                setMinSize(aDimension2D<s32>  _dim);
-        void                setMinSize(s32  _w,
-                                       s32  _h);
 
     /*******************************************************************************
     * window state
     *******************************************************************************/
     public:
         // visibility
-        bool                isVisible() const;
-        void                setVisible(bool _bVisible);
-        void                show();
-        void                hide();
+         void               setVisible(bool _bVisible);
+         void               show();
+         void               hide();
+         bool               isVisible() const;
+
+        void                setMouseTracking(bool _bEnable);
+
+
+    /*******************************************************************************
+    * window geometry
+    *******************************************************************************/
+    public:
+        void                setMinSize(const aDimension2D<s32> &_dim);
+        void                setMinSize(s32  _s32W,
+                                       s32  _s32H);
 
 
     /*******************************************************************************
     * handler
     *******************************************************************************/
     protected:
-        virtual bool        onSysCreate()                       { return true; }
-        virtual bool        onCreate()                          { return true; }
+        virtual bool        onSysCreate();
+        virtual bool        onCreate();
 
-        virtual void        onDropUrl(const aUrl  &/*_url*/)    {}
+        virtual void        onDropUrl(const aUrl  &_url);
+        // virtual bool        onPaint();
 
 
-    /*******************************************************************************
-    * system events
-    *******************************************************************************/
-    private:
-        virtual void        _onOsDropUrl(const aUrl  &_url) override;
+    // /*******************************************************************************
+    // * system handler
+    // *******************************************************************************/
+    protected:
+        void                onSysDropUrl(const aUrl  &_url) override;
 
 }; // class aBaseWin
 
@@ -86,5 +94,26 @@ class aBaseWin : public aSysWin_sys<T>
 } // namespace aWin
 } // namespace aLib
 
-
 #include "aBaseWin.inl"
+#include "aBaseWin_handler.inl"
+
+
+// /*******************************************************************************
+// * window geometry
+// *******************************************************************************/
+// public:
+//     void                setMinSize(aDimension2D<s32>  _dim);
+//     void                setMinSize(s32  _w,
+//                                    s32  _h);
+
+//     aRect2D<s32>        clientRect() const;
+//     s32                 clientW() const;
+//     s32                 clientH() const;
+
+
+// /*******************************************************************************
+// * system events
+// *******************************************************************************/
+// private:
+//     void                _onOsDropUrl(const aUrl  &_url) override;
+//     bool                _onOsPaint() override;

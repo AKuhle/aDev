@@ -54,14 +54,14 @@ aMdiArea* aMdiMainWin::mdiArea() const
 
 
 /*******************************************************************************
-* aMdiMainWin::addMdiWin
+* aMdiMainWin::addMdChild
 *******************************************************************************/
-void aMdiMainWin::addMdiWin(aMdiWin *_pMdiWin)
+void aMdiMainWin::addMdChild(aMdiChild *_pMdiChild)
 {
     CHECK_PRE_CONDITION_VOID(mdiArea() != nullptr);
 
-    mdiArea()->addMdiWin(_pMdiWin);
-} // aMdiMainWin::addMdiWin
+    mdiArea()->addMdChild(_pMdiChild);
+} // aMdiMainWin::addMdChild
 
 
 /*******************************************************************************

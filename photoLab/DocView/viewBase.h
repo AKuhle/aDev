@@ -40,7 +40,7 @@ class ViewBase : public aView
         enumEditMode        m_eEditMode     { enumEditMode::None };
 
     protected:
-        ViewBase(aBaseWin                   *_pParent,
+        ViewBase(SysWinClass                *_pParent,
                  std::shared_ptr<Document>  _pDoc);
 
     public:
@@ -129,7 +129,7 @@ class ViewBase : public aView
         // virtual void            OnResize(const qDimension2D<s32>    &_d2dOld,
         //                                  const qDimension2D<s32>    &_d2dNew) override;
 
-        void                        onPaintContent() override;
+        //bool                        onPaint() override;
         // virtual void            OnPaintMarker(const RenderParams &_rp);
 
 }; // class ViewBase

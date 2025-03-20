@@ -19,7 +19,7 @@
 *******************************************************************************/
 #include "aLib_def.h"
 
-#include "aToolBase.h"
+//#include "aToolBase.h"
 #include "aVector2D.h"
 
 #include "viewBase.h"

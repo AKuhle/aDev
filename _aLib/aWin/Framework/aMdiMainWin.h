@@ -36,7 +36,7 @@ class aMdiMainWin : public aMainWin
 
         aMdiArea*                   mdiArea() const;
 
-        void                        addMdiWin(aMdiWin *_pMdiWin);
+        void                        addMdChild(aMdiChild *_pMdiChild);
 
     public:
         aMdiWin*                    activeMdiWin() const;

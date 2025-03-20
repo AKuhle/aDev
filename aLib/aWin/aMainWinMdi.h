@@ -40,7 +40,8 @@ class aMainWinMdi : public aMainWin
     *******************************************************************************/
     protected:
         aMdiArea*           mdiArea();
-        void                addMdiWin(aMdiWin *_pMdiWin);
+        void                addMdiChild(aMdiChild *_pMdiChild);
+
 
     /*******************************************************************************
     * aSysWin interface

@@ -8,10 +8,11 @@
 *******************************************************************************/
 #pragma once
 
+
 /*******************************************************************************
 * includes
 *******************************************************************************/
-
+#include "aWin_def.h"
 
 
 /*******************************************************************************
@@ -22,13 +23,15 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMdiWin_sysi
+* class aMdiChild_sysi
 *******************************************************************************/
-class aMdiWin_sysi
+class aMdiChild_sysi
 {
-    virtual void            _setCentralWin(SysWinClass   *_pWin) = 0;
-    virtual SysWinClass*    _centralWin() const = 0;
-}; // class aMdiWin_sysi
+    protected:
+        virtual void            setCentralWin(SysWinClass *_pWin) = 0;
+        virtual SysWinClass*    centralWin() = 0;
+
+}; // class aMdiChild_sysi
 
 
 } // namespace aWin

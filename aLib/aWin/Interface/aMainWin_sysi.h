@@ -12,6 +12,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aWin_def.h"
+#include "aUtil/aUrl.h"
+
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -27,8 +31,8 @@ namespace aWin {
 class aMainWin_sysi
 {
     protected:
-        virtual void            _setCentralWin(SysWinClass *_pWin) = 0;
-        virtual SysWinClass*    _centralWin() = 0;
+        virtual void            setCentralWin(SysWinClass *_pWin) = 0;
+        virtual SysWinClass*    centralWin() = 0;
 
 }; // class aMainWin_sysi
 

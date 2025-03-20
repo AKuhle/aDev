@@ -125,11 +125,6 @@ void MainWin::onUpdateCmd(u64     _u64Cmd,
 *******************************************************************************/
 void MainWin::onDropUrl(const aUrl &_url)
 {
-    aPath   path(_url.toLocalFile());
-
-    shared_ptr<CmdOpenFile> pCmd = make_shared<CmdOpenFile> (path, statusBar());
-
-    executeCmd(pCmd);
 } // MainWin::onDropUrl
 
 
@@ -173,23 +168,23 @@ void MainWin::onDoDone(const shared_ptr<aCmdBase> &_pCmd)
                 shared_ptr<Document> pDoc = make_shared<Document> (std::move(pCmd));
 
                 // create the mdiWin
-                aMdiWin     *pMdiWin = new aMdiWin(mdiArea());
-                pMdiWin->create();
-                addMdiWin(pMdiWin);
-                pMdiWin->setGeometry(100, 100, 200, 150);
-                pMdiWin->setMinDim(200, 150);
+                aMdiChild *pMdiChild = new aMdiChild(mdiArea());
+                pMdiChild->create();
+                addMdChild(pMdiChild);
+                //pMdiWin->setGeometry(100, 100, 200, 150);
+                //pMdiWin->setMinDim(200, 150);
 
                 // create the EditScrollWin and set it to the
                 // child of the mdiWin
-                EditScrollWin     *pEditScrollWin = new EditScrollWin();
-                pEditScrollWin->create();
-                pMdiWin->setCentralWin(pEditScrollWin);
+                //EditScrollWin     *pEditScrollWin = new EditScrollWin();
+                //pEditScrollWin->create();
+                //pMdiWin->setCentralWin(pEditScrollWin);
 
                 // create the view an set it to the
                 // child of the scrollWin
-                EditView *pView = new EditView(nullptr, pDoc);
-                pView->create();
-                pEditScrollWin->setCentralWin(pView);
+                //EditView *pView = new EditView(nullptr, pDoc);
+                //pView->create();
+                //pEditScrollWin->setCentralWin(pView);
             }
         } //case ID_FILE_OPEN
     } // switch (pCmd->id())

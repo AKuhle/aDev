@@ -13,7 +13,7 @@
 * includes
 *******************************************************************************/
 #include "aWin_def.h"
-#include "aUtil/aUtil_def.h"
+#include "aUtil/aUrl.h"
 
 using namespace aLib::aUtil;
 
@@ -26,38 +26,41 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aSysWin_sysi
+* class aBaseWin_sysi
 *******************************************************************************/
-class aSysWin_sysi
+class aBaseWin_sysi
 {
-    virtual void            _setParent(SysWinClass *_pParent) = 0;
-    virtual SysWinClass*    _parent() = 0;
-
-
-    /*******************************************************************************
-    * window geometry
-    *******************************************************************************/
-    protected:
-        virtual void        _setMinSize(s32  _w,
-                                        s32  _h) = 0;
+    public:
+        virtual void            setParent(SysWinClass *_pParent) = 0;
+        virtual SysWinClass*    parent() const = 0;
 
 
     /*******************************************************************************
     * window state
     *******************************************************************************/
-    protected:
+    public:
         // visibility
-        virtual bool        _isVisible() const = 0;
-        virtual void        _setVisible(bool _bVisible) = 0;
+        virtual void            setVisible(bool _bVisible) = 0;
+        virtual bool            isVisible() const = 0;
+
+        virtual void            setMouseTracking(bool _bEnable) = 0;
 
 
     /*******************************************************************************
-    * handler
+    * window geometry
     *******************************************************************************/
-    protected:
-        virtual void        _onOsDropUrl(const aUrl  &_url) = 0;
+    public:
+        virtual void            setMinSize(s32  _s32W,
+                                           s32  _s32H) = 0;
 
-}; // class aSysWin_sysi
+
+    // /*******************************************************************************
+    // * system handler
+    // *******************************************************************************/
+    protected:
+        virtual void            onSysDropUrl(const aUrl  &_url) = 0;
+
+}; // class aBaseWin_sysi
 
 
 } // namespace aWin

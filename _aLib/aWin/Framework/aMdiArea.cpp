@@ -45,16 +45,16 @@ aMdiArea::~aMdiArea()
 
 
 /*******************************************************************************
-* aMdiArea::addMdiWin
+* aMdiArea::addMdChild
 *******************************************************************************/
-void aMdiArea::addMdiWin(aMdiWin   *_pMdiWin)
+void aMdiArea::addMdChild(aMdiWin   *_pMdiWin)
 {
     m_lstMdiWin.push_back(_pMdiWin);
     _pMdiWin->setParent(this);
 
     // bring the window to the top of the z-order
     _pMdiWin->setFocus();
-} // aMdiArea::addMdiWin
+} // aMdiArea::addMdChild
 
 
 /*******************************************************************************

@@ -17,10 +17,8 @@
 #include <QMdiArea>
 
 #include "aWin_def.h"
-
 #include "aMdiArea_sysi.h"
 #include "aBaseWin.h"
-
 
 
 /*******************************************************************************
@@ -43,7 +41,13 @@ class aMdiArea_sys : public aBaseWin<QMdiArea>,
         aMdiArea_sys(SysWinClass *_pParent = nullptr);
         ~aMdiArea_sys();
 
-        void                _addMdiWin(aMdiWin *_pMdiWin) override;
+
+    /*******************************************************************************
+    * aMdiArea_sysi interface
+    *******************************************************************************/
+    protected:
+        void            addMdiChild(aMdiChild *_pMdiChild) override;
+
 }; // class aMdiArea_sys
 
 

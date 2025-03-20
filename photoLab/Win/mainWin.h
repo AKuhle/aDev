@@ -17,9 +17,11 @@
 * includes
 *******************************************************************************/
 #include "aMainWinMdi.h"
+#include "aCmdMgr.h"
 
 using namespace aLib;
 using namespace aLib::aWin;
+using namespace aLib::aUtil;
 
 class MainWin;
 
@@ -33,11 +35,22 @@ MainWin&    getMainWin();
 /*******************************************************************************
 * class MainWin
 *******************************************************************************/
-class MainWin : public aMainWinMdi
+class MainWin : public aMainWinMdi,
+                public aCmdMgr
 {
     public:
         MainWin();
         ~MainWin();
+
+
+    /*******************************************************************************
+    * aCmdMgr interface
+    *******************************************************************************/
+    protected:
+        virtual void        onCmdProcessingStart(const shared_ptr<aCmdBase> &_pCmd);
+        virtual void        onCmdProcessingEnd(const shared_ptr<aCmdBase> &_pCmd);
+
+        void                onDoDone(const shared_ptr<aCmdBase> &_pCmd) override;
 
 
     /*******************************************************************************

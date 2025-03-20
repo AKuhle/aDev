@@ -28,7 +28,7 @@ namespace aWin {
 /*******************************************************************************
 * aView::aView
 *******************************************************************************/
-aView::aView(SysWinClass *_pParent)
+aView::aView(SysWinClass   *_pParent)
 : aPlainWin(_pParent)
 {
 } // aView::aView
@@ -37,8 +37,8 @@ aView::aView(SysWinClass *_pParent)
 /*******************************************************************************
 * aView::aView
 *******************************************************************************/
-aView::aView(SysWinClass                   *_pParent,
-             const std::shared_ptr<aDoc>   &_pDoc)
+aView::aView(SysWinClass                    *_pParent,
+             const std::shared_ptr<aDoc>    &_pDoc)
 : aPlainWin(_pParent),
   m_pDoc(_pDoc)
 {

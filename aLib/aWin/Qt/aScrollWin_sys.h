@@ -17,10 +17,8 @@
 #include "QAbstractScrollArea"
 
 #include "aWin_def.h"
-
 #include "aScrollWin_sysi.h"
 #include "aBaseWin.h"
-
 
 
 /*******************************************************************************
@@ -34,7 +32,7 @@ namespace aWin {
 * class aScrollWin_sys
 *******************************************************************************/
 class aScrollWin_sys : public aBaseWin<QAbstractScrollArea>,
-                       public aScrollWin_sysi
+                       private aScrollWin_sysi
 {
     /*******************************************************************************
     * con-/destruction
@@ -42,6 +40,20 @@ class aScrollWin_sys : public aBaseWin<QAbstractScrollArea>,
     protected:
         aScrollWin_sys(SysWinClass *_pParent = nullptr);
         ~aScrollWin_sys();
+
+        void                setCentralWin(SysWinClass *_pWin) override;
+        SysWinClass*        centralWin() override;
+
+        // policy
+        void                setHoriScrollBarPolicy(ScrollBarPolicy _policy) override;
+        void                setVertScrollBarPolicy(ScrollBarPolicy _policy) override;
+
+
+    // /*******************************************************************************
+    // * aBaseWin interface
+    // *******************************************************************************/
+    // protected:
+    //     virtual bool        onPaint();
 
 }; // class aScrollWin_sys
 

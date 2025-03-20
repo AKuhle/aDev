@@ -17,11 +17,8 @@
 #include "QMdiSubWindow"
 
 #include "aWin_def.h"
-
-#include "aMdiWin_sysi.h"
-
+#include "aMdiChild_sysi.h"
 #include "aBaseWin.h"
-
 
 
 /*******************************************************************************
@@ -32,21 +29,27 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMdiWin_sys
+* class aMdiChild_sys
 *******************************************************************************/
-class aMdiWin_sys : public aBaseWin<QMdiSubWindow>,
-                    private aMdiWin_sysi
+class aMdiChild_sys : public aBaseWin<QMdiSubWindow>,
+                      private aMdiChild_sysi
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMdiWin_sys(SysWinClass *_pParent = nullptr);
-        ~aMdiWin_sys();
+        aMdiChild_sys(SysWinClass *_pParent = nullptr);
+        ~aMdiChild_sys();
 
-        virtual void            _setCentralWin(SysWinClass   *_pWin) override;
-        virtual SysWinClass*    _centralWin() const override;
-}; // class aMdiWin_sys
+
+    /*******************************************************************************
+    * aMdiArea_sysi interface
+    *******************************************************************************/
+    protected:
+        void            setCentralWin(SysWinClass *_pWin) override;
+        SysWinClass*    centralWin() override;
+
+}; // class aMdiChild_sys
 
 
 } // namespace aWin

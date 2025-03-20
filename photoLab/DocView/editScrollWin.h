@@ -16,7 +16,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aWin/Framework/aScrollWin.h"
+#include "aScrollWin.h"
 
 using namespace aLib::aWin;
 
@@ -28,7 +28,7 @@ using namespace aLib::aWin;
 class EditScrollWin : public aScrollWin
 {
     public:
-        EditScrollWin(aBaseWin *_pParent = nullptr);
+        EditScrollWin(SysWinClass *_pParent = nullptr);
         ~EditScrollWin();
 
 

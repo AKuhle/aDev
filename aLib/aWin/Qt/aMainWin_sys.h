@@ -17,11 +17,8 @@
 #include <QMainWindow>
 
 #include "aWin_def.h"
-
 #include "aMainWin_sysi.h"
-
 #include "aBaseWin.h"
-
 
 
 /*******************************************************************************
@@ -41,7 +38,7 @@ class aMainWin_sys : public aBaseWin<QMainWindow>,
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWin_sys(SysWinClass *_pParent = nullptr);
+        aMainWin_sys(SysWinClass *_pParent);
         virtual ~aMainWin_sys();
 
 
@@ -49,9 +46,8 @@ class aMainWin_sys : public aBaseWin<QMainWindow>,
     * aMainWin_sysi interface
     *******************************************************************************/
     protected:
-        void            _setCentralWin(SysWinClass *_pWin) override;
-        SysWinClass*    _centralWin() override;
-
+        void            setCentralWin(SysWinClass *_pWin) override;
+        SysWinClass*    centralWin() override;
 
 }; // class aMainWin_sys
 

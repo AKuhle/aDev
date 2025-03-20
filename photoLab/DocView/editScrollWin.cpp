@@ -24,7 +24,7 @@ using namespace aLib::aWin;
 /*******************************************************************************
 * EditScrollWin::EditScrollWin
 *******************************************************************************/
-EditScrollWin::EditScrollWin(aBaseWin *_pParent /*= nullptr*/)
+EditScrollWin::EditScrollWin(SysWinClass *_pParent /*= nullptr*/)
 : aScrollWin(_pParent)
 {
 } // EditScrollWin::EditScrollWin
@@ -43,5 +43,7 @@ EditScrollWin::~EditScrollWin()
 *******************************************************************************/
 bool EditScrollWin::onCreate()
 {
+    //setScrollBarPolicy(ScrollBarPolicy::ScrollBarAlwaysOn);
+
     return true;
 } // EditScrollWin::onCreate

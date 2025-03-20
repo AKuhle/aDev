@@ -58,7 +58,7 @@ class aMainWin : public aMainWin_sys
                                         void    *_pParam2) = 0;
 
 
-    public:
+    // public:
         void                sendUpdateCmd(u64 _u64Cmd);
 
         void                sendUpdateCmd(u64   _u64Cmd,

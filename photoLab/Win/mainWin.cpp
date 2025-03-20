@@ -48,3 +48,14 @@ MainWin::MainWin()
 MainWin::~MainWin()
 {
 } // MainWin::~MainWin
+
+
+/*******************************************************************************
+* MainWin::onCreate
+*******************************************************************************/
+bool MainWin::onCreate()
+{
+    //setMinSize(600, 400);
+
+    return true;
+} // MainWin::onCreate
