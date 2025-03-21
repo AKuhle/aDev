@@ -101,22 +101,6 @@ void aScrollWin_sys::setVertScrollBarPolicy(ScrollBarPolicy _policy)
 } // aScrollWin_sys::setVertScrollBarPolicy
 
 
-// /*******************************************************************************
-// * aScrollWin_sys::onPaint
-// *******************************************************************************/
-// bool aScrollWin_sys::onPaint()
-// {
-//     // inform the viewport about the repaint
-//     QWidget *pW = viewport();
-//     if (pW != nullptr)
-//     {
-//         //pW->repaint();
-//     }
-
-//     return false;   /* nothing paint in this window */
-// } // aScrollWin_sys::onPaint
-
-
 } // namespace aWin
 } // namespace aLib
 

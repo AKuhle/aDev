@@ -124,31 +124,27 @@ void ViewBase::setEditMode(enumEditMode _eEditMode)
 
 
 /*******************************************************************************
-* ViewBase::onPaint
+* ViewBase::doPaint
 *******************************************************************************/
-// bool ViewBase::onPaint()
-// {
-//     cout << __PRETTY_FUNCTION__ << endl;
+void ViewBase::doPaint(aPainter &_painter)
+{
+    // update the render parameter
+    updateRenderParams(m_renderParams);
 
-//     // update the render parameter
-//     updateRenderParams(m_renderParams);
+    // get the image
+    QImage *pImg = m_renderParams.createQImage();
 
-//     // get the image
-//     QImage *pImg = m_renderParams.createQImage();
+    // paint, if the image exists
+    if (pImg != nullptr)
+    {
+        aRect2D<s32>    vp = m_renderParams.viewPort_client();
 
-//     // paint, if the image exists
-//     if (pImg != nullptr)
-//     {
-//         aPainter        p(ToSysWin());
-//         aRect2D<s32>    vp = m_renderParams.viewPort_client();
+        _painter.drawQImg(*pImg, vp.x(), vp.y());
+    }
 
-//         p.drawQImg(*pImg, vp.x(), vp.y());
-//     }
+    // OnPaintMarker(m_renderParams);
 
-//     // OnPaintMarker(m_renderParams);
-
-//     return true;
-// } // ViewBase::onPaint
+} // ViewBase::doPaint
 
 
 
@@ -164,15 +160,6 @@ void ViewBase::setEditMode(enumEditMode _eEditMode)
 // } // ViewBase::OnPaintMarker
 
 
-
-
-// /*******************************************************************************
-// * ViewBase::GetRenderParams
-// *******************************************************************************/
-// const RenderParams& ViewBase::GetRenderParams() const
-// {
-//     return m_renderParams;
-// } // ViewBase::GetRenderParams
 
 
 // /*******************************************************************************

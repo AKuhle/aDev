@@ -50,6 +50,16 @@ void aBaseWin<T>::onDropUrl(const aUrl  &/*_url*/)
 
 
 /*******************************************************************************
+* aBaseWin<T>::onPaint
+*******************************************************************************/
+template<class T>
+bool aBaseWin<T>::onPaint()
+{
+    return false;
+} // aBaseWin<T>::onPaint
+
+
+/*******************************************************************************
 * aBaseWin<T>::onSysDropUrl
 *******************************************************************************/
 template<class T>
@@ -57,6 +67,16 @@ void aBaseWin<T>::onSysDropUrl(const aUrl  &_url)
 {
     onDropUrl(_url);
 } // aBaseWin<T>::onSysDropUrl
+
+
+/*******************************************************************************
+* aBaseWin<T>::onSysPaint
+*******************************************************************************/
+template<class T>
+bool aBaseWin<T>::onSysPaint()
+{
+    return onPaint();
+} // aBaseWin<T>::onSysPaint
 
 
 } // namespace aWin

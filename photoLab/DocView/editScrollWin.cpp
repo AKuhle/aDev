@@ -16,8 +16,8 @@
 * includes
 *******************************************************************************/
 #include "editScrollWin.h"
-
-#include "editScrollWin.h"
+#include "viewBase.h"
+#include "aPainter.h"
 
 using namespace aLib::aWin;
 
@@ -43,7 +43,22 @@ EditScrollWin::~EditScrollWin()
 *******************************************************************************/
 bool EditScrollWin::onCreate()
 {
-    //setScrollBarPolicy(ScrollBarPolicy::ScrollBarAlwaysOn);
+    setScrollBarPolicy(ScrollBarPolicy::ScrollBarAlwaysOn);
 
     return true;
 } // EditScrollWin::onCreate
+
+
+/*******************************************************************************
+* EditScrollWin::onPaint
+*******************************************************************************/
+bool EditScrollWin::onPaint()
+{
+    ViewBase *pView = win_cast<ViewBase *> (centralWin());
+    CHECK_PRE_CONDITION(pView != nullptr, false);
+
+    aPainter    p(pView);
+    pView->doPaint(p);
+
+    return true;
+} // EditScrollWin::onPaint

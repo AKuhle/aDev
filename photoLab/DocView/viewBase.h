@@ -13,6 +13,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aGraphic_def.h"
+
 #include "photoLab_defs.h"
 #include "aView.h"
 
@@ -25,6 +27,7 @@
 * forwards
 *******************************************************************************/
 using namespace aLib::aWin;
+using namespace aLib::aGraphic;
 
 
 /*******************************************************************************
@@ -51,6 +54,8 @@ class ViewBase : public aView
         // const RenderParams&     GetRenderParams() const;
 
         void                        setEditMode(enumEditMode _eEditMode);
+
+        void                        doPaint(aPainter &_painter);
 
     protected:
         virtual void                updateRenderParams(RenderParams &_rp) = 0;
@@ -129,7 +134,6 @@ class ViewBase : public aView
         // virtual void            OnResize(const qDimension2D<s32>    &_d2dOld,
         //                                  const qDimension2D<s32>    &_d2dNew) override;
 
-        //bool                        onPaint() override;
         // virtual void            OnPaintMarker(const RenderParams &_rp);
 
 }; // class ViewBase

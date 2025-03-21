@@ -56,6 +56,26 @@ SysWinClass* aBaseWin_sys<T>::parent() const
 
 
 /*******************************************************************************
+* aBaseWin_sys<T>::update
+*******************************************************************************/
+template<class T>
+void aBaseWin_sys<T>::update()
+{
+    T::update();
+} // aBaseWin_sys<T>::update
+
+
+/*******************************************************************************
+* aBaseWin_sys<T>::repaint
+*******************************************************************************/
+template<class T>
+void aBaseWin_sys<T>::repaint()
+{
+    T::repaint();
+} // aBaseWin_sys<T>::repaint
+
+
+/*******************************************************************************
 * aBaseWin_sys<T>::setVisible
 *******************************************************************************/
 template<class T>
@@ -94,6 +114,20 @@ void aBaseWin_sys<T>::setMinSize(s32  _s32W,
 {
     T::setMinimumSize(_s32W, _s32H);
 } // aBaseWin_sys<T>::setMinSize
+
+
+/*******************************************************************************
+* aBaseWin_sys<T>::clientRect
+*******************************************************************************/
+template<class T>
+aRect2D<s32> aBaseWin_sys<T>::clientRect() const
+{
+    QRect r = T::geometry();
+
+    aRect2D<s32>    r2d(0, 0,r.width(), r.height());
+
+    return r2d;
+} // aBaseWin_sys<T>::clientRect
 
 
 /*******************************************************************************
@@ -148,21 +182,21 @@ void aBaseWin_sys<T>::dropEvent(QDropEvent *_pEvent)
 } // aBaseWin_sys<T>::dropEvent
 
 
-// /*******************************************************************************
-// * aBaseWin_sys<T>::paintEvent
-// *******************************************************************************/
-// template<class T>
-// void aBaseWin_sys<T>::paintEvent(QPaintEvent *_pEvent)
-// {
-//     if (_onOsPaint())
-//     {
-//         _pEvent->accept();
-//     }
-//     else
-//     {
-//         T::paintEvent(_pEvent);
-//     }
-// } // aBaseWin_sys<T>::paintEvent
+/*******************************************************************************
+* aBaseWin_sys<T>::paintEvent
+*******************************************************************************/
+template<class T>
+void aBaseWin_sys<T>::paintEvent(QPaintEvent *_pEvent)
+{
+    if (onSysPaint())
+    {
+        _pEvent->accept();
+    }
+    else
+    {
+        T::paintEvent(_pEvent);
+    }
+} // aBaseWin_sys<T>::paintEvent
 
 
 } // namespace aWin
@@ -170,49 +204,3 @@ void aBaseWin_sys<T>::dropEvent(QDropEvent *_pEvent)
 
 
 #endif //_USE_QT_
-
-
-
-// /*******************************************************************************
-// * aBaseWin_sys<T>::_update
-// *******************************************************************************/
-// template<class T>
-// void aBaseWin_sys<T>::_update()
-// {
-//     T::update();
-// } // aBaseWin_sys<T>::_update
-
-
-// /*******************************************************************************
-// * aBaseWin_sys<T>::_repaint
-// *******************************************************************************/
-// template<class T>
-// void aBaseWin_sys<T>::_repaint()
-// {
-//     T::repaint();
-// } // aBaseWin_sys<T>::_repaint
-
-
-// /*******************************************************************************
-// * aBaseWin_sys<T>::_setMinSize
-// *******************************************************************************/
-// template<class T>
-// void aBaseWin_sys<T>::_setMinSize(s32  _w,
-//                                  s32  _h)
-// {
-//     T::setMinimumSize(_w, _h);
-// } // aBaseWin_sys<T>::_setMinSize
-
-
-// /*******************************************************************************
-// * aBaseWin_sys<T>::_clientRect
-// *******************************************************************************/
-// template<class T>
-// aRect2D<s32> aBaseWin_sys<T>::_clientRect() const
-// {
-//     QRect r = T::geometry();
-
-//     aRect2D<s32>    r2d(0, 0,r.width(), r.height());
-
-//     return r2d;
-// } // aBaseWin_sys<T>::_clientRect

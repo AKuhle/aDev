@@ -84,18 +84,5 @@ void aScrollWin::setVertScrollBarPolicy(ScrollBarPolicy _policy)
 } // aScrollWin::setVertScrollBarPolicy
 
 
-// /*******************************************************************************
-// * aScrollWin::_onOsPaint
-// *******************************************************************************/
-// // bool aScrollWin::_onOsPaint()
-// // {
-// //     SysWinClass *pWin = centralWin();
-
-// //     pWin->update();
-
-// //     return onPaint();
-// // } // aScrollWin::_onOsPaint
-
-
 } // namespace aWin
 } // namespace aLib

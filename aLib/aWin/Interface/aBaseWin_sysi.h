@@ -13,8 +13,10 @@
 * includes
 *******************************************************************************/
 #include "aWin_def.h"
-#include "aUtil/aUrl.h"
+#include "aUrl.h"
+#include "aRect2D.h"
 
+using namespace aLib::aMath;
 using namespace aLib::aUtil;
 
 
@@ -33,6 +35,9 @@ class aBaseWin_sysi
     public:
         virtual void            setParent(SysWinClass *_pParent) = 0;
         virtual SysWinClass*    parent() const = 0;
+
+        virtual void            update() = 0;
+        virtual void            repaint() = 0;
 
 
     /*******************************************************************************
@@ -53,12 +58,15 @@ class aBaseWin_sysi
         virtual void            setMinSize(s32  _s32W,
                                            s32  _s32H) = 0;
 
+        virtual aRect2D<s32>    clientRect() const = 0;
 
-    // /*******************************************************************************
-    // * system handler
-    // *******************************************************************************/
+
+    /*******************************************************************************
+    * system handler
+    *******************************************************************************/
     protected:
         virtual void            onSysDropUrl(const aUrl  &_url) = 0;
+        virtual bool            onSysPaint() = 0;
 
 }; // class aBaseWin_sysi
 

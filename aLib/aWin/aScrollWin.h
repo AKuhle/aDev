@@ -44,8 +44,6 @@ class aScrollWin : public aScrollWin_sys
         void                setHoriScrollBarPolicy(ScrollBarPolicy _policy);
         void                setVertScrollBarPolicy(ScrollBarPolicy _policy);
 
-    //     //bool                _onOsPaint();
-
 }; // class aScrollWin
 
 

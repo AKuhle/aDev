@@ -69,7 +69,9 @@ enum class enumAlignmentVert
 /*******************************************************************************
 * classes
 *******************************************************************************/
-
+class aBrush;
+class aPen;
+class aPainter;
 
 } // namespace aGraphic
 } // namespace aLib

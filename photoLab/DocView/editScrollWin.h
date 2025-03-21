@@ -36,6 +36,7 @@ class EditScrollWin : public aScrollWin
     * BaseWin interface
     *******************************************************************************/
     protected:
-        virtual bool                onCreate();
+        bool        onCreate() override;
+        bool        onPaint() override;
 
 }; // class EditScrollWin

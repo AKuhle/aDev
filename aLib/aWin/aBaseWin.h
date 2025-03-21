@@ -12,10 +12,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aGraphic_def.h"
 #include "aBaseWin_sys.h"
 #include "aDimension2D.h"
-
-using namespace aLib::aMath;
 
 
 /*******************************************************************************
@@ -45,8 +44,8 @@ class aBaseWin : public aBaseWin_sys<T>
         void                setParent(SysWinClass *_pParent);
         SysWinClass*        parent() const;
 
-    //     void                update();
-    //     void                repaint();
+        void                update();
+        void                repaint();
 
 
     /*******************************************************************************
@@ -70,6 +69,10 @@ class aBaseWin : public aBaseWin_sys<T>
         void                setMinSize(s32  _s32W,
                                        s32  _s32H);
 
+        aRect2D<s32>        clientRect() const;
+        s32                 clientW() const;
+        s32                 clientH() const;
+
 
     /*******************************************************************************
     * handler
@@ -79,14 +82,15 @@ class aBaseWin : public aBaseWin_sys<T>
         virtual bool        onCreate();
 
         virtual void        onDropUrl(const aUrl  &_url);
-        // virtual bool        onPaint();
+        virtual bool        onPaint();
 
 
-    // /*******************************************************************************
-    // * system handler
-    // *******************************************************************************/
+    /*******************************************************************************
+    * system handler
+    *******************************************************************************/
     protected:
         void                onSysDropUrl(const aUrl  &_url) override;
+        bool                onSysPaint() override;
 
 }; // class aBaseWin
 
@@ -105,15 +109,3 @@ class aBaseWin : public aBaseWin_sys<T>
 //     void                setMinSize(aDimension2D<s32>  _dim);
 //     void                setMinSize(s32  _w,
 //                                    s32  _h);
-
-//     aRect2D<s32>        clientRect() const;
-//     s32                 clientW() const;
-//     s32                 clientH() const;
-
-
-// /*******************************************************************************
-// * system events
-// *******************************************************************************/
-// private:
-//     void                _onOsDropUrl(const aUrl  &_url) override;
-//     bool                _onOsPaint() override;

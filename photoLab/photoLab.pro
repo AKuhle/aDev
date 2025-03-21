@@ -17,7 +17,8 @@ DEFINES += _USE_QT_
 # debug configuration
 ########################################################################
 CONFIG(debug, debug|release) {
-        TARGET = photoLabd
+#        TARGET = photoLabd
+        TARGET = sample1d
         windows {
                 LIBS += ../../../../Apps/libaLibd.a
         }
@@ -31,7 +32,8 @@ CONFIG(debug, debug|release) {
 # release configuration
 ########################################################################
 CONFIG(release, debug|release) {
-        TARGET = qPhotoLab
+#        TARGET = qPhotoLab
+        TARGET = sample1
         windows {
                 LIBS += ../../../../Apps/libaLib.a
         }

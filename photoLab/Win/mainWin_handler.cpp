@@ -76,17 +76,16 @@ void MainWin::onDoDone(const shared_ptr<aCmdBase> &_pCmd)
                 // create the scrollWin
                 EditScrollWin *pScrollWin = new EditScrollWin;
                  pScrollWin->create();
-                pScrollWin->setScrollBarPolicy(ScrollBarPolicy::ScrollBarAlwaysOn);
                 pMdiChild->setCentralWin(pScrollWin);
 
-                // // create the edit view
-                // EditView *pEditView = new EditView(nullptr, pDoc);
-                // pEditView->create();
-                // //pScrollWin->setCentralWin(pEditView->ToSysWin());
+                // create the edit view
+                EditView *pEditView = new EditView(nullptr, pDoc);
+                pEditView->create();
+                pScrollWin->setCentralWin(pEditView);
 
                 // //pMdiWin->setVisible(true);
                 // pScrollWin->setVisible(true);
-                // //pEditView->setVisible(true);
+                pEditView->setVisible(true);
 
                 // sendUpdateCmd(UPDATE_VIEW, pEditView);
             }

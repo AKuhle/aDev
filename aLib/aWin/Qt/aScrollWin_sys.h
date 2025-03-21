@@ -48,13 +48,6 @@ class aScrollWin_sys : public aBaseWin<QAbstractScrollArea>,
         void                setHoriScrollBarPolicy(ScrollBarPolicy _policy) override;
         void                setVertScrollBarPolicy(ScrollBarPolicy _policy) override;
 
-
-    // /*******************************************************************************
-    // * aBaseWin interface
-    // *******************************************************************************/
-    // protected:
-    //     virtual bool        onPaint();
-
 }; // class aScrollWin_sys
 
 

@@ -48,8 +48,17 @@ class aBaseWin_sys : public T,
         virtual ~aBaseWin_sys();
 
     public:
+        template <class CastName>
+        CastName                win_cast(SysWinClass *_pWin)
+        {
+            return (CastName) _pWin;
+        }
+
         void                    setParent(SysWinClass *_pParent) override;
         SysWinClass*            parent() const override;
+
+        void                    update() override;
+        void                    repaint() override;
 
 
     /*******************************************************************************
@@ -67,8 +76,10 @@ class aBaseWin_sys : public T,
     * window geometry
     *******************************************************************************/
     public:
-        void                setMinSize(s32  _s32W,
-                                       s32  _s32H) override;
+        void                    setMinSize(s32  _s32W,
+                                           s32  _s32H) override;
+
+        aRect2D<s32>            clientRect() const override;
 
 
     // /*******************************************************************************
@@ -79,7 +90,7 @@ class aBaseWin_sys : public T,
         void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
         void                    dropEvent(QDropEvent   *_pEvent) override;
 
-    //     void                    paintEvent(QPaintEvent *_pEvent) override;
+        void                    paintEvent(QPaintEvent *_pEvent) override;
 
 }; // class aBaseWin_sys
 
