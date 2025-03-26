@@ -1,6 +1,8 @@
 debug/aAppMainWin.o
 debug/aAppBase.o
 debug/main.o
+debug/aToolButton_sys.o
+debug/aToolButton.o
 debug/aBrush_sys.o
 debug/aPainter_sys.o
 debug/aPen_sys.o

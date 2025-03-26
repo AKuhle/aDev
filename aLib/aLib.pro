@@ -73,6 +73,10 @@ INCLUDEPATH += aWin/DocView
 INCLUDEPATH += aWin/Interface
 INCLUDEPATH += aWin/Qt
 
+INCLUDEPATH += aCtrl
+INCLUDEPATH += aCtrl/Interface
+INCLUDEPATH += aCtrl/Qt
+
 
 ########################################################################
 # HEADERS
@@ -82,6 +86,12 @@ HEADERS += \
     aApp/aAppBase.h \
     aApp/aApp_def.h \
     aApp/main.h \
+    aCtrl/Qt/aCtrl_sys.h \
+    aCtrl/Qt/aCtrl_sys.inl \
+    aCtrl/Qt/aToolButton_sys.h \
+    aCtrl/aCtrl.h \
+    aCtrl/aCtrl.inl \
+    aCtrl/aToolButton.h \
     aGraphic/Interface/aBrush_sysi.h \
     aGraphic/Interface/aPainter_sysi.h \
     aGraphic/Interface/aPen_sysi.h \
@@ -185,6 +195,8 @@ SOURCES += \
     aApp/Qt/aAppMainWin.cpp \
     aApp/aAppBase.cpp \
     aApp/main.cpp \
+    aCtrl/Qt/aToolButton_sys.cpp \
+    aCtrl/aToolButton.cpp \
     aGraphic/Qt/aBrush_sys.cpp \
     aGraphic/Qt/aPainter_sys.cpp \
     aGraphic/Qt/aPen_sys.cpp \

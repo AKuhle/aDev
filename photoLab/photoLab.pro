@@ -65,6 +65,10 @@ INCLUDEPATH += ../aLib
 INCLUDEPATH += ../aLib/aApp
 INCLUDEPATH += ../aLib/aApp/Qt
 
+INCLUDEPATH += ../aLib/aCtrl
+INCLUDEPATH += ../aLib/aCtrl/Interface
+INCLUDEPATH += ../aLib/aCtrl/Qt
+
 INCLUDEPATH += ../aLib/aGraphic
 INCLUDEPATH += ../aLib/aGraphic/Interface
 INCLUDEPATH += ../aLib/aGraphic/Qt
@@ -146,11 +150,12 @@ RESOURCES += \
     Resource/Resource_Qt/qLib.qrc
 
 DISTFILES += \
-    Resource/Resource_Qt/Masked/close.png \
-    Resource/Resource_Qt/Masked/file_open.png \
     Resource/Resource_Qt/Masked/maximize.png \
     Resource/Resource_Qt/Masked/minimize.png \
     Resource/Resource_Qt/Masked/scrollBarDown.png \
     Resource/Resource_Qt/Masked/scrollBarLeft.png \
     Resource/Resource_Qt/Masked/scrollBarRight.png \
     Resource/Resource_Qt/Masked/scrollBarUp.png
+
+FORMS += \
+    Forms/formMainWin.ui

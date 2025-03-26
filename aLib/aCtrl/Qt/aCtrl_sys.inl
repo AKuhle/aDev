@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file BaseApp.h
+* \file aCtrl_sys.inl
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,53 +10,41 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
+#ifdef _USE_QT_
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aAppMainWin.h"
-#include "mainWin.h"
-
-using namespace aLib::aApp;
-using namespace aLib::aWin;
 
 
 /*******************************************************************************
-* getMainWin
+* namespace
 *******************************************************************************/
-MainWin& getMainWin()
-{
-    return *dynamic_cast<MainWin *> (get_aMainWin());
-} // getMainWin
+namespace aLib {
+namespace aWin {
 
 
 /*******************************************************************************
-* MainWin::MainWin
+* aCtrl_sys<T>::aCtrl_sys
 *******************************************************************************/
-MainWin::MainWin()
+template<class T>
+aCtrl_sys<T>::aCtrl_sys(SysWinClass *_pParent)
+: T(_pParent)
 {
-    #ifdef _USE_QT_
-        m_pUi = new Ui::FormMainWin;
-        m_pUi->setupUi(this);
-    #endif
-} // MainWin::MainWin
+} // aCtrl_sys<T>::aCtrl_sys
 
 
 /*******************************************************************************
-* MainWin::~MainWin
+* aCtrl_sys<T>::~aCtrl_sys
 *******************************************************************************/
-MainWin::~MainWin()
+template<class T>
+aCtrl_sys<T>::~aCtrl_sys()
 {
-} // MainWin::~MainWin
+} // aCtrl_sys<T>::~aCtrl_sys
 
 
-/*******************************************************************************
-* MainWin::onCreate
-*******************************************************************************/
-bool MainWin::onCreate()
-{
-    //setMinSize(600, 400);
+} // namespace aWin
+} // namespace aLib
 
-    return true;
-} // MainWin::onCreate
+#endif //_USE_QT_

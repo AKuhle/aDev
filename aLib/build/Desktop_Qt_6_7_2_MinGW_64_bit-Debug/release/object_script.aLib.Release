@@ -1,6 +1,8 @@
 release/aAppMainWin.o
 release/aAppBase.o
 release/main.o
+release/aToolButton_sys.o
+release/aToolButton.o
 release/aBrush_sys.o
 release/aPainter_sys.o
 release/aPen_sys.o

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file BaseApp.h
+* \file aToolButton_sys.inl
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,53 +10,40 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
+#ifdef _USE_QT_
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aAppMainWin.h"
-#include "mainWin.h"
-
-using namespace aLib::aApp;
-using namespace aLib::aWin;
+#include "aToolButton_sys.h"
 
 
 /*******************************************************************************
-* getMainWin
+* namespace
 *******************************************************************************/
-MainWin& getMainWin()
-{
-    return *dynamic_cast<MainWin *> (get_aMainWin());
-} // getMainWin
+namespace aLib {
+namespace aWin {
 
 
 /*******************************************************************************
-* MainWin::MainWin
+* aToolButton_sys::aToolButton_sys
 *******************************************************************************/
-MainWin::MainWin()
+aToolButton_sys::aToolButton_sys(SysWinClass *_pParent)
+: aCtrl<QToolButton>(_pParent)
 {
-    #ifdef _USE_QT_
-        m_pUi = new Ui::FormMainWin;
-        m_pUi->setupUi(this);
-    #endif
-} // MainWin::MainWin
+} // aToolButton_sys::aToolButton_sys
 
 
 /*******************************************************************************
-* MainWin::~MainWin
+* aToolButton_sys::~aToolButton_sys
 *******************************************************************************/
-MainWin::~MainWin()
+aToolButton_sys::~aToolButton_sys()
 {
-} // MainWin::~MainWin
+} // aToolButton_sys::~aToolButton_sys
 
 
-/*******************************************************************************
-* MainWin::onCreate
-*******************************************************************************/
-bool MainWin::onCreate()
-{
-    //setMinSize(600, 400);
+} // namespace aWin
+} // namespace aLib
 
-    return true;
-} // MainWin::onCreate
+#endif //_USE_QT_

@@ -92,7 +92,7 @@
    <addaction name="menuImage"/>
    <addaction name="menuView"/>
   </widget>
-  <widget class="qLib::qToolBar" name="m_pTbStandard">
+  <widget class="QToolBar" name="m_pTbStandard">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -114,7 +114,7 @@
    <addaction name="m_pActionUndo"/>
    <addaction name="m_pActionRedo"/>
   </widget>
-  <widget class="qLib::qToolBar" name="m_pTbTransform">
+  <widget class="QToolBar" name="m_pTbTransform">
    <property name="enabled">
     <bool>true</bool>
    </property>
@@ -141,9 +141,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/fileOpen.png</normaloff>
-     <disabledoff>:/AppSpecific/fileOpen-d.png</disabledoff>:/AppSpecific/fileOpen.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/Lib_dark/fileOpen_dark.png</normaloff>:/Lib_dark/fileOpen_dark.png</iconset>
    </property>
    <property name="text">
     <string>Open File...</string>
@@ -157,9 +156,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/exit.png</normaloff>
-     <disabledoff>:/AppSpecific/exit-d.png</disabledoff>:/AppSpecific/exit.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/Lib_dark/exit_dark.png</normaloff>:/Lib_dark/exit_dark.png</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
@@ -176,9 +174,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/navigator_off.png</normaloff>
-     <normalon>:/AppSpecific/navigator_on.png</normalon>:/AppSpecific/navigator_off.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/navigator_dark.png</normaloff>:/PhotoLab/navigator_dark.png</iconset>
    </property>
    <property name="text">
     <string>Navigator</string>
@@ -195,9 +192,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/flipHori.png</normaloff>
-     <disabledoff>:/AppSpecific/flipHori-d.png</disabledoff>:/AppSpecific/flipHori.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/flipHori.png</normaloff>:/PhotoLab/flipHori.png</iconset>
    </property>
    <property name="text">
     <string>Flip Horizontal</string>
@@ -208,9 +204,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/undo.png</normaloff>
-     <disabledoff>:/AppSpecific/undo-d.png</disabledoff>:/AppSpecific/undo.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/Lib_dark/undo_dark.png</normaloff>:/Lib_dark/undo_dark.png</iconset>
    </property>
    <property name="text">
     <string>Undo</string>
@@ -224,9 +219,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/redo.png</normaloff>
-     <disabledoff>:/AppSpecific/redo-d.png</disabledoff>:/AppSpecific/redo.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/Lib_dark/redo_dark.png</normaloff>:/Lib_dark/redo_dark.png</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
@@ -240,9 +234,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/flipVert.png</normaloff>
-     <disabledoff>:/AppSpecific/flipVert-d.png</disabledoff>:/AppSpecific/flipVert.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/flipVert.png</normaloff>:/PhotoLab/flipVert.png</iconset>
    </property>
    <property name="text">
     <string>Flip Vertical</string>
@@ -253,9 +246,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/rotateCCW.png</normaloff>
-     <disabledoff>:/AppSpecific/rotateCCW-d.png</disabledoff>:/AppSpecific/rotateCCW.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/rotateCCW.png</normaloff>:/PhotoLab/rotateCCW.png</iconset>
    </property>
    <property name="text">
     <string>Rotate Counter Clockwise</string>
@@ -266,9 +258,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/rotateCW.png</normaloff>
-     <disabledoff>:/AppSpecific/rotateCW-d.png</disabledoff>:/AppSpecific/rotateCW.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/rotateCW.png</normaloff>:/PhotoLab/rotateCW.png</iconset>
    </property>
    <property name="text">
     <string>Rotate Clockwise</string>
@@ -279,9 +270,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/rotate180.png</normaloff>
-     <disabledoff>:/AppSpecific/rotate180-d.png</disabledoff>:/AppSpecific/rotate180.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/rotate180.png</normaloff>:/PhotoLab/rotate180.png</iconset>
    </property>
    <property name="text">
     <string>Rotate 180°</string>
@@ -292,9 +282,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/invert.png</normaloff>
-     <disabledoff>:/AppSpecific/invert-d.png</disabledoff>:/AppSpecific/invert.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/invert.png</normaloff>:/PhotoLab/invert.png</iconset>
    </property>
    <property name="text">
     <string>Invert Image</string>
@@ -311,9 +300,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/toolbox_off.png</normaloff>
-     <normalon>:/AppSpecific/toolbox_on.png</normalon>:/AppSpecific/toolbox_off.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/toolbox_dark.png</normaloff>:/PhotoLab/toolbox_dark.png</iconset>
    </property>
    <property name="text">
     <string>Tool Box</string>
@@ -330,9 +318,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qFsResource.qrc">
-     <normaloff>:/AppSpecific/protocol_off.png</normaloff>
-     <normalon>:/AppSpecific/protocol_on.png</normalon>:/AppSpecific/protocol_off.png</iconset>
+    <iconset resource="../Resource/Resource_Qt/qLib.qrc">
+     <normaloff>:/PhotoLab/protocol_dark.png</normaloff>:/PhotoLab/protocol_dark.png</iconset>
    </property>
    <property name="text">
     <string>Protocol</string>
@@ -397,15 +384,8 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>qLib::qToolBar</class>
-   <extends>QToolBar</extends>
-   <header location="global">qToolBar.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
-  <include location="../Resource/qFsResource.qrc"/>
+  <include location="../Resource/Resource_Qt/qLib.qrc"/>
  </resources>
  <connections/>
 </ui>

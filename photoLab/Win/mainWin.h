@@ -19,6 +19,10 @@
 #include "aMainWinMdi.h"
 #include "aCmdMgr.h"
 
+#ifdef _USE_QT_
+    #include "ui_formMainWin.h"
+#endif
+
 using namespace aLib;
 using namespace aLib::aWin;
 using namespace aLib::aUtil;
@@ -38,6 +42,11 @@ MainWin&    getMainWin();
 class MainWin : public aMainWinMdi,
                 public aCmdMgr
 {
+    private:
+        #ifdef _USE_QT_
+            Ui::FormMainWin     *m_pUi              { nullptr };
+        #endif
+
     public:
         MainWin();
         ~MainWin();
