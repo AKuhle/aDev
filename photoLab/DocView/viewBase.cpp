@@ -30,7 +30,7 @@ using namespace aLib::aGraphic;
 /*******************************************************************************
 * ViewBase::ViewBase
 *******************************************************************************/
-ViewBase::ViewBase(SysWinClass          *_pParent,
+ViewBase::ViewBase(SysWin               *_pParent,
                    shared_ptr<Document> _pDoc)
 : aView(_pParent, _pDoc)
 {

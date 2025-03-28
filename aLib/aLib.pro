@@ -86,12 +86,13 @@ HEADERS += \
     aApp/aAppBase.h \
     aApp/aApp_def.h \
     aApp/main.h \
-    aCtrl/Qt/aCtrl_sys.h \
-    aCtrl/Qt/aCtrl_sys.inl \
-    aCtrl/Qt/aToolButton_sys.h \
-    aCtrl/aCtrl.h \
-    aCtrl/aCtrl.inl \
-    aCtrl/aToolButton.h \
+    aCtrl/Interface/aCtrlI.h \
+    aCtrl/Interface/aToolButtonI.h \
+    aCtrl/Qt/aCtrl.h \
+    aCtrl/Qt/aCtrl.inl \
+    aCtrl/Qt/aToolButton.h \
+    aCtrl/aCtrlMgr.h \
+    aCtrl/aCtrl_def.h \
     aGraphic/Interface/aBrush_sysi.h \
     aGraphic/Interface/aPainter_sysi.h \
     aGraphic/Interface/aPen_sysi.h \
@@ -164,27 +165,22 @@ HEADERS += \
     aLib_def.h \
     aWin/DocView/aDoc.h \
     aWin/DocView/aView.h \
-    aWin/Interface/aBaseWin_sysi.h \
-    aWin/Interface/aMainWin_sysi.h \
-    aWin/Interface/aMdiArea_sysi.h \
-    aWin/Interface/aMdiChild_sysi.h \
-    aWin/Interface/aScrollWin_sysi.h \
-    aWin/Qt/aBaseWin_sys.h \
-    aWin/Qt/aBaseWin_sys.inl \
-    aWin/Qt/aMainWin_sys.h \
-    aWin/Qt/aMdiArea_sys.h \
-    aWin/Qt/aMdiChild_sys.h \
-    aWin/Qt/aPlainWin_sys.h \
-    aWin/Qt/aScrollWin_sys.h \
-    aWin/aBaseWin.h \
-    aWin/aBaseWin.inl \
-    aWin/aBaseWin_handler.inl \
-    aWin/aMainWin.h \
-    aWin/aMainWinMdi.h \
-    aWin/aMdiArea.h \
-    aWin/aMdiChild.h \
-    aWin/aPlainWin.h \
-    aWin/aScrollWin.h \
+    aWin/Interface/aBaseWinI.h \
+    aWin/Interface/aMainWinI.h \
+    aWin/Interface/aMainWinMdiI.h \
+    aWin/Interface/aMdiAreaI.h \
+    aWin/Interface/aMdiChildI.h \
+    aWin/Interface/aPlainWinI.h \
+    aWin/Interface/aScrollWinI.h \
+    aWin/Qt/aBaseWin.h \
+    aWin/Qt/aBaseWin.inl \
+    aWin/Qt/aBaseWin_handler.inl \
+    aWin/Qt/aMainWin.h \
+    aWin/Qt/aMainWinMdi.h \
+    aWin/Qt/aMdiArea.h \
+    aWin/Qt/aMdiChild.h \
+    aWin/Qt/aPlainWin.h \
+    aWin/Qt/aScrollWin.h \
     aWin/aWin_def.h
 
 
@@ -195,8 +191,7 @@ SOURCES += \
     aApp/Qt/aAppMainWin.cpp \
     aApp/aAppBase.cpp \
     aApp/main.cpp \
-    aCtrl/Qt/aToolButton_sys.cpp \
-    aCtrl/aToolButton.cpp \
+    aCtrl/aCtrlMgr.cpp \
     aGraphic/Qt/aBrush_sys.cpp \
     aGraphic/Qt/aPainter_sys.cpp \
     aGraphic/Qt/aPen_sys.cpp \
@@ -232,16 +227,11 @@ SOURCES += \
     aLib.cpp \
     aWin/DocView/aDoc.cpp \
     aWin/DocView/aView.cpp \
-    aWin/Qt/aMainWin_sys.cpp \
-    aWin/Qt/aMdiArea_sys.cpp \
-    aWin/Qt/aMdiChild_sys.cpp \
-    aWin/Qt/aPlainWin_sys.cpp \
-    aWin/Qt/aScrollWin_sys.cpp \
-    aWin/aMainWin.cpp \
-    aWin/aMainWinMdi.cpp \
-    aWin/aMdiArea.cpp \
-    aWin/aMdiChild.cpp \
-    aWin/aPlainWin.cpp \
-    aWin/aScrollWin.cpp
+    aWin/Qt/aMainWin.cpp \
+    aWin/Qt/aMainWinMdi.cpp \
+    aWin/Qt/aMdiArea.cpp \
+    aWin/Qt/aMdiChild.cpp \
+    aWin/Qt/aPlainWin.cpp \
+    aWin/Qt/aScrollWin.cpp
 
 DISTFILES +=

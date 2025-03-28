@@ -17,7 +17,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aToolButton_sys.h"
+#include "aWin_def.h"
+
+#include "aToolButtonI.h"
 
 
 /*******************************************************************************
@@ -30,7 +32,7 @@ namespace aWin {
 /*******************************************************************************
 * class aToolButton
 *******************************************************************************/
-class aToolButton : public aToolButton_sys
+class aToolButton : public aToolButtonI
 {
     public:
         aToolButton(SysWinClass *_pParent = nullptr);

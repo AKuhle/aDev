@@ -15,7 +15,7 @@
 #ifdef _USE_QT_
     #include <QWidget>
 
-    using SysWinClass       = QWidget;
+    using SysWin = QWidget;
 #endif // _USE_QT_
 
 #include "aLib_def.h"
@@ -127,6 +127,7 @@ enum class ScrollBarPolicy {
 /*******************************************************************************
 * classes
 *******************************************************************************/
+class aBaseWinI;
 template <typename T> class aBaseWin;
 class aMainWin;
 class aMainWinMdi;

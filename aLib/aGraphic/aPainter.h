@@ -37,7 +37,7 @@ namespace aGraphic {
 class aPainter : private aPainter_sys
 {
     public:
-        aPainter(SysWinClass *_pWin);
+        aPainter(SysWin *_pWin);
         virtual ~aPainter();
 
 

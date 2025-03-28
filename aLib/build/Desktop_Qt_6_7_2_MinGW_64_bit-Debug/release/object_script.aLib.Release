@@ -1,8 +1,7 @@
 release/aAppMainWin.o
 release/aAppBase.o
 release/main.o
-release/aToolButton_sys.o
-release/aToolButton.o
+release/aCtrlMgr.o
 release/aBrush_sys.o
 release/aPainter_sys.o
 release/aPen_sys.o
@@ -38,11 +37,6 @@ release/aVersionInfo.o
 release/aLib.o
 release/aDoc.o
 release/aView.o
-release/aMainWin_sys.o
-release/aMdiArea_sys.o
-release/aMdiChild_sys.o
-release/aPlainWin_sys.o
-release/aScrollWin_sys.o
 release/aMainWin.o
 release/aMainWinMdi.o
 release/aMdiArea.o

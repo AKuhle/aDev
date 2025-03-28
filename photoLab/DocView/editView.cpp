@@ -21,8 +21,8 @@ using namespace std;
 /*******************************************************************************
 * EditView::EditView
 *******************************************************************************/
-EditView::EditView(SysWinClass                *_pParent,
-                   std::shared_ptr<Document>  _pDoc)
+EditView::EditView(SysWin                       *_pParent,
+                   std::shared_ptr<Document>    _pDoc)
 : ViewBase(_pParent, _pDoc)
 {
 } // EditView::EditView

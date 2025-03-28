@@ -38,9 +38,9 @@ class aView : public aPlainWin
     shared_ptr<aDoc>    m_pDoc;
 
     protected:
-        aView(SysWinClass *_pParent);
+        aView(SysWin *_pParent);
 
-        aView(SysWinClass                   *_pParent,
+        aView(SysWin                   *_pParent,
               const std::shared_ptr<aDoc>   &_pDoc);
 
     public:

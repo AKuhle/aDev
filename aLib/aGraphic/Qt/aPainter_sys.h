@@ -42,7 +42,7 @@ class aPainter_sys : private QPainter,
                      private aPainter_sysi
 {
     public:
-        aPainter_sys(SysWinClass *_pWin);
+        aPainter_sys(SysWin *_pWin);
         virtual ~aPainter_sys();
 
         // /*******************************************************************************

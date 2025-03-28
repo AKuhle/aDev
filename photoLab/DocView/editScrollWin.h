@@ -28,7 +28,7 @@ using namespace aLib::aWin;
 class EditScrollWin : public aScrollWin
 {
     public:
-        EditScrollWin(SysWinClass *_pParent = nullptr);
+        EditScrollWin(SysWin *_pParent = nullptr);
         ~EditScrollWin();
 
 

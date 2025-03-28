@@ -24,7 +24,7 @@ namespace aGraphic {
 /*******************************************************************************
 * aPainter::aPainter
 *******************************************************************************/
-aPainter::aPainter(SysWinClass *_pWin)
+aPainter::aPainter(SysWin *_pWin)
 : aPainter_sys(_pWin)
 {
 } // aPainter::aPainter

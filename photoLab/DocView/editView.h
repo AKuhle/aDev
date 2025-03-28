@@ -27,7 +27,7 @@
 class EditView : public ViewBase
 {
     public:
-        EditView(SysWinClass                *_pParent,
+        EditView(SysWin                     *_pParent,
                  std::shared_ptr<Document>  _pDoc);
 
         virtual ~EditView();

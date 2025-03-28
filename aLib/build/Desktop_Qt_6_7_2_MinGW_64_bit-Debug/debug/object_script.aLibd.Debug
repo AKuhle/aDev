@@ -1,8 +1,7 @@
 debug/aAppMainWin.o
 debug/aAppBase.o
 debug/main.o
-debug/aToolButton_sys.o
-debug/aToolButton.o
+debug/aCtrlMgr.o
 debug/aBrush_sys.o
 debug/aPainter_sys.o
 debug/aPen_sys.o
@@ -38,11 +37,6 @@ debug/aVersionInfo.o
 debug/aLib.o
 debug/aDoc.o
 debug/aView.o
-debug/aMainWin_sys.o
-debug/aMdiArea_sys.o
-debug/aMdiChild_sys.o
-debug/aPlainWin_sys.o
-debug/aScrollWin_sys.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
 debug/aMdiArea.o

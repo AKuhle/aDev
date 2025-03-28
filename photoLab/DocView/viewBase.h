@@ -43,7 +43,7 @@ class ViewBase : public aView
         enumEditMode        m_eEditMode     { enumEditMode::None };
 
     protected:
-        ViewBase(SysWinClass                *_pParent,
+        ViewBase(SysWin                     *_pParent,
                  std::shared_ptr<Document>  _pDoc);
 
     public:

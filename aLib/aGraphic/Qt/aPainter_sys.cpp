@@ -25,7 +25,7 @@ namespace aGraphic {
 /*******************************************************************************
 * aPainter_sys::aPainter_sys
 *******************************************************************************/
-aPainter_sys::aPainter_sys(SysWinClass *_pWin)
+aPainter_sys::aPainter_sys(SysWin *_pWin)
 : QPainter(_pWin)
 {
 } // aPainter_sys::aPainter_sys
