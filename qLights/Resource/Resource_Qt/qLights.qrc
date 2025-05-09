@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>PhotoLab/flipHori.png</file>
+        <file>PhotoLab/flipVert.png</file>
+        <file>PhotoLab/invert.png</file>
+        <file>PhotoLab/rotate180.png</file>
+        <file>PhotoLab/rotateCCW.png</file>
+        <file>PhotoLab/rotateCW.png</file>
+        <file>Lib_dark/exit_dark.png</file>
+        <file>PhotoLab/navigator.png</file>
+        <file>PhotoLab/protocol.png</file>
+        <file>PhotoLab/toolbox.png</file>
+        <file>Lib_color/fileOpen.png</file>
+        <file>Lib_color/exit.png</file>
+        <file>PhotoLab/statusbar.png</file>
+        <file>Lib_color/redo.png</file>
+        <file>Lib_color/undo.png</file>
+        <file>PhotoLab/navigator_s.png</file>
+        <file>PhotoLab/magnifier1.png</file>
+        <file>PhotoLab/magnifier2.png</file>
+        <file>PhotoLab/magnifierFit.png</file>
+        <file>PhotoLab/size_big.png</file>
+        <file>PhotoLab/size_small.png</file>
+    </qresource>
+</RCC>
