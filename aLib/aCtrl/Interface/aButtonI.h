@@ -18,7 +18,10 @@
 * includes
 *******************************************************************************/
 #include "aLib_def.h"
+#include "aUtil_def.h"
 #include "aCtrl_def.h"
+
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -41,6 +44,8 @@ class aButtonI
         virtual void            setCtrlEnabledChecked(bool _bEnabled,
                                                       bool _bChecked) = 0;
         virtual bool            ctrlChecked() const = 0;
+
+        virtual void            setBtnText(const aString &_sText) = 0;
 }; // class aButtonI
 
 

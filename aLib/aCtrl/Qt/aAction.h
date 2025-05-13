@@ -16,7 +16,7 @@
 *******************************************************************************/
 #include <QAction>
 #include "aCtrlI.h"
-#include "aButtonI.h"
+#include "aActionI.h"
 
 
 /*******************************************************************************
@@ -31,7 +31,7 @@ namespace aWin {
 *******************************************************************************/
 class aAction : public QObject,
                 public aCtrlI,
-                public aButtonI
+                public aActionI
 {
     Q_OBJECT
 

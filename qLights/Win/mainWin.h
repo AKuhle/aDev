@@ -20,17 +20,29 @@
     #include "ui_formMainWin.h"
 #endif
 
+#include "aAppMainWin.h"
+#include "qLights_defs.h"
 #include "aMainWinSdi.h"
 
 using namespace aLib;
 using namespace aLib::aWin;
 using namespace aLib::aUtil;
 
+class MainWin;
+class CtrlPanel;
+
+
+/*******************************************************************************
+* globals
+*******************************************************************************/
+MainWin&                    getMainWin();
+
 
 /*******************************************************************************
 * class MainWin
 *******************************************************************************/
-class MainWin : public aMainWinSdi
+class MainWin : public aMainWinSdi,
+                public aCtrlMgr
 {
     Q_OBJECT
 
@@ -39,9 +51,14 @@ class MainWin : public aMainWinSdi
             Ui::FormMainWin     *m_pUi { nullptr };
         #endif
 
+        enumWorkMode            m_eWorkMode             { enumWorkMode::Edit };
+        CtrlPanel               *m_pCtrlPanel           { nullptr };
+
     public:
         MainWin();
         ~MainWin();
+
+        enumWorkMode            workMode() const        { return m_eWorkMode; }
 
 
     /*******************************************************************************
@@ -69,5 +86,15 @@ class MainWin : public aMainWinSdi
                                         dbl     _dblParam2,
                                         void    *_pParam1,
                                         void    *_pParam2) override;
+
+
+    /*******************************************************************************
+    * aCtrlMgr interface
+    *******************************************************************************/
+    public:
+        void                onRegisterCtrl() override;
+        void                onUpdateCtrl(aCtrlI *_pCtrl) override;
+
+        void                onCtrlClicked(aCtrlI *_pCtrl) override;
 
 }; // class MainWin

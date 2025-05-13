@@ -117,6 +117,16 @@ void aBaseWin<T>::repaint()
 
 
 /*******************************************************************************
+* aBaseWin<T>::setWinTitle
+*******************************************************************************/
+template<class T>
+void aBaseWin<T>::setWinTitle(const aString &_sTitle)
+{
+    T::setWindowTitle(_sTitle.toQString());
+} // aBaseWin<T>::setWinTitle
+
+
+/*******************************************************************************
 * aBaseWin<T>::setVisible
 *******************************************************************************/
 template<class T>

@@ -21,5 +21,7 @@
         <file>PhotoLab/magnifierFit.png</file>
         <file>PhotoLab/size_big.png</file>
         <file>PhotoLab/size_small.png</file>
+        <file>qLights/addBank.png</file>
+        <file>qLights/addFixture.png</file>
     </qresource>
 </RCC>

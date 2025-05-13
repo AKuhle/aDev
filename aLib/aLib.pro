@@ -88,10 +88,14 @@ HEADERS += \
     aApp/aAppBase.h \
     aApp/aApp_def.h \
     aApp/main.h \
+    aCtrl/Interface/aActionI.h \
     aCtrl/Interface/aButtonI.h \
     aCtrl/Interface/aCtrlI.h \
     aCtrl/Interface/aLabelI.h \
+    aCtrl/Interface/aLineEditI.h \
     aCtrl/Interface/aProgressBarI.h \
+    aCtrl/Interface/aPushButtonI.h \
+    aCtrl/Interface/aScrollBarI.h \
     aCtrl/Interface/aToolButtonI.h \
     aCtrl/Qt/aAction.h \
     aCtrl/Qt/aButton.h \
@@ -100,7 +104,10 @@ HEADERS += \
     aCtrl/Qt/aCtrl.inl \
     aCtrl/Qt/aCtrlMgr.h \
     aCtrl/Qt/aLabel.h \
+    aCtrl/Qt/aLineEdit.h \
     aCtrl/Qt/aProgressBar.h \
+    aCtrl/Qt/aPushButton.h \
+    aCtrl/Qt/aScrollBar.h \
     aCtrl/Qt/aToolButton.h \
     aCtrl/aCtrl_def.h \
     aGraphic/Interface/aBrushI.h \
@@ -139,6 +146,8 @@ HEADERS += \
     aUtil/Collection/aPtrList.inl \
     aUtil/Collection/aSharedPtrList.h \
     aUtil/Collection/aSharedPtrList.inl \
+    aUtil/Collection/aSharedPtrVector.h \
+    aUtil/Collection/aSharedPtrVector.inl \
     aUtil/Collection/aUniquePtrDeque.h \
     aUtil/Collection/aUniquePtrDeque.inl \
     aUtil/Collection/aUniquePtrList.h \
@@ -185,6 +194,7 @@ HEADERS += \
     aWin/DocView/aDoc.h \
     aWin/DocView/aView.h \
     aWin/Interface/aBaseWinI.h \
+    aWin/Interface/aDialogI.h \
     aWin/Interface/aDockWinI.h \
     aWin/Interface/aMainWinI.h \
     aWin/Interface/aMainWinMdiI.h \
@@ -197,6 +207,7 @@ HEADERS += \
     aWin/Qt/aBaseWin.h \
     aWin/Qt/aBaseWin.inl \
     aWin/Qt/aBaseWin_handler.inl \
+    aWin/Qt/aDialog.h \
     aWin/Qt/aDockWin.h \
     aWin/Qt/aMainWin.h \
     aWin/Qt/aMainWinMdi.h \
@@ -219,7 +230,10 @@ SOURCES += \
     aCtrl/Qt/aAction.cpp \
     aCtrl/Qt/aCtrlMgr.cpp \
     aCtrl/Qt/aLabel.cpp \
+    aCtrl/Qt/aLineEdit.cpp \
     aCtrl/Qt/aProgressBar.cpp \
+    aCtrl/Qt/aPushButton.cpp \
+    aCtrl/Qt/aScrollBar.cpp \
     aCtrl/Qt/aToolButton.cpp \
     aGraphic/Qt/aBrush.cpp \
     aGraphic/Qt/aPainter.cpp \
@@ -264,6 +278,7 @@ SOURCES += \
     aLib.cpp \
     aWin/DocView/aDoc.cpp \
     aWin/DocView/aView.cpp \
+    aWin/Qt/aDialog.cpp \
     aWin/Qt/aDockWin.cpp \
     aWin/Qt/aMainWin.cpp \
     aWin/Qt/aMainWinMdi.cpp \

@@ -195,6 +195,15 @@ bool aString::operator==(const char *_pStr) const
 
 
 /*******************************************************************************
+* aString::operator!=
+*******************************************************************************/
+bool aString::operator!=(const char *_pStr) const
+{
+    return to_stdString().compare(_pStr) != 0;
+} // aString::operator!=
+
+
+/*******************************************************************************
 * aString::fromValue
 *******************************************************************************/
 aString aString::fromValue(s8 _s8Val)

@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>518</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
@@ -35,15 +35,42 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionOpenFile"/>
+   <addaction name="m_pActionOpenFile"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionAddBank"/>
+   <addaction name="m_pActionAddFixture"/>
   </widget>
-  <action name="actionOpenFile">
+  <action name="m_pActionOpenFile">
    <property name="icon">
     <iconset resource="../Resource/Resource_Qt/qLights.qrc">
      <normaloff>:/Lib_color/fileOpen.png</normaloff>:/Lib_color/fileOpen.png</iconset>
    </property>
    <property name="text">
     <string>Open File...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionAddBank">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/qLights/addBank.png</normaloff>:/qLights/addBank.png</iconset>
+   </property>
+   <property name="text">
+    <string>AddBank</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionAddFixture">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/qLights/addFixture.png</normaloff>:/qLights/addFixture.png</iconset>
+   </property>
+   <property name="text">
+    <string>AddFixture</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

@@ -23,6 +23,7 @@
 
 #include "aBaseWinI.h"
 #include "aUrl.h"
+#include "aString.h"
 
 #include "aCtrlMgr.h"
 #include "aToolMgr.h"
@@ -68,6 +69,8 @@ class aBaseWin : public T,
 
         void                    update() override;
         void                    repaint() override;
+
+        void                    setWinTitle(const aString &_sTitle) override;
 
 
     /*******************************************************************************

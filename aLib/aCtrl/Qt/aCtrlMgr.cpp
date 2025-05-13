@@ -20,7 +20,10 @@
 #include "aCtrlMgr.h"
 
 #include "aAction.h"
+#include "aPushButton.h"
+#include "aScrollBar.h"
 #include "aToolButton.h"
+
 
 /*******************************************************************************
 * namespace
@@ -84,7 +87,8 @@ void aCtrlMgr::updateCtrl(aCtrlI *_pCtrl)
 * aCtrlMgr::sendCtrlMessage
 *******************************************************************************/
 void aCtrlMgr::sendCtrlMessage(aCtrlI   *_pCtrl,
-                               u32      _u32Mes)
+                               u32      _u32Mes,
+                               s32     _s32Value /*= 0*/)
 {
     switch (_u32Mes)
     {
@@ -92,9 +96,9 @@ void aCtrlMgr::sendCtrlMessage(aCtrlI   *_pCtrl,
              onCtrlClicked(_pCtrl);
             break;
 
-        // case MSG_VALUE_CHANGED:
-        //     OnCtrlValueChanged(_pCtrl);
-        //     break;
+        case MSG_VALUE_CHANGED:
+            onCtrlValueChanged(_pCtrl, _s32Value);
+            break;
     }
 } // aCtrlMgr::sendCtrlMessage
 
@@ -161,12 +165,90 @@ void aCtrlMgr::registerCtrl(aToolButton     *_pBtn,
 
 } // aCtrlMgr::registerCtrl
 
+
+/*******************************************************************************
+* aCtrlMgr::registerCtrl
+*******************************************************************************/
+void aCtrlMgr::registerCtrl(aPushButton     *_pBtn,
+                            s32             _s32ID,
+                            bool           _bCreateWin)
+                            //qGuiVarPool *_pVarPool    /*= nullptr*/,
+                            //bool        /*_bDefState*/    /*= false*/);
+{
+    if (_bCreateWin)
+    {
+        _pBtn->createWin();
+    }
+
+    m_lstCtrls.push_back(_pBtn);
+
+    _pBtn->setCtrlId(_s32ID);
+    _pBtn->setCtrlMgr(this);
+
+    //if (_pVarPool != nullptr)
+    //{
+    //     // create a new pool variable, if none with the ctrl id exists
+    //     // otherwise simply use the existing one
+    //     if (!_pVarPool->HasBool(_s32ID))
+    //     {
+    //         _pVarPool->AddBool(_s32ID, _bDefState, _bDefState);
+    //     }
+
+    //     pNewCtrl->SetVarPool(_pVarPool);
+    //}
+
+} // aCtrlMgr::registerCtrl
+
+
+/*******************************************************************************
+* aCtrlMgr::registerCtrl
+*******************************************************************************/
+void aCtrlMgr::registerCtrl(aScrollBar  *_pBar,
+                            s32         _s32ID,
+                            bool        _bCreateWin)
+//qGuiVarPool *_pVarPool    /*= nullptr*/,
+//bool        /*_bDefState*/    /*= false*/);
+{
+    if (_bCreateWin)
+    {
+        _pBar->createWin();
+    }
+
+    m_lstCtrls.push_back(_pBar);
+
+    _pBar->setCtrlId(_s32ID);
+    _pBar->setCtrlMgr(this);
+
+    //if (_pVarPool != nullptr)
+    //{
+    //     // create a new pool variable, if none with the ctrl id exists
+    //     // otherwise simply use the existing one
+    //     if (!_pVarPool->HasBool(_s32ID))
+    //     {
+    //         _pVarPool->AddBool(_s32ID, _bDefState, _bDefState);
+    //     }
+
+    //     pNewCtrl->SetVarPool(_pVarPool);
+    //}
+
+} // aCtrlMgr::registerCtrl
+
+
 /*******************************************************************************
 * aCtrlMgr::onCtrlClicked
 *******************************************************************************/
 void aCtrlMgr::onCtrlClicked(aCtrlI  */*_pCtrl*/)
 {
 } // aCtrlMgr::onCtrlClicked
+
+
+/*******************************************************************************
+* aCtrlMgr::onCtrlValueChanged
+*******************************************************************************/
+void aCtrlMgr::onCtrlValueChanged(aCtrlI    */*_pCtrl*/,
+                                  s32       /*_s32Value*/)
+{
+} // aCtrlMgr::onCtrlValueChanged
 
 
 } // namespace aWin

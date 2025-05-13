@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -97,6 +97,7 @@ INCLUDEPATH += ../aLib/aWin/Qt
 # include qLights
 ########################################################################
 INCLUDEPATH += App
+INCLUDEPATH += Classes
 INCLUDEPATH += Dialogs
 INCLUDEPATH += Forms
 INCLUDEPATH += Win
@@ -107,7 +108,14 @@ INCLUDEPATH += Win
 ########################################################################
 HEADERS += \
     App/qLightsApp.h \
+    App/qLights_defs.h \
+    Classes/bank.h \
+    Classes/fader.h \
+    Classes/fixture.h \
+    Classes/scene.h \
+    Classes/universe.h \
     Dialogs/ctrlPanel.h \
+    Dialogs/dlgAddBank.h \
     Win/mainWin.h
 
 
@@ -116,8 +124,15 @@ HEADERS += \
 ########################################################################
 SOURCES += \
     App/qLightsApp.cpp \
+    Classes/bank.cpp \
+    Classes/fader.cpp \
+    Classes/fixture.cpp \
+    Classes/scene.cpp \
+    Classes/universe.cpp \
     Dialogs/ctrlPanel.cpp \
+    Dialogs/dlgAddBank.cpp \
     Win/mainWin.cpp \
+    Win/mainWin_ctrls.cpp \
     Win/mainWin_handler.cpp
 
 
@@ -132,6 +147,7 @@ SOURCES += \
 # forms
 ########################################################################
 FORMS += \
+    Forms/dlgAddBank.ui \
     Forms/formCtrlPanel.ui \
     Forms/formMainWin.ui
 

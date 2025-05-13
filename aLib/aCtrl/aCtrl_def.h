@@ -28,6 +28,7 @@ namespace aWin {
 constexpr u32   MSG_CLICKED                 = 1;
 
 constexpr u32   MSG_USER                    = 1000;
+constexpr u32   MSG_VALUE_CHANGED           = 1001;
 
 
 /*******************************************************************************
@@ -43,7 +44,10 @@ class aLabelI;
 
 class aAction;
 class aLabel;
+class aLineEdit;
 class aProgressBar;
+class aPushButton;
+class aScrollBar;
 class aToolButton;
 
 class aCtrlMgr;

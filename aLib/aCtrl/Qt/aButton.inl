@@ -76,6 +76,15 @@ bool aButton<T>::ctrlChecked() const
 } // aButton<T>::ctrlChecked
 
 
+/*******************************************************************************
+* aButton<T>::setBtnText
+*******************************************************************************/
+template<class T>
+void aButton<T>::setBtnText(const aString &_sText)
+{
+    T::setText(_sText.toQString());
+} // aButton<T>::setBtnText
+
 } // namespace aWin
 } // namespace aLib
 

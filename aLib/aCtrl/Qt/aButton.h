@@ -17,6 +17,7 @@
 #include "aWin_def.h"
 #include "aButtonI.h"
 #include "aCtrl.h"
+#include "aString.h"
 
 
 /*******************************************************************************
@@ -49,6 +50,8 @@ class aButton : public aCtrl<T>,
         void            setCtrlEnabledChecked(bool _bEnabled,
                                               bool _bChecked) override;
         bool            ctrlChecked() const override;
+
+        void            setBtnText(const aString &_sText) override;
 }; // class aButton
 
 

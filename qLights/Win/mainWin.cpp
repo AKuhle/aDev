@@ -8,6 +8,15 @@
 
 
 /*******************************************************************************
+* getMainWin
+*******************************************************************************/
+MainWin& getMainWin()
+{
+    return *dynamic_cast<MainWin *> (aLib::aApp::get_aMainWin());
+} // getMainWin
+
+
+/*******************************************************************************
 * MainWin::MainWin
 *******************************************************************************/
 MainWin::MainWin()
@@ -35,10 +44,12 @@ MainWin::~MainWin()
 *******************************************************************************/
 bool MainWin::onCreateWin()
 {
-    CtrlPanel   *pCtrlPanel = new CtrlPanel(this);
-    pCtrlPanel->createWin();
+    m_pCtrlPanel = new CtrlPanel(this);
+    m_pCtrlPanel->createWin();
 
-    setCentralWin(pCtrlPanel);
+    setCentralWin(m_pCtrlPanel);
+
+    sendUpdateCmd(UPDATE_GUI);
 
     return true;
 } // MainWin::onCreateWin

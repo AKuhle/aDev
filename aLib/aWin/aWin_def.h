@@ -114,6 +114,11 @@ enum class ScrollBarPolicy {
     ScrollBarAlwaysOn
 }; // ScrollBarPolicy
 
+enum class DialogReturn {
+    accepted,
+    rejected
+}; // DialogReturn
+
 
 /*******************************************************************************
 * classes
@@ -121,6 +126,7 @@ enum class ScrollBarPolicy {
 class aBaseWinI;
 template <typename T> class aBaseWin;
 
+class aDialog;
 class aDockWin;
 class aMainWin;
 class aMainWinMdi;

@@ -16,6 +16,7 @@
 * includes
 *******************************************************************************/
 #include "mainWin.h"
+#include "ctrlPanel.h"
 
 using namespace aLib::aWin;
 using namespace std;
@@ -39,7 +40,12 @@ void MainWin::onUpdateCmd(u64     _u64Cmd,
                           void    */*_pParam2*/)
 {
     // UPDATE_VIEW
-    if (isBitsSet(_u64Cmd, UPDATE_VIEW))
+    if (isBitsSet(_u64Cmd, UPDATE_GUI))
     {
+        if (m_pCtrlPanel != nullptr)
+        {
+            m_pCtrlPanel->updateGui();
+            updateAllCtrls();
+        }
     }
 } // MainWin::onUpdateCmd

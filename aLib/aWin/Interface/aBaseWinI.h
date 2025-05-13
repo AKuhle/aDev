@@ -13,6 +13,7 @@
 * includes
 *******************************************************************************/
 #include "aWin_def.h"
+#include "aUtil_def.h"
 #include "aUrl.h"
 #include "aRect2D.h"
 
@@ -47,6 +48,9 @@ class aBaseWinI
 
         virtual void            update() = 0;
         virtual void            repaint() = 0;
+
+
+        virtual void            setWinTitle(const aString &_sTitle) = 0;
 
 
     /*******************************************************************************

@@ -55,14 +55,27 @@ class aCtrlMgr
         //void            registerCtrl(aCtrlI  *_pCtrl);
 
         void            sendCtrlMessage(aCtrlI  *_pCtrl,
-                                        u32     _u32Mes);
+                                        u32     _u32Mes,
+                                        s32     _s32Value = 0);
 
         void            registerCtrl(QAction        *_pAction,
                                      s32            _s32ID);
                                      //qGuiVarPool    *_pVarPool  = nullptr,
                                      //bool           _bDefState  = false);
 
+        void            registerCtrl(aPushButton    *_pBtn,
+                                     s32            _s32ID,
+                                     bool           _bCreateWin);
+                                     //qGuiVarPool    *_pVarPool  = nullptr,
+                                     //bool           _bDefState  = false);
+
         void            registerCtrl(aToolButton    *_pBtn,
+                                     s32            _s32ID,
+                                     bool           _bCreateWin);
+                                     //qGuiVarPool    *_pVarPool  = nullptr,
+                                     //bool           _bDefState  = false);
+
+        void            registerCtrl(aScrollBar     *_pBar,
                                      s32            _s32ID,
                                      bool           _bCreateWin);
                                      //qGuiVarPool    *_pVarPool  = nullptr,
@@ -83,7 +96,8 @@ class aCtrlMgr
     *******************************************************************************/
     protected:
         virtual void    onCtrlClicked(aCtrlI *_pCtrl);
-        // virtual void    OnCtrlValueChanged(qCtrlBase *_pCtrl);
+        virtual void    onCtrlValueChanged(aCtrlI   *_pCtrl,
+                                           s32      _s32Value);
 }; // class aCtrlMgr
 
 

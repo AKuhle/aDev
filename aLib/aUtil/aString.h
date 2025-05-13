@@ -64,6 +64,7 @@ class aString
         aString                 operator+(const aString &_str);
 
         bool                    operator==(const char *_pStr) const;
+        bool                    operator!=(const char *_pStr) const;
 
         static aString          fromValue(s8 _s8Val);
         static aString          fromValue(s16 _s16Val);
