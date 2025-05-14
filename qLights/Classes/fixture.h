@@ -17,26 +17,44 @@
 * includes
 *******************************************************************************/
 #include "aString.h"
-#include "aPushButton.h"
+#include "aMap.h"
 
-using namespace aLib::aWin;
+class Controller;
+class Universe;
+class Channel;
+
+using namespace std;
+using namespace aLib;
 using namespace aLib::aUtil;
 
 
 /*******************************************************************************
 * class Fixture
 *******************************************************************************/
-class Fixture : public aPushButton
+class Fixture
 {
     private:
-        aString         m_sName;
+        aString                         m_sName;
+        s32                             m_s32ControllerIdx  { -1 };
+        s32                             m_s32UniverseId     { -1 };
+        s32                             m_s32ChannelOs      { -1 };
 
+        aMap<s32, shared_ptr<Channel>>  m_mapChannel;
 
     public:
-        Fixture(SysWin *_pParent = nullptr);
+        Fixture(const aString   &_sName,
+                s32             _s32ControllerIdx,
+                s32             _s32UniverseId,
+                s32             _s32ChannelOs);
         ~Fixture();
 
         const aString&      name() const                    { return m_sName; }
         void                setName(const aString &_s)      { m_sName = _s; }
 
+        void                addChannel(s32 _s32ChannelNr);
+        shared_ptr<Channel> channel(s32 _channelNr) const;
+
+        s32                 controllerIdx() const           { return m_s32ControllerIdx; }
+        s32                 universeId() const              { return m_s32UniverseId; }
+        s32                 channelOs() const               { return m_s32ChannelOs; }
 }; // class Fixture

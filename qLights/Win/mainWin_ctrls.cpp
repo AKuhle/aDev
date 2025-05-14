@@ -40,35 +40,35 @@ void MainWin::onRegisterCtrl()
 /*******************************************************************************
 * MainWin::onUpdateCtrl
 *******************************************************************************/
-void MainWin::onUpdateCtrl(aCtrlI *_pCtrl)
+void MainWin::onUpdateCtrl(aCtrlI */*_pCtrl*/)
 {
-    switch (_pCtrl->ctrlId())
-    {
-        // always ebabled
-        case ID_ADD_BANK:
-            _pCtrl->setCtrlEnabled(m_pCtrlPanel->bankCount() < BANK_COUNT);
-            break;
+    // switch (_pCtrl->ctrlId())
+    // {
+    //     // always ebabled
+    //     case ID_ADD_BANK:
+    //         _pCtrl->setCtrlEnabled(m_pCtrlPanel->bankCount() < BANK_COUNT);
+    //         break;
 
-        case ID_ADD_FIXTURE:
-            //_pCtrl->ID_ADD_FIXTURE(!b);
-            break;
-    }
+    //     case ID_ADD_FIXTURE:
+    //         //_pCtrl->ID_ADD_FIXTURE(!b);
+    //         break;
+    // }
 } // MainWin::onUpdateCtrl
 
 
 /*******************************************************************************
 * MainWin::onCtrlClicked
 *******************************************************************************/
-void MainWin::onCtrlClicked(aCtrlI *_pCtrl)
+void MainWin::onCtrlClicked(aCtrlI */*_pCtrl*/)
 {
-    switch (_pCtrl->ctrlId())
-    {
-        case ID_ADD_BANK:
-        m_pCtrlPanel->addBank();;
-            break;
+    // switch (_pCtrl->ctrlId())
+    // {
+    //     case ID_ADD_BANK:
+    //     m_pCtrlPanel->addBank();;
+    //         break;
 
-        case ID_ADD_FIXTURE:
-            m_pCtrlPanel->addFixture();
-            break;
-    }
+    //     case ID_ADD_FIXTURE:
+    //         m_pCtrlPanel->addFixture();
+    //         break;
+    // }
 } // MainWin::onCtrlClicked

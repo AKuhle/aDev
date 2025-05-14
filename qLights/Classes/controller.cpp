@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file bank.cpp
+* \file Controller.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -15,55 +15,54 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "qLights_defs.h"
-#include "bank.h"
-#include "fixture.h"
+#include "controller.h"
+#include "universe.h"
 
 
 /*******************************************************************************
-* Bank::Bank
+* Controller::Controller
 *******************************************************************************/
-Bank::Bank(const aString &_sName)
-: m_sName(_sName)
+Controller::Controller(const aString &_sName,
+                       const aString &_sIpAdr,
+                       s32           _s32UniverseMax)
+: m_sName(_sName),
+  m_sIpAdr(_sIpAdr),
+  m_s32UniverseMax(_s32UniverseMax)
 {
-} // Bank::Bank
+} // Controller::Controller
 
 
 /*******************************************************************************
-* Bank::~Bank
+* Controller::~Controller
 *******************************************************************************/
-Bank::~Bank()
+Controller::~Controller()
 {
-} // Bank::~Bank
+} // Controller::~Controller
 
 
 /*******************************************************************************
-* Bank::addFixture
+* Controller::addUniverse
 *******************************************************************************/
-void Bank::addFixture(const aString   &_sName,
-                      s32             _s32ControllerIdx,
-                      s32             _s32UniverseId,
-                      s32             _s32ChannelOs)
+void Controller::addUniverse(u32 _u32Id)
 {
-    if (m_vFixture.size() < FIXTURE_MAX)
+    if (m_mapUniverse.size() < m_s32UniverseMax)
     {
-        m_vFixture.push_back (make_shared<Fixture> (_sName,
-                                                    _s32ControllerIdx,
-                                                    _s32UniverseId,
-                                                    _s32ChannelOs));
+        m_mapUniverse[_u32Id] = make_shared<Universe> (_u32Id, m_sIpAdr);
     }
-} // Bank::addFixture
+} // Controller::addUniverse
 
 
 /*******************************************************************************
-* Bank::fixture
+* Controller::universe
 *******************************************************************************/
-shared_ptr<Fixture> Bank::fixture(s32 _idx) const
+shared_ptr<Universe> Controller::universe(u32 _u32Id)
 {
-    if (m_vFixture.size() > _idx)
+    auto it = m_mapUniverse.find(_u32Id);
+
+    if (it != m_mapUniverse.end())
     {
-        return m_vFixture.at(_idx);
+        return it->second;
     }
 
     return nullptr;
-} // Bank::fixture
+} // Controller::universe

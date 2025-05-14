@@ -39,20 +39,23 @@ class Universe
         aSharedPtrVector<Bank>  m_vBank;
 
         // artNet
-        QHostAddress            m_targetAddress;
-        const u32               m_u32DmxDataSize    { 512 };
-        QByteArray              m_dmxData;
+        QHostAddress            m_ipAdr;
         const u16               m_u16Port           { 6454 };
+        const u32               m_u32DmxDataSize    { 512 };
+        QByteArray              m_dmxData           { m_u32DmxDataSize, 0 };
 
     public:
-        Universe(u32 _u32Id);
+        Universe(u32            _u32Id,
+                 const aString  &_sIpAdr);
         ~Universe();
 
         u32                 bankCount() const;
         void                addBank(const aString &_sName);
         shared_ptr<Bank>    bank(u32 _u32Idx) const;
 
-        void                setDmxChannel(u32   _u32Channel,
-                                          char  _cValue);
+        void                setDmxChannel(u32   _u32ChannelOs,
+                                          u32   _u32Channel,
+                                          char  _cValue,
+                                          bool  _bSend);
 
 }; // class Universe

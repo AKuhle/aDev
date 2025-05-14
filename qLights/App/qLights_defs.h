@@ -28,14 +28,13 @@ using namespace aLib::aUtil;
 /*******************************************************************************
 * application constants
 *******************************************************************************/
-//aString         IP_ADRESS                       = "192.168.1.245";
 constexpr u32   UNIVERSE                        = 1;
 constexpr u32   PORT                            = 0;
 
-constexpr u32   BANK_COUNT                      = 10;
-constexpr u32   FIXTURE_COUNT                   = 10;
-constexpr u32   SCENE_COUNT                     = 30;
-constexpr u32   FADER_COUNT                     = 24;
+constexpr s32   BANK_MAX                        = 10;
+constexpr s32   FIXTURE_MAX                     = 10;
+constexpr s32   SCENE_MAX                       = 30;
+constexpr s32   FADER_MAX                       = 24;
 
 
 /*******************************************************************************
@@ -45,7 +44,8 @@ constexpr u32   ID_ADD_BANK                     = CTRL_ID_USER + 1;
 constexpr u32   ID_ADD_FIXTURE                  = CTRL_ID_USER + 2;
 
 constexpr u32   ID_FIRST_BANK_IDX               = CTRL_ID_USER + 100;
-constexpr u32   ID_FIRST_FADER_IDX               = CTRL_ID_USER + 200;
+constexpr u32   ID_FIRST_FIXTURE_IDX            = CTRL_ID_USER + 200;
+constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 300;
 
 
 /*******************************************************************************

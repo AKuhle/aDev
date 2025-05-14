@@ -16,13 +16,20 @@
 * includes
 *******************************************************************************/
 #include "fixture.h"
+#include "channel.h"
 
 
 /*******************************************************************************
 * Fixture::Fixture
 *******************************************************************************/
-Fixture::Fixture(SysWin *_pParent /*= nullptr*/)
-: aPushButton(_pParent)
+Fixture::Fixture(const aString   &_sName,
+                 s32             _s32ControllerIdx,
+                 s32             _s32UniverseId,
+                 s32             _s32ChannelOs)
+: m_sName(_sName),
+  m_s32ControllerIdx(_s32ControllerIdx),
+  m_s32UniverseId(_s32UniverseId),
+  m_s32ChannelOs(_s32ChannelOs)
 {
 } // Fixture::Fixture
 
@@ -33,3 +40,28 @@ Fixture::Fixture(SysWin *_pParent /*= nullptr*/)
 Fixture::~Fixture()
 {
 } // Fixture::~Fixture
+
+
+/*******************************************************************************
+* Fixture::addChannel
+*******************************************************************************/
+void Fixture::addChannel(s32 _s32ChannelNr)
+{
+    m_mapChannel[_s32ChannelNr] = make_shared<Channel> (_s32ChannelNr);
+} // Fixture::addChannel
+
+
+/*******************************************************************************
+* Fixture::channel
+*******************************************************************************/
+shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
+{
+    auto it = m_mapChannel.find(_s32ChannelNr);
+
+    if (it != m_mapChannel.end())
+    {
+        return it->second;
+    }
+
+    return nullptr;
+} // Fixture::channel

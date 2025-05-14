@@ -110,6 +110,8 @@ HEADERS += \
     App/qLightsApp.h \
     App/qLights_defs.h \
     Classes/bank.h \
+    Classes/channel.h \
+    Classes/controller.h \
     Classes/fader.h \
     Classes/fixture.h \
     Classes/scene.h \
@@ -125,6 +127,8 @@ HEADERS += \
 SOURCES += \
     App/qLightsApp.cpp \
     Classes/bank.cpp \
+    Classes/channel.cpp \
+    Classes/controller.cpp \
     Classes/fader.cpp \
     Classes/fixture.cpp \
     Classes/scene.cpp \
