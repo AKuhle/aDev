@@ -21,8 +21,9 @@
 #include "controller.h"
 #include "universe.h"
 #include "fixture.h"
+#include "channel.h"
 
-#include "dlgAddBank.h"
+//#include "dlgAddBank.h"
 
 
 /*******************************************************************************
@@ -93,14 +94,30 @@ bool CtrlPanel::onCreateWin()
     m_vFixtureBtn.push_back(m_pUi->m_pFixture_10);
 
     // fader controls
-    m_vFader.push_back(m_pUi->m_pFader_01, m_pUi->m_pFader_02, m_pUi->m_pFader_03);
-    m_vFader.push_back(m_pUi->m_pFader_04, m_pUi->m_pFader_05, m_pUi->m_pFader_06);
-    m_vFader.push_back(m_pUi->m_pFader_07, m_pUi->m_pFader_08, m_pUi->m_pFader_09);
-    m_vFader.push_back(m_pUi->m_pFader_10, m_pUi->m_pFader_11, m_pUi->m_pFader_12);
-    m_vFader.push_back(m_pUi->m_pFader_13, m_pUi->m_pFader_14, m_pUi->m_pFader_15);
-    m_vFader.push_back(m_pUi->m_pFader_16, m_pUi->m_pFader_17, m_pUi->m_pFader_18);
-    m_vFader.push_back(m_pUi->m_pFader_19, m_pUi->m_pFader_20, m_pUi->m_pFader_21);
-    m_vFader.push_back(m_pUi->m_pFader_22, m_pUi->m_pFader_23, m_pUi->m_pFader_24);
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_01, m_pUi->m_pFader_01, m_pUi->m_pNr_01, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_02, m_pUi->m_pFader_02, m_pUi->m_pNr_02, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_03, m_pUi->m_pFader_03, m_pUi->m_pNr_03, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_04, m_pUi->m_pFader_04, m_pUi->m_pNr_04, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_05, m_pUi->m_pFader_05, m_pUi->m_pNr_05, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_06, m_pUi->m_pFader_06, m_pUi->m_pNr_06, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_07, m_pUi->m_pFader_07, m_pUi->m_pNr_01, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_08, m_pUi->m_pFader_08, m_pUi->m_pNr_08, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_09, m_pUi->m_pFader_09, m_pUi->m_pNr_09, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_10, m_pUi->m_pFader_10, m_pUi->m_pNr_10, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_11, m_pUi->m_pFader_11, m_pUi->m_pNr_11, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_12, m_pUi->m_pFader_12, m_pUi->m_pNr_12, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_13, m_pUi->m_pFader_13, m_pUi->m_pNr_13, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_14, m_pUi->m_pFader_14, m_pUi->m_pNr_14, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_15, m_pUi->m_pFader_15, m_pUi->m_pNr_15, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_16, m_pUi->m_pFader_16, m_pUi->m_pNr_16, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_17, m_pUi->m_pFader_17, m_pUi->m_pNr_17, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_18, m_pUi->m_pFader_18, m_pUi->m_pNr_18, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_19, m_pUi->m_pFader_19, m_pUi->m_pNr_19, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_20, m_pUi->m_pFader_20, m_pUi->m_pNr_20, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_21, m_pUi->m_pFader_21, m_pUi->m_pNr_21, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_22, m_pUi->m_pFader_22, m_pUi->m_pNr_22, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_23, m_pUi->m_pFader_23, m_pUi->m_pNr_23, nullptr));
+    m_vFader.push_back(faderTuple(m_pUi->m_pScribbleStrip_24, m_pUi->m_pFader_24, m_pUi->m_pNr_24, nullptr));
 
     createSetup();
 
@@ -126,16 +143,50 @@ void CtrlPanel::createSetup()
     bank(0)->addFixture("TMH-x4-16", 0, 1, 17);
     bank(1)->addFixture("TMH-x4-24", 0, 1, 17);
 
-    bank(0)->fixture(0)->addChannel(1);
-    bank(0)->fixture(0)->addChannel(3);
-    bank(0)->fixture(0)->addChannel(6);
-    bank(0)->fixture(0)->addChannel(8);
-    bank(0)->fixture(0)->addChannel(9);
-    bank(0)->fixture(0)->addChannel(10);
-    bank(0)->fixture(0)->addChannel(11);
+    // 16 channel mode
+    bank(0)->fixture(0)->addChannel(1, 0, CHANNEL_ICN_PAN);
+    bank(0)->fixture(0)->addChannel(2, 1, CHANNEL_ICN_PAN_FINE);
+    bank(0)->fixture(0)->addChannel(3, 2, CHANNEL_ICN_TILT);
+    bank(0)->fixture(0)->addChannel(4, 3, CHANNEL_ICN_TILT_FINE);
+    bank(0)->fixture(0)->addChannel(5, 4, CHANNEL_ICN_PAN_TILT_SPEED);
+    bank(0)->fixture(0)->addChannel(6, 5, CHANNEL_ICN_BRIGHTNESS);
+    bank(0)->fixture(0)->addChannel(7, 6, CHANNEL_ICN_STROBE);
+    bank(0)->fixture(0)->addChannel(8, 7, CHANNEL_ICN_RED);
+    bank(0)->fixture(0)->addChannel(9, 8, CHANNEL_ICN_GREEN);
+    bank(0)->fixture(0)->addChannel(10, 9, CHANNEL_ICN_BLUE);
+    bank(0)->fixture(0)->addChannel(11, 10, CHANNEL_ICN_WHITE);
+    bank(0)->fixture(0)->addChannel(12, 11, CHANNEL_ICN_ZOOM);
+    bank(0)->fixture(0)->addChannel(14, 13, CHANNEL_ICN_COLOR_SPEED);
+    bank(0)->fixture(0)->addChannel(15, 14, CHANNEL_ICN_FUNCTION_1);
+    bank(0)->fixture(0)->addChannel(16, 15, CHANNEL_ICN_RESET);
 
-    bank(1)->fixture(0)->addChannel(1);
-    bank(1)->fixture(0)->addChannel(3);
+    // 16 channel mode
+    bank(1)->fixture(0)->addChannel(1, 0, CHANNEL_ICN_PAN);
+    bank(1)->fixture(0)->addChannel(2, 1, CHANNEL_ICN_PAN_FINE);
+    bank(1)->fixture(0)->addChannel(3, 2, CHANNEL_ICN_TILT);
+    bank(1)->fixture(0)->addChannel(4, 3, CHANNEL_ICN_TILT_FINE);
+    bank(1)->fixture(0)->addChannel(5, 4, CHANNEL_ICN_PAN_TILT_SPEED);
+    bank(1)->fixture(0)->addChannel(6, 5, CHANNEL_ICN_ZOOM);
+    bank(1)->fixture(0)->addChannel(7, 6, CHANNEL_ICN_BRIGHTNESS);
+    bank(1)->fixture(0)->addChannel(8, 7, CHANNEL_ICN_STROBE);
+    bank(1)->fixture(0)->addChannel(9, 8, CHANNEL_ICN_RED_1);
+    bank(1)->fixture(0)->addChannel(10, 9, CHANNEL_ICN_GREEN_1);
+    bank(1)->fixture(0)->addChannel(11, 10, CHANNEL_ICN_BLUE_1);
+    bank(1)->fixture(0)->addChannel(12, 11, CHANNEL_ICN_WHITE_1);
+    bank(1)->fixture(0)->addChannel(13, 12, CHANNEL_ICN_RED_2);
+    bank(1)->fixture(0)->addChannel(14, 13, CHANNEL_ICN_GREEN_2);
+    bank(1)->fixture(0)->addChannel(15, 14, CHANNEL_ICN_BLUE_2);
+    bank(1)->fixture(0)->addChannel(16, 15, CHANNEL_ICN_WHITE_2);
+    bank(1)->fixture(0)->addChannel(17, 16, CHANNEL_ICN_RED_3);
+    bank(1)->fixture(0)->addChannel(18, 17, CHANNEL_ICN_GREEN_3);
+    bank(1)->fixture(0)->addChannel(19, 18, CHANNEL_ICN_BLUE_3);
+    bank(1)->fixture(0)->addChannel(20, 19, CHANNEL_ICN_WHITE_3);
+    bank(1)->fixture(0)->addChannel(22, 21, CHANNEL_ICN_COLOR_SPEED);
+    bank(1)->fixture(0)->addChannel(23, 22, CHANNEL_ICN_FUNCTION_1);
+    bank(1)->fixture(0)->addChannel(24, 23, CHANNEL_ICN_RESET);
+
+    // initial fader initialisation
+    onFixtureSeleted(0);
 } // CtrlPanel::createSetup
 
 
@@ -340,21 +391,9 @@ void CtrlPanel::updateScenes()
 *******************************************************************************/
 void CtrlPanel::updateFaders()
 {
-    shared_ptr<Fixture> pFix = activeFixture();
-
     for (s32 i = 0; i < FADER_MAX; i++)
     {
-        Fader   *pFader = m_vFader.at(i);
-
-        if (pFix)
-        {
-            shared_ptr<Channel> pChannel = pFix->channel(i + 1);
-            pFader->setEnabled(pChannel != nullptr);
-        }
-        else
-        {
-            pFader->setEnabled(false);
-        }
+        std::get<0>(m_vFader.at(i))->update();
     }
 } // CtrlPanel::updateFaders
 
@@ -362,7 +401,7 @@ void CtrlPanel::updateFaders()
 /*******************************************************************************
 * CtrlPanel::onFaderMoved
 *******************************************************************************/
-void CtrlPanel::onFaderMoved(s32    _s32SliderIdx,
+void CtrlPanel::onFaderMoved(s32    s32FaderIdx,
                              s32    _s32Value)
 {
     shared_ptr<Fixture> pFix = activeFixture();
@@ -374,7 +413,10 @@ void CtrlPanel::onFaderMoved(s32    _s32SliderIdx,
     shared_ptr<Universe> pUniverse = pController->universe(pFix->universeId());
     CHECK_PRE_CONDITION_VOID(pUniverse);
 
-    pUniverse->setDmxChannel(pFix->channelOs(), _s32SliderIdx + 1, _s32Value, true);
+    shared_ptr<Channel> pChannel = pFix->channel(s32FaderIdx);
+    CHECK_PRE_CONDITION_VOID(pChannel);
+
+    pUniverse->setDmxChannel(pFix->channelOs(), pChannel->channelNr(), (u8) _s32Value, true);
 } // CtrlPanel::onFaderMoved
 
 
@@ -397,9 +439,9 @@ void CtrlPanel::onRegisterCtrl()
     }
 
     // add faders
-    for (u32 i = 0; i < FADER_MAX; i++)
+    for (u32 iFaderIdx = 0; iFaderIdx < FADER_MAX; iFaderIdx++)
     {
-        registerCtrl(m_vFader.at(i), ID_FIRST_FADER_IDX + i, true);
+        registerCtrl(get<1>(m_vFader.at(iFaderIdx)), ID_FIRST_FADER_IDX + iFaderIdx, true);
     }
 } // CtrlPanel::onRegisterCtrl
 
@@ -495,19 +537,42 @@ void CtrlPanel::onBankSeleted(s32 _s32BankIdx)
 *******************************************************************************/
 void CtrlPanel::onFixtureSeleted(s32 _s32FixtureIdx)
 {
-    shared_ptr<Bank> pBank  = activeBank();
-    aPushButton     *pBtn   = m_vFixtureBtn.at(_s32FixtureIdx);
+    shared_ptr<Bank> pBank          = activeBank();
+    aPushButton     *pFixtureBtn    = m_vFixtureBtn.at(_s32FixtureIdx);
+    s32             s32FaderIdx;
 
     // get the active bank
-    if (pBtn->isChecked())
+    if (pFixtureBtn->isChecked())
     {
-        m_pActiveFixtureBtn = pBtn;
+        m_pActiveFixtureBtn = pFixtureBtn;
         m_pActiveFixture = (pBank)?   pBank->fixture(_s32FixtureIdx) : nullptr;
     }
     else
     {
         m_pActiveFixtureBtn = nullptr;
         m_pActiveFixture = nullptr;
+    }
+
+    // update the faders
+    for (s32FaderIdx = 0; s32FaderIdx < FADER_MAX; s32FaderIdx++)
+    {
+        ScribbleStrip       *pScribble  = get<0>(m_vFader.at(s32FaderIdx));
+        Fader               *pFader     = get<1>(m_vFader.at(s32FaderIdx));
+        aLabel              *pLabel     = get<2>(m_vFader.at(s32FaderIdx));
+        shared_ptr<Channel> pChannel    = (m_pActiveFixture)?   m_pActiveFixture->channel(s32FaderIdx) : nullptr;
+
+        if (pChannel)
+        {
+            pScribble->setIcon(pChannel->channelIcon());
+            pFader->setEnabled(true);
+            pLabel->setText(aString::fromValue(s32FaderIdx + 1));
+        }
+        else
+        {
+            pScribble->setIcon("");
+            pFader->setEnabled(false);
+            pLabel->setText(aString(""));
+        }
     }
 
     getMainWin().sendUpdateCmd(UPDATE_GUI);

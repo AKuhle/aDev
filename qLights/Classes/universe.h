@@ -55,7 +55,7 @@ class Universe
 
         void                setDmxChannel(u32   _u32ChannelOs,
                                           u32   _u32Channel,
-                                          char  _cValue,
+                                          u8    _u8Value,
                                           bool  _bSend);
 
 }; // class Universe

@@ -20,6 +20,7 @@
 #include "ui_formCtrlPanel.h"
 #include "aSharedPtrVector.h"
 #include "aVector.h"
+#include "aMap.h"
 
 #include "aPlainWin.h"
 #include "bank.h"
@@ -37,6 +38,7 @@ using namespace aLib::aUtil;
 class ViewNavigator;
 class Controller;
 class Universe;
+class Channel;
 
 
 /*******************************************************************************
@@ -51,6 +53,7 @@ class CtrlPanel : public aPlainWin,
                   public aCtrlMgr
 {
     using bankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
+    using faderTuple = std::tuple<ScribbleStrip*, Fader *, aLabel *, shared_ptr<Channel>>;
 
     private:
         Ui::FormCtrlPanel               *m_pUi                  { nullptr };
@@ -66,7 +69,7 @@ class CtrlPanel : public aPlainWin,
         aPushButton *                   m_pActiveFixtureBtn     { nullptr };
         shared_ptr<Fixture>             m_pActiveFixture;
 
-        aVector<Fader *>                m_vFader;
+        aVector<faderTuple>             m_vFader;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
@@ -104,7 +107,7 @@ class CtrlPanel : public aPlainWin,
         void                                updateScenes();
         void                                updateFaders();
 
-        void                                onFaderMoved(s32    _s32SliderIdx,
+        void                                onFaderMoved(s32    s32FaderIdx,
                                                          s32    _s32Value);
 
         void                                onBankSeleted(s32 _s32BankIdx);

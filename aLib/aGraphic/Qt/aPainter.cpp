@@ -15,6 +15,7 @@
 #include "aPainter.h"
 #include "aColor.h"
 #include "aRect2D.h"
+#include "aPixmap.h"
 
 using namespace aLib::aUtil;
 
@@ -74,6 +75,21 @@ void aPainter::drawFilledRect(const aRect2D<s32>  &_r2d,
 {
     drawFilledRect(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h(), _pColor);
 } // aPainter::drawFilledRect
+
+
+/*******************************************************************************
+* aPainter::drawPixmap
+*******************************************************************************/
+void aPainter::drawPixmap(const aPixmap &_pixmap,
+                          s32           _s32X,
+                          s32           _s32Y)
+{
+    if (!_pixmap.isNull())
+    {
+        // draw the image
+        QPainter::drawPixmap(_s32X, _s32Y, _pixmap);
+    }
+} // aPainter::drawPixmap
 
 
 /*******************************************************************************

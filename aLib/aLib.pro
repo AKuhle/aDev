@@ -113,9 +113,11 @@ HEADERS += \
     aGraphic/Interface/aBrushI.h \
     aGraphic/Interface/aPainterI.h \
     aGraphic/Interface/aPenI.h \
+    aGraphic/Interface/aPixmapI.h \
     aGraphic/Qt/aBrush.h \
     aGraphic/Qt/aPainter.h \
     aGraphic/Qt/aPen.h \
+    aGraphic/Qt/aPixmap.h \
     aGraphic/aGraphic_def.h \
     aMath/Obj2D/aDimension2D.h \
     aMath/Obj2D/aDimension2D.inl \
@@ -238,6 +240,7 @@ SOURCES += \
     aGraphic/Qt/aBrush.cpp \
     aGraphic/Qt/aPainter.cpp \
     aGraphic/Qt/aPen.cpp \
+    aGraphic/Qt/aPixmap.cpp \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \

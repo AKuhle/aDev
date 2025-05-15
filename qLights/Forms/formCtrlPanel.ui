@@ -823,7 +823,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QWidget" name="m_pScreen_1" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_01" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -918,7 +918,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_01">
+         <widget class="aLabel" name="m_pNr_01">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -963,7 +963,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QWidget" name="m_pScreen_2" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_02" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1058,7 +1058,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_2">
+         <widget class="aLabel" name="m_pNr_02">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1103,7 +1103,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QWidget" name="m_pScreen_3" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_03" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1198,7 +1198,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_3">
+         <widget class="aLabel" name="m_pNr_03">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1243,7 +1243,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QWidget" name="m_pScreen_4" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_04" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1338,7 +1338,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_4">
+         <widget class="aLabel" name="m_pNr_04">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1383,7 +1383,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QWidget" name="m_pScreen_5" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_05" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1478,7 +1478,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_5">
+         <widget class="aLabel" name="m_pNr_05">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1523,7 +1523,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QWidget" name="m_pScreen_6" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_06" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1618,7 +1618,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_6">
+         <widget class="aLabel" name="m_pNr_06">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1663,7 +1663,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QWidget" name="m_pScreen_7" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_07" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1758,7 +1758,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_7">
+         <widget class="aLabel" name="m_pNr_07">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1803,7 +1803,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QWidget" name="m_pScreen_8" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_08" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1898,7 +1898,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_8">
+         <widget class="aLabel" name="m_pNr_08">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -1943,7 +1943,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
-         <widget class="QWidget" name="m_pScreen_9" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_09" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2038,7 +2038,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_9">
+         <widget class="aLabel" name="m_pNr_09">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2083,7 +2083,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
-         <widget class="QWidget" name="m_pScreen_10" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_10" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2178,7 +2178,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_10">
+         <widget class="aLabel" name="m_pNr_10">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2223,7 +2223,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
-         <widget class="QWidget" name="m_pScreen_11" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_11" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2318,7 +2318,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_11">
+         <widget class="aLabel" name="m_pNr_11">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2363,7 +2363,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_12">
         <item>
-         <widget class="QWidget" name="m_pScreen_12" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_12" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2458,7 +2458,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_12">
+         <widget class="aLabel" name="m_pNr_12">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2503,7 +2503,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_13">
         <item>
-         <widget class="QWidget" name="m_pScreen_13" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_13" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2598,7 +2598,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_13">
+         <widget class="aLabel" name="m_pNr_13">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2643,7 +2643,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_14">
         <item>
-         <widget class="QWidget" name="m_pScreen_14" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_14" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2738,7 +2738,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_14">
+         <widget class="aLabel" name="m_pNr_14">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2783,7 +2783,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_15">
         <item>
-         <widget class="QWidget" name="m_pScreen_15" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_15" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2878,7 +2878,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_15">
+         <widget class="aLabel" name="m_pNr_15">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -2923,7 +2923,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_16">
         <item>
-         <widget class="QWidget" name="m_pScreen_16" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_16" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3018,7 +3018,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_16">
+         <widget class="aLabel" name="m_pNr_16">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3063,7 +3063,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_17">
         <item>
-         <widget class="QWidget" name="m_pScreen_17" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_17" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3158,7 +3158,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_17">
+         <widget class="aLabel" name="m_pNr_17">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3203,7 +3203,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_18">
         <item>
-         <widget class="QWidget" name="m_pScreen_18" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_18" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3298,7 +3298,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_18">
+         <widget class="aLabel" name="m_pNr_18">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3343,7 +3343,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_19">
         <item>
-         <widget class="QWidget" name="m_pScreen_19" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_19" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3438,7 +3438,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_19">
+         <widget class="aLabel" name="m_pNr_19">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3483,7 +3483,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_20">
         <item>
-         <widget class="QWidget" name="m_pScreen_20" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_20" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3578,7 +3578,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_20">
+         <widget class="aLabel" name="m_pNr_20">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3623,7 +3623,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_21">
         <item>
-         <widget class="QWidget" name="m_pScreen_21" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_21" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3718,7 +3718,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_21">
+         <widget class="aLabel" name="m_pNr_21">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3763,7 +3763,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_22">
         <item>
-         <widget class="QWidget" name="m_pScreen_22" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_22" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3858,7 +3858,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_22">
+         <widget class="aLabel" name="m_pNr_22">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -3903,7 +3903,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_23">
         <item>
-         <widget class="QWidget" name="m_pScreen_23" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_23" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -3998,7 +3998,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_23">
+         <widget class="aLabel" name="m_pNr_23">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -4043,7 +4043,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_24">
         <item>
-         <widget class="QWidget" name="m_pScreen_24" native="true">
+         <widget class="ScribbleStrip" name="m_pScribbleStrip_24" native="true">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -4138,7 +4138,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="m_pNr_24">
+         <widget class="aLabel" name="m_pNr_24">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -4182,6 +4182,17 @@
    <class>aPushButton</class>
    <extends>QPushButton</extends>
    <header location="global">aPushButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ScribbleStrip</class>
+   <extends>QWidget</extends>
+   <header location="global">scribbleStrip.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>aLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">aLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

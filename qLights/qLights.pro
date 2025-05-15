@@ -118,6 +118,7 @@ HEADERS += \
     Classes/universe.h \
     Dialogs/ctrlPanel.h \
     Dialogs/dlgAddBank.h \
+    Dialogs/scribbleStrip.h \
     Win/mainWin.h
 
 
@@ -135,6 +136,7 @@ SOURCES += \
     Classes/universe.cpp \
     Dialogs/ctrlPanel.cpp \
     Dialogs/dlgAddBank.cpp \
+    Dialogs/scribbleStrip.cpp \
     Win/mainWin.cpp \
     Win/mainWin_ctrls.cpp \
     Win/mainWin_handler.cpp
@@ -156,5 +158,4 @@ FORMS += \
     Forms/formMainWin.ui
 
 RESOURCES += \
-    Resource/Resource_Qt/photoLab.qrc \
     Resource/Resource_Qt/qLights.qrc

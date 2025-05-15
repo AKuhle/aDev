@@ -39,7 +39,7 @@ namespace aGraphic {
 * class aPen
 *******************************************************************************/
 class aPen : private QPen,
-             private aPenI
+             public aPenI
 {
     public:
         aPen();

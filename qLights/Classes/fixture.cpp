@@ -45,18 +45,21 @@ Fixture::~Fixture()
 /*******************************************************************************
 * Fixture::addChannel
 *******************************************************************************/
-void Fixture::addChannel(s32 _s32ChannelNr)
+void Fixture::addChannel(s32        _s32ChannelNr,
+                         s32        _s32FaderIdx,
+                         aString    _sChannelIcon)
 {
-    m_mapChannel[_s32ChannelNr] = make_shared<Channel> (_s32ChannelNr);
+    m_mapChannel[_s32FaderIdx] = make_shared<Channel> (_s32ChannelNr);
+    m_mapChannel[_s32FaderIdx]->setChannelIcon(_sChannelIcon);
 } // Fixture::addChannel
 
 
 /*******************************************************************************
 * Fixture::channel
 *******************************************************************************/
-shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
+shared_ptr<Channel> Fixture::channel(s32 _s32FaderIdx) const
 {
-    auto it = m_mapChannel.find(_s32ChannelNr);
+    auto it = m_mapChannel.find(_s32FaderIdx);
 
     if (it != m_mapChannel.end())
     {

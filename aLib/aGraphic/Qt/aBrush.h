@@ -39,7 +39,7 @@ namespace aGraphic {
 * class aBrush
 *******************************************************************************/
 class aBrush : private QBrush,
-               private aBrushI
+               public aBrushI
 {
     public:
         aBrush();

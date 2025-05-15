@@ -48,13 +48,16 @@ class Fixture
                 s32             _s32ChannelOs);
         ~Fixture();
 
-        const aString&      name() const                    { return m_sName; }
-        void                setName(const aString &_s)      { m_sName = _s; }
+        const aString&          name() const                    { return m_sName; }
+        void                    setName(const aString &_sName)  { m_sName = _sName; }
 
-        void                addChannel(s32 _s32ChannelNr);
-        shared_ptr<Channel> channel(s32 _channelNr) const;
+        void                    addChannel(s32      _s32ChannelNr,
+                                           s32      _s32FaderIdx,
+                                           aString  _sChannelIcon);
 
-        s32                 controllerIdx() const           { return m_s32ControllerIdx; }
-        s32                 universeId() const              { return m_s32UniverseId; }
-        s32                 channelOs() const               { return m_s32ChannelOs; }
+        shared_ptr<Channel>     channel(s32 _s32FaderIdx) const;
+
+        s32                     controllerIdx() const           { return m_s32ControllerIdx; }
+        s32                     universeId() const              { return m_s32UniverseId; }
+        s32                     channelOs() const               { return m_s32ChannelOs; }
 }; // class Fixture

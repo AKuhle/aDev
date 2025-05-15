@@ -72,6 +72,7 @@ enum class enumAlignmentVert
 class aBrush;
 class aPen;
 class aPainter;
+class aPixmap;
 
 } // namespace aGraphic
 } // namespace aLib

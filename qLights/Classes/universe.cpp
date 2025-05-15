@@ -76,12 +76,14 @@ shared_ptr<Bank> Universe::bank(u32 _u32Idx) const
 *******************************************************************************/
 void Universe::setDmxChannel(u32   _u32ChannelOs,
                              u32   _u32Channel,
-                             char  _cValue,
+                             u8    _u8Value,
                              bool  _bSend)
 {
     // set the new channel value
     u32 uChannel = _u32ChannelOs + _u32Channel - 1;
-    m_dmxData[uChannel - 1] = _cValue;
+    m_dmxData[uChannel - 1] = _u8Value;
+
+    cout << "channel: " << uChannel << ", value: " << (u16) _u8Value << endl;
 
     if (_bSend)
     {

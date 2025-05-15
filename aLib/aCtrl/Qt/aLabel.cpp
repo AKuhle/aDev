@@ -49,6 +49,15 @@ void aLabel::setText(const aString &_sText)
 } // aLabel::setText
 
 
+/*******************************************************************************
+* aLabel::setText
+*******************************************************************************/
+void aLabel::setText(const QString &_sText)
+{
+    QLabel::setText(_sText);
+} // aLabel::setText
+
+
 } // namespace aWin
 } // namespace aLib
 

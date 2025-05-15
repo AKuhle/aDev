@@ -41,7 +41,7 @@ namespace aGraphic {
 * class aPainter
 *******************************************************************************/
 class aPainter : private QPainter,
-                 private aPainterI
+                 public aPainterI
 {
     public:
         aPainter(SysWin *_pWin);
@@ -61,6 +61,15 @@ class aPainter : private QPainter,
 
         void            drawFilledRect(const aRect2D<s32>   &_r2d,
                                        const aColor         *_pColor = nullptr) override;
+
+
+    // /*******************************************************************************
+    // * drawPixmap
+    // *******************************************************************************/
+    public:
+        void            drawPixmap(const aPixmap  &_pixmap,
+                                   s32            _s32X,
+                                   s32            _s32Y) override;
 
 
     // /*******************************************************************************
