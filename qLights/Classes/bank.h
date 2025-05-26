@@ -18,6 +18,7 @@
 *******************************************************************************/
 #include "aSharedPtrVector.h"
 #include "aString.h"
+#include "aMap.h"
 
 using namespace std;
 using namespace aLib;
@@ -32,8 +33,8 @@ class Fixture;
 class Bank
 {
     private:
-        aString                     m_sName;
-        aSharedPtrVector<Fixture>   m_vFixture;
+        aString                         m_sName;
+        aMap<s32, shared_ptr<Fixture>>  m_mapFixture;
 
     public:
         Bank(const aString &_sName);
@@ -42,13 +43,9 @@ class Bank
         const aString&                      name() const                    { return m_sName; }
         void                                setName(const aString &_s)      { m_sName = _s; }
 
-        void                                addFixture(const aString   &_sName,
-                                                       s32             _s32ControllerIdx,
-                                                       s32             _s32UniverseId,
-                                                       s32             _s32ChannelOs);
+        void                                addFixture(s32                  _s32FixtureBtnIdx,
+                                                       shared_ptr<Fixture>  _pFixture);
 
-        const aSharedPtrVector<Fixture>&    fixtures() const { return m_vFixture; }
-        shared_ptr<Fixture>                 fixture(s32 _idx) const;
+        shared_ptr<Fixture>                 fixture(s32 _s32FixtureBtnIdx) const;
 
-        void                                resetAll();
 }; // class Bank

@@ -16,11 +16,14 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aLib_def.h"
 #include "aUtil_def.h"
 #include "aLib_def.h"
 #include "aString.h"
 
+class Controller;
 
+using namespace std;
 using namespace aLib;
 using namespace aLib::aUtil;
 
@@ -31,42 +34,46 @@ using namespace aLib::aUtil;
 class Channel
 {
     private:
-        s32             m_s32ChannelNr          { -1 };
-        s32             m_s32ChannelOs          { -1 };
-        s32             m_s32ControllerIdx      { -1 };
-        u32             m_u32UniverseId         { 0 };
-        bool            m_bBrightness           { false };
-        aString         m_sIcon;
-        u8              m_u8Value               { 0 };
+        shared_ptr<Controller>  m_pController;
+        s32                     m_s32UniverseId         { 0 };
+        s32                     m_s32ChannelOs          { -1 };
+        s32                     m_s32ChannelNr          { -1 };
+        aString                 m_sIcon;
+        bool                    m_bBrightness           { false };
+
+        u8                      m_u8Value               { 0 };
+
 
     public:
-        Channel(s32         _s32ChannelNr,
-                s32         _s32ChannelOs,
-                s32         _s32ControllerIdx,
-                u32         _u32UniverseId,
-                bool        _bBrightness,
-                aString     _sIcon);
+        Channel(shared_ptr<Controller>  _pController,
+                s32                     _u32UniverseId,
+                s32                     _s32ChannelOs,
+                s32                     _s32ChannelNr,
+                aString                 _sIcon,
+                bool                    _bBrightness);
 
         ~Channel();
 
-        void            setChannelNr(s32 _s32ChannelNr)         { m_s32ChannelNr = _s32ChannelNr; }
-        s32             channelNr() const                       { return m_s32ChannelNr; }
+        void                    setController(shared_ptr<Controller> _pController)  { m_pController = _pController; }
+        shared_ptr<Controller>  controllerIdx() const                               { return m_pController; }
 
-        void            setChannelOs(s32 _s32ChannelOs)         { m_s32ChannelOs = _s32ChannelOs; }
-        s32             channelOs() const                       { return m_s32ChannelOs; }
+        void                    setUniverseId(s32 &_s32UniverseId)                  { m_s32UniverseId = _s32UniverseId; }
+        s32                     universeId() const                                  { return m_s32UniverseId; }
 
-        void            setControllerIdx(s32 &_controllerIdx)   { m_s32ControllerIdx = _controllerIdx; }
-        s32             controllerIdx() const                   { return m_s32ControllerIdx; }
+        void                    setChannelOs(s32 _s32ChannelOs)                     { m_s32ChannelOs = _s32ChannelOs; }
+        s32                     channelOs() const                                   { return m_s32ChannelOs; }
 
-        void            setUniverseId(u32 &_u32UniverseId)      { m_u32UniverseId = _u32UniverseId; }
-        u32             universeId() const                      { return m_u32UniverseId; }
+        void                    setChannelNr(s32 _s32ChannelNr)                     { m_s32ChannelNr = _s32ChannelNr; }
+        s32                     channelNr() const                                   { return m_s32ChannelNr; }
 
-        void            setBrightness(bool _bBrightness)        { m_bBrightness = _bBrightness; }
-        bool            isBrightness()                          { return m_bBrightness; }
+        void                    setChannelIcon(const aString &_sIcon)               { m_sIcon = _sIcon; }
+        aString                 channelIcon()                                       { return m_sIcon; }
 
-        void            setChannelIcon(const aString &_sIcon)   { m_sIcon = _sIcon; }
-        aString         channelIcon()                           { return m_sIcon; }
+        void                    setBrightness(bool _bBrightness)                    { m_bBrightness = _bBrightness; }
+        bool                    isBrightness()                                      { return m_bBrightness; }
 
-        void            setValue(u8 _u8Value)                   { m_u8Value = _u8Value; }
-        u8              value()                                 { return m_u8Value; }
+        void                    setValue(u8     _u8Value,
+                                         bool   _bSend);
+        u8                      value()                                             { return m_u8Value; }
+
 }; // class Channel

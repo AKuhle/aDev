@@ -35,33 +35,31 @@ class Fixture
 {
     private:
         aString                         m_sName;
-        s32                             m_s32ControllerIdx  { -1 };
+        shared_ptr<Controller>          m_pConroller;
         s32                             m_s32UniverseId     { -1 };
         s32                             m_s32ChannelOs      { -1 };
 
         aMap<s32, shared_ptr<Channel>>  m_mapChannel;
 
     public:
-        Fixture(const aString   &_sName,
-                s32             _s32ControllerIdx,
-                s32             _s32UniverseId,
-                s32             _s32ChannelOs);
+        Fixture(const aString           &_sName,
+                shared_ptr<Controller>  _pConroller,
+                s32                     _s32UniverseId,
+                s32                     _s32ChannelOs);
+
         ~Fixture();
 
         const aString&          name() const                    { return m_sName; }
         void                    setName(const aString &_sName)  { m_sName = _sName; }
 
-        void                    addChannel(s32      _s32FaderIdx,
-                                           s32      _s32ChannelNr,
-                                           aString  _sIcon,
-                                           bool     _bBrightness);
+        shared_ptr<Channel>     createChannel(s32      _s32ChannelNr,
+                                              aString  _sIcon,
+                                              bool     _bBrightness);
 
-        shared_ptr<Channel>     channel(s32 _s32FaderIdx) const;
+        shared_ptr<Channel>     channel(s32 _s32ChannelNr) const;
 
-        s32                     controllerIdx() const           { return m_s32ControllerIdx; }
+        shared_ptr<Controller>  controller() const              { return m_pConroller; }
         s32                     universeId() const              { return m_s32UniverseId; }
         s32                     channelOs() const               { return m_s32ChannelOs; }
-
-        void                    resetAll();
 
 }; // class Fixture

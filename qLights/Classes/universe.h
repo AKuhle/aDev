@@ -54,8 +54,7 @@ class Universe
         shared_ptr<Bank>    bank(u32 _u32Idx) const;
 
 
-        void                setDmxChannelValue(u32   _u32ChannelOs,
-                                               u32   _u32Channel,
+        void                setDmxChannelValue(u32   _u32Channel,
                                                u8    _u8Value,
                                                bool  _bSend);
 

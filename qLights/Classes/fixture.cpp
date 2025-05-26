@@ -22,12 +22,12 @@
 /*******************************************************************************
 * Fixture::Fixture
 *******************************************************************************/
-Fixture::Fixture(const aString   &_sName,
-                 s32             _s32ControllerIdx,
-                 s32             _s32UniverseId,
-                 s32             _s32ChannelOs)
+Fixture::Fixture(const aString          &_sName,
+                 shared_ptr<Controller> _pConroller,
+                 s32                    _s32UniverseId,
+                 s32                    _s32ChannelOs)
 : m_sName(_sName),
-  m_s32ControllerIdx(_s32ControllerIdx),
+  m_pConroller(_pConroller),
   m_s32UniverseId(_s32UniverseId),
   m_s32ChannelOs(_s32ChannelOs)
 {
@@ -43,28 +43,29 @@ Fixture::~Fixture()
 
 
 /*******************************************************************************
-* Fixture::addChannel
+* Fixture::createChannel
 *******************************************************************************/
-void Fixture::addChannel(s32      _s32FaderIdx,
-                         s32      _s32ChannelNr,
-                         aString  _sIcon,
-                         bool     _bBrightness)
+shared_ptr<Channel> Fixture::createChannel(s32      _s32ChannelNr,
+                                           aString  _sIcon,
+                                           bool     _bBrightness)
 {
-    m_mapChannel[_s32FaderIdx] = make_shared<Channel> (_s32ChannelNr,
-                                                       m_s32ChannelOs,
-                                                       m_s32ControllerIdx,
-                                                       m_s32UniverseId,
-                                                       _bBrightness,
-                                                       _sIcon);
-} // Fixture::addChannel
+    m_mapChannel[_s32ChannelNr] = make_shared<Channel> (m_pConroller,
+                                                        m_s32UniverseId,
+                                                        m_s32ChannelOs,
+                                                        _s32ChannelNr,
+                                                        _sIcon,
+                                                        _bBrightness);
+
+    return m_mapChannel[_s32ChannelNr];
+} // Fixture::createChannel
 
 
 /*******************************************************************************
 * Fixture::channel
 *******************************************************************************/
-shared_ptr<Channel> Fixture::channel(s32 _s32FaderIdx) const
+shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
 {
-    auto it = m_mapChannel.find(_s32FaderIdx);
+    auto it = m_mapChannel.find(_s32ChannelNr);
 
     if (it != m_mapChannel.end())
     {
@@ -73,15 +74,3 @@ shared_ptr<Channel> Fixture::channel(s32 _s32FaderIdx) const
 
     return nullptr;
 } // Fixture::channel
-
-
-/*******************************************************************************
-* Fixture::resetAll
-*******************************************************************************/
-void Fixture::resetAll()
-{
-    for (auto &mapEntry : m_mapChannel)
-    {
-        mapEntry.second->setValue(0);
-    }
-} // Fixture::resetAll

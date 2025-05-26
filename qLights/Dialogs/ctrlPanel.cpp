@@ -69,48 +69,48 @@ bool CtrlPanel::onCreateWin()
     m_vBankCtrl.push_back(bankTuple(m_pUi->m_pBank_10, nullptr));
 
     // fixture controls
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_01, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_02, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_03, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_04, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_05, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_06, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_07, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_08, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_09, nullptr));
-    m_vFixture.push_back(fixtureTuple(m_pUi->m_pFixture_10, nullptr));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_01));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_02));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_03));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_04));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_05));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_06));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_07));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_08));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_09));
+    m_vFixtureCtrl.push_back(fixtureTuple(m_pUi->m_pFixture_10));
 
     // scene controls
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_01, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_02, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_03, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_04, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_05, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_06, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_07, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_08, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_09, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_10, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_11, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_12, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_13, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_14, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_15, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_16, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_17, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_18, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_19, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_20, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_21, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_22, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_23, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_24, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_25, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_26, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_27, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_28, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_29, nullptr));
-    m_vScene.push_back(sceneTuple(m_pUi->m_pScene_30, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_01, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_02, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_03, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_04, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_05, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_06, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_07, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_08, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_09, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_10, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_11, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_12, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_13, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_14, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_15, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_16, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_17, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_18, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_19, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_20, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_21, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_22, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_23, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_24, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_25, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_26, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_27, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_28, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_29, nullptr));
+    m_vSceneCtrl.push_back(sceneTuple(m_pUi->m_pScene_30, nullptr));
 
     m_colButtonBg = m_pUi->m_pScene_01->backgroundColor();
 
@@ -181,72 +181,69 @@ void CtrlPanel::createSetup()
     // eurolite-led-tmh-s90-de
     shared_ptr<Fixture> pFix1 = createFixture("TMH-s90", pController, 1, 1);
     assignFixture(pFix1, pBank1, 0);
-
-    bank (0)->addFixture("TMH-s90", 0, 1, 1);
-    bank(0)->fixture(0)->addChannel(0, 1, CHANNEL_ICN_PAN, false);
-    bank(0)->fixture(0)->addChannel(1, 2, CHANNEL_ICN_PAN_FINE, false);
-    bank(0)->fixture(0)->addChannel(2, 3, CHANNEL_ICN_TILT, false);
-    bank(0)->fixture(0)->addChannel(3, 4, CHANNEL_ICN_TILT_FINE, false);
-    bank(0)->fixture(0)->addChannel(4, 5, CHANNEL_ICN_PAN_TILT_SPEED, false);
-    bank(0)->fixture(0)->addChannel(5, 6, CHANNEL_ICN_BRIGHTNESS, true);
-    bank(0)->fixture(0)->addChannel(6, 7, CHANNEL_ICN_STROBE, false);
-    bank(0)->fixture(0)->addChannel(7, 8, CHANNEL_ICN_COLOR_WHEEL, false);
-    bank(0)->fixture(0)->addChannel(8, 9, CHANNEL_ICN_GOBO_STAT_01, false);
-    bank(0)->fixture(0)->addChannel(9, 10, CHANNEL_ICN_GOBO_ROT_01, false);
-    bank(0)->fixture(0)->addChannel(10, 11, CHANNEL_ICN_GOBO_ROT_SPEED, false);
-    bank(0)->fixture(0)->addChannel(11, 12, CHANNEL_ICN_FOCUS, false);
-    bank(0)->fixture(0)->addChannel(12, 13, CHANNEL_ICN_PRISMA, false);
-    bank(0)->fixture(0)->addChannel(13, 14, CHANNEL_ICN_FUNCTION_1, false);
-    bank(0)->fixture(0)->addChannel(14, 15, CHANNEL_ICN_RESET, false);
+    // the channels
+    pFix1->createChannel(1, CHANNEL_ICN_PAN, false);
+    pFix1->createChannel(2, CHANNEL_ICN_PAN_FINE, false);
+    pFix1->createChannel(3, CHANNEL_ICN_TILT, false);
+    pFix1->createChannel(4, CHANNEL_ICN_TILT_FINE, false);
+    pFix1->createChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+    pFix1->createChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+    pFix1->createChannel(7, CHANNEL_ICN_STROBE, false);
+    pFix1->createChannel(8, CHANNEL_ICN_COLOR_WHEEL, false);
+    pFix1->createChannel(9, CHANNEL_ICN_GOBO_STAT_01, false);
+    pFix1->createChannel(10, CHANNEL_ICN_GOBO_ROT_01, false);
+    pFix1->createChannel(11, CHANNEL_ICN_GOBO_ROT_SPEED, false);
+    pFix1->createChannel(12, CHANNEL_ICN_FOCUS, false);
+    pFix1->createChannel(13, CHANNEL_ICN_PRISMA, false);
+    pFix1->createChannel(14, CHANNEL_ICN_FUNCTION_1, false);
+    pFix1->createChannel(15, CHANNEL_ICN_RESET, false);
     // add brightness-channel to master channel
-    m_vMasterChannel.push_back(bank(0)->fixture(0)->channel(5));
+    m_vMasterChannel.push_back(pFix1->channel(6));
 
     // 16 channel mode
     shared_ptr<Fixture> pFix2 = createFixture("TMH-x4-16 l", pController, 1, 17);
     assignFixture(pFix2, pBank1, 1);
-
-    ban k(0)->addFixture("TMH-x4-16 l", 0, 1, 17);
-    bank(0)->fixture(1)->addChannel(0, 1, CHANNEL_ICN_PAN, false);
-    bank(0)->fixture(1)->addChannel(1, 2, CHANNEL_ICN_PAN_FINE, false);
-    bank(0)->fixture(1)->addChannel(2, 3, CHANNEL_ICN_TILT, false);
-    bank(0)->fixture(1)->addChannel(3, 4, CHANNEL_ICN_TILT_FINE, false);
-    bank(0)->fixture(1)->addChannel(4, 5, CHANNEL_ICN_PAN_TILT_SPEED, false);
-    bank(0)->fixture(1)->addChannel(5, 6, CHANNEL_ICN_BRIGHTNESS, true);
-    bank(0)->fixture(1)->addChannel(6, 7, CHANNEL_ICN_STROBE, false);
-    bank(0)->fixture(1)->addChannel(7, 8, CHANNEL_ICN_RED, false);
-    bank(0)->fixture(1)->addChannel(8, 9, CHANNEL_ICN_GREEN, false);
-    bank(0)->fixture(1)->addChannel(9, 10, CHANNEL_ICN_BLUE, false);
-    bank(0)->fixture(1)->addChannel(10, 11, CHANNEL_ICN_WHITE, false);
-    bank(0)->fixture(1)->addChannel(11, 12, CHANNEL_ICN_ZOOM, false);
-    bank(0)->fixture(1)->addChannel(13, 14, CHANNEL_ICN_COLOR_SPEED, false);
-    bank(0)->fixture(1)->addChannel(14, 15, CHANNEL_ICN_FUNCTION_1, false);
-    bank(0)->fixture(1)->addChannel(15, 16, CHANNEL_ICN_RESET, false);
+    // the channels
+    pFix2->createChannel(1, CHANNEL_ICN_PAN, false);
+    pFix2->createChannel(2, CHANNEL_ICN_PAN_FINE, false);
+    pFix2->createChannel(3, CHANNEL_ICN_TILT, false);
+    pFix2->createChannel(4, CHANNEL_ICN_TILT_FINE, false);
+    pFix2->createChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+    pFix2->createChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+    pFix2->createChannel(7, CHANNEL_ICN_STROBE, false);
+    pFix2->createChannel(8, CHANNEL_ICN_RED, false);
+    pFix2->createChannel(9, CHANNEL_ICN_GREEN, false);
+    pFix2->createChannel(10, CHANNEL_ICN_BLUE, false);
+    pFix2->createChannel(11, CHANNEL_ICN_WHITE, false);
+    pFix2->createChannel(12, CHANNEL_ICN_ZOOM, false);
+    pFix2->createChannel(14, CHANNEL_ICN_COLOR_SPEED, false);
+    pFix2->createChannel(15, CHANNEL_ICN_FUNCTION_1, false);
+    pFix2->createChannel(16, CHANNEL_ICN_RESET, false);
     // add brightness-channel to master channel
-    m_vMasterChannel.push_back(bank(0)->fixture(1)->channel(5));
+    m_vMasterChannel.push_back(pFix2->channel(6));
 
 
     // 16 channel mode
     shared_ptr<Fixture> pFix3 = createFixture("TMH-x4-16 r", pController, 1, 42);
     assignFixture(pFix3, pBank1, 2);
-
-    ban k(0)->addFixture("TMH-x4-16 r", 0, 1, 42);
-    bank(0)->fixture(2)->addChannel(0, 1, CHANNEL_ICN_PAN, false);
-    bank(0)->fixture(2)->addChannel(1, 2, CHANNEL_ICN_PAN_FINE, false);
-    bank(0)->fixture(2)->addChannel(2, 3, CHANNEL_ICN_TILT, false);
-    bank(0)->fixture(2)->addChannel(3, 4, CHANNEL_ICN_TILT_FINE, false);
-    bank(0)->fixture(2)->addChannel(4, 5, CHANNEL_ICN_PAN_TILT_SPEED, false);
-    bank(0)->fixture(2)->addChannel(5, 6, CHANNEL_ICN_BRIGHTNESS, true);
-    bank(0)->fixture(2)->addChannel(6, 7, CHANNEL_ICN_STROBE, false);
-    bank(0)->fixture(2)->addChannel(7, 8, CHANNEL_ICN_RED, false);
-    bank(0)->fixture(2)->addChannel(8, 9, CHANNEL_ICN_GREEN, false);
-    bank(0)->fixture(2)->addChannel(9, 10, CHANNEL_ICN_BLUE, false);
-    bank(0)->fixture(2)->addChannel(10, 11, CHANNEL_ICN_WHITE, false);
-    bank(0)->fixture(2)->addChannel(11, 12, CHANNEL_ICN_ZOOM, false);
-    bank(0)->fixture(2)->addChannel(13, 14, CHANNEL_ICN_COLOR_SPEED, false);
-    bank(0)->fixture(2)->addChannel(14, 15, CHANNEL_ICN_FUNCTION_1, false);
-    bank(0)->fixture(2)->addChannel(15, 16, CHANNEL_ICN_RESET, false);
+    // the channels
+    pFix3->createChannel(1, CHANNEL_ICN_PAN, false);
+    pFix3->createChannel(2, CHANNEL_ICN_PAN_FINE, false);
+    pFix3->createChannel(3, CHANNEL_ICN_TILT, false);
+    pFix3->createChannel(4, CHANNEL_ICN_TILT_FINE, false);
+    pFix3->createChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+    pFix3->createChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+    pFix3->createChannel(7, CHANNEL_ICN_STROBE, false);
+    pFix3->createChannel(8, CHANNEL_ICN_RED, false);
+    pFix3->createChannel(9, CHANNEL_ICN_GREEN, false);
+    pFix3->createChannel(10, CHANNEL_ICN_BLUE, false);
+    pFix3->createChannel(11, CHANNEL_ICN_WHITE, false);
+    pFix3->createChannel(12, CHANNEL_ICN_ZOOM, false);
+    pFix3->createChannel(14, CHANNEL_ICN_COLOR_SPEED, false);
+    pFix3->createChannel(15, CHANNEL_ICN_FUNCTION_1, false);
+    pFix3->createChannel(16, CHANNEL_ICN_RESET, false);
     // add brightness-channel to master channel
-    m_vMasterChannel.push_back(bank(0)->fixture(2)->channel(5));
+    m_vMasterChannel.push_back(pFix3->channel(6));
 
     // 24 channel mode
     // bank(1)->addFixture("TMH-x4-24", 0, 1, 17);
@@ -275,6 +272,7 @@ void CtrlPanel::createSetup()
     // bank(1)->fixture(0)->addChannel(24, 23, CHANNEL_ICN_RESET);
 
     // initial initialisation
+    updateBankCtrls();
     updateFixtureCtrls();
     updateSceneCtrls();
     updateFaderCtrls();
@@ -316,8 +314,6 @@ void CtrlPanel::assignBank(shared_ptr<Bank> _pBank,
                            s32              _s32BankBtnIdx)
 {
     std::get<1>(m_vBankCtrl.at((_s32BankBtnIdx))) = _pBank;
-
-    updateBankCtrls();
 } // CtrlPanel::assignBank
 
 
@@ -342,8 +338,7 @@ void CtrlPanel::updateBankCtrls()
             pBankBtn->setCtrlEnabled(false);
        }
 
-        pBankBtn->setCtrlChecked(false);
-       m_pActiveFixture = nullptr;
+       pBankBtn->setCtrlChecked(false);
     }
 } // CtrlPanel::updateBankCtrls
 
@@ -353,6 +348,9 @@ void CtrlPanel::updateBankCtrls()
 *******************************************************************************/
 void CtrlPanel::onBankSeleted(s32 _s32BankBtnIdx)
 {
+    // set the active bank to nullptr
+    m_pActiveBank = nullptr;
+
     for (s32 idx = 0; idx < BANK_MAX; idx++)
     {
         auto pBankBtn = std::get<0> (m_vBankCtrl.at(idx));
@@ -363,11 +361,6 @@ void CtrlPanel::onBankSeleted(s32 _s32BankBtnIdx)
             {
                 // button checked => set active bank
                 m_pActiveBank = &m_vBankCtrl.at(idx);
-            }
-            else
-            {
-                // button not checked => no active bank
-                m_pActiveBank = nullptr;
             }
         }
         else
@@ -408,6 +401,10 @@ void CtrlPanel::assignFixture(shared_ptr<Fixture>   _pFixture,
                               shared_ptr<Bank>      _pBank,
                               s32                   _s32FixtureBtnIdx)
 {
+    // assign the fixture to the bank
+    _pBank->addFixture(_s32FixtureBtnIdx, _pFixture);
+
+    updateFixtureCtrls();
 } // CtrlPanel::assignFixture
 
 
@@ -416,11 +413,18 @@ void CtrlPanel::assignFixture(shared_ptr<Fixture>   _pFixture,
 *******************************************************************************/
 void CtrlPanel::updateFixtureCtrls()
 {
-    for (fixtureTuple &ft : m_vFixture)
-    {
-        auto pFixBtn    = std::get<0> (ft);
-        auto pFix       = std::get<1> (ft);
+    // get the active bank
+    shared_ptr<Bank>    pBank = (m_pActiveBank)?   std::get<1> (*m_pActiveBank) : nullptr;
 
+    for (s32 i = 0; i < FIXTURE_MAX; i++)
+    {
+        auto pFixBtn = std::get<0> (m_vFixtureCtrl.at(i));
+
+        // find the fixture for idx i
+        shared_ptr<Fixture> pFix = (pBank)?   pBank->fixture(i) : nullptr;
+
+        // set the button for the fixture
+        pFixBtn->setCtrlChecked(false);
         if (pFix)
         {
             pFixBtn->setBtnText(pFix->name());
@@ -431,11 +435,39 @@ void CtrlPanel::updateFixtureCtrls()
             pFixBtn->setBtnText("");
             pFixBtn->setCtrlEnabled(false);
         }
+    } // for...
 
-        pFixBtn->setCtrlChecked(false);
-        m_pActiveFixture = nullptr;
-    }
+    m_pActiveFixture = nullptr;
 } // CtrlPanel::updateFixtureCtrls
+
+
+/*******************************************************************************
+* CtrlPanel::onFixtureSeleted
+*******************************************************************************/
+void CtrlPanel::onFixtureSeleted(s32 /*_s32FixtureIdx*/)
+{
+    // CHECK_PRE_CONDITION_VOID(m_pActiveBank);
+    // CHECK_PRE_CONDITION_VOID(_s32FixtureIdx < FIXTURE_MAX);
+
+    // auto pFix = std::get<1>(*m_pActiveBank)->fixture(_s32FixtureIdx);
+
+    // shared_ptr<Bank> pBank      = activeBank();
+    // CHECK_PRE_CONDITION_VOID(pBank);
+
+    // fixtureTuple     &fixture   = m_vFixture.at(_s32FixtureIdx);
+
+    // // get the active bank
+    // if (pBank->isChecked())
+    // {
+    //     m_pActiveFixture = &fixture;
+    // }
+    // else
+    // {
+    //     m_pActiveFixture = nullptr;
+    // }
+
+    // getMainWin().sendUpdateCmd(UPDATE_GUI);
+} // CtrlPanel::onFixtureSeleted
 
 
 /*******************************************************************************
@@ -443,7 +475,7 @@ void CtrlPanel::updateFixtureCtrls()
 *******************************************************************************/
 void CtrlPanel::updateSceneCtrls()
 {
-    for (sceneTuple &st : m_vScene)
+    for (sceneTuple &st : m_vSceneCtrl)
     {
         auto pSceneBtn   = std::get<0> (st);
         auto pScene      = std::get<1> (st);
@@ -465,12 +497,29 @@ void CtrlPanel::updateSceneCtrls()
 
 
 /*******************************************************************************
+* CtrlPanel::onSceneSelected
+*******************************************************************************/
+void CtrlPanel::onSceneSelected(s32 /*_s32SceneBtnIdx*/)
+{
+    // MainWin     &mw = getMainWin();
+
+    // switch (mw.workMode())
+    // {
+    //     case enumWorkMode::Play:
+    //         break;
+
+    //     case enumWorkMode::SaveScene:
+    //         mw.setMode(enumWorkMode::Play);
+    //         break;
+    // }
+} // CtrlPanel::onSceneSelected
+
+
+/*******************************************************************************
 * CtrlPanel::updateFaderCtrls
 *******************************************************************************/
 void CtrlPanel::updateFaderCtrls()
 {
-    shared_ptr<Fixture> pFix = activeFixture();
-
     // update the faders
     for (s32 s32FaderIdx = 0; s32FaderIdx < FADER_MAX; s32FaderIdx++)
     {
@@ -502,47 +551,6 @@ void CtrlPanel::updateFaderCtrls()
 
 
 /*******************************************************************************
-* CtrlPanel::activeFixtureBtn
-*******************************************************************************/
-aPushButton* CtrlPanel::activeFixtureBtn() const
-{
-    if (m_pActiveFixture)
-    {
-        return std::get<0>(*m_pActiveFixture);
-    }
-    else
-    {
-        return nullptr;
-    }
-} // CtrlPanel::activeFixtureBtn
-
-
-/*******************************************************************************
-* CtrlPanel::fixtureBtn
-*******************************************************************************/
-aPushButton* CtrlPanel::fixtureBtn(s32 _idx) const
-{
-    return  (_idx < FIXTURE_MAX)?   std::get<0>(m_vFixture.at(_idx)) : nullptr;
-} // CtrlPanel::fixtureBtn
-
-
-/*******************************************************************************
-* CtrlPanel::activeFixture
-*******************************************************************************/
-shared_ptr<Fixture> CtrlPanel::activeFixture() const
-{
-    if (m_pActiveFixture)
-    {
-        return std::get<1>(*m_pActiveFixture);
-    }
-    else
-    {
-        return nullptr;
-    }
-} // CtrlPanel::activeFixture
-
-
-/*******************************************************************************
 * CtrlPanel::updateGui
 *******************************************************************************/
 void CtrlPanel::updateGui()
@@ -551,30 +559,6 @@ void CtrlPanel::updateGui()
     updateFaders();
     updateBlackoutButton();
 } // CtrlPanel::updateGui
-
-
-/*******************************************************************************
-* CtrlPanel::resetAll
-*******************************************************************************/
-void CtrlPanel::resetAll()
-{
-    // // reset all banks->fixtures->channels
-    // for (auto &bankTuple : m_vBank)
-    // {
-    //     shared_ptr<Bank> pBank = std::get<1>(bankTuple);
-
-    //     if (pBank)
-    //     {
-    //         pBank->resetAll();
-    //     }
-    // }
-
-    // // reset all universes
-    // for (shared_ptr<Controller> &pController : m_vController)
-    // {
-    //     pController->resetAllUniverses();
-    // }
-} // CtrlPanel::resetAll
 
 
 /*******************************************************************************
@@ -643,226 +627,6 @@ void CtrlPanel::updateFaders()
 
 
 /*******************************************************************************
-* CtrlPanel::onFaderMoved
-*******************************************************************************/
-void CtrlPanel::onFaderMoved(s32    s32FaderIdx,
-                             s32    _s32Value)
-{
-    shared_ptr<Fixture> pFix = activeFixture();
-    CHECK_PRE_CONDITION_VOID(pFix);
-
-    shared_ptr<Channel> pChannel = pFix->channel(s32FaderIdx);
-    CHECK_PRE_CONDITION_VOID(pChannel);
-
-    pChannel->setValue(static_cast<u8> (_s32Value));
-    updateDmxValue(pChannel, true);
-} // CtrlPanel::onFaderMoved
-
-
-/*******************************************************************************
-* CtrlPanel::onMasterFaderMoved
-*******************************************************************************/
-void CtrlPanel::onMasterFaderMoved(s32    _s32Value)
-{
-    m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
-    s32 s32Size = m_vMasterChannel.size();
-
-    for (s32 i = 0; i < s32Size; i++)
-    {
-        updateDmxValue(m_vMasterChannel.at(i), i == s32Size-1);
-    }
-
-    updateBlackoutButton();
-} // CtrlPanel::onMasterFaderMoved
-
-
-/*******************************************************************************
-* CtrlPanel::onRegisterCtrl
-*******************************************************************************/
-void CtrlPanel::onRegisterCtrl()
-{
-    // register banks
-    for (u32 i = 0; i < BANK_MAX; i++)
-    {
-        auto pBankBtn = std::get<0>(m_vBankCtrl.at(i));
-        registerCtrl(pBankBtn, ID_FIRST_BANK_IDX + i, true);
-    }
-
-    // register fixtures
-    for (u32 i = 0; i < FIXTURE_MAX; i++)
-    {
-        registerCtrl(std::get<0>(m_vFixture.at(i)), ID_FIRST_FIXTURE_IDX + i, true);
-    }
-
-    // register scenes
-    for (u32 i = 0; i < SCENE_MAX; i++)
-    {
-        auto pSceneBtn = std::get<0>(m_vScene.at(i));
-        registerCtrl(pSceneBtn, ID_FIRST_SCENE_IDX + i, true);
-    }
-
-    // register faders
-    for (u32 iFaderIdx = 0; iFaderIdx < FADER_MAX; iFaderIdx++)
-    {
-        registerCtrl(get<1>(m_vFader.at(iFaderIdx)), ID_FIRST_FADER_IDX + iFaderIdx, true);
-    }
-
-    // register master fader
-    registerCtrl(get<1>(m_masterFader), ID_MASTER_FADER_IDX, true);
-
-    // register blackout button
-    registerCtrl(m_pUi->m_pBlackout, ID_BACKOUT_IDX, true);
-
-} // CtrlPanel::onRegisterCtrl
-
-
-/*******************************************************************************
-* CtrlPanel::onUpdateCtrl
-*******************************************************************************/
-void CtrlPanel::onUpdateCtrl(aCtrlI */*_pCtrl*/)
-{
-} // CtrlPanel::onUpdateCtrl
-
-
-/*******************************************************************************
-* CtrlPanel::onCtrlClicked
-*******************************************************************************/
-void CtrlPanel::onCtrlClicked(aCtrlI *_pCtrl)
-{
-   u32 s32CtrlId = _pCtrl->ctrlId();
-
-   // check for banks
-   if (s32CtrlId >= ID_FIRST_BANK_IDX &&
-       s32CtrlId < ID_FIRST_BANK_IDX + BANK_MAX)
-   {
-       onBankSeleted(s32CtrlId - ID_FIRST_BANK_IDX);
-   }
-
-   // check for fixture
-   if (s32CtrlId >= ID_FIRST_FIXTURE_IDX &&
-       s32CtrlId < ID_FIRST_FIXTURE_IDX + FIXTURE_MAX)
-   {
-       onFixtureSeleted(s32CtrlId - ID_FIRST_FIXTURE_IDX);
-   }
-
-   // check for scenes
-   if (s32CtrlId >= ID_FIRST_SCENE_IDX &&
-       s32CtrlId < ID_FIRST_SCENE_IDX + SCENE_MAX)
-   {
-       onSceneClicked(m_vScene.at(s32CtrlId - ID_FIRST_SCENE_IDX));
-   }
-
-   // check for scenes
-   if (s32CtrlId == ID_BACKOUT_IDX)
-   {
-       onBlackoutClicked();
-   }
-
-} // CtrlPanel::onCtrlClicked
-
-
-/*******************************************************************************
-* CtrlPanel::onCtrlValueChanged
-*******************************************************************************/
-void CtrlPanel::onCtrlValueChanged(aCtrlI   *_pCtrl,
-                                   s32      _s32Value)
-{
-    u32 s32CtrlId = _pCtrl->ctrlId();
-
-    // check for faders
-    if (s32CtrlId >= ID_FIRST_FADER_IDX &&
-        s32CtrlId < ID_FIRST_FADER_IDX + FADER_MAX)
-    {
-        // fader moved
-        onFaderMoved(s32CtrlId - ID_FIRST_FADER_IDX, _s32Value);
-    }
-    else if (s32CtrlId == ID_MASTER_FADER_IDX)
-    {
-        onMasterFaderMoved(_s32Value);
-    }
-
-} // CtrlPanel::onCtrlValueChanged
-
-
-/*******************************************************************************
-* CtrlPanel::onFixtureSeleted
-*******************************************************************************/
-void CtrlPanel::onFixtureSeleted(s32 /*_s32FixtureIdx*/)
-{
-    // CHECK_PRE_CONDITION_VOID(m_pActiveBank);
-    // CHECK_PRE_CONDITION_VOID(_s32FixtureIdx < FIXTURE_MAX);
-
-    // auto pFix = std::get<1>(*m_pActiveBank)->fixture(_s32FixtureIdx);
-
-    // shared_ptr<Bank> pBank      = activeBank();
-    // CHECK_PRE_CONDITION_VOID(pBank);
-
-    // fixtureTuple     &fixture   = m_vFixture.at(_s32FixtureIdx);
-
-    // // get the active bank
-    // if (pBank->isChecked())
-    // {
-    //     m_pActiveFixture = &fixture;
-    // }
-    // else
-    // {
-    //     m_pActiveFixture = nullptr;
-    // }
-
-    // getMainWin().sendUpdateCmd(UPDATE_GUI);
-} // CtrlPanel::onFixtureSeleted
-
-
-/*******************************************************************************
-* CtrlPanel::onSceneClicked
-*******************************************************************************/
-void CtrlPanel::onSceneClicked(const sceneTuple &/*_sceneTuple*/)
-{
-    MainWin     &mw = getMainWin();
-
-    switch (mw.workMode())
-    {
-        case enumWorkMode::Play:
-            break;
-
-        case enumWorkMode::SaveScene:
-            mw.setMode(enumWorkMode::Play);
-            break;
-    }
-} // CtrlPanel::onSceneClicked
-
-
-/*******************************************************************************
-* CtrlPanel::updateDmxValue
-*******************************************************************************/
-void CtrlPanel::updateDmxValue(shared_ptr<Channel>  _pChannel,
-                               bool                 _bSend)
-{
-    u8 u8Value;
-
-    shared_ptr<Controller> pController = controller(_pChannel->controllerIdx());
-    CHECK_PRE_CONDITION_VOID(pController);
-
-    shared_ptr<Universe> pUniverse = pController->universe(_pChannel->universeId());
-    CHECK_PRE_CONDITION_VOID(pUniverse);
-
-    if (_pChannel->isBrightness())
-    {
-        u8Value = static_cast<u8> (m_dMasterBrightness * _pChannel->value());
-    }
-    else
-    {
-        u8Value = _pChannel->value();
-    }
-
-    pUniverse->setDmxChannelValue(_pChannel->channelOs(),
-                                  _pChannel->channelNr(),
-                                  u8Value,
-                                  _bSend);
-} // CtrlPanel::updateDmxValue
-
-
-/*******************************************************************************
 * CtrlPanel::updateBlackoutButton
 *******************************************************************************/
 void CtrlPanel::updateBlackoutButton()
@@ -876,6 +640,38 @@ void CtrlPanel::updateBlackoutButton()
         m_pUi->m_pBlackout->setBackgroundColor(aColor::fromU8(255, 255,128, 255));
     }
 } // CtrlPanel::updateBlackoutButton
+
+
+/*******************************************************************************
+* CtrlPanel::onFaderMoved
+*******************************************************************************/
+void CtrlPanel::onFaderMoved(s32    s32FaderIdx,
+                             s32    _s32Value)
+{
+    CHECK_PRE_CONDITION_VOID(m_pActiveFixture);
+
+    auto pChannel = std::get<3>(m_vFader.at(s32FaderIdx));
+    CHECK_PRE_CONDITION_VOID(pChannel);
+
+    pChannel->setValue(static_cast<u8> (_s32Value), true);
+} // CtrlPanel::onFaderMoved
+
+
+/*******************************************************************************
+* CtrlPanel::onMasterFaderMoved
+*******************************************************************************/
+void CtrlPanel::onMasterFaderMoved(s32 /*_s32Value*/)
+{
+    //m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
+    //s32 s32Size = m_vMasterChannel.size();
+
+    // for (s32 i = 0; i < s32Size; i++)
+    // {
+    //     updateDmxValue(m_vMasterChannel.at(i), i == s32Size-1);
+    // }
+
+    // updateBlackoutButton();
+} // CtrlPanel::onMasterFaderMoved
 
 
 /*******************************************************************************
@@ -898,3 +694,27 @@ void CtrlPanel::onBlackoutClicked()
 
     updateBlackoutButton();
 } // CtrlPanel::onBlackoutClicked
+
+
+/*******************************************************************************
+* CtrlPanel::resetAll
+*******************************************************************************/
+void CtrlPanel::resetAll()
+{
+    // // reset all banks->fixtures->channels
+    // for (auto &bankTuple : m_vBank)
+    // {
+    //     shared_ptr<Bank> pBank = std::get<1>(bankTuple);
+
+    //     if (pBank)
+    //     {
+    //         pBank->resetAll();
+    //     }
+    // }
+
+    // // reset all universes
+    // for (shared_ptr<Controller> &pController : m_vController)
+    // {
+    //     pController->resetAllUniverses();
+    // }
+} // CtrlPanel::resetAll

@@ -57,7 +57,7 @@ class CtrlPanel : public aPlainWin,
                   public aCtrlMgr
 {
     using bankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
-    using fixtureTuple = std::tuple<aPushButton *, shared_ptr<Fixture>>;
+    using fixtureTuple = std::tuple<aPushButton *>;
     using sceneTuple = std::tuple<aPushButton *, shared_ptr<Scene>>;
     using faderTuple = std::tuple<ScribbleStrip*, Fader *, aLabel *, shared_ptr<Channel>>;
 
@@ -79,7 +79,7 @@ class CtrlPanel : public aPlainWin,
         fixtureTuple*                   m_pActiveFixture        { nullptr };
 
         // scenes (30)
-        aVector<sceneTuple>             m_vScene;
+        aVector<sceneTuple>             m_vSceneCtrl;
 
         // faders (24)
         aVector<faderTuple>             m_vFader;
@@ -128,64 +128,63 @@ class CtrlPanel : public aPlainWin,
 
         void                            updateFixtureCtrls();
 
+        void                            onFixtureSeleted(s32 _s32FixtureIdx);
 
         // scene mambers
         void                            updateSceneCtrls();
+
+        void                            onSceneSelected(s32 _s32SceneBtnIdx);
 
 
         // fader mambers
         void                            updateFaderCtrls();
 
 
+    /*******************************************************************************
+    * update gui
+    *******************************************************************************/
     public:
-        // fixture member
-        aPushButton*                        activeFixtureBtn()const ;
-        aPushButton*                        fixtureBtn(s32 _idx) const;
-        shared_ptr<Fixture>                 activeFixture() const;
-
-        void                                updateGui();
-
-        void                                resetAll();
-
+        void                            updateGui();
 
     private:
-        void                                updateScenes();
-        void                                updateFaders();
+        void                            updateScenes();
+        void                            updateFaders();
+        void                            updateBlackoutButton();
 
-        void                                onFaderMoved(s32    s32FaderIdx,
-                                                         s32    _s32Value);
 
-        void                                onMasterFaderMoved(s32    _s32Value);
+    /*******************************************************************************
+    * user action
+    *******************************************************************************/
+    private:
 
-        void                                onFixtureSeleted(s32 _s32FixtureIdx);
+        void                            onFaderMoved(s32    s32FaderIdx,
+                                                     s32    _s32Value);
 
-        void                                onSceneClicked(const sceneTuple &_sceneTuple);
+        void                            onMasterFaderMoved(s32    _s32Value);
 
-        void                                updateDmxValue(shared_ptr<Channel>  _pChannel,
-                                                           bool                 _bSend);
+        void                            onBlackoutClicked();
 
-        void                                updateBlackoutButton();
+        void                            resetAll();
 
-        void                                onBlackoutClicked();
 
     /*******************************************************************************
     * aCtrlMgr interface
     *******************************************************************************/
-    public:
-        void                                onRegisterCtrl() override;
-        void                                onUpdateCtrl(aCtrlI *_pCtrl) override;
+    protected:
+        void                            onRegisterCtrl() override;
+        void                            onUpdateCtrl(aCtrlI *_pCtrl) override;
 
     protected:
-        void                                onCtrlClicked(aCtrlI *_pCtrl) override;
+        void                            onCtrlClicked(aCtrlI *_pCtrl) override;
 
-        void                                onCtrlValueChanged(aCtrlI   *_pCtrl,
-                                                               s32      _s32Value) override;
+        void                            onCtrlValueChanged(aCtrlI   *_pCtrl,
+                                                           s32      _s32Value) override;
 
 
     /*******************************************************************************
     * aBaseWin interface
     *******************************************************************************/
     protected:
-        bool                                onCreateWin() override;
+        bool                            onCreateWin() override;
 
 }; // class CtrlPanel

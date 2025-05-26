@@ -40,42 +40,19 @@ Bank::~Bank()
 /*******************************************************************************
 * Bank::addFixture
 *******************************************************************************/
-void Bank::addFixture(const aString   &_sName,
-                      s32             _s32ControllerIdx,
-                      s32             _s32UniverseId,
-                      s32             _s32ChannelOs)
+void Bank::addFixture(s32                  _s32FixtureBtnIdx,
+                      shared_ptr<Fixture>  _pFixture)
 {
-    if (m_vFixture.size() < FIXTURE_MAX)
-    {
-        m_vFixture.push_back (make_shared<Fixture> (_sName,
-                                                    _s32ControllerIdx,
-                                                    _s32UniverseId,
-                                                    _s32ChannelOs));
-    }
+    m_mapFixture[_s32FixtureBtnIdx] = _pFixture;
 } // Bank::addFixture
 
 
 /*******************************************************************************
 * Bank::fixture
 *******************************************************************************/
-shared_ptr<Fixture> Bank::fixture(s32 _idx) const
+shared_ptr<Fixture> Bank::fixture(s32 _s32FixtureBtnIdx) const
 {
-    if (m_vFixture.size() > _idx)
-    {
-        return m_vFixture.at(_idx);
-    }
+    aMap<s32, shared_ptr<Fixture>>::const_iterator it = m_mapFixture.find(_s32FixtureBtnIdx);
 
-    return nullptr;
+    return (it != m_mapFixture.end())?   it->second : nullptr;
 } // Bank::fixture
-
-
-/*******************************************************************************
-* Bank::resetAll
-*******************************************************************************/
-void Bank::resetAll()
-{
-    for (shared_ptr<Fixture> &pFix : m_vFixture)
-    {
-        pFix->resetAll();
-    }
-} // Bank::resetAll

@@ -16,23 +16,25 @@
 * includes
 *******************************************************************************/
 #include "channel.h"
+#include "controller.h"
+#include "universe.h"
 
 
 /*******************************************************************************
 * Channel::Channel
 *******************************************************************************/
-Channel::Channel(s32         _s32ChannelNr,
-                 s32         _s32ChannelOs,
-                 s32         _s32ControllerIdx,
-                 u32         _u32UniverseId,
-                 bool        _bBrightness,
-                 aString     _sIcon)
-: m_s32ChannelNr(_s32ChannelNr),
+Channel::Channel(shared_ptr<Controller>  _pController,
+                 s32                     _s32UniverseId,
+                 s32                     _s32ChannelOs,
+                 s32                     _s32ChannelNr,
+                 aString                 _sIcon,
+                 bool                    _bBrightness)
+: m_pController(_pController),
+  m_s32UniverseId(_s32UniverseId),
   m_s32ChannelOs(_s32ChannelOs),
-  m_s32ControllerIdx(_s32ControllerIdx),
-  m_u32UniverseId(_u32UniverseId),
-  m_bBrightness(_bBrightness),
-  m_sIcon(_sIcon)
+  m_s32ChannelNr(_s32ChannelNr),
+  m_sIcon(_sIcon),
+  m_bBrightness(_bBrightness)
 {
 } // Channel::Channel
 
@@ -43,3 +45,23 @@ Channel::Channel(s32         _s32ChannelNr,
 Channel::~Channel()
 {
 } // Channel::~Channel
+
+
+/*******************************************************************************
+* Channel::setValue
+*******************************************************************************/
+void Channel::setValue(u8    _u8Value,
+                       bool  _bSend)
+{
+    m_u8Value = _u8Value;
+
+    if (m_pController)
+    {
+        shared_ptr<Universe> pUni = m_pController->universe(m_s32UniverseId);
+
+        if (pUni)
+        {
+            pUni->setDmxChannelValue(m_s32ChannelNr + m_s32ChannelOs - 1, m_u8Value, _bSend);
+        }
+    }
+} // Channel::setValue
