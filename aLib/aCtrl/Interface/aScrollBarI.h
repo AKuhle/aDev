@@ -41,6 +41,8 @@ class aScrollBarI
 
         virtual void            setValue(s32 s32Val) = 0;
 
+        virtual void            setInverse(bool _bInverse) = 0;
+
 }; // class aScrollBarI
 
 

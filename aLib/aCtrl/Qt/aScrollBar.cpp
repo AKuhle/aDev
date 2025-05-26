@@ -58,8 +58,24 @@ void aScrollBar::setRange(s32    _s32Min,
 *******************************************************************************/
 void aScrollBar::setValue(s32 s32Value)
 {
-    QScrollBar::setValue(s32Value);
+    if (m_bInverse)
+    {
+        QScrollBar::setValue(QScrollBar::maximum() - s32Value + QScrollBar::minimum());
+    }
+    else
+    {
+        QScrollBar::setValue(s32Value);
+    }
 } // aScrollBar::setValue
+
+
+/*******************************************************************************
+* aScrollBar::setInverse
+*******************************************************************************/
+void aScrollBar::setInverse(bool _bInverse)
+{
+    m_bInverse = _bInverse;
+} // aScrollBar::setInverse
 
 
 /*******************************************************************************
@@ -67,6 +83,11 @@ void aScrollBar::setValue(s32 s32Value)
 *******************************************************************************/
 void aScrollBar::slotValueChanged(int _iValue)
 {
+    if (m_bInverse)
+    {
+        _iValue = QScrollBar::maximum() - _iValue + QScrollBar::minimum();
+    }
+
     //Control2VarPool();
 
     if (ctrlMgr() != nullptr)

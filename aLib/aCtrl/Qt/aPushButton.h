@@ -41,6 +41,12 @@ class aPushButton : public aButton<QPushButton>,
         aPushButton(SysWin *_pParent);
         virtual ~aPushButton();
 
+        void            setText(const aString &_sText);
+        void            setText(const QString &_sText);
+
+        void            setBackgroundColor(const aColor &_color);
+        aColor          backgroundColor() const;
+
 
     /*******************************************************************************
     * slots

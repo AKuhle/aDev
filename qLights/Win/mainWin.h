@@ -51,14 +51,16 @@ class MainWin : public aMainWinSdi,
             Ui::FormMainWin     *m_pUi { nullptr };
         #endif
 
-        enumWorkMode            m_eWorkMode             { enumWorkMode::Edit };
-        CtrlPanel               *m_pCtrlPanel           { nullptr };
+        enumWorkMode            m_eWorkMode                 { enumWorkMode::Play };
+        CtrlPanel               *m_pCtrlPanel               { nullptr };
+
 
     public:
         MainWin();
         ~MainWin();
 
-        enumWorkMode            workMode() const        { return m_eWorkMode; }
+        void                setMode(enumWorkMode _eMode);
+        enumWorkMode        workMode() const                { return m_eWorkMode; }
 
 
     /*******************************************************************************

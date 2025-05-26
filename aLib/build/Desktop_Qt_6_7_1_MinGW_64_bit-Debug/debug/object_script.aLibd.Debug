@@ -12,6 +12,7 @@ debug/aToolButton.o
 debug/aBrush.o
 debug/aPainter.o
 debug/aPen.o
+debug/aPixmap.o
 debug/aMathObj2D.o
 debug/aMathObj3D.o
 debug/aMathObj.o

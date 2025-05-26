@@ -46,6 +46,7 @@ class aLabel : public aCtrl<QLabel>,
     public:
         void            setText(const aString &_sText) override;
         void            setText(const QString &_sText);
+        void            setText(const char *_pText);
 
 }; // class aLabel
 

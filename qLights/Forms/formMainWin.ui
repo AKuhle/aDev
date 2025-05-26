@@ -25,7 +25,7 @@
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="toolbar">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -39,6 +39,10 @@
    <addaction name="separator"/>
    <addaction name="m_pActionAddBank"/>
    <addaction name="m_pActionAddFixture"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionSaveScene"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionResetAll"/>
   </widget>
   <action name="m_pActionOpenFile">
    <property name="icon">
@@ -71,6 +75,30 @@
    </property>
    <property name="text">
     <string>AddFixture</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionSaveScene">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/Lib_bright/download.png</normaloff>:/Lib_bright/download.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Scene</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionResetAll">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/Lib_color/reset.png</normaloff>:/Lib_color/reset.png</iconset>
+   </property>
+   <property name="text">
+    <string>reset</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

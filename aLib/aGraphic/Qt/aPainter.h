@@ -92,8 +92,6 @@ class aPainter : private QPainter,
 
         //void            setFont(const aFont *_pFont);
 
-        QColor          to_QColor(const aColor &_color);
-
 }; // aPainter
 
 

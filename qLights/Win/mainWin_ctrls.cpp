@@ -34,6 +34,8 @@ void MainWin::onRegisterCtrl()
 {
     registerCtrl(m_pUi->m_pActionAddBank, ID_ADD_BANK);
     registerCtrl(m_pUi->m_pActionAddFixture, ID_ADD_FIXTURE);
+    registerCtrl(m_pUi->m_pActionSaveScene, ID_SAVE_SCENE);
+    registerCtrl(m_pUi->m_pActionResetAll, ID_RESET_ALL);
 } // MainWin::onRegisterCtrl
 
 
@@ -59,16 +61,21 @@ void MainWin::onUpdateCtrl(aCtrlI */*_pCtrl*/)
 /*******************************************************************************
 * MainWin::onCtrlClicked
 *******************************************************************************/
-void MainWin::onCtrlClicked(aCtrlI */*_pCtrl*/)
+void MainWin::onCtrlClicked(aCtrlI *_pCtrl)
 {
-    // switch (_pCtrl->ctrlId())
-    // {
-    //     case ID_ADD_BANK:
-    //     m_pCtrlPanel->addBank();;
-    //         break;
+    switch (_pCtrl->ctrlId())
+    {
+        case ID_SAVE_SCENE:
+            if (m_eWorkMode == enumWorkMode::Play)
+                m_eWorkMode = enumWorkMode::SaveScene;
+            else
+                m_eWorkMode = enumWorkMode::Play;
 
-    //     case ID_ADD_FIXTURE:
-    //         m_pCtrlPanel->addFixture();
-    //         break;
-    // }
+            sendUpdateCmd(UPDATE_GUI);
+            break;
+
+        case ID_RESET_ALL:
+            sendUpdateCmd(UPDATE_RESET_ALL);
+            break;
+    }
 } // MainWin::onCtrlClicked

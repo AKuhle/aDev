@@ -67,3 +67,15 @@ shared_ptr<Fixture> Bank::fixture(s32 _idx) const
 
     return nullptr;
 } // Bank::fixture
+
+
+/*******************************************************************************
+* Bank::resetAll
+*******************************************************************************/
+void Bank::resetAll()
+{
+    for (shared_ptr<Fixture> &pFix : m_vFixture)
+    {
+        pFix->resetAll();
+    }
+} // Bank::resetAll

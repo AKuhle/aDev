@@ -12,6 +12,7 @@ release/aToolButton.o
 release/aBrush.o
 release/aPainter.o
 release/aPen.o
+release/aPixmap.o
 release/aMathObj2D.o
 release/aMathObj3D.o
 release/aMathObj.o

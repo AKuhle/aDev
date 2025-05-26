@@ -125,7 +125,7 @@ void aPainter::setPen(const aColor *_pColor)
 {
     CHECK_PRE_CONDITION_VOID(_pColor != nullptr);
 
-    QPainter::setPen(QPen(to_QColor(*_pColor)));
+    QPainter::setPen(QPen(_pColor->toQColor()));
 } // aPainter::setPen
 
 
@@ -136,7 +136,7 @@ void aPainter::setBrush(const aColor *_pColor)
 {
     if (_pColor != nullptr)
     {
-        QBrush  brush(to_QColor(*_pColor));
+        QBrush  brush(_pColor->toQColor());
 
         QPainter::setBrush(brush);
     }
@@ -153,18 +153,6 @@ void aPainter::setBrush(const aColor *_pColor)
 //         QPainter::setFont(*_pFont);
 //     }
 // } // aPainter::setFont
-
-
-/*******************************************************************************
-* aPainter::toaColor
-*******************************************************************************/
-QColor aPainter::to_QColor(const aColor &_color)
-{
-    return QColor::fromRgbF(_color.r(),
-                            _color.g(),
-                            _color.b(),
-                            _color.a());
-} // aPainter::toaColor
 
 
 } // namespace aGraphic

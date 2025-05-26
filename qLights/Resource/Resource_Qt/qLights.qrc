@@ -58,5 +58,10 @@
         <file>qLights/ChannelIcn/function4.png</file>
         <file>qLights/ChannelIcn/function5.png</file>
         <file>qLights/ChannelIcn/unused.png</file>
+        <file>qLights/ChannelIcn/gobo_rot_speed.png</file>
+        <file>qLights/ChannelIcn/prisma.png</file>
+        <file>Lib_bright/download.png</file>
+        <file>qLights/ChannelIcn/brightnessAll.png</file>
+        <file>Lib_color/reset.png</file>
     </qresource>
 </RCC>

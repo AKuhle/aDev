@@ -21,8 +21,18 @@
 /*******************************************************************************
 * Channel::Channel
 *******************************************************************************/
-Channel::Channel(s32 _s32ChannelNr)
-: m_s32ChannelNr(_s32ChannelNr)
+Channel::Channel(s32         _s32ChannelNr,
+                 s32         _s32ChannelOs,
+                 s32         _s32ControllerIdx,
+                 u32         _u32UniverseId,
+                 bool        _bBrightness,
+                 aString     _sIcon)
+: m_s32ChannelNr(_s32ChannelNr),
+  m_s32ChannelOs(_s32ChannelOs),
+  m_s32ControllerIdx(_s32ControllerIdx),
+  m_u32UniverseId(_u32UniverseId),
+  m_bBrightness(_bBrightness),
+  m_sIcon(_sIcon)
 {
 } // Channel::Channel
 

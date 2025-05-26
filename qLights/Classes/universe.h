@@ -53,9 +53,17 @@ class Universe
         void                addBank(const aString &_sName);
         shared_ptr<Bank>    bank(u32 _u32Idx) const;
 
-        void                setDmxChannel(u32   _u32ChannelOs,
-                                          u32   _u32Channel,
-                                          u8    _u8Value,
-                                          bool  _bSend);
 
+        void                setDmxChannelValue(u32   _u32ChannelOs,
+                                               u32   _u32Channel,
+                                               u8    _u8Value,
+                                               bool  _bSend);
+
+        void                resetUniverse();
+
+        // u8                  dmxChannelValue(u32   _u32ChannelOs,
+        //                                     u32   _u32Channel);
+
+    private:
+        void                sendDmxValues();
 }; // class Universe

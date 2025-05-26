@@ -51,13 +51,17 @@ class Fixture
         const aString&          name() const                    { return m_sName; }
         void                    setName(const aString &_sName)  { m_sName = _sName; }
 
-        void                    addChannel(s32      _s32ChannelNr,
-                                           s32      _s32FaderIdx,
-                                           aString  _sChannelIcon);
+        void                    addChannel(s32      _s32FaderIdx,
+                                           s32      _s32ChannelNr,
+                                           aString  _sIcon,
+                                           bool     _bBrightness);
 
         shared_ptr<Channel>     channel(s32 _s32FaderIdx) const;
 
         s32                     controllerIdx() const           { return m_s32ControllerIdx; }
         s32                     universeId() const              { return m_s32UniverseId; }
         s32                     channelOs() const               { return m_s32ChannelOs; }
+
+        void                    resetAll();
+
 }; // class Fixture

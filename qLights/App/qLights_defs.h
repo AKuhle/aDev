@@ -41,14 +41,29 @@ constexpr s32   SCRIBBLE_STRIP_H                = 32;
 
 
 /*******************************************************************************
+* update commands
+*******************************************************************************/
+constexpr u64   UPDATE_SYS_BITS             = 0x000000000000ffff;
+constexpr u64   UPDATE_USER_BITS            = 0xffffffffffff0000;
+
+constexpr u64   UPDATE_RESET_ALL            = 0x0000000000010000;
+
+
+/*******************************************************************************
 * ctrl-IDs
 *******************************************************************************/
 constexpr u32   ID_ADD_BANK                     = CTRL_ID_USER + 1;
 constexpr u32   ID_ADD_FIXTURE                  = CTRL_ID_USER + 2;
+constexpr u32   ID_SAVE_SCENE                   = CTRL_ID_USER + 3;
+constexpr u32   ID_RESET_ALL                    = CTRL_ID_USER + 4;
 
 constexpr u32   ID_FIRST_BANK_IDX               = CTRL_ID_USER + 100;
 constexpr u32   ID_FIRST_FIXTURE_IDX            = CTRL_ID_USER + 200;
-constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 300;
+constexpr u32   ID_FIRST_SCENE_IDX              = CTRL_ID_USER + 300;
+constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 400;
+
+constexpr u32   ID_MASTER_FADER_IDX             = CTRL_ID_USER + 500;
+constexpr u32   ID_BACKOUT_IDX                  = CTRL_ID_USER + 501;
 
 
 /*******************************************************************************
@@ -60,10 +75,14 @@ constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 300;
 #define         CHANNEL_ICN_TILT_FINE           ":/qLights/ChannelIcn/tilt-fine.png"
 #define         CHANNEL_ICN_PAN_TILT_SPEED      ":/qLights/ChannelIcn/pan-tilt-speed.png"
 #define         CHANNEL_ICN_BRIGHTNESS          ":/qLights/ChannelIcn/brightness.png"
+#define         CHANNEL_ICN_BRIGHTNESS_ALL      ":/qLights/ChannelIcn/brightnessAll.png"
 #define         CHANNEL_ICN_STROBE              ":/qLights/ChannelIcn/strobe.png"
 #define         CHANNEL_ICN_ZOOM                ":/qLights/ChannelIcn/zoom.png"
 #define         CHANNEL_ICN_COLOR_SPEED         ":/qLights/ChannelIcn/color-speed.png"
 #define         CHANNEL_ICN_RESET               ":/qLights/ChannelIcn/reset.png"
+#define         CHANNEL_ICN_COLOR_WHEEL         ":/qLights/ChannelIcn/color-wheel.png"
+#define         CHANNEL_ICN_FOCUS               ":/qLights/ChannelIcn/focus.png"
+#define         CHANNEL_ICN_PRISMA              ":/qLights/ChannelIcn/prisma.png"
 
 #define         CHANNEL_ICN_RED                 ":/qLights/ChannelIcn/red.png"
 #define         CHANNEL_ICN_RED_1               ":/qLights/ChannelIcn/red1.png"
@@ -91,11 +110,18 @@ constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 300;
 #define         CHANNEL_ICN_FUNCTION_4          ":/qLights/ChannelIcn/function4.png"
 #define         CHANNEL_ICN_FUNCTION_5          ":/qLights/ChannelIcn/function5.png"
 
+#define         CHANNEL_ICN_GOBO_ROT_SPEED      ":/qLights/ChannelIcn/gobo_rot_speed.png"
+
+#define         CHANNEL_ICN_GOBO_STAT_01        ":/qLights/ChannelIcn/gobo_stat_01.png"
+
+#define         CHANNEL_ICN_GOBO_ROT_01         ":/qLights/ChannelIcn/gobo_rot_01.png"
+
+
 /*******************************************************************************
 * enums
 *******************************************************************************/
 enum class enumWorkMode
 {
-    Edit,
-    Show
+    Play,
+    SaveScene
 }; // enumMode

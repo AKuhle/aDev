@@ -66,3 +66,15 @@ shared_ptr<Universe> Controller::universe(u32 _u32Id)
 
     return nullptr;
 } // Controller::universe
+
+
+/*******************************************************************************
+* Controller::resetAllUniverses
+*******************************************************************************/
+void Controller::resetAllUniverses()
+{
+    for (auto &mapEntry : m_mapUniverse)
+    {
+        mapEntry.second->resetUniverse();
+    }
+} // Controller::resetAllUniverses

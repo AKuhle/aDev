@@ -49,4 +49,6 @@ class Bank
 
         const aSharedPtrVector<Fixture>&    fixtures() const { return m_vFixture; }
         shared_ptr<Fixture>                 fixture(s32 _idx) const;
+
+        void                                resetAll();
 }; // class Bank

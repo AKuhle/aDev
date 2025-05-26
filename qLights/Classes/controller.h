@@ -56,4 +56,6 @@ class Controller
         void                                addUniverse(u32 _u32Id);
         shared_ptr<Universe>                universe(u32 _u32Id);
 
+        void                                resetAllUniverses();
+
 }; // class Controller

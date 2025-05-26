@@ -39,7 +39,18 @@ void MainWin::onUpdateCmd(u64     _u64Cmd,
                           void    */*_pParam1*/,
                           void    */*_pParam2*/)
 {
-    // UPDATE_VIEW
+    // UPDATE_RESET_ALL
+    if (isBitsSet(_u64Cmd, UPDATE_RESET_ALL))
+    {
+        if (m_pCtrlPanel != nullptr)
+        {
+            m_pCtrlPanel->resetAll();
+
+            _u64Cmd |= UPDATE_GUI;
+        }
+    }
+
+    // UPDATE_GUI
     if (isBitsSet(_u64Cmd, UPDATE_GUI))
     {
         if (m_pCtrlPanel != nullptr)

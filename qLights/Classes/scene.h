@@ -16,6 +16,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aString.h"
+
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -24,9 +27,13 @@
 class Scene
 {
     private:
+        aString     m_sName;
 
     public:
-        Scene();
+        Scene(const aString   &_sName);
         ~Scene();
+
+        const aString&          name() const                    { return m_sName; }
+        void                    setName(const aString &_sName)  { m_sName = _sName; }
 
 }; // class Scene

@@ -32,6 +32,9 @@ namespace aWin {
 class aScrollBar : public aCtrl<QScrollBar>,
                    public aScrollBarI
 {
+    private:
+        bool        m_bInverse      { false };
+
     Q_OBJECT
 
     /*******************************************************************************
@@ -50,6 +53,8 @@ class aScrollBar : public aCtrl<QScrollBar>,
                                  s32    _s32Max) override;
 
         void            setValue(s32 s32Value) override;
+
+        void            setInverse(bool _bInverse) override;
 
 
     /*******************************************************************************

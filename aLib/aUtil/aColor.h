@@ -16,6 +16,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#ifdef _USE_QT_
+    #include <QColor>
+#endif // _USE_QT_
+
 #include "aLib_def.h"
 
 
@@ -53,6 +57,10 @@ class aColor
         aColor(const aColor &_rhs);
 
         aColor(u32   _u32HexValue);
+
+        #ifdef _USE_QT_
+                aColor(const QColor &_rhs);
+        #endif // _USE_QT_
 
         static aColor   fromU8(u8   _r,
                                u8   _g,
@@ -96,6 +104,11 @@ class aColor
 
         bool            isBlack() const;
         bool            isWhite() const;
+
+        #ifdef _USE_QT_
+            QColor      toQColor() const;
+        #endif // _USE_QT_
+
 
         friend std::ostream& operator<<(std::ostream    &_os,
                                         const aColor    &_col)
