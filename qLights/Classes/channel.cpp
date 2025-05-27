@@ -50,18 +50,25 @@ Channel::~Channel()
 /*******************************************************************************
 * Channel::setValue
 *******************************************************************************/
-void Channel::setValue(u8    _u8Value,
-                       bool  _bSend)
+void Channel::setValue(u8    _u8Value)
 {
     m_u8Value = _u8Value;
+} // Channel::setValue
 
+
+/*******************************************************************************
+* Channel::updateDmxValue
+*******************************************************************************/
+void Channel::updateDmxValue(u8    _u8Value,
+                             bool  _bSend)
+{
     if (m_pController)
     {
         shared_ptr<Universe> pUni = m_pController->universe(m_s32UniverseId);
 
         if (pUni)
         {
-            pUni->setDmxChannelValue(m_s32ChannelNr + m_s32ChannelOs - 1, m_u8Value, _bSend);
+            pUni->setDmxChannelValue(m_s32ChannelNr + m_s32ChannelOs - 1, _u8Value, _bSend);
         }
     }
-} // Channel::setValue
+} // Channel::updateDmxValue

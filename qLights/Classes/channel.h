@@ -72,8 +72,10 @@ class Channel
         void                    setBrightness(bool _bBrightness)                    { m_bBrightness = _bBrightness; }
         bool                    isBrightness()                                      { return m_bBrightness; }
 
-        void                    setValue(u8     _u8Value,
-                                         bool   _bSend);
+        void                    setValue(u8     _u8Value);
         u8                      value()                                             { return m_u8Value; }
+
+        void                    updateDmxValue(u8     _u8Value,
+                                               bool   _bSend);
 
 }; // class Channel

@@ -85,7 +85,7 @@ void CtrlPanel::onCtrlClicked(aCtrlI *_pCtrl)
    if (s32CtrlId >= ID_FIRST_FIXTURE_IDX &&
        s32CtrlId < ID_FIRST_FIXTURE_IDX + FIXTURE_MAX)
    {
-       onFixtureSeleted(s32CtrlId - ID_FIRST_FIXTURE_IDX);
+       onFixtureSelected(s32CtrlId - ID_FIRST_FIXTURE_IDX);
    }
 
    // check for scenes

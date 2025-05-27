@@ -42,36 +42,6 @@ Universe::~Universe()
 
 
 /*******************************************************************************
-* Universe::bankCount
-*******************************************************************************/
-u32 Universe::bankCount() const
-{
-    return m_vBank.size();
-} // Universe::bankCount
-
-
-/*******************************************************************************
-* Universe::addBank
-*******************************************************************************/
-void Universe::addBank(const aString &_sName)
-{
-    if (m_vBank.size() < (s32) BANK_MAX)
-    {
-        m_vBank.push_back(make_shared<Bank> (_sName));
-    }
-} // Universe::addBank
-
-
-/*******************************************************************************
-* Universe::bank
-*******************************************************************************/
-shared_ptr<Bank> Universe::bank(u32 _u32Idx) const
-{
-    return (_u32Idx < (u32) m_vBank.size())?   m_vBank.at(_u32Idx) : nullptr;
-} // Universe::bank
-
-
-/*******************************************************************************
 * Universe::setDmxChannelValue
 *******************************************************************************/
 void Universe::setDmxChannelValue(u32   _u32Channel,
@@ -79,9 +49,7 @@ void Universe::setDmxChannelValue(u32   _u32Channel,
                                   bool  _bSend)
 {
     // set the new channel value
-    m_dmxData[_u32Channel] = _u8Value;
-
-    //cout << "channel: " << uChannel << ", value: " << (u16) _u8Value << endl;
+    m_dmxData[_u32Channel - 1] = _u8Value;
 
     if (_bSend)
     {
@@ -111,18 +79,18 @@ void Universe::sendDmxValues()
     QUdpSocket      udpSocket;
     QByteArray      artnetPacket;
 
-    artnetPacket.append("Art-Net");               // Protokollkennung
-    artnetPacket.append('\0');                    // Nullterminierung
-    artnetPacket.append((char) 0x00);                    // OpCode (Low Byte)
-    artnetPacket.append((char) 0x50);                    // OpCode (High Byte) -> ArtDMX
-    artnetPacket.append((char) 0x00);                    // Protokollversion (High Byte)
-    artnetPacket.append((char) 0x0E);                    // Protokollversion (Low Byte)
-    artnetPacket.append((char) 0x00);                    // Sequence (0 = keine Synchronisation)
-    artnetPacket.append((char) 0x00);                    // Physical (nicht verwendet)
-    artnetPacket.append((char) (m_u32Id & 0xFF));         // Universum (Low Byte)
-    artnetPacket.append((char) ((m_u32Id >> 8) & 0xFF));  // Universum (High Byte)
-    artnetPacket.append((char) ((m_u32DmxDataSize >> 8) & 0xFF));                    // DMX-Datenlänge (High Byte)
-    artnetPacket.append((char) m_u32DmxDataSize & 0xFF);                    // DMX-Datenlänge (Low Byte)
+    artnetPacket.append("Art-Net");                                 // Protokollkennung
+    artnetPacket.append('\0');                                      // Nullterminierung
+    artnetPacket.append((char) 0x00);                               // OpCode (Low Byte)
+    artnetPacket.append((char) 0x50);                               // OpCode (High Byte) -> ArtDMX
+    artnetPacket.append((char) 0x00);                               // Protokollversion (High Byte)
+    artnetPacket.append((char) 0x0E);                               // Protokollversion (Low Byte)
+    artnetPacket.append((char) 0x00);                               // Sequence (0 = keine Synchronisation)
+    artnetPacket.append((char) 0x00);                               // Physical (nicht verwendet)
+    artnetPacket.append((char) (m_u32Id & 0xFF));                   // Universum (Low Byte)
+    artnetPacket.append((char) ((m_u32Id >> 8) & 0xFF));            // Universum (High Byte)
+    artnetPacket.append((char) ((m_u32DmxDataSize >> 8) & 0xFF));   // DMX-Datenlänge (High Byte)
+    artnetPacket.append((char) m_u32DmxDataSize & 0xFF);            // DMX-Datenlänge (Low Byte)
 
     // Füge DMX-Daten zum Paket hinzu
     artnetPacket.append(m_dmxData.left(m_u32DmxDataSize));
@@ -132,11 +100,11 @@ void Universe::sendDmxValues()
 
     if (bytesSent == -1)
     {
-        //     std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
+        //std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
     }
     else
     {
-        //     std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+        //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
     }
 } // Universe::sendDmxValues
 

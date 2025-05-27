@@ -24,6 +24,8 @@ using namespace aLib;
 using namespace aLib::aWin;
 using namespace aLib::aUtil;
 
+using universeSaveTuple = std::tuple<s32, s32, QByteArray>;
+
 
 /*******************************************************************************
 * application constants

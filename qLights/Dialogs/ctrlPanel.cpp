@@ -376,6 +376,15 @@ void CtrlPanel::onBankSeleted(s32 _s32BankBtnIdx)
 
 
 /*******************************************************************************
+* CtrlPanel::activeBank
+*******************************************************************************/
+shared_ptr<Bank> CtrlPanel::activeBank() const
+{
+    return (m_pActiveBank)?   std::get<1> (*m_pActiveBank) : nullptr;
+} // CtrlPanel::activeBank
+
+
+/*******************************************************************************
 * CtrlPanel::createFixture
 *******************************************************************************/
 shared_ptr<Fixture> CtrlPanel::createFixture(const aString          &_sName,
@@ -442,32 +451,43 @@ void CtrlPanel::updateFixtureCtrls()
 
 
 /*******************************************************************************
-* CtrlPanel::onFixtureSeleted
+* CtrlPanel::onFixtureSelected
 *******************************************************************************/
-void CtrlPanel::onFixtureSeleted(s32 /*_s32FixtureIdx*/)
+void CtrlPanel::onFixtureSelected(s32 _s32FixtureBtnIdx)
 {
-    // CHECK_PRE_CONDITION_VOID(m_pActiveBank);
-    // CHECK_PRE_CONDITION_VOID(_s32FixtureIdx < FIXTURE_MAX);
+    CHECK_PRE_CONDITION_VOID(_s32FixtureBtnIdx < FIXTURE_MAX);
 
-    // auto pFix = std::get<1>(*m_pActiveBank)->fixture(_s32FixtureIdx);
+    shared_ptr<Bank>    pBank       = activeBank();
 
-    // shared_ptr<Bank> pBank      = activeBank();
-    // CHECK_PRE_CONDITION_VOID(pBank);
+    m_pActiveFixture = (pBank)?   pBank->fixture(_s32FixtureBtnIdx) : nullptr;
 
-    // fixtureTuple     &fixture   = m_vFixture.at(_s32FixtureIdx);
+    // deselect non selected buttons
+    for (s32 i = 0; i < FIXTURE_MAX; i++)
+    {
+        if (i != _s32FixtureBtnIdx)
+        {
+            std::get<0> (m_vFixtureCtrl.at(i))->setChecked(false);
+        }
+    }
 
-    // // get the active bank
-    // if (pBank->isChecked())
-    // {
-    //     m_pActiveFixture = &fixture;
-    // }
-    // else
-    // {
-    //     m_pActiveFixture = nullptr;
-    // }
+    for (s32 i = 0; i < FADER_MAX; i++)
+    {
+        shared_ptr<Channel> pChannel = (m_pActiveFixture)?   m_pActiveFixture->channel(i+1) : nullptr;
 
-    // getMainWin().sendUpdateCmd(UPDATE_GUI);
-} // CtrlPanel::onFixtureSeleted
+        std::get<3> (m_vFader.at(i)) = pChannel;
+    }
+
+    updateFaderCtrls();
+} // CtrlPanel::onFixtureSelected
+
+
+/*******************************************************************************
+* CtrlPanel::activeFixture
+*******************************************************************************/
+shared_ptr<Fixture> CtrlPanel::activeFixture() const
+{
+    return m_pActiveFixture;
+} // CtrlPanel::activeFixture
 
 
 /*******************************************************************************
@@ -483,15 +503,11 @@ void CtrlPanel::updateSceneCtrls()
         if (pScene)
         {
             pSceneBtn->setBtnText(pScene->name());
-            pSceneBtn->setCtrlEnabled(true);
         }
         else
         {
             pSceneBtn->setBtnText("");
-            pSceneBtn->setCtrlEnabled(false);
         }
-
-        pSceneBtn->setCtrlChecked(false);
     }
 } // CtrlPanel::updateSceneCtrls
 
@@ -499,19 +515,24 @@ void CtrlPanel::updateSceneCtrls()
 /*******************************************************************************
 * CtrlPanel::onSceneSelected
 *******************************************************************************/
-void CtrlPanel::onSceneSelected(s32 /*_s32SceneBtnIdx*/)
+void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
 {
-    // MainWin     &mw = getMainWin();
+    MainWin     &mw = getMainWin();
 
-    // switch (mw.workMode())
-    // {
-    //     case enumWorkMode::Play:
-    //         break;
+    switch (mw.workMode())
+    {
+         case enumWorkMode::Play:
+            break;
 
-    //     case enumWorkMode::SaveScene:
-    //         mw.setMode(enumWorkMode::Play);
-    //         break;
-    // }
+        case enumWorkMode::SaveScene:
+            std::get<1> (m_vSceneCtrl.at(_s32SceneBtnIdx)) =
+                make_shared<Scene> (aString::fromValue(_s32SceneBtnIdx));
+
+            updateSceneCtrls();
+
+            mw.setWorkMode(enumWorkMode::Play);
+            break;
+    }
 } // CtrlPanel::onSceneSelected
 
 
@@ -551,6 +572,26 @@ void CtrlPanel::updateFaderCtrls()
 
 
 /*******************************************************************************
+* CtrlPanel::updateDmxValue
+*******************************************************************************/
+void CtrlPanel::updateDmxValue(shared_ptr<Channel>  _pChannel,
+                               bool                 _bSend)
+{
+    CHECK_PRE_CONDITION_VOID(_pChannel);
+
+    if (_pChannel->isBrightness())
+    {
+        u8 u8Val = static_cast<u8> (m_dMasterBrightness * _pChannel->value());
+        _pChannel->updateDmxValue(u8Val, _bSend);
+    }
+    else
+    {
+        _pChannel->updateDmxValue(_pChannel->value(), _bSend);
+    }
+} // CtrlPanel::updateDmxValue
+
+
+/*******************************************************************************
 * CtrlPanel::updateGui
 *******************************************************************************/
 void CtrlPanel::updateGui()
@@ -566,26 +607,26 @@ void CtrlPanel::updateGui()
 *******************************************************************************/
 void CtrlPanel::updateScenes()
 {
-    // MainWin     &mw = getMainWin();
+    MainWin     &mw     = getMainWin();
+    bool        bSave   = (mw.workMode() == enumWorkMode::SaveScene);
 
-    // for (s32 i = 0; i < SCENE_MAX; i++)
-    // {
-    //     aPushButton *pSceneBtn = std::get<0>(m_vScene.at(i));
-    //     aString     sSceneName = std::get<1>(m_vScene.at(i));
+    for (s32 i = 0; i < SCENE_MAX; i++)
+    {
+        aPushButton         *pSceneBtn = std::get<0>(m_vSceneCtrl.at(i));
+        shared_ptr<Scene>   pScene = std::get<1>(m_vSceneCtrl.at(i));
 
-    //     // set background
-    //     if (mw.workMode() == enumWorkMode::SaveScene)
-    //     {
-    //         pSceneBtn->setBackgroundColor(colDarkGoldenRod);
-    //     }
-    //     else
-    //     {
-    //         pSceneBtn->setBackgroundColor(m_colButtonBg);
-    //     }
-
-    //     // set scene names
-    //     pSceneBtn->setText(sSceneName);
-    // }
+        // set background
+        if (bSave)
+        {
+            pSceneBtn->setBackgroundColor(colDarkGoldenRod);
+            pSceneBtn->setEnabled(true);
+        }
+        else
+        {
+            pSceneBtn->setBackgroundColor(m_colButtonBg);
+            pSceneBtn->setEnabled(pScene != nullptr);
+        }
+    }
 } // CtrlPanel::updateScenes
 
 
@@ -653,24 +694,27 @@ void CtrlPanel::onFaderMoved(s32    s32FaderIdx,
     auto pChannel = std::get<3>(m_vFader.at(s32FaderIdx));
     CHECK_PRE_CONDITION_VOID(pChannel);
 
-    pChannel->setValue(static_cast<u8> (_s32Value), true);
+    pChannel->setValue(static_cast<u8> (_s32Value));
+    updateDmxValue(pChannel, true);
 } // CtrlPanel::onFaderMoved
 
 
 /*******************************************************************************
 * CtrlPanel::onMasterFaderMoved
 *******************************************************************************/
-void CtrlPanel::onMasterFaderMoved(s32 /*_s32Value*/)
+void CtrlPanel::onMasterFaderMoved(s32 _s32Value)
 {
-    //m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
-    //s32 s32Size = m_vMasterChannel.size();
+    cout << "onMasterFaderMoved" << endl;
 
-    // for (s32 i = 0; i < s32Size; i++)
-    // {
-    //     updateDmxValue(m_vMasterChannel.at(i), i == s32Size-1);
-    // }
+    m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
+    s32 s32Size = m_vMasterChannel.size();
 
-    // updateBlackoutButton();
+     for (s32 i = 0; i < s32Size; i++)
+     {
+        updateDmxValue(m_vMasterChannel.at(i), i == s32Size - 1);
+     }
+
+    updateBlackoutButton();
 } // CtrlPanel::onMasterFaderMoved
 
 

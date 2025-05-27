@@ -36,7 +36,6 @@ class Universe
 {
     private:
         u32                     m_u32Id;
-        aSharedPtrVector<Bank>  m_vBank;
 
         // artNet
         QHostAddress            m_ipAdr;
@@ -48,11 +47,6 @@ class Universe
         Universe(u32            _u32Id,
                  const aString  &_sIpAdr);
         ~Universe();
-
-        u32                 bankCount() const;
-        void                addBank(const aString &_sName);
-        shared_ptr<Bank>    bank(u32 _u32Idx) const;
-
 
         void                setDmxChannelValue(u32   _u32Channel,
                                                u8    _u8Value,

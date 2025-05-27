@@ -40,14 +40,14 @@ MainWin::~MainWin()
 
 
 /*******************************************************************************
-* MainWin::setMode
+* MainWin::setWorkMode
 *******************************************************************************/
-void MainWin::setMode(enumWorkMode _eMode)
+void MainWin::setWorkMode(enumWorkMode _eMode)
 {
     m_eWorkMode = _eMode;
 
     sendUpdateCmd(UPDATE_GUI);
-} // MainWin::setMode
+} // MainWin::setWorkMode
 
 
 /*******************************************************************************

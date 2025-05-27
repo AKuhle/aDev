@@ -76,7 +76,7 @@ class CtrlPanel : public aPlainWin,
         // fixtures (10)
         aSharedPtrVector<Fixture>       m_vFixture;
         aVector<fixtureTuple>           m_vFixtureCtrl;
-        fixtureTuple*                   m_pActiveFixture        { nullptr };
+        shared_ptr<Fixture>             m_pActiveFixture        { nullptr };
 
         // scenes (30)
         aVector<sceneTuple>             m_vSceneCtrl;
@@ -93,6 +93,8 @@ class CtrlPanel : public aPlainWin,
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
         ~CtrlPanel();
+
+        void                            resetAll();
 
 
     private:
@@ -115,6 +117,8 @@ class CtrlPanel : public aPlainWin,
 
         void                            onBankSeleted(s32 _s32BankBtnIdx);
 
+        shared_ptr<Bank>                activeBank() const;
+
 
         // fixture mambers
         shared_ptr<Fixture>             createFixture(const aString             &_sName,
@@ -128,7 +132,10 @@ class CtrlPanel : public aPlainWin,
 
         void                            updateFixtureCtrls();
 
-        void                            onFixtureSeleted(s32 _s32FixtureIdx);
+        void                            onFixtureSelected(s32 _s32FixtureBtnIdx);
+
+        shared_ptr<Fixture>             activeFixture() const;
+
 
         // scene mambers
         void                            updateSceneCtrls();
@@ -138,6 +145,11 @@ class CtrlPanel : public aPlainWin,
 
         // fader mambers
         void                            updateFaderCtrls();
+
+
+        // channel members
+        void                            updateDmxValue(shared_ptr<Channel>  _pChannel,
+                                                       bool                 _bSend);
 
 
     /*******************************************************************************
@@ -156,15 +168,12 @@ class CtrlPanel : public aPlainWin,
     * user action
     *******************************************************************************/
     private:
-
         void                            onFaderMoved(s32    s32FaderIdx,
                                                      s32    _s32Value);
 
         void                            onMasterFaderMoved(s32    _s32Value);
 
         void                            onBlackoutClicked();
-
-        void                            resetAll();
 
 
     /*******************************************************************************

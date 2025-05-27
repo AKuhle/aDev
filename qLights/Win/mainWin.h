@@ -59,7 +59,7 @@ class MainWin : public aMainWinSdi,
         MainWin();
         ~MainWin();
 
-        void                setMode(enumWorkMode _eMode);
+        void                setWorkMode(enumWorkMode _eMode);
         enumWorkMode        workMode() const                { return m_eWorkMode; }
 
 
