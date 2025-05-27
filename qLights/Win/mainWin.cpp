@@ -3,8 +3,11 @@
 *******************************************************************************/
 #include "ui_formMainWin.h"
 
+#include "aAppMainWin.h"
 #include "mainWin.h"
 #include "ctrlPanel.h"
+
+using namespace aLib::aApp;
 
 
 /*******************************************************************************
@@ -33,6 +36,13 @@ MainWin::MainWin()
 *******************************************************************************/
 MainWin::~MainWin()
 {
+    // save the configuration
+    if (m_pCtrlPanel)
+    {
+        aPath   path = get_appPath() / LAST_CONFIG;
+        m_pCtrlPanel->writeConfiguration(path);
+    }
+
     #ifdef _USE_QT_
         delete m_pUi;
     #endif
@@ -60,6 +70,10 @@ bool MainWin::onCreateWin()
 
     setCentralWin(m_pCtrlPanel);
 
+    // read the last configuration
+    aPath   path = get_appPath() / LAST_CONFIG;
+    m_pCtrlPanel->readConfiguration(path);
+
     sendUpdateCmd(UPDATE_GUI);
 
     return true;
@@ -73,4 +87,3 @@ bool MainWin::onCloseWin()
 {
     return true;
 } // MainWin::onCloseWin
-

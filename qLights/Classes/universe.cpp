@@ -15,10 +15,14 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+#include "aJsonValue.h"
+
 #include "qLights_defs.h"
 #include "universe.h"
 
 using namespace std;
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -39,6 +43,27 @@ Universe::Universe(u32              _u32Id,
 Universe::~Universe()
 {
 } // Universe::~Universe
+
+
+/*******************************************************************************
+* Universe::add2Configuration
+*******************************************************************************/
+void Universe::add2Configuration(aJsonFile &_jf)
+{
+    _jf.openLevel();
+        // add univers info
+        _jf.add(aJsonValue("id", (dbl) m_u32Id));
+
+        // add dmxdata
+        _jf.openLevel();
+            for (s32 i = 0; i < 512; i++)
+            {
+                _jf.add(aJsonValue(aString::fromValue(i), (dbl) m_dmxData.at(i)));
+            }
+        _jf.closeLevel("dmxdata");
+
+    _jf.closeLevel(aString("universe") + "-" + aString::fromValue(m_u32Id));
+} // Universe::add2Configuration
 
 
 /*******************************************************************************

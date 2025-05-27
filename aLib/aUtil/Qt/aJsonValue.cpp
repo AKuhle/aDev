@@ -48,30 +48,6 @@ aJsonValue::aJsonValue(aString  _sKey,
 * aJsonValue::aJsonValue
 *******************************************************************************/
 aJsonValue::aJsonValue(aString  _sKey,
-                       s64      _s64Value)
-: m_sKey(_sKey),
-  m_bIsS64(true),
-  m_s64Value(_s64Value)
-{
-} // aJsonValue::aJsonValue
-
-
-/*******************************************************************************
-* aJsonValue::aJsonValue
-*******************************************************************************/
-aJsonValue::aJsonValue(aString  _sKey,
-                       u64      _u64Value)
-: m_sKey(_sKey),
-  m_bIsU64(true),
-  m_u64Value(_u64Value)
-{
-} // aJsonValue::aJsonValue
-
-
-/*******************************************************************************
-* aJsonValue::aJsonValue
-*******************************************************************************/
-aJsonValue::aJsonValue(aString  _sKey,
                        dbl      _dblValue)
 : m_sKey(_sKey),
   m_bIsDbl(true),
@@ -130,52 +106,6 @@ bool aJsonValue::toBool() const
 
     return false;
 } // aJsonValue::toBool
-
-
-/*******************************************************************************
-* aJsonValue::isS64
-*******************************************************************************/
-bool aJsonValue::isS64() const
-{
-    return m_bIsS64;
-} // aJsonValue::isS64
-
-
-/*******************************************************************************
-* aJsonValue::toS64
-*******************************************************************************/
-s64 aJsonValue::toS64() const
-{
-    if (isS64())
-    {
-        return m_s64Value;
-    }
-
-    return 0;
-} // aJsonValue::toS64
-
-
-/*******************************************************************************
-* aJsonValue::isU64
-*******************************************************************************/
-bool aJsonValue::isU64() const
-{
-    return m_bIsU64;
-} // aJsonValue::isU64
-
-
-/*******************************************************************************
-* aJsonValue::toU64
-*******************************************************************************/
-u64 aJsonValue::toU64() const
-{
-    if (isU64())
-    {
-        return m_u64Value;
-    }
-
-    return 0;
-} // aJsonValue::toU64
 
 
 /*******************************************************************************

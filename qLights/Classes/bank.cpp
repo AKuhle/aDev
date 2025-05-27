@@ -15,9 +15,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+#include "aJsonValue.h"
+
 #include "qLights_defs.h"
 #include "bank.h"
 #include "fixture.h"
+
+using namespace std;
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -38,21 +44,41 @@ Bank::~Bank()
 
 
 /*******************************************************************************
+* Bank::add2Configuration
+*******************************************************************************/
+void Bank::add2Configuration(aJsonFile &_jf)
+{
+    _jf.openLevel();
+        // add controller info
+        _jf.add(aJsonValue("name", m_sName));
+
+        // add universes
+        _jf.openLevel();
+            for (auto f : m_mapFixture)
+            {
+                _jf.add(aJsonValue(aString::fromValue(f.first), f.second->name()));
+            }
+        _jf.closeLevel("fixtures");
+    _jf.closeLevel(aString("bank") + "-" + m_sName);
+} // Bank::add2Configuration
+
+
+/*******************************************************************************
 * Bank::addFixture
 *******************************************************************************/
-void Bank::addFixture(s32                  _s32FixtureBtnIdx,
+void Bank::addFixture(s32                  _s32BankBtnIdx,
                       shared_ptr<Fixture>  _pFixture)
 {
-    m_mapFixture[_s32FixtureBtnIdx] = _pFixture;
+    m_mapFixture[_s32BankBtnIdx] = _pFixture;
 } // Bank::addFixture
 
 
 /*******************************************************************************
 * Bank::fixture
 *******************************************************************************/
-shared_ptr<Fixture> Bank::fixture(s32 _s32FixtureBtnIdx) const
+shared_ptr<Fixture> Bank::fixture(s32 _s32BankBtnIdx) const
 {
-    aMap<s32, shared_ptr<Fixture>>::const_iterator it = m_mapFixture.find(_s32FixtureBtnIdx);
+    aMap<s32, shared_ptr<Fixture>>::const_iterator it = m_mapFixture.find(_s32BankBtnIdx);
 
     return (it != m_mapFixture.end())?   it->second : nullptr;
 } // Bank::fixture

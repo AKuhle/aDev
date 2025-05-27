@@ -48,6 +48,8 @@ class Universe
                  const aString  &_sIpAdr);
         ~Universe();
 
+        void                add2Configuration(aJsonFile &_jf);
+
         void                setDmxChannelValue(u32   _u32Channel,
                                                u8    _u8Value,
                                                bool  _bSend);

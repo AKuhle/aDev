@@ -68,10 +68,10 @@ void aPoolVarS64::add2JsonFile(aJsonFile  &_jFile,
 {
     _jFile.openLevel();
 
-    _jFile.add(aJsonValue("value", val()));
-    _jFile.add(aJsonValue("default", defVal()));
-    _jFile.add(aJsonValue("min", minVal()));
-    _jFile.add(aJsonValue("max", maxVal()));
+    _jFile.add(aJsonValue("value", (dbl) val()));
+    _jFile.add(aJsonValue("default", (dbl) defVal()));
+    _jFile.add(aJsonValue("min", (dbl) minVal()));
+    _jFile.add(aJsonValue("max", (dbl) maxVal()));
     _jFile.add(aJsonValue("minMax", minMax()));
 
     // key for this value is the id of this value

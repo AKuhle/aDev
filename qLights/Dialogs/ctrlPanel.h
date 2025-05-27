@@ -48,6 +48,14 @@ class Fader;
 /*******************************************************************************
 * globals
 *******************************************************************************/
+// <name, map<bankBtnIdx, fixtureName>>
+using bankIoInfo = std::tuple<aString, aMap<s32, aString>>;
+
+// <controller, universeId, channelOs, channelNr, icon, brightness, value>
+using channelIoInfo = std::tuple<aString, s32, s32, s32, aString, bool, u32>;
+
+// <name, controller, universeId, channelOs, vector<channel>>
+using fixtureIoInfo = std::tuple<aString, aString, s32, s32, aMap<aString, channelIoInfo>>;
 
 
 /*******************************************************************************
@@ -56,6 +64,7 @@ class Fader;
 class CtrlPanel : public aPlainWin,
                   public aCtrlMgr
 {
+    // tuple during runtime
     using bankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
     using fixtureTuple = std::tuple<aPushButton *>;
     using sceneTuple = std::tuple<aPushButton *, shared_ptr<Scene>>;
@@ -89,13 +98,15 @@ class CtrlPanel : public aPlainWin,
         dbl                             m_dMasterBrightness     { 1.0 };
         aSharedPtrVector<Channel>       m_vMasterChannel;
 
+        // io-member
+        aMap<aString, bankIoInfo>       m_mapBankIoInfo;
+        aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
         ~CtrlPanel();
 
         void                            resetAll();
-
 
     private:
         void                            createSetup();
@@ -151,6 +162,22 @@ class CtrlPanel : public aPlainWin,
         void                            updateDmxValue(shared_ptr<Channel>  _pChannel,
                                                        bool                 _bSend);
 
+    /*******************************************************************************
+    * CtrlPanel - io
+    *******************************************************************************/
+    public:
+        void                                writeConfiguration(const aPath &_path);
+
+        void                                readConfiguration(const aPath &_path);
+
+    private:
+        void                                JsonCallback(const aVector<aString> &_vecKeys,
+                                                         const aJsonValue       &_value);
+
+    bankIoInfo&                             getBankInfo(const aString &_sName);
+    fixtureIoInfo&                          getFixtureInfo(const aString &_sName);
+    channelIoInfo&                          getChannelInfo(fixtureIoInfo    &_fi,
+                                                           const aString    &_sName);
 
     /*******************************************************************************
     * update gui

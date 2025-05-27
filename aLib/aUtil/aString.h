@@ -103,6 +103,8 @@ class aString
 
         c16                     at(s32  _s32Pos) const;
 
+        aString                 left(s32 _n) const;
+
         size_t                  find(c16 _c) const;
 
         void                    splitString(const aString       _sDelim,			//!< could be multiple, e.g. "|@-" => this split at | or @ or -

@@ -15,8 +15,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+#include "aJsonValue.h"
+
+#include "controller.h"
 #include "fixture.h"
 #include "channel.h"
+
+using namespace std;
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -40,6 +47,27 @@ Fixture::Fixture(const aString          &_sName,
 Fixture::~Fixture()
 {
 } // Fixture::~Fixture
+
+
+/*******************************************************************************
+* Fixture::add2Configuration
+*******************************************************************************/
+void Fixture::add2Configuration(aJsonFile &_jf)
+{
+    _jf.openLevel();
+        _jf.add(aJsonValue("name", m_sName));
+        _jf.add(aJsonValue("controller", m_pConroller->name()));
+        _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
+        _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
+
+        // add the channels
+        for (auto &c : m_mapChannel)
+        {
+            c.second->add2Configuration(_jf);
+        }
+    _jf.closeLevel(aString("fixture") + "-" + m_sName);
+
+} // Fixture::add2Configuration
 
 
 /*******************************************************************************

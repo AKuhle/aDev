@@ -136,6 +136,7 @@ SOURCES += \
     Classes/universe.cpp \
     Dialogs/ctrlPanel.cpp \
     Dialogs/ctrlPanel_ctrl.cpp \
+    Dialogs/ctrlPanel_io.cpp \
     Dialogs/dlgAddBank.cpp \
     Dialogs/scribbleStrip.cpp \
     Win/mainWin.cpp \

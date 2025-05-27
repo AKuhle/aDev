@@ -47,6 +47,8 @@ class Controller
                    s32           _s32UniverseMax);
         ~Controller();
 
+        void                                add2Configuration(aJsonFile &_jf);
+
         const aString&                      name() const                        { return m_sName; }
         void                                setName(const aString &_sName)      { m_sName = _sName; }
 

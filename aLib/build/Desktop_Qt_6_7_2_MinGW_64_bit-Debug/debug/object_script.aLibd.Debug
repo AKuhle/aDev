@@ -4,11 +4,15 @@ debug/main.o
 debug/aAction.o
 debug/aCtrlMgr.o
 debug/aLabel.o
+debug/aLineEdit.o
 debug/aProgressBar.o
+debug/aPushButton.o
+debug/aScrollBar.o
 debug/aToolButton.o
 debug/aBrush.o
 debug/aPainter.o
 debug/aPen.o
+debug/aPixmap.o
 debug/aMathObj2D.o
 debug/aMathObj3D.o
 debug/aMathObj.o
@@ -49,6 +53,7 @@ debug/aVersionInfo.o
 debug/aLib.o
 debug/aDoc.o
 debug/aView.o
+debug/aDialog.o
 debug/aDockWin.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
@@ -59,7 +64,11 @@ debug/aPlainWin.o
 debug/aScrollWin.o
 debug/aStatusBar.o
 debug/moc_aAction.o
+debug/moc_aLineEdit.o
+debug/moc_aPushButton.o
+debug/moc_aScrollBar.o
 debug/moc_aToolButton.o
 debug/moc_aProgressCb.o
 debug/moc_aProgressMgr.o
 debug/moc_aThread.o
+debug/moc_aDialog.o

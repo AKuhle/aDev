@@ -54,6 +54,8 @@ class Channel
 
         ~Channel();
 
+        void                    add2Configuration(aJsonFile &_jf);
+
         void                    setController(shared_ptr<Controller> _pController)  { m_pController = _pController; }
         shared_ptr<Controller>  controllerIdx() const                               { return m_pController; }
 

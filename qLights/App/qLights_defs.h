@@ -26,6 +26,7 @@ using namespace aLib::aUtil;
 
 using universeSaveTuple = std::tuple<s32, s32, QByteArray>;
 
+#define         LAST_CONFIG                     "config.json"
 
 /*******************************************************************************
 * application constants

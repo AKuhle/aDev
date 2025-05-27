@@ -15,9 +15,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+#include "aJsonValue.h"
+
 #include "channel.h"
 #include "controller.h"
 #include "universe.h"
+
+using namespace std;
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -45,6 +51,24 @@ Channel::Channel(shared_ptr<Controller>  _pController,
 Channel::~Channel()
 {
 } // Channel::~Channel
+
+
+/*******************************************************************************
+* Channel::add2Configuration
+*******************************************************************************/
+void Channel::add2Configuration(aJsonFile &_jf)
+{
+    _jf.openLevel();
+        _jf.add(aJsonValue("controller", m_pController->name()));
+        _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
+        _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
+        _jf.add(aJsonValue("channelNr", (dbl) m_s32ChannelNr));
+        _jf.add(aJsonValue("icon", m_sIcon));
+        _jf.add(aJsonValue("brightness", m_bBrightness));
+        _jf.add(aJsonValue("value", (dbl) m_u8Value));
+    _jf.closeLevel(aString("channel") + "-" + aString::fromValue(m_s32ChannelNr));
+
+} // Channel::add2Configuration
 
 
 /*******************************************************************************

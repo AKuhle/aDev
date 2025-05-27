@@ -233,13 +233,13 @@ void aVarPool::JsonCallback(const aVector<aString> &_vecKeys,
         else if (_vecKeys.at(0) == "s64")
         {
             if (_value.key() == "value")
-                setVal(id, _value.toS64());
+                setVal(id, _value.toDbl());
             else if (_value.key() == "default")
-                setDefVal(id, _value.toS64());
+                setDefVal(id, _value.toDbl());
             else if (_value.key() == "min")
-                setMinVal(id, _value.toS64());
+                setMinVal(id, _value.toDbl());
             else if (_value.key() == "max")
-                setMaxVal(id, _value.toS64());
+                setMaxVal(id, _value.toDbl());
             else if (_value.key() == "minMax")
                 setS64MinMax(id, _value.toBool());
         }
@@ -257,13 +257,13 @@ void aVarPool::JsonCallback(const aVector<aString> &_vecKeys,
         else if (_vecKeys.at(0) == "u64")
         {
             if (_value.key() == "value")
-                setVal(id, _value.toU64());
+                setVal(id, _value.toDbl());
             else if (_value.key() == "default")
-                setDefVal(id, _value.toU64());
+                setDefVal(id, _value.toDbl());
             else if (_value.key() == "min")
-                setMinVal(id, _value.toU64());
+                setMinVal(id, _value.toDbl());
             else if (_value.key() == "max")
-                setMaxVal(id, _value.toU64());
+                setMaxVal(id, _value.toDbl());
             else if (_value.key() == "minMax")
                 setU64MinMax(id, _value.toBool());
         }

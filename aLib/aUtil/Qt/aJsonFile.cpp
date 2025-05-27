@@ -92,19 +92,9 @@ void aJsonFile::add(const aJsonValue &_val)
         pObj->insert(_val.key().toQString(), QJsonValue(_val.toBool()));
     }
 
-    if (_val.isS64())
-    {
-        pObj->insert(_val.key().toQString(), QJsonValue((dbl) _val.toS64()));
-    }
-
-    if (_val.isU64())
-    {
-        pObj->insert(_val.key().toQString(), QJsonValue((dbl) (s64) _val.toU64()));
-    }
-
     if (_val.isDbl())
     {
-        pObj->insert(_val.key().toQString(), QJsonValue((dbl) _val.toDbl()));
+        pObj->insert(_val.key().toQString(), QJsonValue(_val.toDbl()));
     }
 
     if (_val.isString())

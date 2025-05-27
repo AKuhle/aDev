@@ -15,6 +15,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+
 #include "qLights_defs.h"
 #include "mainWin.h"
 #include "ctrlPanel.h"
@@ -24,7 +26,7 @@
 #include "channel.h"
 #include "scene.h"
 
-//#include "dlgAddBank.h"
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
