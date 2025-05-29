@@ -48,6 +48,12 @@ class Fader;
 /*******************************************************************************
 * globals
 *******************************************************************************/
+// <id, dmxData>
+using universeIoInfo = std::tuple<s32, QByteArray>;
+
+// <name, adress, universeMax, map<universe>
+using controllerIoInfo = std::tuple<aString, aString, s32, aMap<aString, universeIoInfo>>;
+
 // <name, map<bankBtnIdx, fixtureName>>
 using bankIoInfo = std::tuple<aString, aMap<s32, aString>>;
 
@@ -99,6 +105,7 @@ class CtrlPanel : public aPlainWin,
         aSharedPtrVector<Channel>       m_vMasterChannel;
 
         // io-member
+        aMap<aString, controllerIoInfo> m_mapControllerIoInfo;
         aMap<aString, bankIoInfo>       m_mapBankIoInfo;
         aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
 
@@ -175,9 +182,17 @@ class CtrlPanel : public aPlainWin,
                                                          const aJsonValue       &_value);
 
     bankIoInfo&                             getBankInfo(const aString &_sName);
+
     fixtureIoInfo&                          getFixtureInfo(const aString &_sName);
+
     channelIoInfo&                          getChannelInfo(fixtureIoInfo    &_fi,
                                                            const aString    &_sName);
+
+    controllerIoInfo&                       getControllerInfo(const aString &_sName);
+
+    universeIoInfo&                         getUniverseInfo(controllerIoInfo   &_ci,
+                                                            const aString      &_sName);
+
 
     /*******************************************************************************
     * update gui

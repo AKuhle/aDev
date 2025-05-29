@@ -73,6 +73,40 @@ void CtrlPanel::readConfiguration(const aPath &_path)
     });
 
 
+    // generate the controller
+    for (auto me : m_mapControllerIoInfo)
+    {
+        controllerIoInfo &ci = me.second;
+
+        aString                         sCtrlName   = std::get<0> (ci);
+        aString                         sCtrlAdress = std::get<1> (ci);
+        s32                             s32CtrlUniMax = std::get<2> (ci);
+
+        if (true)
+            cout << sCtrlName << " - "
+                 << sCtrlAdress << " - "
+                 << s32CtrlUniMax << " - "
+                 << endl;
+
+                // generate the universes
+        aMap<aString, universeIoInfo>   &mapUni = std::get<3> (ci);
+        for (auto uniME : mapUni)
+        {
+            universeIoInfo &ui = uniME.second;
+
+            s32         s32UniId    = std::get<0> (ui);
+            QByteArray  &ba         = std::get<1> (ui);
+
+            if (true)
+                cout << s32UniId << " - "
+                     << ba.size() << " - "
+                     << endl;
+
+        }
+
+    } // for (auto me : m_mapControllerIoInfo)
+
+
     // generate the features
     for (auto me : m_mapFixtureIoInfo)
     {
@@ -150,6 +184,49 @@ void CtrlPanel::JsonCallback(const aVector<aString> &_vecKeys,
     s32     s32Size = _vecKeys.size();
 
     // parse bank
+    if (_vecKeys.at(0).left(10) == "controller")
+    {
+        controllerIoInfo &ci = getControllerInfo(_vecKeys.at(0));
+
+        if (s32Size == 1)
+        {
+            // fixture name
+            if (_value.key() == "name")
+                std::get<0> (ci) = _value.toString();
+
+            // ip adress
+            if (_value.key() == "adress")
+                std::get<1> (ci) = _value.toString();
+
+            // universeMax of the controller
+            if (_value.key() == "universeMax")
+                std::get<2> (ci) = _value.toDbl();
+        }
+
+        if (s32Size == 2)
+        {
+            universeIoInfo &ui = getUniverseInfo(ci, _vecKeys.at(0));
+
+            // fixture name
+            if (_value.key() == "id")
+                std::get<0> (ui) = _value.toDbl();
+        }
+
+        if (s32Size == 3)
+        {
+            universeIoInfo &ui = getUniverseInfo(ci, _vecKeys.at(0));
+
+            // fixture name
+            if (_vecKeys.at(2) == "dmxdata")
+            {
+                QByteArray &ba = std::get<1> (ui);
+
+                ba[_value.key().to_s32()] = _value.toDbl();
+            }
+        }
+    }
+
+    // parse bank
     if (_vecKeys.at(0).left(4) == "bank")
     {
         bankIoInfo &bi = getBankInfo(_vecKeys.at(0));
@@ -160,7 +237,8 @@ void CtrlPanel::JsonCallback(const aVector<aString> &_vecKeys,
 
         // bank fixtures
         if (s32Size == 2 && _vecKeys.at(1) == "fixtures")
-            (std::get<1> (bi))[_value.key().to_s32()] = _value.toString();
+
+        (std::get<1> (bi))[_value.key().to_s32()] = _value.toString();
     }
 
 
@@ -273,3 +351,36 @@ channelIoInfo& CtrlPanel::getChannelInfo(fixtureIoInfo  &_fi,
 
     return mapChannelInfo.find(_sName)->second;
 } // CtrlPanel::getChannelInfo
+
+
+/*******************************************************************************
+* CtrlPanel::getControllerInfo
+*******************************************************************************/
+controllerIoInfo& CtrlPanel::getControllerInfo(const aString &_sName)
+{
+    // create a new fixtureinfo, if it does not already exist
+    if (m_mapControllerIoInfo.find(_sName) == m_mapControllerIoInfo.end())
+    {
+        m_mapControllerIoInfo[_sName] = std::make_tuple("", "", 0, aMap<aString, universeIoInfo>{});
+    }
+
+    return m_mapControllerIoInfo.find(_sName)->second;
+} // CtrlPanel::getControllerInfo
+
+
+/*******************************************************************************
+* CtrlPanel::getUniverseInfo
+*******************************************************************************/
+universeIoInfo& CtrlPanel::getUniverseInfo(controllerIoInfo &_ci,
+                                           const aString    &_sName)
+{
+    aMap<aString, universeIoInfo>  &mapUniverseInfo = std::get<3> (_ci);
+
+    // create a new fixtureinfo, if it does not already exist
+    if (mapUniverseInfo.find(_sName) == mapUniverseInfo.end())
+    {
+        mapUniverseInfo[_sName] = std::make_tuple(0, QByteArray{512, 0});
+    }
+
+    return mapUniverseInfo.find(_sName)->second;
+} // CtrlPanel::getUniverseInfo
