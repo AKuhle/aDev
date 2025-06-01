@@ -40,7 +40,8 @@ class Bank
         Bank(const aString &_sName);
         ~Bank();
 
-        void                                add2Configuration(aJsonFile &_jf);
+        void                                add2Configuration(s32       _s32BankBtnIdx,
+                                                              aJsonFile &_jf);
 
         const aString&                      name() const                    { return m_sName; }
         void                                setName(const aString &_s)      { m_sName = _s; }

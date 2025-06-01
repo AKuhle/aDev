@@ -60,24 +60,12 @@ void Channel::add2Configuration(aJsonFile &_jf)
 {
     _jf.openLevel();
         _jf.add(aJsonValue("controller", m_pController->name()));
-        _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
-        _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
         _jf.add(aJsonValue("channelNr", (dbl) m_s32ChannelNr));
         _jf.add(aJsonValue("icon", m_sIcon));
         _jf.add(aJsonValue("brightness", m_bBrightness));
-        _jf.add(aJsonValue("value", (dbl) m_u8Value));
     _jf.closeLevel(aString("channel") + "-" + aString::fromValue(m_s32ChannelNr));
 
 } // Channel::add2Configuration
-
-
-/*******************************************************************************
-* Channel::setValue
-*******************************************************************************/
-void Channel::setValue(u8    _u8Value)
-{
-    m_u8Value = _u8Value;
-} // Channel::setValue
 
 
 /*******************************************************************************

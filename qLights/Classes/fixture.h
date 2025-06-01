@@ -19,9 +19,13 @@
 #include "aString.h"
 #include "aMap.h"
 
+#include "qLights_defs.h"
+
+
 class Controller;
 class Universe;
 class Channel;
+class Bank;
 
 using namespace std;
 using namespace aLib;
@@ -49,7 +53,9 @@ class Fixture
 
         ~Fixture();
 
-        void                    add2Configuration(aJsonFile &_jf);
+        void                    add2Configuration(aJsonFile           &_jf,
+                                                  shared_ptr<Bank>    _pBank,
+                                                  s32                 _s32FixtureBtnIdx);
 
         const aString&          name() const                    { return m_sName; }
         void                    setName(const aString &_sName)  { m_sName = _sName; }
@@ -63,5 +69,8 @@ class Fixture
         shared_ptr<Controller>  controller() const              { return m_pConroller; }
         s32                     universeId() const              { return m_s32UniverseId; }
         s32                     channelOs() const               { return m_s32ChannelOs; }
+
+        void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
+        void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
 
 }; // class Fixture

@@ -52,7 +52,10 @@ class aScrollBar : public aCtrl<QScrollBar>,
         void            setRange(s32    _s32Min,
                                  s32    _s32Max) override;
 
-        void            setValue(s32 s32Value) override;
+        void            setTracking(bool _bTracking) override;
+
+        void            setPosition(s32 _s32Pos) override;
+        void            setValue(s32 _s32Value) override;
 
         void            setInverse(bool _bInverse) override;
 

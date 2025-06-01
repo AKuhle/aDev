@@ -24,7 +24,9 @@
 #include "aString.h"
 #include "aColor.h"
 
+#include "qLights_defs.h"
 #include "aPlainWin.h"
+#include "controller.h"
 
 
 using namespace aLib;
@@ -49,19 +51,22 @@ class Fader;
 * globals
 *******************************************************************************/
 // <id, dmxData>
-using universeIoInfo = std::tuple<s32, QByteArray>;
+using universeIoInfo = std::tuple<s32>;
 
 // <name, adress, universeMax, map<universe>
 using controllerIoInfo = std::tuple<aString, aString, s32, aMap<aString, universeIoInfo>>;
 
-// <name, map<bankBtnIdx, fixtureName>>
-using bankIoInfo = std::tuple<aString, aMap<s32, aString>>;
+// <name, bankBtnIdx>
+using bankIoInfo = std::tuple<aString, s32>;
 
-// <controller, universeId, channelOs, channelNr, icon, brightness, value>
-using channelIoInfo = std::tuple<aString, s32, s32, s32, aString, bool, u32>;
+// <controller, channelNr, icon, brightness, value>
+using channelIoInfo = std::tuple<aString, s32, aString, bool>;
 
-// <name, controller, universeId, channelOs, vector<channel>>
-using fixtureIoInfo = std::tuple<aString, aString, s32, s32, aMap<aString, channelIoInfo>>;
+// <name, controller, universeId, channelOs, bank, fixtureBtnIdx, vector<channel>>
+using fixtureIoInfo = std::tuple<aString, aString, s32, s32, aString, s32, aMap<aString, channelIoInfo>>;
+
+// <idx, sceneName, controllerName, universId, channelNr, channelOs, value>
+using sceneIoInfo = std::tuple<s32, aString, aString, s32, s32, s32, s32>;
 
 
 /*******************************************************************************
@@ -108,12 +113,15 @@ class CtrlPanel : public aPlainWin,
         aMap<aString, controllerIoInfo> m_mapControllerIoInfo;
         aMap<aString, bankIoInfo>       m_mapBankIoInfo;
         aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
+        aMap<aString, sceneIoInfo>      m_mapSceneIoInfo;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
         ~CtrlPanel();
 
-        void                            resetAll();
+        void                            allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
+
+        void                            resetAllChannels();
 
     private:
         void                            createSetup();
@@ -123,6 +131,9 @@ class CtrlPanel : public aPlainWin,
         shared_ptr<Controller>          createController(const aString  &_sName,
                                                          const aString  &_sIpAdr,
                                                          s32            _s32UniverseMax);
+
+        // uivers members
+        void                            sendAllUniverses();
 
 
         // bank members
@@ -167,31 +178,51 @@ class CtrlPanel : public aPlainWin,
 
         // channel members
         void                            updateDmxValue(shared_ptr<Channel>  _pChannel,
-                                                       bool                 _bSend);
+                                                               bool                 _bSend);
+
+        void                            setConfiguration(aMap<aString, controllerIoInfo>    &_mapControllerIoInfo,
+                                                         aMap<aString, bankIoInfo>          &_mapBankIoInfo,
+                                                         aMap<aString, fixtureIoInfo>       &_mapFixtureIoInfo,
+                                                         aMap<aString, sceneIoInfo>         &_mapSceneIoInfo);
+
+        shared_ptr<Controller>          findController(const aString &_sControllerName) const;
+
+
+        shared_ptr<Bank>                findBank(const aString &_sBankName) const;
+
+        bool                            findBank4Fixture(shared_ptr<Fixture>    _pFix,
+                                                         shared_ptr<Bank>       &_pBank,
+                                                         s32                    &_s32FixtureBtnIdx) const;
+
+        shared_ptr<Channel>             findChannel(const aString   &_sControllerName,
+                                                    s32             _s32UniverseId,
+                                                    s32             _s32channelNr,
+                                                    s32             _s32ChannelOs);
 
     /*******************************************************************************
     * CtrlPanel - io
     *******************************************************************************/
     public:
-        void                                writeConfiguration(const aPath &_path);
+        void                            writeConfiguration(const aPath &_path);
 
-        void                                readConfiguration(const aPath &_path);
+        void                            readConfiguration(const aPath &_path);
 
     private:
-        void                                JsonCallback(const aVector<aString> &_vecKeys,
-                                                         const aJsonValue       &_value);
+        void                            JsonCallback(const aVector<aString> &_vecKeys,
+                                                     const aJsonValue       &_value);
 
-    bankIoInfo&                             getBankInfo(const aString &_sName);
+        bankIoInfo&                     getBankInfo(const aString &_sName);
 
-    fixtureIoInfo&                          getFixtureInfo(const aString &_sName);
+        fixtureIoInfo&                  getFixtureInfo(const aString &_sName);
 
-    channelIoInfo&                          getChannelInfo(fixtureIoInfo    &_fi,
-                                                           const aString    &_sName);
+        channelIoInfo&                  getChannelInfo(fixtureIoInfo    &_fi,
+                                                       const aString    &_sName);
 
-    controllerIoInfo&                       getControllerInfo(const aString &_sName);
+        controllerIoInfo&               getControllerInfo(const aString &_sName);
+        universeIoInfo&                 getUniverseInfo(controllerIoInfo   &_ci,
+                                                        const aString      &_sName);
 
-    universeIoInfo&                         getUniverseInfo(controllerIoInfo   &_ci,
-                                                            const aString      &_sName);
+        sceneIoInfo&                    getSceneInfo(const aString    &_sName);
 
 
     /*******************************************************************************

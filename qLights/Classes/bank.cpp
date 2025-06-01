@@ -46,19 +46,14 @@ Bank::~Bank()
 /*******************************************************************************
 * Bank::add2Configuration
 *******************************************************************************/
-void Bank::add2Configuration(aJsonFile &_jf)
+void Bank::add2Configuration(s32        _s32BankBtnIdx,
+                             aJsonFile  &_jf)
 {
     _jf.openLevel();
         // add controller info
+        _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
         _jf.add(aJsonValue("name", m_sName));
 
-        // add universes
-        _jf.openLevel();
-            for (auto f : m_mapFixture)
-            {
-                _jf.add(aJsonValue(aString::fromValue(f.first), f.second->name()));
-            }
-        _jf.closeLevel("fixtures");
     _jf.closeLevel(aString("bank") + "-" + m_sName);
 } // Bank::add2Configuration
 

@@ -21,6 +21,7 @@
 #include "controller.h"
 #include "fixture.h"
 #include "channel.h"
+#include "bank.h"
 
 using namespace std;
 using namespace aLib::aUtil;
@@ -52,13 +53,17 @@ Fixture::~Fixture()
 /*******************************************************************************
 * Fixture::add2Configuration
 *******************************************************************************/
-void Fixture::add2Configuration(aJsonFile &_jf)
+void Fixture::add2Configuration(aJsonFile           &_jf,
+                                shared_ptr<Bank>    _pBank,
+                                s32                 _s32FixtureBtnIdx)
 {
     _jf.openLevel();
         _jf.add(aJsonValue("name", m_sName));
         _jf.add(aJsonValue("controller", m_pConroller->name()));
         _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
         _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
+        _jf.add(aJsonValue("bank", _pBank->name()));
+        _jf.add(aJsonValue("fixtureBtnIdx", (dbl) _s32FixtureBtnIdx));
 
         // add the channels
         for (auto &c : m_mapChannel)
@@ -102,3 +107,29 @@ shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
 
     return nullptr;
 } // Fixture::channel
+
+
+/*******************************************************************************
+* Fixture::allChannelValues
+*******************************************************************************/
+void Fixture::allChannelValues(aVector<channelValueTuple> &vValues) const
+{
+    for (auto &me : m_mapChannel)
+    {
+        channelValueTuple t = std::make_tuple(me.second, me.second->value());
+
+        vValues.push_back(t);
+    }
+} // Fixture::allChannelValues
+
+
+/*******************************************************************************
+* Fixture::allChannels
+*******************************************************************************/
+void Fixture::allChannels(aVector<shared_ptr<Channel>> &_vChannel) const
+{
+    for (auto &me : m_mapChannel)
+    {
+        _vChannel.push_back(me.second);
+    }
+} // Fixture::allChannels

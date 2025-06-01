@@ -44,7 +44,7 @@ void MainWin::onUpdateCmd(u64     _u64Cmd,
     {
         if (m_pCtrlPanel != nullptr)
         {
-            m_pCtrlPanel->resetAll();
+            m_pCtrlPanel->resetAllChannels();
 
             _u64Cmd |= UPDATE_GUI;
         }

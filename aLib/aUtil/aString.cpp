@@ -188,6 +188,15 @@ aString aString::operator+(const aString &_str)
 /*******************************************************************************
 * aString::operator==
 *******************************************************************************/
+bool aString::operator==(const aString &_rhs) const
+{
+    return m_str == _rhs.m_str;
+} // aString::operator==
+
+
+/*******************************************************************************
+* aString::operator==
+*******************************************************************************/
 bool aString::operator==(const char *_pStr) const
 {
     return to_stdString().compare(_pStr) == 0;

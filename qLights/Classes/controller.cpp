@@ -94,12 +94,12 @@ shared_ptr<Universe> Controller::universe(u32 _u32Id)
 
 
 /*******************************************************************************
-* Controller::resetAllUniverses
+* Controller::sendAllUniverses
 *******************************************************************************/
-void Controller::resetAllUniverses()
+void Controller::sendAllUniverses()
 {
     for (auto &mapEntry : m_mapUniverse)
     {
-        mapEntry.second->resetUniverse();
+        mapEntry.second->sendUniverse();
     }
-} // Controller::resetAllUniverses
+} // Controller::sendAllUniverses

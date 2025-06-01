@@ -22,6 +22,8 @@
 
 #include "aLib_def.h"
 #include "aSharedPtrVector.h"
+
+#include "qLights_defs.h"
 #include "bank.h"
 
 using namespace aLib;
@@ -54,7 +56,10 @@ class Universe
                                                u8    _u8Value,
                                                bool  _bSend);
 
-        void                resetUniverse();
+        void                setDmxValues(const QByteArray    &_values,
+                                         bool                _bSend);
+
+        void                sendUniverse();
 
         // u8                  dmxChannelValue(u32   _u32ChannelOs,
         //                                     u32   _u32Channel);

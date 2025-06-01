@@ -63,6 +63,7 @@ class aString
         aString                 operator+(const c16 *_pStr);
         aString                 operator+(const aString &_str);
 
+        bool                    operator==(const aString &_rhs) const;
         bool                    operator==(const char *_pStr) const;
         bool                    operator!=(const char *_pStr) const;
 

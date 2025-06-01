@@ -54,14 +54,6 @@ void Universe::add2Configuration(aJsonFile &_jf)
         // add univers info
         _jf.add(aJsonValue("id", (dbl) m_u32Id));
 
-        // add dmxdata
-        _jf.openLevel();
-            for (s32 i = 0; i < 512; i++)
-            {
-                _jf.add(aJsonValue(aString::fromValue(i), (dbl) m_dmxData.at(i)));
-            }
-        _jf.closeLevel("dmxdata");
-
     _jf.closeLevel(aString("universe") + "-" + aString::fromValue(m_u32Id));
 } // Universe::add2Configuration
 
@@ -85,15 +77,30 @@ void Universe::setDmxChannelValue(u32   _u32Channel,
 
 
 /*******************************************************************************
-* Universe::resetUniverse
+* Universe::setDmxValues
 *******************************************************************************/
-void Universe::resetUniverse()
+void Universe::setDmxValues(const QByteArray &_values,
+                            bool             _bSend)
 {
-    m_dmxData.fill(0);
+    // set the new channel value
+    m_dmxData = _values;
 
+    if (_bSend)
+    {
+        sendDmxValues();
+    } // if (_bSend)
+
+    } // Universe::setDmxValues
+
+
+/*******************************************************************************
+* Universe::sendUniverse
+*******************************************************************************/
+void Universe::sendUniverse()
+{
     sendDmxValues();
 
-} // Universe::resetUniverse
+} // Universe::sendUniverse
 
 
 /*******************************************************************************

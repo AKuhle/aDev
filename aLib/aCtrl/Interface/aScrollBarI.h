@@ -39,7 +39,10 @@ class aScrollBarI
         virtual void            setRange(s32    _s32Min,
                                          s32    _s32Max) = 0;
 
-        virtual void            setValue(s32 s32Val) = 0;
+        virtual void            setTracking(bool _bTracking) = 0;
+
+        virtual void            setPosition(s32 _s32Pos) = 0;
+        virtual void            setValue(s32 _s32Val) = 0;
 
         virtual void            setInverse(bool _bInverse) = 0;
 

@@ -21,7 +21,9 @@
 #include "aString.h"
 #include "aMap.h"
 
+
 class Universe;
+class Channel;
 
 using namespace std;
 using namespace aLib;
@@ -57,6 +59,8 @@ class Controller
 
         void                                addUniverse(u32 _u32Id);
         shared_ptr<Universe>                universe(u32 _u32Id);
+
+        void                                sendAllUniverses();
 
         void                                resetAllUniverses();
 

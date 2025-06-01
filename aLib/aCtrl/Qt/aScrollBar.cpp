@@ -54,17 +54,42 @@ void aScrollBar::setRange(s32    _s32Min,
 
 
 /*******************************************************************************
-* aScrollBar::setValue
+* aScrollBar::setTracking
 *******************************************************************************/
-void aScrollBar::setValue(s32 s32Value)
+void aScrollBar::setTracking(bool _bTracking)
+{
+    QScrollBar::setTracking(_bTracking);
+} // aScrollBar::setTracking
+
+
+/*******************************************************************************
+* aScrollBar::setPosition
+*******************************************************************************/
+void aScrollBar::setPosition(s32 _s32Pos)
 {
     if (m_bInverse)
     {
-        QScrollBar::setValue(QScrollBar::maximum() - s32Value + QScrollBar::minimum());
+        QScrollBar::setSliderPosition(QScrollBar::maximum() - _s32Pos + QScrollBar::minimum());
     }
     else
     {
-        QScrollBar::setValue(s32Value);
+        QScrollBar::setSliderPosition(_s32Pos);
+    }
+} // aScrollBar::setPosition
+
+
+/*******************************************************************************
+* aScrollBar::setValue
+*******************************************************************************/
+void aScrollBar::setValue(s32 _s32Val)
+{
+    if (m_bInverse)
+    {
+        QScrollBar::setValue(QScrollBar::maximum() - _s32Val + QScrollBar::minimum());
+    }
+    else
+    {
+        QScrollBar::setValue(_s32Val);
     }
 } // aScrollBar::setValue
 

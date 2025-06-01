@@ -57,7 +57,7 @@ class Channel
         void                    add2Configuration(aJsonFile &_jf);
 
         void                    setController(shared_ptr<Controller> _pController)  { m_pController = _pController; }
-        shared_ptr<Controller>  controllerIdx() const                               { return m_pController; }
+        shared_ptr<Controller>  controller() const                               { return m_pController; }
 
         void                    setUniverseId(s32 &_s32UniverseId)                  { m_s32UniverseId = _s32UniverseId; }
         s32                     universeId() const                                  { return m_s32UniverseId; }
@@ -74,7 +74,7 @@ class Channel
         void                    setBrightness(bool _bBrightness)                    { m_bBrightness = _bBrightness; }
         bool                    isBrightness()                                      { return m_bBrightness; }
 
-        void                    setValue(u8     _u8Value);
+        void                    setValue(u8     _u8Value)                           { m_u8Value = _u8Value; }
         u8                      value()                                             { return m_u8Value; }
 
         void                    updateDmxValue(u8     _u8Value,
