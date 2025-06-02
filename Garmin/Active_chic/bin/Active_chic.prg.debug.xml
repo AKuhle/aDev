@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+<manifest filename="C:\Tools\aDev\Garmin\Active_chic\manifest.xml"/>
+<pcToLineNum>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="1" lineNum="5" parent="globals/Active_chicApp" pc="268435460" symbol="&lt;init&gt;"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="2" lineNum="31" parent="globals" pc="268435472" symbol="getApp"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="2" lineNum="32" parent="globals" pc="268435482" symbol="getApp"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="3" lineNum="6" parent="globals/Background" pc="268435493" symbol="&lt;init&gt;"/>
+<entry filename="c:\\Tools\\aDev\\Garmin\\Active_chic\\bin\\gen\\006-B4313-00\\source\\Rez.mcgen" id="4" lineNum="7" parent="globals/Rez" pc="268435505" symbol="&lt;init&gt;"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="5" lineNum="8" parent="globals/Active_chicView" pc="268435525" symbol="&lt;init&gt;"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="6" lineNum="12" parent="globals/Active_chicApp" pc="268435537" symbol="onStart"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="7" lineNum="25" parent="globals/Active_chicApp" pc="268435540" symbol="onSettingsChanged"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="7" lineNum="26" parent="globals/Active_chicApp" pc="268435542" symbol="onSettingsChanged"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="8" lineNum="20" parent="globals/Active_chicApp" pc="268435554" symbol="getInitialView"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="8" lineNum="21" parent="globals/Active_chicApp" pc="268435556" symbol="getInitialView"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="9" lineNum="7" parent="globals/Active_chicApp" pc="268435586" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="9" lineNum="8" parent="globals/Active_chicApp" pc="268435588" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicApp.mc" id="10" lineNum="16" parent="globals/Active_chicApp" pc="268435601" symbol="onStop"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="11" lineNum="8" parent="globals/Background" pc="268435604" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="11" lineNum="9" parent="globals/Background" pc="268435607" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="11" lineNum="13" parent="globals/Background" pc="268435625" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="12" lineNum="16" parent="globals/Background" pc="268435642" symbol="draw"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="12" lineNum="18" parent="globals/Background" pc="268435644" symbol="draw"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicBackground.mc" id="12" lineNum="19" parent="globals/Background" pc="268435675" symbol="draw"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="73" parent="globals/Active_chicView" pc="268435684" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="74" parent="globals/Active_chicView" pc="268435687" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="75" parent="globals/Active_chicView" pc="268435696" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="76" parent="globals/Active_chicView" pc="268435705" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="77" parent="globals/Active_chicView" pc="268435712" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="78" parent="globals/Active_chicView" pc="268435719" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="80" parent="globals/Active_chicView" pc="268435736" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="81" parent="globals/Active_chicView" pc="268435753" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="15" lineNum="82" parent="globals/Active_chicView" pc="268435765" symbol="drawSteps"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="16" lineNum="15" parent="globals/Active_chicView" pc="268435782" symbol="onLayout"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="16" lineNum="16" parent="globals/Active_chicView" pc="268435784" symbol="onLayout"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="18" lineNum="10" parent="globals/Active_chicView" pc="268435818" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="18" lineNum="11" parent="globals/Active_chicView" pc="268435820" symbol="initialize"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="26" parent="globals/Active_chicView" pc="268435833" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="28" parent="globals/Active_chicView" pc="268435836" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="29" parent="globals/Active_chicView" pc="268435843" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="30" parent="globals/Active_chicView" pc="268435855" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="31" parent="globals/Active_chicView" pc="268435863" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="32" parent="globals/Active_chicView" pc="268435882" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="33" parent="globals/Active_chicView" pc="268435890" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="36" parent="globals/Active_chicView" pc="268435903" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="37" parent="globals/Active_chicView" pc="268435923" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="38" parent="globals/Active_chicView" pc="268435930" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="41" parent="globals/Active_chicView" pc="268435949" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="44" parent="globals/Active_chicView" pc="268435996" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="45" parent="globals/Active_chicView" pc="268436020" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="46" parent="globals/Active_chicView" pc="268436047" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="49" parent="globals/Active_chicView" pc="268436059" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="52" parent="globals/Active_chicView" pc="268436079" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="20" lineNum="55" parent="globals/Active_chicView" pc="268436090" symbol="onUpdate"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="21" lineNum="86" parent="globals/Active_chicView" pc="268436102" symbol="drawStairs"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="22" lineNum="90" parent="globals/Active_chicView" pc="268436105" symbol="minimum"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="22" lineNum="91" parent="globals/Active_chicView" pc="268436107" symbol="minimum"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="22" lineNum="92" parent="globals/Active_chicView" pc="268436115" symbol="minimum"/>
+<entry filename="C:\\Tools\\aDev\\Garmin\\Active_chic\\source\\Active_chicView.mc" id="22" lineNum="95" parent="globals/Active_chicView" pc="268436121" symbol="minimum"/>
+<entry filename="c:\\Tools\\aDev\\Garmin\\Active_chic\\bin\\gen\\006-B4313-00\\source\\Rez.mcgen" id="23" lineNum="13" parent="globals/Rez/Layouts" pc="268436124" symbol="WatchFace"/>
+<entry filename="c:\\Tools\\aDev\\Garmin\\Active_chic\\bin\\gen\\006-B4313-00\\source\\Rez.mcgen" id="23" lineNum="14" parent="globals/Rez/Layouts" pc="268436135" symbol="WatchFace"/>
+<entry filename="c:\\Tools\\aDev\\Garmin\\Active_chic\\bin\\gen\\006-B4313-00\\source\\Rez.mcgen" id="23" lineNum="16" parent="globals/Rez/Layouts" pc="268436159" symbol="WatchFace"/>
+<entry filename="c:\\Tools\\aDev\\Garmin\\Active_chic\\bin\\gen\\006-B4313-00\\source\\Rez.mcgen" id="23" lineNum="18" parent="globals/Rez/Layouts" pc="268436263" symbol="WatchFace"/>
+</pcToLineNum>
+<symbolTable>
+<entry id="8388639" module="true" symbol="Graphics"/>
+<entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+<entry id="8389683" method="true" symbol="onSettingsChanged"/>
+<entry field="true" id="19" symbol="ColorRed"/>
+<entry id="11" method="true" symbol="minimum"/>
+<entry field="true" id="22" symbol="MilitaryFormatTitle"/>
+<entry field="true" id="8388611" module="true" symbol="Toybox"/>
+<entry field="true" id="16" symbol="ColorBlue"/>
+<entry field="true" id="13" symbol="AppName"/>
+<entry id="5" module="true" symbol="globals/Rez/Strings"/>
+<entry id="8388648" module="true" symbol="WatchUi"/>
+<entry id="2" module="true" symbol="globals/Rez"/>
+<entry id="8389124" method="true" symbol="onUpdate"/>
+<entry id="8389375" method="true" object="true" symbol="WatchFace"/>
+<entry field="true" id="8389065" symbol="locY"/>
+<entry field="true" id="8389064" symbol="locX"/>
+<entry id="10" method="true" symbol="drawSteps"/>
+<entry id="8388771" module="true" object="true" symbol="Drawables"/>
+<entry id="8389348" symbol="font"/>
+<entry id="7" object="true" symbol="Active_chicView"/>
+<entry id="8389275" method="true" symbol="getApp"/>
+<entry field="true" id="17" symbol="ColorDarkGray"/>
+<entry id="4" module="true" symbol="globals/Rez/Layouts"/>
+<entry id="8389122" method="true" symbol="onLayout"/>
+<entry id="8389376" method="true" symbol="onEnterSleep"/>
+<entry field="true" id="8389063" symbol="identifier"/>
+<entry id="8389349" symbol="justification"/>
+<entry field="true" id="20" symbol="ColorWhite"/>
+<entry field="true" id="15" symbol="ColorBlack"/>
+<entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+<entry id="8389377" method="true" symbol="onExitSleep"/>
+<entry id="8388644" module="true" symbol="System"/>
+<entry id="8388769" module="true" object="true" symbol="Rez"/>
+<entry id="8388640" module="true" symbol="Lang"/>
+<entry id="8389068" method="true" symbol="draw"/>
+<entry field="true" id="12" symbol="LauncherIcon"/>
+<entry id="8388610" symbol="statics"/>
+<entry id="8389123" method="true" symbol="onShow"/>
+<entry id="8389350" module="true" symbol="globals"/>
+<entry field="true" id="14" symbol="BackgroundColorTitle"/>
+<entry id="8388770" module="true" object="true" symbol="Strings"/>
+<entry id="8390146" module="true" object="true" symbol="Background"/>
+<entry id="8388702" method="true" symbol="initialize"/>
+<entry id="8389279" method="true" symbol="onStart"/>
+<entry id="8388641" module="true" symbol="Math"/>
+<entry field="true" id="18" symbol="ColorLightGray"/>
+<entry id="8389280" method="true" symbol="getInitialView"/>
+<entry id="8389281" method="true" symbol="onStop"/>
+<entry field="true" id="8389347" symbol="color"/>
+<entry field="true" id="21" symbol="ForegroundColorTitle"/>
+<entry id="8" module="true" symbol="Layouts"/>
+<entry id="6" object="true" symbol="Active_chicApp"/>
+<entry id="9" method="true" symbol="drawStairs"/>
+<entry id="8389125" method="true" symbol="onHide"/>
+<entry id="8388635" module="true" symbol="Application"/>
+</symbolTable>
+<localVars>
+<entry endPc="268435640" name="dictionary" stackId="1" startPc="268435607"/>
+<entry arg="true" endPc="268435683" name="dc" stackId="1" startPc="268435642"/>
+<entry arg="true" endPc="268435781" name="dc" stackId="1" startPc="268435684"/>
+<entry endPc="268435780" name="screenWidth" stackId="2" startPc="268435687"/>
+<entry endPc="268435780" name="screenHeight" stackId="3" startPc="268435687"/>
+<entry endPc="268435780" name="centerX" stackId="4" startPc="268435687"/>
+<entry endPc="268435780" name="centerY" stackId="5" startPc="268435687"/>
+<entry endPc="268435780" name="radius" stackId="6" startPc="268435687"/>
+<entry arg="true" endPc="268435817" name="dc" stackId="1" startPc="268435782"/>
+<entry arg="true" endPc="268436101" name="dc" stackId="1" startPc="268435833"/>
+<entry endPc="268436100" name="timeFormat" stackId="2" startPc="268435836"/>
+<entry endPc="268436100" name="clockTime" stackId="3" startPc="268435836"/>
+<entry endPc="268436100" name="hours" stackId="4" startPc="268435836"/>
+<entry endPc="268436100" name="timeString" stackId="5" startPc="268435836"/>
+<entry endPc="268436100" name="view" stackId="6" startPc="268435836"/>
+<entry arg="true" endPc="268436123" name="x" stackId="1" startPc="268436105"/>
+<entry arg="true" endPc="268436123" name="y" stackId="2" startPc="268436105"/>
+<entry arg="true" endPc="268436277" name="dc" stackId="1" startPc="268436124"/>
+<entry endPc="268436277" name="rez_cmp_local_custom_drawable_11939594661139614796" stackId="2" startPc="268436135"/>
+<entry endPc="268436277" name="rez_cmp_local_text_TimeLabel" stackId="3" startPc="268436135"/>
+</localVars>
+<deviceInfo deviceVersion="6dcd7b8e5f5b4076e877ee6ed9889becbccbd260" partNumber="006-B4313-00"/>
+<annotations>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="MilitaryFormatTitle"/>
+<annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="BackgroundColorTitle"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorRed"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorDarkGray"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorWhite"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ForegroundColorTitle"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorLightGray"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorBlue"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ColorBlack"/>
+</annotations>
+<dataEntryOffsetMappings>
+<dataEntry label="globals" offset="58" parentId="" symbolId="globals" type="module"/>
+<dataEntry label="globals/Active_chicApp" offset="134" parentId="globals" symbolId="Active_chicApp" type="class"/>
+<dataEntry label="globals/Background" offset="214" parentId="globals" symbolId="Background" type="class"/>
+<dataEntry label="globals/Rez" offset="267" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry label="globals/Active_chicView" offset="320" parentId="globals" symbolId="Active_chicView" type="class"/>
+<dataEntry label="globals/Rez/Drawables" offset="445" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry label="globals/Rez/Layouts" offset="480" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry label="globals/Rez/Strings" offset="515" parentId="Rez" symbolId="Strings" type="module"/>
+</dataEntryOffsetMappings>
+<functions>
+<functionEntry accessMode="public" endPc="268435471" name="&lt;init&gt;" parent="Active_chicApp" startPc="268435460">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435492" name="getApp" startPc="268435472">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435504" name="&lt;init&gt;" parent="Background" startPc="268435493">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435524" name="&lt;init&gt;" parent="Rez" startPc="268435505">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435536" name="&lt;init&gt;" parent="Active_chicView" startPc="268435525">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435539" name="onStart" parent="Active_chicApp" startPc="268435537">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435553" name="onSettingsChanged" parent="Active_chicApp" startPc="268435540">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435585" name="getInitialView" parent="Active_chicApp" startPc="268435554">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435600" name="initialize" parent="Active_chicApp" startPc="268435586">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435603" name="onStop" parent="Active_chicApp" startPc="268435601">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435641" name="initialize" parent="Background" startPc="268435604">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435683" name="draw" parent="Background" startPc="268435642">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Layouts">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onExitSleep" parent="Active_chicView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onShow" parent="Active_chicView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435781" name="drawSteps" parent="Active_chicView" startPc="268435684">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435817" name="onLayout" parent="Active_chicView" startPc="268435782">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onEnterSleep" parent="Active_chicView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435832" name="initialize" parent="Active_chicView" startPc="268435818">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onHide" parent="Active_chicView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436101" name="onUpdate" parent="Active_chicView" startPc="268435833">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436104" name="drawStairs" parent="Active_chicView" startPc="268436102">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436123" name="minimum" parent="Active_chicView" startPc="268436105">
+<param id="x"/>
+<param id="y"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436277" name="WatchFace" parent="Layouts" startPc="268436124">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+</functions>
+</debugInfo>

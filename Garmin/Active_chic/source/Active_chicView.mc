@@ -1,0 +1,97 @@
+import Toybox.Application;
+import Toybox.Graphics;
+import Toybox.Lang;
+import Toybox.System;
+import Toybox.WatchUi;
+using Toybox.Math;
+
+class Active_chicView extends WatchUi.WatchFace {
+
+    function initialize() {
+        WatchFace.initialize();
+    }
+
+    // Load your resources here
+    function onLayout(dc as Dc) as Void {
+        setLayout(Rez.Layouts.WatchFace(dc));
+    }
+
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() as Void {
+    }
+
+    // Update the view
+    function onUpdate(dc as Dc) as Void {
+        // Get the current time and format it correctly
+        var timeFormat = "$1$:$2$";
+        var clockTime = System.getClockTime();
+        var hours = clockTime.hour;
+        if (!System.getDeviceSettings().is24Hour) {
+            if (hours > 12) {
+                hours = hours - 12;
+            }
+        } else {
+            if (Application.Properties.getValue("UseMilitaryFormat")) {
+                timeFormat = "$1$$2$";
+                hours = hours.format("%02d");
+            }
+        }
+        var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
+
+        // Update the view
+        var view = View.findDrawableById("TimeLabel") as Text;
+        view.setColor(Application.Properties.getValue("ForegroundColor") as Number);
+        view.setText(timeString);
+
+        // Call the parent onUpdate function to redraw the layout
+        View.onUpdate(dc);
+
+        // draw the steps
+        drawSteps(dc);
+
+        // draw the stairs
+        drawStairs(dc);
+    }
+
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() as Void {
+    }
+
+    // The user has just looked at their watch. Timers and animations may be started here.
+    function onExitSleep() as Void {
+    }
+
+    // Terminate any active timers and prepare for slow updates.
+    function onEnterSleep() as Void {
+    }
+
+    // Terminate any active timers and prepare for slow updates.
+    function drawSteps(dc as Dc) as Void {
+        var screenWidth = dc.getWidth();
+        var screenHeight = dc.getHeight();
+        var centerX = screenWidth / 2;
+        var centerY = screenHeight / 2;
+        var radius = minimum(screenWidth, screenHeight) / 2;
+
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
+        dc.setPenWidth(10);
+        dc.drawCircle(centerX, centerY, radius);
+    }
+
+    // Terminate any active timers and prepare for slow updates.
+    function drawStairs(dc as Dc) as Void {
+    }
+
+    // Terminate any active timers and prepare for slow updates.
+    function minimum(x as Toybox.Lang.Number, y as Toybox.Lang.Number) as Toybox.Lang.Number {
+        if (x < y) {
+            return x;
+        }
+
+        return y;
+    }
+}
