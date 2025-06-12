@@ -21,10 +21,8 @@
 #include <QHostAddress>
 
 #include "aLib_def.h"
-#include "aSharedPtrVector.h"
+#include "aString.h"
 
-#include "qLights_defs.h"
-#include "bank.h"
 
 using namespace aLib;
 using namespace aLib::aUtil;
@@ -50,20 +48,17 @@ class Universe
                  const aString  &_sIpAdr);
         ~Universe();
 
-        void                add2Configuration(aJsonFile &_jf);
+        void                setDmxChannelValue(s32      _s32DmxChannelNr,
+                                               u8       _u8Value,
+                                               bool     _bSend);
 
-        void                setDmxChannelValue(u32   _u32Channel,
-                                               u8    _u8Value,
-                                               bool  _bSend);
+        void                sendValues2Controller();
 
-        void                setDmxValues(const QByteArray    &_values,
-                                         bool                _bSend);
-
-        void                sendUniverse();
+        // void                setDmxValues(const QByteArray    &_values,
+        //                                  bool                _bSend);
 
         // u8                  dmxChannelValue(u32   _u32ChannelOs,
         //                                     u32   _u32Channel);
 
-    private:
-        void                sendDmxValues();
+        // void                add2Configuration(aJsonFile &_jf);
 }; // class Universe

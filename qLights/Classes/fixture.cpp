@@ -15,13 +15,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aJsonFile.h"
-#include "aJsonValue.h"
-
-#include "controller.h"
 #include "fixture.h"
 #include "channel.h"
-#include "bank.h"
+#include "controller.h"
+
+// #include "aJsonFile.h"
+// #include "aJsonValue.h"
+
+// #include "channel.h"
+// #include "bank.h"
 
 using namespace std;
 using namespace aLib::aUtil;
@@ -31,11 +33,11 @@ using namespace aLib::aUtil;
 * Fixture::Fixture
 *******************************************************************************/
 Fixture::Fixture(const aString          &_sName,
-                 shared_ptr<Controller> _pConroller,
+                 shared_ptr<Controller> _pController,
                  s32                    _s32UniverseId,
                  s32                    _s32ChannelOs)
 : m_sName(_sName),
-  m_pConroller(_pConroller),
+  m_pController(_pController),
   m_s32UniverseId(_s32UniverseId),
   m_s32ChannelOs(_s32ChannelOs)
 {
@@ -51,46 +53,22 @@ Fixture::~Fixture()
 
 
 /*******************************************************************************
-* Fixture::add2Configuration
+* Fixture::addChannel
 *******************************************************************************/
-void Fixture::add2Configuration(aJsonFile           &_jf,
-                                shared_ptr<Bank>    _pBank,
-                                s32                 _s32FixtureBtnIdx)
+void Fixture::addChannel(s32      _s32ChannelNr,
+                         aString  _sIcon,
+                         bool     _bBrightness)
 {
-    _jf.openLevel();
-        _jf.add(aJsonValue("name", m_sName));
-        _jf.add(aJsonValue("controller", m_pConroller->name()));
-        _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
-        _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
-        _jf.add(aJsonValue("bank", _pBank->name()));
-        _jf.add(aJsonValue("fixtureBtnIdx", (dbl) _s32FixtureBtnIdx));
+    m_mapAllChannel[_s32ChannelNr] = make_shared<Channel> (this,
+                                                           _s32ChannelNr,
+                                                           _sIcon,
+                                                           _bBrightness);
 
-        // add the channels
-        for (auto &c : m_mapChannel)
-        {
-            c.second->add2Configuration(_jf);
-        }
-    _jf.closeLevel(aString("fixture") + "-" + m_sName);
-
-} // Fixture::add2Configuration
-
-
-/*******************************************************************************
-* Fixture::createChannel
-*******************************************************************************/
-shared_ptr<Channel> Fixture::createChannel(s32      _s32ChannelNr,
-                                           aString  _sIcon,
-                                           bool     _bBrightness)
-{
-    m_mapChannel[_s32ChannelNr] = make_shared<Channel> (m_pConroller,
-                                                        m_s32UniverseId,
-                                                        m_s32ChannelOs,
-                                                        _s32ChannelNr,
-                                                        _sIcon,
-                                                        _bBrightness);
-
-    return m_mapChannel[_s32ChannelNr];
-} // Fixture::createChannel
+    if (_bBrightness)
+    {
+        m_vBrightnessChannel.push_back(m_mapAllChannel[_s32ChannelNr]);
+    }
+} // Fixture::addChannel
 
 
 /*******************************************************************************
@@ -98,9 +76,9 @@ shared_ptr<Channel> Fixture::createChannel(s32      _s32ChannelNr,
 *******************************************************************************/
 shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
 {
-    auto it = m_mapChannel.find(_s32ChannelNr);
+    auto it = m_mapAllChannel.find(_s32ChannelNr);
 
-    if (it != m_mapChannel.end())
+    if (it != m_mapAllChannel.end())
     {
         return it->second;
     }
@@ -110,26 +88,79 @@ shared_ptr<Channel> Fixture::channel(s32 _s32ChannelNr) const
 
 
 /*******************************************************************************
-* Fixture::allChannelValues
+* Fixture::setChannelValue
 *******************************************************************************/
-void Fixture::allChannelValues(aVector<channelValueTuple> &vValues) const
+void Fixture::setChannelValue(s32   _s32ChannelNr,
+                              u8    _u8Value,
+                              bool  _bSend)
 {
-    for (auto &me : m_mapChannel)
-    {
-        channelValueTuple t = std::make_tuple(me.second, me.second->value());
+    CHECK_PRE_CONDITION_VOID(m_pController);
 
-        vValues.push_back(t);
-    }
-} // Fixture::allChannelValues
+    m_pController->setDmxChannelValue(m_s32ChannelOs + _s32ChannelNr - 2,
+                                      m_s32UniverseId, _u8Value, _bSend);
+} // Fixture::setChannelValue
 
 
 /*******************************************************************************
-* Fixture::allChannels
+* Fixture::resetAllChannels
 *******************************************************************************/
-void Fixture::allChannels(aVector<shared_ptr<Channel>> &_vChannel) const
+void Fixture::resetAllChannels()
 {
-    for (auto &me : m_mapChannel)
+    CHECK_PRE_CONDITION_VOID(m_pController);
+
+    for (auto me  : m_mapAllChannel)
     {
-        _vChannel.push_back(me.second);
+        me.second->setValue(0, false);
     }
-} // Fixture::allChannels
+} // Fixture::resetAllChannels
+
+
+// /*******************************************************************************
+// * Fixture::add2Configuration
+// *******************************************************************************/
+// void Fixture::add2Configuration(aJsonFile           &_jf,
+//                                 shared_ptr<Bank>    _pBank,
+//                                 s32                 _s32FixtureBtnIdx)
+// {
+//     _jf.openLevel();
+//         _jf.add(aJsonValue("name", m_sName));
+//         _jf.add(aJsonValue("controller", m_pConroller->name()));
+//         _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
+//         _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
+//         _jf.add(aJsonValue("bank", _pBank->name()));
+//         _jf.add(aJsonValue("fixtureBtnIdx", (dbl) _s32FixtureBtnIdx));
+
+//         // add the channels
+//         for (auto &c : m_mapChannel)
+//         {
+//             c.second->add2Configuration(_jf);
+//         }
+//     _jf.closeLevel(aString("fixture") + "-" + m_sName);
+
+// } // Fixture::add2Configuration
+
+
+// /*******************************************************************************
+// * Fixture::allChannelValues
+// *******************************************************************************/
+// void Fixture::allChannelValues(aVector<channelValueTuple> &vValues) const
+// {
+//     for (auto &me : m_mapChannel)
+//     {
+//         channelValueTuple t = std::make_tuple(me.second, me.second->value());
+
+//         vValues.push_back(t);
+//     }
+// } // Fixture::allChannelValues
+
+
+// /*******************************************************************************
+// * Fixture::allChannels
+// *******************************************************************************/
+// void Fixture::allChannels(aVector<shared_ptr<Channel>> &_vChannel) const
+// {
+//     for (auto &me : m_mapChannel)
+//     {
+//         _vChannel.push_back(me.second);
+//     }
+// } // Fixture::allChannels

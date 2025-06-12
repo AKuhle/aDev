@@ -16,6 +16,8 @@
 * includes
 *******************************************************************************/
 #include "fader.h"
+#include "aLabel.h"
+#include "Channel.h"
 
 
 /*******************************************************************************
@@ -33,3 +35,57 @@ Fader::Fader(SysWin *_pParent /*= nullptr*/)
 Fader::~Fader()
 {
 } // Fader::~Fader
+
+
+/*******************************************************************************
+* Fader::setControls
+*******************************************************************************/
+void Fader::setControls(ScribbleStrip   *_pScribbleStrip,
+                        aLabel          *_pLabel)
+{
+    m_pScribbleStrip    = _pScribbleStrip;
+    m_pLabel            = _pLabel;
+} // Fader::setControls
+
+
+/*******************************************************************************
+* Fader::updateState
+*******************************************************************************/
+void Fader::updateState()
+{
+    if (hasChannel())
+    {
+        setEnabled(true);
+        setValue(m_pChannel->value());
+
+        m_pScribbleStrip->setIcon(m_pChannel->icon());
+    }
+    else
+    {
+        setEnabled(false);
+        setValue(0);
+
+        m_pScribbleStrip->setIcon("");
+        m_pLabel->setText(aString(""));
+    }
+} // Fader::updateState
+
+
+/*******************************************************************************
+* Fader::setChannel
+*******************************************************************************/
+void Fader::setChannel(shared_ptr<Channel> _pChannel)
+{
+    m_pChannel = _pChannel;
+
+    updateState();
+} // Fader::setChannel
+
+
+/*******************************************************************************
+* Fader::hasChannel
+*******************************************************************************/
+bool Fader::hasChannel() const
+{
+    return (m_pChannel != nullptr);
+} // Fader::hasChannel

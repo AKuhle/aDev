@@ -18,7 +18,6 @@
 #include "qLights_defs.h"
 #include "scribbleStrip.h"
 #include "aPainter.h"
-#include "aColor.h"
 
 using namespace aLib::aGraphic;
 

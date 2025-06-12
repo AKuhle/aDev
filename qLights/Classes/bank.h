@@ -16,7 +16,6 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aSharedPtrVector.h"
 #include "aString.h"
 #include "aMap.h"
 
@@ -40,15 +39,19 @@ class Bank
         Bank(const aString &_sName);
         ~Bank();
 
-        void                                add2Configuration(s32       _s32BankBtnIdx,
-                                                              aJsonFile &_jf);
 
+        // properties
         const aString&                      name() const                    { return m_sName; }
         void                                setName(const aString &_s)      { m_sName = _s; }
 
-        void                                addFixture(s32                  _s32BankBtnIdx,
-                                                       shared_ptr<Fixture>  _pFixture);
+
+        // fixture
+        void                                assignFixture(shared_ptr<Fixture>  _pFixture,
+                                                          s32                  _s32FixtureIdx);
 
         shared_ptr<Fixture>                 fixture(s32 _s32BankBtnIdx) const;
+
+        // void                                add2Configuration(s32       _s32BankBtnIdx,
+        //                        aJsonFile &_jf);
 
 }; // class Bank

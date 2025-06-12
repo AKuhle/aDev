@@ -21,7 +21,7 @@
 #include "aLib_def.h"
 #include "aString.h"
 
-class Controller;
+class Fixture;
 
 using namespace std;
 using namespace aLib;
@@ -34,9 +34,7 @@ using namespace aLib::aUtil;
 class Channel
 {
     private:
-        shared_ptr<Controller>  m_pController;
-        s32                     m_s32UniverseId         { 0 };
-        s32                     m_s32ChannelOs          { -1 };
+        Fixture                 *m_pFixture;
         s32                     m_s32ChannelNr          { -1 };
         aString                 m_sIcon;
         bool                    m_bBrightness           { false };
@@ -45,39 +43,33 @@ class Channel
 
 
     public:
-        Channel(shared_ptr<Controller>  _pController,
-                s32                     _u32UniverseId,
-                s32                     _s32ChannelOs,
-                s32                     _s32ChannelNr,
-                aString                 _sIcon,
-                bool                    _bBrightness);
+        Channel(Fixture     *_pFixture,
+                s32         _s32ChannelNr,
+                aString     _sIcon,
+                bool        _bBrightness);
 
         ~Channel();
 
-        void                    add2Configuration(aJsonFile &_jf);
+        bool                    isBrightness()              { return m_bBrightness; }
 
-        void                    setController(shared_ptr<Controller> _pController)  { m_pController = _pController; }
-        shared_ptr<Controller>  controller() const                               { return m_pController; }
+        aString                 icon()                      { return m_sIcon; }
 
-        void                    setUniverseId(s32 &_s32UniverseId)                  { m_s32UniverseId = _s32UniverseId; }
-        s32                     universeId() const                                  { return m_s32UniverseId; }
+        void                    setValue(u8     _u8Value,
+                                         bool   _bSend);
 
-        void                    setChannelOs(s32 _s32ChannelOs)                     { m_s32ChannelOs = _s32ChannelOs; }
-        s32                     channelOs() const                                   { return m_s32ChannelOs; }
+        s32                     channelNr() const           { return m_s32ChannelNr; }
+        u8                      value()                     { return m_u8Value; }
 
-        void                    setChannelNr(s32 _s32ChannelNr)                     { m_s32ChannelNr = _s32ChannelNr; }
-        s32                     channelNr() const                                   { return m_s32ChannelNr; }
+        // void                    setChannelNr(s32 _s32ChannelNr)                     { m_s32ChannelNr = _s32ChannelNr; }
 
-        void                    setChannelIcon(const aString &_sIcon)               { m_sIcon = _sIcon; }
-        aString                 channelIcon()                                       { return m_sIcon; }
+        // void                    setChannelIcon(const aString &_sIcon)               { m_sIcon = _sIcon; }
+        // aString                 channelIcon()                                       { return m_sIcon; }
 
-        void                    setBrightness(bool _bBrightness)                    { m_bBrightness = _bBrightness; }
-        bool                    isBrightness()                                      { return m_bBrightness; }
+        // void                    setBrightness(bool _bBrightness)                    { m_bBrightness = _bBrightness; }
 
-        void                    setValue(u8     _u8Value)                           { m_u8Value = _u8Value; }
-        u8                      value()                                             { return m_u8Value; }
+        // void                    updateDmxValue(u8     _u8Value,
+                                               // bool   _bSend);
 
-        void                    updateDmxValue(u8     _u8Value,
-                                               bool   _bSend);
+        // void                    add2Configuration(aJsonFile &_jf);
 
 }; // class Channel

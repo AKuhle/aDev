@@ -39,8 +39,8 @@ MainWin::~MainWin()
     // save the configuration
     if (m_pCtrlPanel)
     {
-        aPath   path = get_appPath() / LAST_CONFIG;
-        m_pCtrlPanel->writeConfiguration(path);
+        //aPath   path = get_appPath() / LAST_CONFIG;
+        //m_pCtrlPanel->writeConfiguration(path);
     }
 
     #ifdef _USE_QT_
@@ -71,8 +71,8 @@ bool MainWin::onCreateWin()
     setCentralWin(m_pCtrlPanel);
 
     // read the last configuration
-    aPath   path = get_appPath() / LAST_CONFIG;
-    m_pCtrlPanel->readConfiguration(path);
+    //aPath   path = get_appPath() / LAST_CONFIG;
+    //m_pCtrlPanel->readConfiguration(path);
 
     sendUpdateCmd(UPDATE_GUI);
 

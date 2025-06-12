@@ -18,6 +18,7 @@
 *******************************************************************************/
 #include "aString.h"
 #include "aMap.h"
+#include "aSharedPtrVector.h"
 
 #include "qLights_defs.h"
 
@@ -39,38 +40,43 @@ class Fixture
 {
     private:
         aString                         m_sName;
-        shared_ptr<Controller>          m_pConroller;
+        shared_ptr<Controller>          m_pController;
         s32                             m_s32UniverseId     { -1 };
         s32                             m_s32ChannelOs      { -1 };
 
-        aMap<s32, shared_ptr<Channel>>  m_mapChannel;
+        aMap<s32, shared_ptr<Channel>>  m_mapAllChannel;
+        aSharedPtrVector<Channel>       m_vBrightnessChannel;
 
     public:
         Fixture(const aString           &_sName,
-                shared_ptr<Controller>  _pConroller,
+                shared_ptr<Controller>  _pController,
                 s32                     _s32UniverseId,
                 s32                     _s32ChannelOs);
 
         ~Fixture();
 
-        void                    add2Configuration(aJsonFile           &_jf,
-                                                  shared_ptr<Bank>    _pBank,
-                                                  s32                 _s32FixtureBtnIdx);
-
         const aString&          name() const                    { return m_sName; }
-        void                    setName(const aString &_sName)  { m_sName = _sName; }
-
-        shared_ptr<Channel>     createChannel(s32      _s32ChannelNr,
-                                              aString  _sIcon,
-                                              bool     _bBrightness);
-
-        shared_ptr<Channel>     channel(s32 _s32ChannelNr) const;
-
-        shared_ptr<Controller>  controller() const              { return m_pConroller; }
+        shared_ptr<Controller>  controller() const              { return m_pController; }
         s32                     universeId() const              { return m_s32UniverseId; }
         s32                     channelOs() const               { return m_s32ChannelOs; }
 
-        void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
-        void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
+        void                    addChannel(s32      _s32ChannelNr,
+                                           aString  _sIcon,
+                                           bool     _bBrightness);
+
+        shared_ptr<Channel>     channel(s32 _s32ChannelNr) const;
+
+        void                    setChannelValue(s32     _s32ChannelNr,
+                                                u8      _u8Value,
+                                                bool    _bSend);
+
+        void                    resetAllChannels();
+
+        // void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
+        // void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
+
+        // void                    add2Configuration(aJsonFile           &_jf,
+        //                                           shared_ptr<Bank>    _pBank,
+        //                                           s32                 _s32FixtureBtnIdx);
 
 }; // class Fixture

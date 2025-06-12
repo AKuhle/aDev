@@ -15,8 +15,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aJsonFile.h"
-#include "aJsonValue.h"
+// #include "aJsonFile.h"
+// #include "aJsonValue.h"
 #include "controller.h"
 
 #include "universe.h"
@@ -46,26 +46,6 @@ Controller::~Controller()
 
 
 /*******************************************************************************
-* Controller::add2Configuration
-*******************************************************************************/
-void Controller::add2Configuration(aJsonFile &_jf)
-{
-    _jf.openLevel();
-        // add controller info
-        _jf.add(aJsonValue("name", m_sName));
-        _jf.add(aJsonValue("adress", m_sIpAdr));
-        _jf.add(aJsonValue("universeMax", (dbl) m_s32UniverseMax));
-
-        // add universes
-        for (auto u : m_mapUniverse)
-        {
-            u.second->add2Configuration(_jf);
-        }
-    _jf.closeLevel(aString("controller") + "-" + m_sName);
-} // Controller::add2Configuration
-
-
-/*******************************************************************************
 * Controller::addUniverse
 *******************************************************************************/
 void Controller::addUniverse(u32 _u32Id)
@@ -78,19 +58,20 @@ void Controller::addUniverse(u32 _u32Id)
 
 
 /*******************************************************************************
-* Controller::universe
+* Controller::setDmxChannelValue
 *******************************************************************************/
-shared_ptr<Universe> Controller::universe(u32 _u32Id)
+void Controller::setDmxChannelValue(s32      _s32DmxChannelNr,
+                                    s32      _s32UniverseId,
+                                    u8       _u8Value,
+                                    bool     _bSend)
 {
-    auto it = m_mapUniverse.find(_u32Id);
+    aMap<u32, shared_ptr<Universe>>::iterator it = m_mapUniverse.find(_s32UniverseId);
 
     if (it != m_mapUniverse.end())
     {
-        return it->second;
+        it->second->setDmxChannelValue(_s32DmxChannelNr, _u8Value, _bSend);
     }
-
-    return nullptr;
-} // Controller::universe
+} // Controller::setDmxChannelValue
 
 
 /*******************************************************************************
@@ -98,8 +79,56 @@ shared_ptr<Universe> Controller::universe(u32 _u32Id)
 *******************************************************************************/
 void Controller::sendAllUniverses()
 {
-    for (auto &mapEntry : m_mapUniverse)
+    for (auto me : m_mapUniverse)
     {
-        mapEntry.second->sendUniverse();
+        me.second->sendValues2Controller();
     }
 } // Controller::sendAllUniverses
+
+
+// /*******************************************************************************
+// * Controller::add2Configuration
+// *******************************************************************************/
+// void Controller::add2Configuration(aJsonFile &_jf)
+// {
+//     _jf.openLevel();
+//         // add controller info
+//         _jf.add(aJsonValue("name", m_sName));
+//         _jf.add(aJsonValue("adress", m_sIpAdr));
+//         _jf.add(aJsonValue("universeMax", (dbl) m_s32UniverseMax));
+
+//         // add universes
+//         for (auto u : m_mapUniverse)
+//         {
+//             u.second->add2Configuration(_jf);
+//         }
+//     _jf.closeLevel(aString("controller") + "-" + m_sName);
+// } // Controller::add2Configuration
+
+
+// /*******************************************************************************
+// * Controller::universe
+// *******************************************************************************/
+// shared_ptr<Universe> Controller::universe(u32 _u32Id)
+// {
+//     auto it = m_mapUniverse.find(_u32Id);
+
+//     if (it != m_mapUniverse.end())
+//     {
+//         return it->second;
+//     }
+
+//     return nullptr;
+// } // Controller::universe
+
+
+// /*******************************************************************************
+// * Controller::sendAllUniverses
+// *******************************************************************************/
+// void Controller::sendAllUniverses()
+// {
+//     for (auto &mapEntry : m_mapUniverse)
+//     {
+//         mapEntry.second->sendUniverse();
+//     }
+// } // Controller::sendAllUniverses

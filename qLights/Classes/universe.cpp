@@ -18,7 +18,6 @@
 #include "aJsonFile.h"
 #include "aJsonValue.h"
 
-#include "qLights_defs.h"
 #include "universe.h"
 
 using namespace std;
@@ -46,67 +45,29 @@ Universe::~Universe()
 
 
 /*******************************************************************************
-* Universe::add2Configuration
-*******************************************************************************/
-void Universe::add2Configuration(aJsonFile &_jf)
-{
-    _jf.openLevel();
-        // add univers info
-        _jf.add(aJsonValue("id", (dbl) m_u32Id));
-
-    _jf.closeLevel(aString("universe") + "-" + aString::fromValue(m_u32Id));
-} // Universe::add2Configuration
-
-
-/*******************************************************************************
 * Universe::setDmxChannelValue
 *******************************************************************************/
-void Universe::setDmxChannelValue(u32   _u32Channel,
+void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
                                   u8    _u8Value,
                                   bool  _bSend)
 {
+    cout << _s32DmxChannelNr << " - "  <<_u8Value << endl;
+
     // set the new channel value
-    m_dmxData[_u32Channel - 1] = _u8Value;
+    m_dmxData[_s32DmxChannelNr] = _u8Value;
 
     if (_bSend)
     {
-        sendDmxValues();
+        sendValues2Controller();
     } // if (_bSend)
 
 } // Universe::setDmxChannelValue
 
 
 /*******************************************************************************
-* Universe::setDmxValues
+* Universe::sendValues2Controller
 *******************************************************************************/
-void Universe::setDmxValues(const QByteArray &_values,
-                            bool             _bSend)
-{
-    // set the new channel value
-    m_dmxData = _values;
-
-    if (_bSend)
-    {
-        sendDmxValues();
-    } // if (_bSend)
-
-    } // Universe::setDmxValues
-
-
-/*******************************************************************************
-* Universe::sendUniverse
-*******************************************************************************/
-void Universe::sendUniverse()
-{
-    sendDmxValues();
-
-} // Universe::sendUniverse
-
-
-/*******************************************************************************
-* Universe::sendDmxValues
-*******************************************************************************/
-void Universe::sendDmxValues()
+void Universe::sendValues2Controller()
 {
     QUdpSocket      udpSocket;
     QByteArray      artnetPacket;
@@ -138,16 +99,55 @@ void Universe::sendDmxValues()
     {
         //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
     }
-} // Universe::sendDmxValues
+} // Universe::sendValues2Controller
 
 
-/*******************************************************************************
-* Universe::dmxChannelValue
-*******************************************************************************/
-// u8 Universe::dmxChannelValue(u32   _u32ChannelOs,
-//                              u32   _u32Channel)
+// /*******************************************************************************
+// * Universe::add2Configuration
+// *******************************************************************************/
+// void Universe::add2Configuration(aJsonFile &_jf)
 // {
-//     // set the new channel value
-//     u32 uChannel = _u32ChannelOs + _u32Channel - 1;
-//     return m_dmxData[uChannel - 1];
-// } // Universe::dmxChannelValue
+//     _jf.openLevel();
+//         // add univers info
+//         _jf.add(aJsonValue("id", (dbl) m_u32Id));
+
+//     _jf.closeLevel(aString("universe") + "-" + aString::fromValue(m_u32Id));
+// } // Universe::add2Configuration
+
+
+// /*******************************************************************************
+// * Universe::setDmxValues
+// *******************************************************************************/
+// // void Universe::setDmxValues(const QByteArray &_values,
+// //                             bool             _bSend)
+// // {
+// //     // set the new channel value
+// //     m_dmxData = _values;
+
+// //     if (_bSend)
+// //     {
+// //         sendDmxValues();
+// //     } // if (_bSend)
+// // } // Universe::setDmxValues
+
+
+// /*******************************************************************************
+// * Universe::sendUniverse
+// *******************************************************************************/
+// void Universe::sendUniverse()
+// {
+//     sendDmxValues();
+
+// } // Universe::sendUniverse
+
+
+// /*******************************************************************************
+// * Universe::dmxChannelValue
+// *******************************************************************************/
+// // u8 Universe::dmxChannelValue(u32   _u32ChannelOs,
+// //                              u32   _u32Channel)
+// // {
+// //     // set the new channel value
+// //     u32 uChannel = _u32ChannelOs + _u32Channel - 1;
+// //     return m_dmxData[uChannel - 1];
+// // } // Universe::dmxChannelValue

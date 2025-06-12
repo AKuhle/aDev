@@ -18,7 +18,6 @@
 #include "aJsonFile.h"
 #include "aJsonValue.h"
 
-#include "qLights_defs.h"
 #include "bank.h"
 #include "fixture.h"
 
@@ -44,28 +43,13 @@ Bank::~Bank()
 
 
 /*******************************************************************************
-* Bank::add2Configuration
+* Bank::assignFixture
 *******************************************************************************/
-void Bank::add2Configuration(s32        _s32BankBtnIdx,
-                             aJsonFile  &_jf)
+void Bank::assignFixture(shared_ptr<Fixture>  _pFixture,
+                         s32                  _s32FixtureIdx)
 {
-    _jf.openLevel();
-        // add controller info
-        _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
-        _jf.add(aJsonValue("name", m_sName));
-
-    _jf.closeLevel(aString("bank") + "-" + m_sName);
-} // Bank::add2Configuration
-
-
-/*******************************************************************************
-* Bank::addFixture
-*******************************************************************************/
-void Bank::addFixture(s32                  _s32BankBtnIdx,
-                      shared_ptr<Fixture>  _pFixture)
-{
-    m_mapFixture[_s32BankBtnIdx] = _pFixture;
-} // Bank::addFixture
+    m_mapFixture[_s32FixtureIdx] = _pFixture;
+} // Bank::assignFixture
 
 
 /*******************************************************************************
@@ -77,3 +61,18 @@ shared_ptr<Fixture> Bank::fixture(s32 _s32BankBtnIdx) const
 
     return (it != m_mapFixture.end())?   it->second : nullptr;
 } // Bank::fixture
+
+
+// /*******************************************************************************
+// * Bank::add2Configuration
+// *******************************************************************************/
+// void Bank::add2Configuration(s32        _s32BankBtnIdx,
+//                              aJsonFile  &_jf)
+// {
+//     _jf.openLevel();
+//         // add controller info
+//         _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
+//         _jf.add(aJsonValue("name", m_sName));
+
+//     _jf.closeLevel(aString("bank") + "-" + m_sName);
+// } // Bank::add2Configuration

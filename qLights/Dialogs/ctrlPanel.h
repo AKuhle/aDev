@@ -17,56 +17,35 @@
 *******************************************************************************/
 #pragma once
 
-#include "ui_formCtrlPanel.h"
-#include "aSharedPtrVector.h"
-#include "aVector.h"
-#include "aMap.h"
-#include "aString.h"
-#include "aColor.h"
+#include "aLib_def.h"
+#include "aWin_def.h"
+#include "aCtrl_def.h"
+#include "aUtil_def.h"
 
-#include "qLights_defs.h"
 #include "aPlainWin.h"
-#include "controller.h"
 
+#include "aVector.h"
+#include "aSharedPtrVector.h"
+
+#include "ui_formCtrlPanel.h"
 
 using namespace aLib;
 using namespace aLib::aWin;
-using namespace aLib::aUtil;
 
 
 /*******************************************************************************
 * forwards
 *******************************************************************************/
-class ViewNavigator;
-class Controller;
-class Universe;
 class Bank;
 class Fixture;
 class Scene;
+class Controller;
 class Channel;
-class Fader;
 
 
 /*******************************************************************************
 * globals
 *******************************************************************************/
-// <id, dmxData>
-using universeIoInfo = std::tuple<s32>;
-
-// <name, adress, universeMax, map<universe>
-using controllerIoInfo = std::tuple<aString, aString, s32, aMap<aString, universeIoInfo>>;
-
-// <name, bankBtnIdx>
-using bankIoInfo = std::tuple<aString, s32>;
-
-// <controller, channelNr, icon, brightness, value>
-using channelIoInfo = std::tuple<aString, s32, aString, bool>;
-
-// <name, controller, universeId, channelOs, bank, fixtureBtnIdx, vector<channel>>
-using fixtureIoInfo = std::tuple<aString, aString, s32, s32, aString, s32, aMap<aString, channelIoInfo>>;
-
-// <idx, sceneName, controllerName, universId, channelNr, channelOs, value>
-using sceneIoInfo = std::tuple<s32, aString, aString, s32, s32, s32, s32>;
 
 
 /*******************************************************************************
@@ -75,154 +54,79 @@ using sceneIoInfo = std::tuple<s32, aString, aString, s32, s32, s32, s32>;
 class CtrlPanel : public aPlainWin,
                   public aCtrlMgr
 {
-    // tuple during runtime
-    using bankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
-    using fixtureTuple = std::tuple<aPushButton *>;
-    using sceneTuple = std::tuple<aPushButton *, shared_ptr<Scene>>;
-    using faderTuple = std::tuple<ScribbleStrip*, Fader *, aLabel *, shared_ptr<Channel>>;
+    using BankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
+    using FixtureTuple = std::tuple<aPushButton *, shared_ptr<Fixture>>;
+    using SceneTuple = std::tuple<aPushButton *, shared_ptr<Scene>>;
 
     private:
         Ui::FormCtrlPanel               *m_pUi                  { nullptr };
-        aColor                          m_colButtonBg;
 
         // controller
         aSharedPtrVector<Controller>    m_vController;
 
-        // banks (10)
-        aSharedPtrVector<Bank>          m_vBank;
-        aVector<bankTuple>              m_vBankCtrl;
-        bankTuple*                      m_pActiveBank           { nullptr };
+        // banks (10)r
+        aSharedPtrVector<Bank>          m_vBanks;
+        aVector<BankTuple>              m_vBankTuples;
+        shared_ptr<Bank>                m_pActiveBank;
 
         // fixtures (10)
-        aSharedPtrVector<Fixture>       m_vFixture;
-        aVector<fixtureTuple>           m_vFixtureCtrl;
-        shared_ptr<Fixture>             m_pActiveFixture        { nullptr };
+        aSharedPtrVector<Fixture>       m_vFixtures;
+        aVector<FixtureTuple>           m_vFixtureTuples;
+        shared_ptr<Fixture>             m_pActiveFixture;
 
         // scenes (30)
-        aVector<sceneTuple>             m_vSceneCtrl;
+        aVector<SceneTuple>             m_vSceneTuples;
 
         // faders (24)
-        aVector<faderTuple>             m_vFader;
+        aVector<Fader *>                m_vFaders;
 
         // master fader
-        faderTuple                      m_masterFader;
-        dbl                             m_dMasterBrightness     { 1.0 };
-        aSharedPtrVector<Channel>       m_vMasterChannel;
+        //faderTuple                      m_masterFader;
+        //dbl                             m_dMasterBrightness     { 1.0 };
+        //aSharedPtrVector<Channel>       m_vMasterChannel;
 
         // io-member
-        aMap<aString, controllerIoInfo> m_mapControllerIoInfo;
-        aMap<aString, bankIoInfo>       m_mapBankIoInfo;
-        aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
-        aMap<aString, sceneIoInfo>      m_mapSceneIoInfo;
+        //aMap<aString, controllerIoInfo> m_mapControllerIoInfo;
+        //aMap<aString, bankIoInfo>       m_mapBankIoInfo;
+        //aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
+        //aMap<aString, sceneIoInfo>      m_mapSceneIoInfo;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
         ~CtrlPanel();
-
-        void                            allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
 
         void                            resetAllChannels();
 
     private:
         void                            createSetup();
 
-
-        // controller members
         shared_ptr<Controller>          createController(const aString  &_sName,
                                                          const aString  &_sIpAdr,
                                                          s32            _s32UniverseMax);
 
-        // uivers members
-        void                            sendAllUniverses();
+        // bank member
+        shared_ptr<Bank>                createBank(const aString    &_sName);
+
+        void                            assignBank(shared_ptr<Bank>      _pBank,
+                                                   s32                   _s32BankIdx);
 
 
-        // bank members
-        shared_ptr<Bank>                createBank(const aString &_sName);
-
-        void                            assignBank(shared_ptr<Bank> _pBank,
-                                                   s32              _s32BankBtnIdx);
-
-        void                            updateBankCtrls();
-
-        void                            onBankSeleted(s32 _s32BankBtnIdx);
-
-        shared_ptr<Bank>                activeBank() const;
-
-
-        // fixture mambers
+        // fixtur member
         shared_ptr<Fixture>             createFixture(const aString             &_sName,
                                                       shared_ptr<Controller>    _pConroller,
                                                       s32                       _s32UniverseId,
                                                       s32                       _s32ChannelOs);
 
-        void                            assignFixture(shared_ptr<Fixture>   _pFixture,
-                                                      shared_ptr<Bank>      _pBank,
-                                                      s32                   _s32FixtureBtnIdx);
-
-        void                            updateFixtureCtrls();
-
-        void                            onFixtureSelected(s32 _s32FixtureBtnIdx);
-
-        shared_ptr<Fixture>             activeFixture() const;
-
-
-        // scene mambers
-        void                            updateSceneCtrls();
-
-        void                            onSceneSelected(s32 _s32SceneBtnIdx);
-
-
-        // fader mambers
-        void                            updateFaderCtrls();
-
-
-        // channel members
-        void                            updateDmxValue(shared_ptr<Channel>  _pChannel,
-                                                               bool                 _bSend);
-
-        void                            setConfiguration(aMap<aString, controllerIoInfo>    &_mapControllerIoInfo,
-                                                         aMap<aString, bankIoInfo>          &_mapBankIoInfo,
-                                                         aMap<aString, fixtureIoInfo>       &_mapFixtureIoInfo,
-                                                         aMap<aString, sceneIoInfo>         &_mapSceneIoInfo);
-
-        shared_ptr<Controller>          findController(const aString &_sControllerName) const;
-
-
-        shared_ptr<Bank>                findBank(const aString &_sBankName) const;
-
-        bool                            findBank4Fixture(shared_ptr<Fixture>    _pFix,
-                                                         shared_ptr<Bank>       &_pBank,
-                                                         s32                    &_s32FixtureBtnIdx) const;
-
-        shared_ptr<Channel>             findChannel(const aString   &_sControllerName,
-                                                    s32             _s32UniverseId,
-                                                    s32             _s32channelNr,
-                                                    s32             _s32ChannelOs);
+        void                            assignFixture(shared_ptr<Bank>      _pBank,
+                                                      shared_ptr<Fixture>   _pFixture,
+                                                      s32                   _s32FixtureIdx);
 
     /*******************************************************************************
     * CtrlPanel - io
     *******************************************************************************/
     public:
-        void                            writeConfiguration(const aPath &_path);
-
-        void                            readConfiguration(const aPath &_path);
 
     private:
-        void                            JsonCallback(const aVector<aString> &_vecKeys,
-                                                     const aJsonValue       &_value);
-
-        bankIoInfo&                     getBankInfo(const aString &_sName);
-
-        fixtureIoInfo&                  getFixtureInfo(const aString &_sName);
-
-        channelIoInfo&                  getChannelInfo(fixtureIoInfo    &_fi,
-                                                       const aString    &_sName);
-
-        controllerIoInfo&               getControllerInfo(const aString &_sName);
-        universeIoInfo&                 getUniverseInfo(controllerIoInfo   &_ci,
-                                                        const aString      &_sName);
-
-        sceneIoInfo&                    getSceneInfo(const aString    &_sName);
 
 
     /*******************************************************************************
@@ -232,21 +136,31 @@ class CtrlPanel : public aPlainWin,
         void                            updateGui();
 
     private:
+        void                            initBanks();
+        void                            initFixtures();
+        void                            initScenes();
+        void                            initFaders();
+
+        void                            updateBanks();
+        void                            updateFixtures();
         void                            updateScenes();
         void                            updateFaders();
-        void                            updateBlackoutButton();
 
 
     /*******************************************************************************
     * user action
     *******************************************************************************/
     private:
+        void                            onBankSelected(s32 _s32BankBtnIdx);
+
+        void                            onFixtureSelected(s32 _s32FixtureBtnIdx);
+
         void                            onFaderMoved(s32    s32FaderIdx,
                                                      s32    _s32Value);
 
-        void                            onMasterFaderMoved(s32    _s32Value);
+        // void                            onMasterFaderMoved(s32    _s32Value);
 
-        void                            onBlackoutClicked();
+        // void                            onBlackoutClicked();
 
 
     /*******************************************************************************
@@ -255,6 +169,7 @@ class CtrlPanel : public aPlainWin,
     protected:
         void                            onRegisterCtrl() override;
         void                            onUpdateCtrl(aCtrlI *_pCtrl) override;
+
 
     protected:
         void                            onCtrlClicked(aCtrlI *_pCtrl) override;
