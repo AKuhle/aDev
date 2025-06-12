@@ -62,30 +62,6 @@ void aPushButton::setText(const QString &_sText)
 
 
 /*******************************************************************************
-* aPushButton::setBackgroundColor
-*******************************************************************************/
-void aPushButton::setBackgroundColor(const aColor &_color)
-{
-    QPalette pal = palette();
-    pal.setColor(QPalette::Button, _color.toQColor());
-    QPushButton::setAutoFillBackground(true);
-    QPushButton::setPalette(pal);
-    QPushButton::update();
-} // aPushButton::setBackgroundColor
-
-
-/*******************************************************************************
-* aPushButton::backgroundColor
-*******************************************************************************/
-aColor aPushButton::backgroundColor() const
-{
-    QPalette pal = palette();
-
-    return pal.color(QPalette::Button);
-} // aPushButton::backgroundColor
-
-
-/*******************************************************************************
 * aPushButton::slotClicked
 *******************************************************************************/
 void aPushButton::slotClicked(bool /*_bChecked*/)

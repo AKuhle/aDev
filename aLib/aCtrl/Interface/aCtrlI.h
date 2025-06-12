@@ -19,6 +19,9 @@
 *******************************************************************************/
 #include "aLib_def.h"
 #include "aCtrl_def.h"
+#include "aColor.h"
+
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -45,6 +48,9 @@ class aCtrlI
 
         virtual void            setCtrlEnabled(bool _bEnabled) = 0;
         virtual bool            ctrlEnabled() const = 0;
+
+       virtual void            setBackgroundColor(const aColor &_color) = 0;
+       virtual aColor          backgroundColor() const = 0;
 }; // class aCtrlI
 
 

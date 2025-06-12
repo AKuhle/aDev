@@ -44,9 +44,6 @@ class aPushButton : public aButton<QPushButton>,
         void            setText(const aString &_sText);
         void            setText(const QString &_sText);
 
-        void            setBackgroundColor(const aColor &_color);
-        aColor          backgroundColor() const;
-
 
     /*******************************************************************************
     * slots

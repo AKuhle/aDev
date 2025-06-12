@@ -15,6 +15,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "mainWin.h"
 #include "qLights_defs.h"
 #include "ctrlPanel.h"
 #include "controller.h"
@@ -24,7 +25,6 @@
 
 // #include "aJsonFile.h"
 
-// #include "mainWin.h"
 // #include "universe.h"
 // #include "channel.h"
 // #include "scene.h"
@@ -346,10 +346,27 @@ void CtrlPanel::updateFixtures()
 *******************************************************************************/
 void CtrlPanel::updateScenes()
 {
+    MainWin     &mw = getMainWin();
+
     for (auto pSceneTuple : m_vSceneTuples)
     {
-        std::get<0> (pSceneTuple)->setCtrlEnabled(std::get<1> (pSceneTuple) != nullptr);
-    }
+        aPushButton         *pBtn   = std::get<0> (pSceneTuple);
+        shared_ptr<Scene>   pScene  = std::get<1> (pSceneTuple);
+
+        switch (mw.workMode())
+        {
+            case enumWorkMode::Play:
+                pBtn->setCtrlEnabled(pScene != nullptr);
+                pBtn->setBackgroundColor(m_colButtonBg);
+                break;
+
+            case enumWorkMode::SaveScene:
+                pBtn->setCtrlEnabled(true);
+                pBtn->setBackgroundColor(colDarkOrange);
+                break;
+        } // switch
+    } // for
+
 } // CtrlPanel::updateScenes
 
 
@@ -450,7 +467,9 @@ void CtrlPanel::initScenes()
 {
     for (auto pSceneTuple : m_vSceneTuples)
     {
-        std::get<0> (pSceneTuple)->setText(aString(""));
+        aPushButton *pBtn = std::get<0> (pSceneTuple);
+
+        pBtn->setText(aString(""));
     } // CtrlPanel::initGui
 } // CtrlPanel::initScenes
 
@@ -508,6 +527,8 @@ void CtrlPanel::initFaders()
 *******************************************************************************/
 bool CtrlPanel::onCreateWin()
 {
+    m_colButtonBg = m_pUi->m_pScene_01->backgroundColor();
+
     // bank controls
     m_vBankTuples.push_back(BankTuple(m_pUi->m_pBank_01, nullptr));
     m_vBankTuples.push_back(BankTuple(m_pUi->m_pBank_02, nullptr));
@@ -563,8 +584,6 @@ bool CtrlPanel::onCreateWin()
     m_vSceneTuples.push_back(SceneTuple(m_pUi->m_pScene_28, nullptr));
     m_vSceneTuples.push_back(SceneTuple(m_pUi->m_pScene_29, nullptr));
     m_vSceneTuples.push_back(SceneTuple(m_pUi->m_pScene_30, nullptr));
-
-//     m_colButtonBg = m_pUi->m_pScene_01->backgroundColor();
 
     // fader controls
     m_vFaders.push_back(m_pUi->m_pFader_01);

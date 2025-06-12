@@ -104,6 +104,32 @@ bool aCtrl<T>::ctrlEnabled() const
 } // aCtrl<T>::ctrlEnabled
 
 
+/*******************************************************************************
+* aCtrl<T>::ctrlEnabled
+*******************************************************************************/
+template<class T>
+void aCtrl<T>::setBackgroundColor(const aColor &_color)
+{
+    QPalette pal = T::palette();
+    pal.setColor(QPalette::Button, _color.toQColor());
+    T::setAutoFillBackground(true);
+    T::setPalette(pal);
+    T::update();
+} // aCtrl<T>::setBackgroundColor
+
+
+/*******************************************************************************
+* aCtrl<T>::ctrlEnabled
+*******************************************************************************/
+template<class T>
+aColor aCtrl<T>::backgroundColor() const
+{
+    QPalette pal = T::palette();
+
+    return pal.color(QPalette::Button);
+} // aCtrl<T>::backgroundColor
+
+
 } // namespace aWin
 } // namespace aLib
 

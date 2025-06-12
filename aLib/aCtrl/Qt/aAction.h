@@ -69,6 +69,9 @@ class aAction : public QObject,
                                               bool _bChecked) override;
         bool            ctrlChecked() const override;
 
+        void            setBackgroundColor(const aColor &_color) override;
+        aColor          backgroundColor() const override;
+
 
     /*******************************************************************************
     * slots

@@ -56,14 +56,18 @@ void Fader::updateState()
     if (hasChannel())
     {
         setEnabled(true);
-        setValue(m_pChannel->value());
+        setTracking(false);
+        setPosition(m_pChannel->value());
+        setTracking(true);
 
         m_pScribbleStrip->setIcon(m_pChannel->icon());
     }
     else
     {
         setEnabled(false);
-        setValue(0);
+        setTracking(false);
+        setPosition(0);
+        setTracking(true);
 
         m_pScribbleStrip->setIcon("");
         m_pLabel->setText(aString(""));

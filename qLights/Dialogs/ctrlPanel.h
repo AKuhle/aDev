@@ -30,6 +30,7 @@
 #include "ui_formCtrlPanel.h"
 
 using namespace aLib;
+using namespace aLib::aUtil;
 using namespace aLib::aWin;
 
 
@@ -76,6 +77,7 @@ class CtrlPanel : public aPlainWin,
 
         // scenes (30)
         aVector<SceneTuple>             m_vSceneTuples;
+        aColor                          m_colButtonBg;
 
         // faders (24)
         aVector<Fader *>                m_vFaders;

@@ -587,6 +587,8 @@ compiler_moc_header_clean:
 		../../aCtrl/Interface/aCtrlI.h \
 		../../aLib_def.h \
 		../../aCtrl/aCtrl_def.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Interface/aActionI.h \
 		../../aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -832,6 +834,8 @@ compiler_moc_header_clean:
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aLineEditI.h \
 		../../../../GeneratedFiles/qLib/moc_predefs.h \
@@ -1072,6 +1076,8 @@ compiler_moc_header_clean:
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Qt/aButton.inl \
 		../../aCtrl/Interface/aPushButtonI.h \
@@ -1311,6 +1317,8 @@ compiler_moc_header_clean:
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aScrollBarI.h \
 		../../../../GeneratedFiles/qLib/moc_predefs.h \
@@ -1551,6 +1559,8 @@ compiler_moc_header_clean:
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Qt/aButton.inl \
 		../../aCtrl/Interface/aToolButtonI.h \
@@ -2668,9 +2678,8 @@ release/main.o: ../../aApp/main.cpp ../../aLib_def.h \
 		../../aUtil/aPath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\aApp\main.cpp
 
-release/aAction.o: ../../aCtrl/Qt/aAction.cpp ../../aCtrl/Qt/aAction.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QAction \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
+release/aAction.o: ../../aCtrl/Qt/aAction.cpp ../../../../Qt/6.7.2/mingw_64/include/QtGui/QPalette \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpalette.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversionchecks.h \
@@ -2718,22 +2727,31 @@ release/aAction.o: ../../aCtrl/Qt/aAction.cpp ../../aCtrl/Qt/aAction.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpair.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringview.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearray.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrefcount.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydata.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpair.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydatapointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydataops.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainertools_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20functional.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20memory.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayview.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringfwd.h \
@@ -2747,39 +2765,34 @@ release/aAction.o: ../../aCtrl/Qt/aAction.cpp ../../aCtrl/Qt/aAction.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringbuilder.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qicon.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdatastream.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
+		../../aCtrl/Qt/aAction.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QAction \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qicon.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare.h \
@@ -2808,6 +2821,8 @@ release/aAction.o: ../../aCtrl/Qt/aAction.cpp ../../aCtrl/Qt/aAction.h \
 		../../aCtrl/Interface/aCtrlI.h \
 		../../aLib_def.h \
 		../../aCtrl/aCtrl_def.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Interface/aActionI.h \
 		../../aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -2960,6 +2975,8 @@ release/aCtrlMgr.o: ../../aCtrl/Qt/aCtrlMgr.cpp ../../aCtrl/aCtrl_def.h \
 		../../aUtil/Collection/aPtrList.inl \
 		../../aCtrl/Qt/aAction.h \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Interface/aActionI.h \
 		../../aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -3301,6 +3318,8 @@ release/aLabel.o: ../../aCtrl/Qt/aLabel.cpp ../../aCtrl/Qt/aLabel.h \
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aLabelI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aLabel.o ..\..\aCtrl\Qt\aLabel.cpp
@@ -3542,6 +3561,8 @@ release/aLineEdit.o: ../../aCtrl/Qt/aLineEdit.cpp ../../aCtrl/Qt/aLineEdit.h \
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aLineEditI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aLineEdit.o ..\..\aCtrl\Qt\aLineEdit.cpp
@@ -3778,6 +3799,8 @@ release/aProgressBar.o: ../../aCtrl/Qt/aProgressBar.cpp ../../aCtrl/Qt/aProgress
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aProgressBarI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aProgressBar.o ..\..\aCtrl\Qt\aProgressBar.cpp
@@ -4016,11 +4039,11 @@ release/aPushButton.o: ../../aCtrl/Qt/aPushButton.cpp ../../aCtrl/Qt/aPushButton
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Qt/aButton.inl \
-		../../aCtrl/Interface/aPushButtonI.h \
-		../../aUtil/aColor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor
+		../../aCtrl/Interface/aPushButtonI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aPushButton.o ..\..\aCtrl\Qt\aPushButton.cpp
 
 release/aScrollBar.o: ../../aCtrl/Qt/aScrollBar.cpp ../../aCtrl/Qt/aScrollBar.h \
@@ -4255,6 +4278,8 @@ release/aScrollBar.o: ../../aCtrl/Qt/aScrollBar.cpp ../../aCtrl/Qt/aScrollBar.h 
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Interface/aScrollBarI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aScrollBar.o ..\..\aCtrl\Qt\aScrollBar.cpp
@@ -4493,6 +4518,8 @@ release/aToolButton.o: ../../aCtrl/Qt/aToolButton.cpp ../../aCtrl/Qt/aToolButton
 		../../aWin/Qt/aBaseWin.inl \
 		../../aWin/Qt/aBaseWin_handler.inl \
 		../../aCtrl/Interface/aCtrlI.h \
+		../../aUtil/aColor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../aCtrl/Qt/aCtrl.inl \
 		../../aCtrl/Qt/aButton.inl \
 		../../aCtrl/Interface/aToolButtonI.h

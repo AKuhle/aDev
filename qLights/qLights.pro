@@ -117,6 +117,7 @@ HEADERS += \
     Classes/universe.h \
     Dialogs/ctrlPanel.h \
     Dialogs/dlgAddBank.h \
+    Dialogs/dlgAddScene.h \
     Dialogs/scribbleStrip.h \
     Win/mainWin.h
 
@@ -136,6 +137,7 @@ SOURCES += \
     Dialogs/ctrlPanel_ctrl.cpp \
     Dialogs/ctrlPanel_io.cpp \
     Dialogs/dlgAddBank.cpp \
+    Dialogs/dlgAddScene.cpp \
     Dialogs/scribbleStrip.cpp \
     Win/mainWin.cpp \
     Win/mainWin_ctrls.cpp \
@@ -154,6 +156,7 @@ SOURCES += \
 ########################################################################
 FORMS += \
     Forms/dlgAddBank.ui \
+    Forms/dlgAddScene.ui \
     Forms/formCtrlPanel.ui \
     Forms/formMainWin.ui
 

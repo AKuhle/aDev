@@ -51,8 +51,6 @@ void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
                                   u8    _u8Value,
                                   bool  _bSend)
 {
-    cout << _s32DmxChannelNr << " - "  <<_u8Value << endl;
-
     // set the new channel value
     m_dmxData[_s32DmxChannelNr] = _u8Value;
 
@@ -69,6 +67,8 @@ void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
 *******************************************************************************/
 void Universe::sendValues2Controller()
 {
+    cout << __PRETTY_FUNCTION__ << endl;
+
     QUdpSocket      udpSocket;
     QByteArray      artnetPacket;
 

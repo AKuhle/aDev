@@ -57,6 +57,9 @@ class aCtrl : public aBaseWin<T>,
 
         void            setCtrlEnabled(bool _bEnabled) override;
         bool            ctrlEnabled() const override;
+
+        void            setBackgroundColor(const aColor &_color) override;
+        aColor          backgroundColor() const override;
 }; // class aCtrl
 
 

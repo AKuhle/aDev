@@ -9,26 +9,28 @@ using namespace aLib::aWin;
 
 
 namespace Ui {
-class DlgAddBank;
+class DlgAddScene;
 }
 
 
 /*******************************************************************************
-* class DlgAddBank
+* class DlgAddScene
 *******************************************************************************/
-class DlgAddBank : public aDialog,
-                   public aCtrlMgr
+class DlgAddScene : public aDialog,
+                    public aCtrlMgr
 {
     Q_OBJECT
 
     private:
-        Ui::DlgAddBank      *m_pUi          { nullptr };
-        aString             &m_sBankName;
+        Ui::DlgAddScene     *m_pUi                  { nullptr };
+        aString             &m_sSceneName;
 
     public:
-        explicit DlgAddBank(QWidget     *_pParent,
-                            aString     &_sBankName);
-        ~DlgAddBank();
+        explicit DlgAddScene(QWidget     *_pParent,
+                             aString     &_sSceneName);
+        ~DlgAddScene();
+
+        aString             sceneName() const       { return m_sSceneName; }
 
 
     /*******************************************************************************
@@ -52,4 +54,4 @@ class DlgAddBank : public aDialog,
     protected:
         virtual bool        onCreateWin() override;
 
-}; // class DlgAddBank
+}; // class DlgAddScene

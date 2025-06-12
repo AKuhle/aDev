@@ -16,6 +16,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QPalette>
+
 #include "aAction.h"
 #include "aCtrlMgr.h"
 
@@ -128,6 +130,23 @@ bool aAction::ctrlChecked() const
 {
     return m_pAction->isChecked();
 } // aAction::ctrlChecked
+
+
+/*******************************************************************************
+* aAction::ctrlEnabled
+*******************************************************************************/
+void aAction::setBackgroundColor(const aColor &/*_color*/)
+{
+} // aAction::setBackgroundColor
+
+
+/*******************************************************************************
+* aAction::ctrlEnabled
+*******************************************************************************/
+aColor aAction::backgroundColor() const
+{
+    return colBlack;
+} // aAction::backgroundColor
 
 
 /*******************************************************************************
