@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aJsonValue.h
+* \file aJsonObj.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -18,6 +18,7 @@
 * includes
 *******************************************************************************/
 #include <QJsonObject>
+
 #include "aString.h"
 
 
@@ -29,46 +30,22 @@ namespace aUtil {
 
 
 /*******************************************************************************
-* class aJsonValue
+* class aJsonObj
 *******************************************************************************/
-class aJsonValue
+class aJsonObj : public QJsonObject
 {
-    private:
-        aString       m_sKey;
-
-        bool            m_bIsBool       { false };
-        bool            m_bValue        { false };
-
-        bool            m_bIsDbl        { false };
-        dbl             m_dblValue      { 0 };
-
-        bool            m_bIsString     { false };
-        aString         m_sValue;
-
-
     public:
-        aJsonValue(aString  _sKey,
-                   bool     _bValue);
+        aJsonObj();
+        aJsonObj(const QJsonObject  &_rhs);
 
-        aJsonValue(aString  _sKey,
-                   dbl      _dblValue);
+        virtual ~aJsonObj();
 
-        aJsonValue(aString          _sKey,
-                   const aString    &_sValue);
 
-        virtual ~aJsonValue();
+        aString         findString(const aString &_sKey) const;     // empty string for invalid strings
+        s32             findS32(const aString &_sKey) const;        // 0 for invalid strings
+        bool            findBool(const aString &_sKey) const;       // false for invalid strings
 
-        const aString&          key() const;
-
-        bool                    isBool() const;
-        bool                    toBool() const;
-
-        bool                    isDbl() const;
-        dbl                     toDbl() const;
-
-        bool                    isString() const;
-        aString                 toString() const;
-}; // class aJsonValueI
+}; // class aJsonObjI
 
 
 } // namespace aUtil

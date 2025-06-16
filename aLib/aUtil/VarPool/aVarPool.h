@@ -136,8 +136,11 @@ class aVarPool
         void                    setDefB(u32 _id, dbl _val)                                  { createColor(_id); m_mapColor.find(_id)->second.defVal().b() = _val;}
         void                    setDefA(u32 _id, dbl _val)                                  { createColor(_id); m_mapColor.find(_id)->second.defVal().a() = _val;}
 
-        virtual void            JsonCallback(const aVector<aString> &_vecKeys,
-                                             const aJsonValue       &_value);
+        virtual void            JsonValCallback(const aVector<aString> &_vecKeys,
+                                                const aJsonValue       &_value);
+
+        virtual void            JsonObjCallback(const aVector<aString> &_vecKeys,
+                                                const aJsonObj         &_obj);
 
         template <class poolVarT>
         bool hasVar(const std::map<u32, poolVarT>   &_map,

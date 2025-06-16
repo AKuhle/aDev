@@ -72,7 +72,7 @@ class Fixture
 
         void                    resetAllChannels();
 
-        void                    collectScenes(aVector<channelValueTuple> &_vValues);
+        void                    collectChannels(aVector<shared_ptr<Channel>> &_vChannel);
 
         // void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
         // void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;

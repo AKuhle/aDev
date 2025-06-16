@@ -25,6 +25,7 @@
 #include "aPlainWin.h"
 
 #include "aVector.h"
+#include "aMap.h"
 #include "aSharedPtrVector.h"
 
 #include "ui_formCtrlPanel.h"
@@ -55,11 +56,32 @@ class Channel;
 class CtrlPanel : public aPlainWin,
                   public aCtrlMgr
 {
-    using BankTuple = std::tuple<aPushButton *, shared_ptr<Bank>>;
-    using FixtureTuple = std::tuple<aPushButton *, shared_ptr<Fixture>>;
-    using SceneTuple = std::tuple<aPushButton *, shared_ptr<Scene>>;
+    using BankTuple     = std::tuple<aPushButton *, shared_ptr<Bank>>;
+    using FixtureTuple  = std::tuple<aPushButton *, shared_ptr<Fixture>>;
+    using SceneTuple    = std::tuple<aPushButton *, shared_ptr<Scene>>;
 
     private:
+        // controllerIoInfo: name, maxUnivers
+        using controllerIoInfo = std::tuple<aString, s32>;
+
+        // universeIoInfo: id
+        using universeIoInfo = std::tuple<s32>;
+
+        // fixtureIoInfo: controll, id, os
+        using fixtureIoInfo = std::tuple<aString, s32, s32>;
+
+        // sceneIoInfo: fixture, icon, channelNr, brightness
+        using sceneIoInfo = std::tuple<aString, aString, s32, bool>;
+
+        // bankIoInfo: bankBtnIdx
+        using bankIoInfo = std::tuple<s32>;
+
+        // bankFixtureIoInfo: bankName, fixtureName, fixtureBtnIdx
+        using bankFixtureIoInfo = std::tuple<aString, aString, s32>;
+
+        // sceneIoInfo: sceneName, sceneBtnIdx
+        using sceneBtnIoInfo = std::tuple<aString, s32>;
+
         Ui::FormCtrlPanel               *m_pUi                  { nullptr };
 
         // controller
@@ -88,10 +110,13 @@ class CtrlPanel : public aPlainWin,
         //aSharedPtrVector<Channel>       m_vMasterChannel;
 
         // io-member
-        //aMap<aString, controllerIoInfo> m_mapControllerIoInfo;
-        //aMap<aString, bankIoInfo>       m_mapBankIoInfo;
-        //aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;
-        //aMap<aString, sceneIoInfo>      m_mapSceneIoInfo;
+        aMap<aString, controllerIoInfo> m_mapControllerIoInfo;      // controllerName -> bankIoInfo
+        aMap<aString, universeIoInfo>   m_mapUniverseIoInfo;
+        aMap<aString, fixtureIoInfo>    m_mapFixtureIoInfo;         // fixtureName -> fixtureIoInfo
+        aVector<sceneIoInfo>            m_vSceneIoInfo;
+        aMap<aString, bankIoInfo>       m_mapBankIoInfo;              // bankName -> bankIoInfo
+        aVector<bankFixtureIoInfo>      m_vBankFixtureIoInfo;
+        aVector<sceneBtnIoInfo>         m_vSceneBtnIoInfo;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
@@ -123,6 +148,11 @@ class CtrlPanel : public aPlainWin,
                                                       shared_ptr<Fixture>   _pFixture,
                                                       s32                   _s32FixtureIdx);
 
+        shared_ptr<Controller>          findController(const aString  &_sName);
+        shared_ptr<Fixture>             findFixture(const aString  &_sName);
+        shared_ptr<Bank>                findBank(const aString  &_sName);
+
+
     /*******************************************************************************
     * CtrlPanel - io
     *******************************************************************************/
@@ -131,13 +161,25 @@ class CtrlPanel : public aPlainWin,
         void                            readConfiguration(const aPath &_path);
 
     private:
+        void                            resetConfiguration();
+        void                            setConfiguration(const aMap<aString, controllerIoInfo>  &_mapControllerIoInfo,
+                                                         const aMap<aString, universeIoInfo>    &_mapUniverseIoInfo,
+                                                         const aMap<aString, fixtureIoInfo>     &_mapFixtureIoInfo,
+                                                         const aVector<sceneIoInfo>             &_vSceneIoInfo,
+                                                         const aMap<aString, bankIoInfo>        &_mapBankIoInfo,
+                                                         const aVector<bankFixtureIoInfo>       &_vBankFixtureIoInfo,
+                                                         const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo);
+
         void                            loadScene(s32 _s32SceneBtnIdx);
 
         void                            saveScene(s32       _s32SceneBtnIdx,
                                                   aString   _sSceneName);
 
-        void                            JsonCallback(const aVector<aString> &_vecKeys,
-                                                     const aJsonValue       &_value);
+        void                            JsonValCallback(const aVector<aString> &_vecKeys,
+                                                        const aJsonValue       &_value);
+
+        void                            JsonObjCallback(const aVector<aString> &_vecKeys,
+                                                        const aJsonObj         &_obj);
 
 
     /*******************************************************************************

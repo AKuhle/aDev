@@ -74,12 +74,13 @@ void Bank::add2Configuration(aJsonFile  &_jf,
         _jf.add(aJsonValue("name", m_sName));
         _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
 
-        // write the fixures
+        // add the fixures
         for (const auto &me : m_mapFixture)
         {
             _jf.openLevel();
-                _jf.add(aJsonValue("fixtureIdx", (double) me.first));
+                _jf.add(aJsonValue("bankName", m_sName));
                 _jf.add(aJsonValue("fixtureName", me.second->name()));
+                _jf.add(aJsonValue("fixtureBtnIdx", (double) me.first));
             _jf.closeLevel(aString("fixture") + "-" + me.second->name());
         }
 

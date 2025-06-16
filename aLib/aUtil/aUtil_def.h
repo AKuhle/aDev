@@ -77,6 +77,7 @@ template <typename T> class aPoolVarBase;
 class aArgument;
 class aColor;
 class aJsonFile;
+class aJsonObj;
 class aJsonValue;
 class aMargin;
 class aPath;

@@ -27,6 +27,7 @@ release/aCmdMgr.o
 release/aCmdStack.o
 release/aCmdThread.o
 release/aJsonFile.o
+release/aJsonObj.o
 release/aJsonValue.o
 release/aProgressCb.o
 release/aProgressMgr.o

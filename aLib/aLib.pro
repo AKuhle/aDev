@@ -164,6 +164,7 @@ HEADERS += \
     aUtil/Interface/aThread_i.h \
     aUtil/Interface/aUrl_sysi.h \
     aUtil/Qt/aJsonFile.h \
+    aUtil/Qt/aJsonObj.h \
     aUtil/Qt/aJsonValue.h \
     aUtil/Qt/aProgressCb.h \
     aUtil/Qt/aProgressMgr.h \
@@ -255,6 +256,7 @@ SOURCES += \
     aUtil/Cmds/aCmdStack.cpp \
     aUtil/Cmds/aCmdThread.cpp \
     aUtil/Qt/aJsonFile.cpp \
+    aUtil/Qt/aJsonObj.cpp \
     aUtil/Qt/aJsonValue.cpp \
     aUtil/Qt/aProgressCb.cpp \
     aUtil/Qt/aProgressMgr.cpp \

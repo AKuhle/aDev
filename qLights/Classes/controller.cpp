@@ -96,13 +96,18 @@ void Controller::add2Configuration(aJsonFile &_jf) const
         _jf.add(aJsonValue("name", m_sName));
         _jf.add(aJsonValue("adress", m_sIpAdr));
         _jf.add(aJsonValue("universeMax", (dbl) m_s32UniverseMax));
-
-        // add universes
-        for (auto u : m_mapUniverse)
-        {
-            u.second->add2Configuration(_jf);
-        }
     _jf.closeLevel(aString("controller") + "-" + m_sName);
+
+    // add universes
+    for (auto u : m_mapUniverse)
+    {
+        u32     u32Id = u.second->id();
+
+        _jf.openLevel();
+            _jf.add(aJsonValue("name", m_sName));
+            _jf.add(aJsonValue("id", (double) u32Id));
+        _jf.closeLevel(aString("universe") + "-" + m_sName + "-" + aString::fromValue(u32Id));
+    }
 } // Controller::add2Configuration
 
 

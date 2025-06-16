@@ -67,8 +67,6 @@ void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
 *******************************************************************************/
 void Universe::sendValues2Controller()
 {
-    cout << __PRETTY_FUNCTION__ << endl;
-
     QUdpSocket      udpSocket;
     QByteArray      artnetPacket;
 
@@ -100,19 +98,6 @@ void Universe::sendValues2Controller()
         //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
     }
 } // Universe::sendValues2Controller
-
-
-/*******************************************************************************
-* Universe::add2Configuration
-*******************************************************************************/
-void Universe::add2Configuration(aJsonFile &_jf) const
-{
-    _jf.openLevel();
-        // add univers info
-        _jf.add(aJsonValue("id", (dbl) m_u32Id));
-
-    _jf.closeLevel(aString("universe") + "-" + aString::fromValue(m_u32Id));
-} // Universe::add2Configuration
 
 
 // /*******************************************************************************

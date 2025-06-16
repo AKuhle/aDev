@@ -22,14 +22,8 @@
 
 #include "bank.h"
 #include "fixture.h"
+ #include "scene.h"
 
-// #include "aJsonFile.h"
-
-// #include "universe.h"
-// #include "channel.h"
-// #include "scene.h"
-
-//using namespace aLib::aUtil;
 
 
 /*******************************************************************************
@@ -206,6 +200,136 @@ void CtrlPanel::createSetup()
 
 
 /*******************************************************************************
+* CtrlPanel::createSetup
+*******************************************************************************/
+// void CtrlPanel::createSetup()
+// {
+//     // create the controller
+//     shared_ptr<Controller> pController = createController("Showtec NET-2/3 POCKET", "192.168.1.245", 2);
+
+//     // create a universe
+//     pController->addUniverse(1);
+
+//     // spot: eurolite-led-tmh-s90-de
+//     shared_ptr<Fixture> pSpot = createFixture("TMH-S90", pController, 1, 1);
+//     // the channels
+//     pSpot->addChannel(1, CHANNEL_ICN_PAN, false);
+//     pSpot->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
+//     pSpot->addChannel(3, CHANNEL_ICN_TILT, false);
+//     pSpot->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
+//     pSpot->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+//     pSpot->addChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+//     pSpot->addChannel(7, CHANNEL_ICN_STROBE, false);
+//     pSpot->addChannel(8, CHANNEL_ICN_COLOR_WHEEL, false);
+//     pSpot->addChannel(9, CHANNEL_ICN_GOBO_STAT_01, false);
+//     pSpot->addChannel(10, CHANNEL_ICN_GOBO_ROT_01, false);
+//     pSpot->addChannel(11, CHANNEL_ICN_GOBO_ROT_SPEED, false);
+//     pSpot->addChannel(12, CHANNEL_ICN_FOCUS, false);
+//     pSpot->addChannel(13, CHANNEL_ICN_PRISMA, false);
+//     pSpot->addChannel(14, CHANNEL_ICN_FUNCTION_1, false);
+//     pSpot->addChannel(15, CHANNEL_ICN_RESET, false);
+
+//     // wash left: 16 channel mode
+//     shared_ptr<Fixture> pWash_l= createFixture("TMH-X4-16 left", pController, 1, 17);
+//     // the channels
+//     pWash_l->addChannel(1, CHANNEL_ICN_PAN, false);
+//     pWash_l->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
+//     pWash_l->addChannel(3, CHANNEL_ICN_TILT, false);
+//     pWash_l->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
+//     pWash_l->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+//     pWash_l->addChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+//     pWash_l->addChannel(7, CHANNEL_ICN_STROBE, false);
+//     pWash_l->addChannel(8, CHANNEL_ICN_RED, false);
+//     pWash_l->addChannel(9, CHANNEL_ICN_GREEN, false);
+//     pWash_l->addChannel(10, CHANNEL_ICN_BLUE, false);
+//     pWash_l->addChannel(11, CHANNEL_ICN_WHITE, false);
+//     pWash_l->addChannel(12, CHANNEL_ICN_ZOOM, false);
+//     pWash_l->addChannel(14, CHANNEL_ICN_COLOR_SPEED, false);
+//     pWash_l->addChannel(15, CHANNEL_ICN_FUNCTION_1, false);
+//     pWash_l->addChannel(16, CHANNEL_ICN_RESET, false);
+
+//     // wash right: 16 channel mode
+//     shared_ptr<Fixture> pWash_r = createFixture("TMH-X4-16 right", pController, 1, 41);
+//     // the channels
+//     pWash_r->addChannel(1, CHANNEL_ICN_PAN, false);
+//     pWash_r->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
+//     pWash_r->addChannel(3, CHANNEL_ICN_TILT, false);
+//     pWash_r->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
+//     pWash_r->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+//     pWash_r->addChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+//     pWash_r->addChannel(7, CHANNEL_ICN_STROBE, false);
+//     pWash_r->addChannel(8, CHANNEL_ICN_RED, false);
+//     pWash_r->addChannel(9, CHANNEL_ICN_GREEN, false);
+//     pWash_r->addChannel(10, CHANNEL_ICN_BLUE, false);
+//     pWash_r->addChannel(11, CHANNEL_ICN_WHITE, false);
+//     pWash_r->addChannel(12, CHANNEL_ICN_ZOOM, false);
+//     pWash_r->addChannel(14, CHANNEL_ICN_COLOR_SPEED, false);
+//     pWash_r->addChannel(15, CHANNEL_ICN_FUNCTION_1, false);
+//     pWash_r->addChannel(16, CHANNEL_ICN_RESET, false);
+
+//     // // wash right: 24 channel mode
+//     // shared_ptr<Fixture> pWash_r = createFixture("TMH-X4-24 right", pController, 1, 41);
+//     // // the channels
+//     // pWash_r->addChannel(1, CHANNEL_ICN_PAN, false);
+//     // pWash_r->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
+//     // pWash_r->addChannel(3, CHANNEL_ICN_TILT, false);
+//     // pWash_r->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
+//     // pWash_r->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+//     // pWash_r->addChannel(6, CHANNEL_ICN_ZOOM, false);
+//     // pWash_r->addChannel(7, CHANNEL_ICN_BRIGHTNESS, true);
+//     // pWash_r->addChannel(8, CHANNEL_ICN_STROBE, false);
+//     // pWash_r->addChannel(9, CHANNEL_ICN_RED_1, false);
+//     // pWash_r->addChannel(10, CHANNEL_ICN_GREEN_1, false);
+//     // pWash_r->addChannel(11, CHANNEL_ICN_BLUE_1, false);
+//     // pWash_r->addChannel(12, CHANNEL_ICN_WHITE_1, false);
+//     // pWash_r->addChannel(13, CHANNEL_ICN_RED_2, false);
+//     // pWash_r->addChannel(14, CHANNEL_ICN_GREEN_2, false);
+//     // pWash_r->addChannel(15, CHANNEL_ICN_BLUE_2, false);
+//     // pWash_r->addChannel(16, CHANNEL_ICN_WHITE_2, false);
+//     // pWash_r->addChannel(17, CHANNEL_ICN_RED_3, false);
+//     // pWash_r->addChannel(18, CHANNEL_ICN_GREEN_3, false);
+//     // pWash_r->addChannel(19, CHANNEL_ICN_BLUE_3, false);
+//     // pWash_r->addChannel(20, CHANNEL_ICN_WHITE_3, false);
+//     // pWash_r->addChannel(22, CHANNEL_ICN_COLOR_SPEED, false);
+//     // pWash_r->addChannel(23, CHANNEL_ICN_FUNCTION_1, false);
+//     // pWash_r->addChannel(24, CHANNEL_ICN_RESET, false);
+
+//     // PAR left: 1 channel
+//     shared_ptr<Fixture> pPar_l = createFixture("PAR left", pController, 1, 65);
+//     // the channels
+//     pPar_l->addChannel(1, CHANNEL_ICN_BRIGHTNESS, true);
+
+//     // PAR right: 1 channel
+//     shared_ptr<Fixture> pPar_r = createFixture("PAR right", pController, 1, 66);
+//     // the channels
+//     pPar_r->addChannel(1, CHANNEL_ICN_BRIGHTNESS, true);
+
+//     // create the banks
+//     shared_ptr<Bank> pBank1 = createBank("All");
+//     assignBank(pBank1, 0);
+//     assignFixture(pBank1, pSpot, 0);
+//     assignFixture(pBank1, pWash_l, 1);
+//     assignFixture(pBank1, pWash_r, 2);
+//     assignFixture(pBank1, pPar_l, 3);
+//     assignFixture(pBank1, pPar_r, 4);
+
+//     shared_ptr<Bank> pBank2 = createBank("Wash MH");
+//     assignBank(pBank2, 1);
+//     assignFixture(pBank2, pWash_l, 0);
+//     assignFixture(pBank2, pWash_r, 1);
+
+//     shared_ptr<Bank> pBank3 = createBank("Spot MH");
+//     assignBank(pBank3, 2);
+//     assignFixture(pBank3, pSpot, 0);
+
+//     shared_ptr<Bank> pBank4 = createBank("PAR");
+//     assignBank(pBank4, 3);
+//     assignFixture(pBank4, pPar_l, 0);
+//     assignFixture(pBank4, pPar_r, 1);
+// } // CtrlPanel::createSetup
+
+
+/*******************************************************************************
 * CtrlPanel::createController
 *******************************************************************************/
 shared_ptr<Controller> CtrlPanel::createController(const aString  &_sName,
@@ -296,6 +420,57 @@ void CtrlPanel::assignFixture(shared_ptr<Bank>      _pBank,
         }
     }
 } // CtrlPanel::assignFixture
+
+
+/*******************************************************************************
+* CtrlPanel::findController
+*******************************************************************************/
+shared_ptr<Controller> CtrlPanel::findController(const aString  &_sName)
+{
+    for (shared_ptr<Controller> &pC : m_vController)
+    {
+        if (pC->name() == _sName)
+        {
+            return pC;
+        }
+    }
+
+    return nullptr;
+} // CtrlPanel::findController
+
+
+/*******************************************************************************
+* CtrlPanel::findFixture
+*******************************************************************************/
+shared_ptr<Fixture> CtrlPanel::findFixture(const aString  &_sName)
+{
+    for (shared_ptr<Fixture> &pF : m_vFixtures)
+    {
+        if (pF->name() == _sName)
+        {
+            return pF;
+        }
+    }
+
+    return nullptr;
+} // CtrlPanel::findFixture
+
+
+/*******************************************************************************
+* CtrlPanel::findBank
+*******************************************************************************/
+shared_ptr<Bank> CtrlPanel::findBank(const aString  &_sName)
+{
+    for (shared_ptr<Bank> &pB : m_vBanks)
+    {
+        if (pB->name() == _sName)
+        {
+            return pB;
+        }
+    }
+
+    return nullptr;
+} // CtrlPanel::findBank
 
 
 /*******************************************************************************
@@ -469,9 +644,17 @@ void CtrlPanel::initScenes()
 {
     for (auto pSceneTuple : m_vSceneTuples)
     {
-        aPushButton *pBtn = std::get<0> (pSceneTuple);
+        aPushButton         *pBtn   = std::get<0> (pSceneTuple);
+        shared_ptr<Scene>   pScene  = std::get<1> (pSceneTuple);
 
-        pBtn->setText(aString(""));
+        if (pScene != nullptr)
+        {
+            pBtn->setText(pScene->name());
+        }
+        else
+        {
+            pBtn->setText(aString(""));
+        }
     } // CtrlPanel::initGui
 } // CtrlPanel::initScenes
 
@@ -659,8 +842,6 @@ bool CtrlPanel::onCreateWin()
     initFixtures();
     initScenes();
     initFaders();
-
-    updateGui();
 
     return true;
 } // CtrlPanel::onCreateWin

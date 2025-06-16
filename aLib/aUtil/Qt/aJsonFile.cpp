@@ -22,6 +22,7 @@
 
 #include "aLib_def.h"
 #include "aJsonFile.h"
+#include "aJsonObj.h"
 #include "aJsonValue.h"
 
 using namespace std;
@@ -128,7 +129,8 @@ bool aJsonFile::write2File()
 /*******************************************************************************
 * aJsonFile::readAllValues
 *******************************************************************************/
-bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _f) const
+bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _f_fVal,
+                              std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const
 {
     QFile               file(m_sFilePath.canonicalPath().toQString());
     QString             sJsonFile;
@@ -144,7 +146,7 @@ bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const 
         if (jsonDoc.isObject())
         {
             // start the iteration
-            readJsonObj(jsonDoc.object(), vecKeys, _f);
+            readJsonObj(jsonDoc.object(), vecKeys, _f_fVal, _fObj);
 
             bSuccess = true;
         } // if (jsonDoc.isObject())
@@ -159,7 +161,8 @@ bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const 
 *******************************************************************************/
 void aJsonFile::readJsonObj(const QJsonObject                                   &_obj,
                             aVector<aString>                                    &_vecKeys,
-                            std::function<void(const aVector<aString>&, const aJsonValue&)> _f) const
+                            std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
+                            std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const
 {
     QJsonObject::const_iterator     it;
 
@@ -171,8 +174,11 @@ void aJsonFile::readJsonObj(const QJsonObject                                   
             // add the key to the vector of keys
             _vecKeys.push_back(aString::fromQString(it.key()));
 
+            // call callback handler for objects
+            _fObj(_vecKeys, aJsonObj(it->toObject()));
+
             // if the child is another json object => next recursion
-            readJsonObj(it->toObject(), _vecKeys, _f);
+            readJsonObj(it->toObject(), _vecKeys, _fVal, _fObj);
 
             // remove the key from the vector of keys
             _vecKeys.pop_back();
@@ -180,17 +186,17 @@ void aJsonFile::readJsonObj(const QJsonObject                                   
         else if (it->isBool())
         {
             aJsonValue  val(aString::fromQString(it.key()), it.value().toBool());
-            _f(_vecKeys, val);
+            _fVal(_vecKeys, val);
         }
         else if (it->isDouble())
         {
             aJsonValue  val(aString::fromQString(it.key()), it.value().toDouble());
-            _f(_vecKeys, val);
+            _fVal(_vecKeys, val);
         }
         else if (it->isString())
         {
             aJsonValue  val(aString::fromQString(it.key()), aString::fromQString(it.value().toString()));
-            _f(_vecKeys, val);
+            _fVal(_vecKeys, val);
         }
     } // for...
 } // aJsonFile::readJsonObj

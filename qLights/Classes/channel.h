@@ -34,7 +34,7 @@ using namespace aLib::aUtil;
 class Channel
 {
     private:
-        Fixture                 *m_pFixture;
+        Fixture                 *m_pFixture             { nullptr };
         s32                     m_s32ChannelNr          { -1 };
         aString                 m_sIcon;
         bool                    m_bBrightness           { false };
@@ -49,6 +49,8 @@ class Channel
                 bool        _bBrightness);
 
         ~Channel();
+
+        Fixture*                fixture()                   { return m_pFixture; }
 
         bool                    isBrightness()              { return m_bBrightness; }
 

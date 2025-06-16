@@ -12,6 +12,7 @@
 *******************************************************************************/
 #include "aVarPool.h"
 #include "aJsonFile.h"
+#include "aJsonObj.h"
 #include "aJsonValue.h"
 #include "aString.h"
 #include "aColor.h"
@@ -147,9 +148,9 @@ bool aVarPool::writeToJsonFile(const aPath &_sFilePath) const
     bool            bSuccess = false;
 
     // read all entries
-    bSuccess = jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) {
-        this->JsonCallback(_vecKeys, _value);
-    });
+    bSuccess = jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) { this->JsonValCallback(_vecKeys, _value); },
+                                   [this](const aVector<aString> &_vecKeys, const aJsonObj &_obj) { this->JsonObjCallback(_vecKeys, _obj); }
+    );
 
     return bSuccess;
 } // aVarPool::readFromJsonFile
@@ -170,10 +171,10 @@ void aVarPool::clearAllEntries()
 
 
 /*******************************************************************************
-* aVarPool::JsonCallback
+* aVarPool::JsonValCallback
 *******************************************************************************/
-void aVarPool::JsonCallback(const aVector<aString> &_vecKeys,
-                            const aJsonValue       &_value)
+void aVarPool::JsonValCallback(const aVector<aString> &_vecKeys,
+                               const aJsonValue       &_value)
 {
     s32     s32Size = _vecKeys.size();
 
@@ -270,7 +271,16 @@ void aVarPool::JsonCallback(const aVector<aString> &_vecKeys,
 
     } // if...
 
-} // aVarPool::JsonCallback
+} // aVarPool::JsonValCallback
+
+
+/*******************************************************************************
+* aVarPool::JsonObjCallback
+*******************************************************************************/
+void aVarPool::JsonObjCallback(const aVector<aString> &/*_vecKeys*/,
+                               const aJsonObj         &/*_obj*/)
+{
+} // aVarPool::JsonObjCallback
 
 
 } // namespace aUtil

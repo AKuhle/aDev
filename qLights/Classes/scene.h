@@ -36,15 +36,17 @@ class Scene
         aVector<channelValueTuple>  m_vValues;
 
     public:
-        Scene(const aString                     &_sName,
-              const aVector<channelValueTuple>  &_vValues);
+        Scene(const aString &_sName);
         ~Scene();
+
+        void                                addChannel(shared_ptr<Channel>  _pChannel,
+                                                       u8                   _u8Value);
 
         const aString&                      name() const                    { return m_sName; }
         void                                setName(const aString &_sName)  { m_sName = _sName; }
 
         const aVector<channelValueTuple>&   channelValues() const           { return m_vValues; }
 
-        // void                                add2Configuration(aJsonFile     &_jf,
-        //                                                       s32           _idx) const;
+        void                                add2Configuration(aJsonFile &_jf,
+                                                              s32       _idx) const;
 }; // class Scene

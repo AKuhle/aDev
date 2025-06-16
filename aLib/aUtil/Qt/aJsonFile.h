@@ -58,12 +58,14 @@ class aJsonFile
 
         bool        write2File();
 
-        bool        readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _f) const;
+        bool        readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
+                                  std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const;
 
     private:
         void        readJsonObj(const QJsonObject                                   &_obj,
                                 aVector<aString>                                    &_vecKeys,
-                                std::function<void(const aVector<aString>&, const aJsonValue&)> _f) const;
+                                std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
+                                std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const;
 }; // class aJsonFileI
 
 

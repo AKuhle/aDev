@@ -118,15 +118,15 @@ void Fixture::resetAllChannels()
 
 
 /*******************************************************************************
-* Fixture::collectScenes
+* Fixture::collectChannels
 *******************************************************************************/
-void Fixture::collectScenes(aVector<channelValueTuple> &_vValues)
+void Fixture::collectChannels(aVector<shared_ptr<Channel>> &_vChannel)
 {
     for (auto me : m_mapAllChannel)
     {
-        _vValues.push_back(channelValueTuple {me.second, me.second->value()} );
+        _vChannel.push_back(me.second);
     }
-} // Fixture::collectScenes
+} // Fixture::collectChannels
 
 
 /*******************************************************************************
