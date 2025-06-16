@@ -15,11 +15,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aJsonFile.h"
-#include "aJsonValue.h"
+//#include "aJsonFile.h"
+//#include "aJsonValue.h"
 
-#include "channel.h"
-#include "controller.h"
 #include "scene.h"
 
 
@@ -45,25 +43,25 @@ Scene::~Scene()
 /*******************************************************************************
 * Scene::add2Configuration
 *******************************************************************************/
-void Scene::add2Configuration(aJsonFile     &_jf,
-                              s32           _idx) const
-{
-    _jf.openLevel();
-    for (const channelValueTuple &t : m_vValues)
-    {
-        shared_ptr<Channel> pChannel    = std::get<0> (t);
-        u8                  u8Value     = std::get<1> (t);
+// void Scene::add2Configuration(aJsonFile     &_jf,
+//                               s32           _idx) const
+// {
+//     _jf.openLevel();
+//     for (const channelValueTuple &t : m_vValues)
+//     {
+//         shared_ptr<Channel> pChannel    = std::get<0> (t);
+//         u8                  u8Value     = std::get<1> (t);
 
-        _jf.openLevel();
-            _jf.add(aJsonValue("idx", (dbl) _idx));
-            _jf.add(aJsonValue("sceneName", m_sName));
-            _jf.add(aJsonValue("controllerName", pChannel->controller()->name()));
-            _jf.add(aJsonValue("universId", (dbl) pChannel->universeId()));
-            _jf.add(aJsonValue("channelNr", (dbl) pChannel->channelNr()));
-            _jf.add(aJsonValue("channelOs", (dbl) pChannel->channelOs()));
-            _jf.add(aJsonValue("value", (dbl) u8Value));
-        _jf.closeLevel(aString("channel") + "-" + aString::fromValue(pChannel->channelNr() +
-                                                                     pChannel->channelOs()));
-    }
-    _jf.closeLevel(aString("scene") + "-" + m_sName);
-} // Scene::add2Configuration
+//         _jf.openLevel();
+//             _jf.add(aJsonValue("idx", (dbl) _idx));
+//             _jf.add(aJsonValue("sceneName", m_sName));
+//             _jf.add(aJsonValue("controllerName", pChannel->controller()->name()));
+//             _jf.add(aJsonValue("universId", (dbl) pChannel->universeId()));
+//             _jf.add(aJsonValue("channelNr", (dbl) pChannel->channelNr()));
+//             _jf.add(aJsonValue("channelOs", (dbl) pChannel->channelOs()));
+//             _jf.add(aJsonValue("value", (dbl) u8Value));
+//         _jf.closeLevel(aString("channel") + "-" + aString::fromValue(pChannel->channelNr() +
+//                                                                      pChannel->channelOs()));
+//     }
+//     _jf.closeLevel(aString("scene") + "-" + m_sName);
+// } // Scene::add2Configuration

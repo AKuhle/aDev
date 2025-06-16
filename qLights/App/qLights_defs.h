@@ -18,16 +18,14 @@
 *******************************************************************************/
 #include "aLib_def.h"
 #include "aWin_def.h"
-#include "aString.h"
 
 class Channel;
 
 using namespace std;
 using namespace aLib;
 using namespace aLib::aWin;
-using namespace aLib::aUtil;
 
-using universeSaveTuple = tuple<s32, s32, QByteArray>;
+//using universeSaveTuple = tuple<s32, s32, QByteArray>;
 using channelValueTuple = tuple<shared_ptr<Channel>, u8>;
 
 

@@ -15,8 +15,13 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "mainWin.h"
+
 #include "qLights_defs.h"
 #include "ctrlPanel.h"
+#include "dlgAddScene.h"
+#include "scene.h"
+#include "aString.h"
 #include "channel.h"
 
 
@@ -39,12 +44,12 @@ void CtrlPanel::onRegisterCtrl()
         registerCtrl(pFixtureBtn, ID_FIRST_FIXTURE_IDX + i, true);
     }
 
-    // // register scenes
-    // for (u32 i = 0; i < SCENE_MAX; i++)
-    // {
-    //     auto pSceneBtn = std::get<0>(m_vSceneCtrl.at(i));
-    //     registerCtrl(pSceneBtn, ID_FIRST_SCENE_IDX + i, true);
-    // }
+    // register scenes
+    for (u32 i = 0; i < SCENE_MAX; i++)
+    {
+        auto pSceneBtn = std::get<0>(m_vSceneTuples.at(i));
+        registerCtrl(pSceneBtn, ID_FIRST_SCENE_IDX + i, true);
+    }
 
     // register faders
     for (u32 iFaderIdx = 0; iFaderIdx < FADER_MAX; iFaderIdx++)
@@ -90,12 +95,12 @@ void CtrlPanel::onCtrlClicked(aCtrlI *_pCtrl)
        onFixtureSelected(s32CtrlId - ID_FIRST_FIXTURE_IDX);
    }
 
-   // // check for scenes
-   // if (s32CtrlId >= ID_FIRST_SCENE_IDX &&
-   //     s32CtrlId < ID_FIRST_SCENE_IDX + SCENE_MAX)
-   // {
-   //     onSceneSelected(s32CtrlId - ID_FIRST_SCENE_IDX);
-   // }
+   // check for scenes
+   if (s32CtrlId >= ID_FIRST_SCENE_IDX &&
+       s32CtrlId < ID_FIRST_SCENE_IDX + SCENE_MAX)
+   {
+       onSceneSelected(s32CtrlId - ID_FIRST_SCENE_IDX);
+   }
 
    // // check for scenes
    // if (s32CtrlId == ID_BACKOUT_IDX)
@@ -179,6 +184,46 @@ void CtrlPanel::onFixtureSelected(s32 _s32FixtureBtnIdx)
     initFaders();
     updateGui();
 } // CtrlPanel::onFixtureSelected
+
+
+/*******************************************************************************
+* CtrlPanel::onSceneSelected
+*******************************************************************************/
+void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
+{
+    CHECK_PRE_CONDITION_VOID(_s32SceneBtnIdx < SCENE_MAX);
+
+    auto        pSceneBtn   = std::get<0> (m_vSceneTuples.at(_s32SceneBtnIdx));
+    auto        pScene      = std::get<1> (m_vSceneTuples.at(_s32SceneBtnIdx));
+    MainWin     &mw         = getMainWin();
+
+    DlgAddScene *pDlg = new DlgAddScene(this, pSceneBtn->text());
+    pDlg->createWin();
+
+    switch (mw.workMode())
+    {
+        case enumWorkMode::Play:
+            loadScene(_s32SceneBtnIdx);
+            break;
+
+        case enumWorkMode::SaveScene:
+        {
+            DlgAddScene *pDlg = new DlgAddScene(this, pSceneBtn->text());
+            pDlg->createWin();
+
+            if (pDlg->showModal() == DialogReturn::accepted)
+            {
+                saveScene(_s32SceneBtnIdx, pDlg->sceneName());
+            } // if
+
+            break;
+        }
+    } // switch
+
+    // reset the work mode
+    mw.setWorkMode(enumWorkMode::Play);
+    mw.sendUpdateCmd(UPDATE_GUI);
+} // CtrlPanel::onSceneSelected
 
 
 /*******************************************************************************

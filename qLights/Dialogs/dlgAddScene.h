@@ -23,11 +23,11 @@ class DlgAddScene : public aDialog,
 
     private:
         Ui::DlgAddScene     *m_pUi                  { nullptr };
-        aString             &m_sSceneName;
+        aString             m_sSceneName;
 
     public:
-        explicit DlgAddScene(QWidget     *_pParent,
-                             aString     &_sSceneName);
+        explicit DlgAddScene(QWidget        *_pParent,
+                             const aString  &_sSceneName);
         ~DlgAddScene();
 
         aString             sceneName() const       { return m_sSceneName; }

@@ -45,6 +45,6 @@ class Scene
 
         const aVector<channelValueTuple>&   channelValues() const           { return m_vValues; }
 
-        void                                add2Configuration(aJsonFile     &_jf,
-                                                              s32           _idx) const;
+        // void                                add2Configuration(aJsonFile     &_jf,
+        //                                                       s32           _idx) const;
 }; // class Scene

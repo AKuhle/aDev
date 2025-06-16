@@ -39,8 +39,8 @@ MainWin::~MainWin()
     // save the configuration
     if (m_pCtrlPanel)
     {
-        //aPath   path = get_appPath() / LAST_CONFIG;
-        //m_pCtrlPanel->writeConfiguration(path);
+        aPath   path = get_appPath() / LAST_CONFIG;
+        m_pCtrlPanel->writeConfiguration(path);
     }
 
     #ifdef _USE_QT_

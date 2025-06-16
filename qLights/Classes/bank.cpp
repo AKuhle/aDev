@@ -55,24 +55,33 @@ void Bank::assignFixture(shared_ptr<Fixture>  _pFixture,
 /*******************************************************************************
 * Bank::fixture
 *******************************************************************************/
-shared_ptr<Fixture> Bank::fixture(s32 _s32BankBtnIdx) const
+shared_ptr<Fixture> Bank::fixture(s32 _s32FixtureIdx) const
 {
-    aMap<s32, shared_ptr<Fixture>>::const_iterator it = m_mapFixture.find(_s32BankBtnIdx);
+    aMap<s32, shared_ptr<Fixture>>::const_iterator it = m_mapFixture.find(_s32FixtureIdx);
 
     return (it != m_mapFixture.end())?   it->second : nullptr;
 } // Bank::fixture
 
 
-// /*******************************************************************************
-// * Bank::add2Configuration
-// *******************************************************************************/
-// void Bank::add2Configuration(s32        _s32BankBtnIdx,
-//                              aJsonFile  &_jf)
-// {
-//     _jf.openLevel();
-//         // add controller info
-//         _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
-//         _jf.add(aJsonValue("name", m_sName));
+/*******************************************************************************
+* Bank::add2Configuration
+*******************************************************************************/
+void Bank::add2Configuration(aJsonFile  &_jf,
+                             s32        _s32BankBtnIdx) const
+{
+    _jf.openLevel();
+        // add bank info
+        _jf.add(aJsonValue("name", m_sName));
+        _jf.add(aJsonValue("bankBtnIdx", (dbl) _s32BankBtnIdx));
 
-//     _jf.closeLevel(aString("bank") + "-" + m_sName);
-// } // Bank::add2Configuration
+        // write the fixures
+        for (const auto &me : m_mapFixture)
+        {
+            _jf.openLevel();
+                _jf.add(aJsonValue("fixtureIdx", (double) me.first));
+                _jf.add(aJsonValue("fixtureName", me.second->name()));
+            _jf.closeLevel(aString("fixture") + "-" + me.second->name());
+        }
+
+    _jf.closeLevel(aString("bank") + "-" + m_sName);
+} // Bank::add2Configuration

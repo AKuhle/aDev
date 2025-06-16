@@ -49,9 +49,9 @@ class Bank
         void                                assignFixture(shared_ptr<Fixture>  _pFixture,
                                                           s32                  _s32FixtureIdx);
 
-        shared_ptr<Fixture>                 fixture(s32 _s32BankBtnIdx) const;
+        shared_ptr<Fixture>                 fixture(s32 _s32FixtureIdx) const;
 
-        // void                                add2Configuration(s32       _s32BankBtnIdx,
-        //                        aJsonFile &_jf);
+        void                                add2Configuration(aJsonFile &_jf,
+                                                              s32       _s32BankBtnIdx) const;
 
 }; // class Bank

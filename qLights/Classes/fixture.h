@@ -72,11 +72,11 @@ class Fixture
 
         void                    resetAllChannels();
 
+        void                    collectScenes(aVector<channelValueTuple> &_vValues);
+
         // void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
         // void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
 
-        // void                    add2Configuration(aJsonFile           &_jf,
-        //                                           shared_ptr<Bank>    _pBank,
-        //                                           s32                 _s32FixtureBtnIdx);
+        void                    add2Configuration(aJsonFile &_jf) const;
 
 }; // class Fixture

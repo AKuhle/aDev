@@ -15,8 +15,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-// #include "aJsonFile.h"
-// #include "aJsonValue.h"
+#include "aJsonFile.h"
+#include "aJsonValue.h"
 
 #include "channel.h"
 #include "fixture.h"
@@ -61,19 +61,19 @@ void Channel::setValue(u8   _u8Value,
 } // Channel::setValue
 
 
-// /*******************************************************************************
-// * Channel::add2Configuration
-// *******************************************************************************/
-// void Channel::add2Configuration(aJsonFile &_jf)
-// {
-//     _jf.openLevel();
-//         _jf.add(aJsonValue("controller", m_pController->name()));
-//         _jf.add(aJsonValue("channelNr", (dbl) m_s32ChannelNr));
-//         _jf.add(aJsonValue("icon", m_sIcon));
-//         _jf.add(aJsonValue("brightness", m_bBrightness));
-//     _jf.closeLevel(aString("channel") + "-" + aString::fromValue(m_s32ChannelNr));
+/*******************************************************************************
+* Channel::add2Configuration
+*******************************************************************************/
+void Channel::add2Configuration(aJsonFile &_jf) const
+{
+    _jf.openLevel();
+        _jf.add(aJsonValue("fixture", m_pFixture->name()));
+        _jf.add(aJsonValue("channelNr", (dbl) m_s32ChannelNr));
+        _jf.add(aJsonValue("icon", m_sIcon));
+        _jf.add(aJsonValue("brightness", m_bBrightness));
+    _jf.closeLevel(aString("channel") + "-" + aString::fromValue(m_s32ChannelNr));
 
-// } // Channel::add2Configuration
+} // Channel::add2Configuration
 
 
 // /*******************************************************************************

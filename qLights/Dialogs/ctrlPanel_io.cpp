@@ -15,46 +15,96 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aJsonFile.h"
+
 #include "qLights_defs.h"
 #include "ctrlPanel.h"
+#include "fixture.h"
+#include "scene.h"
+#include "channel.h"
+#include "controller.h"
+#include "bank.h"
 
 
+/*******************************************************************************
+* CtrlPanel::loadScene
+*******************************************************************************/
+void CtrlPanel::loadScene(s32 _s32SceneBtnIdx)
+{
+    auto    pScene      = std::get<1> (m_vSceneTuples.at(_s32SceneBtnIdx));
+    CHECK_PRE_CONDITION_VOID(pScene);
 
-// /*******************************************************************************
-// * CtrlPanel::writeConfiguration
-// *******************************************************************************/
-// void CtrlPanel::writeConfiguration(const aPath &_path)
-// {
-//     aJsonFile   jf(_path);
+    const aVector<channelValueTuple>    &vChannels = pScene->channelValues();
 
-//     // add controller and universes
-//     for (shared_ptr<Controller> &pController : m_vController)
-//     {
-//         pController->add2Configuration(jf);
-//     }
+    // set all channel values
+    for (auto &c : vChannels)
+    {
+        std::get<0> (c)->setValue( std::get<1> (c), false);
+    }
 
-//     // add banks
-//     for (s32 idx = 0; idx < BANK_MAX; idx++)
-//     {
-//         const bankTuple     &t      = m_vBankCtrl.at(idx);
-//         shared_ptr<Bank>    pBank   = std::get<1> (t);
+    // send all universes
+    for (auto &pCtrl : m_vController)
+    {
+        pCtrl->sendAllUniverses();
+    }
+} // CtrlPanel::loadScene
 
-//         if (pBank)
-//         {
-//             pBank->add2Configuration(idx, jf);
-//         }
-//     }
 
-//     // add fixtures
-//     for (shared_ptr<Fixture> &pFix : m_vFixture)
-//     {
-//         shared_ptr<Bank>    pBank;
-//         s32                 s32FixtureBtnIdx;
+/*******************************************************************************
+* CtrlPanel::saveScene
+*******************************************************************************/
+void CtrlPanel::saveScene(s32       _s32SceneBtnIdx,
+                          aString   _sSceneName)
+{
+    aVector<channelValueTuple>      vValues;
 
-//         findBank4Fixture(pFix, pBank, s32FixtureBtnIdx);
+    auto    pSceneBtn   = std::get<0> (m_vSceneTuples.at(_s32SceneBtnIdx));
+    auto    &pScene     = std::get<1> (m_vSceneTuples.at(_s32SceneBtnIdx));
 
-//         pFix->add2Configuration(jf, pBank, s32FixtureBtnIdx);
-//     }
+    // set the scene name
+    pSceneBtn->setText(_sSceneName);
+
+    // collect all channels
+    for (auto pFixture : m_vFixtures)
+    {
+        pFixture->collectScenes(vValues);
+    }
+
+    // create an d save the scene
+    pScene = make_shared<Scene> (_sSceneName, vValues);
+} // CtrlPanel::saveScene
+
+
+/*******************************************************************************
+* CtrlPanel::writeConfiguration
+*******************************************************************************/
+void CtrlPanel::writeConfiguration(const aPath &_path) const
+{
+    aJsonFile   jf(_path);
+
+    // add controller and universes
+    for (const shared_ptr<Controller> &pController : m_vController)
+    {
+        pController->add2Configuration(jf);
+    }
+
+    // add fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vFixtures)
+    {
+        pFix->add2Configuration(jf);
+    }
+
+    // add banks
+    for (s32 idx = 0; idx < BANK_MAX; idx++)
+    {
+        const BankTuple     &t      = m_vBankTuples.at(idx);
+        shared_ptr<Bank>    pBank   = std::get<1> (t);
+
+        if (pBank)
+        {
+            pBank->add2Configuration(jf, idx);
+        }
+   }
 
 //     // add scenes
 //     for (s32 idx = 0; idx < SCENE_MAX; idx++)
@@ -68,42 +118,42 @@
 //         }
 //     }
 
-//     // write the json file
-//     jf.write2File();
-// } // CtrlPanel::writeConfiguration
+    // write the json file
+    jf.write2File();
+} // CtrlPanel::writeConfiguration
 
 
-// /*******************************************************************************
-// * CtrlPanel::readConfiguration
-// *******************************************************************************/
-// void CtrlPanel::readConfiguration(const aPath &_path)
-// {
-//     // delete previous configuration
+/*******************************************************************************
+* CtrlPanel::readConfiguration
+*******************************************************************************/
+void CtrlPanel::readConfiguration(const aPath &_path)
+{
+    // delete previous configuration
 //     m_mapControllerIoInfo.clear();
 //     m_mapBankIoInfo.clear();
 //     m_mapFixtureIoInfo.clear();
 
-//     aJsonFile   jFile(_path);
+     aJsonFile   jFile(_path);
 
-//     // read all entries
-//     jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) {
-//                         this->JsonCallback(_vecKeys, _value);
-//     });
+    // read all entries
+    // jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) {
+    //                     this->JsonCallback(_vecKeys, _value);
+    // });
 
 //     // set the configuration
 //     setConfiguration(m_mapControllerIoInfo,
 //                      m_mapBankIoInfo,
 //                      m_mapFixtureIoInfo,
 //                      m_mapSceneIoInfo);
-// } // CtrlPanel::readConfiguration
+} // CtrlPanel::readConfiguration
 
 
-// /*******************************************************************************
-// * CtrlPanel::JsonCallback
-// *******************************************************************************/
-// void CtrlPanel::JsonCallback(const aVector<aString> &_vecKeys,
-//                              const aJsonValue       &_value)
-// {
+/*******************************************************************************
+* CtrlPanel::JsonCallback
+*******************************************************************************/
+void CtrlPanel::JsonCallback(const aVector<aString> &_vecKeys,
+                             const aJsonValue       &_value)
+{
 //     s32     s32Size = _vecKeys.size();
 
 //     // parse controller
@@ -249,7 +299,7 @@
 //         }
 //     }
 
-// } // CtrlPanel::JsonCallback
+} // CtrlPanel::JsonCallback
 
 
 // /*******************************************************************************

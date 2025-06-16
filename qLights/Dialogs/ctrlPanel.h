@@ -127,8 +127,17 @@ class CtrlPanel : public aPlainWin,
     * CtrlPanel - io
     *******************************************************************************/
     public:
+        void                            writeConfiguration(const aPath &_path) const;
+        void                            readConfiguration(const aPath &_path);
 
     private:
+        void                            loadScene(s32 _s32SceneBtnIdx);
+
+        void                            saveScene(s32       _s32SceneBtnIdx,
+                                                  aString   _sSceneName);
+
+        void                            JsonCallback(const aVector<aString> &_vecKeys,
+                                                     const aJsonValue       &_value);
 
 
     /*******************************************************************************
@@ -156,6 +165,8 @@ class CtrlPanel : public aPlainWin,
         void                            onBankSelected(s32 _s32BankBtnIdx);
 
         void                            onFixtureSelected(s32 _s32FixtureBtnIdx);
+
+        void                            onSceneSelected(s32 _s32SceneBtnIdx);
 
         void                            onFaderMoved(s32    s32FaderIdx,
                                                      s32    _s32Value);

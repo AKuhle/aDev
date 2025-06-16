@@ -62,6 +62,15 @@ void aPushButton::setText(const QString &_sText)
 
 
 /*******************************************************************************
+* aPushButton::text
+*******************************************************************************/
+aString aPushButton::text() const
+{
+    return aString::fromQString(QPushButton::text());
+} // aPushButton::text
+
+
+/*******************************************************************************
 * aPushButton::slotClicked
 *******************************************************************************/
 void aPushButton::slotClicked(bool /*_bChecked*/)

@@ -23,7 +23,6 @@
 #include "aLib_def.h"
 #include "aString.h"
 
-
 using namespace aLib;
 using namespace aLib::aUtil;
 using namespace std;
@@ -60,5 +59,5 @@ class Universe
         // u8                  dmxChannelValue(u32   _u32ChannelOs,
         //                                     u32   _u32Channel);
 
-        // void                add2Configuration(aJsonFile &_jf);
+        void                add2Configuration(aJsonFile &_jf) const;
 }; // class Universe

@@ -5,8 +5,8 @@
 /*******************************************************************************
 * DlgAddScene::DlgAddScene
 *******************************************************************************/
-DlgAddScene::DlgAddScene(QWidget     *_pParent,
-                         aString     &_sSceneName)
+DlgAddScene::DlgAddScene(QWidget        *_pParent,
+                         const aString  &_sSceneName)
 : aDialog(_pParent),
   m_sSceneName(_sSceneName)
 {

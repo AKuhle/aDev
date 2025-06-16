@@ -114,6 +114,7 @@ HEADERS += \
     Classes/controller.h \
     Classes/fader.h \
     Classes/fixture.h \
+    Classes/scene.h \
     Classes/universe.h \
     Dialogs/ctrlPanel.h \
     Dialogs/dlgAddBank.h \
@@ -132,6 +133,7 @@ SOURCES += \
     Classes/controller.cpp \
     Classes/fader.cpp \
     Classes/fixture.cpp \
+    Classes/scene.cpp \
     Classes/universe.cpp \
     Dialogs/ctrlPanel.cpp \
     Dialogs/ctrlPanel_ctrl.cpp \

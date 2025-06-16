@@ -70,6 +70,7 @@ class Channel
         // void                    updateDmxValue(u8     _u8Value,
                                                // bool   _bSend);
 
-        // void                    add2Configuration(aJsonFile &_jf);
+
+        void                    add2Configuration(aJsonFile &_jf) const;
 
 }; // class Channel

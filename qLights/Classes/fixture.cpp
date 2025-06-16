@@ -15,15 +15,17 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aVector.h"
+
 #include "fixture.h"
 #include "channel.h"
 #include "controller.h"
 
-// #include "aJsonFile.h"
-// #include "aJsonValue.h"
+#include "qLights_defs.h"
 
-// #include "channel.h"
-// #include "bank.h"
+#include "aJsonFile.h"
+#include "aJsonValue.h"
+
 
 using namespace std;
 using namespace aLib::aUtil;
@@ -115,29 +117,37 @@ void Fixture::resetAllChannels()
 } // Fixture::resetAllChannels
 
 
-// /*******************************************************************************
-// * Fixture::add2Configuration
-// *******************************************************************************/
-// void Fixture::add2Configuration(aJsonFile           &_jf,
-//                                 shared_ptr<Bank>    _pBank,
-//                                 s32                 _s32FixtureBtnIdx)
-// {
-//     _jf.openLevel();
-//         _jf.add(aJsonValue("name", m_sName));
-//         _jf.add(aJsonValue("controller", m_pConroller->name()));
-//         _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
-//         _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
-//         _jf.add(aJsonValue("bank", _pBank->name()));
-//         _jf.add(aJsonValue("fixtureBtnIdx", (dbl) _s32FixtureBtnIdx));
+/*******************************************************************************
+* Fixture::collectScenes
+*******************************************************************************/
+void Fixture::collectScenes(aVector<channelValueTuple> &_vValues)
+{
+    for (auto me : m_mapAllChannel)
+    {
+        _vValues.push_back(channelValueTuple {me.second, me.second->value()} );
+    }
+} // Fixture::collectScenes
 
-//         // add the channels
-//         for (auto &c : m_mapChannel)
-//         {
-//             c.second->add2Configuration(_jf);
-//         }
-//     _jf.closeLevel(aString("fixture") + "-" + m_sName);
 
-// } // Fixture::add2Configuration
+/*******************************************************************************
+* Fixture::add2Configuration
+*******************************************************************************/
+void Fixture::add2Configuration(aJsonFile &_jf) const
+{
+    _jf.openLevel();
+        _jf.add(aJsonValue("name", m_sName));
+        _jf.add(aJsonValue("controller", m_pController->name()));
+        _jf.add(aJsonValue("universeId", (dbl) m_s32UniverseId));
+        _jf.add(aJsonValue("channelOs", (dbl) m_s32ChannelOs));
+
+        // add the channels
+        for (auto &c : m_mapAllChannel)
+        {
+            c.second->add2Configuration(_jf);
+        }
+    _jf.closeLevel(aString("fixture") + "-" + m_sName);
+
+} // Fixture::add2Configuration
 
 
 // /*******************************************************************************

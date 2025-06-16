@@ -62,10 +62,9 @@ class Controller
 
         void                                sendAllUniverses();
 
-
         //shared_ptr<Universe>                universe(u32 _u32Id);
 
         //void                                resetAllUniverses();
 
-        //void                                add2Configuration(aJsonFile &_jf);
+        void                                add2Configuration(aJsonFile &_jf) const;
 }; // class Controller

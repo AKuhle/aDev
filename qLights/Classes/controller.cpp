@@ -15,8 +15,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-// #include "aJsonFile.h"
-// #include "aJsonValue.h"
+#include "aJsonFile.h"
+#include "aJsonValue.h"
 #include "controller.h"
 
 #include "universe.h"
@@ -86,24 +86,24 @@ void Controller::sendAllUniverses()
 } // Controller::sendAllUniverses
 
 
-// /*******************************************************************************
-// * Controller::add2Configuration
-// *******************************************************************************/
-// void Controller::add2Configuration(aJsonFile &_jf)
-// {
-//     _jf.openLevel();
-//         // add controller info
-//         _jf.add(aJsonValue("name", m_sName));
-//         _jf.add(aJsonValue("adress", m_sIpAdr));
-//         _jf.add(aJsonValue("universeMax", (dbl) m_s32UniverseMax));
+/*******************************************************************************
+* Controller::add2Configuration
+*******************************************************************************/
+void Controller::add2Configuration(aJsonFile &_jf) const
+{
+    _jf.openLevel();
+        // add controller info
+        _jf.add(aJsonValue("name", m_sName));
+        _jf.add(aJsonValue("adress", m_sIpAdr));
+        _jf.add(aJsonValue("universeMax", (dbl) m_s32UniverseMax));
 
-//         // add universes
-//         for (auto u : m_mapUniverse)
-//         {
-//             u.second->add2Configuration(_jf);
-//         }
-//     _jf.closeLevel(aString("controller") + "-" + m_sName);
-// } // Controller::add2Configuration
+        // add universes
+        for (auto u : m_mapUniverse)
+        {
+            u.second->add2Configuration(_jf);
+        }
+    _jf.closeLevel(aString("controller") + "-" + m_sName);
+} // Controller::add2Configuration
 
 
 // /*******************************************************************************

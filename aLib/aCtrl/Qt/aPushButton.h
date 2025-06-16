@@ -44,6 +44,8 @@ class aPushButton : public aButton<QPushButton>,
         void            setText(const aString &_sText);
         void            setText(const QString &_sText);
 
+        aString         text() const;
+
 
     /*******************************************************************************
     * slots

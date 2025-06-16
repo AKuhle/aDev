@@ -88,24 +88,22 @@ void CtrlPanel::createSetup()
 
     // spot: eurolite-led-tmh-s90-de
     shared_ptr<Fixture> pSpot = createFixture("TMH-S90", pController, 1, 1);
-    //     // the channels
-    //     pFix1->addChannel(1, CHANNEL_ICN_PAN, false);
-    //     pFix1->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
-    //     pFix1->addChannel(3, CHANNEL_ICN_TILT, false);
-    //     pFix1->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
-    //     pFix1->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
-    //     pFix1->addChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
-    //     pFix1->addChannel(7, CHANNEL_ICN_STROBE, false);
-    //     pFix1->addChannel(8, CHANNEL_ICN_COLOR_WHEEL, false);
-    //     pFix1->addChannel(9, CHANNEL_ICN_GOBO_STAT_01, false);
-    //     pFix1->addChannel(10, CHANNEL_ICN_GOBO_ROT_01, false);
-    //     pFix1->addChannel(11, CHANNEL_ICN_GOBO_ROT_SPEED, false);
-    //     pFix1->addChannel(12, CHANNEL_ICN_FOCUS, false);
-    //     pFix1->addChannel(13, CHANNEL_ICN_PRISMA, false);
-    //     pFix1->addChannel(14, CHANNEL_ICN_FUNCTION_1, false);
-    //     pFix1->addChannel(15, CHANNEL_ICN_RESET, false);
-    //     // add brightness-channel to master channel
-    //     m_vMasterChannel.push_back(pFix1->channel(6));
+    // the channels
+    pSpot->addChannel(1, CHANNEL_ICN_PAN, false);
+    pSpot->addChannel(2, CHANNEL_ICN_PAN_FINE, false);
+    pSpot->addChannel(3, CHANNEL_ICN_TILT, false);
+    pSpot->addChannel(4, CHANNEL_ICN_TILT_FINE, false);
+    pSpot->addChannel(5, CHANNEL_ICN_PAN_TILT_SPEED, false);
+    pSpot->addChannel(6, CHANNEL_ICN_BRIGHTNESS, true);
+    pSpot->addChannel(7, CHANNEL_ICN_STROBE, false);
+    pSpot->addChannel(8, CHANNEL_ICN_COLOR_WHEEL, false);
+    pSpot->addChannel(9, CHANNEL_ICN_GOBO_STAT_01, false);
+    pSpot->addChannel(10, CHANNEL_ICN_GOBO_ROT_01, false);
+    pSpot->addChannel(11, CHANNEL_ICN_GOBO_ROT_SPEED, false);
+    pSpot->addChannel(12, CHANNEL_ICN_FOCUS, false);
+    pSpot->addChannel(13, CHANNEL_ICN_PRISMA, false);
+    pSpot->addChannel(14, CHANNEL_ICN_FUNCTION_1, false);
+    pSpot->addChannel(15, CHANNEL_ICN_RESET, false);
 
     // wash left: 16 channel mode
     shared_ptr<Fixture> pWash_l= createFixture("TMH-X4-16 left", pController, 1, 17);
@@ -174,9 +172,13 @@ void CtrlPanel::createSetup()
 
     // PAR left: 1 channel
     shared_ptr<Fixture> pPar_l = createFixture("PAR left", pController, 1, 65);
+    // the channels
+    pPar_l->addChannel(1, CHANNEL_ICN_BRIGHTNESS, true);
 
     // PAR right: 1 channel
     shared_ptr<Fixture> pPar_r = createFixture("PAR right", pController, 1, 66);
+    // the channels
+    pPar_r->addChannel(1, CHANNEL_ICN_BRIGHTNESS, true);
 
     // create the banks
     shared_ptr<Bank> pBank1 = createBank("All");
