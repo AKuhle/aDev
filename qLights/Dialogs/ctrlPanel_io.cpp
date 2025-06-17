@@ -152,7 +152,8 @@ void CtrlPanel::readConfiguration(const aPath &_path)
                      m_vSceneIoInfo,
                      m_mapBankIoInfo,
                      m_vBankFixtureIoInfo,
-                     m_vSceneBtnIoInfo);
+                     m_vSceneBtnIoInfo,
+                     m_vSceneChannelIoInfo);
 
      initBanks();
      initFixtures();
@@ -211,7 +212,8 @@ void CtrlPanel::setConfiguration(const aMap<aString, controllerIoInfo>  &_mapCon
                                  const aVector<sceneIoInfo>             &_vSceneIoInfo,
                                  const aMap<aString, bankIoInfo>        &_mapBankIoInfo,
                                  const aVector<bankFixtureIoInfo>       &_vBankFixtureIoInfo,
-                                 const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo)
+                                 const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo,
+                                 const aVector<sceneChannelIoInfo>      &_vSceneChannelIoInfo)
 {
     // create the controller
     for (const auto &me : _mapControllerIoInfo)
@@ -308,7 +310,6 @@ void CtrlPanel::setConfiguration(const aMap<aString, controllerIoInfo>  &_mapCon
     // create the scenes
     for (const auto &s : _vSceneBtnIoInfo)
     {
-        aVector<channelValueTuple>  vValues;
         aString sSceneName  = std::get<0> (s);
         s32     s32BtnIdx   = std::get<1> (s);
 
@@ -320,6 +321,39 @@ void CtrlPanel::setConfiguration(const aMap<aString, controllerIoInfo>  &_mapCon
         std::get<1> (sTuple) = pScene;
     }
 
+    // add channels to the scene
+    for (const auto &s : m_vSceneChannelIoInfo)
+    {
+        // find the new scene
+        shared_ptr<Scene> pScene = findScene(std::get<0> (s));
+        if (!pScene)
+        {
+            cout << "scene not found in scene-channels: " << std::get<0> (s) << endl;
+        }
+        else
+        {
+            shared_ptr<Fixture> pFixture = findFixture(std::get<1> (s));
+
+            if (!pFixture)
+            {
+                cout << "fixture not found in scene-channels: " << std::get<1> (s) << endl;
+            }
+            else
+            {
+                shared_ptr<Channel> pChannel = pFixture->channel(std::get<2> (s));
+
+                if (!pChannel)
+                {
+                    cout << "channel not found in scene-channels: " << std::get<2> (s) << endl;
+                }
+                else
+                {
+                    pScene->addChannel(pChannel, std::get<3> (s));
+                }
+            }
+        }
+    }
+
 } // CtrlPanel::setConfiguration
 
 
@@ -329,153 +363,6 @@ void CtrlPanel::setConfiguration(const aMap<aString, controllerIoInfo>  &_mapCon
 void CtrlPanel::JsonValCallback(const aVector<aString> &/*_vecKeys*/,
                                 const aJsonValue       &/*_value*/)
 {
-    //s32     s32Size = _vecKeys.size();
-
-    // parse controller
-    // if (_vecKeys.at(0).left(10) == "controller" && s32Size == 1)
-    // {
-    //     cout << "controllerVal" << endl;
-    // }
-//         controllerIoInfo &ci = getControllerInfo(_vecKeys.at(0));
-
-//         if (s32Size == 1)
-//         {
-//             // fixture name
-//             if (_value.key() == "name")
-//                 std::get<0> (ci) = _value.toString();
-
-//             // ip adress
-//             if (_value.key() == "adress")
-//                 std::get<1> (ci) = _value.toString();
-
-//             // universeMax of the controller
-//             if (_value.key() == "universeMax")
-//                 std::get<2> (ci) = _value.toDbl();
-//         }
-
-//         if (s32Size == 2)
-//         {
-//             universeIoInfo &ui = getUniverseInfo(ci, _vecKeys.at(0));
-
-//             // fixture name
-//             if (_value.key() == "id")
-//                 std::get<0> (ui) = _value.toDbl();
-//         }
-//    }
-
-
-//     // parse bank
-//     if (_vecKeys.at(0).left(4) == "bank")
-//     {
-//         bankIoInfo &bi = getBankInfo(_vecKeys.at(0));
-
-//         if (s32Size == 1)
-//         {
-//             // bank name
-//             if (_value.key() == "name")
-//                 std::get<0> (bi) = _value.toString();
-
-//             // bankBtnIdx
-//             if (_value.key() == "bankBtnIdx")
-//                 std::get<1> (bi) = _value.toDbl();
-//         }
-//     }
-
-
-//     // parse fixture
-//     if (_vecKeys.at(0).left(7) == "fixture")
-//     {
-//         fixtureIoInfo &fi = getFixtureInfo(_vecKeys.at(0));
-
-//         // read fixture data (name, controller, universeId, channelOs)
-//         if (s32Size == 1)
-//         {
-//             // fixture name
-//             if (_value.key() == "name")
-//                 std::get<0> (fi) = _value.toString();
-
-//             // fixture controller
-//             if (_value.key() == "controller")
-//                 std::get<1> (fi) = _value.toString();
-
-//             // fixture universeId
-//             if (_value.key() == "universeId")
-//                 std::get<2> (fi) = _value.toDbl();
-
-//             // fixture universeId
-//             if (_value.key() == "channelOs")
-//                 std::get<3> (fi) = static_cast<s32> (_value.toDbl());
-
-//             // fixture controller
-//             if (_value.key() == "bank")
-//                 std::get<4> (fi) = _value.toString();
-
-//             // fixture controller
-//             if (_value.key() == "fixtureBtnIdx")
-//                 std::get<5> (fi) = _value.toDbl();
-//         }
-
-//         // read fixture channel
-//         if (s32Size == 2)
-//         {
-//             channelIoInfo &ci = getChannelInfo(fi, _vecKeys.at(1));
-
-//             // channel controller
-//             if (_value.key() == "controller")
-//                 std::get<0> (ci) = _value.toString();
-
-//             // channel channelNr
-//             if (_value.key() == "channelNr")
-//                 std::get<1> (ci) = _value.toDbl();
-
-//             // channel icon
-//             if (_value.key() == "icon")
-//                 std::get<2> (ci) = _value.toString();
-
-//             // channel brightness
-//             if (_value.key() == "brightness")
-//                 std::get<3> (ci) = _value.toBool();
-//         }
-
-
-//         // parse scene
-//         if (_vecKeys.at(0).left(5) == "scene")
-//         {
-//             sceneIoInfo &si = getSceneInfo(_vecKeys.at(0));
-
-//             if (s32Size == 1)
-//             {
-//                 // idx
-//                 if (_value.key() == "idx")
-//                     std::get<0> (si) = _value.toDbl();
-
-//                 // sceneName
-//                 if (_value.key() == "sceneName")
-//                     std::get<1> (si) = _value.toString();
-
-//                 // controllerName
-//                 if (_value.key() == "controllerName")
-//                     std::get<2> (si) = _value.toString();
-
-//                 // universId
-//                 if (_value.key() == "universId")
-//                     std::get<3> (si) = _value.toDbl();
-
-//                 // channelNr
-//                 if (_value.key() == "channelNr")
-//                     std::get<4> (si) = _value.toDbl();
-
-//                 // channelOs
-//                 if (_value.key() == "channelOs")
-//                     std::get<5> (si) = _value.toDbl();
-
-//                 // value
-//                 if (_value.key() == "value")
-//                     std::get<6> (si) = _value.toDbl();
-//             }
-//         }
-//     }
-
 } // CtrlPanel::JsonValCallback
 
 
@@ -562,102 +449,18 @@ void CtrlPanel::JsonObjCallback(const aVector<aString> &_vecKeys,
 
             m_vBankFixtureIoInfo.push_back(make_tuple(sBank, sFixture, idx));
         }
+
+        // parse scene channel
+        if (_vecKeys.at(0).left(5) == "scene" &&
+            _vecKeys.at(1).left(7) == "channel")
+        {
+            aString     sScene      = _obj.findString("sceneName");
+            aString     sFixture    = _obj.findString("fixtureName");
+            s32         nr          = _obj.findS32("channelNr");
+            u8          u8Value     = static_cast<u8> (_obj.findS32("brightness"));
+
+            m_vSceneChannelIoInfo.push_back(make_tuple(sScene, sFixture, nr, u8Value));
+        }
     } // else if (s32Size == 2)
 
 } // CtrlPanel::JsonObjCallback
-
-
-// /*******************************************************************************
-// * CtrlPanel::getBankInfo
-// *******************************************************************************/
-// bankIoInfo& CtrlPanel::getBankInfo(const aString &_sName)
-// {
-//     // create a new bankinfo, if it does not already exist
-//     if (m_mapBankIoInfo.find(_sName) == m_mapBankIoInfo.end())
-//     {
-//         m_mapBankIoInfo[_sName] = std::make_tuple("", 0);
-//     }
-
-//     return m_mapBankIoInfo.find(_sName)->second;
-// } // CtrlPanel::getBankInfo
-
-
-// /*******************************************************************************
-// * CtrlPanel::getFixtureInfo
-// *******************************************************************************/
-// fixtureIoInfo& CtrlPanel::getFixtureInfo(const aString &_sName)
-// {
-//     // create a new fixtureinfo, if it does not already exist
-//     if (m_mapFixtureIoInfo.find(_sName) == m_mapFixtureIoInfo.end())
-//     {
-//         m_mapFixtureIoInfo[_sName] = std::make_tuple("", "", 0, 0, "", 0, aMap<aString, channelIoInfo>{});
-//     }
-
-//     return m_mapFixtureIoInfo.find(_sName)->second;
-// } // CtrlPanel::getFixtureInfo
-
-
-// /*******************************************************************************
-// * CtrlPanel::getChannelInfo
-// *******************************************************************************/
-// channelIoInfo& CtrlPanel::getChannelInfo(fixtureIoInfo  &_fi,
-//                                          const aString  &_sName)
-// {
-//     aMap<aString, channelIoInfo>  &mapChannelInfo = std::get<6> (_fi);
-
-//     // create a new fixtureinfo, if it does not already exist
-//     if (mapChannelInfo.find(_sName) == mapChannelInfo.end())
-//     {
-//         mapChannelInfo[_sName] = std::make_tuple("", 0, "", false);
-//     }
-
-//     return mapChannelInfo.find(_sName)->second;
-// } // CtrlPanel::getChannelInfo
-
-
-// /*******************************************************************************
-// * CtrlPanel::getControllerInfo
-// *******************************************************************************/
-// controllerIoInfo& CtrlPanel::getControllerInfo(const aString &_sName)
-// {
-//     // create a new fixtureinfo, if it does not already exist
-//     if (m_mapControllerIoInfo.find(_sName) == m_mapControllerIoInfo.end())
-//     {
-//         m_mapControllerIoInfo[_sName] = std::make_tuple("", "", 0, aMap<aString, universeIoInfo>{});
-//     }
-
-//     return m_mapControllerIoInfo.find(_sName)->second;
-// } // CtrlPanel::getControllerInfo
-
-
-// /*******************************************************************************
-// * CtrlPanel::getUniverseInfo
-// *******************************************************************************/
-// universeIoInfo& CtrlPanel::getUniverseInfo(controllerIoInfo &_ci,
-//                                            const aString    &_sName)
-// {
-//     aMap<aString, universeIoInfo>  &mapUniverseInfo = std::get<3> (_ci);
-
-//     // create a new fixtureinfo, if it does not already exist
-//     if (mapUniverseInfo.find(_sName) == mapUniverseInfo.end())
-//     {
-//         mapUniverseInfo[_sName] = std::make_tuple(0);
-//     }
-
-//     return mapUniverseInfo.find(_sName)->second;
-// } // CtrlPanel::getUniverseInfo
-
-
-// /*******************************************************************************
-// * CtrlPanel::getSceneInfo
-// *******************************************************************************/
-// sceneIoInfo& CtrlPanel::getSceneInfo(const aString    &_sName)
-// {
-//     // create a new fixtureinfo, if it does not already exist
-//     if (m_mapSceneIoInfo.find(_sName) == m_mapSceneIoInfo.end())
-//     {
-//         m_mapSceneIoInfo[_sName] = std::make_tuple(0, "", "", 0, 0, 0, 0);
-//     }
-
-//     return m_mapSceneIoInfo.find(_sName)->second;
-// } // CtrlPanel::getSceneInfo

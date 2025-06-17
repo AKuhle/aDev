@@ -20,6 +20,7 @@
 #include "qLights_defs.h"
 #include "ctrlPanel.h"
 #include "dlgAddScene.h"
+#include "dlgRemoveScene.h"
 #include "scene.h"
 #include "aString.h"
 #include "channel.h"
@@ -191,15 +192,11 @@ void CtrlPanel::onFixtureSelected(s32 _s32FixtureBtnIdx)
 *******************************************************************************/
 void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
 {
-    cout << __PRETTY_FUNCTION__ << ": " << _s32SceneBtnIdx << endl;
-
     CHECK_PRE_CONDITION_VOID(_s32SceneBtnIdx < SCENE_MAX);
 
     auto        pSceneBtn   = std::get<0> (m_vSceneTuples.at(_s32SceneBtnIdx));
-    auto        pScene      = std::get<1> (m_vSceneTuples.at(_s32SceneBtnIdx));
+    auto        &pScene     = std::get<1> (m_vSceneTuples.at(_s32SceneBtnIdx));
     MainWin     &mw         = getMainWin();
-
-    cout << pSceneBtn << " - " << pScene << endl;
 
     DlgAddScene *pDlg = new DlgAddScene(this, pSceneBtn->text());
     pDlg->createWin();
@@ -219,6 +216,23 @@ void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
             {
                 saveScene(_s32SceneBtnIdx, pDlg->sceneName());
             } // if
+
+            break;
+        }
+
+        case enumWorkMode::RemoveScene:
+        {
+            if (pScene != nullptr)
+            {
+                DlgRemoveScene *pDlg = new DlgRemoveScene(this, pSceneBtn->text());
+                pDlg->createWin();
+
+                if (pDlg->showModal() == DialogReturn::accepted)
+                {
+                    pScene = nullptr;
+                    initScenes();
+                } // if
+            }
 
             break;
         }

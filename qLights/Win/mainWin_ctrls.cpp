@@ -35,6 +35,8 @@ void MainWin::onRegisterCtrl()
     registerCtrl(m_pUi->m_pActionAddBank, ID_ADD_BANK);
     registerCtrl(m_pUi->m_pActionAddFixture, ID_ADD_FIXTURE);
     registerCtrl(m_pUi->m_pActionSaveScene, ID_SAVE_SCENE);
+    registerCtrl(m_pUi->m_pActionRemoveScene, ID_REMOVE_SCENE);
+    registerCtrl(m_pUi->m_pActionAddChase, ID_ADD_CHASE);
     registerCtrl(m_pUi->m_pActionResetAll, ID_RESET_ALL);
 } // MainWin::onRegisterCtrl
 
@@ -42,19 +44,22 @@ void MainWin::onRegisterCtrl()
 /*******************************************************************************
 * MainWin::onUpdateCtrl
 *******************************************************************************/
-void MainWin::onUpdateCtrl(aCtrlI */*_pCtrl*/)
+void MainWin::onUpdateCtrl(aCtrlI *_pCtrl)
 {
-    // switch (_pCtrl->ctrlId())
-    // {
-    //     // always ebabled
-    //     case ID_ADD_BANK:
-    //         _pCtrl->setCtrlEnabled(m_pCtrlPanel->bankCount() < BANK_COUNT);
-    //         break;
+    switch (_pCtrl->ctrlId())
+    {
+        case ID_SAVE_SCENE:
+            _pCtrl->setCtrlEnabled(m_eWorkMode != enumWorkMode::RemoveScene);
+            break;
 
-    //     case ID_ADD_FIXTURE:
-    //         //_pCtrl->ID_ADD_FIXTURE(!b);
-    //         break;
-    // }
+        case ID_REMOVE_SCENE:
+            _pCtrl->setCtrlEnabled(m_eWorkMode != enumWorkMode::SaveScene);
+            break;
+
+        case ID_ADD_CHASE:
+            _pCtrl->setCtrlEnabled(m_eWorkMode == enumWorkMode::Play);
+            break;
+    }
 } // MainWin::onUpdateCtrl
 
 
@@ -73,6 +78,24 @@ void MainWin::onCtrlClicked(aCtrlI *_pCtrl)
 
             sendUpdateCmd(UPDATE_GUI);
             break;
+
+        case ID_REMOVE_SCENE:
+            if (m_eWorkMode == enumWorkMode::Play)
+                m_eWorkMode = enumWorkMode::RemoveScene;
+            else
+                m_eWorkMode = enumWorkMode::Play;
+
+            sendUpdateCmd(UPDATE_GUI);
+            break;
+
+        case ID_ADD_CHASE:
+            if (m_eWorkMode == enumWorkMode::Play)
+                m_eWorkMode = enumWorkMode::AddChase;
+            else
+                m_eWorkMode = enumWorkMode::Play;
+
+            sendUpdateCmd(UPDATE_GUI);
+                break;
 
         case ID_RESET_ALL:
             sendUpdateCmd(UPDATE_RESET_ALL);

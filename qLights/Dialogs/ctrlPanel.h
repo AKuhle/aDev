@@ -43,6 +43,7 @@ class Fixture;
 class Scene;
 class Controller;
 class Channel;
+class Chase;
 
 
 /*******************************************************************************
@@ -59,28 +60,17 @@ class CtrlPanel : public aPlainWin,
     using BankTuple     = std::tuple<aPushButton *, shared_ptr<Bank>>;
     using FixtureTuple  = std::tuple<aPushButton *, shared_ptr<Fixture>>;
     using SceneTuple    = std::tuple<aPushButton *, shared_ptr<Scene>>;
+    using ChaseTuple    = std::tuple<aPushButton *, shared_ptr<Chase>>;
 
     private:
-        // controllerIoInfo: name, maxUnivers
-        using controllerIoInfo = std::tuple<aString, s32>;
-
-        // universeIoInfo: id
-        using universeIoInfo = std::tuple<s32>;
-
-        // fixtureIoInfo: controll, id, os
-        using fixtureIoInfo = std::tuple<aString, s32, s32>;
-
-        // sceneIoInfo: fixture, icon, channelNr, brightness
-        using sceneIoInfo = std::tuple<aString, aString, s32, bool>;
-
-        // bankIoInfo: bankBtnIdx
-        using bankIoInfo = std::tuple<s32>;
-
-        // bankFixtureIoInfo: bankName, fixtureName, fixtureBtnIdx
-        using bankFixtureIoInfo = std::tuple<aString, aString, s32>;
-
-        // sceneIoInfo: sceneName, sceneBtnIdx
-        using sceneBtnIoInfo = std::tuple<aString, s32>;
+        using controllerIoInfo = std::tuple<aString, s32>;                  // controllerIoInfo: name, maxUnivers
+        using universeIoInfo = std::tuple<s32>;                             // universeIoInfo: id
+        using fixtureIoInfo = std::tuple<aString, s32, s32>;                // fixtureIoInfo: controll, id, os
+        using sceneIoInfo = std::tuple<aString, aString, s32, bool>;        // sceneIoInfo: fixture, icon, channelNr, brightness
+        using bankIoInfo = std::tuple<s32>;                                 // bankIoInfo: bankBtnIdx
+        using bankFixtureIoInfo = std::tuple<aString, aString, s32>;        // bankFixtureIoInfo: bankName, fixtureName, fixtureBtnIdx
+        using sceneBtnIoInfo = std::tuple<aString, s32>;                    // sceneBtnIoInfo: sceneName, sceneBtnIdx
+        using sceneChannelIoInfo = std::tuple<aString, aString, s32, u8>;   // sceneBtnIoInfo: sceneName, fixtureName, channelNr, value
 
         Ui::FormCtrlPanel               *m_pUi                  { nullptr };
 
@@ -101,6 +91,9 @@ class CtrlPanel : public aPlainWin,
         aVector<SceneTuple>             m_vSceneTuples;
         aColor                          m_colButtonBg;
 
+        // chases (10)
+        aVector<ChaseTuple>             m_vChaseTuples;
+
         // faders (24)
         aVector<Fader *>                m_vFaders;
 
@@ -117,6 +110,7 @@ class CtrlPanel : public aPlainWin,
         aMap<aString, bankIoInfo>       m_mapBankIoInfo;              // bankName -> bankIoInfo
         aVector<bankFixtureIoInfo>      m_vBankFixtureIoInfo;
         aVector<sceneBtnIoInfo>         m_vSceneBtnIoInfo;
+        aVector<sceneChannelIoInfo>     m_vSceneChannelIoInfo;
 
     public:
         CtrlPanel(SysWin *_pParent = nullptr);
@@ -151,6 +145,7 @@ class CtrlPanel : public aPlainWin,
         shared_ptr<Controller>          findController(const aString  &_sName);
         shared_ptr<Fixture>             findFixture(const aString  &_sName);
         shared_ptr<Bank>                findBank(const aString  &_sName);
+        shared_ptr<Scene>               findScene(const aString  &_sName);
 
 
     /*******************************************************************************
@@ -168,7 +163,8 @@ class CtrlPanel : public aPlainWin,
                                                          const aVector<sceneIoInfo>             &_vSceneIoInfo,
                                                          const aMap<aString, bankIoInfo>        &_mapBankIoInfo,
                                                          const aVector<bankFixtureIoInfo>       &_vBankFixtureIoInfo,
-                                                         const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo);
+                                                         const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo,
+                                                         const aVector<sceneChannelIoInfo>      &_vSceneChannelIoInfo);
 
         void                            loadScene(s32 _s32SceneBtnIdx);
 
@@ -192,11 +188,13 @@ class CtrlPanel : public aPlainWin,
         void                            initBanks();
         void                            initFixtures();
         void                            initScenes();
+        void                            initChases();
         void                            initFaders();
 
         void                            updateBanks();
         void                            updateFixtures();
         void                            updateScenes();
+        void                            updateChases();
         void                            updateFaders();
 
 

@@ -71,6 +71,7 @@ void Scene::add2Configuration(aJsonFile     &_jf,
             s32                 s32ChannelNr    = pChannel->channelNr();
 
             _jf.openLevel();
+                _jf.add(aJsonValue("sceneName", m_sName));
                 _jf.add(aJsonValue("fixtureName", sFixName));
                 _jf.add(aJsonValue("channelNr", (dbl) s32ChannelNr));
                 _jf.add(aJsonValue("value", (dbl) u8Value));

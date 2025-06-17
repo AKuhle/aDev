@@ -61,7 +61,9 @@ constexpr u64   UPDATE_RESET_ALL            = 0x0000000000010000;
 constexpr u32   ID_ADD_BANK                     = CTRL_ID_USER + 1;
 constexpr u32   ID_ADD_FIXTURE                  = CTRL_ID_USER + 2;
 constexpr u32   ID_SAVE_SCENE                   = CTRL_ID_USER + 3;
-constexpr u32   ID_RESET_ALL                    = CTRL_ID_USER + 4;
+constexpr u32   ID_REMOVE_SCENE                 = CTRL_ID_USER + 4;
+constexpr u32   ID_ADD_CHASE                    = CTRL_ID_USER + 5;
+constexpr u32   ID_RESET_ALL                    = CTRL_ID_USER + 6;
 
 constexpr u32   ID_FIRST_BANK_IDX               = CTRL_ID_USER + 100;
 constexpr u32   ID_FIRST_FIXTURE_IDX            = CTRL_ID_USER + 200;
@@ -129,5 +131,7 @@ constexpr u32   ID_BACKOUT_IDX                  = CTRL_ID_USER + 501;
 enum class enumWorkMode
 {
     Play,
-    SaveScene
+    SaveScene,
+    RemoveScene,
+    AddChase
 }; // enumMode

@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>518</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
@@ -41,6 +41,9 @@
    <addaction name="m_pActionAddFixture"/>
    <addaction name="separator"/>
    <addaction name="m_pActionSaveScene"/>
+   <addaction name="m_pActionRemoveScene"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionAddChase"/>
    <addaction name="separator"/>
    <addaction name="m_pActionResetAll"/>
   </widget>
@@ -83,7 +86,7 @@
   <action name="m_pActionSaveScene">
    <property name="icon">
     <iconset resource="../Resource/Resource_Qt/qLights.qrc">
-     <normaloff>:/Lib_bright/download.png</normaloff>:/Lib_bright/download.png</iconset>
+     <normaloff>:/qLights/addScene.png</normaloff>:/qLights/addScene.png</iconset>
    </property>
    <property name="text">
     <string>Save Scene</string>
@@ -99,6 +102,30 @@
    </property>
    <property name="text">
     <string>reset</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionRemoveScene">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/qLights/removeScene.png</normaloff>:/qLights/removeScene.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Scene</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionAddChase">
+   <property name="icon">
+    <iconset resource="../Resource/Resource_Qt/qLights.qrc">
+     <normaloff>:/qLights/addChase.png</normaloff>:/qLights/addChase.png</iconset>
+   </property>
+   <property name="text">
+    <string>addChase</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

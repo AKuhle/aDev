@@ -22,7 +22,8 @@
 
 #include "bank.h"
 #include "fixture.h"
- #include "scene.h"
+#include "scene.h"
+#include "chase.h"
 
 
 
@@ -474,6 +475,25 @@ shared_ptr<Bank> CtrlPanel::findBank(const aString  &_sName)
 
 
 /*******************************************************************************
+* CtrlPanel::findScene
+*******************************************************************************/
+shared_ptr<Scene> CtrlPanel::findScene(const aString  &_sName)
+{
+    for (SceneTuple &tup : m_vSceneTuples)
+    {
+        shared_ptr<Scene> pScene = std::get<1> (tup);
+
+        if (pScene != nullptr && pScene->name() == _sName)
+        {
+            return pScene;
+        }
+    }
+
+    return nullptr;
+} // CtrlPanel::findScene
+
+
+/*******************************************************************************
 * CtrlPanel::updateGui
 *******************************************************************************/
 void CtrlPanel::updateGui()
@@ -481,6 +501,7 @@ void CtrlPanel::updateGui()
     updateBanks();
     updateFixtures();
     updateScenes();
+    updateChases();
     updateFaders();
     //     updateBlackoutButton();
 } // CtrlPanel::updateGui
@@ -491,10 +512,10 @@ void CtrlPanel::updateGui()
 *******************************************************************************/
 void CtrlPanel::updateBanks()
 {
-    for (auto pBankTuple : m_vBankTuples)
+    for (auto bankTuple : m_vBankTuples)
     {
-        auto pBtn   = std::get<0> (pBankTuple);
-        auto pBank  = std::get<1> (pBankTuple);
+        auto pBtn   = std::get<0> (bankTuple);
+        auto pBank  = std::get<1> (bankTuple);
 
         pBtn->setCtrlEnabled(pBank != nullptr);
         pBtn->setCtrlChecked(pBank != nullptr && pBank == m_pActiveBank);
@@ -507,10 +528,10 @@ void CtrlPanel::updateBanks()
 *******************************************************************************/
 void CtrlPanel::updateFixtures()
 {
-    for (auto pFixtureTuple : m_vFixtureTuples)
+    for (auto fixtureTuple : m_vFixtureTuples)
     {
-        auto pBtn       = std::get<0> (pFixtureTuple);
-        auto pFixture   = std::get<1> (pFixtureTuple);
+        auto pBtn       = std::get<0> (fixtureTuple);
+        auto pFixture   = std::get<1> (fixtureTuple);
 
         pBtn->setCtrlEnabled(pFixture != nullptr);
         pBtn->setCtrlChecked(pFixture != nullptr && pFixture == m_pActiveFixture);
@@ -525,10 +546,10 @@ void CtrlPanel::updateScenes()
 {
     MainWin     &mw = getMainWin();
 
-    for (auto pSceneTuple : m_vSceneTuples)
+    for (auto sceneTuple : m_vSceneTuples)
     {
-        aPushButton         *pBtn   = std::get<0> (pSceneTuple);
-        shared_ptr<Scene>   pScene  = std::get<1> (pSceneTuple);
+        aPushButton         *pBtn   = std::get<0> (sceneTuple);
+        shared_ptr<Scene>   pScene  = std::get<1> (sceneTuple);
 
         switch (mw.workMode())
         {
@@ -541,10 +562,32 @@ void CtrlPanel::updateScenes()
                 pBtn->setCtrlEnabled(true);
                 pBtn->setBackgroundColor(colDarkOrange);
                 break;
+
+            case enumWorkMode::RemoveScene:
+                pBtn->setCtrlEnabled(true);
+                pBtn->setBackgroundColor(colDarkRed);
+                break;
         } // switch
     } // for
 
 } // CtrlPanel::updateScenes
+
+
+/*******************************************************************************
+* CtrlPanel::updateChases
+*******************************************************************************/
+void CtrlPanel::updateChases()
+{
+    for (auto chaseTuple : m_vChaseTuples)
+    {
+        aPushButton         *pBtn   = std::get<0> (chaseTuple);
+        shared_ptr<Chase>   pChase  = std::get<1> (chaseTuple);
+
+        pBtn->setCtrlEnabled(pChase != nullptr);
+
+    } // for
+
+} // CtrlPanel::updateChases
 
 
 /*******************************************************************************
@@ -642,10 +685,10 @@ void CtrlPanel::initFixtures()
 *******************************************************************************/
 void CtrlPanel::initScenes()
 {
-    for (auto pSceneTuple : m_vSceneTuples)
+    for (auto sceneTuple : m_vSceneTuples)
     {
-        aPushButton         *pBtn   = std::get<0> (pSceneTuple);
-        shared_ptr<Scene>   pScene  = std::get<1> (pSceneTuple);
+        aPushButton         *pBtn   = std::get<0> (sceneTuple);
+        shared_ptr<Scene>   pScene  = std::get<1> (sceneTuple);
 
         if (pScene != nullptr)
         {
@@ -657,6 +700,28 @@ void CtrlPanel::initScenes()
         }
     } // CtrlPanel::initGui
 } // CtrlPanel::initScenes
+
+
+/*******************************************************************************
+* CtrlPanel::initChases
+*******************************************************************************/
+void CtrlPanel::initChases()
+{
+    for (auto chaseTuple : m_vChaseTuples)
+    {
+        aPushButton         *pBtn   = std::get<0> (chaseTuple);
+        shared_ptr<Chase>   pChase  = std::get<1> (chaseTuple);
+
+        if (pChase != nullptr)
+        {
+            pBtn->setText(pChase->name());
+        }
+        else
+        {
+            pBtn->setText(aString(""));
+        }
+    } // CtrlPanel::initGui
+} // CtrlPanel::initChases
 
 
 /*******************************************************************************
@@ -796,6 +861,19 @@ bool CtrlPanel::onCreateWin()
     m_vFaders.push_back(m_pUi->m_pFader_23);
     m_vFaders.push_back(m_pUi->m_pFader_24);
 
+    // chase controls
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_01, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_02, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_03, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_04, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_05, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_06, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_07, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_08, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_09, nullptr));
+    m_vChaseTuples.push_back(ChaseTuple(m_pUi->m_pChase_10, nullptr));
+
+    // faders
     m_pUi->m_pFader_01->setControls(m_pUi->m_pScribbleStrip_01, m_pUi->m_pNr_01);
     m_pUi->m_pFader_02->setControls(m_pUi->m_pScribbleStrip_02, m_pUi->m_pNr_02);
     m_pUi->m_pFader_03->setControls(m_pUi->m_pScribbleStrip_03, m_pUi->m_pNr_03);
@@ -841,6 +919,7 @@ bool CtrlPanel::onCreateWin()
     initBanks();
     initFixtures();
     initScenes();
+    initChases();
     initFaders();
 
     return true;

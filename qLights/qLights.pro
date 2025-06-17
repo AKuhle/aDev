@@ -111,6 +111,7 @@ HEADERS += \
     App/qLights_defs.h \
     Classes/bank.h \
     Classes/channel.h \
+    Classes/chase.h \
     Classes/controller.h \
     Classes/fader.h \
     Classes/fixture.h \
@@ -119,6 +120,7 @@ HEADERS += \
     Dialogs/ctrlPanel.h \
     Dialogs/dlgAddBank.h \
     Dialogs/dlgAddScene.h \
+    Dialogs/dlgRemoveScene.h \
     Dialogs/scribbleStrip.h \
     Win/mainWin.h
 
@@ -130,6 +132,7 @@ SOURCES += \
     App/qLightsApp.cpp \
     Classes/bank.cpp \
     Classes/channel.cpp \
+    Classes/chase.cpp \
     Classes/controller.cpp \
     Classes/fader.cpp \
     Classes/fixture.cpp \
@@ -140,6 +143,7 @@ SOURCES += \
     Dialogs/ctrlPanel_io.cpp \
     Dialogs/dlgAddBank.cpp \
     Dialogs/dlgAddScene.cpp \
+    Dialogs/dlgRemoveScene.cpp \
     Dialogs/scribbleStrip.cpp \
     Win/mainWin.cpp \
     Win/mainWin_ctrls.cpp \
@@ -159,6 +163,7 @@ SOURCES += \
 FORMS += \
     Forms/dlgAddBank.ui \
     Forms/dlgAddScene.ui \
+    Forms/dlgRemoveScene.ui \
     Forms/formCtrlPanel.ui \
     Forms/formMainWin.ui
 
