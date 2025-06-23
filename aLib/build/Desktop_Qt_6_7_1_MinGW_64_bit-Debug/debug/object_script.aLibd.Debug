@@ -27,6 +27,7 @@ debug/aCmdMgr.o
 debug/aCmdStack.o
 debug/aCmdThread.o
 debug/aJsonFile.o
+debug/aJsonObj.o
 debug/aJsonValue.o
 debug/aProgressCb.o
 debug/aProgressMgr.o

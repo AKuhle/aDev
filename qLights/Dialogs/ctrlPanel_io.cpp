@@ -322,33 +322,37 @@ void CtrlPanel::setConfiguration(const aMap<aString, controllerIoInfo>  &_mapCon
     }
 
     // add channels to the scene
-    for (const auto &s : m_vSceneChannelIoInfo)
+    for (const auto &s : _vSceneChannelIoInfo)
     {
+        aString sScene          =   std::get<0> (s);
+        aString sFixture        =   std::get<1> (s);
+        s32     s32ChannelNr    =   std::get<2> (s);
+        u8      u8Value         =   std::get<3> (s);
+
         // find the new scene
-        shared_ptr<Scene> pScene = findScene(std::get<0> (s));
+        shared_ptr<Scene> pScene = findScene(sScene);
         if (!pScene)
         {
-            cout << "scene not found in scene-channels: " << std::get<0> (s) << endl;
+            cout << "scene not found in scene-channels: " << sScene << endl;
         }
         else
         {
-            shared_ptr<Fixture> pFixture = findFixture(std::get<1> (s));
-
+            shared_ptr<Fixture> pFixture = findFixture(sFixture);
             if (!pFixture)
             {
-                cout << "fixture not found in scene-channels: " << std::get<1> (s) << endl;
+                cout << "fixture not found in scene-channels: " << sFixture << endl;
             }
             else
             {
-                shared_ptr<Channel> pChannel = pFixture->channel(std::get<2> (s));
+                shared_ptr<Channel> pChannel = pFixture->channel(s32ChannelNr);
 
                 if (!pChannel)
                 {
-                    cout << "channel not found in scene-channels: " << std::get<2> (s) << endl;
+                    cout << "channel not found in scene-channels: " << s32ChannelNr << endl;
                 }
                 else
                 {
-                    pScene->addChannel(pChannel, std::get<3> (s));
+                    pScene->addChannel(pChannel, u8Value);
                 }
             }
         }
@@ -457,7 +461,7 @@ void CtrlPanel::JsonObjCallback(const aVector<aString> &_vecKeys,
             aString     sScene      = _obj.findString("sceneName");
             aString     sFixture    = _obj.findString("fixtureName");
             s32         nr          = _obj.findS32("channelNr");
-            u8          u8Value     = static_cast<u8> (_obj.findS32("brightness"));
+            u8          u8Value     = static_cast<u8> (_obj.findS32("value"));
 
             m_vSceneChannelIoInfo.push_back(make_tuple(sScene, sFixture, nr, u8Value));
         }

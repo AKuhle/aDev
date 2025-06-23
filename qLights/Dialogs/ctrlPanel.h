@@ -98,9 +98,8 @@ class CtrlPanel : public aPlainWin,
         aVector<Fader *>                m_vFaders;
 
         // master fader
-        //faderTuple                      m_masterFader;
-        //dbl                             m_dMasterBrightness     { 1.0 };
-        //aSharedPtrVector<Channel>       m_vMasterChannel;
+        dbl                             m_dMasterBrightness     { 1.0 };
+        shared_ptr<Channel>             m_pMasterChannel;
 
         // io-member
         aMap<aString, controllerIoInfo> m_mapControllerIoInfo;      // controllerName -> bankIoInfo
@@ -117,6 +116,7 @@ class CtrlPanel : public aPlainWin,
         ~CtrlPanel();
 
         void                            resetAllChannels();
+        dbl                             getMasterBrightness() const     { return m_dMasterBrightness; }
 
     private:
         void                            createSetup();
@@ -146,6 +146,8 @@ class CtrlPanel : public aPlainWin,
         shared_ptr<Fixture>             findFixture(const aString  &_sName);
         shared_ptr<Bank>                findBank(const aString  &_sName);
         shared_ptr<Scene>               findScene(const aString  &_sName);
+
+        void                            updateBrightnessChannels() const;
 
 
     /*******************************************************************************
@@ -196,6 +198,7 @@ class CtrlPanel : public aPlainWin,
         void                            updateScenes();
         void                            updateChases();
         void                            updateFaders();
+        void                            updateBlackoutButton();
 
 
     /*******************************************************************************
@@ -211,9 +214,9 @@ class CtrlPanel : public aPlainWin,
         void                            onFaderMoved(s32    s32FaderIdx,
                                                      s32    _s32Value);
 
-        // void                            onMasterFaderMoved(s32    _s32Value);
+        void                            onMasterFaderMoved(s32    _s32Value);
 
-        // void                            onBlackoutClicked();
+        void                            onBlackoutClicked();
 
 
     /*******************************************************************************

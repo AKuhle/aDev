@@ -34,6 +34,7 @@ class Fader : public aScrollBar
         aLabel                  *m_pLabel           { nullptr };
         shared_ptr<Channel>     m_pChannel          { nullptr };
 
+
     public:
         Fader(SysWin *_pParent = nullptr);
         ~Fader();

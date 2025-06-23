@@ -24,6 +24,7 @@
 #include "fixture.h"
 #include "scene.h"
 #include "chase.h"
+#include "channel.h"
 
 
 
@@ -503,7 +504,7 @@ void CtrlPanel::updateGui()
     updateScenes();
     updateChases();
     updateFaders();
-    //     updateBlackoutButton();
+    updateBlackoutButton();
 } // CtrlPanel::updateGui
 
 
@@ -628,6 +629,22 @@ void CtrlPanel::updateFaders()
     //         pScribble->update();
     //     }
 } // CtrlPanel::updateFaders
+
+
+/*******************************************************************************
+* CtrlPanel::updateBlackoutButton
+*******************************************************************************/
+void CtrlPanel::updateBlackoutButton()
+{
+    if (m_dMasterBrightness > 0)
+    {
+        m_pUi->m_pBlackout->setBackgroundColor(colBlack);
+    }
+    else
+    {
+        m_pUi->m_pBlackout->setBackgroundColor(aColor::fromU8(255, 255,128, 255));
+    }
+} // CtrlPanel::updateBlackoutButton
 
 
 /*******************************************************************************
@@ -905,16 +922,17 @@ bool CtrlPanel::onCreateWin()
         pFader->setInverse(true);
     }
 
-//     m_masterFader = FaderTuple(m_pUi->m_pScribbleStrip_M, m_pUi->m_pFader_M, m_pUi->m_pNr_M, nullptr);
-//     ScribbleStrip       *pScribble  = get<0>(m_masterFader);
-//     Fader               *pFader     = get<1>(m_masterFader);
-//     aLabel              *pLabel     = get<2>(m_masterFader);
-//     pScribble->setIcon(CHANNEL_ICN_BRIGHTNESS_ALL);
-//     pFader->setInverse(true);
-//     pFader->setValue(255);
-//     pLabel->setText("Mstr");
+    // master fader
+    m_pMasterChannel = make_shared<Channel> (nullptr, 0, CHANNEL_ICN_BRIGHTNESS_ALL, false);
+    m_pUi->m_pFader_M->setInverse(true);
+    m_pMasterChannel->setValue(255, false);
 
-    createSetup();
+    m_pUi->m_pNr_M->setText("Mstr");
+
+    m_pUi->m_pFader_M->setControls(m_pUi->m_pScribbleStrip_M, m_pUi->m_pNr_M);
+    m_pUi->m_pFader_M->setChannel(m_pMasterChannel);
+
+    //createSetup();
 
     initBanks();
     initFixtures();
@@ -924,481 +942,3 @@ bool CtrlPanel::onCreateWin()
 
     return true;
 } // CtrlPanel::onCreateWin
-
-
-// /*******************************************************************************
-// * CtrlPanel::setConfiguration
-// *******************************************************************************/
-// void CtrlPanel::setConfiguration(aMap<aString, controllerIoInfo>    &_mapControllerIoInfo,
-//                                  aMap<aString, bankIoInfo>          &_mapBankIoInfo,
-//                                  aMap<aString, fixtureIoInfo>       &_mapFixtureIoInfo,
-//                                  aMap<aString, sceneIoInfo>         &_mapSceneIoInfo)
-// {
-//     // clear previous configuration
-//     m_vController.clear();
-//     m_vBank.clear();
-//     m_pActiveBank = nullptr;
-//     m_vFixture.clear();
-//     m_pActiveFixture = nullptr;
-//     m_vMasterChannel.clear();
-//     for (sceneTuple &t : m_vSceneTuple)
-//     {
-//         std::get<1> (t) = nullptr;
-//     }
-
-//     // create controller/universes
-//     for (auto me : _mapControllerIoInfo)
-//     {
-//         controllerIoInfo &ci = me.second;
-
-//         aString                         sCtrlName   = std::get<0> (ci);
-//         aString                         sCtrlAdress = std::get<1> (ci);
-//         s32                             s32CtrlUniMax = std::get<2> (ci);
-
-//         shared_ptr<Controller> pController = createController(sCtrlName, sCtrlAdress, s32CtrlUniMax);
-
-//         // generate the universes
-//         aMap<aString, universeIoInfo>   &mapUni = std::get<3> (ci);
-//         for (auto uniME : mapUni)
-//         {
-//             universeIoInfo &ui = uniME.second;
-
-//             s32         s32UniId    = std::get<0> (ui);
-//             //QByteArray  &ba         = std::get<1> (ui);
-
-//             pController->addUniverse(s32UniId);
-//         }
-//     } // for (auto me : m_mapControllerIoInfo)
-
-
-//     // create the banks
-//     for (auto me : _mapBankIoInfo)
-//     {
-//         bankIoInfo &bi = me.second;
-
-//         aString sBankName = std::get<0> (bi);
-//         s32 s32BnkBtnIdx = std::get<1> (bi);
-
-//         shared_ptr<Bank> pBank1 = createBank(sBankName);
-//         assignBank(pBank1, s32BnkBtnIdx);
-//     }
-
-
-//     // create the features
-//      for (auto me : _mapFixtureIoInfo)
-//     {
-//         fixtureIoInfo &fi = me.second;
-
-//         aString     sFixName            = std::get<0> (fi);
-//         aString     sFixControllerName  = std::get<1> (fi);
-//         s32         s32FixUniverseId    = std::get<2> (fi);
-//         s32         s32FixChannelOs     = std::get<3> (fi);
-//         aString     sFixBank            = std::get<4> (fi);
-//         s32         s32FixBtnIdx        = std::get<5> (fi);
-
-//         shared_ptr<Controller>  pController = findController(sFixControllerName);
-//         shared_ptr<Bank>        pBank       = findBank(sFixBank);
-
-//         if (pController)
-//         {
-//             // create the fixture
-//             shared_ptr<Fixture> pFix = createFixture(sFixName, pController, s32FixUniverseId, s32FixChannelOs);
-//             assignFixture(pFix, pBank, s32FixBtnIdx);
-
-//             for (auto ci : std::get<6> (fi))
-//             {
-//                 aString sControllerName         = std::get<0> (ci.second);
-//                 s32     s32ChannelNr            = std::get<1> (ci.second);
-//                 aString sChannelIcon            = std::get<2> (ci.second);
-//                 bool    bChannelBrightness      = std::get<3> (ci.second);
-
-//                 // create the channel
-//                 shared_ptr<Channel> pChannel = pFix->addChannel(s32ChannelNr, sChannelIcon, bChannelBrightness);
-
-//                 // add brightness-channel to master channel
-//                 if (bChannelBrightness)
-//                 {
-//                     m_vMasterChannel.push_back(pChannel);
-//                 }
-//             }
-//         }
-//     }
-
-
-//     // create the scenes
-//     for (auto me : _mapSceneIoInfo)
-//     {
-//         //aVector<channelValueTuple>  vtuple;
-//         //sceneIoInfo                 &si             = me.second;
-
-//         //s32                         s32Idx          = std::get<0> (si);
-//         //aString                     sSceneName      = std::get<1> (si);
-//         //aString                     sControllerName = std::get<2> (si);
-//         //s32                         s32UniverseId   = std::get<3> (si);
-//         //s32                         s32ChannelNr    = std::get<4> (si);
-//         //s32                         s32ChannelOs    = std::get<5> (si);
-//         //u8                          u8Value         = std::get<6> (si);
-
-//         //shared_ptr<Channel>         pChannel        = findChannel(sControllerName,
-//         //                                                          s32UniverseId,
-//         //                                                          s32ChannelNr,
-//         //                                                          s32ChannelOs);
-//         // shared_ptr<Bank> pBank1 = createBank(sBankName);
-//         // assignBank(pBank1, s32BnkBtnIdx);
-//     }
-
-//     // initial initialisation
-//     updateBankTuples();
-//     updateFixtureTuples();
-//     updateSceneTuples();
-//     updateFaderCtrls();
-// } // CtrlPanel::setConfiguration
-
-
-// /*******************************************************************************
-// * CtrlPanel::findController
-// *******************************************************************************/
-// shared_ptr<Controller> CtrlPanel::findController(const aString &_sControllerName) const
-// {
-//     for (shared_ptr<Controller> pCtrl : m_vController)
-//     {
-//         if (pCtrl->name() == _sControllerName)
-//         {
-//             return pCtrl;
-//         }
-//     }
-
-//     return nullptr;
-// } // CtrlPanel::findController
-
-
-// /*******************************************************************************
-// * CtrlPanel::findBank
-// *******************************************************************************/
-// shared_ptr<Bank> CtrlPanel::findBank(const aString &_sBankName) const
-// {
-//     for (shared_ptr<Bank> pBank : m_vBank)
-//     {
-//         if (pBank->name() == _sBankName)
-//         {
-//             return pBank;
-//         }
-//     }
-
-//     return nullptr;
-// } // CtrlPanel::findBank
-
-
-// /*******************************************************************************
-// * CtrlPanel::findBank4Fixture
-// *******************************************************************************/
-// bool CtrlPanel::findBank4Fixture(shared_ptr<Fixture>    _pFix,
-//                                  shared_ptr<Bank>       &_pBank,
-//                                  s32                    &_s32FixtureBtnIdx) const
-// {
-//     for (const shared_ptr<Bank> &pBank : m_vBank)
-//     {
-//         for (s32 idx = 0; idx < FIXTURE_MAX; idx++)
-//         {
-//             shared_ptr<Fixture> pFix = pBank->fixture(idx);
-
-//             if (pFix && pFix->name() == _pFix->name())
-//             {
-//                 _pBank = pBank;
-//                 _s32FixtureBtnIdx = idx;
-//                 return true;
-//             }
-//         }
-//     }
-
-//     return false;
-// } // CtrlPanel::findBank4Fixture
-
-
-// /*******************************************************************************
-// * CtrlPanel::findChannel
-// *******************************************************************************/
-// shared_ptr<Channel> CtrlPanel::findChannel(const aString   &_sControllerName,
-//                                            s32             _s32UniverseId,
-//                                            s32             _s32channelNr,
-//                                            s32             _s32ChannelOs)
-// {
-//     return nullptr;
-// } // CtrlPanel::findChannel
-
-
-// /*******************************************************************************
-// * CtrlPanel::createController
-// *******************************************************************************/
-// shared_ptr<Controller> CtrlPanel::createController(const aString   &_sName,
-//                                                    const aString   &_sIpAdr,
-//                                                    s32             _s32UniverseMax)
-// {
-//     shared_ptr<Controller> pCtrl = make_shared<Controller> (_sName, _sIpAdr, _s32UniverseMax);
-
-//     m_vController.push_back(pCtrl);
-
-//     return pCtrl;
-// } // CtrlPanel::createController
-
-
-// /*******************************************************************************
-// * CtrlPanel::sendAllUniverses
-// *******************************************************************************/
-// void CtrlPanel::sendAllUniverses()
-// {
-//     for (shared_ptr<Controller> pCtrl : m_vController)
-//     {
-//         pCtrl->sendAllUniverses();
-//     }
-// } // CtrlPanel::sendAllUniverses
-
-
-
-// /*******************************************************************************
-// * CtrlPanel::updateSceneTuples
-// *******************************************************************************/
-// void CtrlPanel::updateSceneTuples()
-// {
-//     for (sceneTuple &st : m_vSceneTuple)
-//     {
-//         auto pSceneBtn   = std::get<0> (st);
-//         auto pScene      = std::get<1> (st);
-
-//         if (pScene)
-//         {
-//             pSceneBtn->setBtnText(pScene->name());
-//         }
-//         else
-//         {
-//             pSceneBtn->setBtnText("");
-//         }
-//     }
-// } // CtrlPanel::updateSceneTuples
-
-
-// /*******************************************************************************
-// * CtrlPanel::onSceneSelected
-// *******************************************************************************/
-// void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
-// {
-//     MainWin     &mw = getMainWin();
-
-//     //aPushButton         *pBtn   = std::get<0> (m_vSceneTuple.at(_s32SceneBtnIdx));
-//     shared_ptr<Scene>   &pScene = std::get<1> (m_vSceneTuple.at(_s32SceneBtnIdx));
-
-//     switch (mw.workMode())
-//     {
-//         case enumWorkMode::Play:
-//         {
-//             if (pScene)
-//             {
-//                 const aVector<channelValueTuple> vValues = pScene->channelValues();
-
-//                 // set all channel values
-//                 for (auto &tup : vValues)
-//                 {
-//                     shared_ptr<Channel> pChannel    = std::get<0> (tup);
-//                     u8                  u8Val       = std::get<1> (tup);
-
-//                     pChannel->setValue(u8Val);
-//                     updateDmxValue(pChannel, false);
-//                 }
-//             }
-
-//             // finally send all universe data
-//             sendAllUniverses();
-
-//             updateFaders();
-
-//             break;
-//         }
-
-//         case enumWorkMode::SaveScene:
-//         {
-//             aString                     sBtn = aString::fromValue(_s32SceneBtnIdx);
-//             aVector<channelValueTuple>  vValues;
-
-//             // get all channel values
-//             for (auto pFix : m_vFixture)
-//             {
-//                 pFix->allChannelValues(vValues);
-//             }
-
-//             pScene = make_shared<Scene> (sBtn, vValues);
-
-//             updateSceneTuples();
-
-//             mw.setWorkMode(enumWorkMode::Play);
-//             break;
-//         }
-//     }
-// } // CtrlPanel::onSceneSelected
-
-
-// /*******************************************************************************
-// * CtrlPanel::updateDmxValue
-// *******************************************************************************/
-// void CtrlPanel::updateDmxValue(shared_ptr<Channel>  _pChannel,
-//                                bool                 _bSend)
-// {
-//     CHECK_PRE_CONDITION_VOID(_pChannel);
-
-//     if (_pChannel->isBrightness())
-//     {
-//         u8 u8Val = static_cast<u8> (m_dMasterBrightness * _pChannel->value());
-//         _pChannel->updateDmxValue(u8Val, _bSend);
-//     }
-//     else
-//     {
-//         _pChannel->updateDmxValue(_pChannel->value(), _bSend);
-//     }
-// } // CtrlPanel::updateDmxValue
-
-
-// /*******************************************************************************
-// * CtrlPanel::updateScenes
-// *******************************************************************************/
-// void CtrlPanel::updateScenes()
-// {
-//     MainWin     &mw     = getMainWin();
-//     bool        bSave   = (mw.workMode() == enumWorkMode::SaveScene);
-
-//     for (s32 i = 0; i < SCENE_MAX; i++)
-//     {
-//         aPushButton         *pSceneBtn = std::get<0>(m_vSceneTuple.at(i));
-//         shared_ptr<Scene>   pScene = std::get<1>(m_vSceneTuple.at(i));
-
-//         // set background
-//         if (bSave)
-//         {
-//             pSceneBtn->setBackgroundColor(colDarkGoldenRod);
-//             pSceneBtn->setEnabled(true);
-//         }
-//         else
-//         {
-//             pSceneBtn->setBackgroundColor(m_colButtonBg);
-//             pSceneBtn->setEnabled(pScene != nullptr);
-//         }
-//     }
-// } // CtrlPanel::updateScenes
-
-
-// /*******************************************************************************
-// * CtrlPanel::updateFaders
-// *******************************************************************************/
-// void CtrlPanel::updateFaders()
-// {
-//     shared_ptr<Fixture> pFix = activeFixture();
-
-//     // update the faders
-//     for (s32 s32FaderIdx = 0; s32FaderIdx < FADER_MAX; s32FaderIdx++)
-//     {
-//         Fader               *pFader     = get<1>(m_vFader.at(s32FaderIdx));
-//         shared_ptr<Channel> pChannel    = (pFix)?   pFix->channel(s32FaderIdx + 1) : nullptr;
-
-//         pFader->setTracking(false);
-//         if (pChannel)
-//         {
-//             pFader->setPosition(pChannel->value());
-//         }
-//         else
-//         {
-//             pFader->setPosition(0);
-//         }
-//         pFader->setTracking(true);
-//     }
-// } // CtrlPanel::updateFaders
-
-
-// /*******************************************************************************
-// * CtrlPanel::updateBlackoutButton
-// *******************************************************************************/
-// void CtrlPanel::updateBlackoutButton()
-// {
-//     if (m_dMasterBrightness > 0)
-//     {
-//         m_pUi->m_pBlackout->setBackgroundColor(colBlack);
-//     }
-//     else
-//     {
-//         m_pUi->m_pBlackout->setBackgroundColor(aColor::fromU8(255, 255,128, 255));
-//     }
-// } // CtrlPanel::updateBlackoutButton
-
-
-// /*******************************************************************************
-// * CtrlPanel::onMasterFaderMoved
-// *******************************************************************************/
-// void CtrlPanel::onMasterFaderMoved(s32 _s32Value)
-// {
-//     cout << "onMasterFaderMoved" << endl;
-
-//     m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
-//     s32 s32Size = m_vMasterChannel.size();
-
-//      for (s32 i = 0; i < s32Size; i++)
-//      {
-//         updateDmxValue(m_vMasterChannel.at(i), i == s32Size - 1);
-//      }
-
-//     updateBlackoutButton();
-// } // CtrlPanel::onMasterFaderMoved
-
-
-// /*******************************************************************************
-// * CtrlPanel::onBlackoutClicked
-// *******************************************************************************/
-// void CtrlPanel::onBlackoutClicked()
-// {
-//     Fader   *pFader     = get<1>(m_masterFader);
-
-//     if (m_dMasterBrightness > 0)
-//     {
-//         pFader->setValue(0);
-//         m_dMasterBrightness = 0;
-//     }
-//     else
-//     {
-//         pFader->setValue(255);
-//         m_dMasterBrightness = 1;
-//     }
-
-//     updateBlackoutButton();
-// } // CtrlPanel::onBlackoutClicked
-
-
-// /*******************************************************************************
-// * CtrlPanel::allChannels
-// *******************************************************************************/
-// void CtrlPanel::allChannels(aVector<shared_ptr<Channel>> &_vChannel) const
-// {
-//     // deselect non selected buttons
-//     for (shared_ptr<Fixture> pFix : m_vFixture)
-//     {
-//         pFix->allChannels(_vChannel);
-//     }
-// } // CtrlPanel::allChannels
-
-
-// /*******************************************************************************
-// * CtrlPanel::resetAllChannels
-// *******************************************************************************/
-// void CtrlPanel::resetAllChannels()
-// {
-//     aVector<shared_ptr<Channel>> vChannel;
-
-//     allChannels(vChannel);
-
-//     // set all channel values
-//     for (auto &pChannel : vChannel)
-//     {
-//         pChannel->setValue(0);
-//         updateDmxValue(pChannel, false);
-//     }
-
-//     // finally send all universe data
-//     sendAllUniverses();
-
-//     updateFaders();
-// } // CtrlPanel::resetAllChannels

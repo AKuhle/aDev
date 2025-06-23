@@ -40,7 +40,7 @@ MainWin::~MainWin()
     if (m_pCtrlPanel)
     {
         aPath   path = get_appPath() / LAST_CONFIG;
-        //m_pCtrlPanel->writeConfiguration(path);
+        m_pCtrlPanel->writeConfiguration(path);
     }
 
     #ifdef _USE_QT_
@@ -58,6 +58,17 @@ void MainWin::setWorkMode(enumWorkMode _eMode)
 
     sendUpdateCmd(UPDATE_GUI);
 } // MainWin::setWorkMode
+
+
+/*******************************************************************************
+* MainWin::getMasterBrightness
+*******************************************************************************/
+dbl MainWin::getMasterBrightness() const
+{
+    CHECK_PRE_CONDITION(m_pCtrlPanel != nullptr, 0);
+
+    return m_pCtrlPanel->getMasterBrightness();
+} // MainWin::getMasterBrightness
 
 
 /*******************************************************************************

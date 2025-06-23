@@ -24,6 +24,8 @@
 #include "scene.h"
 #include "aString.h"
 #include "channel.h"
+#include "fixture.h"
+#include "controller.h"
 
 
 /*******************************************************************************
@@ -58,11 +60,11 @@ void CtrlPanel::onRegisterCtrl()
         registerCtrl(m_vFaders.at(iFaderIdx), ID_FIRST_FADER_IDX + iFaderIdx, true);
     }
 
-    // // register master fader
-    // registerCtrl(get<1>(m_masterFader), ID_MASTER_FADER_IDX, true);
+    // register master fader
+    registerCtrl(m_pUi->m_pFader_M, ID_MASTER_FADER_IDX, true);
 
-    // // register blackout button
-    // registerCtrl(m_pUi->m_pBlackout, ID_BACKOUT_IDX, true);
+    // register blackout button
+    registerCtrl(m_pUi->m_pBlackout, ID_BACKOUT_IDX, true);
 
 } // CtrlPanel::onRegisterCtrl
 
@@ -103,11 +105,11 @@ void CtrlPanel::onCtrlClicked(aCtrlI *_pCtrl)
        onSceneSelected(s32CtrlId - ID_FIRST_SCENE_IDX);
    }
 
-   // // check for scenes
-   // if (s32CtrlId == ID_BACKOUT_IDX)
-   // {
-   //     onBlackoutClicked();
-   // }
+   // check for scenes
+   if (s32CtrlId == ID_BACKOUT_IDX)
+   {
+       onBlackoutClicked();
+   }
 
 } // CtrlPanel::onCtrlClicked
 
@@ -127,10 +129,10 @@ void CtrlPanel::onCtrlValueChanged(aCtrlI   *_pCtrl,
         // fader moved
         onFaderMoved(s32CtrlId - ID_FIRST_FADER_IDX, _s32Value);
     }
-    // else if (s32CtrlId == ID_MASTER_FADER_IDX)
-    // {
-    //     onMasterFaderMoved(_s32Value);
-    // }
+    else if (s32CtrlId == ID_MASTER_FADER_IDX)
+    {
+        onMasterFaderMoved(_s32Value);
+    }
 
 } // CtrlPanel::onCtrlValueChanged
 
@@ -255,3 +257,57 @@ void CtrlPanel::onFaderMoved(s32    s32FaderIdx,
 
     pChannel->setValue(static_cast<u8> (_s32Value), true);
 } // CtrlPanel::onFaderMoved
+
+
+/*******************************************************************************
+* CtrlPanel::onBlackoutClicked
+*******************************************************************************/
+void CtrlPanel::onBlackoutClicked()
+{
+    if (m_dMasterBrightness > 0)
+    {
+        m_pMasterChannel->setValue(0, false);
+        m_dMasterBrightness = 0;
+    }
+    else
+    {
+        m_pMasterChannel->setValue(255, false);
+        m_dMasterBrightness = 1;
+    }
+
+    m_pUi->m_pFader_M->updateState();
+
+    updateBlackoutButton();
+    updateBrightnessChannels();
+} // CtrlPanel::onBlackoutClicked
+
+
+/*******************************************************************************
+* CtrlPanel::onMasterFaderMoved
+*******************************************************************************/
+void CtrlPanel::onMasterFaderMoved(s32 _s32Value)
+{
+    m_dMasterBrightness = ((dbl) (_s32Value)) / 255.;
+
+    updateBlackoutButton();
+    updateBrightnessChannels();
+} // CtrlPanel::onMasterFaderMoved
+
+
+/*******************************************************************************
+* CtrlPanel::updateBrightnessChannels
+*******************************************************************************/
+void CtrlPanel::updateBrightnessChannels() const
+{
+    for (const auto &pF : m_vFixtures)
+    {
+        pF->updateBrightnessChannels(false);
+
+
+        // send all universes
+        for (auto &pCtrl : m_vController)
+        {
+            pCtrl->sendAllUniverses();
+        }
+    }
+} // CtrlPanel::updateBrightnessChannels

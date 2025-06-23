@@ -61,6 +61,7 @@ class MainWin : public aMainWinSdi,
 
         void                setWorkMode(enumWorkMode _eMode);
         enumWorkMode        workMode() const                { return m_eWorkMode; }
+        dbl                 getMasterBrightness() const;
 
 
     /*******************************************************************************

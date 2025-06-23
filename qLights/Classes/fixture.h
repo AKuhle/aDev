@@ -72,10 +72,9 @@ class Fixture
 
         void                    resetAllChannels();
 
-        void                    collectChannels(aVector<shared_ptr<Channel>> &_vChannel);
+        void                    updateBrightnessChannels(bool   _bSend) const;
 
-        // void                    allChannelValues(aVector<channelValueTuple> &vValues) const;
-        // void                    allChannels(aVector<shared_ptr<Channel>> &_vChannel) const;
+        void                    collectChannels(aVector<shared_ptr<Channel>> &_vChannel);
 
         void                    add2Configuration(aJsonFile &_jf) const;
 

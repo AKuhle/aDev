@@ -59,6 +59,8 @@ class Channel
         void                    setValue(u8     _u8Value,
                                          bool   _bSend);
 
+        void                    updateBrightness(bool   _bSend);
+
         s32                     channelNr() const           { return m_s32ChannelNr; }
         u8                      value()                     { return m_u8Value; }
 

@@ -118,6 +118,18 @@ void Fixture::resetAllChannels()
 
 
 /*******************************************************************************
+* Fixture::updateBrightnessChannels
+*******************************************************************************/
+void Fixture::updateBrightnessChannels(bool   _bSend) const
+{
+    for (auto &pC : m_vBrightnessChannel)
+    {
+        pC->updateBrightness(_bSend);
+    }
+} // Fixture::updateBrightnessChannels
+
+
+/*******************************************************************************
 * Fixture::collectChannels
 *******************************************************************************/
 void Fixture::collectChannels(aVector<shared_ptr<Channel>> &_vChannel)
@@ -148,29 +160,3 @@ void Fixture::add2Configuration(aJsonFile &_jf) const
     _jf.closeLevel(aString("fixture") + "-" + m_sName);
 
 } // Fixture::add2Configuration
-
-
-// /*******************************************************************************
-// * Fixture::allChannelValues
-// *******************************************************************************/
-// void Fixture::allChannelValues(aVector<channelValueTuple> &vValues) const
-// {
-//     for (auto &me : m_mapChannel)
-//     {
-//         channelValueTuple t = std::make_tuple(me.second, me.second->value());
-
-//         vValues.push_back(t);
-//     }
-// } // Fixture::allChannelValues
-
-
-// /*******************************************************************************
-// * Fixture::allChannels
-// *******************************************************************************/
-// void Fixture::allChannels(aVector<shared_ptr<Channel>> &_vChannel) const
-// {
-//     for (auto &me : m_mapChannel)
-//     {
-//         _vChannel.push_back(me.second);
-//     }
-// } // Fixture::allChannels

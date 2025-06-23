@@ -18,6 +18,7 @@
 #include "aJsonFile.h"
 #include "aJsonValue.h"
 
+#include "mainWin.h"
 #include "channel.h"
 #include "fixture.h"
 
@@ -54,11 +55,41 @@ Channel::~Channel()
 void Channel::setValue(u8   _u8Value,
                        bool _bSend)
 {
+    m_u8Value = _u8Value;
+
     CHECK_PRE_CONDITION_VOID(m_pFixture);
 
-    m_u8Value = _u8Value;
-    m_pFixture->setChannelValue(m_s32ChannelNr, _u8Value, _bSend);
+    if (m_bBrightness)
+    {
+        MainWin     &mw = getMainWin();
+
+        m_pFixture->setChannelValue(m_s32ChannelNr, mw.getMasterBrightness() * m_u8Value, _bSend);
+    }
+    else
+    {
+        m_pFixture->setChannelValue(m_s32ChannelNr, m_u8Value, _bSend);
+    }
 } // Channel::setValue
+
+
+/*******************************************************************************
+* Channel::updateBrightness
+*******************************************************************************/
+void Channel::updateBrightness(bool _bSend)
+{
+    CHECK_PRE_CONDITION_VOID(m_pFixture);
+
+    if (m_bBrightness)
+    {
+        MainWin     &mw = getMainWin();
+
+        m_pFixture->setChannelValue(m_s32ChannelNr, mw.getMasterBrightness() * m_u8Value, _bSend);
+    }
+    else
+    {
+        m_pFixture->setChannelValue(m_s32ChannelNr, m_u8Value, _bSend);
+    }
+} // Channel::updateBrightness
 
 
 /*******************************************************************************
