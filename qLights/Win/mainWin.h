@@ -36,6 +36,7 @@ class CtrlPanel;
 * globals
 *******************************************************************************/
 MainWin&                    getMainWin();
+CtrlPanel&                  getCtrlPanel();
 
 
 /*******************************************************************************
@@ -62,6 +63,7 @@ class MainWin : public aMainWinSdi,
         void                setWorkMode(enumWorkMode _eMode);
         enumWorkMode        workMode() const                { return m_eWorkMode; }
         dbl                 getMasterBrightness() const;
+        CtrlPanel*          ctrlPanel()                     { return m_pCtrlPanel; }
 
 
     /*******************************************************************************

@@ -47,6 +47,8 @@ class Scene
 
         const aVector<channelValueTuple>&   channelValues() const           { return m_vValues; }
 
+        const channelValueTuple*            findCorrespondingChannelValueTuple(const channelValueTuple &_template) const;
+
         void                                add2Configuration(aJsonFile &_jf,
                                                               s32       _idx) const;
 }; // class Scene

@@ -568,6 +568,11 @@ void CtrlPanel::updateScenes()
                 pBtn->setCtrlEnabled(true);
                 pBtn->setBackgroundColor(colDarkRed);
                 break;
+
+            case enumWorkMode::AddChase:
+                pBtn->setCtrlEnabled(false);
+                pBtn->setBackgroundColor(m_colButtonBg);
+                break;
         } // switch
     } // for
 
@@ -579,13 +584,36 @@ void CtrlPanel::updateScenes()
 *******************************************************************************/
 void CtrlPanel::updateChases()
 {
+    MainWin     &mw = getMainWin();
+
     for (auto chaseTuple : m_vChaseTuples)
     {
         aPushButton         *pBtn   = std::get<0> (chaseTuple);
         shared_ptr<Chase>   pChase  = std::get<1> (chaseTuple);
 
-        pBtn->setCtrlEnabled(pChase != nullptr);
+        switch (mw.workMode())
+        {
+            case enumWorkMode::Play:
+                pBtn->setCtrlEnabled(pChase != nullptr);
+                pBtn->setBackgroundColor(m_colButtonBg);
+                break;
 
+            case enumWorkMode::SaveScene:
+                pBtn->setCtrlEnabled(false);
+                pBtn->setBackgroundColor(m_colButtonBg);
+                break;
+
+            case enumWorkMode::RemoveScene:
+                pBtn->setCtrlEnabled(false);
+                pBtn->setBackgroundColor(m_colButtonBg);
+                break;
+
+            case enumWorkMode::AddChase:
+                pBtn->setCtrlEnabled(true);
+                pBtn->setBackgroundColor(colDarkOrange);
+                break;
+
+        } // switch
     } // for
 
 } // CtrlPanel::updateChases

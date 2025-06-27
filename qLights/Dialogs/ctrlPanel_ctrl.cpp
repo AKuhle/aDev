@@ -21,11 +21,13 @@
 #include "ctrlPanel.h"
 #include "dlgAddScene.h"
 #include "dlgRemoveScene.h"
+#include "dlgAddChase.h"
 #include "scene.h"
 #include "aString.h"
 #include "channel.h"
 #include "fixture.h"
 #include "controller.h"
+#include "chase.h"
 
 
 /*******************************************************************************
@@ -52,6 +54,13 @@ void CtrlPanel::onRegisterCtrl()
     {
         auto pSceneBtn = std::get<0>(m_vSceneTuples.at(i));
         registerCtrl(pSceneBtn, ID_FIRST_SCENE_IDX + i, true);
+    }
+
+    // register chases
+    for (u32 i = 0; i < CHASE_MAX; i++)
+    {
+        auto pChaseBtn = std::get<0>(m_vChaseTuples.at(i));
+        registerCtrl(pChaseBtn, ID_FIRST_CHASE_IDX + i, true);
     }
 
     // register faders
@@ -103,6 +112,13 @@ void CtrlPanel::onCtrlClicked(aCtrlI *_pCtrl)
        s32CtrlId < ID_FIRST_SCENE_IDX + SCENE_MAX)
    {
        onSceneSelected(s32CtrlId - ID_FIRST_SCENE_IDX);
+   }
+
+   // check for chases
+   if (s32CtrlId >= ID_FIRST_CHASE_IDX &&
+       s32CtrlId < ID_FIRST_CHASE_IDX + CHASE_MAX)
+   {
+       onChaseSelected(s32CtrlId - ID_FIRST_CHASE_IDX);
    }
 
    // check for scenes
@@ -238,12 +254,74 @@ void CtrlPanel::onSceneSelected(s32 _s32SceneBtnIdx)
 
             break;
         }
+
+    case enumWorkMode::AddChase:
+            break;
+
     } // switch
 
     // reset the work mode
     mw.setWorkMode(enumWorkMode::Play);
     mw.sendUpdateCmd(UPDATE_GUI);
 } // CtrlPanel::onSceneSelected
+
+
+/*******************************************************************************
+* CtrlPanel::onChaseSelected
+*******************************************************************************/
+void CtrlPanel::onChaseSelected(s32 _s32ChaseBtnIdx)
+{
+    CHECK_PRE_CONDITION_VOID(_s32ChaseBtnIdx < SCENE_MAX);
+
+    auto        pChaseBtn   = std::get<0> (m_vChaseTuples.at(_s32ChaseBtnIdx));
+    auto        &pChase     = std::get<1> (m_vChaseTuples.at(_s32ChaseBtnIdx));
+    MainWin     &mw         = getMainWin();
+
+    // DlgAddScene *pDlg = new DlgAddScene(this, pSceneBtn->text());
+    // pDlg->createWin();
+
+    switch (mw.workMode())
+    {
+        case enumWorkMode::SaveScene:
+        case enumWorkMode::RemoveScene:
+            break;
+
+        case enumWorkMode::Play:
+        {
+            if (pChase != nullptr)
+            {
+                pChase->playChase();
+            }
+            break;
+        }
+
+        case enumWorkMode::AddChase:
+        {
+            DlgAddChase *pDlg = new DlgAddChase(this, pChaseBtn->text());
+            pDlg->createWin();
+
+            if (pDlg->showModal() == DialogReturn::accepted)
+            {
+                cout << "1" << endl;
+
+                // set the chase name
+                pChaseBtn->setText(pDlg->chaseName());
+
+                cout << pDlg->chaseName() << endl;
+
+                // set the chase
+                pChase = pDlg->chase();
+                cout << pChase << endl;
+            } // if
+
+            break;
+        }
+    } // switch
+
+    // reset the work mode
+    mw.setWorkMode(enumWorkMode::Play);
+    mw.sendUpdateCmd(UPDATE_GUI);
+} // CtrlPanel::onChaseSelected
 
 
 /*******************************************************************************

@@ -51,6 +51,25 @@ void Scene::addChannel(shared_ptr<Channel>  _pChannel,
 
 
 /*******************************************************************************
+* Scene::findCorrespondingChannelValueTuple
+*******************************************************************************/
+const channelValueTuple* Scene::findCorrespondingChannelValueTuple(const channelValueTuple &_template) const
+{
+    const channelValueTuple   *pFound = nullptr;
+
+    for (const channelValueTuple &v : m_vValues)
+    {
+        if (std::get<0> (v) == std::get<0> (_template))
+        {
+            pFound = &v;
+        }
+    }
+
+    return pFound;
+} // Scene::findCorrespondingChannelValueTuple
+
+
+/*******************************************************************************
 * Scene::add2Configuration
 *******************************************************************************/
 void Scene::add2Configuration(aJsonFile     &_jf,

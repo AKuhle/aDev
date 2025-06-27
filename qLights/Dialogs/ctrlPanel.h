@@ -118,6 +118,10 @@ class CtrlPanel : public aPlainWin,
         void                            resetAllChannels();
         dbl                             getMasterBrightness() const     { return m_dMasterBrightness; }
 
+        shared_ptr<Scene>               findScene(const aString  &_sName);
+        void                            loadScene(s32 _s32SceneBtnIdx);
+
+
     private:
         void                            createSetup();
 
@@ -145,7 +149,6 @@ class CtrlPanel : public aPlainWin,
         shared_ptr<Controller>          findController(const aString  &_sName);
         shared_ptr<Fixture>             findFixture(const aString  &_sName);
         shared_ptr<Bank>                findBank(const aString  &_sName);
-        shared_ptr<Scene>               findScene(const aString  &_sName);
 
         void                            updateBrightnessChannels() const;
 
@@ -168,8 +171,6 @@ class CtrlPanel : public aPlainWin,
                                                          const aVector<sceneBtnIoInfo>          &_vSceneBtnIoInfo,
                                                          const aVector<sceneChannelIoInfo>      &_vSceneChannelIoInfo);
 
-        void                            loadScene(s32 _s32SceneBtnIdx);
-
         void                            saveScene(s32       _s32SceneBtnIdx,
                                                   aString   _sSceneName);
 
@@ -178,6 +179,14 @@ class CtrlPanel : public aPlainWin,
 
         void                            JsonObjCallback(const aVector<aString> &_vecKeys,
                                                         const aJsonObj         &_obj);
+
+
+    /*******************************************************************************
+    * CtrlPanel - chase
+    *******************************************************************************/
+    private:
+        void                            saveChase(s32       _s32ChaseBtnIdx,
+                                                  aString   _sChaseName);
 
 
     /*******************************************************************************
@@ -210,6 +219,8 @@ class CtrlPanel : public aPlainWin,
         void                            onFixtureSelected(s32 _s32FixtureBtnIdx);
 
         void                            onSceneSelected(s32 _s32SceneBtnIdx);
+
+        void                            onChaseSelected(s32 _s32ChaseBtnIdx);
 
         void                            onFaderMoved(s32    s32FaderIdx,
                                                      s32    _s32Value);

@@ -40,6 +40,7 @@ constexpr u32   PORT                            = 0;
 constexpr s32   BANK_MAX                        = 10;
 constexpr s32   FIXTURE_MAX                     = 10;
 constexpr s32   SCENE_MAX                       = 30;
+constexpr s32   CHASE_MAX                       = 10;
 constexpr s32   FADER_MAX                       = 24;
 
 constexpr s32   SCRIBBLE_STRIP_W                = 32;
@@ -66,9 +67,10 @@ constexpr u32   ID_ADD_CHASE                    = CTRL_ID_USER + 5;
 constexpr u32   ID_RESET_ALL                    = CTRL_ID_USER + 6;
 
 constexpr u32   ID_FIRST_BANK_IDX               = CTRL_ID_USER + 100;
-constexpr u32   ID_FIRST_FIXTURE_IDX            = CTRL_ID_USER + 200;
-constexpr u32   ID_FIRST_SCENE_IDX              = CTRL_ID_USER + 300;
-constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 400;
+constexpr u32   ID_FIRST_FIXTURE_IDX            = CTRL_ID_USER + 150;
+constexpr u32   ID_FIRST_SCENE_IDX              = CTRL_ID_USER + 200;
+constexpr u32   ID_FIRST_CHASE_IDX              = CTRL_ID_USER + 250;
+constexpr u32   ID_FIRST_FADER_IDX              = CTRL_ID_USER + 300;
 
 constexpr u32   ID_MASTER_FADER_IDX             = CTRL_ID_USER + 500;
 constexpr u32   ID_BACKOUT_IDX                  = CTRL_ID_USER + 501;

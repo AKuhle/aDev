@@ -49,15 +49,18 @@ void MainWin::onUpdateCtrl(aCtrlI *_pCtrl)
     switch (_pCtrl->ctrlId())
     {
         case ID_SAVE_SCENE:
-            _pCtrl->setCtrlEnabled(m_eWorkMode != enumWorkMode::RemoveScene);
+            _pCtrl->setCtrlEnabled(m_eWorkMode == enumWorkMode::Play ||
+                                   m_eWorkMode == enumWorkMode::SaveScene);
             break;
 
         case ID_REMOVE_SCENE:
-            _pCtrl->setCtrlEnabled(m_eWorkMode != enumWorkMode::SaveScene);
+            _pCtrl->setCtrlEnabled(m_eWorkMode == enumWorkMode::Play ||
+                                   m_eWorkMode == enumWorkMode::RemoveScene);
             break;
 
         case ID_ADD_CHASE:
-            _pCtrl->setCtrlEnabled(m_eWorkMode == enumWorkMode::Play);
+            _pCtrl->setCtrlEnabled(m_eWorkMode == enumWorkMode::Play ||
+                                   m_eWorkMode == enumWorkMode::AddChase);
             break;
     }
 } // MainWin::onUpdateCtrl
@@ -95,7 +98,7 @@ void MainWin::onCtrlClicked(aCtrlI *_pCtrl)
                 m_eWorkMode = enumWorkMode::Play;
 
             sendUpdateCmd(UPDATE_GUI);
-                break;
+            break;
 
         case ID_RESET_ALL:
             sendUpdateCmd(UPDATE_RESET_ALL);

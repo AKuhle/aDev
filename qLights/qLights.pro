@@ -119,6 +119,7 @@ HEADERS += \
     Classes/universe.h \
     Dialogs/ctrlPanel.h \
     Dialogs/dlgAddBank.h \
+    Dialogs/dlgAddChase.h \
     Dialogs/dlgAddScene.h \
     Dialogs/dlgRemoveScene.h \
     Dialogs/scribbleStrip.h \
@@ -139,9 +140,11 @@ SOURCES += \
     Classes/scene.cpp \
     Classes/universe.cpp \
     Dialogs/ctrlPanel.cpp \
+    Dialogs/ctrlPanel_chase.cpp \
     Dialogs/ctrlPanel_ctrl.cpp \
     Dialogs/ctrlPanel_io.cpp \
     Dialogs/dlgAddBank.cpp \
+    Dialogs/dlgAddChase.cpp \
     Dialogs/dlgAddScene.cpp \
     Dialogs/dlgRemoveScene.cpp \
     Dialogs/scribbleStrip.cpp \
@@ -162,6 +165,7 @@ SOURCES += \
 ########################################################################
 FORMS += \
     Forms/dlgAddBank.ui \
+    Forms/dlgAddChase.ui \
     Forms/dlgAddScene.ui \
     Forms/dlgRemoveScene.ui \
     Forms/formCtrlPanel.ui \
