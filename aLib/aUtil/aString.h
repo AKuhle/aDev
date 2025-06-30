@@ -43,11 +43,13 @@ class aString
 
     public:
         aString();
+        aString(const aString &_str);
         aString(const char *_pStr);
         aString(const c16 *_pStr);
         aString(const std::u16string &_str);
         virtual ~aString();
 
+        aString&                operator=(const aString &_str);
         aString&                operator=(const std::u16string &_str);
         aString&                operator=(const std::string &_str);
         aString&                operator=(const char *_pStr);

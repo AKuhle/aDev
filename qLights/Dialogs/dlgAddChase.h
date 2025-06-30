@@ -10,6 +10,7 @@
 
 class Chase;
 
+using namespace aLib;
 using namespace aLib::aWin;
 
 
@@ -28,20 +29,21 @@ class DlgAddChase : public aDialog,
 
     private:
         Ui::DlgAddChase     *m_pUi              { nullptr };
+        s32                 m_s32ChaseBtnIdx    { -1 };
         aString             m_sChaseName;
 
         QStringList         m_lstData           { 5 };
         QStringListModel    m_model             { m_lstData };
 
-        shared_ptr<Chase>   m_pChase;
 
     public:
         explicit DlgAddChase(QWidget        *_pParent,
+                             s32            _s32ChaseBtnIdx,
                              const aString  &_sChaseName);
         ~DlgAddChase();
 
-        aString             chaseName() const       { return m_sChaseName; }
-        shared_ptr<Chase>   chase() const           { return m_pChase; }
+        //aString             chaseName() const       { return m_sChaseName; }
+        aString             chaseName() const       { return "m_sChaseName"; }
 
 
     /*******************************************************************************

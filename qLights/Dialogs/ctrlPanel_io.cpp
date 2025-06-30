@@ -25,6 +25,7 @@
 #include "channel.h"
 #include "controller.h"
 #include "bank.h"
+#include "chase.h"
 
 
 /*******************************************************************************
@@ -80,6 +81,21 @@ void CtrlPanel::saveScene(s32       _s32SceneBtnIdx,
         pScene->addChannel(pChannel, pChannel->value());
     }
 } // CtrlPanel::saveScene
+
+
+/*******************************************************************************
+* CtrlPanel::setChase
+*******************************************************************************/
+void CtrlPanel::setChase(s32                _s32ChaseBtnIdx,
+                         shared_ptr<Chase>  _pChase)
+{
+    auto        pChaseBtn   = std::get<0> (m_vChaseTuples.at(_s32ChaseBtnIdx));
+    auto        &pChase     = std::get<1> (m_vChaseTuples.at(_s32ChaseBtnIdx));
+
+    pChaseBtn->setText(_pChase->name());
+    pChase = _pChase;
+
+} // CtrlPanel::setChase
 
 
 /*******************************************************************************

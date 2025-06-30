@@ -37,6 +37,15 @@ aString::aString()
 /*******************************************************************************
 * aString::aString
 *******************************************************************************/
+aString::aString(const aString &_str)
+{
+    m_str = _str.m_str;
+} // aString::aString
+
+
+/*******************************************************************************
+* aString::aString
+*******************************************************************************/
 aString::aString(const char *_pStr)
 {
     std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> utf16conv;
@@ -68,6 +77,17 @@ aString::aString(const std::u16string &_str)
 aString::~aString()
 {
 } // aString::~aString
+
+
+/*******************************************************************************
+* aString::operator=
+*******************************************************************************/
+aString& aString::operator=(const aString &_str)
+{
+    m_str = _str.m_str;
+
+    return *this;
+} // aString::operator=
 
 
 /*******************************************************************************

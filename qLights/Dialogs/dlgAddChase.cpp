@@ -4,6 +4,8 @@
 #include "dlgAddChase.h"
 #include "ui_DlgAddChase.h"
 
+#include "mainWin.h"
+#include "ctrlPanel.h"
 #include "chase.h"
 
 
@@ -28,8 +30,10 @@ class LineEditDelegate : public QStyledItemDelegate
 * DlgAddChase::DlgAddChase
 *******************************************************************************/
 DlgAddChase::DlgAddChase(QWidget        *_pParent,
+                         s32            _s32ChaseBtnIdx,
                          const aString  &_sChaseName)
 : aDialog(_pParent),
+  m_s32ChaseBtnIdx(_s32ChaseBtnIdx),
   m_sChaseName(_sChaseName)
 {
     #ifdef _USE_QT_
@@ -71,10 +75,12 @@ bool DlgAddChase::onCreateWin()
 *******************************************************************************/
 void DlgAddChase::onAccepted()
 {
-    m_sChaseName = m_pUi->m_pChaseName->editText();
+    CtrlPanel   &ctrlPanel = getCtrlPanel();
+
+    aString sChaseName = m_pUi->m_pChaseName->editText();
 
     // create the new chase
-    m_pChase = make_shared<Chase> (m_sChaseName);
+    shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName);
 
     QStringList lstValues = m_model.stringList();
     for (const QString &str : lstValues)
@@ -84,16 +90,23 @@ void DlgAddChase::onAccepted()
 
         sToken.splitString("|", vecToken);
 
-        if (vecToken.size() == 2)
+        switch (vecToken.size())
         {
-            m_pChase->addStep(vecToken.at(0), vecToken.at(1).to_s32());
-        }
-        else if (vecToken.size() == 1)
-        {
-            m_pChase->addStep(vecToken.at(0), 0);
-        }
+            case 0:
+            break;
+
+            case 1:
+                pChase->addStep(vecToken.at(0), 0);
+                break;
+
+            case 2:
+                pChase->addStep(vecToken.at(0), vecToken.at(1).to_s32());
+                break;
+        } // switch (vecToken.size())
     }
 
+    // set the new chase
+    ctrlPanel.setChase(m_s32ChaseBtnIdx, pChase);
 } // DlgAddChase::onAccepted
 
 

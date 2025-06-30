@@ -27,10 +27,10 @@
 * Chase::Chase
 *******************************************************************************/
 Chase::Chase(const aString &_sName)
-: m_sName(_sName),
-  m_timer(this)
+: m_sName(_sName)
 {
-    connect(&m_timer, &QTimer::timeout, this, &Chase::onTimeout);
+    m_pTimer = new QTimer(this);
+    //connect(m_pTimer, &QTimer::timeout, this, &Chase::onTimeout);
 } // Chase::Chase
 
 
@@ -39,6 +39,7 @@ Chase::Chase(const aString &_sName)
 *******************************************************************************/
 Chase::~Chase()
 {
+    delete m_pTimer;
 } // Chase::~Chase
 
 
@@ -106,7 +107,7 @@ void Chase::playChase()
 {
     cout << __PRETTY_FUNCTION__ << endl;
 
-    cout << this << "<-this, playChase: " << m_vSteps.size() << " steps" << endl;
+    // cout << this << "<-this, playChase: " << m_vSteps.size() << " steps" << endl;
 
     // for (auto &st : m_vSteps)
     // {
@@ -123,10 +124,10 @@ void Chase::playChase()
 /*******************************************************************************
 * Chase::onTimeout
 *******************************************************************************/
-void Chase::onTimeout()
-{
-    cout << "onTimeout" << endl;
-} // Chase::onTimeout
+// void Chase::onTimeout()
+// {
+//     cout << "onTimeout" << endl;
+// } // Chase::onTimeout
 
 /*******************************************************************************
 * Chase::add2Configuration

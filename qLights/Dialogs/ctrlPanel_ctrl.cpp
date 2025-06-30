@@ -273,8 +273,8 @@ void CtrlPanel::onChaseSelected(s32 _s32ChaseBtnIdx)
 {
     CHECK_PRE_CONDITION_VOID(_s32ChaseBtnIdx < SCENE_MAX);
 
-    auto        pChaseBtn   = std::get<0> (m_vChaseTuples.at(_s32ChaseBtnIdx));
     auto        &pChase     = std::get<1> (m_vChaseTuples.at(_s32ChaseBtnIdx));
+    aString     sChaseName  = (pChase)?   pChase->name() : "";
     MainWin     &mw         = getMainWin();
 
     // DlgAddScene *pDlg = new DlgAddScene(this, pSceneBtn->text());
@@ -297,23 +297,9 @@ void CtrlPanel::onChaseSelected(s32 _s32ChaseBtnIdx)
 
         case enumWorkMode::AddChase:
         {
-            DlgAddChase *pDlg = new DlgAddChase(this, pChaseBtn->text());
+            DlgAddChase *pDlg = new DlgAddChase(this, _s32ChaseBtnIdx, sChaseName);
             pDlg->createWin();
-
-            if (pDlg->showModal() == DialogReturn::accepted)
-            {
-                cout << "1" << endl;
-
-                // set the chase name
-                pChaseBtn->setText(pDlg->chaseName());
-
-                cout << pDlg->chaseName() << endl;
-
-                // set the chase
-                pChase = pDlg->chase();
-                cout << pChase << endl;
-            } // if
-
+            pDlg->showModal();
             break;
         }
     } // switch

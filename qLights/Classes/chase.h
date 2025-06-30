@@ -17,7 +17,7 @@
 * includes
 *******************************************************************************/
 #include <QTimer>
-#include <QObject>
+//#include <QObject>
 
 #include "aString.h"
 #include "aVector.h"
@@ -50,7 +50,8 @@ class Chase : public QObject
         aVector<channelValueTuple>  m_vValues;
         aVector<StepTuple>          m_vSteps;
 
-        QTimer                      m_timer;
+        QTimer                      *m_pTimer      { nullptr };
+
 
     public:
         Chase(const aString &_sName);
@@ -68,7 +69,7 @@ class Chase : public QObject
         void                                add2Configuration(aJsonFile &_jf,
                                                               s32       _idx) const;
 
-    private slots:
-        void                                onTimeout();
+    // private slots:
+    //     void                                onTimeout();
 
 }; // class Chase

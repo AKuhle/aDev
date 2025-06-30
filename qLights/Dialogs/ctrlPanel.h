@@ -121,6 +121,9 @@ class CtrlPanel : public aPlainWin,
         shared_ptr<Scene>               findScene(const aString  &_sName);
         void                            loadScene(s32 _s32SceneBtnIdx);
 
+        void                            setChase(s32                _s32ChaseBtnIdx,
+                                                 shared_ptr<Chase>  _pChase);
+
 
     private:
         void                            createSetup();
