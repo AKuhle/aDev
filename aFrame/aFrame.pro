@@ -1,0 +1,223 @@
+########################################################################
+# configuration
+########################################################################
+QT += widgets
+
+TEMPLATE = lib
+
+CONFIG += staticlib
+CONFIG += c++17
+
+# degbug
+CONFIG(debug, debug|release) {
+TARGET = aFramed
+}
+
+# release
+CONFIG(release, debug|release) {
+TARGET = aFrame
+}
+
+# pathes
+UI_DIR = ../../../../GeneratedFiles/aFrame
+MOC_DIR = ../../../../GeneratedFiles/aFrame
+DESTDIR = ../../../../Apps
+
+
+########################################################################
+# defines
+########################################################################
+# You can make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+# You can make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+DEFINES += AFRAME_LIBRARY
+DEFINES += _USE_QT_
+
+
+########################################################################
+# include pathes for aFrame
+########################################################################
+INCLUDEPATH += aApp
+INCLUDEPATH += aApp/Qt
+
+INCLUDEPATH += aUtil
+INCLUDEPATH += aUtil/Cmds
+INCLUDEPATH += aUtil/Collection
+INCLUDEPATH += aUtil/Interface
+INCLUDEPATH += aUtil/Qt
+INCLUDEPATH += aUtil/Tool
+INCLUDEPATH += aUtil/VarPool
+
+INCLUDEPATH += aMath
+INCLUDEPATH += aMath/Obj2D
+INCLUDEPATH += aMath/Obj3D
+
+INCLUDEPATH += aGraphic
+INCLUDEPATH += aGraphic/Interface
+INCLUDEPATH += aGraphic/Qt
+
+INCLUDEPATH += aWin
+INCLUDEPATH += aWin/Interface
+INCLUDEPATH += aWin/Qt
+
+
+########################################################################
+# HEADERS
+########################################################################
+HEADERS += \
+    aApp/aAppBase.h \
+    aApp/aAppMainWin.h \
+    aApp/aApp_def.h \
+    aApp/main.h \
+    aFrame_def.h \
+    aFrame_global.h \
+    aFrame.h \
+    aGraphic/Interface/aBrushI.h \
+    aGraphic/Interface/aPainterI.h \
+    aGraphic/Interface/aPenI.h \
+    aGraphic/Interface/aPixmapI.h \
+    aGraphic/Qt/aBrush.h \
+    aGraphic/Qt/aPainter.h \
+    aGraphic/Qt/aPen.h \
+    aGraphic/Qt/aPixmap.h \
+    aGraphic/aGraphic_def.h \
+    aMath/Obj2D/aDimension2D.h \
+    aMath/Obj2D/aDimension2D.inl \
+    aMath/Obj2D/aMathObj2D.h \
+    aMath/Obj2D/aRect2D.h \
+    aMath/Obj2D/aRect2D.inl \
+    aMath/Obj2D/aTransform2D.h \
+    aMath/Obj2D/aTransform2D.inl \
+    aMath/Obj2D/aVector2D.h \
+    aMath/Obj2D/aVector2D.inl \
+    aMath/Obj3D/aMathObj3D.h \
+    aMath/aMathObj.h \
+    aMath/aMath_def.h \
+    aUtil/Cmds/aCmd.h \
+    aUtil/Cmds/aCmdBase.h \
+    aUtil/Cmds/aCmdMgr.h \
+    aUtil/Cmds/aCmdStack.h \
+    aUtil/Cmds/aCmdThread.h \
+    aUtil/Collection/aMap.h \
+    aUtil/Collection/aPtrList.h \
+    aUtil/Collection/aPtrList.inl \
+    aUtil/Collection/aSharedPtrList.h \
+    aUtil/Collection/aSharedPtrList.inl \
+    aUtil/Collection/aSharedPtrVector.h \
+    aUtil/Collection/aSharedPtrVector.inl \
+    aUtil/Collection/aUniquePtrDeque.h \
+    aUtil/Collection/aUniquePtrDeque.inl \
+    aUtil/Collection/aUniquePtrList.h \
+    aUtil/Collection/aUniquePtrList.inl \
+    aUtil/Collection/aUniquePtrVec.h \
+    aUtil/Collection/aUniquePtrVec.inl \
+    aUtil/Collection/aVector.h \
+    aUtil/Collection/aVector.inl \
+    aUtil/Interface/aProgressCbI.h \
+    aUtil/Interface/aProgressMgrI.h \
+    aUtil/Interface/aThreadCb_i.h \
+    aUtil/Interface/aThread_i.h \
+    aUtil/Interface/aUrl_sysi.h \
+    aUtil/Qt/aJsonFile.h \
+    aUtil/Qt/aJsonObj.h \
+    aUtil/Qt/aJsonValue.h \
+    aUtil/Qt/aProgressCb.h \
+    aUtil/Qt/aProgressMgr.h \
+    aUtil/Qt/aThread.h \
+    aUtil/Qt/aUrl_sys.h \
+    aUtil/Tool/aToolBase.h \
+    aUtil/Tool/aToolMgr.h \
+    aUtil/VarPool/aPoolVarBase.h \
+    aUtil/VarPool/aPoolVarBool.h \
+    aUtil/VarPool/aPoolVarColor.h \
+    aUtil/VarPool/aPoolVarDbl.h \
+    aUtil/VarPool/aPoolVarS64.h \
+    aUtil/VarPool/aPoolVarString.h \
+    aUtil/VarPool/aPoolVarU64.h \
+    aUtil/VarPool/aVarPool.h \
+    aUtil/VarPool/qBaseVarPool.inl \
+    aUtil/aArgument.h \
+    aUtil/aColor.h \
+    aUtil/aHelper.h \
+    aUtil/aHelper.inl \
+    aUtil/aMargin.h \
+    aUtil/aPath.h \
+    aUtil/aStopwatch.h \
+    aUtil/aString.h \
+    aUtil/aSynchronize.h \
+    aUtil/aUrl.h \
+    aUtil/aUrl_qt.h \
+    aUtil/aUtil_def.h \
+    aUtil/aVersionInfo.h \
+    aWin/Interface/aBaseWin_i.h \
+    aWin/Interface/aMainWinMdi_i.h \
+    aWin/Interface/aMainWin_i.h \
+    aWin/Qt/aBaseWin.h \
+    aWin/Qt/aMainWin.h \
+    aWin/Qt/aMainWinMdi.h \
+    aWin/aWin_def.h
+
+
+########################################################################
+# SOURCES
+########################################################################
+SOURCES += \
+    aApp/Qt/aAppMainWin.cpp \
+    aApp/aAppBase.cpp \
+    aApp/main.cpp \
+    aFrame.cpp \
+    aGraphic/Qt/aBrush.cpp \
+    aGraphic/Qt/aPainter.cpp \
+    aGraphic/Qt/aPen.cpp \
+    aGraphic/Qt/aPixmap.cpp \
+    aMath/Obj2D/aMathObj2D.cpp \
+    aMath/Obj3D/aMathObj3D.cpp \
+    aMath/aMathObj.cpp \
+    aUtil/Cmds/aCmd.cpp \
+    aUtil/Cmds/aCmdBase.cpp \
+    aUtil/Cmds/aCmdMgr.cpp \
+    aUtil/Cmds/aCmdStack.cpp \
+    aUtil/Cmds/aCmdThread.cpp \
+    aUtil/Qt/aJsonFile.cpp \
+    aUtil/Qt/aJsonObj.cpp \
+    aUtil/Qt/aJsonValue.cpp \
+    aUtil/Qt/aProgressCb.cpp \
+    aUtil/Qt/aProgressMgr.cpp \
+    aUtil/Qt/aThread.cpp \
+    aUtil/Qt/aUrl_sys.cpp \
+    aUtil/Tool/aToolBase.cpp \
+    aUtil/Tool/aToolMgr.cpp \
+    aUtil/VarPool/aPoolVarBool.cpp \
+    aUtil/VarPool/aPoolVarColor.cpp \
+    aUtil/VarPool/aPoolVarDbl.cpp \
+    aUtil/VarPool/aPoolVarS64.cpp \
+    aUtil/VarPool/aPoolVarString.cpp \
+    aUtil/VarPool/aPoolVarU64.cpp \
+    aUtil/VarPool/aVarPool.cpp \
+    aUtil/aArgument.cpp \
+    aUtil/aColor.cpp \
+    aUtil/aHelper.cpp \
+    aUtil/aMargin.cpp \
+    aUtil/aPath.cpp \
+    aUtil/aStopwatch.cpp \
+    aUtil/aString.cpp \
+    aUtil/aUrl.cpp \
+    aUtil/aVersionInfo.cpp \
+    aWin/Interface/aBaseWin_i.cpp \
+    aWin/Interface/aMainWinMdi_i.cpp \
+    aWin/Interface/aMainWin_i.cpp \
+    aWin/Qt/aBaseWin.cpp \
+    aWin/Qt/aMainWin.cpp \
+    aWin/Qt/aMainWinMdi.cpp
+
+# Default rules for deployment.
+unix {
+    target.path = /usr/lib
+}
+!isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    Documents/boxModel.png

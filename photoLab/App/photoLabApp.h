@@ -22,8 +22,8 @@
 
 #include "aAppMainWin.h"
 
-using namespace aLib::aApp;
-using namespace aLib::aWin;
+using namespace aFrame::aApp;
+using namespace aFrame::aWin;
 
 class PhotoLabApp;
 

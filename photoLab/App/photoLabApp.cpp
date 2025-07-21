@@ -20,8 +20,7 @@
 
 #include "aUtil/aVersionInfo.h"
 
-
-using namespace aLib::aWin;
+using namespace aFrame::aWin;
 
 
 /*******************************************************************************

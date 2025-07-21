@@ -1,9 +1,28 @@
+########################################################################
+# configuration
+########################################################################
 QT += widgets
 
 TEMPLATE = lib
-CONFIG += staticlib
 
+CONFIG += staticlib
 CONFIG += c++17
+
+# degbug
+CONFIG(debug, debug|release) {
+TARGET = aLibd
+}
+
+# release
+######################################################
+CONFIG(release, debug|release) {
+TARGET = aLib
+}
+
+# pathes
+UI_DIR = ../../../../GeneratedFiles/qLib
+MOC_DIR = ../../../../GeneratedFiles/qLib
+DESTDIR = ../../../../Apps
 
 
 ########################################################################
@@ -14,29 +33,6 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 DEFINES += _USE_QT_
 
-
-########################################################################
-# debug configuration
-########################################################################
-CONFIG(debug, debug|release) {
-TARGET = aLibd
-}
-
-
-########################################################################
-# release configuration
-########################################################################
-CONFIG(release, debug|release) {
-TARGET = aLib
-}
-
-
-########################################################################
-# windows configuration
-########################################################################
-UI_DIR = ../../../../GeneratedFiles/qLib
-MOC_DIR = ../../../../GeneratedFiles/qLib
-DESTDIR = ../../../../Apps
 
 
 # Default rules for deployment.
