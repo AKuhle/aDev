@@ -31,6 +31,11 @@ namespace aWin {
 aMainWin::aMainWin(SysWin *_pParent)
 : aMainWin_i(new QMainWindow(_pParent))
 {
+    // Titelleiste entfernen
+    m_pWin->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+
+    // Optional: Fenster im Vordergrund halten
+    // setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
 } // aMainWin::_isVisible
 
 

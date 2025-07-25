@@ -1,0 +1,8 @@
+{
+    "aBaseWin": {
+        "bg": "solid(rgb(30, 30, 130, 255))"
+    },
+    "aMainWin": {
+        "bg": "solid(rgb(0, 100, 0, 155))"
+    }
+}

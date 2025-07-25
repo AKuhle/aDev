@@ -61,9 +61,9 @@ class aString
         aString&                operator+=(const c16 _c);
         aString&                operator+=(const aString &_str);
 
-        aString                 operator+(const char *_pStr);
-        aString                 operator+(const c16 *_pStr);
-        aString                 operator+(const aString &_str);
+        aString                 operator+(const char *_pStr) const;
+        aString                 operator+(const c16 *_pStr) const;
+        aString                 operator+(const aString &_str) const;
 
         bool                    operator==(const aString &_rhs) const;
         bool                    operator==(const char *_pStr) const;
@@ -109,6 +109,8 @@ class aString
         aString                 left(s32 _n) const;
 
         size_t                  find(c16 _c) const;
+
+        bool                    contains(const char *_pSubStr) const;
 
         void                    splitString(const aString       _sDelim,			//!< could be multiple, e.g. "|@-" => this split at | or @ or -
                                             aVector<aString>	&_vecToken) const;

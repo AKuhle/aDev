@@ -35,6 +35,10 @@ aBaseWin::aBaseWin(SysWin *_pWin)
     // delete the window when it is beeing closed
     m_pWin->setAttribute(Qt::WA_DeleteOnClose);
 
+    // no background painting
+    m_pWin->setAttribute(Qt::WA_NoSystemBackground);
+    m_pWin->setAttribute(Qt::WA_TranslucentBackground);
+
     // install the event filter
     m_pWin->installEventFilter(this);
 } // aBaseWin::aBaseWin
@@ -73,6 +77,42 @@ bool aBaseWin::isVisible() const
 {
     return m_pWin->isVisible();
 } // aBaseWin::isVisible
+
+
+/*******************************************************************************
+* aBaseWin::setMinW
+*******************************************************************************/
+void aBaseWin::setMinW(s32 _s32MinW)
+{
+    m_pWin->setMinimumWidth(_s32MinW);
+} // aBaseWin::setMinW
+
+
+/*******************************************************************************
+* aBaseWin::setMinH
+*******************************************************************************/
+void aBaseWin::setMinH(s32 _s32MinH)
+{
+    m_pWin->setMinimumHeight(_s32MinH);
+} // aBaseWin::setMinH
+
+
+/*******************************************************************************
+* aBaseWin::setMaxW
+*******************************************************************************/
+void aBaseWin::setMaxW(s32 _s32MaxW)
+{
+    m_pWin->setMaximumWidth(_s32MaxW);
+} // aBaseWin::setMaxW
+
+
+/*******************************************************************************
+* aBaseWin::setMaxH
+*******************************************************************************/
+void aBaseWin::setMaxH(s32 _s32MaxH)
+{
+    m_pWin->setMaximumHeight(_s32MaxH);
+} // aBaseWin::setMaxH
 
 
 /*******************************************************************************

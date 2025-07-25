@@ -52,6 +52,10 @@ PhotoLabApp::~PhotoLabApp()
 void PhotoLabApp::onCreateMainWin(aMainWin *& _pMainWin)
 {
     _pMainWin = new MainWin;
+
+    // set the style file
+    _pMainWin->setStyleFile("C:\\Tools\\aDev\\aFrame\\Documents\\dark_style.json");
+
     if (!_pMainWin->createWin())
     {
         //_pMainWin->close();

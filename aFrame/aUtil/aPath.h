@@ -38,6 +38,7 @@ class aPath : std::filesystem::path
         aPath(const aPath  &_sPath);
         aPath(const aString  &_sPath);
         aPath(const std::filesystem::path &_path);
+        aPath(const char *_pStr);
         virtual ~aPath();
 
         aPath&          operator=(const aPath &_path);

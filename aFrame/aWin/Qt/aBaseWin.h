@@ -20,6 +20,8 @@
 
 #include "aBaseWin_i.h"
 
+#include "aDimension2D.h"
+
 // #include <QDragEnterEvent>
 // #include <QDragMoveEvent>
 // #include <QDropEvent>
@@ -49,7 +51,7 @@ class aBaseWin : public QObject,
 {
     Q_OBJECT
 
-    private:
+    protected:
         SysWin      *m_pWin;
 
 
@@ -64,6 +66,7 @@ class aBaseWin : public QObject,
 
         SysWin*                 sysWinPtr() override;
 
+
     /*******************************************************************************
     * window state
     *******************************************************************************/
@@ -77,6 +80,12 @@ class aBaseWin : public QObject,
     * window geometry
     *******************************************************************************/
     public:
+        void                    setMinW(s32 _s32MinW) override;
+        void                    setMinH(s32 _s32MinH) override;
+
+        void                    setMaxW(s32 _s32MaxW) override;
+        void                    setMaxH(s32 _s32MaxH) override;
+
         aRect2D<s32>            geometryRect() const override;
         s32                     geometryW() const override;
         s32                     geometryH() const override;

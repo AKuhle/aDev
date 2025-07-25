@@ -150,7 +150,7 @@ MainWin::MainWin()
 MainWin::~MainWin()
 {
     // #ifdef _USE_QT_
-    //     delete m_pUi;
+    //     delete m_pUi;1
     // #endif
 } // MainWin::~MainWin
 
@@ -160,6 +160,9 @@ MainWin::~MainWin()
 *******************************************************************************/
 bool MainWin::onCreateWin()
 {
+    setMinDim(600, 400);
+
+
 //     // create the navigator dock win
 //     m_pNavigatorDockWin = new aDockWin(this);
 //     m_pNavigatorDockWin->createWin();

@@ -62,6 +62,7 @@ INCLUDEPATH += aGraphic/Qt
 INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Interface
 INCLUDEPATH += aWin/Qt
+INCLUDEPATH += aWin/Style
 
 
 ########################################################################
@@ -158,6 +159,10 @@ HEADERS += \
     aWin/Qt/aBaseWin.h \
     aWin/Qt/aMainWin.h \
     aWin/Qt/aMainWinMdi.h \
+    aWin/Style/aStyleItem.h \
+    aWin/Style/aStyleItemFill.h \
+    aWin/Style/aStyleItemFillSolid.h \
+    aWin/Style/aStyleParser.h \
     aWin/aWin_def.h
 
 
@@ -211,7 +216,11 @@ SOURCES += \
     aWin/Interface/aMainWin_i.cpp \
     aWin/Qt/aBaseWin.cpp \
     aWin/Qt/aMainWin.cpp \
-    aWin/Qt/aMainWinMdi.cpp
+    aWin/Qt/aMainWinMdi.cpp \
+    aWin/Style/aStyleItem.cpp \
+    aWin/Style/aStyleItemFill.cpp \
+    aWin/Style/aStyleItemFillSolid.cpp \
+    aWin/Style/aStyleParser.cpp
 
 # Default rules for deployment.
 unix {
@@ -220,4 +229,5 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Documents/boxModel.png
+    Documents/boxModel.png \
+    Documents/dark_style.json

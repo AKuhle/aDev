@@ -27,15 +27,22 @@
 #include <mutex>
 #include <shared_mutex>
 #include <random>
+#include <regex>
 #include <string>
 #include <thread>
 #include <tuple>
+#include <typeindex>
+#include <typeinfo>
 #include <type_traits>
 
 #include <deque>
 #include <list>
 #include <map>
 #include <vector>
+
+#ifdef __GNUG__
+    #include <cxxabi.h>
+#endif
 
 
 /*******************************************************************************

@@ -34,10 +34,10 @@ namespace aUtil {
 /*******************************************************************************
 * aJsonFile::aJsonFile
 *******************************************************************************/
-aJsonFile::aJsonFile(const aPath  &_sFilePath)
+aJsonFile::aJsonFile(const aPath    &_sFilePath)
 : m_sFilePath(_sFilePath)
 {
-    // create the first (root) json object
+    // create the first (root) json object for readAllValues
     unique_ptr<QJsonObject> pObj = make_unique<QJsonObject> ();
     m_vecObj.push_back(move(pObj));
     m_vecIdx.push_back(m_vecObj.size() - 1);
@@ -127,6 +127,64 @@ bool aJsonFile::write2File()
 
 
 /*******************************************************************************
+* aJsonFile::readStringValue
+*******************************************************************************/
+aString aJsonFile::readStringValue(const aString &_sNestedKey)
+{
+    CHECK_PRE_CONDITION(_sNestedKey != "", "");
+
+    // eg. _sNestedKey = "key1:key2:color"
+
+    aString         sValue;
+
+    if (readJsonDoc()) // is only read once
+    {
+        aVector<aString>	vecToken;
+
+        // split the keys
+        _sNestedKey.splitString(":", vecToken);
+        s32 s32KeyCount = vecToken.size();
+
+        // get the root obj
+        QJsonObject obj = m_jsonDoc.object();
+
+        // dive into the keys until the last key is reached
+        // last key defines the value
+        // key1:key2:color => dive int key1 -> key2, color ist the value tag
+        for (s32 i = 0; i < s32KeyCount - 1; i++)
+        {
+            QString sKey = vecToken.at(i).toQString();
+
+            if (!obj.contains(sKey)) {
+                cout << "key " << _sNestedKey << "not found" << endl;
+                return "";
+            }
+            else
+            {
+                obj = obj[sKey].toObject();
+            }
+        }
+
+        // get the value
+        QString sValueKey = vecToken.at(s32KeyCount - 1).toQString();
+
+        if (!obj.contains(sValueKey))
+        {
+            cout << "key " << _sNestedKey << "not found" << endl;
+            return "";
+        }
+        else
+        {
+            sValue = aString::fromQString(obj[sValueKey].toString());
+        }
+
+    } // if (!m_jsonDoc.isEmpty())
+
+    return sValue;
+} // aJsonFile::readStringValue
+
+
+/*******************************************************************************
 * aJsonFile::readAllValues
 *******************************************************************************/
 bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _f_fVal,
@@ -154,6 +212,41 @@ bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const 
 
     return bSuccess;
 } // aJsonFile::readAllValues
+
+
+/*******************************************************************************
+* aJsonFile::readJsonDoc
+*******************************************************************************/
+bool aJsonFile::readJsonDoc()
+{
+    // read the document in the first call
+    if (m_jsonDoc.isEmpty())
+    {
+        QFile file(m_sFilePath.canonicalPath().toQString());
+
+        // read the json document into the member variable
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            cout << "json file" << m_sFilePath.canonicalPath() << "not found" << endl;
+        }
+        else
+        {
+            QByteArray data = file.readAll();
+            file.close();
+
+            // JSON parsen
+            QJsonParseError parseError;
+            m_jsonDoc = QJsonDocument::fromJson(data, &parseError);
+
+            if (parseError.error != QJsonParseError::NoError)
+            {
+                cout << "JSON Parse Error:" << aString::fromQString(parseError.errorString()) << endl;
+            }
+        }
+    } // if (m_jsonDoc.isEmpty())
+
+    return !m_jsonDoc.isEmpty();
+} // aJsonFile::readJsonDoc
 
 
 /*******************************************************************************

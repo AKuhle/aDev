@@ -46,8 +46,6 @@ aMainWinMdi::~aMainWinMdi()
 *******************************************************************************/
 bool aMainWinMdi::onSysCreateWin()
 {
-    std::cout << typeid(this).name() << std::endl;
-
 //     aMdiArea *pMdiArea = new aMdiArea();
 //     pMdiArea->createWin();
 

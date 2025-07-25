@@ -45,6 +45,10 @@ debug/aMainWin_i.o
 debug/aBaseWin.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
+debug/aStyleItem.o
+debug/aStyleItemFill.o
+debug/aStyleItemFillSolid.o
+debug/aStyleParser.o
 debug/moc_aProgressCb.o
 debug/moc_aProgressMgr.o
 debug/moc_aThread.o

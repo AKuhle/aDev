@@ -17,6 +17,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QJsonDocument>
 #include <QJsonObject>
 #include "aString.h"
 #include "aPath.h"
@@ -44,6 +45,7 @@ class aJsonFile
 {
     private:
         aPath                           m_sFilePath;
+        QJsonDocument                   m_jsonDoc;
         aUniquePtrVec<QJsonObject>      m_vecObj;
         aVector<s32>                    m_vecIdx;
 
@@ -51,6 +53,8 @@ class aJsonFile
         aJsonFile(const aPath  &_sFilePath);
         virtual ~aJsonFile();
 
+
+        // write member
         void        openLevel();
         void        closeLevel(const aString &_sKey);
 
@@ -58,10 +62,16 @@ class aJsonFile
 
         bool        write2File();
 
+
+        // read member
+        aString     readStringValue(const aString     &_sNestedKey);    // eg. "key1:key2:color"
+
         bool        readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
                                   std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const;
 
     private:
+        bool        readJsonDoc();
+
         void        readJsonObj(const QJsonObject                                   &_obj,
                                 aVector<aString>                                    &_vecKeys,
                                 std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,

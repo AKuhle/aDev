@@ -181,7 +181,7 @@ aString& aString::operator+=(const aString &_str)
 /*******************************************************************************
 * aString::operator+
 *******************************************************************************/
-aString aString::operator+(const char *_pStr)
+aString aString::operator+(const char *_pStr) const
 {
     return m_str + aString(_pStr).m_str;
 } // aString::operator+
@@ -190,18 +190,18 @@ aString aString::operator+(const char *_pStr)
 /*******************************************************************************
 * aString::operator+
 *******************************************************************************/
-aString aString::operator+(const c16 *_pStr)
+aString aString::operator+(const c16 *_pStr)const
 {
-    return m_str += aString(_pStr).m_str;
+    return m_str + aString(_pStr).m_str;
 } // aString::operator+
 
 
 /*******************************************************************************
 * aString::operator+
 *******************************************************************************/
-aString aString::operator+(const aString &_str)
+aString aString::operator+(const aString &_str)const
 {
-    return m_str += _str.m_str;;
+    return m_str + _str.m_str;;
 } // aString::operator+
 
 
@@ -513,6 +513,19 @@ size_t aString::find(c16 _c) const
 {
     return m_str.find(_c);
 } // aString::find
+
+
+/*******************************************************************************
+* aString::contains
+*******************************************************************************/
+bool aString::contains(const char *_pSubStr) const
+{
+    // UTF-8 zu UTF-16 Konvertierung
+    std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+    std::u16string u16SubStr = converter.from_bytes(_pSubStr);
+
+    return m_str.find(u16SubStr) != std::u16string::npos;
+} // aString::contains
 
 
 /*******************************************************************************
