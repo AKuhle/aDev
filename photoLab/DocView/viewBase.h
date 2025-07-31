@@ -38,7 +38,7 @@ class ViewBase : public aView,
 {
     private:
         RenderParams        m_renderParams;
-        // aVector2D<s32>  m_v2dOrigin_zoom;
+        // aPoint2D<s32>  m_v2dOrigin_zoom;
 
     protected:
         ViewBase(SysWin                     *_pParent,
@@ -80,49 +80,49 @@ class ViewBase : public aView,
 
         // // Client2Pic
         // qRect2D<s32>            Client2Pic(const qRect2D<s32> &_r2d_client) const;
-        // aVector2D<s32>          Client2Pic(const aVector2D<s32> &_v2d_client) const;
-        // aVector2D<s32>          Client2Pic(const s32	_s32X_client,
+        // aPoint2D<s32>          Client2Pic(const aPoint2D<s32> &_v2d_client) const;
+        // aPoint2D<s32>          Client2Pic(const s32	_s32X_client,
         //                                    const s32	_s32Y_client) const;
 
         // // Client2Zoom
         // qRect2D<s32>            Client2Zoom(const qRect2D<s32> &_r2d_client) const;
-        // aVector2D<s32>          Client2Zoom(const aVector2D<s32> &_v2d_client) const;
-        // aVector2D<s32>          Client2Zoom(const s32	_s32X_client,
+        // aPoint2D<s32>          Client2Zoom(const aPoint2D<s32> &_v2d_client) const;
+        // aPoint2D<s32>          Client2Zoom(const s32	_s32X_client,
         //                                     const s32	_s32Y_client) const;
 
         // // Pic2Client
         // qRect2D<s32>            Pic2Client(const qRect2D<s32> &_r2d_pic) const;
-        // aVector2D<s32>          Pic2Client(const aVector2D<s32> &_v2d_pic) const;
-        // aVector2D<s32>          Pic2Client(const s32	_s32X_pic,
+        // aPoint2D<s32>          Pic2Client(const aPoint2D<s32> &_v2d_pic) const;
+        // aPoint2D<s32>          Pic2Client(const s32	_s32X_pic,
         //                                    const s32	_s32Y_pic) const;
 
         // // Pic2Zoom
         // qRect2D<s32>            Pic2Zoom(const qRect2D<s32> &_r2d_pic) const;
-        aVector2D<s32>              pic2Zoom(const aVector2D<s32> &_v2d_pic) const;
-        // aVector2D<s32>          Pic2Zoom(const s32	_s32X_pic,
+        aPoint2D<s32>              pic2Zoom(const aPoint2D<s32> &_v2d_pic) const;
+        // aPoint2D<s32>          Pic2Zoom(const s32	_s32X_pic,
         //                                  const s32	_s32Y_pic) const;
 
         // center point
-        aVector2D<s32>              centerPoint_pic() const;
-        aVector2D<s32>              centerPoint_zoom() const;
+        aPoint2D<s32>              centerPoint_pic() const;
+        aPoint2D<s32>              centerPoint_zoom() const;
 
-        void                        setCenterPoint_pic(aVector2D<s32> _v2dCenter_pic);
+        void                        setCenterPoint_pic(aPoint2D<s32> _v2dCenter_pic);
 
         void                        setCenterPoint_pic(s32  _x_pic,
                                                        s32  _y_pic);
 
-        void                        setCenterPoint_zoom(aVector2D<s32> _v2dCenter_zoom);
+        void                        setCenterPoint_zoom(aPoint2D<s32> _v2dCenter_zoom);
 
         void                        setCenterPoint_zoom(s32     _x_zoom,
                                                         s32     _y_zoom);
 
         // // mapping methods
-        // void                    MapPic2Client(const aVector2D<s32>  &_v32MapPoint_pic,
-        //                                       const aVector2D<s32>  &_v2dDest_client);
+        // void                    MapPic2Client(const aPoint2D<s32>  &_v32MapPoint_pic,
+        //                                       const aPoint2D<s32>  &_v2dDest_client);
 
     protected:
         virtual void                updateScrollBars() = 0;
-        virtual void                setCenterPointInZoom(aVector2D<s32> _v2dCenter_zoom) = 0;
+        virtual void                setCenterPointInZoom(aPoint2D<s32> _v2dCenter_zoom) = 0;
 
 
     /*******************************************************************************
@@ -154,8 +154,8 @@ class ViewBase : public aView,
     public:
          bool                       doWheel(u32                  _u32Modifiers,
                                             s32                  _s32Degree,
-                                            const aVector2D<s32> &_v2dLocal,
-                                            const aVector2D<s32> &_v2dGlobal);
+                                            const aPoint2D<s32> &_v2dLocal,
+                                            const aPoint2D<s32> &_v2dGlobal);
 
             // virtual void            OnResize(const qDimension2D<s32>    &_d2dOld,
         //                                  const qDimension2D<s32>    &_d2dNew) override;

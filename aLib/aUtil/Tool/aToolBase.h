@@ -71,8 +71,8 @@ class aToolBase
 
         virtual enumToolResult      onWheel(u32                     _u32Modifiers,
                                             s32                     _s32Degree,
-                                            const aVector2D<s32>    &_v2dLocal,
-                                            const aVector2D<s32>    &_v2dGlobal);
+                                            const aPoint2D<s32>    &_v2dLocal,
+                                            const aPoint2D<s32>    &_v2dGlobal);
 
 
     /*******************************************************************************
@@ -81,8 +81,8 @@ class aToolBase
     private:
         enumToolResult              toolOnWheel(u32                     _u32Modifiers,
                                                 s32                     _s32Degree,
-                                                const aVector2D<s32>    &_v2dLocal,
-                                                const aVector2D<s32>    &_v2dGlobal);
+                                                const aPoint2D<s32>    &_v2dLocal,
+                                                const aPoint2D<s32>    &_v2dGlobal);
 
     }; // class aToolBase
 
@@ -95,16 +95,16 @@ class aToolBase
 //         private:
 //             u32             m_u32MouseButton        { MOUSE_BTN_NONE };
 
-//             aVector2D<s32>  m_v2dMoveStartLocal;
-//             aVector2D<s32>  m_v2dMoveCurrentLocal;
-//             aVector2D<s32>  m_v2dMoveStartGlobal;
-//             aVector2D<s32>  m_v2dMoveCurrentGlobal;
+//             aPoint2D<s32>  m_v2dMoveStartLocal;
+//             aPoint2D<s32>  m_v2dMoveCurrentLocal;
+//             aPoint2D<s32>  m_v2dMoveStartGlobal;
+//             aPoint2D<s32>  m_v2dMoveCurrentGlobal;
 
 //             bool            m_bDrawXorRect          { false };
 
 //         protected:
-//             aVector2D<s32>              GetMoveDeltaLocal() const;
-//             aVector2D<s32>              GetMoveDeltaGlobal() const;
+//             aPoint2D<s32>              GetMoveDeltaLocal() const;
+//             aPoint2D<s32>              GetMoveDeltaGlobal() const;
 
 
 //         /*******************************************************************************
@@ -120,13 +120,13 @@ class aToolBase
 
 //             // OnContextMenu
 //             virtual enumToolResult      OnContextMenu(u32                   _u32Modifiers,
-//                                                       const aVector2D<s32>  &_v2dLocal,
-//                                                       const aVector2D<s32>  &_v2dGlobal);
+//                                                       const aPoint2D<s32>  &_v2dLocal,
+//                                                       const aPoint2D<s32>  &_v2dGlobal);
 
 //             // OnEnter
 //             virtual enumToolResult      OnEnter(u32                   _u32Modifiers,
-//                                                 const aVector2D<s32>  &_v2dLocal,
-//                                                 const aVector2D<s32>  &_v2dGlobal);
+//                                                 const aPoint2D<s32>  &_v2dLocal,
+//                                                 const aPoint2D<s32>  &_v2dGlobal);
 
 //             // OnLeave
 //             virtual enumToolResult      OnLeave(u32 _u32Modifiers);
@@ -134,98 +134,98 @@ class aToolBase
 //             // OnDoubleClick
 //             virtual enumToolResult      OnDoubleClick(u32                   _u32Modifiers,
 //                                                       u32                   _u32MouseButton,
-//                                                       const aVector2D<s32>  &_v2dLocal,
-//                                                       const aVector2D<s32>  &_v2dGlobal);
+//                                                       const aPoint2D<s32>  &_v2dLocal,
+//                                                       const aPoint2D<s32>  &_v2dGlobal);
 
 //             virtual enumToolResult      OnLDoubleClick(u32                     _u32Modifiers,
-//                                                        const aVector2D<s32>    &_v2dLocal,
-//                                                        const aVector2D<s32>    &_v2dGlobal);
+//                                                        const aPoint2D<s32>    &_v2dLocal,
+//                                                        const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnMDoubleClick(u32                     _u32Modifiers,
-//                                                        const aVector2D<s32>    &_v2dLocal,
-//                                                        const aVector2D<s32>    &_v2dGlobal);
+//                                                        const aPoint2D<s32>    &_v2dLocal,
+//                                                        const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnRDoubleClick(u32                     _u32Modifiers,
-//                                                        const aVector2D<s32>    &_v2dLocal,
-//                                                        const aVector2D<s32>    &_v2dGlobal);
+//                                                        const aPoint2D<s32>    &_v2dLocal,
+//                                                        const aPoint2D<s32>    &_v2dGlobal);
 
 //             // OnMousePress
 //             virtual enumToolResult      OnMousePress(u32                   _u32Modifiers,
 //                                                      u32                   _u32MouseButton,
-//                                                      const aVector2D<s32>  &_v2dLocal,
-//                                                      const aVector2D<s32>  &_v2dGlobal);
+//                                                      const aPoint2D<s32>  &_v2dLocal,
+//                                                      const aPoint2D<s32>  &_v2dGlobal);
 
 //             virtual enumToolResult      OnLMousePress(u32                     _u32Modifiers,
-//                                                       const aVector2D<s32>    &_v2dLocal,
-//                                                       const aVector2D<s32>    &_v2dGlobal);
+//                                                       const aPoint2D<s32>    &_v2dLocal,
+//                                                       const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnMMousePress(u32                     _u32Modifiers,
-//                                                       const aVector2D<s32>    &_v2dLocal,
-//                                                       const aVector2D<s32>    &_v2dGlobal);
+//                                                       const aPoint2D<s32>    &_v2dLocal,
+//                                                       const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnRMousePress(u32                     _u32Modifiers,
-//                                                       const aVector2D<s32>    &_v2dLocal,
-//                                                       const aVector2D<s32>    &_v2dGlobal);
+//                                                       const aPoint2D<s32>    &_v2dLocal,
+//                                                       const aPoint2D<s32>    &_v2dGlobal);
 
 //             // OnMouseMove
 //             virtual enumToolResult      OnMouseMove(u32                   _u32Modifiers,
 //                                                     u32                   _u32MouseButton,
-//                                                     const aVector2D<s32>  &_v2dLocal,
-//                                                     const aVector2D<s32>  &_v2dGlobal);
+//                                                     const aPoint2D<s32>  &_v2dLocal,
+//                                                     const aPoint2D<s32>  &_v2dGlobal);
 
 //             virtual enumToolResult      OnLMouseMove(u32                     _u32Modifiers,
-//                                                      const aVector2D<s32>    &_v2dLocal,
-//                                                      const aVector2D<s32>    &_v2dGlobal);
+//                                                      const aPoint2D<s32>    &_v2dLocal,
+//                                                      const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnMMouseMove(u32                     _u32Modifiers,
-//                                                      const aVector2D<s32>    &_v2dLocal,
-//                                                      const aVector2D<s32>    &_v2dGlobal);
+//                                                      const aPoint2D<s32>    &_v2dLocal,
+//                                                      const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnRMouseMove(u32                     _u32Modifiers,
-//                                                      const aVector2D<s32>    &_v2dLocal,
-//                                                      const aVector2D<s32>    &_v2dGlobal);
+//                                                      const aPoint2D<s32>    &_v2dLocal,
+//                                                      const aPoint2D<s32>    &_v2dGlobal);
 
 //             // OnMouseRelease
 //             virtual enumToolResult      OnMouseRelease(u32                   _u32Modifiers,
 //                                                        u32                   _u32MouseButton,
-//                                                        const aVector2D<s32>  &_v2dLocal,
-//                                                        const aVector2D<s32>  &_v2dGlobal);
+//                                                        const aPoint2D<s32>  &_v2dLocal,
+//                                                        const aPoint2D<s32>  &_v2dGlobal);
 
 //             virtual enumToolResult      OnLMouseRelease(u32                     _u32Modifiers,
-//                                                         const aVector2D<s32>    &_v2dLocal,
-//                                                         const aVector2D<s32>    &_v2dGlobal);
+//                                                         const aPoint2D<s32>    &_v2dLocal,
+//                                                         const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnMMouseRelease(u32                     _u32Modifiers,
-//                                                         const aVector2D<s32>    &_v2dLocal,
-//                                                         const aVector2D<s32>    &_v2dGlobal);
+//                                                         const aPoint2D<s32>    &_v2dLocal,
+//                                                         const aPoint2D<s32>    &_v2dGlobal);
 
 //             virtual enumToolResult      OnRMouseRelease(u32                     _u32Modifiers,
-//                                                         const aVector2D<s32>    &_v2dLocal,
-//                                                         const aVector2D<s32>    &_v2dGlobal);
+//                                                         const aPoint2D<s32>    &_v2dLocal,
+//                                                         const aPoint2D<s32>    &_v2dGlobal);
 
 //         private:
 //             enumToolResult              ToolOnEnter(u32                   _u32Modifiers,
-//                                                     const aVector2D<s32>  &_v2dLocal,
-//                                                     const aVector2D<s32>  &_v2dGlobal);
+//                                                     const aPoint2D<s32>  &_v2dLocal,
+//                                                     const aPoint2D<s32>  &_v2dGlobal);
 
 //             enumToolResult              ToolOnLeave(u32 _u32Modifiers);
 
 //             enumToolResult              ToolOnDoubleClick(u32                   _u32Modifiers,
 //                                                           u32                   _u32MouseButton,
-//                                                           const aVector2D<s32>  &_v2dLocal,
-//                                                           const aVector2D<s32>  &_v2dGlobal);
+//                                                           const aPoint2D<s32>  &_v2dLocal,
+//                                                           const aPoint2D<s32>  &_v2dGlobal);
 
 //             enumToolResult              ToolOnMousePress(u32                   _u32Modifiers,
 //                                                          u32                   _u32MouseButton,
-//                                                          const aVector2D<s32>  &_v2dLocal,
-//                                                          const aVector2D<s32>  &_v2dGlobal);
+//                                                          const aPoint2D<s32>  &_v2dLocal,
+//                                                          const aPoint2D<s32>  &_v2dGlobal);
 
 //             enumToolResult              ToolOnMouseMove(u32                   _u32Modifiers,
 //                                                         u32                   _u32MouseButton,
-//                                                         const aVector2D<s32>  &_v2dLocal,
-//                                                         const aVector2D<s32>  &_v2dGlobal);
+//                                                         const aPoint2D<s32>  &_v2dLocal,
+//                                                         const aPoint2D<s32>  &_v2dGlobal);
 
 //             enumToolResult              ToolOnMouseRelease(u32                   _u32Modifiers,
 //                                                            u32                   _u32MouseButton,
-//                                                            const aVector2D<s32>  &_v2dLocal,
-//                                                            const aVector2D<s32>  &_v2dGlobal);
+//                                                            const aPoint2D<s32>  &_v2dLocal,
+//                                                            const aPoint2D<s32>  &_v2dGlobal);

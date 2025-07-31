@@ -34,7 +34,7 @@ class qMathObj;
 class aMathObj2D;
 
 template<class T> class aDimension2D;
-template<class T> class aVector2D;
+template<class T> class aPoint2D;
 template<class T> class aRect2D;
 
 class aMathObj3D;

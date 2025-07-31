@@ -14,12 +14,13 @@
 *******************************************************************************/
 #include "aUtil_def.h"
 #include "aWin_def.h"
-#include "aMath_def.h"
 
 #include "aMargin.h"
 #include "aColor.h"
 
 #include "aStyleParser.h"
+#include "aStyleItemFillSolid.h"
+
 
 // #include <QDragEnterEvent>
 // #include <QDragMoveEvent>
@@ -37,7 +38,6 @@
 using namespace std;
 
 using namespace aFrame::aUtil;
-using namespace aFrame::aMath;
 
 
 /*******************************************************************************
@@ -57,7 +57,7 @@ class aBaseWin_i
 
     // style
     private:
-        shared_ptr<aStyleItemFill>      m_pBgStyle;
+        shared_ptr<aStyleItemFill>      m_pBgStyle  { std::make_shared<aStyleItemFillSolid> (colBlack) };
 
     // geometry
     private:
@@ -134,29 +134,29 @@ class aBaseWin_i
         // void                    setFixedW(s32  _s32W) override;
         // void                    setFixedH(s32  _s32H) override;
 
-        void                            setMinDim(const aDimension2D<s32> &_minDim);
+        void                            setMinDim(const aDimension &_minDim);
         void                            setMinDim(s32 _s32MinW,
                                           s32 _s32MinH);
         virtual void                    setMinW(s32 _s32MinW) = 0;
         virtual void                    setMinH(s32 _s32MinH) = 0;
 
-        void                            setMaxDim(const aDimension2D<s32> &_maxDim);
+        void                            setMaxDim(const aDimension &_maxDim);
         void                            setMaxDim(s32 _s32MaxW,
                                           s32 _s32MaxH);
         virtual void                    setMaxW(s32 _s32MaxW) = 0;
         virtual void                    setMaxH(s32 _s32MaxH) = 0;
 
-        virtual aRect2D<s32>            geometryRect() const = 0;
+        virtual aRect                   geometryRect() const = 0;
         virtual s32                     geometryW() const = 0;
         virtual s32                     geometryH() const = 0;
 
-        virtual aRect2D<s32>            marginRect() const;
+        virtual aRect                   marginRect() const;
 
-        virtual aRect2D<s32>            borderRect() const;
+        virtual aRect                   borderRect() const;
 
-        virtual aRect2D<s32>            paddingRect() const;
+        virtual aRect                   paddingRect() const;
 
-        virtual aRect2D<s32>            contentRect() const;
+        virtual aRect                   contentRect() const;
 
 
     /*******************************************************************************
@@ -180,8 +180,8 @@ class aBaseWin_i
     // public:
     //     bool                    onWheel(u32                  _u32Modifiers,
     //                                     s32                  _s32Degree,
-    //                                     const aVector2D<s32> &_v2dLocal,
-    //                                     const aVector2D<s32> &_v2dGlobal) override;
+    //                                     const aPoint2D<s32> &_v2dLocal,
+    //                                     const aPoint2D<s32> &_v2dGlobal) override;
 }; // class aBaseWin_i
 
 

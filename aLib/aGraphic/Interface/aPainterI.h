@@ -93,8 +93,8 @@ class aPainterI
 //                              s32         _endY,
 //                              const aPen  *_pPen = nullptr);
 
-//     void            drawLine(const aVector2D<s32>   &_v2dStart,
-//                              const aVector2D<s32>   &_v2dEnd,
+//     void            drawLine(const aPoint2D<s32>   &_v2dStart,
+//                              const aPoint2D<s32>   &_v2dEnd,
 //                              const aPen             *_pPen = nullptr);
 
 
@@ -115,8 +115,8 @@ class aPainterI
 
 
 //     void            drawGradientRect(const aRect2D<s32>     &_r2d,
-//                                      const aVector2D<s32>   &_v2dGradStart,
-//                                      const aVector2D<s32>   &_v2dGradEnd,
+//                                      const aPoint2D<s32>   &_v2dGradStart,
+//                                      const aPoint2D<s32>   &_v2dGradEnd,
 //                                      const aColor           &_colStart,
 //                                      const aColor           &_colEnd);
 
@@ -131,7 +131,7 @@ class aPainterI
 //                                      s32            _radius,
 //                                      const aColor   *_pColor = nullptr);
 
-//     void            drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+//     void            drawFilledCircle(const aPoint2D<s32>   &_v2dCenter,
 //                                      s32                    _s32Radius,
 //                                      const aColor           *_pColor = nullptr);
 

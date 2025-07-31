@@ -37,7 +37,6 @@ class aStyleItemFillSolid : public aStyleItemFill
         aColor      m_fillColor;
 
     public:
-        aStyleItemFillSolid();
         aStyleItemFillSolid(const aColor   &_col);
         virtual ~aStyleItemFillSolid();
 

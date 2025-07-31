@@ -64,8 +64,8 @@ aPen::~aPen()
 // /*******************************************************************************
 // * aPen::drawLine
 // *******************************************************************************/
-// void aPen::drawLine(const aVector2D<s32>    &_v2dStart,
-//                           const aVector2D<s32>    &_v2dEnd,
+// void aPen::drawLine(const aPoint2D<s32>    &_v2dStart,
+//                           const aPoint2D<s32>    &_v2dEnd,
 //                           const aPen              *_pPen /*= nullptr*/)
 // {
 //     drawLine(_v2dStart.x(), _v2dStart.y(), _v2dEnd.x(), _v2dEnd.y(), _pPen);
@@ -130,8 +130,8 @@ aPen::~aPen()
 // * aPen::drawGradientRect
 // *******************************************************************************/
 // void aPen::drawGradientRect(const aRect2D<s32>    &_r2d,
-//                                   const aVector2D<s32>  &_v2dGradStart,
-//                                   const aVector2D<s32>  &_v2dGradEnd,
+//                                   const aPoint2D<s32>  &_v2dGradStart,
+//                                   const aPoint2D<s32>  &_v2dGradEnd,
 //                                   const aColor          &_colStart,
 //                                   const aColor          &_colEnd)
 // {
@@ -161,7 +161,7 @@ aPen::~aPen()
 // /*******************************************************************************
 // * aPen::drawFilledCircle
 // *******************************************************************************/
-// void aPen::drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+// void aPen::drawFilledCircle(const aPoint2D<s32>   &_v2dCenter,
 //                                   s32                    _radius,
 //                                   const aColor           *_pColor /*= nullptr*/)
 // {

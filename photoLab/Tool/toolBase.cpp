@@ -102,8 +102,8 @@ bool ToolBase::canHandleEvent() const
 *******************************************************************************/
 enumToolResult ToolBase::onWheel(u32                    /*_u32Modifiers*/,
                                  s32                    _s32Degree,
-                                 const aVector2D<s32>   &/*_v2dLocal*/,
-                                 const aVector2D<s32>   &/*_v2dGlobal*/)
+                                 const aPoint2D<s32>   &/*_v2dLocal*/,
+                                 const aPoint2D<s32>   &/*_v2dGlobal*/)
 {
     // check whether the owner view exist and the view has the focus
     CHECK_PRE_CONDITION(canHandleEvent(), enumToolResult::Unhandled);
@@ -115,7 +115,7 @@ enumToolResult ToolBase::onWheel(u32                    /*_u32Modifiers*/,
     if (isBitsSet<u64> (toolBaseFunction(), TBF_WHEEL_ZOOM))
     {
         // transform the click position to zoom of the owner view
-        //aVector2D<s32> v2dZoom_pic = pView->Client2Pic(_v2dLocal);
+        //aPoint2D<s32> v2dZoom_pic = pView->Client2Pic(_v2dLocal);
 
         if (_s32Degree > 0)
         {

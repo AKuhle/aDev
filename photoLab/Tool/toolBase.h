@@ -20,7 +20,7 @@
 #include "aLib_def.h"
 
 #include "aToolBase.h"
-#include "aVector2D.h"
+#include "aPoint2D.h"
 
 #include "viewBase.h"
 #include "editScrollWin.h"
@@ -36,10 +36,10 @@ using namespace aLib::aWin;
 class ToolBase : public aToolBase
 {
     private:
-        // aVector2D<s32>  m_v2dMoveStart_pic;
+        // aPoint2D<s32>  m_v2dMoveStart_pic;
 
         // xor-member
-        // aVector2D<s32>  m_v2dMoveStart;
+        // aPoint2D<s32>  m_v2dMoveStart;
 
     protected:
         ToolBase(ViewBase   *_pOwnerView,
@@ -75,6 +75,6 @@ class ToolBase : public aToolBase
     protected:
         virtual enumToolResult      onWheel(u32                     _u32Modifiers,
                                             s32                     _s32Degree,
-                                            const aVector2D<s32>    &_v2dLocal,
-                                            const aVector2D<s32>    &_v2dGlobal) override;
+                                            const aPoint2D<s32>    &_v2dLocal,
+                                            const aPoint2D<s32>    &_v2dGlobal) override;
 }; // class ToolBase

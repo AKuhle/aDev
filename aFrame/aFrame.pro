@@ -85,15 +85,9 @@ HEADERS += \
     aGraphic/Qt/aPen.h \
     aGraphic/Qt/aPixmap.h \
     aGraphic/aGraphic_def.h \
-    aMath/Obj2D/aDimension2D.h \
-    aMath/Obj2D/aDimension2D.inl \
     aMath/Obj2D/aMathObj2D.h \
-    aMath/Obj2D/aRect2D.h \
-    aMath/Obj2D/aRect2D.inl \
     aMath/Obj2D/aTransform2D.h \
     aMath/Obj2D/aTransform2D.inl \
-    aMath/Obj2D/aVector2D.h \
-    aMath/Obj2D/aVector2D.inl \
     aMath/Obj3D/aMathObj3D.h \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
@@ -142,10 +136,13 @@ HEADERS += \
     aUtil/VarPool/qBaseVarPool.inl \
     aUtil/aArgument.h \
     aUtil/aColor.h \
+    aUtil/aDimension.h \
     aUtil/aHelper.h \
     aUtil/aHelper.inl \
     aUtil/aMargin.h \
     aUtil/aPath.h \
+    aUtil/aPoint.h \
+    aUtil/aRect.h \
     aUtil/aStopwatch.h \
     aUtil/aString.h \
     aUtil/aSynchronize.h \
@@ -161,6 +158,7 @@ HEADERS += \
     aWin/Qt/aMainWinMdi.h \
     aWin/Style/aStyleItem.h \
     aWin/Style/aStyleItemFill.h \
+    aWin/Style/aStyleItemFillGradient.h \
     aWin/Style/aStyleItemFillSolid.h \
     aWin/Style/aStyleParser.h \
     aWin/aWin_def.h
@@ -174,6 +172,7 @@ SOURCES += \
     aApp/aAppBase.cpp \
     aApp/main.cpp \
     aFrame.cpp \
+    aGraphic/Interface/aPainterI.cpp \
     aGraphic/Qt/aBrush.cpp \
     aGraphic/Qt/aPainter.cpp \
     aGraphic/Qt/aPen.cpp \
@@ -204,9 +203,12 @@ SOURCES += \
     aUtil/VarPool/aVarPool.cpp \
     aUtil/aArgument.cpp \
     aUtil/aColor.cpp \
+    aUtil/aDimension.cpp \
     aUtil/aHelper.cpp \
     aUtil/aMargin.cpp \
     aUtil/aPath.cpp \
+    aUtil/aPoint.cpp \
+    aUtil/aRect.cpp \
     aUtil/aStopwatch.cpp \
     aUtil/aString.cpp \
     aUtil/aUrl.cpp \
@@ -219,6 +221,7 @@ SOURCES += \
     aWin/Qt/aMainWinMdi.cpp \
     aWin/Style/aStyleItem.cpp \
     aWin/Style/aStyleItemFill.cpp \
+    aWin/Style/aStyleItemFillGradient.cpp \
     aWin/Style/aStyleItemFillSolid.cpp \
     aWin/Style/aStyleParser.cpp
 

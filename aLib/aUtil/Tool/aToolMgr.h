@@ -52,8 +52,8 @@ class aToolMgr
 
         bool            toolMgrOnWheel(u32                  _u32Modifiers,
                                        s32                  _s32Degree,
-                                       const aVector2D<s32> &_v2dLocal,
-                                       const aVector2D<s32> &_v2dGlobal);
+                                       const aPoint2D<s32> &_v2dLocal,
+                                       const aPoint2D<s32> &_v2dGlobal);
 
     // handler
     protected:
@@ -107,30 +107,30 @@ class aToolMgr
 
 //     public:
 //         bool            ToolMgrOnEnter(u32                   _u32Modifiers,
-//                                        const aVector2D<s32>  &_v2dLocal,
-//                                        const aVector2D<s32>  &_v2dGlobal);
+//                                        const aPoint2D<s32>  &_v2dLocal,
+//                                        const aPoint2D<s32>  &_v2dGlobal);
 
 //         bool            ToolMgrOnLeave(u32 _u32Modifiers);
 
 //         bool            ToolMgrOnDoubleClick(u32                   _u32Modifiers,
 //                                              u32                   _u32MouseButton,
-//                                              const aVector2D<s32>  &_v2dLocal,
-//                                              const aVector2D<s32>  &_v2dGlobal);
+//                                              const aPoint2D<s32>  &_v2dLocal,
+//                                              const aPoint2D<s32>  &_v2dGlobal);
 
 //         bool            ToolMgrOnMousePress(u32                   _u32Modifiers,
 //                                             u32                   _u32MouseButton,
-//                                             const aVector2D<s32>  &_v2dLocal,
-//                                             const aVector2D<s32>  &_v2dGlobal);
+//                                             const aPoint2D<s32>  &_v2dLocal,
+//                                             const aPoint2D<s32>  &_v2dGlobal);
 
 //         bool            ToolMgrOnMouseMove(u32                   _u32Modifiers,
 //                                            u32                   _u32MouseButton,
-//                                            const aVector2D<s32>  &_v2dLocal,
-//                                            const aVector2D<s32>  &_v2dGlobal);
+//                                            const aPoint2D<s32>  &_v2dLocal,
+//                                            const aPoint2D<s32>  &_v2dGlobal);
 
 //         bool            ToolMgrOnMouseRelease(u32                   _u32Modifiers,
 //                                               u32                   _u32MouseButton,
-//                                               const aVector2D<s32>  &_v2dLocal,
-//                                               const aVector2D<s32>  &_v2dGlobal);
+//                                               const aPoint2D<s32>  &_v2dLocal,
+//                                               const aPoint2D<s32>  &_v2dGlobal);
 
 //         void            ToolMgrOnPaintToolMarker();
 

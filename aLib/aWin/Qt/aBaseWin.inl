@@ -349,8 +349,8 @@ template<class T>
 void aBaseWin<T>::wheelEvent(QWheelEvent *_pEvent)
 {
     u32             u32Modifiers    = 0;//_Modifiers();
-    aVector2D<s32>  v2dLocal;//        = _LocalCursorPos();
-    aVector2D<s32>  v2dGlobal;//       = _GlobalCursorPos();
+    aPoint2D<s32>  v2dLocal;//        = _LocalCursorPos();
+    aPoint2D<s32>  v2dGlobal;//       = _GlobalCursorPos();
     s32             s32Degree       = (s32) (((dbl) _pEvent->angleDelta().y()) / 8.);
     bool            bHandled        = false;
 

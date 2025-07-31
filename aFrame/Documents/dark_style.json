@@ -1,8 +1,8 @@
 {
     "aBaseWin": {
-        "bg": "solid(rgb(30, 30, 130, 255))"
+        "bg": "solid(rgb(0, 0, 0, 255))"
     },
     "aMainWin": {
-        "bg": "solid(rgb(0, 100, 0, 155))"
+        "bg": "gradient(rgb(0, 0, 0, 155), rgb(130, 130, 130, 160), 0)"
     }
 }

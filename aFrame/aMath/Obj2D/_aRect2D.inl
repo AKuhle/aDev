@@ -15,6 +15,11 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aVector.h"
+
+#include "aParametricLine2D.h"
+
+using namespace std;
 
 
 /*******************************************************************************
@@ -215,9 +220,9 @@ void aRect2D<T>::resize(dbl _dFactor)
 * qRect2D<T, Tprec>::centerPoint
 *******************************************************************************/
 template<class T>
-aVector2D<T> aRect2D<T>::centerPoint() const
+aPoint2D<T> aRect2D<T>::centerPoint() const
 {
-    return aVector2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
+    return aPoint2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
                          (T) (((dbl) m_y) + ((dbl) m_h)/2));
 } // qRect2D<T, Tprec>::GetCenterPoint()
 
@@ -328,10 +333,91 @@ aRect2D<T> aRect2D<T>::intersect1(const aRect2D<T> &_rhs) const
 
 
 /*******************************************************************************
+* aRect2D<T, Tprec>::intersect
+*******************************************************************************/
+template<class T>
+aVector<aPoint2D<T>> aRect2D<T>::intersect(const aParametricLine2D<T> &_l) const
+{
+    aVector<aPoint2D<T>>    vFound;
+
+    aVector<std::optional<aPoint2D<T>>> vInter;
+    aVector<dbl>                        vT;
+    dbl                                 tMin = __DBL_MAX__;
+    dbl                                 tLine, tSegment;
+    bool                                bIntersectionPointOnSegment;
+
+    std::cout << "_l: os=" << _l.supportPoint() << ", dir=" << _l.direction() << endl;
+
+    // top edge
+    std::optional<aPoint2D<T>> p1 = _l.intersect(aPoint2D<s32> (l(), t()),
+                                                 aPoint2D<s32> (r1(), t()),
+                                                 tLine, tSegment,
+                                                 bIntersectionPointOnSegment);
+    if (p1.has_value() && bIntersectionPointOnSegment)
+    {
+        std::cout << "top edge: " << p1.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+        vInter.push_back(p1);
+        vT.push_back(tLine);
+    }
+
+    // bottom edge
+    std::optional<aPoint2D<T>> p2 = _l.intersect(aPoint2D<s32> (l(), b1()),
+                                                 aPoint2D<s32> (r1(), b1()),
+                                                 tLine, tSegment,
+                                                 bIntersectionPointOnSegment);
+    if (p2.has_value() && bIntersectionPointOnSegment)
+    {
+        std::cout << "bottom edge: " << p2.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+        vInter.push_back(p2);
+        vT.push_back(tLine);
+    }
+
+    // left edge
+    std::optional<aPoint2D<T>> p3 = _l.intersect(aPoint2D<s32> (l(), t()),
+                                                 aPoint2D<s32> (l(), b1()),
+                                                 tLine, tSegment,
+                                                 bIntersectionPointOnSegment);
+    if (p3.has_value() && bIntersectionPointOnSegment)
+    {
+        std::cout << "left edge: " << p3.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+        vInter.push_back(p3);
+        vT.push_back(tLine);
+    }
+
+    // right edge
+    std::optional<aPoint2D<T>> p4 = _l.intersect(aPoint2D<s32> (r1(), t()),
+                                                 aPoint2D<s32> (r1(), b1()),
+                                                 tLine, tSegment,
+                                                 bIntersectionPointOnSegment);
+    if (p4.has_value() && bIntersectionPointOnSegment)
+    {
+        std::cout << "right edge: " << p4.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+        vInter.push_back(p4);
+        vT.push_back(tLine);
+    }
+
+    for (s32 i = vInter.size()-1; i >= 0; i--)
+    {
+        if (vT.at(i) < tMin)
+        {
+            vFound.push_front(vInter.at(i).value());
+            tMin = vT.at(i);
+        }
+        else
+        {
+            vFound.push_back(vInter.at(i).value());
+        }
+    }
+
+    return vFound;
+} // aRect2D<T, Tprec>::intersect
+
+
+/*******************************************************************************
 * aRect2D<T>::pointInRect
 *******************************************************************************/
 template<class T>
-bool aRect2D<T>::pointInRect(const aVector2D<T> &_v2d) const
+bool aRect2D<T>::pointInRect(const aPoint2D<T> &_v2d) const
 {
     return pointInRect(_v2d.x(), _v2d.y());
 } // aRect2D<T>::pointInRect

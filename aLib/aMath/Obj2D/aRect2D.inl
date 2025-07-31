@@ -215,9 +215,9 @@ void aRect2D<T>::resize(dbl _dFactor)
 * qRect2D<T, Tprec>::centerPoint
 *******************************************************************************/
 template<class T>
-aVector2D<T> aRect2D<T>::centerPoint() const
+aPoint2D<T> aRect2D<T>::centerPoint() const
 {
-    return aVector2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
+    return aPoint2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
                          (T) (((dbl) m_y) + ((dbl) m_h)/2));
 } // qRect2D<T, Tprec>::GetCenterPoint()
 
@@ -331,7 +331,7 @@ aRect2D<T> aRect2D<T>::intersect1(const aRect2D<T> &_rhs) const
 * aRect2D<T>::pointInRect
 *******************************************************************************/
 template<class T>
-bool aRect2D<T>::pointInRect(const aVector2D<T> &_v2d) const
+bool aRect2D<T>::pointInRect(const aPoint2D<T> &_v2d) const
 {
     return pointInRect(_v2d.x(), _v2d.y());
 } // aRect2D<T>::pointInRect

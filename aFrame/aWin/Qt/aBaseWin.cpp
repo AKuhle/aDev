@@ -15,7 +15,6 @@
 #include <QPaintEvent>
 
 #include "aBaseWin.h"
-#include "aRect2D.h"
 
 
 /*******************************************************************************
@@ -118,11 +117,11 @@ void aBaseWin::setMaxH(s32 _s32MaxH)
 /*******************************************************************************
 * aBaseWin::geometryRect
 *******************************************************************************/
-aRect2D<s32> aBaseWin::geometryRect() const
+aRect aBaseWin::geometryRect() const
 {
     QRect r = m_pWin->frameGeometry();
 
-    return aRect2D<s32> (r.left(), r.right(), r.width(), r.height());
+    return aRect(r.left(), r.right(), r.width(), r.height());
 } // aBaseWin::geometryRect
 
 
@@ -410,8 +409,8 @@ bool aBaseWin::eventFilter(QObject *_pObj,
 // void aBaseWin::wheelEvent(QWheelEvent *_pEvent)
 // {
 //     u32             u32Modifiers    = 0;//_Modifiers();
-//     aVector2D<s32>  v2dLocal;//        = _LocalCursorPos();
-//     aVector2D<s32>  v2dGlobal;//       = _GlobalCursorPos();
+//     aPoint2D<s32>  v2dLocal;//        = _LocalCursorPos();
+//     aPoint2D<s32>  v2dGlobal;//       = _GlobalCursorPos();
 //     s32             s32Degree       = (s32) (((dbl) _pEvent->angleDelta().y()) / 8.);
 //     bool            bHandled        = false;
 

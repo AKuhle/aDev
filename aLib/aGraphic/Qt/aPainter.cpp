@@ -180,8 +180,8 @@ void aPainter::setBrush(const aColor *_pColor)
 // /*******************************************************************************
 // * aPainter::drawLine
 // *******************************************************************************/
-// void aPainter::drawLine(const aVector2D<s32>    &_v2dStart,
-//                           const aVector2D<s32>    &_v2dEnd,
+// void aPainter::drawLine(const aPoint2D<s32>    &_v2dStart,
+//                           const aPoint2D<s32>    &_v2dEnd,
 //                           const aPen              *_pPen /*= nullptr*/)
 // {
 //     drawLine(_v2dStart.x(), _v2dStart.y(), _v2dEnd.x(), _v2dEnd.y(), _pPen);
@@ -246,8 +246,8 @@ void aPainter::setBrush(const aColor *_pColor)
 // * aPainter::drawGradientRect
 // *******************************************************************************/
 // void aPainter::drawGradientRect(const aRect2D<s32>    &_r2d,
-//                                   const aVector2D<s32>  &_v2dGradStart,
-//                                   const aVector2D<s32>  &_v2dGradEnd,
+//                                   const aPoint2D<s32>  &_v2dGradStart,
+//                                   const aPoint2D<s32>  &_v2dGradEnd,
 //                                   const aColor          &_colStart,
 //                                   const aColor          &_colEnd)
 // {
@@ -277,7 +277,7 @@ void aPainter::setBrush(const aColor *_pColor)
 // /*******************************************************************************
 // * aPainter::drawFilledCircle
 // *******************************************************************************/
-// void aPainter::drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+// void aPainter::drawFilledCircle(const aPoint2D<s32>   &_v2dCenter,
 //                                   s32                    _radius,
 //                                   const aColor           *_pColor /*= nullptr*/)
 // {

@@ -27,6 +27,23 @@ namespace aMath {
 
 
 /*******************************************************************************
+* const
+*******************************************************************************/
+#define TWO_PI                  6.283185307179586476    // 2 * Pi
+#define PI                      3.141592653589793238    // Pi
+#define PI_2                    1.570796326794896619    // Pi / 2
+#define PI_3                    1.047197551196597746    // Pi / 3
+#define PI_4                    0.785398163397448309    // Pi / 4
+
+
+/*******************************************************************************
+* macros
+*******************************************************************************/
+#define Deg2Rad(a) (a) * PI / 180.0
+#define Rad2Deg(a) (a) / PI * 180.0
+
+
+/*******************************************************************************
 * classes
 *******************************************************************************/
 class qMathObj;
@@ -34,7 +51,9 @@ class qMathObj;
 class aMathObj2D;
 
 template<class T> class aDimension2D;
+template<class T> class aPoint2D;
 template<class T> class aVector2D;
+template<class T> class aParametricLine2D;
 template<class T> class aRect2D;
 
 class aMathObj3D;

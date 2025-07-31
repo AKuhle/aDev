@@ -61,6 +61,8 @@ class aVector
         void				push_back(const T &_t1, const T &_t2, const T &_t3, const T &_t4, const T &_t5);
         void				push_back(const T &_t1, const T &_t2, const T &_t3, const T &_t4, const T &_t5, const T &_t6);
 
+        void				push_front(const T &_t1);
+
         const_reference		at(s32	_s32Pos) const					{ return m_vec.at(_s32Pos); }
         reference			at(s32	_s32Pos)						{ return m_vec.at(_s32Pos); }
 

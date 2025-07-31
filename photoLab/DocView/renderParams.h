@@ -23,7 +23,7 @@
 #include "aLib_def.h"
 
 #include "aDimension2D.h"
-#include "aVector2D.h"
+#include "aPoint2D.h"
 #include "aRect2D.h"
 #include "zoomSteps.h"
 #include "layerStack.h"
@@ -56,7 +56,7 @@ class RenderParams
         // draw params set by the application
         shared_ptr<SynchronizedLS>  m_pLayerStack;
         aRect2D<s32>                m_r2dVp_client;                     // viewport to render into
-        aVector2D<s32>              m_v2dOrigin_zoom;                   // mapped to left/top of the viewport
+        aPoint2D<s32>              m_v2dOrigin_zoom;                   // mapped to left/top of the viewport
 
         // calculated values
         bool                        m_bModified				{ true };
@@ -92,8 +92,8 @@ class RenderParams
                                                  s32   _h_client);
 
         // 4. m_v2dOrigin_zoom
-        const aVector2D<s32>&       origin_zoom( ) const;
-        void						setOrigin_zoom(const aVector2D<s32> &_v2dOrigin_zoom);
+        const aPoint2D<s32>&       origin_zoom( ) const;
+        void						setOrigin_zoom(const aPoint2D<s32> &_v2dOrigin_zoom);
         void						setOrigin_zoom(s32    _x_zoom,
                                                    s32    _y_zoom);
 

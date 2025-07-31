@@ -2,6 +2,7 @@ release/aAppMainWin.o
 release/aAppBase.o
 release/main.o
 release/aFrame.o
+release/aPainterI.o
 release/aBrush.o
 release/aPainter.o
 release/aPen.o
@@ -32,9 +33,12 @@ release/aPoolVarU64.o
 release/aVarPool.o
 release/aArgument.o
 release/aColor.o
+release/aDimension.o
 release/aHelper.o
 release/aMargin.o
 release/aPath.o
+release/aPoint.o
+release/aRect.o
 release/aStopwatch.o
 release/aString.o
 release/aUrl.o
@@ -47,6 +51,7 @@ release/aMainWin.o
 release/aMainWinMdi.o
 release/aStyleItem.o
 release/aStyleItemFill.o
+release/aStyleItemFillGradient.o
 release/aStyleItemFillSolid.o
 release/aStyleParser.o
 release/moc_aProgressCb.o

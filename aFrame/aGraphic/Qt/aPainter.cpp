@@ -14,7 +14,6 @@
 *******************************************************************************/
 #include "aPainter.h"
 #include "aColor.h"
-#include "aRect2D.h"
 #include "aPixmap.h"
 
 using namespace aFrame::aUtil;
@@ -46,13 +45,13 @@ aPainter::~aPainter()
 
 
 /*******************************************************************************
-* aPainter::drawFilledRect
+* aPainter::_drawFilledRect
 *******************************************************************************/
-void aPainter::drawFilledRect(s32           _x,
-                              s32           _y,
-                              s32           _w,
-                              s32           _h,
-                              const aColor  *_pColor /*= nullptr*/)
+void aPainter::_drawFilledRect(s32           _x,
+                               s32           _y,
+                               s32           _w,
+                               s32           _h,
+                               const aColor  *_pColor /*= nullptr*/)
 {
     QPainter::setPen(Qt::NoPen);
     setBrush(_pColor);
@@ -64,17 +63,29 @@ void aPainter::drawFilledRect(s32           _x,
     // fillRect(_x, _y, _w, _h, toaColor(colLightSeaGreen));
     // setRenderHint(QPainter::Antialiasing, false);
     // fillRect(rectangle, toaColor(colGreenYellow));
-} // aPainter::drawFilledRect
+} // aPainter::_drawFilledRect
 
 
 /*******************************************************************************
-* aPainter::drawFilledRect
+* aPainter::_drawGradientRect
 *******************************************************************************/
-void aPainter::drawFilledRect(const aRect2D<s32>  &_r2d,
-                                const aColor        *_pColor /*= nullptr*/)
+void aPainter::_drawGradientRect(s32           _x,
+                                 s32           _y,
+                                 s32           _w,
+                                 s32           _h,
+                                 s32           _s32GradStartX,
+                                 s32           _s32GradStartY,
+                                 s32           _s32GradEndX,
+                                 s32           _s32GradEndY,
+                                 const aColor  &_colStart,
+                                 const aColor  &_colEnd)
 {
-    drawFilledRect(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h(), _pColor);
-} // aPainter::drawFilledRect
+    QLinearGradient grad(QPointF(_s32GradStartX, _s32GradStartY), QPointF(_s32GradEndX, _s32GradEndY));
+    grad.setColorAt(0, _colStart.toQColor());
+    grad.setColorAt(1, _colEnd.toQColor());
+
+    QPainter::fillRect(_x, _y, _w, _h, grad);
+} // aPainter::_drawGradientRect
 
 
 /*******************************************************************************
@@ -180,8 +191,8 @@ void aPainter::setBrush(const aColor *_pColor)
 // /*******************************************************************************
 // * aPainter::drawLine
 // *******************************************************************************/
-// void aPainter::drawLine(const aVector2D<s32>    &_v2dStart,
-//                           const aVector2D<s32>    &_v2dEnd,
+// void aPainter::drawLine(const aPoint2D<s32>    &_v2dStart,
+//                           const aPoint2D<s32>    &_v2dEnd,
 //                           const aPen              *_pPen /*= nullptr*/)
 // {
 //     drawLine(_v2dStart.x(), _v2dStart.y(), _v2dEnd.x(), _v2dEnd.y(), _pPen);
@@ -223,31 +234,9 @@ void aPainter::setBrush(const aColor *_pColor)
 // /*******************************************************************************
 // * aPainter::drawGradientRect
 // *******************************************************************************/
-// void aPainter::drawGradientRect(s32           _x,
-//                                   s32           _y,
-//                                   s32           _w,
-//                                   s32           _h,
-//                                   s32           _s32GradStartX,
-//                                   s32           _s32GradStartY,
-//                                   s32           _s32GradEndX,
-//                                   s32           _s32GradEndY,
-//                                   const aColor  &_colStart,
-//                                   const aColor  &_colEnd)
-// {
-//     QLinearGradient grad(QPointF(_s32GradStartX, _s32GradStartY), QPointF(_s32GradEndX, _s32GradEndY));
-//     grad.setColorAt(0, to_QColor(_colStart));
-//     grad.setColorAt(1, to_QColor(_colEnd));
-
-//     QPainter::fillRect(_x, _y, _w, _h, grad);
-// } // aPainter::drawGradientRect
-
-
-// /*******************************************************************************
-// * aPainter::drawGradientRect
-// *******************************************************************************/
 // void aPainter::drawGradientRect(const aRect2D<s32>    &_r2d,
-//                                   const aVector2D<s32>  &_v2dGradStart,
-//                                   const aVector2D<s32>  &_v2dGradEnd,
+//                                   const aPoint2D<s32>  &_v2dGradStart,
+//                                   const aPoint2D<s32>  &_v2dGradEnd,
 //                                   const aColor          &_colStart,
 //                                   const aColor          &_colEnd)
 // {
@@ -277,7 +266,7 @@ void aPainter::setBrush(const aColor *_pColor)
 // /*******************************************************************************
 // * aPainter::drawFilledCircle
 // *******************************************************************************/
-// void aPainter::drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+// void aPainter::drawFilledCircle(const aPoint2D<s32>   &_v2dCenter,
 //                                   s32                    _radius,
 //                                   const aColor           *_pColor /*= nullptr*/)
 // {

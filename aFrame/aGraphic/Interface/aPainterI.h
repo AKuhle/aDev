@@ -21,11 +21,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMath_def.h"
 #include "aUtil_def.h"
 #include "aGraphic_def.h"
+#include "aRect.h"
 
-using namespace aFrame::aMath;
 using namespace aFrame::aUtil;
 
 
@@ -41,19 +40,72 @@ namespace aGraphic {
 *******************************************************************************/
 class aPainterI
 {
+    public:
+        aPainterI();
+        virtual ~aPainterI();
+
+
     /*******************************************************************************
     * drawFilledRect
     * uses/sets the current Pen!
     *******************************************************************************/
     public:
-        virtual void        drawFilledRect(s32          _x,
+        virtual void        _drawFilledRect(s32          _x,
+                                            s32          _y,
+                                            s32          _w,
+                                            s32          _h,
+                                            const aColor *_pColor = nullptr) = 0;
+
+        void                drawFilledRect(s32          _x,
                                            s32          _y,
                                            s32          _w,
                                            s32          _h,
-                                           const aColor *_pColor = nullptr) = 0;
+                                           const aColor *_pColor = nullptr);
 
-        virtual void        drawFilledRect(const aRect2D<s32>   &_r2d,
-                                           const aColor         *_pColor = nullptr) = 0;
+        void                drawFilledRect(const aRect  &_r2d,
+                                           const aColor *_pColor = nullptr);
+
+
+    /*******************************************************************************
+    * drawGradientRect
+    *******************************************************************************/
+    public:
+        virtual void        _drawGradientRect(s32           _x,
+                                              s32           _y,
+                                              s32           _w,
+                                              s32           _h,
+                                              s32           _s32GradStartX,
+                                              s32           _s32GradStartY,
+                                              s32           _s32GradEndX,
+                                              s32           _s32GradEndY,
+                                              const aColor  &_colStart,
+                                              const aColor  &_colEnd) = 0;
+
+        void                drawGradientRect(s32            _x,
+                                             s32            _y,
+                                             s32            _w,
+                                             s32            _h,
+                                             s32            _s32GradStartX,
+                                             s32            _s32GradStartY,
+                                             s32            _s32GradEndX,
+                                             s32            _s32GradEndY,
+                                             const aColor   &_colStart,
+                                             const aColor   &_colEnd);
+
+        void                drawGradientRect(s32            _x,
+                                             s32            _y,
+                                             s32            _w,
+                                             s32            _h,
+                                             const aPoint   &_v2dGradStart,
+                                             const aPoint   &_v2dGradEnd,
+                                             const aColor   &_colStart,
+                                             const aColor   &_colEnd);
+
+        void                drawGradientRect(const aRect    &_r2d,
+                                             const aPoint   &_v2dGradStart,
+                                             const aPoint   &_v2dGradEnd,
+                                             const aColor   &_colStart,
+                                             const aColor   &_colEnd);
 
 
     // /*******************************************************************************
@@ -93,8 +145,8 @@ class aPainterI
 //                              s32         _endY,
 //                              const aPen  *_pPen = nullptr);
 
-//     void            drawLine(const aVector2D<s32>   &_v2dStart,
-//                              const aVector2D<s32>   &_v2dEnd,
+//     void            drawLine(const aPoint2D<s32>   &_v2dStart,
+//                              const aPoint2D<s32>   &_v2dEnd,
 //                              const aPen             *_pPen = nullptr);
 
 
@@ -115,8 +167,8 @@ class aPainterI
 
 
 //     void            drawGradientRect(const aRect2D<s32>     &_r2d,
-//                                      const aVector2D<s32>   &_v2dGradStart,
-//                                      const aVector2D<s32>   &_v2dGradEnd,
+//                                      const aPoint2D<s32>   &_v2dGradStart,
+//                                      const aPoint2D<s32>   &_v2dGradEnd,
 //                                      const aColor           &_colStart,
 //                                      const aColor           &_colEnd);
 
@@ -131,7 +183,7 @@ class aPainterI
 //                                      s32            _radius,
 //                                      const aColor   *_pColor = nullptr);
 
-//     void            drawFilledCircle(const aVector2D<s32>   &_v2dCenter,
+//     void            drawFilledCircle(const aPoint2D<s32>   &_v2dCenter,
 //                                      s32                    _s32Radius,
 //                                      const aColor           *_pColor = nullptr);
 

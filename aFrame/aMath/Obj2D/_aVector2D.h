@@ -16,18 +16,18 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aLib_def.h"
+#include "aFrame_def.h"
 #include "aHelper.h"
 
 #include "aMathObj2D.h"
 
-using namespace aLib::aUtil;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
 * namespace
 *******************************************************************************/
-namespace aLib {
+namespace aFrame {
 namespace aMath {
 
 
@@ -57,7 +57,7 @@ class aVector2D : public aMathObj2D
         T&                      x()             { return m_x; }
         T&                      y()             { return m_y; }
 
-        void					Set(T _x,
+        void					set(T _x,
                                     T _y);
 
         aVector2D<T>&           operator=(const aVector2D<T> &_rhs);
@@ -75,14 +75,14 @@ class aVector2D : public aMathObj2D
         aVector2D<T>&           operator*=(dbl _t);
         aVector2D<T>&           operator/=(dbl _t);
 
-        void					Normalize();
+        void					normalize();
 
-        dbl                     Norm() const;								//!< absolute value [=sqrt(x*x + y*y)]
-        dbl                     NormSquare() const;							//!< square  of the absolute value
+        dbl                     norm() const;								//!< absolute value [=sqrt(x*x + y*y)]
+        dbl                     normSquare() const;							//!< square  of the absolute value
 
-        dbl                     Distance(const aVector2D<T> &_rhs) const;	//!< distance between the two points
+        //dbl                     distance(const aVector2D<T> &_rhs) const;	//!< distance between the two points
 
-        dbl                     ScalarProduct(const aVector2D<T> &_rhs) const;
+        dbl                     scalarProduct(const aVector2D<T> &_rhs) const;
 
 
         friend std::ostream& operator<<(std::ostream&       _os,
@@ -97,6 +97,6 @@ class aVector2D : public aMathObj2D
 
 
 } // namespace aMath
-} // namespace aLib
+} // namespace aFrame
 
 #include "aVector2D.inl"

@@ -25,6 +25,7 @@
 #include <locale>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <shared_mutex>
 #include <random>
 #include <regex>
@@ -95,12 +96,6 @@ using	color_t			= float;			//!> data type for class Rgb
 #define U32_MAX                 4294967295
 #define U64_MIN                 0
 #define U64_MAX                 18446744073709551615
-
-#define TWO_PI                  6.283185307179586476    // 2 * Pi
-#define PI                      3.141592653589793238    // Pi
-#define PI_2                    1.570796326794896619    // Pi / 2
-#define PI_3                    1.047197551196597746    // Pi / 3
-#define PI_4                    0.785398163397448309    // Pi / 4
 
 
 /*******************************************************************************

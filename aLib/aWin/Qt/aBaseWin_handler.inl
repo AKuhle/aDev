@@ -71,8 +71,8 @@ bool aBaseWin<T>::onPaint()
 template<class T>
 bool aBaseWin<T>::onWheel(u32                  /*_u32Modifiers*/,
                           s32                  /*_s32Degree*/,
-                          const aVector2D<s32> &/*_v2dLocal*/,
-                          const aVector2D<s32> &/*_v2dGlobal*/)
+                          const aPoint2D<s32> &/*_v2dLocal*/,
+                          const aPoint2D<s32> &/*_v2dGlobal*/)
 {
     return false;
 } // aBaseWin::onWheel

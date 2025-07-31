@@ -194,7 +194,7 @@ T* aPicBuffer::dataPointer(s32  _s32X,
 * aPicBuffer::addLayer2Buffer
 *******************************************************************************/
 void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,                // the layer to add
-                                 const aVector2D<s32>   &_v2dBufOrigin_zoom,    // buf-position within the zoomed pic
+                                 const aPoint2D<s32>   &_v2dBufOrigin_zoom,    // buf-position within the zoomed pic
                                  dbl                    _dZoomFactor) const
 {
     s32             s32LayerX, s32LayerY;
@@ -318,7 +318,7 @@ void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,               
 *******************************************************************************/
 // void aPicBuffer::ToQImage(shared_ptr<qLayerStack>   _pLayerStack,
 //                           const aDimension2D<s32>&   _d2dQImage,
-//                           const aVector2D<s32>&      _v2dBufOrigin_zoom,
+//                           const aPoint2D<s32>&      _v2dBufOrigin_zoom,
 //                           dbl                        _dZoomFactor,
 //                           QImage                     *&_pImg)
 // {
@@ -332,7 +332,7 @@ void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,               
 // void aPicBuffer::ToQImage(shared_ptr<qLayerStack>   _pLayerStack,
 //                           s32                       _s32QImageW,
 //                           s32                       _s32QImageH,
-//                           const aVector2D<s32>&     _v2dBufOrigin_zoom,
+//                           const aPoint2D<s32>&     _v2dBufOrigin_zoom,
 //                           dbl                       _dZoomFactor,
 //                           QImage*&                  _pImg)
 // {
@@ -345,7 +345,7 @@ void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,               
 *******************************************************************************/
 // void aPicBuffer::ToQImage(shared_ptr<aLayerI>       _pLayer,
 //                           const aDimension2D<s32>&  _d2dQImage,
-//                           const aVector2D<s32>&     _v2dBufOrigin_zoom,
+//                           const aPoint2D<s32>&     _v2dBufOrigin_zoom,
 //                           dbl                       _dZoomFactor,
 //                           QImage*&                  _pImg)
 // {
@@ -359,7 +359,7 @@ void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,               
 // void aPicBuffer::ToQImage(shared_ptr<aLayerI>   _pLayer,
 //                          s32                    _s32QImageW,
 //                          s32                    _s32QImageH,
-//                          const aVector2D<s32>&  _v2dBufOrigin_zoom,
+//                          const aPoint2D<s32>&  _v2dBufOrigin_zoom,
 //                          dbl                    _dZoomFactor,
 //                          QImage*&               _pImg)
 // {
@@ -373,7 +373,7 @@ void aPicBuffer::addLayer2Buffer(aLayerI                *_pLayer,               
 void aPicBuffer::toQImage(shared_ptr<aLayerStack>   _pLayerStack,
                           s32                       _s32QImageW,
                           s32                       _s32QImageH,
-                          const aVector2D<s32>      &_v2dBufOrigin_zoom,
+                          const aPoint2D<s32>      &_v2dBufOrigin_zoom,
                           dbl                       _dZoomFactor,
                           QImage                    *&_pImg)
 {

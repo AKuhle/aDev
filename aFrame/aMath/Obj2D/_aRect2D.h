@@ -21,10 +21,13 @@
 #include "aHelper.h"
 #include "aMargin.h"
 
+#include "aVector.h"
+
 #include "aMathObj2D.h"
 #include "aDimension2D.h"
-#include "aVector2D.h"
+#include "aPoint2D.h"
 
+using namespace aFrame;
 using namespace aFrame::aUtil;
 
 
@@ -61,8 +64,8 @@ class aRect2D : public aMathObj2D
 //                    const T                 _w,
 //                    const T                 _h);
 
-        // aRect2D(const aVector2D<T>& _v2dOrigin,
-        //         const aVector2D<T>& _v2dOppositCorner);
+        // aRect2D(const aPoint2D<T>& _v2dOrigin,
+        //         const aPoint2D<T>& _v2dOppositCorner);
 
         virtual ~aRect2D();
 
@@ -87,16 +90,16 @@ class aRect2D : public aMathObj2D
         T                       b() const       { return m_y + m_h; }                   // bottom
         T                       b1() const      { return m_y + m_h - 1; }               // pixel-bottom
 
-        aVector2D<T>            lt() const      { return aVector2D<T>(m_x, m_y); }      // left top
+        aPoint2D<T>            lt() const      { return aPoint2D<T>(m_x, m_y); }      // left top
 
-        aVector2D<T>            lb() const      { return aVector2D<T>(m_x, b()); }      // left bottom
-        aVector2D<T>            lb1() const     { return aVector2D<T>(m_x, b1()); }     // left bottom
+        aPoint2D<T>            lb() const      { return aPoint2D<T>(m_x, b()); }      // left bottom
+        aPoint2D<T>            lb1() const     { return aPoint2D<T>(m_x, b1()); }     // left bottom
 
-        aVector2D<T>            rt() const      { return aVector2D<T>(r(), m_y); }      // right top
-        aVector2D<T>            r1t() const     { return aVector2D<T>(r1(), m_y); }     // pixel right top
+        aPoint2D<T>            rt() const      { return aPoint2D<T>(r(), m_y); }      // right top
+        aPoint2D<T>            r1t() const     { return aPoint2D<T>(r1(), m_y); }     // pixel right top
 
-        aVector2D<T>            rb() const      { return aVector2D<T>(r(), b()); }      // right bottom
-        aVector2D<T>            r1b1() const     { return aVector2D<T>(r1(), b1()); }    // pixel right bottom
+        aPoint2D<T>            rb() const      { return aPoint2D<T>(r(), b()); }      // right bottom
+        aPoint2D<T>            r1b1() const     { return aPoint2D<T>(r1(), b1()); }    // pixel right bottom
 
         void					set(const T _x,
                                     const T	_y,
@@ -122,7 +125,7 @@ class aRect2D : public aMathObj2D
 
         void 					resize(dbl _dFactor);
 
-        aVector2D<T>			centerPoint() const;
+        aPoint2D<T>             centerPoint() const;
         void					setCenterPoint(const T		_x,
                                                const T		_y);
 
@@ -132,24 +135,30 @@ class aRect2D : public aMathObj2D
         void                    shrink(T _tValue);
         void                    expand(T _tValue);
 
-        aRect2D<T>              intersect(const aRect2D<T>& _rhs) const;
-        aRect2D<T>              intersect1(const aRect2D<T>& _rhs) const;
+        aRect2D<T>              intersect(const aRect2D<T> &_rhs) const;
+        aRect2D<T>              intersect1(const aRect2D<T> &_rhs) const;
 
-        bool					pointInRect(const aVector2D<T>& _v2d) const;
+        // 0 intersections => line outside the rect
+        // 1 intersections => line mets corner point
+        // 2 intersections => line cuts rectangle
+        // the order of the found points follows the direction of the line
+        aVector<aPoint2D<T>>    intersect(const aParametricLine2D<T> &_l) const;
+
+        bool					pointInRect(const aPoint2D<T> &_v2d) const;
 
         bool                    pointInRect(const T _x,
                                             const T _y) const;
 
-//            aRect2D<T>        FitIntoRect(const aRect2D<T>	&_rct2FitInto) const;
+        //            aRect2D<T>        FitIntoRect(const aRect2D<T>	&_rct2FitInto) const;
 
-        // aVector2D<T>            Transform(const aRect2D<T>&  _rctDst,
-        //                                   const aVector2D<T>&       _v2dTrans) const;
+        // aPoint2D<T>            Transform(const aRect2D<T>&  _rctDst,
+        //                                   const aPoint2D<T>&       _v2dTrans) const;
 
         // aRect2D<T>       Transform(const aRect2D<T>&  _rctDst,
         //                                   const aRect2D<T>&  _r2dTrans) const;
 
-        friend std::ostream& operator<<(std::ostream            &_os,
-                                        const aRect2D<T> &_r2d)
+        friend std::ostream& operator<<(std::ostream        &_os,
+                                        const aRect2D<T>    &_r2d)
         {
             _os << "(x:" << _r2d.m_x
                 << ", y:" << _r2d.m_y

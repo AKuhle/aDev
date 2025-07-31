@@ -14,12 +14,13 @@
 #include "aFrame_def.h"
 
 #include "aBaseWin_i.h"
-#include "aRect2D.h"
+#include "aRect.h"
 #include "aPainter.h"
 #include "aColor.h"
 #include "aString.h"
 
 #include "aStyleItemFillSolid.h"
+#include "aStyleItemFillGradient.h"
 
 using namespace aFrame::aGraphic;
 
@@ -172,7 +173,7 @@ void aBaseWin_i::hide()
 /*******************************************************************************
 * aBaseWin_i::setMinDim
 *******************************************************************************/
-void aBaseWin_i::setMinDim(const aDimension2D<s32> &_minDim)
+void aBaseWin_i::setMinDim(const aDimension &_minDim)
 {
     setMinW(_minDim.w());
     setMinH(_minDim.h());
@@ -193,7 +194,7 @@ void aBaseWin_i::setMinDim(s32 _s32MinW,
 /*******************************************************************************
 * aBaseWin_i::setMaxDim
 *******************************************************************************/
-void aBaseWin_i::setMaxDim(const aDimension2D<s32> &_maxDim)
+void aBaseWin_i::setMaxDim(const aDimension &_maxDim)
 {
     setMaxW(_maxDim.w());
     setMaxH(_maxDim.h());
@@ -214,18 +215,18 @@ void aBaseWin_i::setMaxDim(s32 _s32MaxW,
 /*******************************************************************************
 * aBaseWin_i::marginRect
 *******************************************************************************/
-aRect2D<s32> aBaseWin_i::marginRect() const
+aRect aBaseWin_i::marginRect() const
 {
-    return aRect2D<s32>(0, 0, geometryW(), geometryH());
+    return aRect(0, 0, geometryW(), geometryH());
 } // aBaseWin_i::marginRect
 
 
 /*******************************************************************************
 * aBaseWin_i::borderRect
 *******************************************************************************/
-aRect2D<s32> aBaseWin_i::borderRect() const
+aRect aBaseWin_i::borderRect() const
 {
-    aRect2D<s32>    r = marginRect();
+    aRect    r = marginRect();
 
     r.x() += m_margin.l();
     r.y() += m_margin.t();
@@ -239,9 +240,9 @@ aRect2D<s32> aBaseWin_i::borderRect() const
 /*******************************************************************************
 * aBaseWin_i::paddingRect
 *******************************************************************************/
-aRect2D<s32> aBaseWin_i::paddingRect() const
+aRect aBaseWin_i::paddingRect() const
 {
-    aRect2D<s32>    r = borderRect();
+    aRect    r = borderRect();
 
     r.x() += m_border.l();
     r.y() += m_border.t();
@@ -255,9 +256,9 @@ aRect2D<s32> aBaseWin_i::paddingRect() const
 /*******************************************************************************
 * aBaseWin_i::contentRect
 *******************************************************************************/
-aRect2D<s32> aBaseWin_i::contentRect() const
+aRect aBaseWin_i::contentRect() const
 {
-    aRect2D<s32>    r = paddingRect();
+    aRect    r = paddingRect();
 
     r.x() += m_padding.l();
     r.y() += m_padding.t();
@@ -328,16 +329,55 @@ void aBaseWin_i::onPaintPadding()
 *******************************************************************************/
 void aBaseWin_i::onPaintContentBg()
 {
-    aStyleItemFillSolid *pfi = dynamic_cast<aStyleItemFillSolid *> (m_pBgStyle.get());
+    aStyleItemFillSolid     *pfs = dynamic_cast<aStyleItemFillSolid *> (m_pBgStyle.get());
+    //aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (m_pBgStyle.get());
 
-    if (pfi)
+    // draw solid fill
+    if (pfs)
     {
-        aRect2D<s32>    r = contentRect();
-        aPainter        p(sysWinPtr());
-        aColor          col = pfi->fillColor();
+        aRect       r = contentRect();
+        aPainter    p(sysWinPtr());
+        aColor      col = pfs->fillColor();
 
         p.drawFilledRect(r, &col);
     }
+
+    // draw gradient fill
+    // else if (pfg)
+    // {
+        // aRect       r           = contentRect();
+        // aColor      col1        = pfg->fillColor1();
+        // aColor      col2        = pfg->fillColor2();
+        // dbl         dAngle      = Deg2Rad(pfg->angle());
+        // aPoint      p2dGradStart;
+        // aPoint      p2dGradEnd;
+        // aPainter    p(sysWinPtr());
+
+        // // calculate the parametric line for the gradient
+        // aParametricLine2D<s32> l(r.centerPoint(), dAngle);
+
+        // // get the intersection points
+        // aVector<aPoint> vInt = r.intersect(l);
+
+        // // draw the gradient between the found points
+        // if (vInt.size() == 2)
+        // {
+        //     p2dGradStart.set(vInt.at(0).x(), vInt.at(0).y());
+        //     p2dGradEnd.set(vInt.at(1).x(), vInt.at(1).y());
+
+        //     cout << "r" << r << endl;
+
+        //     cout << "p2dGradStart" << p2dGradStart << endl;
+        //     cout << "p2dGradEnd" << p2dGradEnd << endl;
+        // }
+        // else
+        // {
+        //     // no gradient points found => just fill the rect
+        //     p.drawFilledRect(r, &col1);
+        // }
+
+        // p.drawGradientRect(r, p2dGradStart, p2dGradEnd, col1, col2);
+    // }
 } // aBaseWin_i::onPaintContentBg
 
 
@@ -405,8 +445,8 @@ void aBaseWin_i::onPaintContent()
 // template<class T>
 // bool aBaseWin::onWheel(u32                  /*_u32Modifiers*/,
 //                           s32                  /*_s32Degree*/,
-//                           const aVector2D<s32> &/*_v2dLocal*/,
-//                           const aVector2D<s32> &/*_v2dGlobal*/)
+//                           const aPoint &/*_v2dLocal*/,
+//                           const aPoint &/*_v2dGlobal*/)
 // {
 //     return false;
 // } // aBaseWin::onWheel

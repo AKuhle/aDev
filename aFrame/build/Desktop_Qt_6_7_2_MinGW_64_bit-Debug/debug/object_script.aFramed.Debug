@@ -2,6 +2,7 @@ debug/aAppMainWin.o
 debug/aAppBase.o
 debug/main.o
 debug/aFrame.o
+debug/aPainterI.o
 debug/aBrush.o
 debug/aPainter.o
 debug/aPen.o
@@ -32,9 +33,12 @@ debug/aPoolVarU64.o
 debug/aVarPool.o
 debug/aArgument.o
 debug/aColor.o
+debug/aDimension.o
 debug/aHelper.o
 debug/aMargin.o
 debug/aPath.o
+debug/aPoint.o
+debug/aRect.o
 debug/aStopwatch.o
 debug/aString.o
 debug/aUrl.o
@@ -47,6 +51,7 @@ debug/aMainWin.o
 debug/aMainWinMdi.o
 debug/aStyleItem.o
 debug/aStyleItemFill.o
+debug/aStyleItemFillGradient.o
 debug/aStyleItemFillSolid.o
 debug/aStyleParser.o
 debug/moc_aProgressCb.o

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aVector2D.h
+* \file aPoint2D.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -16,40 +16,40 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "aLib_def.h"
 #include "aHelper.h"
 
 #include "aMathObj2D.h"
 
-using namespace aFrame::aUtil;
+using namespace aLib::aUtil;
 
 
 /*******************************************************************************
 * namespace
 *******************************************************************************/
-namespace aFrame {
+namespace aLib {
 namespace aMath {
 
 
 /*******************************************************************************
-* class aVector2D
+* class aPoint2D
 *******************************************************************************/
 template<class T>
-class aVector2D : public aMathObj2D
+class aPoint2D : public aMathObj2D
 {
     private:
         T		m_x	{ 0 };			//!< x-component
         T		m_y	{ 0 };			//!< y-component
 
     public:
-        aVector2D();
+        aPoint2D();
 
-        aVector2D(const aVector2D<T>& _rhs);
+        aPoint2D(const aPoint2D<T>& _rhs);
 
-        aVector2D(T _x,
+        aPoint2D(T _x,
                   T _y);
 
-        virtual ~aVector2D();
+        virtual ~aPoint2D();
 
         T                       x() const       { return m_x; }
         T                       y() const       { return m_y; }
@@ -60,43 +60,43 @@ class aVector2D : public aMathObj2D
         void					Set(T _x,
                                     T _y);
 
-        aVector2D<T>&           operator=(const aVector2D<T> &_rhs);
+        aPoint2D<T>&           operator=(const aPoint2D<T> &_rhs);
 
-        bool                    operator==(const aVector2D<T> &_rhs) const;
-        bool                    operator!=(const aVector2D<T> &_rhs) const;
+        bool                    operator==(const aPoint2D<T> &_rhs) const;
+        bool                    operator!=(const aPoint2D<T> &_rhs) const;
 
-        aVector2D<T>            operator+(const aVector2D<T>	&_rhs) const;
-        aVector2D<T>            operator-(const aVector2D<T>	&_rhs) const;
-        aVector2D<T>            operator*(dbl _t) const;
-        aVector2D<T>            operator/(dbl _t) const;
+        aPoint2D<T>            operator+(const aPoint2D<T>	&_rhs) const;
+        aPoint2D<T>            operator-(const aPoint2D<T>	&_rhs) const;
+        aPoint2D<T>            operator*(dbl _t) const;
+        aPoint2D<T>            operator/(dbl _t) const;
 
-        aVector2D<T>&           operator+=(const aVector2D<T> &_rhs);
-        aVector2D<T>&           operator-=(const aVector2D<T> &_rhs);
-        aVector2D<T>&           operator*=(dbl _t);
-        aVector2D<T>&           operator/=(dbl _t);
+        aPoint2D<T>&           operator+=(const aPoint2D<T> &_rhs);
+        aPoint2D<T>&           operator-=(const aPoint2D<T> &_rhs);
+        aPoint2D<T>&           operator*=(dbl _t);
+        aPoint2D<T>&           operator/=(dbl _t);
 
         void					Normalize();
 
         dbl                     Norm() const;								//!< absolute value [=sqrt(x*x + y*y)]
         dbl                     NormSquare() const;							//!< square  of the absolute value
 
-        dbl                     Distance(const aVector2D<T> &_rhs) const;	//!< distance between the two points
+        dbl                     Distance(const aPoint2D<T> &_rhs) const;	//!< distance between the two points
 
-        dbl                     ScalarProduct(const aVector2D<T> &_rhs) const;
+        dbl                     ScalarProduct(const aPoint2D<T> &_rhs) const;
 
 
         friend std::ostream& operator<<(std::ostream&       _os,
-                                        const aVector2D<T>  &_v2d)
+                                        const aPoint2D<T>  &_v2d)
         {
             _os << "(x:" << _v2d.m_x
                 << ", y:" << _v2d.m_y
                 << ")";
               return _os;
         } // operator<<
-}; // class aVector2D
+}; // class aPoint2D
 
 
 } // namespace aMath
-} // namespace aFrame
+} // namespace aLib
 
-#include "aVector2D.inl"
+#include "aPoint2D.inl"

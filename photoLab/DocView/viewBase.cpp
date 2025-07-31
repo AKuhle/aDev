@@ -167,8 +167,8 @@ void ViewBase::doPaintMarker(aPainter &/*_painter*/)
 *******************************************************************************/
 bool ViewBase::doWheel(u32                  _u32Modifiers,
                        s32                  _s32Degree,
-                       const aVector2D<s32> &_v2dLocal,
-                       const aVector2D<s32> &_v2dGlobal)
+                       const aPoint2D<s32> &_v2dLocal,
+                       const aPoint2D<s32> &_v2dGlobal)
 {
     toolMgrOnWheel(_u32Modifiers, _s32Degree, _v2dLocal, _v2dGlobal);
 

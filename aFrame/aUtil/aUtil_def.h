@@ -76,13 +76,16 @@ template <typename T> class aPoolVarBase;
 
 class aArgument;
 class aColor;
+class aDimension;
 class aJsonFile;
 class aJsonObj;
 class aJsonValue;
 class aMargin;
 class aPath;
+class aPoint;
 class aProgressMgr;
 class aProgressCb;
+class aRect;
 class aStopwatch;
 class aString;
 class aThread;

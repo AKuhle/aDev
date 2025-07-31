@@ -51,22 +51,25 @@ aVector2D<T>::aVector2D(T _x,
 } // aVector2D<T>::aVector2D
 
 
+/*******************************************************************************
+* aVector2D<T>::~aVector2D
+*******************************************************************************/
 template<class T>
 aVector2D<T>::~aVector2D()
 {
-}
+} // aVector2D<T>::~aVector2D
 
 
 /*******************************************************************************
-* aVector2D<T>::Set
+* aVector2D<T>::set
 *******************************************************************************/
 template<class T>
-void aVector2D<T>::Set(T _x,
-                              T _y)
+void aVector2D<T>::set(T _x,
+                       T _y)
 {
     m_x = _x;
     m_y = _y;
-} // aVector2D<T>::Set
+} // aVector2D<T>::set
 
 
 /*******************************************************************************
@@ -202,53 +205,53 @@ aVector2D<T>& aVector2D<T>::operator/=(dbl _t)
 
 
 /*******************************************************************************
-* aVector2D<T>::Normalize
+* aVector2D<T>::normalize
 *******************************************************************************/
 template<class T>
-void aVector2D<T>::Normalize()
+void aVector2D<T>::normalize()
 {
-    *this /= Norm();
-} // aVector2D<T>::Normalize
+    *this /= norm();
+} // aVector2D<T>::normalize
 
 
 /*******************************************************************************
-* aVector2D<T>::Norm
+* aVector2D<T>::norm
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::Norm() const
+dbl aVector2D<T>::norm() const
 {
     return sqrt(((dbl) m_x) * m_x + ((dbl) m_y) * m_y);
-} // aVector2D<T>::Norm
+} // aVector2D<T>::norm
 
 
 /*******************************************************************************
-* aVector2D<T>::NormSquare
+* aVector2D<T>::normSquare
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::NormSquare() const
+dbl aVector2D<T>::normSquare() const
 {
     return ((dbl) m_x) * m_x + ((dbl) m_y) * m_y;
-} // aVector2D<T>::NormSquare
+} // aVector2D<T>::normSquare
 
 
 /*******************************************************************************
-* aVector2D<T>::Distance
+* aVector2D<T>::distance
 *******************************************************************************/
-template<class T>
-dbl aVector2D<T>::Distance(const aVector2D<T>	&_rhs) const
-{
-    return ((*this) - _rhs).Norm();
-} // aVector2D<T>::Distance
+// template<class T>
+// dbl aVector2D<T>::distance(const aVector2D<T>	&_rhs) const
+// {
+//     return ((*this) - _rhs).Norm();
+// } // aVector2D<T>::distance
 
 
 /*******************************************************************************
-* ScalarProduct
+* scalarProduct
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::ScalarProduct(const aVector2D<T> &_rhs) const
+dbl aVector2D<T>::scalarProduct(const aVector2D<T> &_rhs) const
 {
     return (dbl) (m_x * _rhs.m_x + m_y * _rhs.m_y);
-} // ScalarProduct
+} // scalarProduct
 
 
 } // namespace aMath

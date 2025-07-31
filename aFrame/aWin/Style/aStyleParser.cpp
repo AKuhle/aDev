@@ -19,6 +19,7 @@
 
 #include "aMainWin.h"
 #include "aStyleItemFillSolid.h"
+#include "aStyleItemFillGradient.h"
 
 using namespace std;
 
@@ -124,30 +125,68 @@ void aStyleParser::setBg(aBaseWin_i                 *_pBaseWin,
 *******************************************************************************/
 shared_ptr<aStyleItemFill> aStyleParser::parseFillItem(aString    _sValue) const
 {
+
     shared_ptr<aStyleItemFill>  pFillItem;
+    std::string     reAny = R"(.*)";
+    std::string     reRgb = R"(rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\))";
+
+    std::string     sValue = _sValue.to_stdString();
+    std::smatch     matches;
+
+    std::regex      solidRgbPattern(reAny + R"(solid\s*\(\s*)" + reRgb + reAny + R"(\s*\))");
+    std::regex      gradientRgbPattern(reAny + R"(gradient\s*\(\s*)" + reRgb + reAny + reRgb + R"(\s*,\s*(\d+)\s*\))");
 
     // check for solid color
-    if (_sValue.contains("solid"))
+    if (std::regex_match(sValue, matches, solidRgbPattern))
     {
-        if (_sValue.contains("rgb"))
-        {
-            std::string     sValue      = _sValue.to_stdString();
-            std::smatch     matches;
-            // Regex pattern für rgb(zahl, zahl, zahl, zahl)  -> rgb(r,g,b,a)
-            std::regex      solidRgbPattern(R"(.*\(\s*rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d+))?\s*\)*s*\))");
+        // matches[0] ist der komplette Match, matches[1-4] sind die Gruppen
+        auto col = aColor::fromU8(std::stoi(matches[1].str()),
+                                  std::stoi(matches[2].str()),
+                                  std::stoi(matches[3].str()),
+                                  std::stoi(matches[4].str()));
 
-            if (std::regex_match(sValue, matches, solidRgbPattern))
-            {
-                // matches[0] ist der komplette Match, matches[1-4] sind die Gruppen
-                auto col = aColor::fromU8(std::stoi(matches[1].str()),
-                                          std::stoi(matches[2].str()),
-                                          std::stoi(matches[3].str()),
-                                          std::stoi(matches[4].str()));
+        pFillItem = make_shared<aStyleItemFillSolid> (col);
+    }
 
-                pFillItem = make_shared<aStyleItemFillSolid> (col);
-            }
-        }
-    } // if (_sValue.contains("solid"))
+    // check for solid color
+    else if (std::regex_match(sValue, matches, gradientRgbPattern))
+    {
+        // matches[0] ist der komplette Match, matches[1-4] sind die Gruppen
+        auto col1 = aColor::fromU8(std::stoi(matches[1].str()),
+                                   std::stoi(matches[2].str()),
+                                   std::stoi(matches[3].str()),
+                                   std::stoi(matches[4].str()));
+
+        auto col2 = aColor::fromU8(std::stoi(matches[5].str()),
+                                   std::stoi(matches[6].str()),
+                                   std::stoi(matches[7].str()),
+                                   std::stoi(matches[8].str()));
+
+        auto angle = std::stoi(matches[9].str());
+
+        pFillItem = make_shared<aStyleItemFillGradient> (col1, col2, angle);
+    }
+
+    // if (_sValue.contains("solid"))
+    // {
+    //     if (_sValue.contains("rgb"))
+    //     {
+    //         std::smatch     matches;
+    //         // Regex pattern für rgb(zahl, zahl, zahl, zahl)  -> rgb(r,g,b,a)
+    //         std::regex      solidRgbPattern(reAny + reRgb + reAny);
+
+    //         if (std::regex_match(sValue, matches, solidRgbPattern))
+    //         {
+    //             // matches[0] ist der komplette Match, matches[1-4] sind die Gruppen
+    //             auto col = aColor::fromU8(std::stoi(matches[1].str()),
+    //                                       std::stoi(matches[2].str()),
+    //                                       std::stoi(matches[3].str()),
+    //                                       std::stoi(matches[4].str()));
+
+    //             pFillItem = make_shared<aStyleItemFillSolid> (col);
+    //         }
+    //     }
+    // } // if (_sValue.contains("solid"))
 
     return pFillItem;
 } // aStyleParser::parseFillItem

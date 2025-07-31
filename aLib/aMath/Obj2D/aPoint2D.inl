@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aVector2D.inl
+* \file aPoint2D.inl
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -20,232 +20,232 @@ namespace aMath {
 
 
 /*******************************************************************************
-* aVector2D<T>::aVector2D
+* aPoint2D<T>::aPoint2D
 *******************************************************************************/
 template<class T>
-aVector2D<T>::aVector2D()
+aPoint2D<T>::aPoint2D()
 {
-} // aVector2D<T>::aVector2D
+} // aPoint2D<T>::aPoint2D
 
 
 /*******************************************************************************
-* aVector2D<T>::aVector2D
+* aPoint2D<T>::aPoint2D
 *******************************************************************************/
 template<class T>
-aVector2D<T>::aVector2D(const aVector2D<T> &_rhs)
+aPoint2D<T>::aPoint2D(const aPoint2D<T> &_rhs)
 : m_x(_rhs.m_x),
   m_y(_rhs.m_y)
 {
-} // aVector2D<T>::aVector2D
+} // aPoint2D<T>::aPoint2D
 
 
 template<class T>
 /*******************************************************************************
-* aVector2D<T>::aVector2D
+* aPoint2D<T>::aPoint2D
 *******************************************************************************/
-aVector2D<T>::aVector2D(T _x,
+aPoint2D<T>::aPoint2D(T _x,
                                T _y)
 : m_x(_x),
   m_y(_y)
 {
-} // aVector2D<T>::aVector2D
+} // aPoint2D<T>::aPoint2D
 
 
 template<class T>
-aVector2D<T>::~aVector2D()
+aPoint2D<T>::~aPoint2D()
 {
 }
 
 
 /*******************************************************************************
-* aVector2D<T>::Set
+* aPoint2D<T>::Set
 *******************************************************************************/
 template<class T>
-void aVector2D<T>::Set(T _x,
+void aPoint2D<T>::Set(T _x,
                               T _y)
 {
     m_x = _x;
     m_y = _y;
-} // aVector2D<T>::Set
+} // aPoint2D<T>::Set
 
 
 /*******************************************************************************
-* aVector2D<T>::operator=
+* aPoint2D<T>::operator=
 *******************************************************************************/
 template<class T>
-aVector2D<T>& aVector2D<T>::operator=(const aVector2D<T> &_rhs)
+aPoint2D<T>& aPoint2D<T>::operator=(const aPoint2D<T> &_rhs)
 {
     // avoid selfcopy
     m_x = _rhs.m_x;
     m_y = _rhs.m_y;
 
     return *this;
-} // aVector2D<T>::operator=
+} // aPoint2D<T>::operator=
 
 
 /*******************************************************************************
-* aVector2D<T>::operator==
+* aPoint2D<T>::operator==
 *******************************************************************************/
 template<class T>
-bool aVector2D<T>::operator==(const aVector2D<T>	&_rhs) const
+bool aPoint2D<T>::operator==(const aPoint2D<T>	&_rhs) const
 {
     return isEqual(m_x, _rhs.m_x) &&
            isEqual(m_y, _rhs.m_y);
-} // aVector2D<T>::operator==
+} // aPoint2D<T>::operator==
 
 
 /*******************************************************************************
-* aVector2D<T>::operator!=
+* aPoint2D<T>::operator!=
 *******************************************************************************/
 template<class T>
-bool aVector2D<T>::operator!=(const aVector2D<T>	&_rhs) const
+bool aPoint2D<T>::operator!=(const aPoint2D<T>	&_rhs) const
 {
     return isUnequal(m_x, _rhs.m_x) ||
            isUnequal(m_y, _rhs.m_y);
-} // aVector2D<T>::operator!=
+} // aPoint2D<T>::operator!=
 
 
 /*******************************************************************************
-* aVector2D<T>::operator+
+* aPoint2D<T>::operator+
 *******************************************************************************/
 template<class T>
-aVector2D<T> aVector2D<T>::operator+(const aVector2D<T>	&_rhs) const
+aPoint2D<T> aPoint2D<T>::operator+(const aPoint2D<T>	&_rhs) const
 {
-    return	aVector2D<T>(m_x + _rhs.m_x,
+    return	aPoint2D<T>(m_x + _rhs.m_x,
                                 m_y + _rhs.m_y);
-} // aVector2D<T>::operator+
+} // aPoint2D<T>::operator+
 
 
 /*******************************************************************************
-* aVector2D<T>::operator-
+* aPoint2D<T>::operator-
 *******************************************************************************/
 template<class T>
-aVector2D<T> aVector2D<T>::operator-(const aVector2D<T>	&_rhs) const
+aPoint2D<T> aPoint2D<T>::operator-(const aPoint2D<T>	&_rhs) const
 {
-    return aVector2D<T>(m_x - _rhs.m_x,
+    return aPoint2D<T>(m_x - _rhs.m_x,
                                m_y - _rhs.m_y);
-} // aVector2D<T>::operator-
+} // aPoint2D<T>::operator-
 
 
 /*******************************************************************************
-* aVector2D<T>::operator*
+* aPoint2D<T>::operator*
 *******************************************************************************/
 template<class T>
-aVector2D<T> aVector2D<T>::operator*(dbl	_t) const
+aPoint2D<T> aPoint2D<T>::operator*(dbl	_t) const
 {
-    return aVector2D<T>((T) (((dbl) m_x) * _t),
+    return aPoint2D<T>((T) (((dbl) m_x) * _t),
                                (T) (((dbl) m_y) * _t));
-} //  aVector2D<T>::operator*
+} //  aPoint2D<T>::operator*
 
 
 /*******************************************************************************
-* aVector2D<T>::operator/
+* aPoint2D<T>::operator/
 *******************************************************************************/
 template<class T>
-aVector2D<T> aVector2D<T>::operator/(dbl	_t) const
+aPoint2D<T> aPoint2D<T>::operator/(dbl	_t) const
 {
-    return aVector2D<T>((T) (((dbl) m_x) / _t),
+    return aPoint2D<T>((T) (((dbl) m_x) / _t),
                                (T) (((dbl) m_y) / _t));
-} // aVector2D<T>::operator/
+} // aPoint2D<T>::operator/
 
 
 /*******************************************************************************
-* aVector2D<T>::operator==
+* aPoint2D<T>::operator==
 *******************************************************************************/
 template<class T>
-aVector2D<T>& aVector2D<T>::operator+=(const aVector2D<T>	&_rhs)
+aPoint2D<T>& aPoint2D<T>::operator+=(const aPoint2D<T>	&_rhs)
 {
     m_x += _rhs.m_x;
     m_y += _rhs.m_y;
 
     return *this;
-} // aVector2D<T>::operator==
+} // aPoint2D<T>::operator==
 
 
 /*******************************************************************************
-* aVector2D<T>::operator-=
+* aPoint2D<T>::operator-=
 *******************************************************************************/
 template<class T>
-aVector2D<T>& aVector2D<T>::operator-=(const aVector2D<T>	&_rhs)
+aPoint2D<T>& aPoint2D<T>::operator-=(const aPoint2D<T>	&_rhs)
 {
     m_x -= _rhs.m_x;
     m_y -= _rhs.m_y;
 
     return *this;
-} // aVector2D<T>::operator-=
+} // aPoint2D<T>::operator-=
 
 
 /*******************************************************************************
-* aVector2D<T>::operator*=
+* aPoint2D<T>::operator*=
 *******************************************************************************/
 template<class T>
-aVector2D<T>& aVector2D<T>::operator*=(dbl	_t)
+aPoint2D<T>& aPoint2D<T>::operator*=(dbl	_t)
 {
     m_x = (T) (((dbl) m_x) * _t);
     m_y = (T) (((dbl) m_y) * _t);
 
     return *this;
-} // aVector2D<T>::operator*=
+} // aPoint2D<T>::operator*=
 
 
 /*******************************************************************************
-* aVector2D<T>::operator/=
+* aPoint2D<T>::operator/=
 *******************************************************************************/
 template<class T>
-aVector2D<T>& aVector2D<T>::operator/=(dbl _t)
+aPoint2D<T>& aPoint2D<T>::operator/=(dbl _t)
 {
     m_x = (T) (((dbl) m_x) / _t);
     m_y = (T) (((dbl) m_y) / _t);
 
     return *this;
-} // aVector2D<T>::operator/=
+} // aPoint2D<T>::operator/=
 
 
 /*******************************************************************************
-* aVector2D<T>::Normalize
+* aPoint2D<T>::Normalize
 *******************************************************************************/
 template<class T>
-void aVector2D<T>::Normalize()
+void aPoint2D<T>::Normalize()
 {
     *this /= Norm();
-} // aVector2D<T>::Normalize
+} // aPoint2D<T>::Normalize
 
 
 /*******************************************************************************
-* aVector2D<T>::Norm
+* aPoint2D<T>::Norm
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::Norm() const
+dbl aPoint2D<T>::Norm() const
 {
     return sqrt(((dbl) m_x) * m_x + ((dbl) m_y) * m_y);
-} // aVector2D<T>::Norm
+} // aPoint2D<T>::Norm
 
 
 /*******************************************************************************
-* aVector2D<T>::NormSquare
+* aPoint2D<T>::NormSquare
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::NormSquare() const
+dbl aPoint2D<T>::NormSquare() const
 {
     return ((dbl) m_x) * m_x + ((dbl) m_y) * m_y;
-} // aVector2D<T>::NormSquare
+} // aPoint2D<T>::NormSquare
 
 
 /*******************************************************************************
-* aVector2D<T>::Distance
+* aPoint2D<T>::Distance
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::Distance(const aVector2D<T>	&_rhs) const
+dbl aPoint2D<T>::Distance(const aPoint2D<T>	&_rhs) const
 {
     return ((*this) - _rhs).Norm();
-} // aVector2D<T>::Distance
+} // aPoint2D<T>::Distance
 
 
 /*******************************************************************************
 * ScalarProduct
 *******************************************************************************/
 template<class T>
-dbl aVector2D<T>::ScalarProduct(const aVector2D<T> &_rhs) const
+dbl aPoint2D<T>::ScalarProduct(const aPoint2D<T> &_rhs) const
 {
     return (dbl) (m_x * _rhs.m_x + m_y * _rhs.m_y);
 } // ScalarProduct

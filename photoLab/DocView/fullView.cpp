@@ -63,7 +63,7 @@ void FullView::updateScrollBars()
 /*******************************************************************************
 * FullView::setCenterPointInZoom
 *******************************************************************************/
-void FullView::setCenterPointInZoom(aVector2D<s32> /*_v2dCenter_zoom*/)
+void FullView::setCenterPointInZoom(aPoint2D<s32> /*_v2dCenter_zoom*/)
 {
     // does nothing, because the full image is always visible and centered
 } // FullView::setCenterPointInZoom

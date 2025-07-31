@@ -103,8 +103,8 @@ aToolBase* aToolMgr::ActiveTool() const
 *******************************************************************************/
 bool aToolMgr::toolMgrOnWheel(u32                  _u32Modifiers,
                               s32                  _s32Degree,
-                              const aVector2D<s32> &_v2dLocal,
-                              const aVector2D<s32> &_v2dGlobal)
+                              const aPoint2D<s32> &_v2dLocal,
+                              const aPoint2D<s32> &_v2dGlobal)
 {
     bool    bHandled = false;
 
@@ -205,8 +205,8 @@ bool aToolMgr::manageTool(aToolBase         *_pTool,
 //     * aToolMgr::ToolMgrOnEnter
 //     *******************************************************************************/
 //     bool aToolMgr::ToolMgrOnEnter(u32                  _u32Modifiers,
-//                                   const aVector2D<s32> &_v2dLocal,
-//                                   const aVector2D<s32> &_v2dGlobal)
+//                                   const aPoint2D<s32> &_v2dLocal,
+//                                   const aPoint2D<s32> &_v2dGlobal)
 //     {
 //         bool    bHandled = false;
 
@@ -244,8 +244,8 @@ bool aToolMgr::manageTool(aToolBase         *_pTool,
 //     *******************************************************************************/
 //     bool aToolMgr::ToolMgrOnDoubleClick(u32                   _u32Modifiers,
 //                                         u32                   _u32MouseButton,
-//                                         const aVector2D<s32>  &_v2dLocal,
-//                                         const aVector2D<s32>  &_v2dGlobal)
+//                                         const aPoint2D<s32>  &_v2dLocal,
+//                                         const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         bool    bHandled = false;
 
@@ -265,8 +265,8 @@ bool aToolMgr::manageTool(aToolBase         *_pTool,
 //     *******************************************************************************/
 //     bool aToolMgr::ToolMgrOnMousePress(u32                   _u32Modifiers,
 //                                        u32                   _u32MouseButton,
-//                                        const aVector2D<s32>  &_v2dLocal,
-//                                        const aVector2D<s32>  &_v2dGlobal)
+//                                        const aPoint2D<s32>  &_v2dLocal,
+//                                        const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         bool    bHandled = false;
 
@@ -286,8 +286,8 @@ bool aToolMgr::manageTool(aToolBase         *_pTool,
 //     *******************************************************************************/
 //     bool aToolMgr::ToolMgrOnMouseMove(u32                   _u32Modifiers,
 //                                       u32                   _u32MouseButton,
-//                                       const aVector2D<s32>  &_v2dLocal,
-//                                       const aVector2D<s32>  &_v2dGlobal)
+//                                       const aPoint2D<s32>  &_v2dLocal,
+//                                       const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         bool    bHandled = false;
 
@@ -307,8 +307,8 @@ bool aToolMgr::manageTool(aToolBase         *_pTool,
 //     *******************************************************************************/
 //     bool aToolMgr::ToolMgrOnMouseRelease(u32                   _u32Modifiers,
 //                                          u32                   _u32MouseButton,
-//                                          const aVector2D<s32>  &_v2dLocal,
-//                                          const aVector2D<s32>  &_v2dGlobal)
+//                                          const aPoint2D<s32>  &_v2dLocal,
+//                                          const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         bool    bHandled = false;
 

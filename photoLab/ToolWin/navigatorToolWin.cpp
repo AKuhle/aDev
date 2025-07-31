@@ -75,7 +75,7 @@ void NavigatorToolWin::setZoomFactor(dbl _dZoomFaktor) const
     MainWin     &mw     = getMainWin();
 
     // get the current centerpoint
-    aVector2D<s32> v2dCenter = pView->centerPoint_pic();
+    aPoint2D<s32> v2dCenter = pView->centerPoint_pic();
 
     pView->setZoomFactor(_dZoomFaktor);
     pView->setCenterPoint_pic(v2dCenter);

@@ -39,7 +39,7 @@ class FullView : public ViewBase
         void                updateRenderParams(RenderParams &_rp) override;
         void                doPaintBackground(aPainter &_painter) override;
 
-        void                setCenterPointInZoom(aVector2D<s32> _v2dCenter_zoom) override;
+        void                setCenterPointInZoom(aPoint2D<s32> _v2dCenter_zoom) override;
         void                updateScrollBars() override;
 
 

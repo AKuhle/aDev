@@ -83,6 +83,14 @@ void aVector<T>::push_back(const T &_t1,
 }
 
 
+//! add 1 element at the front
+template <typename T>
+void aVector<T>::push_front(const T &_t1)
+{
+    m_vec.insert(m_vec.begin(), _t1);
+}
+
+
 //! remove n elements fromt the front
 template <typename T>
 void aVector<T>::pop_front(s32   _s32Count)

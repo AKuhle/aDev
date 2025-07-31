@@ -129,7 +129,7 @@ void RenderParams::setVp_client(s32   _x_client,
 /*******************************************************************************
 * RenderParams::origin_zoom
 *******************************************************************************/
-const aVector2D<s32>& RenderParams::origin_zoom() const
+const aPoint2D<s32>& RenderParams::origin_zoom() const
 {
     return m_v2dOrigin_zoom;
 } // RenderParams::origin_zoom
@@ -138,7 +138,7 @@ const aVector2D<s32>& RenderParams::origin_zoom() const
 /*******************************************************************************
 * RenderParams::setOrigin_zoom
 *******************************************************************************/
-void RenderParams::setOrigin_zoom(const aVector2D<s32> &_v2dOrigin_zoom)
+void RenderParams::setOrigin_zoom(const aPoint2D<s32> &_v2dOrigin_zoom)
 {
     if (m_v2dOrigin_zoom != _v2dOrigin_zoom)
     {
@@ -154,7 +154,7 @@ void RenderParams::setOrigin_zoom(const aVector2D<s32> &_v2dOrigin_zoom)
 void RenderParams::setOrigin_zoom(s32   _x_zoom,
                                   s32   _y_zoom)
 {
-    setOrigin_zoom(aVector2D<s32>(_x_zoom, _y_zoom));
+    setOrigin_zoom(aPoint2D<s32>(_x_zoom, _y_zoom));
 } // RenderParams::setOrigin_zoom
 
 

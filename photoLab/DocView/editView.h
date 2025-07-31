@@ -40,7 +40,7 @@ class EditView : public ViewBase
         void            updateRenderParams(RenderParams &_rp) override;
 
         void            updateScrollBars() override;
-        void            setCenterPointInZoom(aVector2D<s32> _v2dCenter_zoom) override;
+        void            setCenterPointInZoom(aPoint2D<s32> _v2dCenter_zoom) override;
 
 
     /*******************************************************************************
@@ -53,8 +53,8 @@ class EditView : public ViewBase
 
         // bool            onMouseMove(u32                     _u32Modifiers,
         //                             u32                     _u32MouseButton,
-        //                             const aVector2D<s32>    &_v2dLocal,
-        //                             const aVector2D<s32>    &_v2dGlobal) override;
+        //                             const aPoint2D<s32>    &_v2dLocal,
+        //                             const aPoint2D<s32>    &_v2dGlobal) override;
 
 
 }; // class EditView

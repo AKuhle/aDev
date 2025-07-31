@@ -32,14 +32,6 @@ namespace aWin {
 /*******************************************************************************
 * aStyleItemFillSolid::aStyleItemFillSolid
 *******************************************************************************/
-aStyleItemFillSolid::aStyleItemFillSolid()
-{
-} // aStyleItemFillSolid::aStyleItemFillSolid
-
-
-/*******************************************************************************
-* aStyleItemFillSolid::aStyleItemFillSolid
-*******************************************************************************/
 aStyleItemFillSolid::aStyleItemFillSolid(const aColor   &_col)
 : m_fillColor(_col)
 {

@@ -53,14 +53,28 @@ class aPainter : private QPainter,
     * uses/sets the current Pen!
     *******************************************************************************/
     public:
-        void            drawFilledRect(s32          _x,
-                                       s32          _y,
-                                       s32          _w,
-                                       s32          _h,
-                                       const aColor *_pColor = nullptr) override;
+        void            _drawFilledRect(s32          _x,
+                                        s32          _y,
+                                        s32          _w,
+                                        s32          _h,
+                                        const aColor *_pColor = nullptr) override;
 
-        void            drawFilledRect(const aRect2D<s32>   &_r2d,
-                                       const aColor         *_pColor = nullptr) override;
+
+    /*******************************************************************************
+    * drawGradientRect
+    * uses/sets the current Brush!
+    *******************************************************************************/
+    public:
+        void            _drawGradientRect(s32           _x,
+                                          s32           _y,
+                                          s32           _w,
+                                          s32           _h,
+                                          s32           _s32GradStartX,
+                                          s32           _s32GradStartY,
+                                          s32           _s32GradEndX,
+                                          s32           _s32GradEndY,
+                                          const aColor  &_colStart,
+                                          const aColor  &_colEnd) override;
 
 
     // /*******************************************************************************

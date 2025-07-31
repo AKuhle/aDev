@@ -68,7 +68,7 @@ void EditView::updateScrollBars()
 /*******************************************************************************
 * EditView::setCenterPointInZoom
 *******************************************************************************/
-void EditView::setCenterPointInZoom(aVector2D<s32> /*_v2dCenter_zoom*/)
+void EditView::setCenterPointInZoom(aPoint2D<s32> /*_v2dCenter_zoom*/)
 {
 } // EditView::setCenterPointInZoom
 
@@ -165,8 +165,8 @@ void EditView::updateRenderParams(RenderParams &_rp)
 *******************************************************************************/
 // bool EditView::onMouseMove(u32                  /*_u32Modifiers*/,
 //                            u32                  /*_u32MouseButton*/,
-//                            const aVector2D<s32> &_v2dLocal,
-//                            const aVector2D<s32> &/*_v2dGlobal*/)
+//                            const aPoint2D<s32> &_v2dLocal,
+//                            const aPoint2D<s32> &/*_v2dGlobal*/)
 // {
 //     MainWin     &mw         = getMainWin();
 

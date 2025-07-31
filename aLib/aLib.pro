@@ -122,8 +122,8 @@ HEADERS += \
     aMath/Obj2D/aRect2D.inl \
     aMath/Obj2D/aTransform2D.h \
     aMath/Obj2D/aTransform2D.inl \
-    aMath/Obj2D/aVector2D.h \
-    aMath/Obj2D/aVector2D.inl \
+    aMath/Obj2D/aPoint2D.h \
+    aMath/Obj2D/aPoint2D.inl \
     aMath/Obj3D/aMathObj3D.h \
     aMath/aMathObj.h \
     aMath/aMath_def.h \

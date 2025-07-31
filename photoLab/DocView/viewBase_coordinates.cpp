@@ -234,9 +234,9 @@ aDimension2D<s32> ViewBase::picDimension_zoom() const
 /*******************************************************************************
 * ViewBase::pic2Zoom
 *******************************************************************************/
-aVector2D<s32> ViewBase::pic2Zoom(const aVector2D<s32> &_v2d_pic) const
+aPoint2D<s32> ViewBase::pic2Zoom(const aPoint2D<s32> &_v2d_pic) const
 {
-    return aVector2D<s32> (_v2d_pic * zoomFactor());
+    return aPoint2D<s32> (_v2d_pic * zoomFactor());
 } // ViewBase::pic2Zoom
 
 
@@ -253,7 +253,7 @@ aVector2D<s32> ViewBase::pic2Zoom(const aVector2D<s32> &_v2d_pic) const
 /*******************************************************************************
 * ViewBase::centerPoint_pic
 *******************************************************************************/
-aVector2D<s32> ViewBase::centerPoint_pic() const
+aPoint2D<s32> ViewBase::centerPoint_pic() const
 {
     return m_renderParams.viewPort_pic().centerPoint();
 } // ViewBase::centerPoint_pic
@@ -262,7 +262,7 @@ aVector2D<s32> ViewBase::centerPoint_pic() const
 /*******************************************************************************
 * ViewBase::centerPoint_zoom
 *******************************************************************************/
-aVector2D<s32> ViewBase::centerPoint_zoom() const
+aPoint2D<s32> ViewBase::centerPoint_zoom() const
 {
     return m_renderParams.viewPort_zoom().centerPoint();
 } // ViewBase::centerPoint_zoom
@@ -271,7 +271,7 @@ aVector2D<s32> ViewBase::centerPoint_zoom() const
 /*******************************************************************************
 * ViewBase::setCenterPoint_pic
 *******************************************************************************/
-void ViewBase::setCenterPoint_pic(aVector2D<s32> _v2dCenter_pic)
+void ViewBase::setCenterPoint_pic(aPoint2D<s32> _v2dCenter_pic)
 {
     // call the virtual member because
     // some views have a parent with scrollbars, which must be adjusted, other not
@@ -289,14 +289,14 @@ void ViewBase::setCenterPoint_pic(s32     _x_pic,
     // call the virtual member because
     // some views have a parent with scrollbars, which must be adjusted, other not
     // fullView e.g. will probabla ignore this etc.
-    setCenterPointInZoom(pic2Zoom(aVector2D<s32> (_x_pic, _y_pic)));
+    setCenterPointInZoom(pic2Zoom(aPoint2D<s32> (_x_pic, _y_pic)));
 } // ViewBase::setCenterPoint_pic
 
 
 /*******************************************************************************
 * ViewBase::setCenterPoint_zoom
 *******************************************************************************/
-void ViewBase::setCenterPoint_zoom(aVector2D<s32> _v2dCenter_zoom)
+void ViewBase::setCenterPoint_zoom(aPoint2D<s32> _v2dCenter_zoom)
 {
     // call the virtual member because
     // some views have a parent with scrollbars, which must be adjusted, other not
@@ -314,7 +314,7 @@ void ViewBase::setCenterPoint_zoom(s32     _x_zoom,
     // call the virtual member because
     // some views have a parent with scrollbars, which must be adjusted, other not
     // fullView e.g. will probabla ignore this etc.
-    setCenterPointInZoom(aVector2D<s32> (_x_zoom, _y_zoom));
+    setCenterPointInZoom(aPoint2D<s32> (_x_zoom, _y_zoom));
 } // ViewBase::setCenterPoint_zoom
 
 

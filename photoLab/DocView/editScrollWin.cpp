@@ -86,8 +86,8 @@ bool EditScrollWin::onPaint()
 *******************************************************************************/
 bool EditScrollWin::onWheel(u32                  _u32Modifiers,
                             s32                  _s32Degree,
-                            const aVector2D<s32> &_v2dLocal,
-                            const aVector2D<s32> &_v2dGlobal)
+                            const aPoint2D<s32> &_v2dLocal,
+                            const aPoint2D<s32> &_v2dGlobal)
 {
     ViewBase* pView = viewBase();
     CHECK_PRE_CONDITION(pView != nullptr, false);

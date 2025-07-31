@@ -20,7 +20,7 @@
 
 #include "aBaseWin_i.h"
 
-#include "aDimension2D.h"
+#include "aRect.h"
 
 // #include <QDragEnterEvent>
 // #include <QDragMoveEvent>
@@ -86,7 +86,7 @@ class aBaseWin : public QObject,
         void                    setMaxW(s32 _s32MaxW) override;
         void                    setMaxH(s32 _s32MaxH) override;
 
-        aRect2D<s32>            geometryRect() const override;
+        aRect                   geometryRect() const override;
         s32                     geometryW() const override;
         s32                     geometryH() const override;
 

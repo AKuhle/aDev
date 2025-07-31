@@ -80,8 +80,8 @@ u64 aToolBase::toolBaseFunction() const
 *******************************************************************************/
 enumToolResult aToolBase::onWheel(u32                     /*_u32Modifiers*/,
                                   s32                     /*_s32Degree*/,
-                                  const aVector2D<s32>    &/*_v2dLocal*/,
-                                  const aVector2D<s32>    &/*_v2dGlobal*/)
+                                  const aPoint2D<s32>    &/*_v2dLocal*/,
+                                  const aPoint2D<s32>    &/*_v2dGlobal*/)
 {
     return enumToolResult::Unhandled;
 } // aToolBase::onWheel
@@ -100,8 +100,8 @@ void aToolBase::onToolActivated(bool /*_bActivated*/)
 *******************************************************************************/
 enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
                                       s32                    _s32Deree,
-                                      const aVector2D<s32>   &_v2dLocal,
-                                      const aVector2D<s32>   &_v2dGlobal)
+                                      const aPoint2D<s32>   &_v2dLocal,
+                                      const aPoint2D<s32>   &_v2dGlobal)
 {
     return onWheel(_u32Modifiers, _s32Deree, _v2dLocal, _v2dGlobal);
 } // aToolBase::toolOnWheel
@@ -121,7 +121,7 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     /*******************************************************************************
 //     * aToolBase::GetMoveDeltaLocal
 //     *******************************************************************************/
-//     aVector2D<s32> aToolBase::GetMoveDeltaLocal() const
+//     aPoint2D<s32> aToolBase::GetMoveDeltaLocal() const
 //     {
 //         return m_v2dMoveCurrentLocal - m_v2dMoveStartLocal;
 //     } // aToolBase::GetMoveDeltaLocal
@@ -130,7 +130,7 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     /*******************************************************************************
 //     * aToolBase::GetMoveDeltaGlobal
 //     *******************************************************************************/
-//     aVector2D<s32> aToolBase::GetMoveDeltaGlobal() const
+//     aPoint2D<s32> aToolBase::GetMoveDeltaGlobal() const
 //     {
 //         return m_v2dMoveCurrentGlobal - m_v2dMoveStartGlobal;
 //     } // aToolBase::GetMoveDeltaGlobal
@@ -174,8 +174,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnContextMenu
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnContextMenu(u32                     /*_u32Modifiers*/,
-//                                             const aVector2D<s32>    &/*_v2dLocal*/,
-//                                             const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                             const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                             const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnContextMenu
@@ -185,8 +185,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnEnter
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnEnter(u32                     /*_u32Modifiers*/,
-//                                       const aVector2D<s32>    &/*_v2dLocal*/,
-//                                       const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                       const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                       const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnEnter
@@ -206,8 +206,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnDoubleClick(u32                   /*_u32Modifiers*/,
 //                                             u32                   /*_u32MouseButton*/,
-//                                             const aVector2D<s32>  &/*_v2dLocal*/,
-//                                             const aVector2D<s32>  &/*_v2dGlobal*/)
+//                                             const aPoint2D<s32>  &/*_v2dLocal*/,
+//                                             const aPoint2D<s32>  &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnDoubleClick
@@ -217,8 +217,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnLDoubleClick
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnLDoubleClick(u32                     /*_u32Modifiers*/,
-//                                              const aVector2D<s32>    &/*_v2dLocal*/,
-//                                              const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                              const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                              const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnLDoubleClick
@@ -228,8 +228,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnMDoubleClick
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMDoubleClick(u32                     /*_u32Modifiers*/,
-//                                              const aVector2D<s32>    &/*_v2dLocal*/,
-//                                              const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                              const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                              const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMDoubleClick
@@ -239,8 +239,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnRDoubleClick
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnRDoubleClick(u32                     /*_u32Modifiers*/,
-//                                              const aVector2D<s32>    &/*_v2dLocal*/,
-//                                              const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                              const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                              const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnRDoubleClick
@@ -251,8 +251,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMousePress(u32                   /*_u32Modifiers*/,
 //                                            u32                   /*_u32MouseButton*/,
-//                                            const aVector2D<s32>  &/*_v2dLocal*/,
-//                                            const aVector2D<s32>  &/*_v2dGlobal*/)
+//                                            const aPoint2D<s32>  &/*_v2dLocal*/,
+//                                            const aPoint2D<s32>  &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMousePress
@@ -262,8 +262,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnLMousePress
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnLMousePress(u32                     /*_u32Modifiers*/,
-//                                             const aVector2D<s32>    &/*_v2dLocal*/,
-//                                             const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                             const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                             const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         enumToolResult eResult  = enumToolResult::Unhandled;
 
@@ -283,8 +283,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnMMousePress
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMMousePress(u32                     /*_u32Modifiers*/,
-//                                             const aVector2D<s32>    &/*_v2dLocal*/,
-//                                             const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                             const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                             const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMMousePress
@@ -294,8 +294,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnRMousePress
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnRMousePress(u32                     /*_u32Modifiers*/,
-//                                         const aVector2D<s32>    &/*_v2dLocal*/,
-//                                         const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                         const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                         const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnRMousePress
@@ -306,8 +306,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMouseMove(u32                   /*_u32Modifiers*/,
 //                                       u32                   /*_u32MouseButton*/,
-//                                       const aVector2D<s32>  &/*_v2dLocal*/,
-//                                       const aVector2D<s32>  &/*_v2dGlobal*/)
+//                                       const aPoint2D<s32>  &/*_v2dLocal*/,
+//                                       const aPoint2D<s32>  &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnRMouseMove
@@ -317,8 +317,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnLMouseMove
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnLMouseMove(u32                     /*_u32Modifiers*/,
-//                                            const aVector2D<s32>    &/*_v2dLocal*/,
-//                                            const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                            const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                            const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         CHECK_PRE_CONDITION(GetOwnerWin() != nullptr, enumToolResult::Unhandled);
 //         enumToolResult eResult  = enumToolResult::Unhandled;
@@ -340,8 +340,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnMMouseMove
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMMouseMove(u32                     /*_u32Modifiers*/,
-//                                        const aVector2D<s32>    &/*_v2dLocal*/,
-//                                        const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                        const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                        const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMMouseMove
@@ -351,8 +351,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnRMouseMove
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnRMouseMove(u32                     /*_u32Modifiers*/,
-//                                        const aVector2D<s32>    &/*_v2dLocal*/,
-//                                        const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                        const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                        const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnRMouseMove
@@ -363,8 +363,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMouseRelease(u32                   /*_u32Modifiers*/,
 //                                          u32                   /*_u32MouseButton*/,
-//                                          const aVector2D<s32>  &/*_v2dLocal*/,
-//                                          const aVector2D<s32>  &/*_v2dGlobal*/)
+//                                          const aPoint2D<s32>  &/*_v2dLocal*/,
+//                                          const aPoint2D<s32>  &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMouseRelease
@@ -374,8 +374,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnLMouseRelease
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnLMouseRelease(u32                     /*_u32Modifiers*/,
-//                                           const aVector2D<s32>    &/*_v2dLocal*/,
-//                                           const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                           const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                           const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         CHECK_PRE_CONDITION(GetOwnerWin() != nullptr, enumToolResult::Unhandled);
 //         enumToolResult eResult  = enumToolResult::Unhandled;
@@ -401,8 +401,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnMMouseRelease
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnMMouseRelease(u32                     /*_u32Modifiers*/,
-//                                           const aVector2D<s32>    &/*_v2dLocal*/,
-//                                           const aVector2D<s32>    &/*_v2dGlobal*/)
+//                                           const aPoint2D<s32>    &/*_v2dLocal*/,
+//                                           const aPoint2D<s32>    &/*_v2dGlobal*/)
 //     {
 //         return enumToolResult::Unhandled;
 //     } // aToolBase::OnMMouseRelease
@@ -412,8 +412,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::OnRMouseRelease
 //     *******************************************************************************/
 //     enumToolResult aToolBase::OnRMouseRelease(u32                     _u32Modifiers,
-//                                           const aVector2D<s32>    &_v2dLocal,
-//                                           const aVector2D<s32>    &_v2dGlobal)
+//                                           const aPoint2D<s32>    &_v2dLocal,
+//                                           const aPoint2D<s32>    &_v2dGlobal)
 //     {
 //         CHECK_PRE_CONDITION(GetOwnerWin() != nullptr, enumToolResult::Unhandled);
 //         enumToolResult eResult  = enumToolResult::Unhandled;
@@ -430,8 +430,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     * aToolBase::ToolOnEnter
 //     *******************************************************************************/
 //     enumToolResult aToolBase::ToolOnEnter(u32                    _u32Modifiers,
-//                                           const aVector2D<s32>   &_v2dLocal,
-//                                           const aVector2D<s32>   &_v2dGlobal)
+//                                           const aPoint2D<s32>   &_v2dLocal,
+//                                           const aPoint2D<s32>   &_v2dGlobal)
 //     {
 //         return OnEnter(_u32Modifiers, _v2dLocal, _v2dGlobal);
 //     } // aToolBase::ToolOnEnter
@@ -451,8 +451,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::ToolOnDoubleClick(u32                   _u32Modifiers,
 //                                             u32                   _u32MouseButton,
-//                                             const aVector2D<s32>  &_v2dLocal,
-//                                             const aVector2D<s32>  &_v2dGlobal)
+//                                             const aPoint2D<s32>  &_v2dLocal,
+//                                             const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         enumToolResult eResult  = enumToolResult::Unhandled;
 
@@ -484,8 +484,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::ToolOnMousePress(u32                   _u32Modifiers,
 //                                                u32                   _u32MouseButton,
-//                                                const aVector2D<s32>  &_v2dLocal,
-//                                                const aVector2D<s32>  &_v2dGlobal)
+//                                                const aPoint2D<s32>  &_v2dLocal,
+//                                                const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         enumToolResult eResult  = enumToolResult::Unhandled;
 
@@ -528,8 +528,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::ToolOnMouseMove(u32                   _u32Modifiers,
 //                                               u32                   _u32MouseButton,
-//                                               const aVector2D<s32>  &_v2dLocal,
-//                                               const aVector2D<s32>  &_v2dGlobal)
+//                                               const aPoint2D<s32>  &_v2dLocal,
+//                                               const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         enumToolResult eResult  = enumToolResult::Unhandled;
 
@@ -564,8 +564,8 @@ enumToolResult aToolBase::toolOnWheel(u32                    _u32Modifiers,
 //     *******************************************************************************/
 //     enumToolResult aToolBase::ToolOnMouseRelease(u32                   _u32Modifiers,
 //                                              u32                   /*_u32MouseButton*/,
-//                                              const aVector2D<s32>  &_v2dLocal,
-//                                              const aVector2D<s32>  &_v2dGlobal)
+//                                              const aPoint2D<s32>  &_v2dLocal,
+//                                              const aPoint2D<s32>  &_v2dGlobal)
 //     {
 //         enumToolResult eResult  = enumToolResult::Unhandled;
 
