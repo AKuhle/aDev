@@ -34,31 +34,31 @@ namespace aMath {
 /*******************************************************************************
 * class aVector2D
 *******************************************************************************/
-template<class T>
+template<class T = dbl>
 class aVector2D : public aMathObj2D
 {
     private:
-        T		m_x	{ 0 };			//!< x-component
-        T		m_y	{ 0 };			//!< y-component
+        T		m_dx	{ 0 };			//!< x-component
+        T		m_dy	{ 0 };			//!< y-component
 
     public:
         aVector2D();
 
         aVector2D(const aVector2D<T>& _rhs);
 
-        aVector2D(T _x,
-                  T _y);
+        aVector2D(T _dx,
+                  T _dy);
 
         virtual ~aVector2D();
 
-        T                       x() const       { return m_x; }
-        T                       y() const       { return m_y; }
+        T                       dx() const       { return m_dx; }
+        T                       dy() const       { return m_dy; }
 
-        T&                      x()             { return m_x; }
-        T&                      y()             { return m_y; }
+        T&                      dx()             { return m_dx; }
+        T&                      dy()             { return m_dy; }
 
-        void					set(T _x,
-                                    T _y);
+        void					set(T _dx,
+                                    T _dy);
 
         aVector2D<T>&           operator=(const aVector2D<T> &_rhs);
 
@@ -80,16 +80,14 @@ class aVector2D : public aMathObj2D
         dbl                     norm() const;								//!< absolute value [=sqrt(x*x + y*y)]
         dbl                     normSquare() const;							//!< square  of the absolute value
 
-        //dbl                     distance(const aVector2D<T> &_rhs) const;	//!< distance between the two points
-
         dbl                     scalarProduct(const aVector2D<T> &_rhs) const;
 
 
         friend std::ostream& operator<<(std::ostream&       _os,
                                         const aVector2D<T>  &_v2d)
         {
-            _os << "(x:" << _v2d.m_x
-                << ", y:" << _v2d.m_y
+            _os << "(x:" << _v2d.m_dx
+                << ", y:" << _v2d.m_dy
                 << ")";
               return _os;
         } // operator<<

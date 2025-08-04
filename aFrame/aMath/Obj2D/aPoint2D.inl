@@ -39,10 +39,10 @@ aPoint2D<T>::aPoint2D(const aPoint2D<T> &_rhs)
 } // aPoint2D<T>::aPoint2D
 
 
-template<class T>
 /*******************************************************************************
 * aPoint2D<T>::aPoint2D
 *******************************************************************************/
+template<class T>
 aPoint2D<T>::aPoint2D(T _x,
                       T _y)
 : m_x(_x),

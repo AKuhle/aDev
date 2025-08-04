@@ -34,7 +34,7 @@ namespace aMath {
 /*******************************************************************************
 * class aPoint2D
 *******************************************************************************/
-template<class T>
+template<class T = dbl>
 class aPoint2D : public aMathObj2D
 {
     private:

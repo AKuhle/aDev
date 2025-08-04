@@ -35,7 +35,7 @@ namespace aMath {
 /*******************************************************************************
 * class aParametricLine2D
 *******************************************************************************/
-template<class T>
+template<class T = dbl>
 class aParametricLine2D : public aMathObj2D
 {
     private:
@@ -43,20 +43,21 @@ class aParametricLine2D : public aMathObj2D
         aVector2D<dbl>  m_v2dNormDir;   // normalized direction (a, b)
 
     public:
-        aParametricLine2D();
-
         aParametricLine2D(const aParametricLine2D<T>& _rhs);
-
-        aParametricLine2D(const aPoint2D<T>     &_p1,
-                          const aPoint2D<T>     &_p2);
-
-        aParametricLine2D(const aPoint2D<T>     &_p,
-                          dbl                   _dAngle_rad);
 
         aParametricLine2D(T     _x1,
                           T     _y1,
                           T     _x2,
                           T     _y2);
+
+        aParametricLine2D(const aPoint2D<T>     &_p1,
+                          const aPoint2D<T>     &_p2) : aParametricLine2D(_p1.x(),
+                                                                          _p1.y(),
+                                                                          _p2.x(),
+                                                                          _p2.y()) {}
+
+        aParametricLine2D(const aPoint2D<T>     &_p,
+                          dbl                   _dAngle_rad);
 
         virtual ~aParametricLine2D();
 
@@ -92,7 +93,7 @@ class aParametricLine2D : public aMathObj2D
                                         const aParametricLine2D<T>  &_l2d)
         {
             _os << "l = " << _l2d.m_p2dSupport <<
-                   " + r" << _l2d.m_v2dNormDir;
+                   " + r*" << _l2d.m_v2dNormDir;
               return _os;
         } // operator<<
 }; // class aParametricLine2D

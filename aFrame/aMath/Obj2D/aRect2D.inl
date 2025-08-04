@@ -17,7 +17,7 @@
 *******************************************************************************/
 #include "aVector.h"
 
-#include "aParametricLine2D.h"
+//#include "aParametricLine2D.h"
 
 using namespace std;
 
@@ -55,10 +55,25 @@ aRect2D<T>::aRect2D(const aRect2D<T>	&_rhs)
 * aRect2D<T>::aRect2D()
 *******************************************************************************/
 template<class T>
-aRect2D<T>::aRect2D(const T		_x,
-                           const T		_y,
-                           const T		_w,
-                           const T		_h)
+aRect2D<T>::aRect2D(const aRect	&_rctTransform)
+: m_x(_rctTransform.x()),
+  m_w(_rctTransform.w()),
+  m_h(_rctTransform.h()),
+  m_rctTransform(_rctTransform),
+  m_bTransform(true)
+{
+    m_y = win2MathY(_rctTransform.y());
+} // aRect2D<T>::aRect2D()
+
+
+/*******************************************************************************
+* aRect2D<T>::aRect2D()
+*******************************************************************************/
+template<class T>
+aRect2D<T>::aRect2D(T   _x,
+                    T	_y,
+                    T	_w,
+                    T	_h)
 : m_x(_x),
   m_y(_y),
   m_w(_w),
@@ -80,10 +95,10 @@ aRect2D<T>::~aRect2D()
 * aRect2D<T>::set
 *******************************************************************************/
 template<class T>
-void aRect2D<T>::set(const T	_x,
-                            const T	_y,
-                            const T	_w,
-                            const T	_h)
+void aRect2D<T>::set(T	_x,
+                     T	_y,
+                     T	_w,
+                     T	_h)
 {
     m_x = _x;
     m_y = _y;
@@ -98,75 +113,13 @@ void aRect2D<T>::set(const T	_x,
 template<class T>
 aRect2D<T>& aRect2D<T>::operator=(const aRect2D<T>	&_rhs)
 {
-    // avoid selfcopy
-    if (this != &_rhs)
-    {
-        m_x = _rhs.m_x;
-        m_y = _rhs.m_y;
-        m_w = _rhs.m_w;
-        m_h = _rhs.m_h;
-    }
+    m_x = _rhs.m_x;
+    m_y = _rhs.m_y;
+    m_w = _rhs.m_w;
+    m_h = _rhs.m_h;
 
     return *this;
 } // aRect2D<T>::operator=
-
-
-/*******************************************************************************
-* aRect2D<T>::operator+
-*******************************************************************************/
-template<class T>
-aRect2D<T> aRect2D<T>::operator+(const aMargin &_margin) const
-{
-    return	aRect2D<T> (m_x - _margin.l(),
-                        m_y - _margin.t(),
-                        m_w + _margin.w(),
-                        m_h + _margin.h());
-} // aRect2D<T>::operator+
-
-
-/*******************************************************************************
-* aRect2D<T>::operator-
-*******************************************************************************/
-template<class T>
-aRect2D<T> aRect2D<T>::operator-(const aMargin &_margin) const
-{
-    return	aRect2D<T> (m_x + _margin.l(),
-                        m_y + _margin.t(),
-                        m_w - _margin.w(),
-                        m_h - _margin.h());
-} // aRect2D<T>::operator-
-
-
-/*******************************************************************************
-* aRect2D<T>::operator+=
-*******************************************************************************/
-template<class T>
-aRect2D<T>& aRect2D<T>::operator+=(const aMargin &_margin)
-{
-    m_x -= _margin.l();
-    m_y -= _margin.t();
-    m_w += _margin.w();
-    m_h += _margin.h();
-
-    return *this;
-} // aRect2D<T>::operator+=
-
-
-
-
-/*******************************************************************************
-* aRect2D<T>::operator-=
-*******************************************************************************/
-template<class T>
-aRect2D<T>& aRect2D<T>::operator-=(const aMargin &_margin)
-{
-    m_x += _margin.l();
-    m_y += _margin.t();
-    m_w -= _margin.w();
-    m_h -= _margin.h();
-
-    return *this;
-} // aRect2D<T>::operator-=
 
 
 /*******************************************************************************
@@ -175,10 +128,10 @@ aRect2D<T>& aRect2D<T>::operator-=(const aMargin &_margin)
 template<class T>
 bool aRect2D<T>::operator==(const aRect2D<T>	&_rhs) const
 {
-    return isEqual<T>(m_x, _rhs.m_x) &&
-           isEqual<T>(m_y, _rhs.m_y) &&
-           isEqual<T>(m_w, _rhs.m_w) &&
-           isEqual<T>(m_h, _rhs.m_h);
+    return isEqual(m_x, _rhs.m_x) &&
+           isEqual(m_y, _rhs.m_y) &&
+           isEqual(m_w, _rhs.m_w) &&
+           isEqual(m_h, _rhs.m_h);
 } // aRect2D<T>::operator==
 
 
@@ -201,7 +154,7 @@ bool aRect2D<T>::operator!=(const aRect2D<T>	&_rhs) const
 template<class T>
 aDimension2D<T> aRect2D<T>::dimension() const
 {
-    return aDimension2D<T> (m_w, m_h);
+    return aDimension2D(m_w, m_h);
 } // qRect2D<T, Tprec>::dimension()
 
 
@@ -211,8 +164,8 @@ aDimension2D<T> aRect2D<T>::dimension() const
 template<class T>
 void aRect2D<T>::resize(dbl _dFactor)
 {
-    m_w = (T) (_dFactor * m_w);
-    m_h = (T) (_dFactor * m_h);
+    m_w = static_cast<T> (_dFactor * m_w);
+    m_h = static_cast<T> (_dFactor * m_h);
 } // qRect2D<T, Tprec>::resize()
 
 
@@ -222,8 +175,8 @@ void aRect2D<T>::resize(dbl _dFactor)
 template<class T>
 aPoint2D<T> aRect2D<T>::centerPoint() const
 {
-    return aPoint2D<T> ((T) (((dbl) m_x) + ((dbl) m_w)/2),
-                         (T) (((dbl) m_y) + ((dbl) m_h)/2));
+    return aPoint2D<T> ((m_x + m_w) / 2,
+                        (m_y + m_h) / 2);
 } // qRect2D<T, Tprec>::GetCenterPoint()
 
 
@@ -234,8 +187,8 @@ template<class T>
 void aRect2D<T>::setCenterPoint(const T	_x,
                                 const T	_y)
 {
-    m_x = _x - w/2;
-    m_y = _y - h/2;
+    m_x = _x - w / 2;
+    m_y = _y - h / 2;
 } // qRect2D<T, Tprec>::setCenterPoint
 
 
@@ -291,125 +244,132 @@ void aRect2D<T>::expand(T _tValue)
 /*******************************************************************************
 * aRect2D<T, Tprec>::intersect
 *******************************************************************************/
-template<class T>
-aRect2D<T> aRect2D<T>::intersect(const aRect2D<T> &_rhs) const
-{
-    aRect2D<T>  r2dIntersect;   // initial the rect is empty
+// template<class T>
+// aRect2D<T> aRect2D<T>::intersect(const aRect2D<T> &_rhs) const
+// {
+//     aRect2D<T>  r2dIntersect;   // initial the rect is empty
 
-    T           tMinX   = aUtil::max<T>(m_x, _rhs.m_x);
-    T           tMinY   = aUtil::max<T>(m_y, _rhs.m_y);
-    T           tMaxX   = aUtil::min<T>(m_x + m_w, _rhs.m_x + _rhs.m_w);
-    T           tMaxY   = aUtil::min<T>(m_y + m_h, _rhs.m_y + _rhs.m_h);
+//     T           tMinX   = aUtil::max<T>(m_x, _rhs.m_x);
+//     T           tMinY   = aUtil::max<T>(m_y, _rhs.m_y);
+//     T           tMaxX   = aUtil::min<T>(m_x + m_w, _rhs.m_x + _rhs.m_w);
+//     T           tMaxY   = aUtil::min<T>(m_y + m_h, _rhs.m_y + _rhs.m_h);
 
-    if ((tMinX <= tMaxX) && tMinY <= tMaxY)
-    {
-        r2dIntersect.set(tMinX, tMinY, tMaxX-tMinX, tMaxY-tMinY);
-    }
+//     if ((tMinX <= tMaxX) && tMinY <= tMaxY)
+//     {
+//         r2dIntersect.set(tMinX, tMinY, tMaxX-tMinX, tMaxY-tMinY);
+//     }
 
-    return r2dIntersect;
-} // aRect2D<T, Tprec>::intersect
+//     return r2dIntersect;
+// } // aRect2D<T, Tprec>::intersect
 
 
 /*******************************************************************************
 * aRect2D<T, Tprec>::intersect1
 *******************************************************************************/
-template<class T>
-aRect2D<T> aRect2D<T>::intersect1(const aRect2D<T> &_rhs) const
-{
-    aRect2D<T>  r2dIntersect;   // initial the rect is empty
+// template<class T>
+// aRect2D<T> aRect2D<T>::intersect1(const aRect2D<T> &_rhs) const
+// {
+//     aRect2D<T>  r2dIntersect;   // initial the rect is empty
 
-    T           tMinX   = aUtil::max<T>(m_x, _rhs.m_x);
-    T           tMinY   = aUtil::max<T>(m_y, _rhs.m_y);
-    T           tMaxX   = aUtil::min<T>(m_x + m_w, _rhs.m_x + _rhs.m_w);
-    T           tMaxY   = aUtil::min<T>(m_y + m_h, _rhs.m_y + _rhs.m_h);
+//     T           tMinX   = aUtil::max<T>(m_x, _rhs.m_x);
+//     T           tMinY   = aUtil::max<T>(m_y, _rhs.m_y);
+//     T           tMaxX   = aUtil::min<T>(m_x + m_w, _rhs.m_x + _rhs.m_w);
+//     T           tMaxY   = aUtil::min<T>(m_y + m_h, _rhs.m_y + _rhs.m_h);
 
-    if ((tMinX <= tMaxX) && tMinY <= tMaxY)
-    {
-        r2dIntersect.set(tMinX, tMinY, tMaxX-tMinX+1, tMaxY-tMinY+1);
-    }
+//     if ((tMinX <= tMaxX) && tMinY <= tMaxY)
+//     {
+//         r2dIntersect.set(tMinX, tMinY, tMaxX-tMinX+1, tMaxY-tMinY+1);
+//     }
 
-    return r2dIntersect;
-} // aRect2D<T, Tprec>::intersect1
+//     return r2dIntersect;
+// } // aRect2D<T, Tprec>::intersect1
 
 
 /*******************************************************************************
 * aRect2D<T, Tprec>::intersect
 *******************************************************************************/
 template<class T>
-aVector<aPoint2D<T>> aRect2D<T>::intersect(const aParametricLine2D<T> &_l) const
+void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
+                           aVector<aPoint>      &_vIntersect) const
 {
-    aVector<aPoint2D<T>>    vFound;
-
-    aVector<std::optional<aPoint2D<T>>> vInter;
-    aVector<dbl>                        vT;
     dbl                                 tMin = __DBL_MAX__;
     dbl                                 tLine, tSegment;
-    bool                                bIntersectionPointOnSegment;
+    bool                                bOnSeg;
 
-    std::cout << "_l: os=" << _l.supportPoint() << ", dir=" << _l.direction() << endl;
+    std::cout << _line << endl;
 
     // top edge
-    std::optional<aPoint2D<T>> p1 = _l.intersect(aPoint2D<s32> (l(), t()),
-                                                 aPoint2D<s32> (r1(), t()),
-                                                 tLine, tSegment,
-                                                 bIntersectionPointOnSegment);
-    if (p1.has_value() && bIntersectionPointOnSegment)
+    std::optional<aPoint2D<T>> p1 = _line.intersect(lt(), rt(), tLine, tSegment, bOnSeg);
+    std::cout << "top edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
+    if (p1.has_value() && bOnSeg)
     {
         std::cout << "top edge: " << p1.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-        vInter.push_back(p1);
-        vT.push_back(tLine);
-    }
 
-    // bottom edge
-    std::optional<aPoint2D<T>> p2 = _l.intersect(aPoint2D<s32> (l(), b1()),
-                                                 aPoint2D<s32> (r1(), b1()),
-                                                 tLine, tSegment,
-                                                 bIntersectionPointOnSegment);
-    if (p2.has_value() && bIntersectionPointOnSegment)
-    {
-        std::cout << "bottom edge: " << p2.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-        vInter.push_back(p2);
-        vT.push_back(tLine);
-    }
-
-    // left edge
-    std::optional<aPoint2D<T>> p3 = _l.intersect(aPoint2D<s32> (l(), t()),
-                                                 aPoint2D<s32> (l(), b1()),
-                                                 tLine, tSegment,
-                                                 bIntersectionPointOnSegment);
-    if (p3.has_value() && bIntersectionPointOnSegment)
-    {
-        std::cout << "left edge: " << p3.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-        vInter.push_back(p3);
-        vT.push_back(tLine);
-    }
-
-    // right edge
-    std::optional<aPoint2D<T>> p4 = _l.intersect(aPoint2D<s32> (r1(), t()),
-                                                 aPoint2D<s32> (r1(), b1()),
-                                                 tLine, tSegment,
-                                                 bIntersectionPointOnSegment);
-    if (p4.has_value() && bIntersectionPointOnSegment)
-    {
-        std::cout << "right edge: " << p4.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-        vInter.push_back(p4);
-        vT.push_back(tLine);
-    }
-
-    for (s32 i = vInter.size()-1; i >= 0; i--)
-    {
-        if (vT.at(i) < tMin)
+        if (tLine < tMin)
         {
-            vFound.push_front(vInter.at(i).value());
-            tMin = vT.at(i);
+            _vIntersect.push_front(math2WinY(p1.value()));
+            tMin = tLine;
         }
         else
         {
-            vFound.push_back(vInter.at(i).value());
+            _vIntersect.push_back(math2WinY(p1.value()));
         }
     }
 
-    return vFound;
+    // bottom edge
+    std::optional<aPoint2D<T>> p2 = _line.intersect(lb(), rb(), tLine, tSegment, bOnSeg);
+    std::cout << "bottom edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
+    if (p2.has_value() && bOnSeg)
+    {
+        std::cout << "bottom edge: " << p2.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+
+        if (tLine < tMin)
+        {
+            _vIntersect.push_front(math2WinY(p2.value()));
+            tMin = tLine;
+        }
+        else
+        {
+            _vIntersect.push_back(math2WinY(p2.value()));
+        }
+    }
+
+    // left edge
+    std::optional<aPoint2D<T>> p3 = _line.intersect(lt(), lb(), tLine, tSegment, bOnSeg);
+    std::cout << "left edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
+    if (p3.has_value() && bOnSeg)
+    {
+        std::cout << "left edge: " << p3.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+
+        if (tLine < tMin)
+        {
+            _vIntersect.push_front(math2WinY(p3.value()));
+            tMin = tLine;
+        }
+        else
+        {
+            _vIntersect.push_back(math2WinY(p3.value()));
+        }
+    }
+
+    // right edge
+    std::optional<aPoint2D<T>> p4 = _line.intersect(rt(), rb(), tLine, tSegment, bOnSeg);
+    std::cout << "right edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
+    if (p4.has_value() && bOnSeg)
+    {
+        std::cout << "right edge: " << p4.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
+
+        if (tLine < tMin)
+        {
+            _vIntersect.push_front(math2WinY(p4.value()));
+            tMin = tLine;
+        }
+        else
+        {
+            _vIntersect.push_back(math2WinY(p4.value()));
+        }
+    }
+
 } // aRect2D<T, Tprec>::intersect
 
 
@@ -427,14 +387,90 @@ bool aRect2D<T>::pointInRect(const aPoint2D<T> &_v2d) const
 * aRect2D<T>::pointInRect
 *******************************************************************************/
 template<class T>
-bool aRect2D<T>::pointInRect(const T _x,
-                                    const T _y) const
+bool aRect2D<T>::pointInRect(T _x,
+                             T _y) const
 {
     return (_x >= m_x) &&
            (_y >= m_y) &&
-           (_x < m_x + m_w) &&
-           (_y < m_y + m_h);
+           (_x <= m_x + m_w) &&
+           (_y <= m_y + m_h);
 } // aRect2D<T>::pointInRect
+
+
+/*******************************************************************************
+* aRect2D<T>::win2MathY
+*******************************************************************************/
+template<class T>
+T aRect2D<T>::win2MathY(T _tY) const
+{
+    if (m_bTransform)
+    {
+        return m_rctTransform.y() + m_rctTransform.b() - _tY;
+    }
+    else
+    {
+        cout << "error: no transform rect in win2MathY" << endl;
+    }
+
+    return _tY;
+} // aRect2D<T>::win2MathY
+
+
+/*******************************************************************************
+* aRect2D<T>::math2WinY
+*******************************************************************************/
+template<class T>
+T aRect2D<T>::math2WinY(T _tY) const
+{
+    if (m_bTransform)
+    {
+        return m_rctTransform.t() + m_rctTransform.b() - _tY;
+    }
+    else
+    {
+        cout << "error: no transform rect in math2WinY" << endl;
+    }
+
+    return _tY;
+} // aRect2D<T>::math2WinY
+
+
+/*******************************************************************************
+* aRect2D<T>::win2MathY
+*******************************************************************************/
+template<class T>
+aPoint2D<T> aRect2D<T>::win2MathY(const aPoint &_pnt) const
+{
+    if (m_bTransform)
+    {
+        return aPoint2D<T> (_pnt.x(), win2MathY(_pnt.y()));
+    }
+    else
+    {
+        cout << "error: no transform rect in win2MathY" << endl;
+    }
+
+    return aPoint2D<T> (_pnt.x(), _pnt.y());
+} // aRect2D<T>::win2MathY
+
+
+/*******************************************************************************
+* aRect2D<T>::math2WinY
+*******************************************************************************/
+template<class T>
+aPoint aRect2D<T>::math2WinY(const aPoint2D<T> &_p2d) const
+{
+    if (m_bTransform)
+    {
+        return aPoint(_p2d.x(), math2WinY(_p2d.y()));
+    }
+    else
+    {
+        cout << "error: no transform rect in math2WinY" << endl;
+    }
+
+    return aPoint(_p2d.x(), _p2d.y());
+} // aRect2D<T>::math2WinY
 
 
 } // namespace aMath

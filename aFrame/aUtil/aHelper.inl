@@ -27,22 +27,44 @@ namespace aUtil {
 /*******************************************************************************
 * min
 *******************************************************************************/
-template <class T>
-T min(const T _t1,
-      const T _t2)
+template<typename T>
+constexpr T min(T    _t1,
+                T    _t2)
 {
     return std::min<T>(_t1, _t2);
 } // min
 
 
 /*******************************************************************************
+* min
+*******************************************************************************/
+template<typename T, typename... Args>
+constexpr T min(T       first,
+                Args... args)
+{
+    return min(first, min(args...));
+} // min
+
+
+/*******************************************************************************
 * max
 *******************************************************************************/
-template <class T>
-T max(const T    _t1,
-      const T    _t2)
+template<typename T>
+constexpr T max(T    _t1,
+                T    _t2)
 {
     return std::max<T>(_t1, _t2);
+} // max
+
+
+/*******************************************************************************
+* max
+*******************************************************************************/
+template<typename T, typename... Args>
+constexpr T max(T       first,
+                Args... args)
+{
+    return max(first, max(args...));
 } // max
 
 
@@ -50,9 +72,9 @@ T max(const T    _t1,
 * clamp
 *******************************************************************************/
 template <class T>
-T clamp(const T _tValue,
-        const T	_tMin,
-        const T	_tMax)
+T clamp(T _tValue,
+        T _tMin,
+        T _tMax)
 {
     return (_tValue < _tMin)?   _tMin :
            (_tValue > _tMax)?   _tMax : _tValue;
@@ -63,9 +85,9 @@ T clamp(const T _tValue,
 * isZero
 *******************************************************************************/
 template <class T>
-bool isZero(const T _t1)
+bool isZero(T _t1)
 {
-    return std::abs(_t1) < std::numeric_limits<T>::epsilon();
+    return std::abs(_t1) <= std::numeric_limits<T>::epsilon();
 } // isZero
 
 
@@ -73,10 +95,10 @@ bool isZero(const T _t1)
 * isEqual
 *******************************************************************************/
 template <class T>
-bool isEqual(const T    _t1,
-             const T	_t2)
+bool isEqual(T _t1,
+             T _t2)
 {
-    return std::abs(_t1 - _t2) < std::numeric_limits<T>::epsilon();
+    return std::abs(_t1 - _t2) <= std::numeric_limits<T>::epsilon();
 } // isEqual
 
 
@@ -84,8 +106,8 @@ bool isEqual(const T    _t1,
 * isUnequal
 *******************************************************************************/
 template <class T>
-bool isUnequal(const T  _t1,
-               const T	_t2)
+bool isUnequal(T _t1,
+               T _t2)
 {
     return std::abs(_t1 - _t2) > std::numeric_limits<T>::epsilon();
 } // isUnequal
@@ -95,8 +117,8 @@ bool isUnequal(const T  _t1,
 * setBits
 *******************************************************************************/
 template<class T>
-void setBits(T			&_tValue,
-             const T    _tBits2Set)
+void setBits(T	&_tValue,
+             T  _tBits2Set)
 {
     _tValue |= _tBits2Set;
 } // setBits
@@ -106,8 +128,8 @@ void setBits(T			&_tValue,
 * clearBits
 *******************************************************************************/
 template<class T>
-void clearBits(T		&_tValue,
-               const T  _tBits2Clear)
+void clearBits(T &_tValue,
+               T _tBits2Clear)
 {
     _tValue &= ~_tBits2Clear;
 } // clearBits
@@ -117,33 +139,33 @@ void clearBits(T		&_tValue,
 * toggleBits
 *******************************************************************************/
 template<class T>
-void toggleBits(T       &_tValue,
-                const T	_tBits2Toggle)
+void toggleBits(T &_tValue,
+                T _tBits2Toggle)
 {
     _tValue ^= _tBits2Toggle;
 } // toggleBits
 
 
 /*******************************************************************************
-* isBitsSet
+* areBitsSet
 *******************************************************************************/
 template<class T>
-bool isBitsSet(const T    _tValue,
-               const T    _tBits2Check)
+bool areBitsSet(T _tValue,
+                T _tBits2Check)
 {
     return (_tValue & _tBits2Check) == _tBits2Check;
-} // isBitsSet
+} // areBitsSet
 
 
 /*******************************************************************************
-* isBitsClear
+* areBitsClear
 *******************************************************************************/
 template<class T>
-bool isBitsClear(const T  _tValue,
-                 const T  _tBits2Check)
+bool areBitsClear(T _tValue,
+                  T _tBits2Check)
 {
     return (_tValue & _tBits2Check) == 0;
-} // isBitsClear
+} // areBitsClear
 
 
 } // namespace aUtil

@@ -67,12 +67,8 @@ aDimension2D<T>::~aDimension2D()
 template<class T>
 aDimension2D<T>& aDimension2D<T>::operator=(const aDimension2D<T>	&_rhs)
 {
-    // avoid selfcopy
-    if (this != &_rhs)
-    {
-        m_w = _rhs.m_w;
-        m_h = _rhs.m_h;
-    }
+    m_w = _rhs.m_w;
+    m_h = _rhs.m_h;
 
     return *this;
 } // aDimension2D<T>::operator=
@@ -84,8 +80,8 @@ aDimension2D<T>& aDimension2D<T>::operator=(const aDimension2D<T>	&_rhs)
 template<class T>
 bool aDimension2D<T>::operator==(const aDimension2D<T>	&_rhs) const
 {
-    return isEqual<T>(m_w, _rhs.m_w) &&
-           isEqual<T>(m_h, _rhs.m_h);
+    return isEqual(m_w, _rhs.m_w) &&
+           isEqual(m_h, _rhs.m_h);
 } // aDimension2D<T>::operator==
 
 
@@ -95,8 +91,8 @@ bool aDimension2D<T>::operator==(const aDimension2D<T>	&_rhs) const
 template<class T>
 bool aDimension2D<T>::operator!=(const aDimension2D<T>	&_rhs) const
 {
-    return isUnequal<T>(m_w, _rhs.m_w) ||
-           isUnequal<T>(m_h, _rhs.m_h);
+    return isUnequal(m_w, _rhs.m_w) ||
+           isUnequal(m_h, _rhs.m_h);
 } // aDimension2D<T>::operator!=
 
 
@@ -132,49 +128,9 @@ aDimension2D<T>& aDimension2D<T>::operator*=(dbl _dMuliplicator)
 template<class T>
 aDimension2D<T> aDimension2D<T>::operator*(dbl	_dMuliplicator) const
 {
-    return aDimension2D<T> ((T) (((dbl) m_w) * _dMuliplicator),
-                            (T) (((dbl) m_h) * _dMuliplicator));
+    return aDimension2D<T> (static_cast<T> (m_w * _dMuliplicator),
+                            static_cast<T> (m_h * _dMuliplicator));
 } // aDimension2D<T>::operator*
-
-
-/*******************************************************************************
-* aDimension2D<T>::w
-*******************************************************************************/
-template<class T>
-T aDimension2D<T>::w() const
-{
-    return m_w;
-} // aDimension2D<T>::w
-
-
-/*******************************************************************************
-* aDimension2D<T>::h
-*******************************************************************************/
-template<class T>
-T aDimension2D<T>::h() const
-{
-    return m_h;
-} // aDimension2D<T>::h
-
-
-/*******************************************************************************
-* aDimension2D<T>::w
-*******************************************************************************/
-template<class T>
-T& aDimension2D<T>::w()
-{
-    return m_w;
-} // aDimension2D<T>::w
-
-
-/*******************************************************************************
-* aDimension2D<T>::h
-*******************************************************************************/
-template<class T>
-T& aDimension2D<T>::h()
-{
-    return m_h;
-} // aDimension2D<T>::h
 
 
 /*******************************************************************************
@@ -205,7 +161,7 @@ void aDimension2D<T>::setEmpty()
 template<class T>
 bool aDimension2D<T>::isEmpty() const
 {
-    return isZero<T>(m_w) && isZero<T>(m_h);
+    return isZero(m_w) && isZero(m_h);
 } // aDimension2D<T>::isEmpty
 
 
@@ -215,8 +171,8 @@ bool aDimension2D<T>::isEmpty() const
 template<class T>
 aDimension2D<T> aDimension2D<T>::max(const aDimension2D<T> &_rhs) const
 {
-    return aDimension2D<T> (aUtil::max<T> (m_w, _rhs.m_w),
-                            aUtil::max<T> (m_h, _rhs.m_h));
+    return aDimension2D<T> (aUtil::max(m_w, _rhs.m_w),
+                            aUtil::max(m_h, _rhs.m_h));
 } // aDimension2D<T>::max
 
 

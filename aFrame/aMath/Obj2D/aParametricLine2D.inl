@@ -27,15 +27,6 @@ namespace aMath {
 * aParametricLine2D<T>::aParametricLine2D
 *******************************************************************************/
 template<class T>
-aParametricLine2D<T>::aParametricLine2D()
-{
-} // aParametricLine2D<T>::aParametricLine2D
-
-
-/*******************************************************************************
-* aParametricLine2D<T>::aParametricLine2D
-*******************************************************************************/
-template<class T>
 aParametricLine2D<T>::aParametricLine2D(const aParametricLine2D<T> &_rhs)
 : m_p2dSupport(_rhs.m_p2dSupport),
   m_v2dNormDir(_rhs.m_v2dNormDir)
@@ -43,44 +34,10 @@ aParametricLine2D<T>::aParametricLine2D(const aParametricLine2D<T> &_rhs)
 } // aParametricLine2D<T>::aParametricLine2D
 
 
-template<class T>
 /*******************************************************************************
 * aParametricLine2D<T>::aParametricLine2D
 *******************************************************************************/
-aParametricLine2D<T>::aParametricLine2D(const aPoint2D<T>     &_p1,
-                                        const aPoint2D<T>     &_p2)
-{
-    // support point = _p1
-    m_p2dSupport = _p1;
-
-    // calclulate the normalized direction vector
-    m_v2dNormDir.set(_p2.x() - _p1.x(),
-                     _p2.y() - _p1.y());
-    m_v2dNormDir.normalize();
-} // aParametricLine2D<T>::aParametricLine2D
-
-
 template<class T>
-/*******************************************************************************
-* aParametricLine2D<T>::aParametricLine2D
-*******************************************************************************/
-aParametricLine2D<T>::aParametricLine2D(const aPoint2D<T> &_p,
-                                        dbl               _dAngle_rad)
-{
-    // support point = _p1
-    m_p2dSupport = _p;
-
-    // calclulate the normalized direction vector
-    // y-value is negativ because the win origin is top left
-    m_v2dNormDir.set(std::cos(_dAngle_rad),
-                     std::sin(_dAngle_rad));
-} // aParametricLine2D<T>::aParametricLine2D
-
-
-template<class T>
-/*******************************************************************************
-* aParametricLine2D<T>::aParametricLine2D
-*******************************************************************************/
 aParametricLine2D<T>::aParametricLine2D(T     _x1,
                                         T     _y1,
                                         T     _x2,
@@ -93,6 +50,23 @@ aParametricLine2D<T>::aParametricLine2D(T     _x1,
     m_v2dNormDir.set(_x2 - _x1,
                      _y2 - _y1);
     m_v2dNormDir.normalize();
+} // aParametricLine2D<T>::aParametricLine2D
+
+
+/*******************************************************************************
+* aParametricLine2D<T>::aParametricLine2D
+*******************************************************************************/
+template<class T>
+aParametricLine2D<T>::aParametricLine2D(const aPoint2D<T> &_p,
+                                        dbl               _dAngle_rad)
+{
+    // support point = _p1
+    m_p2dSupport = _p;
+
+    // calclulate the normalized direction vector
+    // y-value is negativ because the win origin is top left
+    m_v2dNormDir.set(std::cos(_dAngle_rad),
+                     std::sin(_dAngle_rad));
 } // aParametricLine2D<T>::aParametricLine2D
 
 
@@ -147,7 +121,7 @@ bool aParametricLine2D<T>::operator!=(const aParametricLine2D<T>	&_rhs) const
 template<class T>
 bool aParametricLine2D<T>::isHorizontal() const
 {
-    return !isZero(m_v2dNormDir.x()) && isZero(m_v2dNormDir.y());
+    return !isZero(m_v2dNormDir.dx()) && isZero(m_v2dNormDir.dy());
 } // aParametricLine2D<T>::isHorizontal
 
 
@@ -157,7 +131,7 @@ bool aParametricLine2D<T>::isHorizontal() const
 template<class T>
 bool aParametricLine2D<T>::isVertical() const
 {
-    return isZero(m_v2dNormDir.x()) && !isZero(m_v2dNormDir.y());
+    return isZero(m_v2dNormDir.dx()) && !isZero(m_v2dNormDir.dy());
 } // aParametricLine2D<T>::isVertical
 
 
@@ -172,18 +146,18 @@ std::optional<aPoint2D<T>> aParametricLine2D<T>::intersect(const aPoint2D<T>  &_
                                                            bool               &_bIntersectionPointOnSegment) const
 {
     // for better readability
-    double x1 = _pSegmentStart.x();
-    double y1 = _pSegmentStart.y();
-    double dx1 = _pSegmentEnd.x() - _pSegmentStart.x();
-    double dy1 = _pSegmentEnd.y() - _pSegmentStart.y();
+    double xSeg = _pSegmentStart.x();
+    double ySeg = _pSegmentStart.y();
+    double dxSeg = _pSegmentEnd.x() - _pSegmentStart.x();
+    double dySeg = _pSegmentEnd.y() - _pSegmentStart.y();
 
-    double x2 = m_p2dSupport.x();
-    double y2 = m_p2dSupport.y();
-    double dx2 = m_v2dNormDir.x();
-    double dy2 = m_v2dNormDir.y();
+    double xLine = m_p2dSupport.x();
+    double yLine = m_p2dSupport.y();
+    double dxLine = m_v2dNormDir.dx();
+    double dyLine = m_v2dNormDir.dy();
 
     // Berechne Determinante (Nenner)
-    double denominator = dx1 * dy2 - dy1 * dx2;
+    double denominator = dySeg * dxLine - dxSeg * dyLine;
 
     // check if parallel
     if (isZero(denominator))
@@ -197,18 +171,18 @@ std::optional<aPoint2D<T>> aParametricLine2D<T>::intersect(const aPoint2D<T>  &_
     }
 
     // Berechne die Parameter t für beide Linien
-    double dx = x1 - x2;
-    double dy = y1 - y2;
+    double dx = xSeg - xLine;
+    double dy = ySeg - yLine;
 
-    _tSegment = (dx * dy2 - dy * dx2) / denominator;
-    _tLine = (dx * dy1 - dy * dx1) / denominator;
+    _tSegment = (dxLine * dy - dyLine * dx) / denominator;
+    _tLine = (dxSeg * dy - dySeg * dx) / denominator;
 
     // check if intersection point is on segment
     _bIntersectionPointOnSegment = (_tSegment >= 0.0) && (_tSegment <= 1.0);
 
     // calculate and return intersection
-    return aPoint2D<T>(static_cast<T>(x1 + _tSegment * dx1),
-                       static_cast<T>(y1 + _tSegment * dy1));
+    return aPoint2D<T>(static_cast<T>(xSeg + _tSegment * dxSeg),
+                       static_cast<T>(ySeg + _tSegment * dySeg));
 } // aParametricLine2D<T>::intersect
 
 

@@ -12,17 +12,25 @@
 * includes
 *******************************************************************************/
 #include "aFrame_def.h"
+#include "aMath_def.h"
+
+#include "aPoint2D.h"
+#include "aRect2D.h"
+#include "aParametricLine2D.h"
 
 #include "aBaseWin_i.h"
 #include "aRect.h"
 #include "aPainter.h"
 #include "aColor.h"
 #include "aString.h"
+#include "aVector.h"
 
 #include "aStyleItemFillSolid.h"
 #include "aStyleItemFillGradient.h"
 
 using namespace aFrame::aGraphic;
+using namespace aFrame::aMath;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -330,7 +338,7 @@ void aBaseWin_i::onPaintPadding()
 void aBaseWin_i::onPaintContentBg()
 {
     aStyleItemFillSolid     *pfs = dynamic_cast<aStyleItemFillSolid *> (m_pBgStyle.get());
-    //aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (m_pBgStyle.get());
+    aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (m_pBgStyle.get());
 
     // draw solid fill
     if (pfs)
@@ -343,41 +351,36 @@ void aBaseWin_i::onPaintContentBg()
     }
 
     // draw gradient fill
-    // else if (pfg)
-    // {
-        // aRect       r           = contentRect();
-        // aColor      col1        = pfg->fillColor1();
-        // aColor      col2        = pfg->fillColor2();
-        // dbl         dAngle      = Deg2Rad(pfg->angle());
-        // aPoint      p2dGradStart;
-        // aPoint      p2dGradEnd;
-        // aPainter    p(sysWinPtr());
+    else if (pfg)
+     {
+        aRect           r               = contentRect();
+        aColor          col1            = pfg->fillColor1();
+        aColor          col2            = pfg->fillColor2();
+        dbl             dAngle          = Deg2Rad(pfg->angle());
+        aVector<aPoint> vIntersect;
+        aPainter        p(sysWinPtr());
 
-        // // calculate the parametric line for the gradient
-        // aParametricLine2D<s32> l(r.centerPoint(), dAngle);
+        // calculate the intersection of the content rect with the
+        // parametric line through the centerpoint
+        aRect2D<float> r2d(r);
+        aParametricLine2D<float> l(r2d.centerPoint(), dAngle);
 
-        // // get the intersection points
-        // aVector<aPoint> vInt = r.intersect(l);
+        // get the intersection points
+        r2d.intersect(l, vIntersect);
 
-        // // draw the gradient between the found points
-        // if (vInt.size() == 2)
-        // {
-        //     p2dGradStart.set(vInt.at(0).x(), vInt.at(0).y());
-        //     p2dGradEnd.set(vInt.at(1).x(), vInt.at(1).y());
 
-        //     cout << "r" << r << endl;
-
-        //     cout << "p2dGradStart" << p2dGradStart << endl;
-        //     cout << "p2dGradEnd" << p2dGradEnd << endl;
-        // }
-        // else
-        // {
-        //     // no gradient points found => just fill the rect
-        //     p.drawFilledRect(r, &col1);
-        // }
-
-        // p.drawGradientRect(r, p2dGradStart, p2dGradEnd, col1, col2);
-    // }
+        // draw the gradient between the found points
+        if (vIntersect.size() == 2)
+        {
+            // draw the gradient
+            p.drawGradientRect(r, vIntersect.at(0), vIntersect.at(1), col1, col2);
+        }
+        else
+        {
+            // no gradient points found => just fill the rect
+            p.drawFilledRect(r, &col1);
+        }
+    }
 } // aBaseWin_i::onPaintContentBg
 
 

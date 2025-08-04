@@ -35,7 +35,7 @@ namespace aMath {
 //! \brief definition of a rect. A rect has an origin and a size
 //!
 //! A size has a width and a height.
-template<class T>
+template<class T = dbl>
 class aDimension2D : public aMathObj2D
 {
     private:
@@ -59,11 +59,11 @@ class aDimension2D : public aMathObj2D
 
         aDimension2D<T>         operator*(dbl _dMuliplicator) const;
 
-        T                       w() const;
-        T                       h() const;
+        T                       w() const       { return m_w; }
+        T                       h() const       { return m_h; }
 
-        T&                      w();
-        T&                      h();
+        T&                      w()             { return m_w; }
+        T&                      h()             { return m_h; }
 
         void					set(const T _w,
                                     const T	_h);

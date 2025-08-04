@@ -35,49 +35,57 @@ u32     hardwareConcurrency();
 /*******************************************************************************
 * templated functions
 *******************************************************************************/
-template <class T>
-T       min(const T		_t1,
-            const T		_t2);
+template<typename T>
+constexpr T min(T a,
+                T b);
+
+template<typename T, typename... Args>
+constexpr T min(T       first,
+                Args... args);
+
+template<typename T>
+constexpr T max(T a,
+                T b);
+
+template<typename T, typename... Args>
+constexpr T max(T       first,
+                Args... args);
 
 template <class T>
-T       max(const T		_t1,
-            const T		_t2);
+T       clamp(T	_tValue,
+              T	_tMin,
+              T _tMax);
 
 template <class T>
-T       clamp(const T		_tValue,
-              const T		_tMin,
-              const T		_tMax);
+bool    isZero(T _t1);
 
 template <class T>
-bool    isZero(const T		_t1);
+bool    isEqual(T _t1,
+                T _t2);
 
 template <class T>
-bool    isEqual(const T		_t1,
-                const T		_t2);
-
-template <class T>
-bool    isUnequal(const T		_t1,
-                  const T		_t2);
+bool    isUnequal(T _t1,
+                  T _t2);
 
 template<class T>
-void    setBits(T		&_tValue,
-                const T	_tBits2Set);
+void    setBits(T	&_tValue,
+                T   _tBits2Set);
 
 template<class T>
-void 	clearBits(T			&_tValue,
-                  const T	_tBits2Clear);
+void 	clearBits(T	&_tValue,
+                  T _tBits2Clear);
 
 template<class T>
-void 	toggleBits(T		&_tValue,
-                   const T	_tBits2Toggle);
+void 	toggleBits(T	&_tValue,
+                   T    _tBits2Toggle);
 
 template<class T>
-bool 	isBitsSet(const T	_tValue,
-                  const T	_tBits2Check);
+bool 	areBitsSet(T	_tValue,
+                   T	_tBits2Check);
 
 template<class T>
-bool 	isBitsClear(const T	_tValue,
-                    const T	_tBits2Check);
+bool 	areBitsClear(T	_tValue,
+                     T	_tBits2Check);
 
 } // namespace aUtil
 } // namespace aFrame
