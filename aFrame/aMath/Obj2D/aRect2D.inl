@@ -62,7 +62,7 @@ aRect2D<T>::aRect2D(const aRect	&_rctTransform)
   m_rctTransform(_rctTransform),
   m_bTransform(true)
 {
-    m_y = win2MathY(_rctTransform.y());
+    m_y = win2MathY(_rctTransform.b());
 } // aRect2D<T>::aRect2D()
 
 
@@ -296,15 +296,10 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
     dbl                                 tLine, tSegment;
     bool                                bOnSeg;
 
-    std::cout << _line << endl;
-
     // top edge
     std::optional<aPoint2D<T>> p1 = _line.intersect(lt(), rt(), tLine, tSegment, bOnSeg);
-    std::cout << "top edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
     if (p1.has_value() && bOnSeg)
     {
-        std::cout << "top edge: " << p1.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-
         if (tLine < tMin)
         {
             _vIntersect.push_front(math2WinY(p1.value()));
@@ -318,11 +313,8 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
 
     // bottom edge
     std::optional<aPoint2D<T>> p2 = _line.intersect(lb(), rb(), tLine, tSegment, bOnSeg);
-    std::cout << "bottom edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
     if (p2.has_value() && bOnSeg)
     {
-        std::cout << "bottom edge: " << p2.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-
         if (tLine < tMin)
         {
             _vIntersect.push_front(math2WinY(p2.value()));
@@ -336,11 +328,8 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
 
     // left edge
     std::optional<aPoint2D<T>> p3 = _line.intersect(lt(), lb(), tLine, tSegment, bOnSeg);
-    std::cout << "left edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
     if (p3.has_value() && bOnSeg)
     {
-        std::cout << "left edge: " << p3.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-
         if (tLine < tMin)
         {
             _vIntersect.push_front(math2WinY(p3.value()));
@@ -354,11 +343,8 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
 
     // right edge
     std::optional<aPoint2D<T>> p4 = _line.intersect(rt(), rb(), tLine, tSegment, bOnSeg);
-    std::cout << "right edge: " << "tLine=" << tLine << ", tSegment=" << tSegment << endl;
     if (p4.has_value() && bOnSeg)
     {
-        std::cout << "right edge: " << p4.value() << ", tLine=" << tLine << ", tSegment=" << tSegment << endl;
-
         if (tLine < tMin)
         {
             _vIntersect.push_front(math2WinY(p4.value()));
@@ -369,7 +355,6 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
             _vIntersect.push_back(math2WinY(p4.value()));
         }
     }
-
 } // aRect2D<T, Tprec>::intersect
 
 

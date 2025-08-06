@@ -43,7 +43,6 @@ namespace aWin {
 /*******************************************************************************
 * namespace
 *******************************************************************************/
-unique_ptr<aStyleParser>       aBaseWin_i::m_pStyleParser;
 
 
 /*******************************************************************************
@@ -69,7 +68,7 @@ bool aBaseWin_i::createWin()
 {
     if (onSysCreateWin() && onCreateWin())
     {
-        setWinStyle();
+        setStyle();
 
 //         // aCtrlMgr initialization
 //         aCtrlMgr *pCtrlMgr = dynamic_cast<aCtrlMgr *> (this);
@@ -113,51 +112,6 @@ aString aBaseWin_i::className() const
     return sMangled_name;
 
 } // aBaseWin_i::className
-
-
-/*******************************************************************************
-* aBaseWin_i::setStyleFile
-*******************************************************************************/
-void aBaseWin_i::setStyleFile(const aPath    &_path)
-{
-    m_pStyleParser = make_unique<aStyleParser> (_path);
-
-    if (!m_pStyleParser->isValid())
-    {
-        m_pStyleParser = nullptr;
-    }
-} // aBaseWin_i::setStyleFile
-
-
-/*******************************************************************************
-* aBaseWin_i::setBgStyle
-*******************************************************************************/
-void aBaseWin_i::setBgStyle(shared_ptr<aStyleItemFill>  _pBgStyle)
-{
-    m_pBgStyle = _pBgStyle;
-} // aBaseWin_i::setBgStyle
-
-
-/*******************************************************************************
-* aBaseWin_i::bgStyle
-*******************************************************************************/
-shared_ptr<aStyleItemFill> aBaseWin_i::bgStyle() const
-{
-    return m_pBgStyle;
-} // aBaseWin_i::bgStyle
-
-
-/*******************************************************************************
-* aBaseWin_i::setWinStyle
-*******************************************************************************/
-void aBaseWin_i::setWinStyle()
-{
-    if (m_pStyleParser)
-    {
-        m_pStyleParser->setStyle(this);
-    }
-
-} // aBaseWin_i::setWinStyle
 
 
 /*******************************************************************************
@@ -337,8 +291,8 @@ void aBaseWin_i::onPaintPadding()
 *******************************************************************************/
 void aBaseWin_i::onPaintContentBg()
 {
-    aStyleItemFillSolid     *pfs = dynamic_cast<aStyleItemFillSolid *> (m_pBgStyle.get());
-    aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (m_pBgStyle.get());
+    aStyleItemFillSolid     *pfs = dynamic_cast<aStyleItemFillSolid *> (bgStyle().get());
+    aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (bgStyle().get());
 
     // draw solid fill
     if (pfs)

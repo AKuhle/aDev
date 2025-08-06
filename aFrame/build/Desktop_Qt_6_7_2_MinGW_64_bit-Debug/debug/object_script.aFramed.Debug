@@ -53,7 +53,7 @@ debug/aStyleItem.o
 debug/aStyleItemFill.o
 debug/aStyleItemFillGradient.o
 debug/aStyleItemFillSolid.o
-debug/aStyleParser.o
+debug/aWinStyle.o
 debug/moc_aProgressCb.o
 debug/moc_aProgressMgr.o
 debug/moc_aThread.o

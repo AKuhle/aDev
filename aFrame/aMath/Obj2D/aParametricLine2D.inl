@@ -171,8 +171,8 @@ std::optional<aPoint2D<T>> aParametricLine2D<T>::intersect(const aPoint2D<T>  &_
     }
 
     // Berechne die Parameter t für beide Linien
-    double dx = xSeg - xLine;
-    double dy = ySeg - yLine;
+    double dx = xLine - xSeg;
+    double dy = yLine - ySeg;
 
     _tSegment = (dxLine * dy - dyLine * dx) / denominator;
     _tLine = (dxSeg * dy - dySeg * dx) / denominator;

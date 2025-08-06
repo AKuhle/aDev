@@ -16,10 +16,8 @@
 #include "aWin_def.h"
 
 #include "aMargin.h"
-#include "aColor.h"
 
-#include "aStyleParser.h"
-#include "aStyleItemFillSolid.h"
+#include "aWinStyle.h"
 
 
 // #include <QDragEnterEvent>
@@ -50,15 +48,8 @@ namespace aWin {
 /*******************************************************************************
 * class aBaseWin_i
 *******************************************************************************/
-class aBaseWin_i
+class aBaseWin_i : public aWinStyle
 {
-    private:
-        static unique_ptr<aStyleParser> m_pStyleParser;
-
-    // style
-    private:
-        shared_ptr<aStyleItemFill>      m_pBgStyle  { std::make_shared<aStyleItemFillSolid> (colBlack) };
-
     // geometry
     private:
         aMargin                         m_margin;
@@ -99,19 +90,6 @@ class aBaseWin_i
 
         // void                    setWinTitle(const aString &_sTitle) override;
 
-
-    /*******************************************************************************
-    * window style
-    *******************************************************************************/
-    public:
-        void                            setStyleFile(const aPath    &_path);
-
-        void                            setBgStyle(shared_ptr<aStyleItemFill>  _pBgStyle);
-        shared_ptr<aStyleItemFill>      bgStyle() const;
-
-
-    private:
-        void                            setWinStyle();
 
 
     /*******************************************************************************

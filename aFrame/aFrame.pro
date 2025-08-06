@@ -168,7 +168,7 @@ HEADERS += \
     aWin/Style/aStyleItemFill.h \
     aWin/Style/aStyleItemFillGradient.h \
     aWin/Style/aStyleItemFillSolid.h \
-    aWin/Style/aStyleParser.h \
+    aWin/Style/aWinStyle.h \
     aWin/aWin_def.h
 
 
@@ -231,7 +231,7 @@ SOURCES += \
     aWin/Style/aStyleItemFill.cpp \
     aWin/Style/aStyleItemFillGradient.cpp \
     aWin/Style/aStyleItemFillSolid.cpp \
-    aWin/Style/aStyleParser.cpp
+    aWin/Style/aWinStyle.cpp
 
 # Default rules for deployment.
 unix {

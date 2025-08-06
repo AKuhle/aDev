@@ -1,8 +1,25 @@
 {
+    "color": "rgba(r,g,b,a)",
+
+    "solidColor": "solid(color)",
+    "gradient": "gradient(colorStart, colorEnd, angle)",
+
+    "bg": "solidColor | gradient",
+    "border": "solidColor",
+
+    "solid(rgba)": "solid(rgba(r,g,b,a))",
+    "gradient(rgba, rgba, angle)": "gradient(rgba(rgba(r,g,b,a)), rgba(r,g,b,a), val)",
+
+    "border(rgba)": "border(rgba(r,g,b,a))",
+    "borderFrame(frameThickness, Thickness, rgbaFrame, rgbaBorder)": "",
+
+
+
     "aBaseWin": {
-        "bg": "solid(rgb(0, 0, 0, 255))"
+        "bg": "solid(rgba(0, 0, 0, 255))"
     },
     "aMainWin": {
-        "bg": "gradient(rgb(0, 0, 0, 155), rgb(230, 130, 130, 160), 45)"
+        "bg": "solid(rgba(10, 10, 10, 255))",
+        "border": "solid(rgba(0, 0, 0, 255))"
     }
 }

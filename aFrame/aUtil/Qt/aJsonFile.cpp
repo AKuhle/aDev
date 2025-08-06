@@ -156,7 +156,7 @@ aString aJsonFile::readStringValue(const aString &_sNestedKey)
             QString sKey = vecToken.at(i).toQString();
 
             if (!obj.contains(sKey)) {
-                cout << "key " << _sNestedKey << "not found" << endl;
+                cout << "key >" << _sNestedKey << "< not found" << endl;
                 return "";
             }
             else

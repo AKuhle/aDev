@@ -53,7 +53,7 @@ release/aStyleItem.o
 release/aStyleItemFill.o
 release/aStyleItemFillGradient.o
 release/aStyleItemFillSolid.o
-release/aStyleParser.o
+release/aWinStyle.o
 release/moc_aProgressCb.o
 release/moc_aProgressMgr.o
 release/moc_aThread.o
