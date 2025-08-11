@@ -51,9 +51,16 @@ constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 
 
 /*******************************************************************************
-* tool id's
+* tool flags
 *******************************************************************************/
-// constexpr u32   TOOL_ID_USER                = 1000;
+constexpr u32   TOOL_ID_PARENT_CTRL     = 1;
+constexpr u32   TOOL_ID_USER            = 1000;
+
+
+/*******************************************************************************
+* tool flags
+*******************************************************************************/
+constexpr u32   TF_NONE                 = 0x00000001;
 
 
 /*******************************************************************************
@@ -126,6 +133,10 @@ constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 class aLayout_i;
 class aLayoutCentralWin;
 class aLayoutMainWin;
+
+class aToolBase;
+class aParentCtrlTool;
+class aToolManager;
 
 class aBaseWin_i;
 class aBaseWin;

@@ -13,7 +13,9 @@
 * includes
 *******************************************************************************/
 #include "aWin_def.h"
+
 #include "aBaseWin.h"
+#include "aToolManager.h"
 
 
 /*******************************************************************************
@@ -26,7 +28,8 @@ namespace aWin {
 /*******************************************************************************
 * class aTitleBar
 *******************************************************************************/
-class aTitleBar : public aBaseWin
+class aTitleBar : public aBaseWin,
+                  public aToolManager
 {
     /*******************************************************************************
     * con-/destruction
@@ -34,6 +37,17 @@ class aTitleBar : public aBaseWin
     public:
         aTitleBar(SysWin *_pParent);
         virtual ~aTitleBar();
+
+
+    /*******************************************************************************
+    * aBaseWin interface
+    *******************************************************************************/
+    protected:
+        virtual bool                    onSysCreateWin();
+
+        virtual bool                    onLDoubleClick(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
 }; // class aTitleBar
 
 

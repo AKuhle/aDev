@@ -38,9 +38,13 @@ bool aBaseWin::eventFilter(QObject *_pObj,
         QSize oldSize = pResizeEvent->oldSize();
         QSize newSize = pResizeEvent->size();
 
-        // Call the resize handler
+        // Call the sys resize handler
         onSysResize(aDimension(oldSize.width(), oldSize.height()),
                     aDimension(newSize.width(), newSize.height()));
+
+        // Call the resize handler
+        onResize(aDimension(oldSize.width(), oldSize.height()),
+                 aDimension(newSize.width(), newSize.height()));
 
         return false;
     }
@@ -57,11 +61,23 @@ bool aBaseWin::eventFilter(QObject *_pObj,
         return true; // Meist false, damit das Widget normal gezeichnet wird
     }
 
+    // wheel click events
+    else if (_pEvent->type() == QEvent::Wheel)
+    {
+        QWheelEvent *pEvent         = static_cast<QWheelEvent *>(_pEvent);
+        u16         u16Mods         = modifierFromEvent(pEvent);
+        s16         _s16Degree      = pEvent->angleDelta().y() / 8;
+        aPoint      pntLocal(pEvent->position().x(), pEvent->position().y());
+        aPoint      pntGlobal(pEvent->globalPosition().x(), pEvent->globalPosition().y());
+
+        return onWheel(u16Mods, _s16Degree, pntLocal, pntGlobal);
+    }
+
     // double click events
     else if (_pEvent->type() == QEvent::MouseButtonDblClick)
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
-        u16         u16Mods         = modifierFromMouseEvent(pMouseEvent);
+        u16         u16Mods         = modifierFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
@@ -87,7 +103,7 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     else if (_pEvent->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
-        u16         u16Mods         = modifierFromMouseEvent(pMouseEvent);
+        u16         u16Mods         = modifierFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
@@ -110,7 +126,7 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     else if (_pEvent->type() == QEvent::MouseMove)
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
-        u16         u16Mods         = modifierFromMouseEvent(pMouseEvent);
+        u16         u16Mods         = modifierFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
@@ -154,7 +170,7 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     else if (_pEvent->type() == QEvent::MouseButtonRelease)
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
-        u16         u16Mods         = modifierFromMouseEvent(pMouseEvent);
+        u16         u16Mods         = modifierFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
@@ -178,9 +194,9 @@ bool aBaseWin::eventFilter(QObject *_pObj,
 
 
 /*******************************************************************************
-* aBaseWin::modifierFromMouseEvent
+* aBaseWin::modifierFromEvent
 *******************************************************************************/
-u16 aBaseWin::modifierFromMouseEvent(QMouseEvent *_pMouseEvent) const
+u16 aBaseWin::modifierFromEvent(QInputEvent *_pMouseEvent) const
 {
     u16                     u16Mods     = MODIFIER_NONE;
     Qt::KeyboardModifiers   modifiers   = _pMouseEvent->modifiers();
@@ -201,7 +217,7 @@ u16 aBaseWin::modifierFromMouseEvent(QMouseEvent *_pMouseEvent) const
             u16Mods |= MODIFIER_KEYPAD;
 
     return u16Mods;
-} // aBaseWin::modifierFromMouseEvent
+} // aBaseWin::modifierFromEvent
 
 
 } // namespace aWin

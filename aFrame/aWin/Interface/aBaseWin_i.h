@@ -104,6 +104,12 @@ class aBaseWin_i : public aWinStyle
         virtual void                    setVisible(bool _bVisible) = 0;
         virtual bool                    isVisible() const = 0;
 
+        virtual bool                    isMinimized() const = 0;
+        virtual bool                    isMaximized() const = 0;
+        virtual void                    showMinimized() = 0;
+        virtual void                    showMaximized() = 0;
+        void                            toggleMaximized();
+
         virtual void                    setMouseTracking(bool _bEnable) = 0;
 
 
@@ -158,6 +164,13 @@ class aBaseWin_i : public aWinStyle
         virtual bool                    onSysCreateWin();
         virtual bool                    onCreateWin();
     //     bool                    onCloseWin() override;
+
+
+        // wheel event, true => event handled
+        virtual bool                    onWheel(u16             _u16Modifier,
+                                                s16             _s16Degree,
+                                                const aPoint    &_pntLocal,
+                                                const aPoint    &_pntGlobal);
 
 
         // double click events, true => event handled

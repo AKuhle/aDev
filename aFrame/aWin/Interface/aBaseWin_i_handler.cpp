@@ -57,6 +57,108 @@ bool aBaseWin_i::onCreateWin()
 
 
 /*******************************************************************************
+* aBaseWin_i::onSysResize
+*******************************************************************************/
+void aBaseWin_i::onSysResize(const aDimension   &/*_dOldDim*/,
+                             const aDimension   &/*_dNewDim*/)
+{
+    if (m_pLayout)
+    {
+        m_pLayout->arrange(contentRect());
+    }
+} // aBaseWin_i::onSysResize
+
+
+/*******************************************************************************
+* aBaseWin_i::onResize
+*******************************************************************************/
+void aBaseWin_i::onResize(const aDimension   &/*_dOldDim*/,
+                          const aDimension   &/*_dNewDim*/)
+{
+} // aBaseWin_i::onResize
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaint
+*******************************************************************************/
+void aBaseWin_i::onPaint()
+{
+    onPaintMargin();
+    onPaintBorder();
+    onPaintPadding();
+    onPaintContentBg();
+    onPaintContent();
+} // aBaseWin_i::onPaint
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaintMargin
+*******************************************************************************/
+void aBaseWin_i::onPaintMargin()
+{
+} // aBaseWin_i::onPaintMargin
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaintBorder
+*******************************************************************************/
+void aBaseWin_i::onPaintBorder()
+{
+    if (borderStyle() != nullptr)
+    {
+        aRect       r = borderRect();
+        aPainter    p(m_pWinInstance);
+
+        borderStyle()->draw(p, r);
+    }
+} // aBaseWin_i::onPaintBorder
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaintPadding
+*******************************************************************************/
+void aBaseWin_i::onPaintPadding()
+{
+} // aBaseWin_i::onPaintPadding
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaintContentBg
+*******************************************************************************/
+void aBaseWin_i::onPaintContentBg()
+{
+    if (bgStyle() != nullptr)
+    {
+        aRect       r = contentRect();
+        aPainter    p(m_pWinInstance);
+
+        bgStyle()->draw(p, r);
+    }
+
+} // aBaseWin_i::onPaintContentBg
+
+
+/*******************************************************************************
+* aBaseWin_i::onPaintContent
+*******************************************************************************/
+void aBaseWin_i::onPaintContent()
+{
+} // aBaseWin_i::onPaintContent
+
+
+/*******************************************************************************
+* aBaseWin_i::onLDoubleClick
+*******************************************************************************/
+bool aBaseWin_i::onWheel(u16            /*_u16Modifier*/,
+                         s16            /*_s16Degree*/,
+                         const aPoint   &/*_pntLocal*/,
+                         const aPoint   &/*_pntGlobal*/)
+{
+    return false;
+} // aBaseWin_i::onWheel
+
+
+/*******************************************************************************
 * aBaseWin_i::onLDoubleClick
 *******************************************************************************/
 bool aBaseWin_i::onLDoubleClick(u16          /*_u16Modifier*/,
@@ -211,98 +313,6 @@ bool aBaseWin_i::onRButtonRelease(u16          /*_u16Modifier*/,
 {
     return false;
 } // aBaseWin_i::onRButtonRelease
-
-
-/*******************************************************************************
-* aBaseWin_i::onSysResize
-*******************************************************************************/
-void aBaseWin_i::onSysResize(const aDimension   &_dOldDim,
-                             const aDimension   &_dNewDim)
-{
-    if (m_pLayout)
-    {
-        m_pLayout->arrange(contentRect());
-    }
-
-    onResize(_dOldDim, _dNewDim);
-} // aBaseWin_i::onSysResize
-
-
-/*******************************************************************************
-* aBaseWin_i::onResize
-*******************************************************************************/
-void aBaseWin_i::onResize(const aDimension   &/*_dOldDim*/,
-                          const aDimension   &/*_dNewDim*/)
-{
-} // aBaseWin_i::onResize
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaint
-*******************************************************************************/
-void aBaseWin_i::onPaint()
-{
-    onPaintMargin();
-    onPaintBorder();
-    onPaintPadding();
-    onPaintContentBg();
-    onPaintContent();
-} // aBaseWin_i::onPaint
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintMargin
-*******************************************************************************/
-void aBaseWin_i::onPaintMargin()
-{
-} // aBaseWin_i::onPaintMargin
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintBorder
-*******************************************************************************/
-void aBaseWin_i::onPaintBorder()
-{
-    if (borderStyle() != nullptr)
-    {
-        aRect       r = borderRect();
-        aPainter    p(m_pWinInstance);
-
-        borderStyle()->draw(p, r);
-    }
-} // aBaseWin_i::onPaintBorder
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintPadding
-*******************************************************************************/
-void aBaseWin_i::onPaintPadding()
-{
-} // aBaseWin_i::onPaintPadding
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintContentBg
-*******************************************************************************/
-void aBaseWin_i::onPaintContentBg()
-{
-    if (bgStyle() != nullptr)
-    {
-        aRect       r = contentRect();
-        aPainter    p(m_pWinInstance);
-
-        bgStyle()->draw(p, r);
-    }
-
-} // aBaseWin_i::onPaintContentBg
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintContent
-*******************************************************************************/
-void aBaseWin_i::onPaintContent()
-{
-} // aBaseWin_i::onPaintContent
 
 
 } // namespace aWin

@@ -15,6 +15,7 @@
 * includes
 *******************************************************************************/
 #include <QWidget>
+#include <QInputEvent>
 
 #include "aWin_def.h"
 
@@ -79,6 +80,11 @@ class aBaseWin : private QWidget,
         void                    setVisible(bool _bVisible) override;
         bool                    isVisible() const override;
 
+        bool                    isMinimized() const override;
+        bool                    isMaximized() const override;
+        void                    showMinimized() override;
+        void                    showMaximized() override;
+
         void                    setMouseTracking(bool _bEnable) override;
 
 
@@ -110,7 +116,7 @@ class aBaseWin : private QWidget,
                                             QEvent  *_pEvent) override;
 
     private:
-        u16                     modifierFromMouseEvent(QMouseEvent *_pMouseEvent) const;
+        u16                     modifierFromEvent(QInputEvent *_pMouseEvent) const;
         // void                    dragEnterEvent(QDragEnterEvent *_pEvent) override;
         // void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
         // void                    dropEvent(QDropEvent   *_pEvent) override;
@@ -124,6 +130,10 @@ class aBaseWin : private QWidget,
     public:
         using aBaseWin_i::show;
         using aBaseWin_i::hide;
+        using aBaseWin_i::isMinimized;
+        using aBaseWin_i::isMaximized;
+        using aBaseWin_i::showMinimized;
+        using aBaseWin_i::showMaximized;
         using aBaseWin_i::setMouseTracking;
         using aBaseWin_i::setGeometry;
         using aBaseWin_i::setParent;

@@ -93,9 +93,6 @@ class aUrl;
 class aThreadCb;
 class aVersionInfo;
 
-class aToolBase;
-class aToolMgr;
-
 class aCmdBase;
 class aCmdMgr;
 class aCmdStack;

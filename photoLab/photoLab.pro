@@ -70,7 +70,6 @@ INCLUDEPATH += ../aFrame/aUtil/Cmds
 INCLUDEPATH += ../aFrame/aUtil/Collection
 INCLUDEPATH += ../aFrame/aUtil/Interface
 INCLUDEPATH += ../aFrame/aUtil/Qt
-INCLUDEPATH += ../aFrame/aUtil/Tool
 INCLUDEPATH += ../aFrame/aUtil/VarPool
 
 INCLUDEPATH += ../aFrame/aMath
@@ -86,6 +85,7 @@ INCLUDEPATH += ../aFrame/aWin
 INCLUDEPATH += ../aFrame/aWin/Interface
 INCLUDEPATH += ../aFrame/aWin/Layout
 INCLUDEPATH += ../aFrame/aWin/Qt
+INCLUDEPATH += ../aFrame/aWin/Tools
 
 
 ########################################################################

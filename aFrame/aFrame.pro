@@ -48,7 +48,6 @@ INCLUDEPATH += aUtil/Cmds
 INCLUDEPATH += aUtil/Collection
 INCLUDEPATH += aUtil/Interface
 INCLUDEPATH += aUtil/Qt
-INCLUDEPATH += aUtil/Tool
 INCLUDEPATH += aUtil/VarPool
 
 INCLUDEPATH += aMath
@@ -64,6 +63,7 @@ INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Interface
 INCLUDEPATH += aWin/Layout
 INCLUDEPATH += aWin/Qt
+INCLUDEPATH += aWin/Tools
 
 
 ########################################################################
@@ -138,8 +138,6 @@ HEADERS += \
     aUtil/Qt/aProgressMgr.h \
     aUtil/Qt/aThread.h \
     aUtil/Qt/aUrl_sys.h \
-    aUtil/Tool/aToolBase.h \
-    aUtil/Tool/aToolMgr.h \
     aUtil/VarPool/aPoolVarBase.h \
     aUtil/VarPool/aPoolVarBool.h \
     aUtil/VarPool/aPoolVarColor.h \
@@ -170,6 +168,9 @@ HEADERS += \
     aWin/Layout/aLayoutMainWin.h \
     aWin/Layout/aLayout_i.h \
     aWin/Qt/aBaseWin.h \
+    aWin/Tools/aParentCtrlTool.h \
+    aWin/Tools/aToolBase.h \
+    aWin/Tools/aToolManager.h \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
     aWin/aTitleBar.h \
@@ -212,8 +213,6 @@ SOURCES += \
     aUtil/Qt/aProgressMgr.cpp \
     aUtil/Qt/aThread.cpp \
     aUtil/Qt/aUrl_sys.cpp \
-    aUtil/Tool/aToolBase.cpp \
-    aUtil/Tool/aToolMgr.cpp \
     aUtil/VarPool/aPoolVarBool.cpp \
     aUtil/VarPool/aPoolVarColor.cpp \
     aUtil/VarPool/aPoolVarDbl.cpp \
@@ -240,6 +239,9 @@ SOURCES += \
     aWin/Layout/aLayout_i.cpp \
     aWin/Qt/aBaseWin.cpp \
     aWin/Qt/aBaseWin_events.cpp \
+    aWin/Tools/aParentCtrlTool.cpp \
+    aWin/Tools/aToolBase.cpp \
+    aWin/Tools/aToolManager.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
     aWin/aTitleBar.cpp \

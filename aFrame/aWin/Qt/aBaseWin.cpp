@@ -107,6 +107,42 @@ bool aBaseWin::isVisible() const
 
 
 /*******************************************************************************
+* aBaseWin::isMinimized
+*******************************************************************************/
+bool aBaseWin::isMinimized() const
+{
+    return QWidget::isMinimized();
+} // aBaseWin::isMinimized
+
+
+/*******************************************************************************
+* aBaseWin::isMaximized
+*******************************************************************************/
+bool aBaseWin::isMaximized() const
+{
+    return QWidget::isMaximized();
+} // aBaseWin::isMaximized
+
+
+/*******************************************************************************
+* aBaseWin::showMinimized
+*******************************************************************************/
+void aBaseWin::showMinimized()
+{
+    return QWidget::showMinimized();
+} // aBaseWin::showMaximized
+
+
+/*******************************************************************************
+* aBaseWin::showMaximized
+*******************************************************************************/
+void aBaseWin::showMaximized()
+{
+    return QWidget::showMaximized();
+} // aBaseWin::showMaximized
+
+
+/*******************************************************************************
 * aBaseWin::setMouseTracking
 *******************************************************************************/
 void aBaseWin::setMouseTracking(bool _bEnable)

@@ -120,6 +120,22 @@ void aBaseWin_i::hide()
 
 
 /*******************************************************************************
+* aBaseWin_i::toggleMaximized
+*******************************************************************************/
+void aBaseWin_i::toggleMaximized()
+{
+    if (isMinimized())
+    {
+        showMaximized();
+    }
+    else
+    {
+        isMinimized();
+    }
+} // aBaseWin_i::toggleMaximized
+
+
+/*******************************************************************************
 * aBaseWin_i::setLayout
 *******************************************************************************/
 void aBaseWin_i::setLayout(unique_ptr<aLayout_i> _pLayout)
