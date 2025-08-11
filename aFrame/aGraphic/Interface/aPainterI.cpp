@@ -44,6 +44,29 @@ aPainterI::~aPainterI()
 
 
 /*******************************************************************************
+* aPainter::drawRect
+*******************************************************************************/
+void aPainterI::drawRect(s32        _x,
+                         s32        _y,
+                         s32        _w,
+                         s32        _h,
+                         const aPen *_pPen /*= nullptr*/)
+{
+    _drawRect(_x, _y, _w, _h, _pPen);
+} // aPainterI::drawRect
+
+
+/*******************************************************************************
+* aPainter::drawRect
+*******************************************************************************/
+void aPainterI::drawRect(const aRect  &_r,
+                         const aPen *_pPen /*= nullptr*/)
+{
+    _drawRect(_r.x(), _r.y(), _r.w(), _r.h(), _pPen);
+} // aPainterI::drawRect
+
+
+/*******************************************************************************
 * aPainter::drawFilledRect
 *******************************************************************************/
 void aPainterI::drawFilledRect(s32           _x,
@@ -59,10 +82,10 @@ void aPainterI::drawFilledRect(s32           _x,
 /*******************************************************************************
 * aPainterI::drawFilledRect
 *******************************************************************************/
-void aPainterI::drawFilledRect(const aRect  &_r2d,
+void aPainterI::drawFilledRect(const aRect  &_r,
                                const aColor *_pColor /*= nullptr*/)
 {
-    _drawFilledRect(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h(), _pColor);
+    _drawFilledRect(_r.x(), _r.y(), _r.w(), _r.h(), _pColor);
 } // aPainterI::drawFilledRect
 
 
@@ -94,14 +117,14 @@ void aPainterI::drawGradientRect(s32            _x,
                                  s32            _y,
                                  s32            _w,
                                  s32            _h,
-                                 const aPoint   &_v2dGradStart,
-                                 const aPoint   &_v2dGradEnd,
+                                 const aPoint   &_pntGradStart,
+                                 const aPoint   &_pntGradEnd,
                                  const aColor   &_colStart,
                                  const aColor   &_colEnd)
 {
     _drawGradientRect(_x, _y, _w, _h,
-                      _v2dGradStart.x(), _v2dGradStart.y(),
-                      _v2dGradEnd.x(), _v2dGradEnd.y(),
+                      _pntGradStart.x(), _pntGradStart.y(),
+                      _pntGradEnd.x(), _pntGradEnd.y(),
                       _colStart, _colEnd);
 } // aPainterI::drawGradientRect
 
@@ -109,15 +132,15 @@ void aPainterI::drawGradientRect(s32            _x,
 /*******************************************************************************
 * aPainterI::drawGradientRect
 *******************************************************************************/
-void aPainterI::drawGradientRect(const aRect    &_r2d,
-                                 const aPoint   &_v2dGradStart,
-                                 const aPoint   &_v2dGradEnd,
+void aPainterI::drawGradientRect(const aRect    &_r,
+                                 const aPoint   &_pntGradStart,
+                                 const aPoint   &_pntGradEnd,
                                  const aColor   &_colStart,
                                  const aColor   &_colEnd)
 {
-    _drawGradientRect(_r2d.x(), _r2d.y(), _r2d.w(), _r2d.h(),
-                      _v2dGradStart.x(), _v2dGradStart.y(),
-                      _v2dGradEnd.x(), _v2dGradEnd.y(),
+    _drawGradientRect(_r.x(), _r.y(), _r.w(), _r.h(),
+                      _pntGradStart.x(), _pntGradStart.y(),
+                      _pntGradEnd.x(), _pntGradEnd.y(),
                       _colStart, _colEnd);
 } // aPainterI::drawGradientRect
 

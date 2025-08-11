@@ -14,7 +14,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QObject>
+#include <QWidget>
 
 #include "aWin_def.h"
 
@@ -46,34 +46,40 @@ namespace aWin {
 /*******************************************************************************
 * class aBaseWin
 *******************************************************************************/
-class aBaseWin : public QObject,
+class aBaseWin : private QWidget,
                  public aBaseWin_i
 {
     Q_OBJECT
-
-    protected:
-        SysWin      *m_pWin;
 
 
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aBaseWin(SysWin *_pWin);
+        aBaseWin(SysWin *_pParent);
 
     public:
         virtual ~aBaseWin();
 
-        SysWin*                 sysWinPtr() override;
+        // QWidget is private => provide cast operator for QWidget
+        //operator QWidget*()         { return static_cast<QWidget*>(this); }
+        SysWin*                 asSysWin()  { return this; }
 
 
     /*******************************************************************************
     * window state
     *******************************************************************************/
     public:
-        // visibility
+        void                    setParent(SysWin *_pParent) override;
+        SysWin*                 parent() const override;
+
+        void                    update() override;
+        void                    repaint() override;
+
         void                    setVisible(bool _bVisible) override;
         bool                    isVisible() const override;
+
+        void                    setMouseTracking(bool _bEnable) override;
 
 
     /*******************************************************************************
@@ -86,25 +92,45 @@ class aBaseWin : public QObject,
         void                    setMaxW(s32 _s32MaxW) override;
         void                    setMaxH(s32 _s32MaxH) override;
 
+        void                    setGeometry(s32 _s32X,
+                                            s32 _s32Y,
+                                            s32 _s32W,
+                                            s32 _s32H) override;
+
         aRect                   geometryRect() const override;
         s32                     geometryW() const override;
         s32                     geometryH() const override;
 
 
-    // /*******************************************************************************
-    // * qt handler
-    // *******************************************************************************/
+    /*******************************************************************************
+    * qt handler
+    *******************************************************************************/
     protected:
         bool                    eventFilter(QObject *_pObj,
                                             QEvent  *_pEvent) override;
 
     private:
+        u16                     modifierFromMouseEvent(QMouseEvent *_pMouseEvent) const;
         // void                    dragEnterEvent(QDragEnterEvent *_pEvent) override;
         // void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
         // void                    dropEvent(QDropEvent   *_pEvent) override;
 
         // void                    wheelEvent(QWheelEvent *_pEvent) override;
 
+
+    /*******************************************************************************
+    * using
+    *******************************************************************************/
+    public:
+        using aBaseWin_i::show;
+        using aBaseWin_i::hide;
+        using aBaseWin_i::setMouseTracking;
+        using aBaseWin_i::setGeometry;
+        using aBaseWin_i::setParent;
+        using aBaseWin_i::parent;
+        using aBaseWin_i::setLayout;
+        using aBaseWin_i::update;
+        using aBaseWin_i::repaint;
 }; // class aBaseWin
 
 

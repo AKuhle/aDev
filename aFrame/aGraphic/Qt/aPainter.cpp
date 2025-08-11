@@ -13,6 +13,7 @@
 * includes
 *******************************************************************************/
 #include "aPainter.h"
+#include "aPen.h"
 #include "aColor.h"
 #include "aPixmap.h"
 
@@ -31,7 +32,7 @@ namespace aGraphic {
 * aPainter::aPainter
 *******************************************************************************/
 aPainter::aPainter(SysWin *_pWin)
-: QPainter(_pWin)
+: m_p(_pWin)
 {
 } // aPainter::aPainter
 
@@ -45,6 +46,24 @@ aPainter::~aPainter()
 
 
 /*******************************************************************************
+* aPainter::_drawRect
+*******************************************************************************/
+void aPainter::_drawRect(s32        _x,
+                         s32        _y,
+                         s32        _w,
+                         s32        _h,
+                         const aPen *_pPen /*= nullptr*/)
+{
+    if (_pPen)
+    {
+        setPen(_pPen);
+    }
+
+    m_p.drawRect(_x, _y, _w-1, _h-1);
+} // aPainter::_drawFilledRect
+
+
+/*******************************************************************************
 * aPainter::_drawFilledRect
 *******************************************************************************/
 void aPainter::_drawFilledRect(s32           _x,
@@ -53,15 +72,15 @@ void aPainter::_drawFilledRect(s32           _x,
                                s32           _h,
                                const aColor  *_pColor /*= nullptr*/)
 {
-    QPainter::setPen(Qt::NoPen);
+    m_p.setPen(Qt::NoPen);
     setBrush(_pColor);
 
-    QPainter::drawRect(_x, _y, _w, _h);
+    m_p.drawRect(_x, _y, _w, _h);
 
     // setPen(aPen(Qt::NoPen));
     // QRectF rectangle(0.0, 0.0, 3.0, 3.0);
     // fillRect(_x, _y, _w, _h, toaColor(colLightSeaGreen));
-    // setRenderHint(QPainter::Antialiasing, false);
+    // setRenderHint(m_p.Antialiasing, false);
     // fillRect(rectangle, toaColor(colGreenYellow));
 } // aPainter::_drawFilledRect
 
@@ -84,7 +103,7 @@ void aPainter::_drawGradientRect(s32           _x,
     grad.setColorAt(0, _colStart.toQColor());
     grad.setColorAt(1, _colEnd.toQColor());
 
-    QPainter::fillRect(_x, _y, _w, _h, grad);
+    m_p.fillRect(_x, _y, _w, _h, grad);
 } // aPainter::_drawGradientRect
 
 
@@ -98,7 +117,7 @@ void aPainter::drawPixmap(const aPixmap &_pixmap,
     if (!_pixmap.isNull())
     {
         // draw the image
-        QPainter::drawPixmap(_s32X, _s32Y, _pixmap);
+        m_p.drawPixmap(_s32X, _s32Y, _pixmap);
     }
 } // aPainter::drawPixmap
 
@@ -113,7 +132,7 @@ void aPainter::drawQImg(const QImage    &_img,
     if (!_img.isNull())
     {
         // draw the image
-        QPainter::drawImage(_s32X, _s32Y, _img);
+        m_p.drawImage(_s32X, _s32Y, _img);
     }
 } // aPainter::drawQImg
 
@@ -121,22 +140,11 @@ void aPainter::drawQImg(const QImage    &_img,
 /*******************************************************************************
 * aPainter::setPen
 *******************************************************************************/
-// void aPainter::setPen(const aPen *_pPen)
-// {
-//     CHECK_PRE_CONDITION_VOID(_pPen != nullptr);
-
-//     QPainter::setPen(*_pPen);
-// } // aPainter::setPen
-
-
-/*******************************************************************************
-* aPainter::setPen
-*******************************************************************************/
-void aPainter::setPen(const aColor *_pColor)
+void aPainter::setPen(const aPen *_pPen)
 {
-    CHECK_PRE_CONDITION_VOID(_pColor != nullptr);
+    CHECK_PRE_CONDITION_VOID(_pPen != nullptr);
 
-    QPainter::setPen(QPen(_pColor->toQColor()));
+    m_p.setPen(_pPen->toQPen());
 } // aPainter::setPen
 
 
@@ -149,7 +157,7 @@ void aPainter::setBrush(const aColor *_pColor)
     {
         QBrush  brush(_pColor->toQColor());
 
-        QPainter::setBrush(brush);
+        m_p.setBrush(brush);
     }
 } // aPainter::setBrush
 
@@ -161,7 +169,7 @@ void aPainter::setBrush(const aColor *_pColor)
 // {
 //     if (_pFont != nullptr)
 //     {
-//         QPainter::setFont(*_pFont);
+//         m_p.setFont(*_pFont);
 //     }
 // } // aPainter::setFont
 
@@ -184,7 +192,7 @@ void aPainter::setBrush(const aColor *_pColor)
 // {
 //     setPen(_pPen);
 
-//     QPainter::drawLine(_startX, _startY, _endX, _endY);
+//     m_p.drawLine(_startX, _startY, _endX, _endY);
 // } // aPainter::drawLine
 
 
@@ -208,7 +216,7 @@ void aPainter::setBrush(const aColor *_pColor)
 //                                 s32             _h,
 //                                 const aColor    *_pColor /*= nullptr*/)
 // {
-//     QPainter::setPen(Qt::NoPen);
+//     m_p.setPen(Qt::NoPen);
 //     setBrush(_pColor);
 
 //     drawRect(_x, _y, _w, _h);
@@ -216,7 +224,7 @@ void aPainter::setBrush(const aColor *_pColor)
 //     // setPen(aPen(Qt::NoPen));
 //     // QRectF rectangle(0.0, 0.0, 3.0, 3.0);
 //     // fillRect(_x, _y, _w, _h, toaColor(colLightSeaGreen));
-//     // setRenderHint(QPainter::Antialiasing, false);
+//     // setRenderHint(m_p.Antialiasing, false);
 //     // fillRect(rectangle, toaColor(colGreenYellow));
 // } // aPainter::drawFilledRect
 
@@ -258,7 +266,7 @@ void aPainter::setBrush(const aColor *_pColor)
 //     setPen(_pColor);
 //     setBrush(_pColor);
 
-//     QPainter::drawEllipse(_centerX-_radius, _centerY-_radius,
+//     m_p.drawEllipse(_centerX-_radius, _centerY-_radius,
 //                           _radius*2, _radius*2);
 // } // aPainter::drawFilledCircle
 
@@ -298,7 +306,7 @@ void aPainter::setBrush(const aColor *_pColor)
 //     setFont(_pFont);
 //     setPen(_pColor);
 
-//     QPainter::drawText(_x, _y, _sText.toQString());
+//     m_p.drawText(_x, _y, _sText.toQString());
 // } // aPainter::drawText
 
 
@@ -376,19 +384,19 @@ void aPainter::setBrush(const aColor *_pColor)
 //     if (pBoundingRect != nullptr)
 //     {
 //         QRect   rct;
-//         QPainter::drawText(rect, iFlags, _sText.toQString(), &rct);
+//         m_p.drawText(rect, iFlags, _sText.toQString(), &rct);
 
 //         pBoundingRect->set(rct.x(), rct.y(), rct.width(), rct.height());
 //     }
 //     else
 //     {
-//         QPainter::drawText(rect, iFlags, _sText.toQString());
+//         m_p.drawText(rect, iFlags, _sText.toQString());
 //     }
 // } // aPainter::drawText
 
 
 // /*******************************************************************************
-// * qPainter::drawTextCentered
+// * m_p.drawTextCentered
 // *******************************************************************************/
 // void aPainter::drawTextCentered(const aString &_sText,
 //                                   aRect2D<s32>  _r2dBoundingBox,
@@ -408,13 +416,13 @@ void aPainter::setBrush(const aColor *_pColor)
 //     if (pBoundingRect != nullptr)
 //     {
 //         QRect   rct;
-//         QPainter::drawText(rect, Qt::AlignHCenter | Qt::AlignVCenter, _sText.toQString(), &rct);
+//         m_p.drawText(rect, Qt::AlignHCenter | Qt::AlignVCenter, _sText.toQString(), &rct);
 
 //         pBoundingRect->set(rct.x(), rct.y(), rct.width(), rct.height());
 //     }
 //     else
 //     {
-//         QPainter:: drawText(rect, Qt::AlignHCenter | Qt::AlignVCenter, _sText.toQString());
+//         m_p. drawText(rect, Qt::AlignHCenter | Qt::AlignVCenter, _sText.toQString());
 //     }
 // } // aPainter::drawTextCentered
 
@@ -426,5 +434,5 @@ void aPainter::setBrush(const aColor *_pColor)
 //                             s32             _x,
 //                             s32             _y)
 // {
-//     QPainter::drawPixmap(_x, _y, _pixmap);
+//     m_p.drawPixmap(_x, _y, _pixmap);
 // } // aPainter::drawPixmap

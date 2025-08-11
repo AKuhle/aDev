@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aStyleItemFillSolid.cpp
+* \file aLayoutMainWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -11,15 +11,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
-
-#include "aStyleItemFillSolid.h"
-#include "aPath.h"
-#include "aJsonFile.h"
-
-#include "aMainWin.h"
-
-using namespace std;
+#include "aLayoutMainWin.h"
+#include "aTitleBar.h"
 
 
 /*******************************************************************************
@@ -30,38 +23,42 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aStyleItemFillSolid::aStyleItemFillSolid
+* aLayoutMainWin::aLayoutMainWin
 *******************************************************************************/
-aStyleItemFillSolid::aStyleItemFillSolid(const aColor   &_col)
-: m_fillColor(_col)
+aLayoutMainWin::aLayoutMainWin()
 {
-} // aStyleItemFillSolid::aStyleItemFillSolid
+} // aLayoutMainWin::aLayoutMainWin
 
 
 /*******************************************************************************
-* aStyleItemFillSolid::~aStyleItemFillSolid
+* aLayoutMainWin::~aLayoutMainWin
 *******************************************************************************/
-aStyleItemFillSolid::~aStyleItemFillSolid()
+aLayoutMainWin::~aLayoutMainWin()
 {
-} // aStyleItemFillSolid::~aStyleItemFillSolid
+} // aLayoutMainWin::~aLayoutMainWin
 
 
 /*******************************************************************************
-* aStyleItemFillSolid::setFillColor
+* aLayoutMainWin::setTitleBar
 *******************************************************************************/
-void aStyleItemFillSolid::setFillColor(const aColor   &_col)
+void aLayoutMainWin::setTitleBar(unique_ptr<aTitleBar>   _pTitleBar)
 {
-    m_fillColor = _col;
-} // aStyleItemFillSolid::setFillColor
+    m_pTitleBar = std::move(_pTitleBar);
+} // aLayoutMainWin::setTitleBar
 
 
 /*******************************************************************************
-* aStyleItemFillSolid::fillColor
+* aLayoutMainWin::arrange
 *******************************************************************************/
-aColor aStyleItemFillSolid::fillColor() const
+void aLayoutMainWin::arrange(const aRect &_r)
 {
-    return m_fillColor;
-} // aStyleItemFillSolid::fillColor
+    aRect r = _r;
+
+    if (m_pTitleBar)
+    {
+        m_pTitleBar->setGeometry(r.l(), r.t(), r.w(), m_pTitleBar->sysMetrics().h());
+    }
+} // aLayoutMainWin::arrange
 
 
 } // namespace aWin

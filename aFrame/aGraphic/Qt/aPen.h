@@ -25,7 +25,9 @@
 #include <QPen>
 
 #include "aWin_def.h"
-#include "aPeni.h"
+#include "aUtil_def.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -38,12 +40,18 @@ namespace aGraphic {
 /*******************************************************************************
 * class aPen
 *******************************************************************************/
-class aPen : private QPen,
-             public aPenI
+class aPen
 {
+    private:
+        QPen        m_pen;
+
     public:
-        aPen();
+        aPen(const aColor   &_col,
+             s32            _s32Thick);
         virtual ~aPen();
+
+        const QPen&     toQPen() const      { return m_pen; }
+
 }; // aPen
 
 

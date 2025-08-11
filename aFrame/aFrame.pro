@@ -58,11 +58,12 @@ INCLUDEPATH += aMath/Obj3D
 INCLUDEPATH += aGraphic
 INCLUDEPATH += aGraphic/Interface
 INCLUDEPATH += aGraphic/Qt
+INCLUDEPATH += aGraphic/Style
 
 INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Interface
+INCLUDEPATH += aWin/Layout
 INCLUDEPATH += aWin/Qt
-INCLUDEPATH += aWin/Style
 
 
 ########################################################################
@@ -78,12 +79,18 @@ HEADERS += \
     aFrame.h \
     aGraphic/Interface/aBrushI.h \
     aGraphic/Interface/aPainterI.h \
-    aGraphic/Interface/aPenI.h \
     aGraphic/Interface/aPixmapI.h \
     aGraphic/Qt/aBrush.h \
     aGraphic/Qt/aPainter.h \
     aGraphic/Qt/aPen.h \
     aGraphic/Qt/aPixmap.h \
+    aGraphic/Style/aStyleItem.h \
+    aGraphic/Style/aStyleItemBorder.h \
+    aGraphic/Style/aStyleItemBorderSolid.h \
+    aGraphic/Style/aStyleItemBorderSolidFrame.h \
+    aGraphic/Style/aStyleItemFill.h \
+    aGraphic/Style/aStyleItemFillGradient.h \
+    aGraphic/Style/aStyleItemFillSolid.h \
     aGraphic/aGraphic_def.h \
     aMath/Obj2D/aDimension2D.h \
     aMath/Obj2D/aDimension2D.inl \
@@ -159,16 +166,14 @@ HEADERS += \
     aUtil/aUtil_def.h \
     aUtil/aVersionInfo.h \
     aWin/Interface/aBaseWin_i.h \
-    aWin/Interface/aMainWinMdi_i.h \
-    aWin/Interface/aMainWin_i.h \
+    aWin/Layout/aLayoutCentralWin.h \
+    aWin/Layout/aLayoutMainWin.h \
+    aWin/Layout/aLayout_i.h \
     aWin/Qt/aBaseWin.h \
-    aWin/Qt/aMainWin.h \
-    aWin/Qt/aMainWinMdi.h \
-    aWin/Style/aStyleItem.h \
-    aWin/Style/aStyleItemFill.h \
-    aWin/Style/aStyleItemFillGradient.h \
-    aWin/Style/aStyleItemFillSolid.h \
-    aWin/Style/aWinStyle.h \
+    aWin/aMainWin.h \
+    aWin/aMainWinMdi.h \
+    aWin/aTitleBar.h \
+    aWin/aWinStyle.h \
     aWin/aWin_def.h
 
 
@@ -185,6 +190,13 @@ SOURCES += \
     aGraphic/Qt/aPainter.cpp \
     aGraphic/Qt/aPen.cpp \
     aGraphic/Qt/aPixmap.cpp \
+    aGraphic/Style/aStyleItem.cpp \
+    aGraphic/Style/aStyleItemBorder.cpp \
+    aGraphic/Style/aStyleItemBorderSolid.cpp \
+    aGraphic/Style/aStyleItemBorderSolidFrame.cpp \
+    aGraphic/Style/aStyleItemFill.cpp \
+    aGraphic/Style/aStyleItemFillGradient.cpp \
+    aGraphic/Style/aStyleItemFillSolid.cpp \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
@@ -222,16 +234,16 @@ SOURCES += \
     aUtil/aUrl.cpp \
     aUtil/aVersionInfo.cpp \
     aWin/Interface/aBaseWin_i.cpp \
-    aWin/Interface/aMainWinMdi_i.cpp \
-    aWin/Interface/aMainWin_i.cpp \
+    aWin/Interface/aBaseWin_i_handler.cpp \
+    aWin/Layout/aLayoutCentralWin.cpp \
+    aWin/Layout/aLayoutMainWin.cpp \
+    aWin/Layout/aLayout_i.cpp \
     aWin/Qt/aBaseWin.cpp \
-    aWin/Qt/aMainWin.cpp \
-    aWin/Qt/aMainWinMdi.cpp \
-    aWin/Style/aStyleItem.cpp \
-    aWin/Style/aStyleItemFill.cpp \
-    aWin/Style/aStyleItemFillGradient.cpp \
-    aWin/Style/aStyleItemFillSolid.cpp \
-    aWin/Style/aWinStyle.cpp
+    aWin/Qt/aBaseWin_events.cpp \
+    aWin/aMainWin.cpp \
+    aWin/aMainWinMdi.cpp \
+    aWin/aTitleBar.cpp \
+    aWin/aWinStyle.cpp
 
 # Default rules for deployment.
 unix {

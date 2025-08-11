@@ -1,25 +1,28 @@
 {
     "color": "rgba(r,g,b,a)",
 
-    "solidColor": "solid(color)",
-    "gradient": "gradient(colorStart, colorEnd, angle)",
+    "bg values": "",
+    "bg": "solid(color)",
+    "bg": "gradient(colorStart, colorEnd, angle)",
 
-    "bg": "solidColor | gradient",
-    "border": "solidColor",
-
-    "solid(rgba)": "solid(rgba(r,g,b,a))",
-    "gradient(rgba, rgba, angle)": "gradient(rgba(rgba(r,g,b,a)), rgba(r,g,b,a), val)",
-
-    "border(rgba)": "border(rgba(r,g,b,a))",
-    "borderFrame(frameThickness, Thickness, rgbaFrame, rgbaBorder)": "",
-
+    "border values": "",
+    "border": "solid(borderColor, l, r, t, b)",
+    "border": "solidFrame(frameThickness, frameColor, borderColor, l, r, t, b)",
 
 
     "aBaseWin": {
         "bg": "solid(rgba(0, 0, 0, 255))"
     },
+
     "aMainWin": {
         "bg": "solid(rgba(10, 10, 10, 255))",
-        "border": "solid(rgba(0, 0, 0, 255))"
+        "bg1": "gradient(rgba(50, 0, 0, 155), rgba(0, 0, 50, 155), 45)",
+        "border1": "solid(rgba(10, 10, 10, 255), 3, 3, 3, 3)",
+        "border": "solidFrame(1, rgba(80, 80, 80, 255), rgba(10, 10, 10, 255), 3, 3, 3, 3)"
+    },
+
+    "aTitleBar": {
+        "bg": "solid(rgba(20, 20, 20, 255))",
+        "sysMetricsH": "32"
     }
 }

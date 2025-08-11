@@ -123,15 +123,24 @@ constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 /*******************************************************************************
 * classes
 *******************************************************************************/
+class aLayout_i;
+class aLayoutCentralWin;
+class aLayoutMainWin;
+
 class aBaseWin_i;
 class aBaseWin;
 class aMainWin;
 class aMainWinMdi;
+class aTitleBar;
 
 class aStyleParser;
 class aStyleItem;
 class aStyleItemFill;
 class aStyleItemFillSolid;
+class aStyleItemFillGradient;
+class aStyleItemBorder;
+class aStyleItemBorderSolid;
+class aStyleItemBorderSolidFrame;
 
 // class aDialog;
 // class aDockWin;

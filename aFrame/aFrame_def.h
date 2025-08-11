@@ -105,7 +105,8 @@ using	color_t			= float;			//!> data type for class Rgb
 #define MODIFIER_SHIFT			0x0001
 #define MODIFIER_CTRL			0x0002
 #define MODIFIER_ALT			0x0004
-#define MODIFIER_KEYPAD			0x0008
+#define MODIFIER_META			0x0008
+#define MODIFIER_KEYPAD			0x0010
 
 
 /*******************************************************************************

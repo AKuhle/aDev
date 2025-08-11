@@ -16,6 +16,7 @@
 #include "aWin_def.h"
 
 #include "aMargin.h"
+#include "aDimension.h"
 
 #include "aWinStyle.h"
 
@@ -52,16 +53,20 @@ class aBaseWin_i : public aWinStyle
 {
     // geometry
     private:
+        SysWin                          *m_pWinInstance;
+
         aMargin                         m_margin;
-        aMargin                         m_border;
         aMargin                         m_padding;
+
+        // layout
+        unique_ptr<aLayout_i>           m_pLayout;
 
 
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aBaseWin_i();
+        aBaseWin_i(SysWin *_pWinInstance);
 
     public:
         virtual ~aBaseWin_i();
@@ -69,9 +74,13 @@ class aBaseWin_i : public aWinStyle
         bool                            createWin();
         // bool                    closeWin() override;
 
-        virtual SysWin*                 sysWinPtr() = 0;
         aString                         className() const;
 
+        virtual void                    setParent(SysWin *_pParent) = 0;
+        virtual SysWin*                 parent() const = 0;
+
+        virtual void                    update() = 0;
+        virtual void                    repaint() = 0;
 
         // aBaseWin_iI*              widget2BaseWin(QWidget *_pWidget);
         // QWidget*                baseWin2Widget(aBaseWin_iI *_pWin);
@@ -82,14 +91,7 @@ class aBaseWin_i : public aWinStyle
         //     return (aWin) _pWin;
         // }
 
-        // void                    setParent(SysWin *_pParent) override;
-        // SysWin*                 parent() const override;
-
-        // void                    update() override;
-        // void                    repaint() override;
-
         // void                    setWinTitle(const aString &_sTitle) override;
-
 
 
     /*******************************************************************************
@@ -102,7 +104,14 @@ class aBaseWin_i : public aWinStyle
         virtual void                    setVisible(bool _bVisible) = 0;
         virtual bool                    isVisible() const = 0;
 
-        // void                    setMouseTracking(bool _bEnable) override;
+        virtual void                    setMouseTracking(bool _bEnable) = 0;
+
+
+    /*******************************************************************************
+    * layout
+    *******************************************************************************/
+    public:
+        void                            setLayout(unique_ptr<aLayout_i> _pLayout);
 
 
     /*******************************************************************************
@@ -124,6 +133,11 @@ class aBaseWin_i : public aWinStyle
         virtual void                    setMaxW(s32 _s32MaxW) = 0;
         virtual void                    setMaxH(s32 _s32MaxH) = 0;
 
+        virtual void                    setGeometry(s32 _s32X,
+                                                    s32 _s32Y,
+                                                    s32 _s32W,
+                                                    s32 _s32H) = 0;
+
         virtual aRect                   geometryRect() const = 0;
         virtual s32                     geometryW() const = 0;
         virtual s32                     geometryH() const = 0;
@@ -144,6 +158,81 @@ class aBaseWin_i : public aWinStyle
         virtual bool                    onSysCreateWin();
         virtual bool                    onCreateWin();
     //     bool                    onCloseWin() override;
+
+
+        // double click events, true => event handled
+        virtual bool                    onLDoubleClick(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+        virtual bool                    onMDoubleClick(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+        virtual bool                    onRDoubleClick(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+
+        // mouse pressed events, true => event handled
+        virtual bool                    onLButtonPress(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+        virtual bool                    onMButtonPress(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+        virtual bool                    onRButtonPress(u16          _u16Modifier,
+                                                       const aPoint &_pntLocal,
+                                                       const aPoint &_pntGlobal);
+
+
+        // mouse move events, true => event handled
+        // separate handler for moves without/multiple buttons
+        virtual bool                    onLMouseMove(u16          _u16Modifier,
+                                                     const aPoint &_pntLocal,
+                                                     const aPoint &_pntGlobal);
+
+        virtual bool                    onMMouseMove(u16          _u16Modifier,
+                                                     const aPoint &_pntLocal,
+                                                     const aPoint &_pntGlobal);
+
+        virtual bool                    onRMouseMove(u16          _u16Modifier,
+                                                     const aPoint &_pntLocal,
+                                                     const aPoint &_pntGlobal);
+
+        // only called, if mouseTracking is enabled
+        virtual bool                    onMouseMove(u16          _u16Modifier,
+                                                    const aPoint &_pntLocal,
+                                                    const aPoint &_pntGlobal);
+
+        virtual bool                    onMultipleMouseMove(u16             _u16Modifier,
+                                                            const aPoint    &_pntLocal,
+                                                            const aPoint    &_pntGlobal,
+                                                            bool            _bLBtn,
+                                                            bool            _bMBtn,
+                                                            bool            _bRBtn);
+
+        // mouse release events, true => event handled
+        virtual bool                    onLButtonRelease(u16          _u16Modifier,
+                                                         const aPoint &_pntLocal,
+                                                         const aPoint &_pntGlobal);
+
+        virtual bool                    onMButtonRelease(u16          _u16Modifier,
+                                                         const aPoint &_pntLocal,
+                                                         const aPoint &_pntGlobal);
+
+        virtual bool                    onRButtonRelease(u16          _u16Modifier,
+                                                         const aPoint &_pntLocal,
+                                                         const aPoint &_pntGlobal);
+
+
+        virtual void                    onSysResize(const aDimension   &_dOldDim,
+                                                    const aDimension   &_dNewDim);
+
+        virtual void                    onResize(const aDimension   &_dOldDim,
+                                                 const aDimension   &_dNewDim);
 
         virtual void                    onPaint();
         virtual void                    onPaintMargin();

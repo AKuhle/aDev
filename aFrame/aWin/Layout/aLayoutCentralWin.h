@@ -1,12 +1,8 @@
 /*******************************************************************************
-* \file aPenI.h
+* \file qWin.h
 * \author Andreas Kuhlewind
 *
 * \brief
-*
-* $Revision: 69 $
-* $LastChangedDate: 2010-08-17 14:10:45 +0200 (Di, 17 Aug 2010) $
-* $LastChangedBy: akuhlewi $
 *
 *  Detailed description starts here.
 *******************************************************************************/
@@ -16,28 +12,41 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aWin_def.h"
+#include "aLayout_i.h"
 
-
-/*******************************************************************************
-* includes
-*******************************************************************************/
+using namespace std;
+using namespace aFrame::aWin;
 
 
 /*******************************************************************************
 * namespace
 *******************************************************************************/
 namespace aFrame {
-namespace aGraphic {
+namespace aWin {
 
 
 /*******************************************************************************
-* class aPenI
+* class aLayoutCentralWin
 *******************************************************************************/
-class aPenI
+class aLayoutCentralWin : public aLayout_i
 {
+    protected:
+        SysWin          *m_pCentralWin  { nullptr };
+
+    protected:
+        aLayoutCentralWin();
+
     public:
-}; // aPenI
+        virtual ~aLayoutCentralWin();
+
+        void                setCentralWin(SysWin *_pWin)    { m_pCentralWin = _pWin; }
+        const SysWin*       centralWin() const              { return m_pCentralWin; }
+        SysWin*             centralWin()                    { return m_pCentralWin; }
+
+        void                arrange(const aRect &_r) override;
+}; // class aLayoutCentralWin
 
 
-} // namespace aGraphic
+} // namespace aWin
 } // namespace aFrame

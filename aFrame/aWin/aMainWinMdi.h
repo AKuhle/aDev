@@ -25,16 +25,16 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMainWinMdi_i
+* class aMainWinMdi
 *******************************************************************************/
-class aMainWinMdi_i : public aMainWin
+class aMainWinMdi : public aMainWin
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWinMdi_i(SysWin *_pParent = nullptr);
-        ~aMainWinMdi_i();
+        aMainWinMdi(SysWin *_pParent = nullptr);
+        ~aMainWinMdi();
 
 
     /*******************************************************************************
@@ -55,10 +55,10 @@ class aMainWinMdi_i : public aMainWin
     /*******************************************************************************
     * aBaseWin interface
     *******************************************************************************/
-    // protected:
-    //     virtual bool        onSysCreateWin() override;
+    protected:
+        virtual bool        onSysCreateWin() override;
 
-}; // class aMainWinMdi_i
+}; // class aMainWinMdi
 
 
 } // namespace aWin

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aMainWinMdi_i.cpp
+* \file aMainWinMdi.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -11,7 +11,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMainWinMdi_i.h"
+#include "aFrame_def.h"
+#include "aWin_def.h"
+
+#include "aMainWinMdi.h"
 
 
 /*******************************************************************************
@@ -22,103 +25,106 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aMainWinMdi_i::aMainWinMdi_i
+* aMainWinMdi::aMainWinMdi
 *******************************************************************************/
-aMainWinMdi_i::aMainWinMdi_i(SysWin *_pParent /*= nullptr*/)
+aMainWinMdi::aMainWinMdi(SysWin *_pParent /*= nullptr*/)
 : aMainWin(_pParent)
 {
-} // aMainWinMdi_i::aMainWinMdi_i
+} // aMainWinMdi::aMainWinMdi
 
 
 /*******************************************************************************
-* aMainWinMdi_i::~aMainWinMdi_i
+* aMainWinMdi::~aMainWinMdi
 *******************************************************************************/
-aMainWinMdi_i::~aMainWinMdi_i()
+aMainWinMdi::~aMainWinMdi()
 {
-} // aMainWinMdi_i::~aMainWinMdi_i
+} // aMainWinMdi::~aMainWinMdi
+
+
+/*******************************************************************************
+* aMainWinMdi::onSysCreateWin
+*******************************************************************************/
+bool aMainWinMdi::onSysCreateWin()
+{
+    if (aMainWin::onSysCreateWin())
+    {
+        //     aMdiArea *pMdiArea = new aMdiArea();
+        //     pMdiArea->createWin();
+
+        //     setCentralWin(pMdiArea);
+    }
+
+    return true;
+} // aMainWinMdi::onSysCreateWin
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::mdiArea
+// * aMainWinMdi::mdiArea
 // *******************************************************************************/
-// aMdiArea* aMainWinMdi_i::mdiArea()
+// aMdiArea* aMainWinMdi::mdiArea()
 // {
 //     return dynamic_cast<aMdiArea *> (centralWin());
 //     //return (aMdiArea *) (centralWin());
-// } // aMainWinMdi_i::mdiArea
+// } // aMainWinMdi::mdiArea
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::mdiArea
+// * aMainWinMdi::mdiArea
 // *******************************************************************************/
-// aMdiArea* aMainWinMdi_i::mdiArea() const
+// aMdiArea* aMainWinMdi::mdiArea() const
 // {
 //     return dynamic_cast<aMdiArea *> (centralWin());
 //     //return (aMdiArea *) (centralWin());
-// } // aMainWinMdi_i::mdiArea
+// } // aMainWinMdi::mdiArea
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::addMdiChild
+// * aMainWinMdi::addMdiChild
 // *******************************************************************************/
-// void aMainWinMdi_i::addMdiChild(aMdiChild *_pMdiChild)
+// void aMainWinMdi::addMdiChild(aMdiChild *_pMdiChild)
 // {
 //     aMdiArea    *pMdiArea = mdiArea();
 //     CHECK_PRE_CONDITION_VOID(pMdiArea != nullptr);
 
 //     pMdiArea->addMdiChild(_pMdiChild);
 //     _pMdiChild->show();
-// } // aMainWinMdi_i::addMdiChild
+// } // aMainWinMdi::addMdiChild
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::mdiChildList
+// * aMainWinMdi::mdiChildList
 // *******************************************************************************/
-// void aMainWinMdi_i::mdiChildList(aPtrList<aMdiChild> &_lstMdiChild) const
+// void aMainWinMdi::mdiChildList(aPtrList<aMdiChild> &_lstMdiChild) const
 // {
 //     aMdiArea    *pMdiArea = mdiArea();
 //     CHECK_PRE_CONDITION_VOID(pMdiArea != nullptr);
 
 //     pMdiArea->mdiChildList(_lstMdiChild);
-// } // aMainWinMdi_i::mdiChildList
+// } // aMainWinMdi::mdiChildList
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::activeMdiChild
+// * aMainWinMdi::activeMdiChild
 // *******************************************************************************/
-// aMdiChild* aMainWinMdi_i::activeMdiChild() const
+// aMdiChild* aMainWinMdi::activeMdiChild() const
 // {
 //     aMdiArea    *pMdiArea = mdiArea();
 //     CHECK_PRE_CONDITION(pMdiArea != nullptr, nullptr);
 
 //     return pMdiArea->activeMdiChild();
-// } // aMainWinMdi_i::activeMdiChild
+// } // aMainWinMdi::activeMdiChild
 
 
 // /*******************************************************************************
-// * aMainWinMdi_i::topmostMdiChild
+// * aMainWinMdi::topmostMdiChild
 // *******************************************************************************/
-// aMdiChild* aMainWinMdi_i::topmostMdiChild() const
+// aMdiChild* aMainWinMdi::topmostMdiChild() const
 // {
 //     aMdiArea    *pMdiArea = mdiArea();
 //     CHECK_PRE_CONDITION(pMdiArea != nullptr, nullptr);
 
 //     return pMdiArea->topmostMdiChild();
-// } // aMainWinMdi_i::topmostMdiChild
-
-
-// /*******************************************************************************
-// * aMainWinMdi_i::onSysCreateWin
-// *******************************************************************************/
-// bool aMainWinMdi_i::onSysCreateWin()
-// {
-//     aMdiArea *pMdiArea = new aMdiArea();
-//     pMdiArea->createWin();
-
-//     setCentralWin(pMdiArea);
-
-//     return true;
-// } // aMainWinMdi_i::onSysCreateWin
+// } // aMainWinMdi::topmostMdiChild
 
 
 } // namespace aWin

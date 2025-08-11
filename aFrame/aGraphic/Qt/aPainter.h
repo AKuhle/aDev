@@ -25,6 +25,7 @@
 #include <QPainter>
 
 #include "aWin_def.h"
+#include "aGraphic_def.h"
 #include "aPainterI.h"
 
 using namespace aFrame::aUtil;
@@ -40,13 +41,26 @@ namespace aGraphic {
 /*******************************************************************************
 * class aPainter
 *******************************************************************************/
-class aPainter : private QPainter,
-                 public aPainterI
+class aPainter : public aPainterI
 {
+    private:
+        QPainter        m_p;
+
     public:
         aPainter(SysWin *_pWin);
         virtual ~aPainter();
 
+
+    /*******************************************************************************
+    * drawRect
+    * uses/sets the current Pen!
+    *******************************************************************************/
+    public:
+        void            _drawRect(s32           _x,
+                                  s32           _y,
+                                  s32           _w,
+                                  s32           _h,
+                                  const aPen    *_pPen = nullptr) override;
 
     /*******************************************************************************
     * drawFilledRect
@@ -77,18 +91,18 @@ class aPainter : private QPainter,
                                           const aColor  &_colEnd) override;
 
 
-    // /*******************************************************************************
-    // * drawPixmap
-    // *******************************************************************************/
+    /*******************************************************************************
+    * drawPixmap
+    *******************************************************************************/
     public:
         void            drawPixmap(const aPixmap  &_pixmap,
                                    s32            _s32X,
                                    s32            _s32Y) override;
 
 
-    // /*******************************************************************************
-    // * drawImage
-    // *******************************************************************************/
+    /*******************************************************************************
+    * drawImage
+    *******************************************************************************/
     public:
         void            drawQImg(const QImage   &_img,
                                  s32            _s32X,
@@ -99,8 +113,7 @@ class aPainter : private QPainter,
     * private members
     *******************************************************************************/
     private:
-        //void            setPen(const aPen *_pPen);
-        void            setPen(const aColor *_pColor);
+        void            setPen(const aPen *_pPen);
 
         void            setBrush(const aColor *_pColor);
 

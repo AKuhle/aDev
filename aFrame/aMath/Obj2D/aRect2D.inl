@@ -292,9 +292,9 @@ template<class T>
 void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
                            aVector<aPoint>      &_vIntersect) const
 {
-    dbl                                 tMin = __DBL_MAX__;
-    dbl                                 tLine, tSegment;
-    bool                                bOnSeg;
+    dbl     tMin = __DBL_MAX__;
+    dbl     tLine, tSegment;
+    bool    bOnSeg;
 
     // top edge
     std::optional<aPoint2D<T>> p1 = _line.intersect(lt(), rt(), tLine, tSegment, bOnSeg);

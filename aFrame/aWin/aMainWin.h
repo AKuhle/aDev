@@ -8,13 +8,12 @@
 *******************************************************************************/
 #pragma once
 
-#ifdef _USE_QT_
-
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMainWinMdi_i.h"
+#include "aWin_def.h"
+#include "aBaseWin.h"
 
 
 /*******************************************************************************
@@ -25,31 +24,16 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMainWinMdi
+* class aMainWin
 *******************************************************************************/
-class aMainWinMdi : public aMainWinMdi_i
+class aMainWin : public aBaseWin
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWinMdi(SysWin *_pParent = nullptr);
-        ~aMainWinMdi();
-
-
-    /*******************************************************************************
-    * aMainWinI interface
-    *******************************************************************************/
-    // protected:
-    //     aMdiArea*           mdiArea() override;
-    //     aMdiArea*           mdiArea() const override;
-
-    // public:
-    //     void                addMdiChild(aMdiChild *_pMdiChild) override;
-
-    //     void                mdiChildList(aPtrList<aMdiChild> &_lstMdiChild) const override;
-    //     aMdiChild*          activeMdiChild() const override;
-    //     aMdiChild*          topmostMdiChild() const override;
+        aMainWin(SysWin *_pParent);
+        virtual ~aMainWin();
 
 
     /*******************************************************************************
@@ -57,12 +41,8 @@ class aMainWinMdi : public aMainWinMdi_i
     *******************************************************************************/
     protected:
         virtual bool        onSysCreateWin() override;
-
-}; // class aMainWinMdi
+}; // class aMainWin
 
 
 } // namespace aWin
 } // namespace aFrame
-
-
-#endif //_USE_QT_

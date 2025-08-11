@@ -29,27 +29,24 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aStyleItemFillGradient
+* class aStyleItemFillSolid
 *******************************************************************************/
-class aStyleItemFillGradient : public aStyleItemFill
+class aStyleItemFillSolid : public aStyleItemFill
 {
     private:
-        aColor      m_fillColor1;
-        aColor      m_fillColor2;
-        s32         m_s32Angle;
+        aColor      m_color;
 
     public:
-        aStyleItemFillGradient(const aColor &_col1,
-                               const aColor &_col2,
-                               s32          _s32Angle);
-        virtual ~aStyleItemFillGradient();
+        aStyleItemFillSolid(const aColor   &_col);
+        virtual ~aStyleItemFillSolid();
 
-        void            setFillColor(const aColor   &_col1,
-                                     const aColor   &_col2);
-        aColor          fillColor1() const;
-        aColor          fillColor2() const;
-        s32             angle() const;
-}; // class aStyleItemFillGradient
+        void            setColor(const aColor   &_col);
+        const aColor&   color() const;
+
+        void            draw(aPainter       &_p,
+                             const aRect    &_r) override;
+
+}; // class aStyleItemFillSolid
 
 
 } // namespace aWin

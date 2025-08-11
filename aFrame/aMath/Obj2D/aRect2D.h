@@ -26,6 +26,7 @@
 #include "aDimension2D.h"
 #include "aPoint2D.h"
 #include "aVector.h"
+#include "aParametricLine2D.h"
 
 #include "aRect.h"
 

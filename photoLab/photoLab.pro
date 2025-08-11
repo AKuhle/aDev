@@ -80,11 +80,12 @@ INCLUDEPATH += ../aFrame/aMath/Obj3D
 INCLUDEPATH += ../aFrame/aGraphic
 INCLUDEPATH += ../aFrame/aGraphic/Interface
 INCLUDEPATH += ../aFrame/aGraphic/Qt
+INCLUDEPATH += ../aFrame/aGraphic/Style
 
 INCLUDEPATH += ../aFrame/aWin
 INCLUDEPATH += ../aFrame/aWin/Interface
+INCLUDEPATH += ../aFrame/aWin/Layout
 INCLUDEPATH += ../aFrame/aWin/Qt
-INCLUDEPATH += ../aFrame/aWin/Style
 
 
 ########################################################################

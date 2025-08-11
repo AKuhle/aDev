@@ -12,25 +12,16 @@
 * includes
 *******************************************************************************/
 #include "aFrame_def.h"
-#include "aMath_def.h"
 
-#include "aPoint2D.h"
-#include "aRect2D.h"
-#include "aParametricLine2D.h"
+#include "aString.h"
+#include "aRect.h"
+#include "aStyleItemBorder.h"
 
 #include "aBaseWin_i.h"
-#include "aRect.h"
-#include "aPainter.h"
-#include "aColor.h"
-#include "aString.h"
-#include "aVector.h"
+#include "aLayout_i.h"
 
-#include "aStyleItemFillSolid.h"
-#include "aStyleItemFillGradient.h"
-
-using namespace aFrame::aGraphic;
-using namespace aFrame::aMath;
 using namespace aFrame::aUtil;
+
 
 
 /*******************************************************************************
@@ -41,14 +32,10 @@ namespace aWin {
 
 
 /*******************************************************************************
-* namespace
-*******************************************************************************/
-
-
-/*******************************************************************************
 * aBaseWin_i::aBaseWin_i
 *******************************************************************************/
-aBaseWin_i::aBaseWin_i()
+aBaseWin_i::aBaseWin_i(SysWin *_pWinInstance)
+: m_pWinInstance(_pWinInstance)
 {
 } // aBaseWin_i::aBaseWin_i
 
@@ -133,6 +120,15 @@ void aBaseWin_i::hide()
 
 
 /*******************************************************************************
+* aBaseWin_i::setLayout
+*******************************************************************************/
+void aBaseWin_i::setLayout(unique_ptr<aLayout_i> _pLayout)
+{
+    m_pLayout = std::move(_pLayout);
+} // aBaseWin_i::setLayout
+
+
+/*******************************************************************************
 * aBaseWin_i::setMinDim
 *******************************************************************************/
 void aBaseWin_i::setMinDim(const aDimension &_minDim)
@@ -206,10 +202,16 @@ aRect aBaseWin_i::paddingRect() const
 {
     aRect    r = borderRect();
 
-    r.x() += m_border.l();
-    r.y() += m_border.t();
-    r.w() -= m_border.w();
-    r.h() -= m_border.h();
+    // no border => padding rect == border rect
+    if (borderStyle())
+    {
+        const aMargin &m = borderStyle()->margin();
+
+        r.x() += m.l();
+        r.y() += m.t();
+        r.w() -= m.w();
+        r.h() -= m.h();
+    }
 
     return r;
 } // aBaseWin_i::paddingRect
@@ -229,121 +231,6 @@ aRect aBaseWin_i::contentRect() const
 
     return r;
 } // aBaseWin_i::contentRect
-
-
-/*******************************************************************************
-* aBaseWin_i::onSysCreateWin
-*******************************************************************************/
-bool aBaseWin_i::onSysCreateWin()
-{
-    return true;
-} // aBaseWin_i::onSysCreateWin
-
-
-/*******************************************************************************
-* aBaseWin_i::onCreateWin
-*******************************************************************************/
-bool aBaseWin_i::onCreateWin()
-{
-    return true;
-} // aBaseWin_i::onCreateWin
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaint
-*******************************************************************************/
-void aBaseWin_i::onPaint()
-{
-    onPaintMargin();
-    onPaintBorder();
-    onPaintPadding();
-    onPaintContentBg();
-    onPaintContent();
-} // aBaseWin_i::onPaint
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintMargin
-*******************************************************************************/
-void aBaseWin_i::onPaintMargin()
-{
-} // aBaseWin_i::onPaintMargin
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintBorder
-*******************************************************************************/
-void aBaseWin_i::onPaintBorder()
-{
-} // aBaseWin_i::onPaintBorder
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintPadding
-*******************************************************************************/
-void aBaseWin_i::onPaintPadding()
-{
-} // aBaseWin_i::onPaintPadding
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintContentBg
-*******************************************************************************/
-void aBaseWin_i::onPaintContentBg()
-{
-    aStyleItemFillSolid     *pfs = dynamic_cast<aStyleItemFillSolid *> (bgStyle().get());
-    aStyleItemFillGradient  *pfg = dynamic_cast<aStyleItemFillGradient *> (bgStyle().get());
-
-    // draw solid fill
-    if (pfs)
-    {
-        aRect       r = contentRect();
-        aPainter    p(sysWinPtr());
-        aColor      col = pfs->fillColor();
-
-        p.drawFilledRect(r, &col);
-    }
-
-    // draw gradient fill
-    else if (pfg)
-     {
-        aRect           r               = contentRect();
-        aColor          col1            = pfg->fillColor1();
-        aColor          col2            = pfg->fillColor2();
-        dbl             dAngle          = Deg2Rad(pfg->angle());
-        aVector<aPoint> vIntersect;
-        aPainter        p(sysWinPtr());
-
-        // calculate the intersection of the content rect with the
-        // parametric line through the centerpoint
-        aRect2D<float> r2d(r);
-        aParametricLine2D<float> l(r2d.centerPoint(), dAngle);
-
-        // get the intersection points
-        r2d.intersect(l, vIntersect);
-
-
-        // draw the gradient between the found points
-        if (vIntersect.size() == 2)
-        {
-            // draw the gradient
-            p.drawGradientRect(r, vIntersect.at(0), vIntersect.at(1), col1, col2);
-        }
-        else
-        {
-            // no gradient points found => just fill the rect
-            p.drawFilledRect(r, &col1);
-        }
-    }
-} // aBaseWin_i::onPaintContentBg
-
-
-/*******************************************************************************
-* aBaseWin_i::onPaintContent
-*******************************************************************************/
-void aBaseWin_i::onPaintContent()
-{
-} // aBaseWin_i::onPaintContent
 
 
 } // namespace aWin

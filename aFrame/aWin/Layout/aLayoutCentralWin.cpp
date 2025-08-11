@@ -1,19 +1,17 @@
 /*******************************************************************************
-* \file qWin.h
+* \file aLayoutCentralWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#pragma once
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aUtil_def.h"
-#include "aWin_def.h"
+#include "aLayoutCentralWin.h"
 
 using namespace aFrame::aUtil;
 
@@ -26,14 +24,27 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aStyleItem
+* aLayoutCentralWin::aLayoutCentralWin
 *******************************************************************************/
-class aStyleItem
+aLayoutCentralWin::aLayoutCentralWin()
 {
-    public:
-        aStyleItem();
-        virtual ~aStyleItem();
-}; // class aStyleItem
+} // aLayoutCentralWin::_isVisible
+
+
+/*******************************************************************************
+* aLayoutCentralWin::~aLayoutCentralWin
+*******************************************************************************/
+aLayoutCentralWin::~aLayoutCentralWin()
+{
+} // aLayoutCentralWin::~aLayoutCentralWin
+
+
+/*******************************************************************************
+* aLayoutCentralWin::arrange
+*******************************************************************************/
+void aLayoutCentralWin::arrange(const aRect &/*_r*/)
+{
+} // aLayoutCentralWin::arrange
 
 
 } // namespace aWin

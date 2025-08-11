@@ -65,6 +65,19 @@ class aMargin
         s32     w() const           { return m_l + m_r; }
         s32     h() const           { return m_t + m_b; }
 
+
+        friend std::ostream& operator<<(std::ostream    &_os,
+                                        const aMargin   &_margin)
+        {
+            _os << "(l:" << _margin.m_l
+                << ", r:" << _margin.m_r
+                << ", t:" << _margin.m_t
+                << ", b:" << _margin.m_b
+                << ")";
+
+            return _os;
+        } // operator<<
+
 }; // class aMargin
 
 

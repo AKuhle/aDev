@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aStyleItemFillGradient.cpp
+* \file aStyleItemFillSolid.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -13,9 +13,11 @@
 *******************************************************************************/
 #include "aFrame_def.h"
 
-#include "aStyleItemFillGradient.h"
+#include "aStyleItemFillSolid.h"
 #include "aPath.h"
 #include "aJsonFile.h"
+
+#include "aPainter.h"
 
 #include "aMainWin.h"
 
@@ -30,62 +32,48 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aStyleItemFillGradient::aStyleItemFillGradient
+* aStyleItemFillSolid::aStyleItemFillSolid
 *******************************************************************************/
-aStyleItemFillGradient::aStyleItemFillGradient(const aColor  &_col1,
-                                               const aColor &_col2,
-                                               s32          _s32Angle)
-: m_fillColor1(_col1),
-  m_fillColor2(_col2),
-  m_s32Angle(_s32Angle)
+aStyleItemFillSolid::aStyleItemFillSolid(const aColor   &_col)
+: m_color(_col)
 {
-} // aStyleItemFillGradient::aStyleItemFillGradient
+} // aStyleItemFillSolid::aStyleItemFillSolid
 
 
 /*******************************************************************************
-* aStyleItemFillGradient::~aStyleItemFillGradient
+* aStyleItemFillSolid::~aStyleItemFillSolid
 *******************************************************************************/
-aStyleItemFillGradient::~aStyleItemFillGradient()
+aStyleItemFillSolid::~aStyleItemFillSolid()
 {
-} // aStyleItemFillGradient::~aStyleItemFillGradient
+} // aStyleItemFillSolid::~aStyleItemFillSolid
 
 
 /*******************************************************************************
-* aStyleItemFillGradient::setFillColor
+* aStyleItemFillSolid::setColor
 *******************************************************************************/
-void aStyleItemFillGradient::setFillColor(const aColor   &_col1,
-                                          const aColor   &_col2)
+void aStyleItemFillSolid::setColor(const aColor   &_col)
 {
-    m_fillColor1 = _col1;
-    m_fillColor2 = _col2;
-} // aStyleItemFillGradient::setFillColor
+    m_color = _col;
+} // aStyleItemFillSolid::setColor
 
 
 /*******************************************************************************
-* aStyleItemFillGradient::fillColor1
+* aStyleItemFillSolid::color
 *******************************************************************************/
-aColor aStyleItemFillGradient::fillColor1() const
+const aColor& aStyleItemFillSolid::color() const
 {
-    return m_fillColor1;
-} // aStyleItemFillGradient::fillColor1
+    return m_color;
+} // aStyleItemFillSolid::color
 
 
 /*******************************************************************************
-* aStyleItemFillGradient::fillColor2
+* aStyleItemFillSolid::draw
 *******************************************************************************/
-aColor aStyleItemFillGradient::fillColor2() const
+void aStyleItemFillSolid::draw(aPainter       &_p,
+                               const aRect    &_r)
 {
-    return m_fillColor2;
-} // aStyleItemFillGradient::fillColor2
-
-
-/*******************************************************************************
-* aStyleItemFillGradient::angle
-*******************************************************************************/
-s32 aStyleItemFillGradient::angle() const
-{
-    return m_s32Angle;
-} // aStyleItemFillGradient::angle
+    _p.drawFilledRect(_r, &m_color);
+} // aStyleItemFillSolid::draw
 
 
 } // namespace aWin

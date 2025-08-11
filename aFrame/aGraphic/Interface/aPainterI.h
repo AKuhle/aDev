@@ -46,6 +46,27 @@ class aPainterI
 
 
     /*******************************************************************************
+    * drawRect
+    * uses/sets the current Pen!
+    *******************************************************************************/
+    public:
+        virtual void        _drawRect(s32           _x,
+                                      s32           _y,
+                                      s32           _w,
+                                      s32           _h,
+                                      const aPen    *_pPen = nullptr) = 0;
+
+        void                drawRect(s32        _x,
+                                     s32        _y,
+                                     s32        _w,
+                                     s32        _h,
+                                     const aPen *_pPen = nullptr);
+
+        void                drawRect(const aRect  &_r,
+                                     const aPen *_pPen = nullptr);
+
+
+    /*******************************************************************************
     * drawFilledRect
     * uses/sets the current Pen!
     *******************************************************************************/
@@ -62,7 +83,7 @@ class aPainterI
                                            s32          _h,
                                            const aColor *_pColor = nullptr);
 
-        void                drawFilledRect(const aRect  &_r2d,
+        void                drawFilledRect(const aRect  &_r,
                                            const aColor *_pColor = nullptr);
 
 
@@ -96,14 +117,14 @@ class aPainterI
                                              s32            _y,
                                              s32            _w,
                                              s32            _h,
-                                             const aPoint   &_v2dGradStart,
-                                             const aPoint   &_v2dGradEnd,
+                                             const aPoint   &_pntGradStart,
+                                             const aPoint   &_pntGradEnd,
                                              const aColor   &_colStart,
                                              const aColor   &_colEnd);
 
-        void                drawGradientRect(const aRect    &_r2d,
-                                             const aPoint   &_v2dGradStart,
-                                             const aPoint   &_v2dGradEnd,
+        void                drawGradientRect(const aRect    &_r,
+                                             const aPoint   &_pntGradStart,
+                                             const aPoint   &_pntGradEnd,
                                              const aColor   &_colStart,
                                              const aColor   &_colEnd);
 
