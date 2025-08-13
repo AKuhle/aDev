@@ -15,7 +15,7 @@
 #include "aWin_def.h"
 
 #include "aBaseWin.h"
-#include "aToolManager.h"
+#include "aToolMgr.h"
 
 
 /*******************************************************************************
@@ -29,13 +29,13 @@ namespace aWin {
 * class aTitleBar
 *******************************************************************************/
 class aTitleBar : public aBaseWin,
-                  public aToolManager
+                  public aToolMgr
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     public:
-        aTitleBar(SysWin *_pParent);
+        aTitleBar(aBaseWin *_pParent);
         virtual ~aTitleBar();
 
 
@@ -43,11 +43,28 @@ class aTitleBar : public aBaseWin,
     * aBaseWin interface
     *******************************************************************************/
     protected:
-        virtual bool                    onSysCreateWin();
+        bool                    onSysCreateWin() override;
 
-        virtual bool                    onLDoubleClick(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
+        bool                    onDoubleClick(u16           _u16Modifier,
+                                              u16           _u16Btn,
+                                              const aPoint  &_pntLocal,
+                                              const aPoint  &_pntGlobal) override;
+
+        bool                    onButtonPress(u16           _u16Modifier,
+                                              u16           _u16Btn,
+                                              const aPoint  &_pntLocal,
+                                              const aPoint  &_pntGlobal) override;
+
+        bool                    onMouseMove(u16             _u16Modifier,
+                                            u16             _u16Btn,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal) override;
+
+        bool                    onButtonRelease(u16             _u16Modifier,
+                                                u16             _u16Btn,
+                                                const aPoint    &_pntLocal,
+                                                const aPoint    &_pntGlobal) override;
+
 }; // class aTitleBar
 
 

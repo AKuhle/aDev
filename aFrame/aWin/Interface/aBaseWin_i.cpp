@@ -124,15 +124,31 @@ void aBaseWin_i::hide()
 *******************************************************************************/
 void aBaseWin_i::toggleMaximized()
 {
-    if (isMinimized())
+    if (isMaximized())
     {
-        showMaximized();
+        showNormal();
     }
     else
     {
-        isMinimized();
+        showMaximized();
     }
 } // aBaseWin_i::toggleMaximized
+
+
+/*******************************************************************************
+* aBaseWin_i::toggleFullScreen
+*******************************************************************************/
+void aBaseWin_i::toggleFullScreen()
+{
+    if (isFullScreen())
+    {
+        showNormal();
+    }
+    else
+    {
+        showFullScreen();
+    }
+} // aBaseWin_i::toggleFullScreen
 
 
 /*******************************************************************************
@@ -187,6 +203,15 @@ void aBaseWin_i::setMaxDim(s32 _s32MaxW,
 
 
 /*******************************************************************************
+* aBaseWin_i::setGeometry
+*******************************************************************************/
+void aBaseWin_i::setGeometry(const aRect &_r)
+{
+    setGeometry(_r.x(), _r.y(), _r.w(), _r.h());
+} // aBaseWin_i::setGeometry
+
+
+/*******************************************************************************
 * aBaseWin_i::marginRect
 *******************************************************************************/
 aRect aBaseWin_i::marginRect() const
@@ -202,10 +227,14 @@ aRect aBaseWin_i::borderRect() const
 {
     aRect    r = marginRect();
 
-    r.x() += m_margin.l();
-    r.y() += m_margin.t();
-    r.w() -= m_margin.w();
-    r.h() -= m_margin.h();
+    // full screen => no margin => border rect = margin rect
+    if (!isFullScreen())
+    {
+        r.x() += m_margin.l();
+        r.y() += m_margin.t();
+        r.w() -= m_margin.w();
+        r.h() -= m_margin.h();
+    }
 
     return r;
 } // aBaseWin_i::borderRect
@@ -218,15 +247,19 @@ aRect aBaseWin_i::paddingRect() const
 {
     aRect    r = borderRect();
 
-    // no border => padding rect == border rect
-    if (borderStyle())
+    // full screen => no border => padding rect = border rect
+    if (!isFullScreen())
     {
-        const aMargin &m = borderStyle()->margin();
+        // no border => padding rect == border rect
+        if (borderStyle())
+        {
+            const aMargin &m = borderStyle()->margin();
 
-        r.x() += m.l();
-        r.y() += m.t();
-        r.w() -= m.w();
-        r.h() -= m.h();
+            r.x() += m.l();
+            r.y() += m.t();
+            r.w() -= m.w();
+            r.h() -= m.h();
+        }
     }
 
     return r;

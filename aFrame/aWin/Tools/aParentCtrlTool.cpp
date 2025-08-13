@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aParentCtrlTool.h"
+#include "aBaseWin.h"
 
 
 
@@ -44,14 +45,65 @@ aParentCtrlTool::~aParentCtrlTool()
 /*******************************************************************************
 * aParentCtrlTool::onLDoubleClick
 *******************************************************************************/
-bool aParentCtrlTool::onLDoubleClick(u16              /*_u16Modifier*/,
-                                     const aPoint     &/*_pntLocal*/,
-                                     const aPoint     &/*_pntGlobal*/)
+enumToolResult aParentCtrlTool::onLDoubleClick(u16              /*_u16Modifier*/,
+                                               const aPoint     &/*_pntLocal*/,
+                                               const aPoint     &/*_pntGlobal*/)
 {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
 
-    return true;
+    ownerParent()->toggleMaximized();
+
+    return enumToolResult::HANDLED;
 } // aParentCtrlTool::onLDoubleClick
+
+
+/*******************************************************************************
+* aParentCtrlTool::onLButtonPress
+*******************************************************************************/
+enumToolResult aParentCtrlTool::onLButtonPress(u16              /*_u16Modifier*/,
+                                               const aPoint     &/*_pntLocal*/,
+                                               const aPoint     &/*_pntGlobal*/)
+{
+    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+
+    m_rctMoveStartRect = ownerParent()->geometryRect();
+
+    return enumToolResult::HANDLED;
+} // aParentCtrlTool::onLButtonPress
+
+
+/*******************************************************************************
+* aParentCtrlTool::onLMouseMove
+*******************************************************************************/
+enumToolResult aParentCtrlTool::onLMouseMove(u16              /*_u16Modifier*/,
+                                             const aPoint     &/*_pntLocal*/,
+                                             const aPoint     &/*_pntGlobal*/)
+{
+    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+
+    // only normal windows (not fullscreen or maximized) can be moved
+    if (ownerParent()->isNormal())
+    {
+        ownerParent()->setGeometry(m_rctMoveStartRect.x() + delta().x(),
+                                   m_rctMoveStartRect.y() + delta().y(),
+                                   m_rctMoveStartRect.w(),
+                                   m_rctMoveStartRect.h());
+    }
+    return enumToolResult::HANDLED;
+} // aParentCtrlTool::onLMouseMove
+
+
+/*******************************************************************************
+* aParentCtrlTool::onLButtonRelease
+*******************************************************************************/
+enumToolResult aParentCtrlTool::onLButtonRelease(u16              /*_u16Modifier*/,
+                                                 const aPoint     &/*_pntLocal*/,
+                                                 const aPoint     &/*_pntGlobal*/)
+{
+    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+
+    return enumToolResult::HANDLED;
+} // aParentCtrlTool::onLButtonRelease
 
 
 } // namespace aWin

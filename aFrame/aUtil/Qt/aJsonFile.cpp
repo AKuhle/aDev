@@ -156,7 +156,7 @@ aString aJsonFile::readStringValue(const aString &_sNestedKey)
             QString sKey = vecToken.at(i).toQString();
 
             if (!obj.contains(sKey)) {
-                cout << "key >" << _sNestedKey << "< not found" << endl;
+                //cout << "key >" << _sNestedKey << "< not found" << endl;
                 return "";
             }
             else
@@ -170,7 +170,7 @@ aString aJsonFile::readStringValue(const aString &_sNestedKey)
 
         if (!obj.contains(sValueKey))
         {
-            cout << "key " << _sNestedKey << "not found" << endl;
+            //cout << "key " << _sNestedKey << " not found" << endl;
             return "";
         }
         else
@@ -227,7 +227,7 @@ bool aJsonFile::readJsonDoc()
         // read the json document into the member variable
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
-            cout << "json file" << m_sFilePath.canonicalPath() << "not found" << endl;
+            cout << "json file" << m_sFilePath.canonicalPath() << " not found" << endl;
         }
         else
         {

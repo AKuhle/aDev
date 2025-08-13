@@ -15,7 +15,7 @@
 * includes
 *******************************************************************************/
 #include <QWidget>
-#include <QInputEvent>
+#include <QSinglePointEvent>
 
 #include "aWin_def.h"
 
@@ -57,7 +57,7 @@ class aBaseWin : private QWidget,
     * con-/destruction
     *******************************************************************************/
     protected:
-        aBaseWin(SysWin *_pParent);
+        aBaseWin(aBaseWin *_pParent);
 
     public:
         virtual ~aBaseWin();
@@ -71,8 +71,8 @@ class aBaseWin : private QWidget,
     * window state
     *******************************************************************************/
     public:
-        void                    setParent(SysWin *_pParent) override;
-        SysWin*                 parent() const override;
+        void                    setParent(aBaseWin *_pParent) override;
+        aBaseWin*                 parent() const override;
 
         void                    update() override;
         void                    repaint() override;
@@ -81,9 +81,16 @@ class aBaseWin : private QWidget,
         bool                    isVisible() const override;
 
         bool                    isMinimized() const override;
-        bool                    isMaximized() const override;
         void                    showMinimized() override;
+
+        bool                    isMaximized() const override;
         void                    showMaximized() override;
+
+        bool                    isFullScreen() const override;
+        void                    showFullScreen() override;
+
+        bool                    isNormal() const override;
+        void                    showNormal() override;
 
         void                    setMouseTracking(bool _bEnable) override;
 
@@ -116,7 +123,9 @@ class aBaseWin : private QWidget,
                                             QEvent  *_pEvent) override;
 
     private:
-        u16                     modifierFromEvent(QInputEvent *_pMouseEvent) const;
+        u16                     modifierFromEvent(QSinglePointEvent *_pEvent) const;
+        u16                     buttonsFromEvent(QSinglePointEvent *_pEvent) const;
+
         // void                    dragEnterEvent(QDragEnterEvent *_pEvent) override;
         // void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
         // void                    dropEvent(QDropEvent   *_pEvent) override;
@@ -130,10 +139,16 @@ class aBaseWin : private QWidget,
     public:
         using aBaseWin_i::show;
         using aBaseWin_i::hide;
+
         using aBaseWin_i::isMinimized;
-        using aBaseWin_i::isMaximized;
         using aBaseWin_i::showMinimized;
+        using aBaseWin_i::isMaximized;
         using aBaseWin_i::showMaximized;
+        using aBaseWin_i::isFullScreen;
+        using aBaseWin_i::showFullScreen;
+        using aBaseWin_i::isNormal;
+        using aBaseWin_i::showNormal;
+
         using aBaseWin_i::setMouseTracking;
         using aBaseWin_i::setGeometry;
         using aBaseWin_i::setParent;

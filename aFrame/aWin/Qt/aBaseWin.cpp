@@ -25,7 +25,7 @@ namespace aWin {
 /*******************************************************************************
 * aBaseWin::aBaseWin
 *******************************************************************************/
-aBaseWin::aBaseWin(SysWin *_pParent)
+aBaseWin::aBaseWin(aBaseWin *_pParent)
 : QWidget(_pParent),
   aBaseWin_i(this)
 {
@@ -55,7 +55,7 @@ aBaseWin::~aBaseWin()
 /*******************************************************************************
 * aBaseWin::setParent
 *******************************************************************************/
-void aBaseWin::setParent(SysWin *_pParent)
+void aBaseWin::setParent(aBaseWin *_pParent)
 {
     QWidget::setParent(_pParent);
 } // aBaseWin::setParent
@@ -64,9 +64,9 @@ void aBaseWin::setParent(SysWin *_pParent)
 /*******************************************************************************
 * aBaseWin::parent
 *******************************************************************************/
-SysWin* aBaseWin::parent() const
+aBaseWin* aBaseWin::parent() const
 {
-    return QWidget::parentWidget();
+    return static_cast<aBaseWin *> (QWidget::parentWidget());
 } // aBaseWin::parent
 
 
@@ -111,17 +111,8 @@ bool aBaseWin::isVisible() const
 *******************************************************************************/
 bool aBaseWin::isMinimized() const
 {
-    return QWidget::isMinimized();
+    return (QWidget::windowState() & Qt::WindowMinimized) != 0;
 } // aBaseWin::isMinimized
-
-
-/*******************************************************************************
-* aBaseWin::isMaximized
-*******************************************************************************/
-bool aBaseWin::isMaximized() const
-{
-    return QWidget::isMaximized();
-} // aBaseWin::isMaximized
 
 
 /*******************************************************************************
@@ -129,8 +120,17 @@ bool aBaseWin::isMaximized() const
 *******************************************************************************/
 void aBaseWin::showMinimized()
 {
-    return QWidget::showMinimized();
+    QWidget::setWindowState(Qt::WindowMinimized);
 } // aBaseWin::showMaximized
+
+
+/*******************************************************************************
+* aBaseWin::isMaximized
+*******************************************************************************/
+bool aBaseWin::isMaximized() const
+{
+    return (QWidget::windowState() & Qt::WindowMaximized) != 0;
+} // aBaseWin::isMaximized
 
 
 /*******************************************************************************
@@ -138,8 +138,44 @@ void aBaseWin::showMinimized()
 *******************************************************************************/
 void aBaseWin::showMaximized()
 {
-    return QWidget::showMaximized();
+    QWidget::setWindowState(Qt::WindowMaximized);
 } // aBaseWin::showMaximized
+
+
+/*******************************************************************************
+* aBaseWin::isFullScreen
+*******************************************************************************/
+bool aBaseWin::isFullScreen() const
+{
+    return (QWidget::windowState() & Qt::WindowFullScreen) != 0;
+} // aBaseWin::isFullScreen
+
+
+/*******************************************************************************
+* aBaseWin::showFullScreen
+*******************************************************************************/
+void aBaseWin::showFullScreen()
+{
+    QWidget::setWindowState(Qt::WindowFullScreen);
+} // aBaseWin::showFullScreen
+
+
+/*******************************************************************************
+* aBaseWin::isNormal
+*******************************************************************************/
+bool aBaseWin::isNormal() const
+{
+    return (QWidget::windowState() == Qt::WindowNoState);
+} // aBaseWin::isNormal
+
+
+/*******************************************************************************
+* aBaseWin::showNormal
+*******************************************************************************/
+void aBaseWin::showNormal()
+{
+    QWidget::setWindowState(Qt::WindowNoState);
+} // aBaseWin::showNormal
 
 
 /*******************************************************************************
@@ -206,7 +242,7 @@ aRect aBaseWin::geometryRect() const
 {
     QRect r = QWidget::frameGeometry();
 
-    return aRect(r.left(), r.right(), r.width(), r.height());
+    return aRect(r.left(), r.top(), r.width(), r.height());
 } // aBaseWin::geometryRect
 
 

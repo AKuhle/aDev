@@ -29,8 +29,6 @@ debug/aProgressCb.o
 debug/aProgressMgr.o
 debug/aThread.o
 debug/aUrl_sys.o
-debug/aToolBase.o
-debug/aToolMgr.o
 debug/aPoolVarBool.o
 debug/aPoolVarColor.o
 debug/aPoolVarDbl.o
@@ -57,6 +55,9 @@ debug/aLayoutMainWin.o
 debug/aLayout_i.o
 debug/aBaseWin.o
 debug/aBaseWin_events.o
+debug/aParentCtrlTool.o
+debug/aToolBase.o
+debug/aToolMgr.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
 debug/aTitleBar.o

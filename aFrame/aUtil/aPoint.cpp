@@ -110,6 +110,25 @@ bool aPoint::operator!=(const aPoint	&_rhs) const
 } // aPoint::operator!=
 
 
+/*******************************************************************************
+* aPoint::operator-
+*******************************************************************************/
+aPoint aPoint::operator-(const aPoint	&_rhs) const
+{
+    return aPoint(m_x - _rhs.m_x,
+                  m_y - _rhs.m_y);
+} // aPoint::operator-
+
+
+/*******************************************************************************
+* aPoint::operator+
+*******************************************************************************/
+aPoint aPoint::operator+(const aPoint	&_rhs) const
+{
+    return aPoint(m_x + _rhs.m_x,
+                  m_y + _rhs.m_y);
+} // aPoint::operator+
+
 
 } // namespace aUtil
 } // namespace aFrame

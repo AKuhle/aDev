@@ -87,6 +87,15 @@ constexpr u32   TF_NONE                 = 0x00000001;
 /*******************************************************************************
 * enums
 *******************************************************************************/
+enum class enumToolResult
+{
+    UNHANDLED,
+    HANDLED,
+    SUCCESS,
+    CANCELED
+}; // enumButtonStyle
+
+
 // enum class enumButtonStyle
 // {
 //     MASKED_MODE,

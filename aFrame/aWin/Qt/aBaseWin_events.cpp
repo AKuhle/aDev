@@ -78,25 +78,11 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
         u16         u16Mods         = modifierFromEvent(pMouseEvent);
+        u16         u16Btn          = buttonsFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
-        // Prüfe welche Maustaste doppelgeklickt wurde
-        if (pMouseEvent->button() == Qt::LeftButton)
-        {
-            // true => event handled
-            return onLDoubleClick(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::MiddleButton)
-        {
-            // true => event handled
-            return onMDoubleClick(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::RightButton)
-        {
-            // true => event handled
-            return onRDoubleClick(u16Mods, pntLocal, pntGlobal);
-        }
+        return onDoubleClick(u16Mods, u16Btn, pntLocal, pntGlobal);
     }
 
     // MouseButtonPress events
@@ -104,22 +90,11 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
         u16         u16Mods         = modifierFromEvent(pMouseEvent);
+        u16         u16Btn          = buttonsFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
-        // Prüfe welche Maustaste gedrückt wurde
-        if (pMouseEvent->button() == Qt::LeftButton)
-        {
-            return onLButtonPress(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::MiddleButton)
-        {
-            return onMButtonPress(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::RightButton)
-        {
-            return onRButtonPress(u16Mods, pntLocal, pntGlobal);
-        }
+        return onButtonPress(u16Mods, u16Btn, pntLocal, pntGlobal);
     }
 
     // MouseMove events
@@ -127,43 +102,11 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
         u16         u16Mods         = modifierFromEvent(pMouseEvent);
+        u16         u16Btn          = buttonsFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
-        // Welche Maustaste(n) sind während der Bewegung gedrückt?
-        Qt::MouseButtons buttons = pMouseEvent->buttons();
-
-        bool bLeftPressed   = buttons & Qt::LeftButton;
-        bool bMiddlePressed = buttons & Qt::MiddleButton;
-        bool bRightPressed  = buttons & Qt::RightButton;
-
-        // if only one button is pressed => call the appriate function
-        // else call the onMouseMove with the pressed button info
-        if (bLeftPressed && !bMiddlePressed && !bRightPressed)
-        {
-            // only left button is pressed
-            return onLMouseMove(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (!bLeftPressed && bMiddlePressed && !bRightPressed)
-        {
-            // only middle button is pressed
-            return onMMouseMove(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (!bLeftPressed && !bMiddlePressed && bRightPressed)
-        {
-            // only right button is pressed
-            return onRMouseMove(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (!bLeftPressed && !bMiddlePressed && !bRightPressed)
-        {
-            // no button pressed
-            return onMouseMove(u16Mods, pntLocal, pntGlobal);
-        }
-        else
-        {
-            // multiple buttons are pressed
-            return onMultipleMouseMove(u16Mods, pntLocal, pntGlobal, bLeftPressed, bMiddlePressed, bRightPressed);
-        }
+        return onMouseMove(u16Mods, u16Btn, pntLocal, pntGlobal);
     }
 
     // MouseButtonRelease events
@@ -171,22 +114,11 @@ bool aBaseWin::eventFilter(QObject *_pObj,
     {
         QMouseEvent *pMouseEvent    = static_cast<QMouseEvent *>(_pEvent);
         u16         u16Mods         = modifierFromEvent(pMouseEvent);
+        u16         u16Btn          = buttonsFromEvent(pMouseEvent);
         aPoint      pntLocal(pMouseEvent->pos().x(), pMouseEvent->pos().y());
         aPoint      pntGlobal(pMouseEvent->globalPosition().x(), pMouseEvent->globalPosition().y());
 
-        // Prüfe welche Maustaste losgelassen wurde
-        if (pMouseEvent->button() == Qt::LeftButton)
-        {
-            return onLButtonRelease(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::MiddleButton)
-        {
-            return onMButtonRelease(u16Mods, pntLocal, pntGlobal);
-        }
-        else if (pMouseEvent->button() == Qt::RightButton)
-        {
-            return onRButtonRelease(u16Mods, pntLocal, pntGlobal);
-        }
+        return onButtonRelease(u16Mods, u16Btn, pntLocal, pntGlobal);
     }
 
     return QObject::eventFilter(_pObj, _pEvent);
@@ -196,12 +128,12 @@ bool aBaseWin::eventFilter(QObject *_pObj,
 /*******************************************************************************
 * aBaseWin::modifierFromEvent
 *******************************************************************************/
-u16 aBaseWin::modifierFromEvent(QInputEvent *_pMouseEvent) const
+u16 aBaseWin::modifierFromEvent(QSinglePointEvent *_pEvent) const
 {
     u16                     u16Mods     = MODIFIER_NONE;
-    Qt::KeyboardModifiers   modifiers   = _pMouseEvent->modifiers();
+    Qt::KeyboardModifiers   modifiers   = _pEvent->modifiers();
 
-    if (_pMouseEvent->modifiers() & Qt::ControlModifier)
+    if (modifiers & Qt::ControlModifier)
         u16Mods |= MODIFIER_CTRL;
 
     if (modifiers & Qt::ShiftModifier)
@@ -218,6 +150,33 @@ u16 aBaseWin::modifierFromEvent(QInputEvent *_pMouseEvent) const
 
     return u16Mods;
 } // aBaseWin::modifierFromEvent
+
+
+/*******************************************************************************
+* aBaseWin::buttonsFromEvent
+*******************************************************************************/
+u16 aBaseWin::buttonsFromEvent(QSinglePointEvent *_pEvent) const
+{
+    u16                 u16Buttons  = MOUSE_BTN_NONE;
+    Qt::MouseButtons    buttons     = _pEvent->buttons();
+
+    if (buttons & Qt::LeftButton)
+    {
+        u16Buttons |= MOUSE_BTN_LEFT;
+    }
+
+    if (buttons & Qt::MiddleButton)
+    {
+        u16Buttons |= MOUSE_BTN_MIDDLE;
+    }
+
+    if (buttons & Qt::RightButton)
+    {
+        u16Buttons |= MOUSE_BTN_RIGHT;
+    }
+
+    return u16Buttons;
+} // aBaseWin::buttonsFromEvent
 
 
 } // namespace aWin

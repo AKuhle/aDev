@@ -32,7 +32,7 @@ class aMainWin : public aBaseWin
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWin(SysWin *_pParent);
+        aMainWin(aBaseWin *_pParent);
         virtual ~aMainWin();
 
 

@@ -104,12 +104,16 @@ void aBaseWin_i::onPaintMargin()
 *******************************************************************************/
 void aBaseWin_i::onPaintBorder()
 {
-    if (borderStyle() != nullptr)
+    // full screen => no border
+    if (!isFullScreen())
     {
-        aRect       r = borderRect();
-        aPainter    p(m_pWinInstance);
+        if (borderStyle() != nullptr)
+        {
+            aRect       r = borderRect();
+            aPainter    p(m_pWinInstance);
 
-        borderStyle()->draw(p, r);
+            borderStyle()->draw(p, r);
+        }
     }
 } // aBaseWin_i::onPaintBorder
 
@@ -147,7 +151,7 @@ void aBaseWin_i::onPaintContent()
 
 
 /*******************************************************************************
-* aBaseWin_i::onLDoubleClick
+* aBaseWin_i::onWheel
 *******************************************************************************/
 bool aBaseWin_i::onWheel(u16            /*_u16Modifier*/,
                          s16            /*_s16Degree*/,
@@ -159,160 +163,51 @@ bool aBaseWin_i::onWheel(u16            /*_u16Modifier*/,
 
 
 /*******************************************************************************
-* aBaseWin_i::onLDoubleClick
+* aBaseWin_i::onDoubleClick
 *******************************************************************************/
-bool aBaseWin_i::onLDoubleClick(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
+bool aBaseWin_i::onDoubleClick(u16          /*_u16Modifier*/,
+                               u16          /*_u16Btn*/,
+                               const aPoint &/*_pntLocal*/,
+                               const aPoint &/*_pntGlobal*/)
 {
     return false;
-} // aBaseWin_i::onLDoubleClick
+} // aBaseWin_i::onDoubleClick
 
 
 /*******************************************************************************
-* aBaseWin_i::onMDoubleClick
+* aBaseWin_i::onButtonPress
 *******************************************************************************/
-bool aBaseWin_i::onMDoubleClick(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
+bool aBaseWin_i::onButtonPress(u16          /*_u16Modifier*/,
+                               u16          /*_u16Btn*/,
+                               const aPoint &/*_pntLocal*/,
+                               const aPoint &/*_pntGlobal*/)
 {
     return false;
-} // aBaseWin_i::onMDoubleClick
-
-
-/*******************************************************************************
-* aBaseWin_i::onRDoubleClick
-*******************************************************************************/
-bool aBaseWin_i::onRDoubleClick(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onRDoubleClick
-
-
-/*******************************************************************************
-* aBaseWin_i::onLButtonPress
-*******************************************************************************/
-bool aBaseWin_i::onLButtonPress(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onLButtonPress
-
-
-/*******************************************************************************
-* aBaseWin_i::onMButtonPress
-*******************************************************************************/
-bool aBaseWin_i::onMButtonPress(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onMButtonPress
-
-
-/*******************************************************************************
-* aBaseWin_i::onRButtonPress
-*******************************************************************************/
-bool aBaseWin_i::onRButtonPress(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onRButtonPress
-
-
-/*******************************************************************************
-* aBaseWin_i::onLMouseMove
-*******************************************************************************/
-bool aBaseWin_i::onLMouseMove(u16          /*_u16Modifier*/,
-                              const aPoint &/*_pntLocal*/,
-                              const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onLMouseMove
-
-
-/*******************************************************************************
-* aBaseWin_i::onMMouseMove
-*******************************************************************************/
-bool aBaseWin_i::onMMouseMove(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onMMouseMove
-
-
-/*******************************************************************************
-* aBaseWin_i::onRMouseMove
-*******************************************************************************/
-bool aBaseWin_i::onRMouseMove(u16          /*_u16Modifier*/,
-                                const aPoint &/*_pntLocal*/,
-                                const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onRMouseMove
+} // aBaseWin_i::onButtonPress
 
 
 /*******************************************************************************
 * aBaseWin_i::onMouseMove
 *******************************************************************************/
-bool aBaseWin_i::onMouseMove(u16          /*_u16Modifier*/,
-                             const aPoint &/*_pntLocal*/,
-                             const aPoint &/*_pntGlobal*/)
+bool aBaseWin_i::onMouseMove(u16            /*_u16Modifier*/,
+                             u16            /*_u16Btn*/,
+                             const aPoint   &/*_pntLocal*/,
+                             const aPoint   &/*_pntGlobal*/)
 {
     return false;
 } // aBaseWin_i::onMouseMove
 
 
 /*******************************************************************************
-* aBaseWin_i::onMultipleMouseMove
+* aBaseWin_i::onButtonRelease
 *******************************************************************************/
-bool aBaseWin_i::onMultipleMouseMove(u16            /*_u16Modifier*/,
-                                     const aPoint   &/*_pntLocal*/,
-                                     const aPoint   &/*_pntGlobal*/,
-                                     bool           /*_bLBtn*/,
-                                     bool           /*_bMBtn*/,
-                                     bool           /*_bRBtn*/)
+bool aBaseWin_i::onButtonRelease(u16            /*_u16Modifier*/,
+                                 u16            /*_u16Btn*/,
+                                 const aPoint   &/*_pntLocal*/,
+                                 const aPoint   &/*_pntGlobal*/)
 {
     return false;
-} // aBaseWin_i::onMultipleMouseMove
-
-
-/*******************************************************************************
-* aBaseWin_i::onLButtonRelease
-*******************************************************************************/
-bool aBaseWin_i::onLButtonRelease(u16          /*_u16Modifier*/,
-                                  const aPoint &/*_pntLocal*/,
-                                  const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onLButtonRelease
-
-
-/*******************************************************************************
-* aBaseWin_i::onMButtonRelease
-*******************************************************************************/
-bool aBaseWin_i::onMButtonRelease(u16          /*_u16Modifier*/,
-                                  const aPoint &/*_pntLocal*/,
-                                  const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onMButtonRelease
-
-
-/*******************************************************************************
-* aBaseWin_i::onRButtonRelease
-*******************************************************************************/
-bool aBaseWin_i::onRButtonRelease(u16          /*_u16Modifier*/,
-                                  const aPoint &/*_pntLocal*/,
-                                  const aPoint &/*_pntGlobal*/)
-{
-    return false;
-} // aBaseWin_i::onRButtonRelease
+} // aBaseWin_i::onButtonRelease
 
 
 } // namespace aWin

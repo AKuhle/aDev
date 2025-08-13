@@ -162,6 +162,8 @@ bool MainWin::onCreateWin()
 {
     setMinDim(600, 400);
 
+    setGeometry(100, 100, 600, 400);
+
 
 //     // create the navigator dock win
 //     m_pNavigatorDockWin = new aDockWin(this);

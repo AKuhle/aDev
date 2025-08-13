@@ -27,7 +27,7 @@ namespace aWin {
 /*******************************************************************************
 * aMainWinMdi::aMainWinMdi
 *******************************************************************************/
-aMainWinMdi::aMainWinMdi(SysWin *_pParent /*= nullptr*/)
+aMainWinMdi::aMainWinMdi(aBaseWin *_pParent /*= nullptr*/)
 : aMainWin(_pParent)
 {
 } // aMainWinMdi::aMainWinMdi

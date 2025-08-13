@@ -170,7 +170,7 @@ HEADERS += \
     aWin/Qt/aBaseWin.h \
     aWin/Tools/aParentCtrlTool.h \
     aWin/Tools/aToolBase.h \
-    aWin/Tools/aToolManager.h \
+    aWin/Tools/aToolMgr.h \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
     aWin/aTitleBar.h \
@@ -241,7 +241,7 @@ SOURCES += \
     aWin/Qt/aBaseWin_events.cpp \
     aWin/Tools/aParentCtrlTool.cpp \
     aWin/Tools/aToolBase.cpp \
-    aWin/Tools/aToolManager.cpp \
+    aWin/Tools/aToolMgr.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
     aWin/aTitleBar.cpp \

@@ -33,7 +33,7 @@ class aMainWinMdi : public aMainWin
     * con-/destruction
     *******************************************************************************/
     protected:
-        aMainWinMdi(SysWin *_pParent = nullptr);
+        aMainWinMdi(aBaseWin *_pParent = nullptr);
         ~aMainWinMdi();
 
 

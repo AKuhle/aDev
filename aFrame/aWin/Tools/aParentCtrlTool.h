@@ -19,6 +19,7 @@
 #include "aWin_def.h"
 
 #include "aToolBase.h"
+#include "aRect.h"
 
 using namespace aFrame;
 using namespace aFrame::aUtil;
@@ -37,6 +38,9 @@ namespace aWin {
 *******************************************************************************/
 class aParentCtrlTool : public aToolBase
 {
+    private:
+        aRect   m_rctMoveStartRect;
+
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
@@ -48,9 +52,21 @@ class aParentCtrlTool : public aToolBase
         ~aParentCtrlTool();
 
     protected:
-        virtual bool    onLDoubleClick(u16          _u16Modifier,
-                                       const aPoint &_pntLocal,
-                                       const aPoint &_pntGlobal);
+        enumToolResult      onLDoubleClick(u16          _u16Modifier,
+                                           const aPoint &_pntLocal,
+                                           const aPoint &_pntGlobal) override;
+
+        enumToolResult      onLButtonPress(u16          _u16Modifier,
+                                           const aPoint &_pntLocal,
+                                           const aPoint &_pntGlobal) override;
+
+        enumToolResult      onLMouseMove(u16          _u16Modifier,
+                                         const aPoint &_pntLocal,
+                                         const aPoint &_pntGlobal) override;
+
+        enumToolResult      onLButtonRelease(u16          _u16Modifier,
+                                             const aPoint &_pntLocal,
+                                             const aPoint &_pntGlobal) override;
 
 }; // class aParentCtrlTool
 

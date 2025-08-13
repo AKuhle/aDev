@@ -30,7 +30,7 @@ namespace aWin {
 /*******************************************************************************
 * aMainWin::aMainWin
 *******************************************************************************/
-aMainWin::aMainWin(SysWin *_pParent)
+aMainWin::aMainWin(aBaseWin *_pParent)
 : aBaseWin(_pParent)
 {
 } // aMainWin::_isVisible
@@ -57,7 +57,7 @@ bool aMainWin::onSysCreateWin()
     // create the layout
     unique_ptr<aLayoutMainWin>  pLayout = make_unique<aLayoutMainWin> ();
 
-    unique_ptr<aTitleBar> pTitleBar = make_unique<aTitleBar> (asSysWin());
+    unique_ptr<aTitleBar> pTitleBar = make_unique<aTitleBar> (this);
     pTitleBar->createWin();
 
     // move the items

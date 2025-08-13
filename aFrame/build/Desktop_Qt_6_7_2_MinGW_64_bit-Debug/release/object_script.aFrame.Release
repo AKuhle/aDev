@@ -29,8 +29,6 @@ release/aProgressCb.o
 release/aProgressMgr.o
 release/aThread.o
 release/aUrl_sys.o
-release/aToolBase.o
-release/aToolMgr.o
 release/aPoolVarBool.o
 release/aPoolVarColor.o
 release/aPoolVarDbl.o
@@ -57,6 +55,9 @@ release/aLayoutMainWin.o
 release/aLayout_i.o
 release/aBaseWin.o
 release/aBaseWin_events.o
+release/aParentCtrlTool.o
+release/aToolBase.o
+release/aToolMgr.o
 release/aMainWin.o
 release/aMainWinMdi.o
 release/aTitleBar.o

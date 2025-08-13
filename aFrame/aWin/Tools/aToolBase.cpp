@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aToolBase.h"
+#include "aBaseWin.h"
 
 
 
@@ -44,69 +45,283 @@ aToolBase::~aToolBase()
 
 
 /*******************************************************************************
+* aToolBase::ownerParent
+*******************************************************************************/
+aBaseWin* aToolBase::ownerParent() const
+{
+    CHECK_PRE_CONDITION(m_pOwner, nullptr);
+
+    return m_pOwner->parent();
+} // aToolBase::ownerParent
+
+
+/*******************************************************************************
 * aToolBase::onLDoubleClick
 *******************************************************************************/
-bool aToolBase::onLDoubleClick(u16              /*_u16Modifier*/,
-                               const aPoint     &/*_pntLocal*/,
-                               const aPoint     &/*_pntGlobal*/)
+enumToolResult aToolBase::onLDoubleClick(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return false;
+    return enumToolResult::UNHANDLED;
 } // aToolBase::onLDoubleClick
 
 
 /*******************************************************************************
 * aToolBase::onMDoubleClick
 *******************************************************************************/
-bool aToolBase::onMDoubleClick(u16              /*_u16Modifier*/,
-                               const aPoint     &/*_pntLocal*/,
-                               const aPoint     &/*_pntGlobal*/)
+enumToolResult aToolBase::onMDoubleClick(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return false;
+    return enumToolResult::UNHANDLED;
 } // aToolBase::onMDoubleClick
 
 
 /*******************************************************************************
 * aToolBase::onRDoubleClick
 *******************************************************************************/
-bool aToolBase::onRDoubleClick(u16              /*_u16Modifier*/,
-                               const aPoint     &/*_pntLocal*/,
-                               const aPoint     &/*_pntGlobal*/)
+enumToolResult aToolBase::onRDoubleClick(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return false;
+    return enumToolResult::UNHANDLED;
 } // aToolBase::onRDoubleClick
 
 
 /*******************************************************************************
-* aToolBase::onToolLDoubleClick
+* aToolBase::onLButtonPress
 *******************************************************************************/
-bool aToolBase::onToolLDoubleClick(u16              _u16Modifier,
-                                   const aPoint     &_pntLocal,
-                                   const aPoint     &_pntGlobal)
+enumToolResult aToolBase::onLButtonPress(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return onLDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
-} // aToolBase::onToolLDoubleClick
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onLButtonPress
 
 
 /*******************************************************************************
-* aToolBase::onToolMDoubleClick
+* aToolBase::onMButtonPress
 *******************************************************************************/
-bool aToolBase::onToolMDoubleClick(u16              _u16Modifier,
-                                   const aPoint     &_pntLocal,
-                                   const aPoint     &_pntGlobal)
+enumToolResult aToolBase::onMButtonPress(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return onMDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
-} // aToolBase::onToolMDoubleClick
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onMButtonPress
 
 
 /*******************************************************************************
-* aToolBase::onToolRDoubleClick
+* aToolBase::onRButtonPress
 *******************************************************************************/
-bool aToolBase::onToolRDoubleClick(u16              _u16Modifier,
-                                   const aPoint     &_pntLocal,
-                                   const aPoint     &_pntGlobal)
+enumToolResult aToolBase::onRButtonPress(u16              /*_u16Modifier*/,
+                                         const aPoint     &/*_pntLocal*/,
+                                         const aPoint     &/*_pntGlobal*/)
 {
-    return onRDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
-} // aToolBase::onToolRDoubleClick
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onRButtonPress
+
+
+/*******************************************************************************
+* aToolBase::onLMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onLMouseMove(u16              /*_u16Modifier*/,
+                                       const aPoint     &/*_pntLocal*/,
+                                       const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onLMouseMove
+
+
+/*******************************************************************************
+* aToolBase::onMMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onMMouseMove(u16              /*_u16Modifier*/,
+                                       const aPoint     &/*_pntLocal*/,
+                                       const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onMMouseMove
+
+
+/*******************************************************************************
+* aToolBase::onRMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onRMouseMove(u16              /*_u16Modifier*/,
+                                       const aPoint     &/*_pntLocal*/,
+                                       const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onRMouseMove
+
+
+/*******************************************************************************
+* aToolBase::onMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onMouseMove(u16              /*_u16Modifier*/,
+                                      const aPoint     &/*_pntLocal*/,
+                                      const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onMouseMove
+
+
+/*******************************************************************************
+* aToolBase::onLButtonRelease
+*******************************************************************************/
+enumToolResult aToolBase::onLButtonRelease(u16              /*_u16Modifier*/,
+                                           const aPoint     &/*_pntLocal*/,
+                                           const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onLButtonRelease
+
+
+/*******************************************************************************
+* aToolBase::onMButtonRelease
+*******************************************************************************/
+enumToolResult aToolBase::onMButtonRelease(u16              /*_u16Modifier*/,
+                                           const aPoint     &/*_pntLocal*/,
+                                           const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onMButtonRelease
+
+
+/*******************************************************************************
+* aToolBase::onRButtonRelease
+*******************************************************************************/
+enumToolResult aToolBase::onRButtonRelease(u16              /*_u16Modifier*/,
+                                           const aPoint     &/*_pntLocal*/,
+                                           const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onRButtonRelease
+
+
+/*******************************************************************************
+* aToolBase::onToolDoubleClick
+*******************************************************************************/
+enumToolResult aToolBase::onToolDoubleClick(u16             _u16Modifier,
+                                            u16             _u16Btn,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal)
+{
+    enumToolResult eResult = enumToolResult::UNHANDLED;
+
+    if (_u16Btn == MOUSE_BTN_LEFT)
+    {
+        eResult = onLDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (_u16Btn == MOUSE_BTN_MIDDLE)
+    {
+        eResult = onMDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (_u16Btn == MOUSE_BTN_RIGHT)
+    {
+        eResult = onRDoubleClick(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+
+    return eResult;
+} // aToolBase::onToolDoubleClick
+
+
+/*******************************************************************************
+* aToolBase::onToolButtonPress
+*******************************************************************************/
+enumToolResult aToolBase::onToolButtonPress(u16             _u16Modifier,
+                                            u16             _u16Btn,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal)
+{
+    enumToolResult eResult = enumToolResult::UNHANDLED;
+
+    // set the start point for m position tracking
+    m_u16Btn            = _u16Btn;
+    m_pntStartLocal     = _pntLocal;
+    m_pntStartGlobal    = _pntGlobal;
+
+    if (_u16Btn == MOUSE_BTN_LEFT)
+    {
+        eResult = onLButtonPress(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (_u16Btn == MOUSE_BTN_MIDDLE)
+    {
+        eResult = onMButtonPress(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (_u16Btn == MOUSE_BTN_RIGHT)
+    {
+        eResult = onRButtonPress(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+
+    return eResult;
+} // aToolBase::onToolButtonPress
+
+
+/*******************************************************************************
+* aToolBase::onToolMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onToolMouseMove(u16           _u16Modifier,
+                                           u16          /*_u16Btn*/,
+                                           const aPoint &_pntLocal,
+                                           const aPoint &_pntGlobal)
+{
+    enumToolResult eResult = enumToolResult::UNHANDLED;
+
+    // calculate the move delta
+    m_pntDelta = _pntGlobal - m_pntStartGlobal;
+
+    if (m_u16Btn == MOUSE_BTN_NONE)
+    {
+        eResult = onMouseMove(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (m_u16Btn == MOUSE_BTN_LEFT)
+    {
+        eResult = onLMouseMove(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (m_u16Btn == MOUSE_BTN_MIDDLE)
+    {
+        eResult = onMMouseMove(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (m_u16Btn == MOUSE_BTN_RIGHT)
+    {
+        eResult = onRMouseMove(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+
+    return eResult;
+} // aToolBase::onToolMouseMove
+
+
+/*******************************************************************************
+* aToolBase::onToolButtonRelease
+*******************************************************************************/
+enumToolResult aToolBase::onToolButtonRelease(u16           _u16Modifier,
+                                              u16           /*_u16Btn*/,
+                                              const aPoint  &_pntLocal,
+                                              const aPoint  &_pntGlobal)
+{
+    enumToolResult eResult = enumToolResult::UNHANDLED;
+
+    // set the start point for m position tracking
+    m_pntStartLocal  = _pntLocal;
+    m_pntStartGlobal = _pntGlobal;
+
+    if (m_u16Btn == MOUSE_BTN_LEFT)
+    {
+        eResult = onLButtonRelease(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (m_u16Btn == MOUSE_BTN_MIDDLE)
+    {
+        eResult = onMButtonRelease(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+    else if (m_u16Btn == MOUSE_BTN_RIGHT)
+    {
+        eResult = onRButtonRelease(_u16Modifier, _pntLocal, _pntGlobal);
+    }
+
+    m_u16Btn = MOUSE_BTN_NONE;
+
+    return eResult;
+} // aToolBase::onToolButtonRelease
 
 
 } // namespace aWin

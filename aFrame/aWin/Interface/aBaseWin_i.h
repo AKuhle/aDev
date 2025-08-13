@@ -76,8 +76,8 @@ class aBaseWin_i : public aWinStyle
 
         aString                         className() const;
 
-        virtual void                    setParent(SysWin *_pParent) = 0;
-        virtual SysWin*                 parent() const = 0;
+        virtual void                    setParent(aBaseWin *_pParent) = 0;
+        virtual aBaseWin*               parent() const = 0;
 
         virtual void                    update() = 0;
         virtual void                    repaint() = 0;
@@ -105,10 +105,19 @@ class aBaseWin_i : public aWinStyle
         virtual bool                    isVisible() const = 0;
 
         virtual bool                    isMinimized() const = 0;
-        virtual bool                    isMaximized() const = 0;
         virtual void                    showMinimized() = 0;
+
+        virtual bool                    isMaximized() const = 0;
         virtual void                    showMaximized() = 0;
+
+        virtual bool                    isFullScreen() const = 0;
+        virtual void                    showFullScreen() = 0;
+
+        virtual bool                    isNormal() const = 0;
+        virtual void                    showNormal() = 0;
+
         void                            toggleMaximized();
+        void                            toggleFullScreen();
 
         virtual void                    setMouseTracking(bool _bEnable) = 0;
 
@@ -144,6 +153,8 @@ class aBaseWin_i : public aWinStyle
                                                     s32 _s32W,
                                                     s32 _s32H) = 0;
 
+        void                            setGeometry(const aRect &_r);
+
         virtual aRect                   geometryRect() const = 0;
         virtual s32                     geometryW() const = 0;
         virtual s32                     geometryH() const = 0;
@@ -174,72 +185,28 @@ class aBaseWin_i : public aWinStyle
 
 
         // double click events, true => event handled
-        virtual bool                    onLDoubleClick(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
-        virtual bool                    onMDoubleClick(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
-        virtual bool                    onRDoubleClick(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
+        virtual bool                    onDoubleClick(u16          _u16Modifier,
+                                                      u16          _u16Btn,
+                                                      const aPoint  &_pntLocal,
+                                                      const aPoint  &_pntGlobal);
 
         // mouse pressed events, true => event handled
-        virtual bool                    onLButtonPress(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
-        virtual bool                    onMButtonPress(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
-        virtual bool                    onRButtonPress(u16          _u16Modifier,
-                                                       const aPoint &_pntLocal,
-                                                       const aPoint &_pntGlobal);
-
+        virtual bool                    onButtonPress(u16           _u16Modifier,
+                                                      u16           _u16Btn,
+                                                      const aPoint  &_pntLocal,
+                                                      const aPoint  &_pntGlobal);
 
         // mouse move events, true => event handled
-        // separate handler for moves without/multiple buttons
-        virtual bool                    onLMouseMove(u16          _u16Modifier,
-                                                     const aPoint &_pntLocal,
-                                                     const aPoint &_pntGlobal);
-
-        virtual bool                    onMMouseMove(u16          _u16Modifier,
-                                                     const aPoint &_pntLocal,
-                                                     const aPoint &_pntGlobal);
-
-        virtual bool                    onRMouseMove(u16          _u16Modifier,
-                                                     const aPoint &_pntLocal,
-                                                     const aPoint &_pntGlobal);
-
-        // only called, if mouseTracking is enabled
-        virtual bool                    onMouseMove(u16          _u16Modifier,
-                                                    const aPoint &_pntLocal,
-                                                    const aPoint &_pntGlobal);
-
-        virtual bool                    onMultipleMouseMove(u16             _u16Modifier,
-                                                            const aPoint    &_pntLocal,
-                                                            const aPoint    &_pntGlobal,
-                                                            bool            _bLBtn,
-                                                            bool            _bMBtn,
-                                                            bool            _bRBtn);
+        virtual bool                    onMouseMove(u16             _u16Modifier,
+                                                    u16             _u16Btn,
+                                                    const aPoint    &_pntLocal,
+                                                    const aPoint    &_pntGlobal);
 
         // mouse release events, true => event handled
-        virtual bool                    onLButtonRelease(u16          _u16Modifier,
-                                                         const aPoint &_pntLocal,
-                                                         const aPoint &_pntGlobal);
-
-        virtual bool                    onMButtonRelease(u16          _u16Modifier,
-                                                         const aPoint &_pntLocal,
-                                                         const aPoint &_pntGlobal);
-
-        virtual bool                    onRButtonRelease(u16          _u16Modifier,
-                                                         const aPoint &_pntLocal,
-                                                         const aPoint &_pntGlobal);
-
+        virtual bool                    onButtonRelease(u16             _u16Modifier,
+                                                        u16             _u16Btn,
+                                                        const aPoint    &_pntLocal,
+                                                        const aPoint    &_pntGlobal);
 
         virtual void                    onSysResize(const aDimension   &_dOldDim,
                                                     const aDimension   &_dNewDim);

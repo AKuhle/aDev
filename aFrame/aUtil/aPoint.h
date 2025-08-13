@@ -60,6 +60,9 @@ class aPoint
         bool                    operator==(const aPoint &_rhs) const;
         bool                    operator!=(const aPoint &_rhs) const;
 
+        aPoint                  operator-(const aPoint &_rhs) const;
+        aPoint                  operator+(const aPoint &_rhs)const;
+
         friend std::ostream& operator<<(std::ostream&       _os,
                                         const aPoint  &_v2d)
         {
