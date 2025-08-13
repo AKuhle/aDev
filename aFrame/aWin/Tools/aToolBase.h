@@ -43,6 +43,7 @@ class aToolBase
         aBaseWin   *m_pOwner        { nullptr };
         u32        m_u32ToolId      { 0 };
         u32        m_u32Flags       { TF_NONE };
+        aToolCb   *m_pToolCb        { nullptr };
 
         // member for position tracking
         u16        m_u16Btn         { MOUSE_BTN_NONE };
@@ -55,9 +56,10 @@ class aToolBase
     * con-/destruction
     *******************************************************************************/
     protected:
-        aToolBase(aBaseWin   *_pOwner,
-                  u32        _u32ToolId,
-                  u32        _u32Flags       = TF_NONE);
+        aToolBase(aBaseWin  *_pOwner,
+                  u32       _u32ToolId,
+                  u32       _u32Flags,
+                  aToolCb   *_pToolCb);
 
         const aPoint&   startLocal() const     { return m_pntStartLocal; }
         const aPoint&   startGlobal() const    { return m_pntStartGlobal; }
@@ -70,9 +72,12 @@ class aToolBase
         u32             toolId() const          { return m_u32ToolId; }
         aBaseWin*       ownerWin() const        { return m_pOwner; }
         aBaseWin*       ownerParent() const;
+        aToolCb*        toolCb() const          { return m_pToolCb; }
 
 
     protected:
+        void                    onActivate(bool _bActivate);
+
         // double click events
         virtual enumToolResult  onLDoubleClick(u16          _u16Modifier,
                                                const aPoint &_pntLocal,
@@ -102,7 +107,12 @@ class aToolBase
 
 
         // mouse move events
-        // separate handler for moves without/multiple buttons
+
+        // only called, if mouseTracking is enabled
+        virtual enumToolResult  onMouseMove(u16          _u16Modifier,
+                                            const aPoint &_pntLocal,
+                                            const aPoint &_pntGlobal);
+                                            
         virtual enumToolResult  onLMouseMove(u16          _u16Modifier,
                                              const aPoint &_pntLocal,
                                              const aPoint &_pntGlobal);
@@ -114,11 +124,6 @@ class aToolBase
         virtual enumToolResult  onRMouseMove(u16          _u16Modifier,
                                              const aPoint &_pntLocal,
                                              const aPoint &_pntGlobal);
-
-        // only called, if mouseTracking is enabled
-        virtual enumToolResult  onMouseMove(u16          _u16Modifier,
-                                            const aPoint &_pntLocal,
-                                            const aPoint &_pntGlobal);
 
 
         // mouse release events

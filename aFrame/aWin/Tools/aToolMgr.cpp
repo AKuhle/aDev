@@ -13,6 +13,7 @@
 *******************************************************************************/
 #include "aToolMgr.h"
 #include "aToolBase.h"
+#include "aToolCb.h"
 
 
 
@@ -44,7 +45,15 @@ aToolMgr::~aToolMgr()
 *******************************************************************************/
 void aToolMgr::addTool(std::unique_ptr<aToolBase>  _pTool)
 {
+    CHECK_PRE_CONDITION_VOID(_pTool);
+
     m_vTools.push_back(std::move(_pTool));
+    m_vTools.back()->onActivate(true);
+
+    if (m_vTools.back()->toolCb())
+    {
+        m_vTools.back()->toolCb()->onToolStart(m_vTools.back().get());
+    }
 } // aToolMgr::addTool
 
 
@@ -62,7 +71,7 @@ bool aToolMgr::onToolMgrDoubleClick(u16             _u16Modifier,
     {
         eResult = m_vTools.back()->onToolDoubleClick(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
 
-        manage(m_vTools.back().get(), eResult);
+        manage(m_vTools.back(), eResult);
     }
 
     return eResult != enumToolResult::UNHANDLED;
@@ -83,7 +92,7 @@ bool aToolMgr::onToolMgrButtonPress(u16             _u16Modifier,
     {
         eResult = m_vTools.back()->onToolButtonPress(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
 
-        manage(m_vTools.back().get(), eResult);
+        manage(m_vTools.back(), eResult);
     }
 
     return eResult != enumToolResult::UNHANDLED;
@@ -104,7 +113,7 @@ bool aToolMgr::onToolMgrMouseMove(u16           _u16Modifier,
     {
         eResult = m_vTools.back()->onToolMouseMove(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
 
-        manage(m_vTools.back().get(), eResult);
+        manage(m_vTools.back(), eResult);
     }
 
     return eResult != enumToolResult::UNHANDLED;
@@ -124,7 +133,7 @@ bool aToolMgr::onToolMgrButtonRelease(u16           _u16Modifier,
     if (m_vTools.back() != nullptr)
     {
         eResult = m_vTools.back()->onToolButtonRelease(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
-        manage(m_vTools.back().get(), eResult);
+        manage(m_vTools.back(), eResult);
     }
 
     return eResult != enumToolResult::UNHANDLED;
@@ -134,10 +143,10 @@ bool aToolMgr::onToolMgrButtonRelease(u16           _u16Modifier,
 /*******************************************************************************
 * aToolMgr::manage
 *******************************************************************************/
-void aToolMgr::manage(aToolBase        */*_pTool*/,
-                      enumToolResult   _eRresult)
+void aToolMgr::manage(std::unique_ptr<aToolBase>    &/*_pTool*/,
+                      enumToolResult                _eResult)
 {
-    switch (_eRresult)
+    switch (_eResult)
     {
         case enumToolResult::UNHANDLED:
         {

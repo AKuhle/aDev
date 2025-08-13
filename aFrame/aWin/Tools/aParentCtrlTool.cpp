@@ -29,7 +29,7 @@ namespace aWin {
 aParentCtrlTool::aParentCtrlTool(aBaseWin   *_pOwner,
                                  u32        _u32ToolId  /*= TOOL_ID_PARENT_CTRL*/,
                                  u32        _u32Flags   /*= TF_NONE*/)
-: aToolBase(_pOwner, _u32ToolId, _u32Flags)
+: aToolBase(_pOwner, _u32ToolId, _u32Flags, nullptr)
 {
 } // aParentCtrlTool::aParentCtrlTool
 

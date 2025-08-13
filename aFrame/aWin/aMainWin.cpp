@@ -18,6 +18,7 @@
 #include "aMainWin.h"
 #include "aLayoutMainWin.h"
 #include "aTitleBar.h"
+#include "aBorderResizeTool.h"
 
 
 /*******************************************************************************
@@ -49,6 +50,8 @@ aMainWin::~aMainWin()
 *******************************************************************************/
 bool aMainWin::onSysCreateWin()
 {
+    CHECK_PRE_CONDITION(aBaseWin::onSysCreateWin(), false);
+
     #ifdef _USE_QT_
         // Titelleiste entfernen (for top level windows)
         asSysWin()->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -64,8 +67,47 @@ bool aMainWin::onSysCreateWin()
     pLayout->setTitleBar(std::move(pTitleBar));
     setLayout(std::move(pLayout));
 
+    // add the aBorderResizeTool
+    addTool(make_unique<aBorderResizeTool> (this));
+
     return true;
 } // aMainWin::onSysCreateWin
+
+
+ /*******************************************************************************
+ * aMainWin::onButtonPress
+ *******************************************************************************/
+ bool aMainWin::onButtonPress(u16          _u16Modifier,
+                              u16          _u16Btn,
+                              const aPoint &_pntLocal,
+                              const aPoint &_pntGlobal)
+{
+    return onToolMgrButtonPress(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
+} // aMainWin::onButtonPress
+
+
+/*******************************************************************************
+* aMainWin::onMouseMove
+*******************************************************************************/
+bool aMainWin::onMouseMove(u16             _u16Modifier,
+                           u16             _u16Btn,
+                           const aPoint    &_pntLocal,
+                           const aPoint    &_pntGlobal)
+{
+    return onToolMgrMouseMove(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
+} // aMainWin::onMouseMove
+
+
+/*******************************************************************************
+* aMainWin::onButtonRelease
+*******************************************************************************/
+bool aMainWin::onButtonRelease(u16             _u16Modifier,
+                               u16             _u16Btn,
+                               const aPoint    &_pntLocal,
+                               const aPoint    &_pntGlobal)
+{
+    return onToolMgrButtonRelease(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
+} // aMainWin::onLDoubleClick
 
 
 } // namespace aWin

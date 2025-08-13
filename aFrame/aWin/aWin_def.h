@@ -54,6 +54,7 @@ constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 * tool flags
 *******************************************************************************/
 constexpr u32   TOOL_ID_PARENT_CTRL     = 1;
+constexpr u32   TOOL_ID_BORDER_RESIZE   = 2;
 constexpr u32   TOOL_ID_USER            = 1000;
 
 
@@ -144,7 +145,9 @@ class aLayoutCentralWin;
 class aLayoutMainWin;
 
 class aToolBase;
+class aBorderResizeTool;
 class aParentCtrlTool;
+class aToolCb;
 class aToolManager;
 
 class aBaseWin_i;

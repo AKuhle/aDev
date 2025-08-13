@@ -55,9 +55,11 @@ debug/aLayoutMainWin.o
 debug/aLayout_i.o
 debug/aBaseWin.o
 debug/aBaseWin_events.o
+debug/aBorderResizeTool.o
 debug/aParentCtrlTool.o
 debug/aToolBase.o
-debug/aToolManager.o
+debug/aToolCb.o
+debug/aToolMgr.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
 debug/aTitleBar.o

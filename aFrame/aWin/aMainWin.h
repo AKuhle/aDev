@@ -14,6 +14,7 @@
 *******************************************************************************/
 #include "aWin_def.h"
 #include "aBaseWin.h"
+#include "aToolMgr.h"
 
 
 /*******************************************************************************
@@ -26,7 +27,8 @@ namespace aWin {
 /*******************************************************************************
 * class aMainWin
 *******************************************************************************/
-class aMainWin : public aBaseWin
+class aMainWin : public aBaseWin,
+                 public aToolMgr
 {
     /*******************************************************************************
     * con-/destruction
@@ -41,6 +43,21 @@ class aMainWin : public aBaseWin
     *******************************************************************************/
     protected:
         virtual bool        onSysCreateWin() override;
+
+        bool                onButtonPress(u16           _u16Modifier,
+                                          u16           _u16Btn,
+                                          const aPoint  &_pntLocal,
+                                          const aPoint  &_pntGlobal) override;
+
+        bool                onMouseMove(u16             _u16Modifier,
+                                        u16             _u16Btn,
+                                        const aPoint    &_pntLocal,
+                                        const aPoint    &_pntGlobal) override;
+
+        bool                onButtonRelease(u16             _u16Modifier,
+                                            u16             _u16Btn,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal) override;
 }; // class aMainWin
 
 

@@ -81,8 +81,8 @@ class aToolMgr
 
 
     private:
-        void                manage(aToolBase        *_pTool,
-                                   enumToolResult   _eRresult);
+        void                manage(std::unique_ptr<aToolBase>   &_pTool,
+                                   enumToolResult               _eResult);
 }; // class aToolMgr
 
 

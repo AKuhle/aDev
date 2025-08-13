@@ -168,8 +168,10 @@ HEADERS += \
     aWin/Layout/aLayoutMainWin.h \
     aWin/Layout/aLayout_i.h \
     aWin/Qt/aBaseWin.h \
+    aWin/Tools/aBorderResizeTool.h \
     aWin/Tools/aParentCtrlTool.h \
     aWin/Tools/aToolBase.h \
+    aWin/Tools/aToolCb.h \
     aWin/Tools/aToolMgr.h \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
@@ -239,8 +241,10 @@ SOURCES += \
     aWin/Layout/aLayout_i.cpp \
     aWin/Qt/aBaseWin.cpp \
     aWin/Qt/aBaseWin_events.cpp \
+    aWin/Tools/aBorderResizeTool.cpp \
     aWin/Tools/aParentCtrlTool.cpp \
     aWin/Tools/aToolBase.cpp \
+    aWin/Tools/aToolCb.cpp \
     aWin/Tools/aToolMgr.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \

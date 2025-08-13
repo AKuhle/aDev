@@ -28,10 +28,12 @@ namespace aWin {
 *******************************************************************************/
 aToolBase::aToolBase(aBaseWin   *_pOwner,
                      u32        _u32ToolId,
-                     u32        _u32Flags       /*= TF_NONE*/)
+                     u32        _u32Flags,
+                     aToolCb    *_pToolCb)
 : m_pOwner(_pOwner),
   m_u32ToolId(_u32ToolId),
-  m_u32Flags(_u32Flags)
+  m_u32Flags(_u32Flags),
+  m_pToolCb(_pToolCb)
 {
 } // aToolBase::aToolBase
 
@@ -53,6 +55,14 @@ aBaseWin* aToolBase::ownerParent() const
 
     return m_pOwner->parent();
 } // aToolBase::ownerParent
+
+
+/*******************************************************************************
+* aToolBase::onActivate
+*******************************************************************************/
+void aToolBase::onActivate(bool /*_bActivate*/)
+{
+} // aToolBase::onActivate
 
 
 /*******************************************************************************
@@ -122,6 +132,17 @@ enumToolResult aToolBase::onRButtonPress(u16              /*_u16Modifier*/,
 
 
 /*******************************************************************************
+* aToolBase::onMouseMove
+*******************************************************************************/
+enumToolResult aToolBase::onMouseMove(u16              /*_u16Modifier*/,
+                                      const aPoint     &/*_pntLocal*/,
+                                      const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onMouseMove
+
+
+/*******************************************************************************
 * aToolBase::onLMouseMove
 *******************************************************************************/
 enumToolResult aToolBase::onLMouseMove(u16              /*_u16Modifier*/,
@@ -152,17 +173,6 @@ enumToolResult aToolBase::onRMouseMove(u16              /*_u16Modifier*/,
 {
     return enumToolResult::UNHANDLED;
 } // aToolBase::onRMouseMove
-
-
-/*******************************************************************************
-* aToolBase::onMouseMove
-*******************************************************************************/
-enumToolResult aToolBase::onMouseMove(u16              /*_u16Modifier*/,
-                                      const aPoint     &/*_pntLocal*/,
-                                      const aPoint     &/*_pntGlobal*/)
-{
-    return enumToolResult::UNHANDLED;
-} // aToolBase::onMouseMove
 
 
 /*******************************************************************************
