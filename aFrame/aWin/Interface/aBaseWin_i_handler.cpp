@@ -96,6 +96,9 @@ void aBaseWin_i::onPaint()
 *******************************************************************************/
 void aBaseWin_i::onPaintMargin()
 {
+    aPainter    p(m_pWinInstance);
+
+    p.drawFilledRect(marginRect(), &colTransparent);
 } // aBaseWin_i::onPaintMargin
 
 

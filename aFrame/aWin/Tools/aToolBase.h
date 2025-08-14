@@ -61,18 +61,18 @@ class aToolBase
                   u32       _u32Flags,
                   aToolCb   *_pToolCb);
 
-        const aPoint&   startLocal() const     { return m_pntStartLocal; }
-        const aPoint&   startGlobal() const    { return m_pntStartGlobal; }
-        const aPoint&   delta() const          { return m_pntDelta; }
+        const aPoint&           startLocal() const     { return m_pntStartLocal; }
+        const aPoint&           startGlobal() const    { return m_pntStartGlobal; }
+        const aPoint&           delta() const          { return m_pntDelta; }
 
 
     public:
         ~aToolBase();
 
-        u32             toolId() const          { return m_u32ToolId; }
-        aBaseWin*       ownerWin() const        { return m_pOwner; }
-        aBaseWin*       ownerParent() const;
-        aToolCb*        toolCb() const          { return m_pToolCb; }
+        u32                     toolId() const          { return m_u32ToolId; }
+        aBaseWin*               ownerWin() const        { return m_pOwner; }
+        aBaseWin*               ownerParent() const;
+        aToolCb*                toolCb() const          { return m_pToolCb; }
 
 
     protected:

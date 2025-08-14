@@ -29,7 +29,7 @@ namespace aGraphic {
 *******************************************************************************/
 aPen::aPen(const aColor   &_col,
            s32            _s32Thick)
-: m_pen(_col.toQColor(), _s32Thick, Qt::SolidLine)
+: QPen(_col.toQColor(), _s32Thick, Qt::SolidLine)
 {
 } // aPen::aPen
 

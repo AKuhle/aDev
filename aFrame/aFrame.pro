@@ -78,9 +78,12 @@ HEADERS += \
     aFrame_global.h \
     aFrame.h \
     aGraphic/Interface/aBrushI.h \
+    aGraphic/Interface/aCursorI.h \
     aGraphic/Interface/aPainterI.h \
+    aGraphic/Interface/aPenI.h \
     aGraphic/Interface/aPixmapI.h \
     aGraphic/Qt/aBrush.h \
+    aGraphic/Qt/aCursor.h \
     aGraphic/Qt/aPainter.h \
     aGraphic/Qt/aPen.h \
     aGraphic/Qt/aPixmap.h \
@@ -190,6 +193,7 @@ SOURCES += \
     aFrame.cpp \
     aGraphic/Interface/aPainterI.cpp \
     aGraphic/Qt/aBrush.cpp \
+    aGraphic/Qt/aCursor.cpp \
     aGraphic/Qt/aPainter.cpp \
     aGraphic/Qt/aPen.cpp \
     aGraphic/Qt/aPixmap.cpp \

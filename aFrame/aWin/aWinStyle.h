@@ -18,6 +18,7 @@
 
 #include "aColor.h"
 #include "aDimension.h"
+#include "aMargin.h"
 
 #include "aStyleItemFillSolid.h"
 
@@ -44,6 +45,9 @@ class aWinStyle
         static std::unique_ptr<aJsonFile>               m_pStyleFile;
         static std::map<aString, std::vector<aString>>  m_mapClassOrder;
 
+        aMargin                         m_margin;
+        aMargin                         m_padding;
+
         // win metrics
         aDimension                      m_dimSysMetrics;
         static float                    m_fSysMetricsFactor;
@@ -54,9 +58,10 @@ class aWinStyle
 
 
         // regular expressions for items
-        std::string m_reAny = R"(.*)";
+        //std::string m_reAny = R"(.*)";
         std::string m_reU32 = R"(\s*(\d+))";
         std::string m_reColon = R"(\s*,)";
+
         std::string m_reRgb = R"(\s*rgba\s*\()" +
                               m_reU32 + m_reColon +
                               m_reU32 + m_reColon +
@@ -78,6 +83,9 @@ class aWinStyle
         shared_ptr<aStyleItemFill>          bgStyle() const             { return m_pBgStyle; }
         shared_ptr<aStyleItemBorder>        borderStyle() const         { return m_pBorderStyle; }
 
+        aMargin                           	marginMargin() const        { return m_margin; }
+        aMargin                             borderMargin() const;
+        aMargin                             paddingMargin() const       { return m_padding; }
 
     private:
         bool                                isValid() const;
@@ -86,11 +94,13 @@ class aWinStyle
 
         void                                setMetricsW(const std::vector<aString> &_vStyleClass);
         void                                setMetricsH(const std::vector<aString> &_vStyleClass);
-        void                                setBorder(const std::vector<aString> &_vStyleClass);
-        void                                setBg(const std::vector<aString> &_vStyleClass);
+        void                                setMarginStyle(const std::vector<aString> &_vStyleClass);
+        void                                setBorderStyle(const std::vector<aString> &_vStyleClass);
+        void                                setBgStyle(const std::vector<aString> &_vStyleClass);
 
         s32                                 parseValueS32(aString _sValue);
         std::shared_ptr<aStyleItemFill>     parseFillItem(aString _sValue);
+        bool                                parseMarginItem(aString _sValue);
         bool                                parseBorderItem(aString _sValue);
 }; // class aWinStyle
 

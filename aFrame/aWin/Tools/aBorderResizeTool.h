@@ -39,7 +39,8 @@ namespace aWin {
 class aBorderResizeTool : public aToolBase
 {
     private:
-        aRect   m_rctMoveStartRect;
+        aRect           m_rctOri;       // original window size before resizing
+        enumPosition    m_eDirection;   // resize direction
 
     /*******************************************************************************
     * con-/destruction
@@ -51,6 +52,13 @@ class aBorderResizeTool : public aToolBase
 
         ~aBorderResizeTool();
 
+    private:
+        enumPosition        findPos(const aPoint &_pntLocal) const;
+
+
+    /*******************************************************************************
+    * aToolBase implementation
+    *******************************************************************************/
     protected:
         enumToolResult      onMouseMove(u16          _u16Modifier,
                                         const aPoint &_pntLocal,
@@ -67,7 +75,6 @@ class aBorderResizeTool : public aToolBase
         enumToolResult      onLButtonRelease(u16          _u16Modifier,
                                              const aPoint &_pntLocal,
                                              const aPoint &_pntGlobal) override;
-
 }; // class aBorderResizeTool
 
 

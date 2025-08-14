@@ -230,10 +230,7 @@ aRect aBaseWin_i::borderRect() const
     // full screen => no margin => border rect = margin rect
     if (!isFullScreen())
     {
-        r.x() += m_margin.l();
-        r.y() += m_margin.t();
-        r.w() -= m_margin.w();
-        r.h() -= m_margin.h();
+        r -= marginMargin();
     }
 
     return r;
@@ -253,12 +250,7 @@ aRect aBaseWin_i::paddingRect() const
         // no border => padding rect == border rect
         if (borderStyle())
         {
-            const aMargin &m = borderStyle()->margin();
-
-            r.x() += m.l();
-            r.y() += m.t();
-            r.w() -= m.w();
-            r.h() -= m.h();
+            r -= borderStyle()->margin();
         }
     }
 
@@ -271,34 +263,12 @@ aRect aBaseWin_i::paddingRect() const
 *******************************************************************************/
 aRect aBaseWin_i::contentRect() const
 {
-    aRect    r = paddingRect();
-
-    r.x() += m_padding.l();
-    r.y() += m_padding.t();
-    r.w() -= m_padding.w();
-    r.h() -= m_padding.h();
-
-    return r;
+    return paddingRect() - paddingMargin();
 } // aBaseWin_i::contentRect
 
 
 } // namespace aWin
 } // namespace aFrame
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -320,26 +290,3 @@ aRect aBaseWin_i::contentRect() const
 // void aBaseWin::onDropUrl(const aUrl  &/*_url*/)
 // {
 // } // aBaseWin::onDropUrl
-
-
-// /*******************************************************************************
-// * aBaseWin::onPaint
-// *******************************************************************************/
-// template<class T>
-// bool aBaseWin::onPaint()
-// {
-//     return false;
-// } // aBaseWin::onPaint
-
-
-// /*******************************************************************************
-// * aBaseWin::onWheel
-// *******************************************************************************/
-// template<class T>
-// bool aBaseWin::onWheel(u32                  /*_u32Modifiers*/,
-//                           s32                  /*_s32Degree*/,
-//                           const aPoint &/*_v2dLocal*/,
-//                           const aPoint &/*_v2dGlobal*/)
-// {
-//     return false;
-// } // aBaseWin::onWheel

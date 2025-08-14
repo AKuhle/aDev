@@ -21,19 +21,34 @@ namespace aGraphic {
 *******************************************************************************/
 enum class enumCursorShape
 {
-    Arrow,
-    Cross,
-    Wait,
-    IBeam,
-    SizeVer,
-    SizeHor,
-    Size_TL_BR,
-    Size_TR_BL,
-    PointingHand,
-    OpenHand,
-    ClosedHand,
-    Busy
-}; // enumToolResult
+    // standard cursors:
+    ArrowCursor,          // Standard-Pfeil
+    UpArrowCursor,        // Pfeil nach oben
+    CrossCursor,          // Kreuz/Fadenkreuz
+    WaitCursor,           // Sanduhr/Spinner (Warten)
+    IBeamCursor,          // Text-Cursor (I-Balken)
+    SizeVerCursor,        // Vertikale Größenänderung (↕)
+    SizeHorCursor,        // Horizontale Größenänderung (↔)
+    SizeBDiagCursor,      // Diagonale Größenänderung (/)
+    SizeFDiagCursor,      // Diagonale Größenänderung (\)
+    SizeAllCursor,        // Alle Richtungen (✛)
+    BlankCursor,          // Unsichtbarer Cursor}; // enumCursorShape
+
+    // interactive cursors:
+    SplitVCursor,         // Vertikaler Splitter
+    SplitHCursor,         // Horizontaler Splitter
+    PointingHandCursor,   // Hand (klickbar)
+    ForbiddenCursor,      // Verboten/Nicht erlaubt (🚫)
+    WhatsThisCursor,      // Fragezeichen
+    BusyCursor,           // Beschäftigt (Pfeil + Sanduhr)
+
+    // extended cursors:
+    OpenHandCursor,       // Offene Hand
+    ClosedHandCursor,     // Geschlossene Hand (ziehen)
+    DragCopyCursor,       // Drag & Drop Kopieren
+    DragMoveCursor,       // Drag & Drop Verschieben
+    DragLinkCursor        // Drag & Drop Verknüpfen
+}; // enumCursorShape
 
 
 enum class enumFontWeight
@@ -73,6 +88,7 @@ class aBrush;
 class aPen;
 class aPainter;
 class aPixmap;
+class aCursor;
 
 } // namespace aGraphic
 } // namespace aFrame

@@ -55,9 +55,6 @@ class aBaseWin_i : public aWinStyle
     private:
         SysWin                          *m_pWinInstance;
 
-        aMargin                         m_margin;
-        aMargin                         m_padding;
-
         // layout
         unique_ptr<aLayout_i>           m_pLayout;
 
@@ -95,7 +92,7 @@ class aBaseWin_i : public aWinStyle
 
 
     /*******************************************************************************
-    * window state
+    * window state/appearance
     *******************************************************************************/
     public:
         // visibility
@@ -121,6 +118,8 @@ class aBaseWin_i : public aWinStyle
 
         virtual void                    setMouseTracking(bool _bEnable) = 0;
 
+        virtual void                    setCursor(const aCursor &_cursor) = 0;
+
 
     /*******************************************************************************
     * layout
@@ -138,9 +137,12 @@ class aBaseWin_i : public aWinStyle
 
         void                            setMinDim(const aDimension &_minDim);
         void                            setMinDim(s32 _s32MinW,
-                                          s32 _s32MinH);
+                                                  s32 _s32MinH);
         virtual void                    setMinW(s32 _s32MinW) = 0;
         virtual void                    setMinH(s32 _s32MinH) = 0;
+        virtual s32                     minW() const = 0;
+        virtual s32                     minH() const = 0;
+        aDimension                      minDim() const      { return aDimension(minW(), minH()); }
 
         void                            setMaxDim(const aDimension &_maxDim);
         void                            setMaxDim(s32 _s32MaxW,

@@ -50,7 +50,7 @@ aWinStyle::aWinStyle()
 {
     m_mapClassOrder["aBaseWin"] = std::vector<aString>   { "aBaseWin" };
     m_mapClassOrder["aMainWin"] = std::vector<aString>   { "aMainWin", "aBaseWin" };
-    m_mapClassOrder["aTitleBar"] = std::vector<aString>   { "aTitleBar", "aBaseWin" };
+    m_mapClassOrder["aTitleBar"] = std::vector<aString>  { "aTitleBar", "aBaseWin" };
 } // aWinStyle::aWinStyle
 
 
@@ -81,15 +81,6 @@ void aWinStyle::setStyleFile(const aPath    &_path)
 
 
 /*******************************************************************************
-* aWinStyle::isValid
-*******************************************************************************/
-bool aWinStyle::isValid() const
-{
-    return m_pStyleFile != nullptr;
-} // aWinStyle::isValid
-
-
-/*******************************************************************************
 * aWinStyle::setStyle
 *******************************************************************************/
 void aWinStyle::setStyle()
@@ -116,6 +107,31 @@ void aWinStyle::setStyle()
 
 
 /*******************************************************************************
+* aWinStyle::borderMargin
+*******************************************************************************/
+aMargin aWinStyle::borderMargin() const
+{
+    aMargin     m;
+
+    if (m_pBorderStyle)
+    {
+        m = m_pBorderStyle->margin();
+    }
+
+    return m;
+} // aWinStyle::borderMargin
+
+
+/*******************************************************************************
+* aWinStyle::isValid
+*******************************************************************************/
+bool aWinStyle::isValid() const
+{
+    return m_pStyleFile != nullptr;
+} // aWinStyle::isValid
+
+
+/*******************************************************************************
 * aWinStyle::setStyle4WinClass
 *******************************************************************************/
 void aWinStyle::setStyle4WinClass(const aString     &_sWinClass)
@@ -127,8 +143,9 @@ void aWinStyle::setStyle4WinClass(const aString     &_sWinClass)
     {
         setMetricsW(it->second);        // set metricsW
         setMetricsH(it->second);        // set metricsH
-        setBorder(it->second);          // set border
-        setBg(it->second);              // set bg
+        setMarginStyle(it->second);          // set margin
+        setBorderStyle(it->second);          // set border
+        setBgStyle(it->second);              // set bg
     }
 } // aWinStyle::setStyle4WinClass
 
@@ -174,9 +191,31 @@ void aWinStyle::setMetricsH(const std::vector<aString> &_vStyleClass)
 
 
 /*******************************************************************************
-* aWinStyle::setBorder
+* aWinStyle::setMarginStyle
 *******************************************************************************/
-void aWinStyle::setBorder(const std::vector<aString> &_vStyleClass)
+void aWinStyle::setMarginStyle(const std::vector<aString> &_vStyleClass)
+{
+    // iterate over the class chain
+    for (const aString &s : _vStyleClass)
+    {
+        aString sVal = m_pStyleFile->readStringValue(s + ":margin");
+
+        if (sVal != "")
+        {
+            // value found => set the value and cancel the class chain
+            if (parseMarginItem(sVal))
+            {
+                return;
+            }
+        }
+    }
+} // aWinStyle::setMarginStyle
+
+
+/*******************************************************************************
+* aWinStyle::setBorderStyle
+*******************************************************************************/
+void aWinStyle::setBorderStyle(const std::vector<aString> &_vStyleClass)
 {
     // iterate over the class chain
     for (const aString &s : _vStyleClass)
@@ -192,13 +231,13 @@ void aWinStyle::setBorder(const std::vector<aString> &_vStyleClass)
             }
         }
     }
-} // aWinStyle::setBorder
+} // aWinStyle::setBorderStyle
 
 
 /*******************************************************************************
-* aWinStyle::setBg
+* aWinStyle::setBgStyle
 *******************************************************************************/
-void aWinStyle::setBg(const std::vector<aString> &_vStyleClass)
+void aWinStyle::setBgStyle(const std::vector<aString> &_vStyleClass)
 {
     // iterate over the class chain
     for (const aString &s : _vStyleClass)
@@ -216,7 +255,7 @@ void aWinStyle::setBg(const std::vector<aString> &_vStyleClass)
             }
         }
     }
-} // aWinStyle::setBg
+} // aWinStyle::setBgStyle
 
 
 /*******************************************************************************
@@ -246,10 +285,10 @@ shared_ptr<aStyleItemFill> aWinStyle::parseFillItem(aString _sValue)
     std::string     sValue = _sValue.to_stdString();
     std::smatch     matches;
 
-    std::regex      solid(m_reAny + R"(\s*solid\s*\()" +
+    std::regex      solid(R"(\s*solid\s*\()" +
                           m_reRgb + R"(\s*\))");
 
-    std::regex      gradient(m_reAny + R"(\s*gradient\s*\()" +
+    std::regex      gradient(+ R"(\s*gradient\s*\()" +
                              m_reRgb + m_reColon +
                              m_reRgb + m_reColon +
                              m_reU32 + R"(\s*\))");
@@ -290,6 +329,35 @@ shared_ptr<aStyleItemFill> aWinStyle::parseFillItem(aString _sValue)
 
 
 /*******************************************************************************
+* aWinStyle::parseMarginItem
+*******************************************************************************/
+bool aWinStyle::parseMarginItem(aString _sValue)
+{
+    std::string     sValue = _sValue.to_stdString();
+    std::smatch     matches;
+
+    // check for solid border
+    std::regex      lrtb(m_reU32 + m_reColon +
+                         m_reU32 + m_reColon +
+                         m_reU32 + m_reColon +
+                         m_reU32);
+
+    if (std::regex_match(sValue, matches, lrtb))
+    {
+        // matches[0] ist der komplette Match, matches[1-4] sind die Gruppen
+        m_margin.set(std::stoi(matches[1].str()),
+                     std::stoi(matches[2].str()),
+                     std::stoi(matches[3].str()),
+                     std::stoi(matches[4].str()));
+
+        return true;
+    }
+
+    return false;
+} // aWinStyle::parseMarginItem
+
+
+/*******************************************************************************
 * aWinStyle::parseBorderItem
 *******************************************************************************/
 bool aWinStyle::parseBorderItem(aString _sValue)
@@ -298,7 +366,7 @@ bool aWinStyle::parseBorderItem(aString _sValue)
     std::smatch     matches;
 
     // check for solid border
-    std::regex      solid(m_reAny + R"(\s*solid\s*\()" +
+    std::regex      solid(R"(\s*solid\s*\()" +
                           m_reRgb + m_reColon +
                           m_reU32 + m_reColon +
                           m_reU32 + m_reColon +
@@ -307,7 +375,7 @@ bool aWinStyle::parseBorderItem(aString _sValue)
                           R"(\s*\))");
 
     // check for solid borderFrame
-    std::regex      solidFrame(m_reAny + R"(\s*solidFrame\s*\()" +
+    std::regex      solidFrame(R"(\s*solidFrame\s*\()" +
                                m_reU32 + m_reColon +
                                m_reRgb + m_reColon +
                                m_reRgb + m_reColon +

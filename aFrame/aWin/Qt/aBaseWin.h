@@ -17,6 +17,7 @@
 #include <QWidget>
 #include <QSinglePointEvent>
 
+#include "aGraphic_def.h"
 #include "aWin_def.h"
 
 #include "aBaseWin_i.h"
@@ -35,6 +36,10 @@
 
 // #include "aCtrlMgr.h"
 // #include "aToolMgr.h"
+
+using namespace aFrame::aGraphic;
+
+
 
 /*******************************************************************************
 * namespace
@@ -72,7 +77,7 @@ class aBaseWin : private QWidget,
     *******************************************************************************/
     public:
         void                    setParent(aBaseWin *_pParent) override;
-        aBaseWin*                 parent() const override;
+        aBaseWin*               parent() const override;
 
         void                    update() override;
         void                    repaint() override;
@@ -94,6 +99,8 @@ class aBaseWin : private QWidget,
 
         void                    setMouseTracking(bool _bEnable) override;
 
+        void                    setCursor(const aCursor &_cursor) override;
+
 
     /*******************************************************************************
     * window geometry
@@ -101,6 +108,8 @@ class aBaseWin : private QWidget,
     public:
         void                    setMinW(s32 _s32MinW) override;
         void                    setMinH(s32 _s32MinH) override;
+        s32                     minW() const override;
+        s32                     minH() const override;
 
         void                    setMaxW(s32 _s32MaxW) override;
         void                    setMaxH(s32 _s32MaxH) override;
@@ -150,6 +159,7 @@ class aBaseWin : private QWidget,
         using aBaseWin_i::showNormal;
 
         using aBaseWin_i::setMouseTracking;
+        using aBaseWin_i::setCursor;
         using aBaseWin_i::setGeometry;
         using aBaseWin_i::setParent;
         using aBaseWin_i::parent;

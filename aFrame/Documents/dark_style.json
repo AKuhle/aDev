@@ -1,4 +1,6 @@
 {
+    "margin": "l,r,t,b",
+
     "color": "rgba(r,g,b,a)",
 
     "bg values": "",
@@ -18,7 +20,8 @@
         "bg": "solid(rgba(10, 10, 10, 255))",
         "bg1": "gradient(rgba(50, 0, 0, 155), rgba(0, 0, 50, 155), 45)",
         "border1": "solid(rgba(10, 10, 10, 255), 3, 3, 3, 3)",
-        "border": "solidFrame(1, rgba(80, 80, 80, 255), rgba(10, 10, 10, 255), 3, 3, 3, 3)"
+        "margin": "3, 3, 3, 3",
+        "border": "solidFrame(1, rgba(80, 80, 80, 255), rgba(10, 10, 10, 255), 5, 5, 5, 5)"
     },
 
     "aTitleBar": {

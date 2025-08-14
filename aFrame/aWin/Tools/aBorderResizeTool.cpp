@@ -13,7 +13,8 @@
 *******************************************************************************/
 #include "aBorderResizeTool.h"
 #include "aBaseWin.h"
-
+#include "aStyleItemBorder.h"
+#include "aCursor.h"
 
 
 /*******************************************************************************
@@ -31,6 +32,7 @@ aBorderResizeTool::aBorderResizeTool(aBaseWin   *_pOwner,
                                      u32        _u32Flags   /*= TF_NONE*/)
 : aToolBase(_pOwner, _u32ToolId, _u32Flags, nullptr)
 {
+    _pOwner->setMouseTracking(true);
 } // aBorderResizeTool::aBorderResizeTool
 
 
@@ -43,13 +45,88 @@ aBorderResizeTool::~aBorderResizeTool()
 
 
 /*******************************************************************************
+* aBorderResizeTool::findPos
+*******************************************************************************/
+enumPosition aBorderResizeTool::findPos(const aPoint &_pntLocal) const
+{
+    CHECK_PRE_CONDITION(ownerWin(), enumPosition::None);
+
+    aRect       rMargin = ownerWin()->marginRect();
+    aMargin     mMargin = ownerWin()->marginMargin();
+    aMargin     mBorder = ownerWin()->borderMargin();
+    s32         x       = _pntLocal.x();
+    s32         y       = _pntLocal.y();
+
+    bool        l       = x >= rMargin.t() &&
+                          x <= rMargin.t() + mMargin.l() + mBorder.l();
+
+    bool        r       = x <= rMargin.r() &&
+                          x >= rMargin.r() - mMargin.r() - mBorder.r();
+
+    bool        t       = y >= rMargin.t() &&
+                          y <= rMargin.t() + mMargin.t() + mBorder.t();
+
+    bool        b       = y <= rMargin.b() &&
+                          y >= rMargin.b() - mMargin.b() - mBorder.b();
+
+    return (l && t)?    enumPosition::NorthWest :
+           (r && t)?    enumPosition::NorthEast :
+           (r && b)?    enumPosition::SouthEast :
+           (l && b)?    enumPosition::SouthWest :
+           (l)?         enumPosition::West :
+           (r)?         enumPosition::East :
+           (t)?         enumPosition::North :
+           (b)?         enumPosition::South :
+                        enumPosition::None;
+} // aBorderResizeTool::findPos
+
+
+/*******************************************************************************
 * aBorderResizeTool::onMouseMove
 *******************************************************************************/
 enumToolResult aBorderResizeTool::onMouseMove(u16              /*_u16Modifier*/,
                                               const aPoint     &_pntLocal,
                                               const aPoint     &/*_pntGlobal*/)
 {
-    cout << "Mouse Move: Local(" << _pntLocal << ")" << endl;
+    CHECK_PRE_CONDITION(ownerWin(), enumToolResult::UNHANDLED);
+
+    switch (findPos(_pntLocal))
+    {
+        default:
+            break;
+
+        case enumPosition::North:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeVerCursor));
+            break;
+
+        case enumPosition::NorthEast:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeBDiagCursor));
+            break;
+
+        case enumPosition::East:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeHorCursor));
+            break;
+
+        case enumPosition::SouthEast:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeFDiagCursor));
+            break;
+
+        case enumPosition::South:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeVerCursor));
+            break;
+
+        case enumPosition::SouthWest:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeBDiagCursor));
+            break;
+
+        case enumPosition::West:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeHorCursor));
+            break;
+
+        case enumPosition::NorthWest:
+            ownerWin()->setCursor(aCursor(enumCursorShape::SizeFDiagCursor));
+            break;
+    }
 
     return enumToolResult::HANDLED;
 } // aBorderResizeTool::onMouseMove
@@ -59,12 +136,13 @@ enumToolResult aBorderResizeTool::onMouseMove(u16              /*_u16Modifier*/,
 * aBorderResizeTool::onLButtonPress
 *******************************************************************************/
 enumToolResult aBorderResizeTool::onLButtonPress(u16              /*_u16Modifier*/,
-                                               const aPoint     &/*_pntLocal*/,
-                                               const aPoint     &/*_pntGlobal*/)
+                                                 const aPoint     &_pntLocal,
+                                                 const aPoint     &/*_pntGlobal*/)
 {
-    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+    CHECK_PRE_CONDITION(ownerWin(), enumToolResult::UNHANDLED);
 
-    m_rctMoveStartRect = ownerParent()->geometryRect();
+    m_rctOri = ownerWin()->geometryRect();
+    m_eDirection = findPos(_pntLocal);
 
     return enumToolResult::HANDLED;
 } // aBorderResizeTool::onLButtonPress
@@ -74,19 +152,68 @@ enumToolResult aBorderResizeTool::onLButtonPress(u16              /*_u16Modifier
 * aBorderResizeTool::onLMouseMove
 *******************************************************************************/
 enumToolResult aBorderResizeTool::onLMouseMove(u16              /*_u16Modifier*/,
-                                             const aPoint     &/*_pntLocal*/,
-                                             const aPoint     &/*_pntGlobal*/)
+                                               const aPoint     &_pntLocal,
+                                               const aPoint     &/*_pntGlobal*/)
 {
-    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+    CHECK_PRE_CONDITION(ownerWin(), enumToolResult::UNHANDLED);
 
-    // only normal windows (not fullscreen or maximized) can be moved
-    if (ownerParent()->isNormal())
+    aRect           r   = m_rctOri;
+    const aPoint    &d  = delta();
+
+    switch (m_eDirection)
     {
-        ownerParent()->setGeometry(m_rctMoveStartRect.x() + delta().x(),
-                                   m_rctMoveStartRect.y() + delta().y(),
-                                   m_rctMoveStartRect.w(),
-                                   m_rctMoveStartRect.h());
+        default:
+            break;
+
+        case enumPosition::North:
+            r.y() += d.y();
+            r.h() -= d.y();
+            break;
+
+        case enumPosition::NorthEast:
+            break;
+
+        case enumPosition::East:
+            r.w() += d.x();
+            break;
+
+        case enumPosition::SouthEast:
+            r.w() += d.x();
+            r.h() += d.y();
+            break;
+
+        case enumPosition::South:
+            r.h() += d.y();
+            break;
+
+        case enumPosition::SouthWest:
+            break;
+
+        case enumPosition::West:
+            r.x() += d.x();
+            r.w() -= d.x();
+            break;
+
+        case enumPosition::NorthWest:
+            break;
     }
+
+    // correct the top if h < minH
+    if (r.h() < ownerWin()->minH())
+    {
+        r.h() = ownerWin()->minH();
+        r.y() = m_rctOri.b() - r.h() + 1;
+    }
+
+    // correct the left if w < minW
+    if (r.w() < ownerWin()->minW())
+    {
+        r.w() = ownerWin()->minW();
+        r.x() = m_rctOri.r() - r.w() + 1;
+    }
+
+    ownerWin()->setGeometry(r);
+
     return enumToolResult::HANDLED;
 } // aBorderResizeTool::onLMouseMove
 
@@ -98,7 +225,7 @@ enumToolResult aBorderResizeTool::onLButtonRelease(u16              /*_u16Modifi
                                                  const aPoint     &/*_pntLocal*/,
                                                  const aPoint     &/*_pntGlobal*/)
 {
-    CHECK_PRE_CONDITION(ownerParent(), enumToolResult::UNHANDLED);
+    CHECK_PRE_CONDITION(ownerWin(), enumToolResult::UNHANDLED);
 
     return enumToolResult::HANDLED;
 } // aBorderResizeTool::onLButtonRelease
