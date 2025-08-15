@@ -4,6 +4,7 @@ release/main.o
 release/aFrame.o
 release/aPainterI.o
 release/aBrush.o
+release/aCursor.o
 release/aPainter.o
 release/aPen.o
 release/aPixmap.o

@@ -4,6 +4,7 @@ debug/main.o
 debug/aFrame.o
 debug/aPainterI.o
 debug/aBrush.o
+debug/aCursor.o
 debug/aPainter.o
 debug/aPen.o
 debug/aPixmap.o

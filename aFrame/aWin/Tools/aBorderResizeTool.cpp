@@ -13,8 +13,10 @@
 *******************************************************************************/
 #include "aBorderResizeTool.h"
 #include "aBaseWin.h"
-#include "aStyleItemBorder.h"
 #include "aCursor.h"
+#include "aHelper.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -152,13 +154,15 @@ enumToolResult aBorderResizeTool::onLButtonPress(u16              /*_u16Modifier
 * aBorderResizeTool::onLMouseMove
 *******************************************************************************/
 enumToolResult aBorderResizeTool::onLMouseMove(u16              /*_u16Modifier*/,
-                                               const aPoint     &_pntLocal,
+                                               const aPoint     &/*_pntLocal*/,
                                                const aPoint     &/*_pntGlobal*/)
 {
     CHECK_PRE_CONDITION(ownerWin(), enumToolResult::UNHANDLED);
 
     aRect           r   = m_rctOri;
     const aPoint    &d  = delta();
+    const aPoint    dMax(m_rctOri.w() - ownerWin()->minW(),
+                         m_rctOri.h() - ownerWin()->minH());
 
     switch (m_eDirection)
     {
@@ -166,11 +170,14 @@ enumToolResult aBorderResizeTool::onLMouseMove(u16              /*_u16Modifier*/
             break;
 
         case enumPosition::North:
-            r.y() += d.y();
-            r.h() -= d.y();
+            r.y() += aUtil::min(d.y(), dMax.y());
+            r.h() -= aUtil::min(d.y(), dMax.y());
             break;
 
         case enumPosition::NorthEast:
+            r.y() += aUtil::min(d.y(), dMax.y());
+            r.h() -= aUtil::min(d.y(), dMax.y());
+            r.w() += d.x();
             break;
 
         case enumPosition::East:
@@ -178,8 +185,8 @@ enumToolResult aBorderResizeTool::onLMouseMove(u16              /*_u16Modifier*/
             break;
 
         case enumPosition::SouthEast:
-            r.w() += d.x();
             r.h() += d.y();
+            r.w() += d.x();
             break;
 
         case enumPosition::South:
@@ -187,29 +194,22 @@ enumToolResult aBorderResizeTool::onLMouseMove(u16              /*_u16Modifier*/
             break;
 
         case enumPosition::SouthWest:
+            r.h() += d.y();
+            r.x() += aUtil::min(d.x(), dMax.x());
+            r.w() -= aUtil::min(d.x(), dMax.x());
             break;
 
         case enumPosition::West:
-            r.x() += d.x();
-            r.w() -= d.x();
+            r.x() += aUtil::min(d.x(), dMax.x());
+            r.w() -= aUtil::min(d.x(), dMax.x());
             break;
 
         case enumPosition::NorthWest:
+            r.y() += aUtil::min(d.y(), dMax.y());
+            r.h() -= aUtil::min(d.y(), dMax.y());
+            r.x() += aUtil::min(d.x(), dMax.x());
+            r.w() -= aUtil::min(d.x(), dMax.x());
             break;
-    }
-
-    // correct the top if h < minH
-    if (r.h() < ownerWin()->minH())
-    {
-        r.h() = ownerWin()->minH();
-        r.y() = m_rctOri.b() - r.h() + 1;
-    }
-
-    // correct the left if w < minW
-    if (r.w() < ownerWin()->minW())
-    {
-        r.w() = ownerWin()->minW();
-        r.x() = m_rctOri.r() - r.w() + 1;
     }
 
     ownerWin()->setGeometry(r);
