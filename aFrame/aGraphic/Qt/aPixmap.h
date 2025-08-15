@@ -49,7 +49,7 @@ class aPixmap : private QPixmap,
     public:
         aPixmap();
         aPixmap(const QPixmap &_lhs);
-        aPixmap(const aString &_sFileName);
+        aPixmap(const aString &_sRscName);
         virtual ~aPixmap();
 
 

@@ -25,7 +25,22 @@
     },
 
     "aTitleBar": {
-        "bg": "solid(rgba(20, 20, 20, 255))",
-        "sysMetricsH": "32"
+        "bg": "solid(rgba(30, 30, 30, 255))",
+        "sysMetricsH": "36"
+    },
+
+    "aButton": {
+        "sysMetricsW": "12",
+        "sysMetricsH": "12",
+        "normal": "rgba(160, 160, 160, 255)",
+        "active": "rgba(230, 230, 230, 255)",
+        "hover": "rgba(128, 255, 255, 255)",
+        "disabled": "rgba(64, 64, 64, 255)"
+    },
+
+    "aPushButton": {
+    },
+
+    "aToolButton": {
     }
 }

@@ -18,6 +18,9 @@
 #include "aJsonFile.h"
 
 #include "aMainWin.h"
+#include "aPushBtn.h"
+#include "aToolBtn.h"
+
 #include "aTitleBar.h"
 #include "aStyleItemFillSolid.h"
 #include "aStyleItemFillGradient.h"
@@ -51,6 +54,8 @@ aWinStyle::aWinStyle()
     m_mapClassOrder["aBaseWin"] = std::vector<aString>   { "aBaseWin" };
     m_mapClassOrder["aMainWin"] = std::vector<aString>   { "aMainWin", "aBaseWin" };
     m_mapClassOrder["aTitleBar"] = std::vector<aString>  { "aTitleBar", "aBaseWin" };
+    m_mapClassOrder["aPushBtn"] = std::vector<aString>  { "aPushBtn", "aBtn", "aBaseWin" };
+    m_mapClassOrder["aToolBtn"] = std::vector<aString>  { "aToolBtn", "aBtn", "aBaseWin" };
 } // aWinStyle::aWinStyle
 
 
@@ -98,6 +103,14 @@ void aWinStyle::setStyle()
         {
             setStyle4WinClass("aTitleBar");
         }
+        else if (dynamic_cast<aPushBtn *> (pBaseWin) != nullptr)
+        {
+            setStyle4WinClass("aPushBtn");
+        }
+        else if (dynamic_cast<aPushBtn *> (pBaseWin) != nullptr)
+        {
+            setStyle4WinClass("aToolBtn");
+        }
         else
         {
             setStyle4WinClass("aBaseWin");
@@ -141,11 +154,20 @@ void aWinStyle::setStyle4WinClass(const aString     &_sWinClass)
 
     if (it != m_mapClassOrder.end())
     {
+        // metrics
         setMetricsW(it->second);        // set metricsW
         setMetricsH(it->second);        // set metricsH
-        setMarginStyle(it->second);          // set margin
-        setBorderStyle(it->second);          // set border
-        setBgStyle(it->second);              // set bg
+
+        // margins
+        setMarginStyle(it->second);     // set margin
+        setBorderStyle(it->second);     // set border
+        setBgStyle(it->second);         // set bg
+
+        // colors
+        setNormalColor(it->second);     // set normal color
+        setActiveColor(it->second);     // set active color
+        setHoverColor(it->second);      // set hover color
+        setDisabledColor(it->second);   // set disabled color
     }
 } // aWinStyle::setStyle4WinClass
 
@@ -155,15 +177,17 @@ void aWinStyle::setStyle4WinClass(const aString     &_sWinClass)
 *******************************************************************************/
 void aWinStyle::setMetricsW(const std::vector<aString> &_vStyleClass)
 {
+    s32     s32Val;
+
     // iterate over the class chain
     for (const aString &s : _vStyleClass)
     {
         aString sVal = m_pStyleFile->readStringValue(s + ":sysMetricsW");
 
-        if (sVal != "")
+        if (parseS32Value(sVal, s32Val))
         {
             // value found => set the value and cancel the class chain
-            m_dimSysMetrics.w() = parseValueS32(sVal);
+            m_dimSysMetrics.w() = s32Val;
             return;
         }
     }
@@ -175,15 +199,17 @@ void aWinStyle::setMetricsW(const std::vector<aString> &_vStyleClass)
 *******************************************************************************/
 void aWinStyle::setMetricsH(const std::vector<aString> &_vStyleClass)
 {
+    s32     s32Val;
+
     // iterate over the class chain
     for (const aString &s : _vStyleClass)
     {
         aString sVal = m_pStyleFile->readStringValue(s + ":sysMetricsH");
 
-        if (sVal != "")
+        if (parseS32Value(sVal, s32Val))
         {
             // value found => set the value and cancel the class chain
-            m_dimSysMetrics.h() = parseValueS32(sVal);
+            m_dimSysMetrics.h() = s32Val;
             return;
         }
     }
@@ -259,9 +285,126 @@ void aWinStyle::setBgStyle(const std::vector<aString> &_vStyleClass)
 
 
 /*******************************************************************************
-* aWinStyle::parseValueS32
+* aWinStyle::setNormalColor
 *******************************************************************************/
-s32 aWinStyle::parseValueS32(aString _sValue)
+void aWinStyle::setNormalColor(const std::vector<aString> &_vStyleClass)
+{
+    aColor  col;
+
+    // iterate over the class chain
+    for (const aString &s : _vStyleClass)
+    {
+        aString sVal = m_pStyleFile->readStringValue(s + ":normal");
+
+        if (sVal != "")
+        {
+            // value found => set the value and cancel the class chain
+            if (parseColorValue(sVal, col))
+            {
+                aBtn *pBtn = dynamic_cast<aBtn *> (this);
+                if (pBtn)
+                {
+                    pBtn->setNormalColor(col);
+                    return;
+                }
+            }
+        }
+    }
+} // aWinStyle::setNormalColor
+
+
+/*******************************************************************************
+* aWinStyle::setActiveColor
+*******************************************************************************/
+void aWinStyle::setActiveColor(const std::vector<aString> &_vStyleClass)
+{
+    aColor  col;
+
+    // iterate over the class chain
+    for (const aString &s : _vStyleClass)
+    {
+        aString sVal = m_pStyleFile->readStringValue(s + ":active");
+
+        if (sVal != "")
+        {
+            // value found => set the value and cancel the class chain
+            if (parseColorValue(sVal, col))
+            {
+                aBtn *pBtn = dynamic_cast<aBtn *> (this);
+                if (pBtn)
+                {
+                    pBtn->setActiveColor(col);
+                    return;
+                }
+            }
+        }
+    }
+} // aWinStyle::setActiveColor
+
+
+/*******************************************************************************
+* aWinStyle::setHoverColor
+*******************************************************************************/
+void aWinStyle::setHoverColor(const std::vector<aString> &_vStyleClass)
+{
+    aColor  col;
+
+    // iterate over the class chain
+    for (const aString &s : _vStyleClass)
+    {
+        aString sVal = m_pStyleFile->readStringValue(s + ":hover");
+
+        if (sVal != "")
+        {
+            // value found => set the value and cancel the class chain
+            if (parseColorValue(sVal, col))
+            {
+                aBtn *pBtn = dynamic_cast<aBtn *> (this);
+                if (pBtn)
+                {
+                    pBtn->setHoverColor(col);
+                    return;
+                }
+            }
+        }
+    }
+} // aWinStyle::setHoverColor
+
+
+/*******************************************************************************
+* aWinStyle::setDisabledColor
+*******************************************************************************/
+void aWinStyle::setDisabledColor(const std::vector<aString> &_vStyleClass)
+{
+    aColor  col;
+
+    // iterate over the class chain
+    for (const aString &s : _vStyleClass)
+    {
+        aString sVal = m_pStyleFile->readStringValue(s + ":disabled");
+
+        if (sVal != "")
+        {
+            // value found => set the value and cancel the class chain
+            if (parseColorValue(sVal, col))
+            {
+                aBtn *pBtn = dynamic_cast<aBtn *> (this);
+                if (pBtn)
+                {
+                    pBtn->setDisabledColor(col);
+                    return;
+                }
+            }
+        }
+    }
+} // aWinStyle::setDisabledColor
+
+
+/*******************************************************************************
+* aWinStyle::parseS32Value
+*******************************************************************************/
+bool aWinStyle::parseS32Value(aString   _sValue,
+                              s32       &_s32Val)
 {
     std::string     sValue = _sValue.to_stdString();
     std::smatch     matches;
@@ -270,11 +413,37 @@ s32 aWinStyle::parseValueS32(aString _sValue)
     // check for solid color
     if (std::regex_match(sValue, matches, reVal))
     {
-        return std::stoi(matches[1].str());
+        _s32Val =  std::stoi(matches[1].str());
+        return true;
     }
 
-    return 0;
-} // aWinStyle::parseValueS32
+    return false;
+} // aWinStyle::parseS32Value
+
+
+/*******************************************************************************
+* aWinStyle::parseColorValue
+*******************************************************************************/
+bool aWinStyle::parseColorValue(aString _sValue,
+                                aColor  &_col)
+{
+    std::string     sValue = _sValue.to_stdString();
+    std::smatch     matches;
+    std::regex      reRgb(m_reRgb);
+
+    // check for solid color
+    if (std::regex_match(sValue, matches, reRgb))
+    {
+        _col=  aColor(std::stoi(matches[1].str()),
+                      std::stoi(matches[2].str()),
+                      std::stoi(matches[3].str()),
+                      std::stoi(matches[4].str()));
+
+        return true;
+    }
+
+    return false;
+} // aWinStyle::parseColorValue
 
 
 /*******************************************************************************

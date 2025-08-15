@@ -30,7 +30,7 @@ namespace aWin {
 
 
 /*******************************************************************************
-* mouse buttons
+* mouse Btns
 *******************************************************************************/
 constexpr u16   MOUSE_BTN_NONE              = 0x0000;
 constexpr u16   MOUSE_BTN_LEFT              = 0x0001;
@@ -94,14 +94,14 @@ enum class enumToolResult
     HANDLED,
     SUCCESS,
     CANCELED
-}; // enumButtonStyle
+}; // enumBtnStyle
 
 
-// enum class enumButtonStyle
+// enum class enumBtnStyle
 // {
 //     MASKED_MODE,
 //     MASKED_ROUND_MODE
-// }; // enumButtonStyle
+// }; // enumBtnStyle
 
 // enum class enumFocusReason
 // {
@@ -114,7 +114,7 @@ enum class enumToolResult
 //     ShortcutFocusReason,        // The user typed a label's buddy shortcut
 //     MenuBarFocusReason,         // The menu bar took focus.
 //     OtherFocusReason            // Another reason, usually application-specific.
-// }; // enumButtonStyle
+// }; // enumBtnStyle
 
 // enum class enumFocusPolicy
 // {
@@ -123,7 +123,7 @@ enum class enumToolResult
 //     ClickFocus,                 // the widget accepts focus by clicking.
 //     StrongFocus,                // the widget accepts focus by both tabbing and clicking.
 //     WheelFocus                  // like Qt::StrongFocus plus the widget accepts focus by using the mouse wheel.
-// }; // enumButtonStyle
+// }; // enumBtnStyle
 
 // enum class ScrollBarPolicy {
 //     ScrollBarAsNeeded,
@@ -152,6 +152,12 @@ class aToolManager;
 
 class aBaseWin_i;
 class aBaseWin;
+
+class aCtrl;
+class aBtn;
+class aPushBtn;
+class aToolBtn;
+
 class aMainWin;
 class aMainWinMdi;
 class aTitleBar;

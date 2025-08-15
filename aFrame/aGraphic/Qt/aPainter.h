@@ -27,8 +27,10 @@
 #include "aWin_def.h"
 #include "aGraphic_def.h"
 #include "aPainterI.h"
+#include "aBaseWin.h"
 
 using namespace aFrame::aUtil;
+using namespace aFrame::aWin;
 
 
 /*******************************************************************************
@@ -48,6 +50,7 @@ class aPainter : public aPainterI
 
     public:
         aPainter(SysWin *_pWin);
+        aPainter(aBaseWin *_pWin) : aPainter(_pWin->asSysWin())  {}
         virtual ~aPainter();
 
 
@@ -61,6 +64,7 @@ class aPainter : public aPainterI
                                   s32           _w,
                                   s32           _h,
                                   const aPen    *_pPen = nullptr) override;
+
 
     /*******************************************************************************
     * drawFilledRect

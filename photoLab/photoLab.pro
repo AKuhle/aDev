@@ -82,6 +82,7 @@ INCLUDEPATH += ../aFrame/aGraphic/Qt
 INCLUDEPATH += ../aFrame/aGraphic/Style
 
 INCLUDEPATH += ../aFrame/aWin
+INCLUDEPATH += ../aFrame/aWin/Ctrl
 INCLUDEPATH += ../aFrame/aWin/Interface
 INCLUDEPATH += ../aFrame/aWin/Layout
 INCLUDEPATH += ../aFrame/aWin/Qt
@@ -122,6 +123,8 @@ SOURCES += \
 ########################################################################
 # resources
 ########################################################################
+RESOURCES += \
+    ../aFrame/Resource/aFrame.qrc
 #RESOURCES += \
 #    Resource/Resource_Qt/photoLab.qrc
 

@@ -19,6 +19,7 @@
 #include "aLayoutMainWin.h"
 #include "aTitleBar.h"
 #include "aBorderResizeTool.h"
+#include "aToolBtn.h"
 
 
 /*******************************************************************************
@@ -62,6 +63,11 @@ bool aMainWin::onSysCreateWin()
 
     unique_ptr<aTitleBar> pTitleBar = make_unique<aTitleBar> (this);
     pTitleBar->createWin();
+
+    // test tool btn
+    aToolBtn *pBtn = new aToolBtn(this, ":/Standard/Masked/32/folder.png", "");
+    pBtn->createWin();
+    pBtn->setGeometry(10, 2, 32, 32);
 
     // move the items
     pLayout->setTitleBar(std::move(pTitleBar));

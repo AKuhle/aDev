@@ -60,6 +60,7 @@ INCLUDEPATH += aGraphic/Qt
 INCLUDEPATH += aGraphic/Style
 
 INCLUDEPATH += aWin
+INCLUDEPATH += aWin/Ctrl
 INCLUDEPATH += aWin/Interface
 INCLUDEPATH += aWin/Layout
 INCLUDEPATH += aWin/Qt
@@ -166,6 +167,10 @@ HEADERS += \
     aUtil/aUrl_qt.h \
     aUtil/aUtil_def.h \
     aUtil/aVersionInfo.h \
+    aWin/Ctrl/aBtn.h \
+    aWin/Ctrl/aCtrl.h \
+    aWin/Ctrl/aPushBtn.h \
+    aWin/Ctrl/aToolBtn.h \
     aWin/Interface/aBaseWin_i.h \
     aWin/Layout/aLayoutCentralWin.h \
     aWin/Layout/aLayoutMainWin.h \
@@ -238,6 +243,10 @@ SOURCES += \
     aUtil/aString.cpp \
     aUtil/aUrl.cpp \
     aUtil/aVersionInfo.cpp \
+    aWin/Ctrl/aBtn.cpp \
+    aWin/Ctrl/aCtrl.cpp \
+    aWin/Ctrl/aPushBtn.cpp \
+    aWin/Ctrl/aToolBtn.cpp \
     aWin/Interface/aBaseWin_i.cpp \
     aWin/Interface/aBaseWin_i_handler.cpp \
     aWin/Layout/aLayoutCentralWin.cpp \

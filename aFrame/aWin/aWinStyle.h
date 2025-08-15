@@ -94,11 +94,22 @@ class aWinStyle
 
         void                                setMetricsW(const std::vector<aString> &_vStyleClass);
         void                                setMetricsH(const std::vector<aString> &_vStyleClass);
+
         void                                setMarginStyle(const std::vector<aString> &_vStyleClass);
         void                                setBorderStyle(const std::vector<aString> &_vStyleClass);
         void                                setBgStyle(const std::vector<aString> &_vStyleClass);
 
-        s32                                 parseValueS32(aString _sValue);
+        void                                setNormalColor(const std::vector<aString> &_vStyleClass);
+        void                                setActiveColor(const std::vector<aString> &_vStyleClass);
+        void                                setHoverColor(const std::vector<aString> &_vStyleClass);
+        void                                setDisabledColor(const std::vector<aString> &_vStyleClass);
+
+        bool                                parseS32Value(aString   _sValue,
+                                                          s32       &_s32Val);
+
+        bool                                parseColorValue(aString _sValue,
+                                                            aColor  &_col);   // rgba, hsl etc (future)
+
         std::shared_ptr<aStyleItemFill>     parseFillItem(aString _sValue);
         bool                                parseMarginItem(aString _sValue);
         bool                                parseBorderItem(aString _sValue);

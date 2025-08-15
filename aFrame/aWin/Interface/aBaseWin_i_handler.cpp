@@ -150,6 +150,12 @@ void aBaseWin_i::onPaintContentBg()
 *******************************************************************************/
 void aBaseWin_i::onPaintContent()
 {
+    aPainter    p(m_pWinInstance);
+
+    p.drawFilledRect(50, 150, 32, 32, &colRed);
+    p.drawFilledRect(150, 150, 48, 48, &colRed);
+    p.drawFilledRect(250, 150, 64, 64, &colRed);
+
 } // aBaseWin_i::onPaintContent
 
 

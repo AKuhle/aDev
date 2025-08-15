@@ -49,6 +49,10 @@ release/aStopwatch.o
 release/aString.o
 release/aUrl.o
 release/aVersionInfo.o
+release/aBtn.o
+release/aCtrl.o
+release/aPushBtn.o
+release/aToolBtn.o
 release/aBaseWin_i.o
 release/aBaseWin_i_handler.o
 release/aLayoutCentralWin.o

@@ -53,10 +53,11 @@ aBaseWin_i::~aBaseWin_i()
 *******************************************************************************/
 bool aBaseWin_i::createWin()
 {
+    // first set the style, probably used in the creation methods
+    setStyle();
+
     if (onSysCreateWin() && onCreateWin())
     {
-        setStyle();
-
 //         // aCtrlMgr initialization
 //         aCtrlMgr *pCtrlMgr = dynamic_cast<aCtrlMgr *> (this);
 //         if (pCtrlMgr != nullptr)

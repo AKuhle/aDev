@@ -49,6 +49,10 @@ debug/aStopwatch.o
 debug/aString.o
 debug/aUrl.o
 debug/aVersionInfo.o
+debug/aBtn.o
+debug/aCtrl.o
+debug/aPushBtn.o
+debug/aToolBtn.o
 debug/aBaseWin_i.o
 debug/aBaseWin_i_handler.o
 debug/aLayoutCentralWin.o
