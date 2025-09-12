@@ -20,7 +20,6 @@
 #include "aLayoutHoriVert.h"
 #include "aTitleBar.h"
 #include "aBorderResizeTool.h"
-#include "aToolBtn.h"
 
 
 /*******************************************************************************
@@ -48,30 +47,27 @@ aMainWin::~aMainWin()
 
 
 /*******************************************************************************
-* aMainWin::onMinimize
+* aMainWin::titleBar
 *******************************************************************************/
-void aMainWin::onMinimize(aBtn */*_pBtn*/)
+const aTitleBar* aMainWin::titleBar() const
 {
-    cout << __FUNCTION__ << endl;
-} // aMainWin::onMinimize
+    const aLayoutMainWin *pLayout = dynamic_cast<const aLayoutMainWin *> (layout());
+    CHECK_PRE_CONDITION(pLayout, nullptr);
+
+    return pLayout->titleBar();
+} // aMainWin::titleBar
 
 
 /*******************************************************************************
-* aMainWin::onMaximize
+* aMainWin::titleBar
 *******************************************************************************/
-void aMainWin::onMaximize(aBtn */*_pBtn*/)
+aTitleBar* aMainWin::titleBar()
 {
-    cout << __FUNCTION__ << endl;
-} // aMainWin::onMaximize
+    aLayoutMainWin *pLayout = dynamic_cast<aLayoutMainWin *> (layout());
+    CHECK_PRE_CONDITION(pLayout, nullptr);
 
-
-/*******************************************************************************
-* aMainWin::onClose
-*******************************************************************************/
-void aMainWin::onClose(aBtn */*_pBtn*/)
-{
-    closeWin();
-} // aMainWin::onClose
+    return pLayout->titleBar();
+} // aMainWin::titleBar
 
 
 /*******************************************************************************
@@ -79,8 +75,6 @@ void aMainWin::onClose(aBtn */*_pBtn*/)
 *******************************************************************************/
 bool aMainWin::onSysCreateWin()
 {
-    aToolBtn *pBtn;
-
     CHECK_PRE_CONDITION(aBaseWin::onSysCreateWin(), false);
 
     #ifdef _USE_QT_
@@ -93,38 +87,6 @@ bool aMainWin::onSysCreateWin()
 
     unique_ptr<aTitleBar> pTitleBar = make_unique<aTitleBar> (this);
     pTitleBar->createWin();
-    aLayoutHoriVert *pTitleBarLayout = dynamic_cast<aLayoutHoriVert *> (pTitleBar->layout());
-
-    // minimize button
-    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/minimize.png", "");
-    pBtn->createWin();
-    pBtn->setFixDim(pBtn->sysMetrics());
-    pBtn->addClickHandler([this](aBtn* btn) { onMinimize(btn); });
-    pTitleBarLayout->addChild(pBtn);
-
-    // maximize button
-    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/maximize.png", "");
-    pBtn->createWin();
-    pBtn->setCheckable(true);
-    pBtn->setFixDim(pBtn->sysMetrics());
-    pBtn->addClickHandler([this](aBtn* btn) { onMaximize(btn); });
-    pTitleBarLayout->addChild(pBtn);
-
-    // close button - disabled
-    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/close.png", "");
-    pBtn->createWin();
-    pBtn->setFixDim(pBtn->sysMetrics());
-    pBtn->setHoverColor(colRed);
-    pBtn->setEnabled(false);
-    pTitleBarLayout->addChild(pBtn);
-
-    // close button
-    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/close.png", "");
-    pBtn->createWin();
-    pBtn->setFixDim(pBtn->sysMetrics());
-    pBtn->setHoverColor(colRed);
-    pBtn->addClickHandler([this](aBtn* btn) { onClose(btn); });
-    pTitleBarLayout->addChild(pBtn);
 
     // move the items
     pLayout->setTitleBar(std::move(pTitleBar));

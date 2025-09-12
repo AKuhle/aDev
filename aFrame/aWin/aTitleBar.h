@@ -14,7 +14,7 @@
 *******************************************************************************/
 #include "aWin_def.h"
 
-#include "aBaseWin.h"
+#include "aToolBar.h"
 #include "aToolMgr.h"
 
 
@@ -28,14 +28,14 @@ namespace aWin {
 /*******************************************************************************
 * class aTitleBar
 *******************************************************************************/
-class aTitleBar : public aBaseWin,
+class aTitleBar : public aToolBar,
                   public aToolMgr
 {
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
     public:
-        aTitleBar(aBaseWin *_pParent);
+        aTitleBar(aBaseWin *_pParent = nullptr);
         virtual ~aTitleBar();
 
 

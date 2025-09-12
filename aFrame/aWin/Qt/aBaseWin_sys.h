@@ -110,9 +110,8 @@ class aBaseWin_sys : public QWidget
 
         void                            setMaxW(s32 _s32MaxW);
         void                            setMaxH(s32 _s32MaxH);
-
-        void                            setFixW(s32 _s32FixW);
-        void                            setFixH(s32 _s32FixH);
+        s32                             maxW() const;
+        s32                             maxH() const;
 
         void                            setGeometry(s32 _s32X,
                                                     s32 _s32Y,

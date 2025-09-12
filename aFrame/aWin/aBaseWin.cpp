@@ -48,7 +48,7 @@ bool aBaseWin::createWin()
     // first set the style, probably used in the creation methods
     setWinStyle();
 
-    if (onSysCreateWin() && onCreateWin())
+    if (onSysCreateWin() && onCreateWin() && onCreateChilds())
     {
 //         // aCtrlMgr initialization
 //         aCtrlMgr *pCtrlMgr = dynamic_cast<aCtrlMgr *> (this);
@@ -122,6 +122,26 @@ void aBaseWin::setMaxDim(s32 _s32MaxW,
 
 
 /*******************************************************************************
+* aBaseWin::setFixW
+*******************************************************************************/
+void aBaseWin::setFixW(s32 _s32FixW)
+{
+    setMinW(_s32FixW);
+    setMaxW(_s32FixW);
+} // aBaseWin::setFixW
+
+
+/*******************************************************************************
+* aBaseWin::setFixH
+*******************************************************************************/
+void aBaseWin::setFixH(s32 _s32FixW)
+{
+    setMinH(_s32FixW);
+    setMaxH(_s32FixW);
+} // aBaseWin::setFixH
+
+
+/*******************************************************************************
 * aBaseWin::setFixDim
 *******************************************************************************/
 void aBaseWin::setFixDim(const aDimension &_minDim)
@@ -140,6 +160,24 @@ void aBaseWin::setFixDim(s32 _s32MinW,
     setFixW(_s32MinW);
     setFixH(_s32MinH);
 } // aBaseWin::setFixDim
+
+
+/*******************************************************************************
+* aBaseWin::isFixW
+*******************************************************************************/
+bool aBaseWin::isFixW() const
+{
+    return minW() == maxW();
+} // aBaseWin::isFixW
+
+
+/*******************************************************************************
+* aBaseWin::isFixH
+*******************************************************************************/
+bool aBaseWin::isFixH() const
+{
+    return minH() == maxH();
+} // aBaseWin::isFixH
 
 
 /*******************************************************************************

@@ -127,11 +127,18 @@ class aBaseWin : public aBaseWin_sys,
         void                    setMaxDim(s32 _s32MaxW,
                                           s32 _s32MaxH);
 
-        void                    setFixW(s32 _s32FixW)               { aBaseWin_sys::setFixW(_s32FixW); }
-        void                    setFixH(s32 _s32FixH)               { aBaseWin_sys::setFixH(_s32FixH); }
+        s32                     maxW() const                        { return aBaseWin_sys::maxW(); }
+        s32                     maxH() const                        { return aBaseWin_sys::maxH(); }
+        aDimension              maxDim() const                      { return aDimension(aBaseWin_sys::maxW(),
+                                                                                        aBaseWin_sys::maxH()); }
+
+        void                    setFixW(s32 _s32FixW);
+        void                    setFixH(s32 _s32FixH);
         void                    setFixDim(const aDimension &_fixDim);
         void                    setFixDim(s32 _s32FixW,
                                           s32 _s32FixH);
+        bool                    isFixW() const;
+        bool                    isFixH() const;
 
         void                    setGeometry(s32 _s32X,
                                             s32 _s32Y,
@@ -169,6 +176,7 @@ class aBaseWin : public aBaseWin_sys,
         // create window window
         virtual bool            onSysCreateWin();
         virtual bool            onCreateWin();
+        virtual bool            onCreateChilds();
 
         // close window
         virtual bool            onCloseWin();

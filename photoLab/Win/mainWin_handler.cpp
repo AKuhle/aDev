@@ -16,186 +16,202 @@
 * includes
 *******************************************************************************/
 #include "photoLab_defs.h"
-
-#include "aString.h"
 #include "mainWin.h"
-#include "aMdiChild.h"
-#include "editScrollWin.h"
-#include "editView.h"
-#include "aPath.h"
 
-#include "aDockWin.h"
-#include "navigatorToolWin.h"
-
-using namespace aLib::aWin;
-using namespace std;
 
 
 /*******************************************************************************
-* MainWin::onCmdProcessingStart
+* MainWin::onMinimize
 *******************************************************************************/
-void MainWin::onCmdProcessingStart(const shared_ptr<aCmdBase> &/*_pCmd*/)
+void MainWin::onMinimize(aBtn */*_pBtn*/)
 {
-    sendUpdateCmd(UPDATE_CMD_PROCESSING_START);
-} // MainWin::onCmdProcessingStart
+    showMinimized();
+} // MainWin::onMinimize
 
 
 /*******************************************************************************
-* MainWin::onCmdProcessingEnd
+* MainWin::onMaximize
 *******************************************************************************/
-void MainWin::onCmdProcessingEnd(const shared_ptr<aCmdBase> &/*_pCmd*/)
+void MainWin::onMaximize(aBtn */*_pBtn*/)
 {
-    sendUpdateCmd(UPDATE_CMD_PROCESSING_END);
-} // MainWin::onCmdProcessingEnd
+    showMaximized();
+} // MainWin::onMaximize
 
 
 /*******************************************************************************
-* MainWin::onDoDone
+* MainWin::onClose
 *******************************************************************************/
-void MainWin::onDoDone(const shared_ptr<aCmdBase> &_pCmd)
+void MainWin::onClose(aBtn */*_pBtn*/)
 {
-    shared_ptr<CmdBase> pCmd = dynamic_pointer_cast<CmdBase> (_pCmd);
-    CHECK_PRE_CONDITION_VOID(pCmd != nullptr);
-
-    switch (pCmd->id())
-    {
-        case ID_FILE_OPEN:
-        {
-            const shared_ptr<SynchronizedLS> &pSync = pCmd->postLS();
-            SharedLS pShared(*pSync);
-            shared_ptr<aLayerStack> pPostLS = pShared.get();
-
-            if (pPostLS->isValid())
-            {
-                // create the document with the layerstack
-                shared_ptr<Document> pDoc = make_shared<Document> (std::move(pCmd));
-
-                // create the mdiChild
-                aMdiChild *pMdiChild = new aMdiChild();
-                pMdiChild->createWin();
-                addMdiChild(pMdiChild);
-                pMdiChild->setMinSize(300, 200);
-                pMdiChild->show();
-
-                // create the scrollWin
-                EditScrollWin *pScrollWin = new EditScrollWin;
-                 pScrollWin->createWin();
-                pMdiChild->setCentralWin(pScrollWin);
-
-                // create the edit view
-                EditView *pEditView = new EditView(nullptr, pDoc);
-                pEditView->createWin();
-                pScrollWin->setCentralWin(pEditView);
-
-                // //pMdiWin->setVisible(true);
-                // pScrollWin->setVisible(true);
-                pEditView->setVisible(true);
-
-                sendUpdateCmd(UPDATE_CMD_VIEW_ACTIVATED, pEditView);
-            }
-        } //case ID_FILE_OPEN
-
-    } // switch (pCmd->id())
-
-} // MainWin::onDoDone
+    closeWin();
+} // MainWin::onClose
 
 
-/*******************************************************************************
-* MainWin::onDropUrl
-*******************************************************************************/
-void MainWin::onDropUrl(const aUrl  &_url)
-{
-    aPath   path(_url.toLocalFile());
-
-    openFile(path);
-} // MainWin::onDropUrl
+// /*******************************************************************************
+// * MainWin::onCmdProcessingStart
+// *******************************************************************************/
+// void MainWin::onCmdProcessingStart(const shared_ptr<aCmdBase> &/*_pCmd*/)
+// {
+//     sendUpdateCmd(UPDATE_CMD_PROCESSING_START);
+// } // MainWin::onCmdProcessingStart
 
 
-/*******************************************************************************
-* MainWin::onUpdateCmd
-*******************************************************************************/
-void MainWin::onUpdateCmd(u64     _u64Cmd,
-                          aDoc    *_pDoc,
-                          aView   *_pView,
-                          s64     /*_s64Param1*/,
-                          s64     /*_s64Param2*/,
-                          u64     /*_u64Param1*/,
-                          u64     /*_u64Param2*/,
-                          flt     /*_fltParam1*/,
-                          flt     /*_fltParam2*/,
-                          dbl     /*_dblParam1*/,
-                          dbl     /*_dblParam2*/,
-                          void    */*_pParam1*/,
-                          void    */*_pParam2*/)
-{
-    // UPDATE_CMD_PROCESSING_START
-    if (isBitsSet(_u64Cmd, UPDATE_CMD_PROCESSING_START))
-    {
-        // update gui, e.g. disable buttons
-        _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
-    }
-
-    // UPDATE_CMD_PROCESSING_END
-    if (isBitsSet(_u64Cmd, UPDATE_CMD_PROCESSING_END))
-    {
-        // update gui, e.g. enable buttons
-        _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
-    }
-
-    // UPDATE_CMD_VIEW_ACTIVATED
-    if (isBitsSet(_u64Cmd, UPDATE_CMD_VIEW_ACTIVATED))
-    {
-        ViewBase *pView = dynamic_cast<ViewBase *> (_pView);
-
-        if (pView != nullptr)
-        {
-            pView->setTool(m_eEditMode);
-
-            // changing the active view results in an update of the gui
-            // e.g. the activated view has another color mode
-            _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
-        }
-    }
-
-    // UPDATE_VIEW
-    if (isBitsSet(_u64Cmd, UPDATE_VIEW))
-    {
-        if (_pView != nullptr)
-        {
-            _pView->update();
-        }
-    }
-
-    // UPDATE_VIEWS_BY_DOC
-    if (isBitsSet(_u64Cmd, UPDATE_VIEWS_BY_DOC))
-    {
-        // get all views
-        aPtrList<ViewBase> lstView;
-        viewList(lstView);
-
-        for (ViewBase *pView : lstView)
-        {
-            if (pView->document().get() == _pDoc)
-            {
-                pView->update();
-            }
-        }
-    }
+// /*******************************************************************************
+// * MainWin::onCmdProcessingEnd
+// *******************************************************************************/
+// void MainWin::onCmdProcessingEnd(const shared_ptr<aCmdBase> &/*_pCmd*/)
+// {
+//     sendUpdateCmd(UPDATE_CMD_PROCESSING_END);
+// } // MainWin::onCmdProcessingEnd
 
 
-    /*******************************************************************************
-    * Gui update - must be the last update in the queue
-    *******************************************************************************/
-    // UPDATE_GUI
-    if (isBitsSet(_u64Cmd, UPDATE_GUI))
-    {
-        updateAllCtrls();
-    }
+// /*******************************************************************************
+// * MainWin::onDoDone
+// *******************************************************************************/
+// void MainWin::onDoDone(const shared_ptr<aCmdBase> &_pCmd)
+// {
+//     shared_ptr<CmdBase> pCmd = dynamic_pointer_cast<CmdBase> (_pCmd);
+//     CHECK_PRE_CONDITION_VOID(pCmd != nullptr);
 
-    // UPDATE_CMD_NAVIGATOR
-    if (isBitsSet(_u64Cmd, UPDATE_CMD_NAVIGATOR) && m_pNavigatorDockWin->isVisible())
-    {
-        m_pNavigatorToolWin->updateToolWin();
-    }
+//     switch (pCmd->id())
+//     {
+//         case ID_FILE_OPEN:
+//         {
+//             const shared_ptr<SynchronizedLS> &pSync = pCmd->postLS();
+//             SharedLS pShared(*pSync);
+//             shared_ptr<aLayerStack> pPostLS = pShared.get();
 
-} // MainWin::onUpdateCmd
+//             if (pPostLS->isValid())
+//             {
+//                 // create the document with the layerstack
+//                 shared_ptr<Document> pDoc = make_shared<Document> (std::move(pCmd));
+
+//                 // create the mdiChild
+//                 aMdiChild *pMdiChild = new aMdiChild();
+//                 pMdiChild->createWin();
+//                 addMdiChild(pMdiChild);
+//                 pMdiChild->setMinSize(300, 200);
+//                 pMdiChild->show();
+
+//                 // create the scrollWin
+//                 EditScrollWin *pScrollWin = new EditScrollWin;
+//                  pScrollWin->createWin();
+//                 pMdiChild->setCentralWin(pScrollWin);
+
+//                 // create the edit view
+//                 EditView *pEditView = new EditView(nullptr, pDoc);
+//                 pEditView->createWin();
+//                 pScrollWin->setCentralWin(pEditView);
+
+//                 // //pMdiWin->setVisible(true);
+//                 // pScrollWin->setVisible(true);
+//                 pEditView->setVisible(true);
+
+//                 sendUpdateCmd(UPDATE_CMD_VIEW_ACTIVATED, pEditView);
+//             }
+//         } //case ID_FILE_OPEN
+
+//     } // switch (pCmd->id())
+
+// } // MainWin::onDoDone
+
+
+// /*******************************************************************************
+// * MainWin::onDropUrl
+// *******************************************************************************/
+// void MainWin::onDropUrl(const aUrl  &_url)
+// {
+//     aPath   path(_url.toLocalFile());
+
+//     openFile(path);
+// } // MainWin::onDropUrl
+
+
+// /*******************************************************************************
+// * MainWin::onUpdateCmd
+// *******************************************************************************/
+// void MainWin::onUpdateCmd(u64     _u64Cmd,
+//                           aDoc    *_pDoc,
+//                           aView   *_pView,
+//                           s64     /*_s64Param1*/,
+//                           s64     /*_s64Param2*/,
+//                           u64     /*_u64Param1*/,
+//                           u64     /*_u64Param2*/,
+//                           flt     /*_fltParam1*/,
+//                           flt     /*_fltParam2*/,
+//                           dbl     /*_dblParam1*/,
+//                           dbl     /*_dblParam2*/,
+//                           void    */*_pParam1*/,
+//                           void    */*_pParam2*/)
+// {
+//     // UPDATE_CMD_PROCESSING_START
+//     if (isBitsSet(_u64Cmd, UPDATE_CMD_PROCESSING_START))
+//     {
+//         // update gui, e.g. disable buttons
+//         _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
+//     }
+
+//     // UPDATE_CMD_PROCESSING_END
+//     if (isBitsSet(_u64Cmd, UPDATE_CMD_PROCESSING_END))
+//     {
+//         // update gui, e.g. enable buttons
+//         _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
+//     }
+
+//     // UPDATE_CMD_VIEW_ACTIVATED
+//     if (isBitsSet(_u64Cmd, UPDATE_CMD_VIEW_ACTIVATED))
+//     {
+//         ViewBase *pView = dynamic_cast<ViewBase *> (_pView);
+
+//         if (pView != nullptr)
+//         {
+//             pView->setTool(m_eEditMode);
+
+//             // changing the active view results in an update of the gui
+//             // e.g. the activated view has another color mode
+//             _u64Cmd |= UPDATE_GUI | UPDATE_CMD_TOOL_WIN;
+//         }
+//     }
+
+//     // UPDATE_VIEW
+//     if (isBitsSet(_u64Cmd, UPDATE_VIEW))
+//     {
+//         if (_pView != nullptr)
+//         {
+//             _pView->update();
+//         }
+//     }
+
+//     // UPDATE_VIEWS_BY_DOC
+//     if (isBitsSet(_u64Cmd, UPDATE_VIEWS_BY_DOC))
+//     {
+//         // get all views
+//         aPtrList<ViewBase> lstView;
+//         viewList(lstView);
+
+//         for (ViewBase *pView : lstView)
+//         {
+//             if (pView->document().get() == _pDoc)
+//             {
+//                 pView->update();
+//             }
+//         }
+//     }
+
+
+//     /*******************************************************************************
+//     * Gui update - must be the last update in the queue
+//     *******************************************************************************/
+//     // UPDATE_GUI
+//     if (isBitsSet(_u64Cmd, UPDATE_GUI))
+//     {
+//         updateAllCtrls();
+//     }
+
+//     // UPDATE_CMD_NAVIGATOR
+//     if (isBitsSet(_u64Cmd, UPDATE_CMD_NAVIGATOR) && m_pNavigatorDockWin->isVisible())
+//     {
+//         m_pNavigatorToolWin->updateToolWin();
+//     }
+
+// } // MainWin::onUpdateCmd

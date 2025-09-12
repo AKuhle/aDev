@@ -39,6 +39,8 @@ class aLayoutMainWin : public aLayoutCentralWin
         virtual ~aLayoutMainWin();
 
         void                setTitleBar(unique_ptr<aTitleBar>   _pTitleBar);
+        const aTitleBar*    titleBar() const;
+        aTitleBar*          titleBar();
 
         aDimension          layoutDemand() const override;
         void                arrange(const aRect &_r) override;

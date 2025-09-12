@@ -52,6 +52,7 @@ debug/aVersionInfo.o
 debug/aBtn.o
 debug/aCtrl.o
 debug/aPushBtn.o
+debug/aSpacer.o
 debug/aToolBtn.o
 debug/aLayoutCentralWin.o
 debug/aLayoutHoriVert.o
@@ -70,6 +71,7 @@ debug/aBaseWin_handler.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
 debug/aTitleBar.o
+debug/aToolBar.o
 debug/aWinStyle.o
 debug/moc_aProgressCb.o
 debug/moc_aProgressMgr.o

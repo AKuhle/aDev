@@ -118,13 +118,12 @@ class MainWin : public aMainWinMdi
 
 
     /*******************************************************************************
-    * aCtrlMgr interface
+    * ctrl handler
     *******************************************************************************/
     public:
-        // void                onRegisterCtrl() override;
-        // void                onUpdateCtrl(aCtrlI *_pCtrl) override;
-
-        // void                onCtrlClicked(aCtrlI *_pCtrl) override;
+        void                onMinimize(aBtn *_pBtn);
+        void                onMaximize(aBtn *_pBtn);
+        void                onClose(aBtn *_pBtn);
 
 
     /*******************************************************************************
@@ -132,6 +131,7 @@ class MainWin : public aMainWinMdi
     *******************************************************************************/
     protected:
         bool                onCreateWin() override;
+        bool                onCreateChilds() override;
         bool                onCloseWin() override;
         // void                onDropUrl(const aUrl  &_url) override;
 

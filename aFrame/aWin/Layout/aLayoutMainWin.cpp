@@ -48,6 +48,24 @@ void aLayoutMainWin::setTitleBar(unique_ptr<aTitleBar>   _pTitleBar)
 
 
 /*******************************************************************************
+* aLayoutMainWin::titleBar
+*******************************************************************************/
+const aTitleBar* aLayoutMainWin::titleBar() const
+{
+    return m_pTitleBar.get();
+} // aLayoutMainWin::titleBar
+
+
+/*******************************************************************************
+* aLayoutMainWin::titleBar
+*******************************************************************************/
+aTitleBar* aLayoutMainWin::titleBar()
+{
+    return m_pTitleBar.get();
+} // aLayoutMainWin::titleBar
+
+
+/*******************************************************************************
 * aLayoutMainWin::layoutDemand
 *******************************************************************************/
 aDimension aLayoutMainWin::layoutDemand() const

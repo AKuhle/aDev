@@ -169,6 +169,7 @@ HEADERS += \
     aWin/Ctrl/aBtn.h \
     aWin/Ctrl/aCtrl.h \
     aWin/Ctrl/aPushBtn.h \
+    aWin/Ctrl/aSpacer.h \
     aWin/Ctrl/aToolBtn.h \
     aWin/Layout/aLayoutCentralWin.h \
     aWin/Layout/aLayoutHoriVert.h \
@@ -185,6 +186,7 @@ HEADERS += \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
     aWin/aTitleBar.h \
+    aWin/aToolBar.h \
     aWin/aWinStyle.h \
     aWin/aWin_def.h
 
@@ -247,6 +249,7 @@ SOURCES += \
     aWin/Ctrl/aBtn.cpp \
     aWin/Ctrl/aCtrl.cpp \
     aWin/Ctrl/aPushBtn.cpp \
+    aWin/Ctrl/aSpacer.cpp \
     aWin/Ctrl/aToolBtn.cpp \
     aWin/Layout/aLayoutCentralWin.cpp \
     aWin/Layout/aLayoutHoriVert.cpp \
@@ -265,6 +268,7 @@ SOURCES += \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
     aWin/aTitleBar.cpp \
+    aWin/aToolBar.cpp \
     aWin/aWinStyle.cpp
 
 # Default rules for deployment.

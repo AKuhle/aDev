@@ -54,6 +54,12 @@ void aToolBtn::onPaintContentBg()
 
         case enumBtnStyle::MASKED_ROUND_MODE:
             break;
+
+        case enumBtnStyle::ICON_MODE:
+            break;
+
+        case enumBtnStyle::ICON_STATIC_MODE:
+            break;
     }
 } // aToolBtn::onPaintContentBg
 
@@ -64,12 +70,15 @@ void aToolBtn::onPaintContentBg()
 void aToolBtn::onPaintContent()
 {
     aPainter                p(this);
-    shared_ptr<aPixmap>     pPix        = pixmap();
-    aColor                  col         = stateColor();
+    shared_ptr<aPixmap>     pPix = pixmap();
 
     switch (btnStyle())
     {
         case enumBtnStyle::MASKED_MODE:
+        {
+            aColor col = stateColor();
+
+            // draw the pixmap if it exist
             if (pPix)
             {
                 pPix->setMaskedColor(col);
@@ -77,8 +86,18 @@ void aToolBtn::onPaintContent()
                 p.drawPixmap(*pPix, 0, 0);
             }
             break;
+        }
 
         case enumBtnStyle::MASKED_ROUND_MODE:
+            break;
+
+        case enumBtnStyle::ICON_MODE:
+        case enumBtnStyle::ICON_STATIC_MODE:
+            // draw the pixmap if it exist
+            if (pPix)
+            {
+                p.drawPixmap(*pPix, 0, 0);
+            }
             break;
     }
 } // aToolBtn::onPaintContent

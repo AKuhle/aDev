@@ -37,14 +37,8 @@ class aMainWin : public aBaseWin,
         aMainWin(aBaseWin *_pParent);
         virtual ~aMainWin();
 
-
-    /*******************************************************************************
-    * ctrl handler
-    *******************************************************************************/
-    public:
-        void                onMinimize(aBtn *_pBtn);
-        void                onMaximize(aBtn *_pBtn);
-        void                onClose(aBtn *_pBtn);
+        const aTitleBar*    titleBar() const;
+        aTitleBar*          titleBar();
 
 
     /*******************************************************************************

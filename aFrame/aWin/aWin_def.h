@@ -101,7 +101,10 @@ enum class enumToolResult
 enum class enumBtnStyle
 {
     MASKED_MODE,            // pixmap in state colors
-    MASKED_ROUND_MODE       // round bg in state colors
+    MASKED_ROUND_MODE,      // round bg in state colors
+
+    ICON_MODE,              // icon, bg changes depending on the state (e.g. hover)
+    ICON_STATIC_MODE        // static btn, no visual response of mouse actions
 }; // enumBtnStyle
 
 
@@ -161,10 +164,12 @@ class aCtrl;
 class aBtn;
 class aPushBtn;
 class aToolBtn;
+class aSpacer;
 
 class aMainWin;
 class aMainWinMdi;
 class aTitleBar;
+class aToolBar;
 
 class aStyleParser;
 class aStyleItem;

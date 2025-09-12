@@ -116,14 +116,17 @@ HEADERS += \
 ########################################################################
 SOURCES += \
     App/photoLabApp.cpp \
-    Win/mainWin.cpp
+    Win/mainWin.cpp \
+    Win/mainWin_handler.cpp \
+    Win/mainWin_statics.cpp
 
 
 ########################################################################
 # resources
 ########################################################################
 RESOURCES += \
-    ../aFrame/Resource/aFrame.qrc
+    ../aFrame/Resource/aFrame.qrc \
+    Resource/Resource_Qt/photoLab.qrc
 #RESOURCES += \
 #    Resource/Resource_Qt/photoLab.qrc
 

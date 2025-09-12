@@ -52,6 +52,7 @@ release/aVersionInfo.o
 release/aBtn.o
 release/aCtrl.o
 release/aPushBtn.o
+release/aSpacer.o
 release/aToolBtn.o
 release/aLayoutCentralWin.o
 release/aLayoutHoriVert.o
@@ -70,6 +71,7 @@ release/aBaseWin_handler.o
 release/aMainWin.o
 release/aMainWinMdi.o
 release/aTitleBar.o
+release/aToolBar.o
 release/aWinStyle.o
 release/moc_aProgressCb.o
 release/moc_aProgressMgr.o

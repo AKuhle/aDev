@@ -16,7 +16,6 @@
 
 #include "aTitleBar.h"
 #include "aParentCtrlTool.h"
-#include "aLayoutHoriVert.h"
 
 
 /*******************************************************************************
@@ -30,7 +29,7 @@ namespace aWin {
 * aTitleBar::aTitleBar
 *******************************************************************************/
 aTitleBar::aTitleBar(aBaseWin *_pParent /*= nullptr*/)
-: aBaseWin(_pParent)
+: aToolBar(_pParent)
 {
 } // aTitleBar::aTitleBar
 
@@ -48,11 +47,7 @@ aTitleBar::~aTitleBar()
 *******************************************************************************/
 bool aTitleBar::onSysCreateWin()
 {
-    CHECK_PRE_CONDITION(aBaseWin::onSysCreateWin(), false);
-
-    // create the layout
-    unique_ptr<aLayoutHoriVert>  pLayout = make_unique<aLayoutHoriVert> ();
-    setLayout(std::move(pLayout));
+    CHECK_PRE_CONDITION(aToolBar::onSysCreateWin(), false);
 
     addTool(make_unique<aParentCtrlTool> (this));
 

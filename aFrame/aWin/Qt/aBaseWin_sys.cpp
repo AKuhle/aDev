@@ -352,21 +352,21 @@ void aBaseWin_sys::setMaxH(s32 _s32MaxH)
 
 
 /*******************************************************************************
-* aBaseWin_sys::setFixW
+* aBaseWin_sys::maxW
 *******************************************************************************/
-void aBaseWin_sys::setFixW(s32 _s32MaxW)
+s32 aBaseWin_sys::maxW() const
 {
-    QWidget::setFixedWidth(_s32MaxW);
-} // aBaseWin_sys::setFixW
+    return QWidget::maximumWidth();
+} // aBaseWin_sys::maxW
 
 
 /*******************************************************************************
-* aBaseWin_sys::setFixH
+* aBaseWin_sys::maxH
 *******************************************************************************/
-void aBaseWin_sys::setFixH(s32 _s32MaxH)
+s32 aBaseWin_sys::maxH() const
 {
-    QWidget::setFixedHeight(_s32MaxH);
-} // aBaseWin_sys::setFixH
+    return QWidget::maximumHeight();
+} // aBaseWin_sys::maxH
 
 
 /*******************************************************************************
