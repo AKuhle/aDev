@@ -45,26 +45,6 @@ class aTitleBar : public aBaseWin,
     protected:
         bool                    onSysCreateWin() override;
 
-        bool                    onDoubleClick(u16           _u16Modifier,
-                                              u16           _u16Btn,
-                                              const aPoint  &_pntLocal,
-                                              const aPoint  &_pntGlobal) override;
-
-        bool                    onButtonPress(u16           _u16Modifier,
-                                              u16           _u16Btn,
-                                              const aPoint  &_pntLocal,
-                                              const aPoint  &_pntGlobal) override;
-
-        bool                    onMouseMove(u16             _u16Modifier,
-                                            u16             _u16Btn,
-                                            const aPoint    &_pntLocal,
-                                            const aPoint    &_pntGlobal) override;
-
-        bool                    onButtonRelease(u16             _u16Modifier,
-                                                u16             _u16Btn,
-                                                const aPoint    &_pntLocal,
-                                                const aPoint    &_pntGlobal) override;
-
 }; // class aTitleBar
 
 

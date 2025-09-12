@@ -14,6 +14,8 @@
 *******************************************************************************/
 #include "aString.h"
 #include "aCtrl.h"
+#include "aToolMgr.h"
+#include "aVector.h"
 
 using namespace std;
 
@@ -28,22 +30,32 @@ namespace aWin {
 /*******************************************************************************
 * class aBtn
 *******************************************************************************/
-class aBtn : public aCtrl
+class aBtn : public aCtrl,
+             public aToolMgr
 {
+    // the button tool has access to the callback handlers
+    friend class aBtnTool;
+
+    public:
+        using ClickHandler = std::function<void (aBtn*)>;
+
     private:
         shared_ptr<aPixmap>     m_pPixmap;
         aString                 m_sRsc;
         aString                 m_sInfoText;
 
-        aColor                  m_colNormal;
-        aColor                  m_colActive;
-        aColor                  m_colHover;
-        aColor                  m_colDisabled;
+        // state
+        enumBtnStyle            m_eBtnStyle     { enumBtnStyle::MASKED_MODE };
+        bool                    m_bCheckable    { false };
+        bool                    m_bChecked      { false };
+
+        aVector<ClickHandler>   m_vClickHandler;
 
     protected:
         aBtn(aBaseWin        *_pParent,
              const aString   &_sRsc,
              const aString   &_sInfoText);
+
 
     public:
         virtual ~aBtn();
@@ -53,17 +65,23 @@ class aBtn : public aCtrl
 
         shared_ptr<aPixmap> pixmap() const                          { return m_pPixmap; }
 
-        void                setNormalColor(const aColor &_col)      { m_colNormal = _col; }
-        const aColor&       normalColor() const                     { return m_colNormal; }
+        void                setBtnStyle(enumBtnStyle _eBtnStyle)    { m_eBtnStyle = _eBtnStyle; }
+        enumBtnStyle        btnStyle() const                        { return m_eBtnStyle; }
 
-        void                setActiveColor(const aColor &_col)      { m_colActive = _col; }
-        const aColor&       activeColor() const                     { return m_colActive; }
+        void                setCheckable(bool _bCheckable)          { m_bCheckable = _bCheckable; }
+        bool                isCheckable() const                     { return m_bCheckable; }
 
-        void                setHoverColor(const aColor &_col)       { m_colHover = _col; }
-        const aColor&       hoverColor() const                      { return m_colHover; }
+        void                setChecked(bool _bChecked)              { m_bChecked = _bChecked; }
+        bool                isChecked() const                       { return m_bChecked; }
 
-        void                setDisabledColor(const aColor &_col)    { m_colDisabled = _col; }
-        const aColor&       disabledColor() const                   { return m_colDisabled; }
+
+    // callback handler
+    public:
+        void                addClickHandler(ClickHandler _handler);
+
+
+    protected:
+        aColor              stateColor() const;
 
 
     private:

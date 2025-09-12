@@ -66,6 +66,38 @@ void aToolBase::onActivate(bool /*_bActivate*/)
 
 
 /*******************************************************************************
+* aToolBase::onEnter
+*******************************************************************************/
+enumToolResult aToolBase::onEnter(u16              /*_u16Modifier*/,
+                                  const aPoint     &/*_pntLocal*/,
+                                  const aPoint     &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onEnter
+
+
+/*******************************************************************************
+* aToolBase::onLeave
+*******************************************************************************/
+enumToolResult aToolBase::onLeave(u16              /*_u16Modifier*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onLeave
+
+
+/*******************************************************************************
+* aToolBase::onWheel
+*******************************************************************************/
+enumToolResult aToolBase::onWheel(u16           /*_u16Modifier*/,
+                                  s16           /*_s16Degree*/,
+                                  const aPoint  &/*_pntLocal*/,
+                                  const aPoint  &/*_pntGlobal*/)
+{
+    return enumToolResult::UNHANDLED;
+} // aToolBase::onWheel
+
+
+/*******************************************************************************
 * aToolBase::onLDoubleClick
 *******************************************************************************/
 enumToolResult aToolBase::onLDoubleClick(u16              /*_u16Modifier*/,
@@ -206,6 +238,38 @@ enumToolResult aToolBase::onRButtonRelease(u16              /*_u16Modifier*/,
 {
     return enumToolResult::UNHANDLED;
 } // aToolBase::onRButtonRelease
+
+
+/*******************************************************************************
+* aToolBase::onToolEnter
+*******************************************************************************/
+enumToolResult aToolBase::onToolEnter(u16             _u16Modifier,
+                                      const aPoint    &_pntLocal,
+                                      const aPoint    &_pntGlobal)
+{
+    return onEnter(_u16Modifier, _pntLocal, _pntGlobal);
+} // aToolBase::onToolEnter
+
+
+/*******************************************************************************
+* aToolBase::onToolLeave
+*******************************************************************************/
+enumToolResult aToolBase::onToolLeave(u16 _u16Modifier)
+{
+    return onLeave(_u16Modifier);
+} // aToolBase::onToolLeave
+
+
+/*******************************************************************************
+* aToolBase::onToolWheel
+*******************************************************************************/
+enumToolResult aToolBase::onToolWheel(u16             _u16Modifier,
+                                      s16             _s16Degree,
+                                      const aPoint    &_pntLocal,
+                                      const aPoint    &_pntGlobal)
+{
+    return onWheel(_u16Modifier, _s16Degree, _pntLocal, _pntGlobal);
+} // aToolBase::onToolWheel
 
 
 /*******************************************************************************

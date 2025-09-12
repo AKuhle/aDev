@@ -53,6 +53,22 @@ class aToolMgr
 
         void                addTool(std::unique_ptr<aToolBase>  _pTool);
 
+        const aToolBase*    activeTool() const;
+        aToolBase*          activeTool();
+
+
+        // enter / leave
+        virtual bool        onToolMgrEnter(u16             _u16Modifier,
+                                           const aPoint    &_pntLocal,
+                                           const aPoint    &_pntGlobal);
+
+        virtual bool        onToolMgrLeave(u16 _u16Modifier);
+
+        // wheel event, true => event handled
+        virtual bool        onToolMgrWheel(u16             _u16Modifier,
+                                           s16             _s16Degree,
+                                           const aPoint    &_pntLocal,
+                                           const aPoint    &_pntGlobal);
 
         // double click
         bool                onToolMgrDoubleClick(u16            _u16Modifier,

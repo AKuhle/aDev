@@ -60,6 +60,8 @@ class aPixmap : private QPixmap,
         bool                isValid() const override;
         void                scale(s32    _s32W,
                                   s32    _s32H) override;
+
+        void                setMaskedColor(const aColor &_col);
 }; // aPixmap
 
 

@@ -41,6 +41,7 @@ class aToolBtn : public aBtn
     * aBaseWin implementation
     *******************************************************************************/
     protected:
+        void                onPaintContentBg() override;
         void                onPaintContent() override;
 
 }; // class aToolBtn

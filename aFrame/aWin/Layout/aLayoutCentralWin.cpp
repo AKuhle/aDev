@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aLayoutCentralWin.h"
+#include "aBaseWin.h"
 
 using namespace aFrame::aUtil;
 
@@ -40,10 +41,30 @@ aLayoutCentralWin::~aLayoutCentralWin()
 
 
 /*******************************************************************************
+* aLayoutCentralWin::layoutDemand
+*******************************************************************************/
+aDimension aLayoutCentralWin::layoutDemand() const
+{
+    aDimension   dMin;
+
+    if (m_pCentralWin)
+    {
+        dMin += layoutDemandOfChild(m_pCentralWin);
+    }
+
+    return dMin;
+} // aLayoutCentralWin::layoutDemand
+
+
+/*******************************************************************************
 * aLayoutCentralWin::arrange
 *******************************************************************************/
-void aLayoutCentralWin::arrange(const aRect &/*_r*/)
+void aLayoutCentralWin::arrange(const aRect &_r)
 {
+    if (m_pCentralWin)
+    {
+        m_pCentralWin->setGeometry(_r);
+    }
 } // aLayoutCentralWin::arrange
 
 

@@ -13,34 +13,34 @@
 
 
     "aBaseWin": {
-        "bg": "solid(rgba(0, 0, 0, 255))"
+        "bg": "solid(rgba(0, 0, 0, 255))",
+
+        "normal": "rgba(140, 140, 140, 255)",
+        "active": "rgba(230, 230, 230, 255)",
+        "hover": "rgba(0, 176, 202, 255)",
+        "disabled": "rgba(48, 48, 48, 255)"
     },
 
     "aMainWin": {
         "bg": "solid(rgba(10, 10, 10, 255))",
-        "bg1": "gradient(rgba(50, 0, 0, 155), rgba(0, 0, 50, 155), 45)",
+        "bg-gradient-sample": "gradient(rgba(50, 0, 0, 155), rgba(0, 0, 50, 155), 45)",
         "border1": "solid(rgba(10, 10, 10, 255), 3, 3, 3, 3)",
         "margin": "3, 3, 3, 3",
         "border": "solidFrame(1, rgba(80, 80, 80, 255), rgba(10, 10, 10, 255), 5, 5, 5, 5)"
     },
 
     "aTitleBar": {
-        "bg": "solid(rgba(30, 30, 30, 255))",
-        "sysMetricsH": "36"
+        "bg": "solid(rgba(30, 30, 30, 255))"
     },
 
-    "aButton": {
-        "sysMetricsW": "12",
-        "sysMetricsH": "12",
-        "normal": "rgba(160, 160, 160, 255)",
-        "active": "rgba(230, 230, 230, 255)",
-        "hover": "rgba(128, 255, 255, 255)",
-        "disabled": "rgba(64, 64, 64, 255)"
+    "aBtn": {
+        "sysMetricsW": "32",
+        "sysMetricsH": "32"
     },
 
-    "aPushButton": {
+    "aPushBtn": {
     },
 
-    "aToolButton": {
+    "aToolBtn": {
     }
 }

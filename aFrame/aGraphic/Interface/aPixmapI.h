@@ -17,11 +17,9 @@
 * includes
 *******************************************************************************/
 #include "aFrame_def.h"
+#include "aColor.h"
 
-
-/*******************************************************************************
-* includes
-*******************************************************************************/
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -41,6 +39,8 @@ class aPixmapI
         virtual bool            isValid() const = 0;
         virtual void            scale(s32    _s32W,
                                       s32    _s32H) = 0;
+
+        virtual void            setMaskedColor(const aColor &_col) = 0;
 }; // aPixmapI
 
 

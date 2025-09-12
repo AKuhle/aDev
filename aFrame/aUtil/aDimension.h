@@ -68,6 +68,9 @@ class aDimension
 
         aDimension              max(const aDimension &_rhs) const;
 
+        static aDimension       max(const aDimension &_dim1,
+                                    const aDimension &_dim2);
+
         friend std::ostream& operator<<(std::ostream        &_os,
                                         const aDimension    &_d2d)
         {

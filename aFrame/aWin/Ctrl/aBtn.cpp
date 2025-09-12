@@ -13,6 +13,7 @@
 *******************************************************************************/
 #include "aBtn.h"
 #include "aPixmap.h"
+#include "aBtnTool.h"
 
 
 /*******************************************************************************
@@ -41,6 +42,26 @@ aBtn::aBtn(aBaseWin        *_pParent,
 aBtn::~aBtn()
 {
 } // aBtn::~aBtn
+
+
+/*******************************************************************************
+* aBtn::addClickHandler
+*******************************************************************************/
+void aBtn::addClickHandler(ClickHandler _handler)
+{
+    m_vClickHandler.push_back(_handler);
+} // aBtn::addClickHandler
+
+
+/*******************************************************************************
+* aBtn::stateColor
+*******************************************************************************/
+aColor aBtn::stateColor() const
+{
+    const aBtnTool *pTool = dynamic_cast<const aBtnTool *> (activeTool());
+
+    return (pTool)?   pTool->stateColor() : colRed;
+} // aBtn::stateColor
 
 
 /*******************************************************************************
@@ -74,6 +95,8 @@ void aBtn::createPixmap()
 bool aBtn::onSysCreateWin()
 {
     createPixmap();
+
+    addTool(make_unique<aBtnTool> (this));
 
     return true;
 } // aBtn::onSysCreateWin

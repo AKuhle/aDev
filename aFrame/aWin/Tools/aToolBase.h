@@ -78,6 +78,21 @@ class aToolBase
     protected:
         void                    onActivate(bool _bActivate);
 
+        // enter / leave events
+        virtual enumToolResult  onEnter(u16             _u16Modifier,
+                                        const aPoint    &_pntLocal,
+                                        const aPoint    &_pntGlobal);
+
+        virtual enumToolResult  onLeave(u16 _u16Modifier);
+
+
+        // wheel event
+        virtual enumToolResult  onWheel(u16             _u16Modifier,
+                                        s16             _s16Degree,
+                                        const aPoint    &_pntLocal,
+                                        const aPoint    &_pntGlobal);
+
+
         // double click events
         virtual enumToolResult  onLDoubleClick(u16          _u16Modifier,
                                                const aPoint &_pntLocal,
@@ -141,6 +156,19 @@ class aToolBase
 
 
     private:
+        // enter / leave
+        virtual enumToolResult  onToolEnter(u16             _u16Modifier,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal);
+
+        virtual enumToolResult  onToolLeave(u16             _u16Modifier);
+
+        // wheel event
+        virtual enumToolResult  onToolWheel(u16             _u16Modifier,
+                                            s16             _s16Degree,
+                                            const aPoint    &_pntLocal,
+                                            const aPoint    &_pntGlobal);
+
         // double click events
         virtual enumToolResult  onToolDoubleClick(u16           _u16Modifier,
                                                   u16           _u16Btn,

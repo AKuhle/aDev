@@ -61,7 +61,6 @@ INCLUDEPATH += aGraphic/Style
 
 INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Ctrl
-INCLUDEPATH += aWin/Interface
 INCLUDEPATH += aWin/Layout
 INCLUDEPATH += aWin/Qt
 INCLUDEPATH += aWin/Tools
@@ -171,16 +170,18 @@ HEADERS += \
     aWin/Ctrl/aCtrl.h \
     aWin/Ctrl/aPushBtn.h \
     aWin/Ctrl/aToolBtn.h \
-    aWin/Interface/aBaseWin_i.h \
     aWin/Layout/aLayoutCentralWin.h \
+    aWin/Layout/aLayoutHoriVert.h \
     aWin/Layout/aLayoutMainWin.h \
     aWin/Layout/aLayout_i.h \
-    aWin/Qt/aBaseWin.h \
+    aWin/Qt/aBaseWin_sys.h \
     aWin/Tools/aBorderResizeTool.h \
+    aWin/Tools/aBtnTool.h \
     aWin/Tools/aParentCtrlTool.h \
     aWin/Tools/aToolBase.h \
     aWin/Tools/aToolCb.h \
     aWin/Tools/aToolMgr.h \
+    aWin/aBaseWin.h \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
     aWin/aTitleBar.h \
@@ -247,18 +248,20 @@ SOURCES += \
     aWin/Ctrl/aCtrl.cpp \
     aWin/Ctrl/aPushBtn.cpp \
     aWin/Ctrl/aToolBtn.cpp \
-    aWin/Interface/aBaseWin_i.cpp \
-    aWin/Interface/aBaseWin_i_handler.cpp \
     aWin/Layout/aLayoutCentralWin.cpp \
+    aWin/Layout/aLayoutHoriVert.cpp \
     aWin/Layout/aLayoutMainWin.cpp \
     aWin/Layout/aLayout_i.cpp \
-    aWin/Qt/aBaseWin.cpp \
-    aWin/Qt/aBaseWin_events.cpp \
+    aWin/Qt/aBaseWin_sys.cpp \
     aWin/Tools/aBorderResizeTool.cpp \
+    aWin/Tools/aBtnTool.cpp \
     aWin/Tools/aParentCtrlTool.cpp \
     aWin/Tools/aToolBase.cpp \
     aWin/Tools/aToolCb.cpp \
     aWin/Tools/aToolMgr.cpp \
+    aWin/aBaseWin.cpp \
+    aWin/aBaseWin_events.cpp \
+    aWin/aBaseWin_handler.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
     aWin/aTitleBar.cpp \

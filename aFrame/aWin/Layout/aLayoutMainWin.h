@@ -40,6 +40,7 @@ class aLayoutMainWin : public aLayoutCentralWin
 
         void                setTitleBar(unique_ptr<aTitleBar>   _pTitleBar);
 
+        aDimension          layoutDemand() const override;
         void                arrange(const aRect &_r) override;
 }; // class aLayoutMainWin
 

@@ -48,15 +48,45 @@ void aLayoutMainWin::setTitleBar(unique_ptr<aTitleBar>   _pTitleBar)
 
 
 /*******************************************************************************
+* aLayoutMainWin::layoutDemand
+*******************************************************************************/
+aDimension aLayoutMainWin::layoutDemand() const
+{
+    aDimension   dimMin = aLayoutCentralWin::layoutDemand();
+
+    // add the minDim of the titlebar
+    if (m_pTitleBar)
+    {
+        dimMin += layoutDemandOfChild(m_pTitleBar.get());
+    }
+
+    return dimMin;
+} // aLayoutMainWin::layoutDemand
+
+
+/*******************************************************************************
 * aLayoutMainWin::arrange
 *******************************************************************************/
 void aLayoutMainWin::arrange(const aRect &_r)
 {
     aRect r = _r;
 
+    // set the titlebar
     if (m_pTitleBar)
     {
-        m_pTitleBar->setGeometry(r.l(), r.t(), r.w(), m_pTitleBar->sysMetrics().h());
+        aDimension dimTitle = layoutDemandOfChild(m_pTitleBar.get());
+
+        m_pTitleBar->setGeometry(r.l(), r.t(), r.w(), dimTitle.h());
+        r.y() += dimTitle.h();
+        r.h() -= dimTitle.h();
+    }
+
+    // set the central win
+    if (centralWin())
+    {
+        aDimension dimTitle = layoutDemandOfChild(m_pTitleBar.get());
+
+        m_pTitleBar->setGeometry(r);
     }
 } // aLayoutMainWin::arrange
 

@@ -86,13 +86,13 @@ void aWinStyle::setStyleFile(const aPath    &_path)
 
 
 /*******************************************************************************
-* aWinStyle::setStyle
+* aWinStyle::setWinStyle
 *******************************************************************************/
-void aWinStyle::setStyle()
+void aWinStyle::setWinStyle()
 {
     if (m_pStyleFile)
     {
-        aBaseWin_i   *pBaseWin = dynamic_cast<aBaseWin_i *> (this);
+        aBaseWin   *pBaseWin = dynamic_cast<aBaseWin *> (this);
         CHECK_PRE_CONDITION_VOID(pBaseWin != nullptr);
 
         if (dynamic_cast<aMainWin *> (pBaseWin) != nullptr)
@@ -107,7 +107,7 @@ void aWinStyle::setStyle()
         {
             setStyle4WinClass("aPushBtn");
         }
-        else if (dynamic_cast<aPushBtn *> (pBaseWin) != nullptr)
+        else if (dynamic_cast<aToolBtn *> (pBaseWin) != nullptr)
         {
             setStyle4WinClass("aToolBtn");
         }
@@ -116,7 +116,7 @@ void aWinStyle::setStyle()
             setStyle4WinClass("aBaseWin");
         }
     }
-} // aWinStyle::setStyle
+} // aWinStyle::setWinStyle
 
 
 /*******************************************************************************
@@ -301,12 +301,8 @@ void aWinStyle::setNormalColor(const std::vector<aString> &_vStyleClass)
             // value found => set the value and cancel the class chain
             if (parseColorValue(sVal, col))
             {
-                aBtn *pBtn = dynamic_cast<aBtn *> (this);
-                if (pBtn)
-                {
-                    pBtn->setNormalColor(col);
-                    return;
-                }
+                setNormalColor(col);
+                return;
             }
         }
     }
@@ -330,12 +326,8 @@ void aWinStyle::setActiveColor(const std::vector<aString> &_vStyleClass)
             // value found => set the value and cancel the class chain
             if (parseColorValue(sVal, col))
             {
-                aBtn *pBtn = dynamic_cast<aBtn *> (this);
-                if (pBtn)
-                {
-                    pBtn->setActiveColor(col);
-                    return;
-                }
+                setActiveColor(col);
+                return;
             }
         }
     }
@@ -359,12 +351,8 @@ void aWinStyle::setHoverColor(const std::vector<aString> &_vStyleClass)
             // value found => set the value and cancel the class chain
             if (parseColorValue(sVal, col))
             {
-                aBtn *pBtn = dynamic_cast<aBtn *> (this);
-                if (pBtn)
-                {
-                    pBtn->setHoverColor(col);
-                    return;
-                }
+                setHoverColor(col);
+                return;
             }
         }
     }
@@ -388,12 +376,8 @@ void aWinStyle::setDisabledColor(const std::vector<aString> &_vStyleClass)
             // value found => set the value and cancel the class chain
             if (parseColorValue(sVal, col))
             {
-                aBtn *pBtn = dynamic_cast<aBtn *> (this);
-                if (pBtn)
-                {
-                    pBtn->setDisabledColor(col);
-                    return;
-                }
+                setDisabledColor(col);
+                return;
             }
         }
     }
@@ -434,10 +418,10 @@ bool aWinStyle::parseColorValue(aString _sValue,
     // check for solid color
     if (std::regex_match(sValue, matches, reRgb))
     {
-        _col=  aColor(std::stoi(matches[1].str()),
-                      std::stoi(matches[2].str()),
-                      std::stoi(matches[3].str()),
-                      std::stoi(matches[4].str()));
+        _col=  aColor::fromU8(std::stoi(matches[1].str()),
+                              std::stoi(matches[2].str()),
+                              std::stoi(matches[3].str()),
+                              std::stoi(matches[4].str()));
 
         return true;
     }

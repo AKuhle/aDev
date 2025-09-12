@@ -205,5 +205,16 @@ aDimension aDimension::max(const aDimension &_rhs) const
 } // aDimension::max
 
 
+/*******************************************************************************
+* aDimension::max
+*******************************************************************************/
+aDimension aDimension::max(const aDimension &_dim1,
+                           const aDimension &_dim2)
+{
+    return aDimension (aUtil::max(_dim1.m_w, _dim2.m_w),
+                       aUtil::max(_dim1.m_h, _dim2.m_h));
+} // aDimension::max
+
+
 } // namespace aUtil
 } // namespace aFrame

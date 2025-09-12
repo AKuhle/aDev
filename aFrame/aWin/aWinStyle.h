@@ -56,6 +56,12 @@ class aWinStyle
         shared_ptr<aStyleItemFill>      m_pBgStyle          { std::make_shared<aStyleItemFillSolid> (colBlack) };
         shared_ptr<aStyleItemBorder>    m_pBorderStyle;
 
+        // color, individual used by the window classes
+        // e.g. buttons use them all
+        aColor                          m_colNormal;
+        aColor                          m_colActive;
+        aColor                          m_colHover;
+        aColor                          m_colDisabled;
 
         // regular expressions for items
         //std::string m_reAny = R"(.*)";
@@ -76,7 +82,7 @@ class aWinStyle
         virtual ~aWinStyle();
 
         static void                         setStyleFile(const aPath    &_path);
-        void                                setStyle();
+        void                                setWinStyle();
 
         // style getter
         aDimension                          sysMetrics() const          { return m_dimSysMetrics * m_fSysMetricsFactor; }
@@ -86,6 +92,20 @@ class aWinStyle
         aMargin                           	marginMargin() const        { return m_margin; }
         aMargin                             borderMargin() const;
         aMargin                             paddingMargin() const       { return m_padding; }
+
+
+        void                                setNormalColor(const aColor &_col)      { m_colNormal = _col; }
+        const aColor&                       normalColor() const                     { return m_colNormal; }
+
+        void                                setActiveColor(const aColor &_col)      { m_colActive = _col; }
+        const aColor&                       activeColor() const                     { return m_colActive; }
+
+        void                                setHoverColor(const aColor &_col)       { m_colHover = _col; }
+        const aColor&                       hoverColor() const                      { return m_colHover; }
+
+        void                                setDisabledColor(const aColor &_col)    { m_colDisabled = _col; }
+        const aColor&                       disabledColor() const                   { return m_colDisabled; }
+
 
     private:
         bool                                isValid() const;

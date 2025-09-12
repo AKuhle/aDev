@@ -83,7 +83,6 @@ INCLUDEPATH += ../aFrame/aGraphic/Style
 
 INCLUDEPATH += ../aFrame/aWin
 INCLUDEPATH += ../aFrame/aWin/Ctrl
-INCLUDEPATH += ../aFrame/aWin/Interface
 INCLUDEPATH += ../aFrame/aWin/Layout
 INCLUDEPATH += ../aFrame/aWin/Qt
 INCLUDEPATH += ../aFrame/aWin/Tools

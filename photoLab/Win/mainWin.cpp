@@ -31,6 +31,7 @@ using namespace aFrame::aApp;
 using namespace aFrame::aWin;
 
 
+
 /*******************************************************************************
 * getMainWin
 *******************************************************************************/
@@ -206,26 +207,26 @@ bool MainWin::onCreateWin()
 // /*******************************************************************************
 // * MainWin::onCloseWin
 // *******************************************************************************/
-// bool MainWin::onCloseWin()
-// {
-//     // save the var pool
-//     aPath   path = get_appPath() / "vpool.json";
-//     m_varPool.writeToJsonFile(path);
+bool MainWin::onCloseWin()
+{
+    // // save the var pool
+    // aPath   path = get_appPath() / "vpool.json";
+    // m_varPool.writeToJsonFile(path);
 
-//     // save the current win geomatry
-//     saveWinGeometry(COMPANY_NAME, APP_NAME);
+    // // save the current win geomatry
+    // saveWinGeometry(COMPANY_NAME, APP_NAME);
 
-//     return !busy();
-// } // MainWin::onCloseWin
+    return !isBusy();
+} // MainWin::onCloseWin
 
 
-// /*******************************************************************************
-// * MainWin::busy
-// *******************************************************************************/
-// bool MainWin::busy() const
-// {
-//     return m_bBusy;
-// } // MainWin::busy
+/*******************************************************************************
+* MainWin::isBusy
+*******************************************************************************/
+bool MainWin::isBusy() const
+{
+    return m_bBusy;
+} // MainWin::isBusy
 
 
 // /*******************************************************************************

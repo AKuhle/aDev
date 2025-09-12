@@ -58,6 +58,85 @@ void aToolMgr::addTool(std::unique_ptr<aToolBase>  _pTool)
 
 
 /*******************************************************************************
+* aToolMgr::activeTool
+*******************************************************************************/
+const aToolBase* aToolMgr::activeTool() const
+{
+    // tool at the back is active
+    return (!m_vTools.empty())?    m_vTools.back().get() : nullptr;
+} // aToolMgr::activeTool
+
+
+/*******************************************************************************
+* aToolMgr::activeTool
+*******************************************************************************/
+aToolBase* aToolMgr::activeTool()
+{
+    // tool at the back is active
+    return (!m_vTools.empty())?    m_vTools.back().get() : nullptr;
+} // aToolMgr::activeTool
+
+
+/*******************************************************************************
+* aToolMgr::onToolMgrEnter
+*******************************************************************************/
+bool aToolMgr::onToolMgrEnter(u16             _u16Modifier,
+                              const aPoint    &_pntLocal,
+                              const aPoint    &_pntGlobal)
+{
+    enumToolResult  eResult = enumToolResult::UNHANDLED;
+
+    if (m_vTools.back() != nullptr)
+    {
+        eResult = m_vTools.back()->onToolEnter(_u16Modifier, _pntLocal, _pntGlobal);
+
+        manage(m_vTools.back(), eResult);
+    }
+
+    return eResult != enumToolResult::UNHANDLED;
+} // aToolMgr::onToolMgrEnter
+
+
+/*******************************************************************************
+* aToolMgr::onToolMgrLeave
+*******************************************************************************/
+bool aToolMgr::onToolMgrLeave(u16             _u16Modifier)
+{
+    enumToolResult  eResult = enumToolResult::UNHANDLED;
+
+    if (m_vTools.back() != nullptr)
+    {
+        eResult = m_vTools.back()->onToolLeave(_u16Modifier);
+
+        manage(m_vTools.back(), eResult);
+    }
+
+    return eResult != enumToolResult::UNHANDLED;
+} // aToolMgr::onToolMgrLeave
+
+
+/*******************************************************************************
+* aToolMgr::onToolMgrWheel
+*******************************************************************************/
+bool aToolMgr::onToolMgrWheel(u16             _u16Modifier,
+                              s16             _s16Degree,
+                              const aPoint    &_pntLocal,
+                              const aPoint    &_pntGlobal)
+{
+    enumToolResult  eResult = enumToolResult::UNHANDLED;
+
+    if (m_vTools.back() != nullptr)
+    {
+        eResult = m_vTools.back()->onToolWheel(_u16Modifier, _s16Degree, _pntLocal, _pntGlobal);
+
+        manage(m_vTools.back(), eResult);
+    }
+
+    return eResult != enumToolResult::UNHANDLED;
+} // aToolMgr::onToolMgrWheel
+
+
+/*******************************************************************************
 * aToolMgr::onToolMgrDoubleClick
 *******************************************************************************/
 bool aToolMgr::onToolMgrDoubleClick(u16             _u16Modifier,

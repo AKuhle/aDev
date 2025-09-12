@@ -32,7 +32,7 @@ namespace aWin {
 class aLayoutCentralWin : public aLayout_i
 {
     protected:
-        SysWin          *m_pCentralWin  { nullptr };
+        aBaseWin    *m_pCentralWin  { nullptr };
 
     protected:
         aLayoutCentralWin();
@@ -40,10 +40,11 @@ class aLayoutCentralWin : public aLayout_i
     public:
         virtual ~aLayoutCentralWin();
 
-        void                setCentralWin(SysWin *_pWin)    { m_pCentralWin = _pWin; }
-        const SysWin*       centralWin() const              { return m_pCentralWin; }
-        SysWin*             centralWin()                    { return m_pCentralWin; }
+        void                setCentralWin(aBaseWin *_pWin)  { m_pCentralWin = _pWin; }
+        const aBaseWin*     centralWin() const              { return m_pCentralWin; }
+        aBaseWin*           centralWin()                    { return m_pCentralWin; }
 
+        aDimension          layoutDemand() const override;
         void                arrange(const aRect &_r) override;
 }; // class aLayoutCentralWin
 

@@ -92,6 +92,7 @@ int aAppMainWin::onAppCreate(int       _argc,
     else
     {
         m_pMainWin->show();
+        m_pMainWin->repaint();
 
         // aCtrlMgr initialization
         // aCtrlMgr *pCtrlMgr = dynamic_cast<aCtrlMgr *> (m_pMainWin);

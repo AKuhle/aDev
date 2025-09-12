@@ -77,14 +77,14 @@ class MainWin : public aMainWinMdi
         // aDockWin            *m_pNavigatorDockWin        { nullptr };
         // NavigatorToolWin    *m_pNavigatorToolWin        { nullptr };
 
-        // // true => app is busy, e.g. running a cmd
-        // bool                m_bBusy                     { false };
+        // true => app is busy, e.g. running a cmd
+        bool                m_bBusy                     { false };
 
     public:
         MainWin();
         ~MainWin();
 
-    //     bool                busy() const;
+        bool                isBusy() const;
 
     //     const StatusBar&    mwStatusBar() const         { return *m_pStatusBar; }
     //     StatusBar&          mwStatusBar()               { return *m_pStatusBar; }
@@ -132,7 +132,7 @@ class MainWin : public aMainWinMdi
     *******************************************************************************/
     protected:
         bool                onCreateWin() override;
-        // bool                onCloseWin() override;
+        bool                onCloseWin() override;
         // void                onDropUrl(const aUrl  &_url) override;
 
 

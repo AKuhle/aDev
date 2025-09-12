@@ -55,6 +55,7 @@ constexpr u16   MOUSE_BTN_RIGHT             = 0x0004;
 *******************************************************************************/
 constexpr u32   TOOL_ID_PARENT_CTRL     = 1;
 constexpr u32   TOOL_ID_BORDER_RESIZE   = 2;
+constexpr u32   TOOL_ID_BUTTON          = 3;
 constexpr u32   TOOL_ID_USER            = 1000;
 
 
@@ -97,11 +98,12 @@ enum class enumToolResult
 }; // enumBtnStyle
 
 
-// enum class enumBtnStyle
-// {
-//     MASKED_MODE,
-//     MASKED_ROUND_MODE
-// }; // enumBtnStyle
+enum class enumBtnStyle
+{
+    MASKED_MODE,            // pixmap in state colors
+    MASKED_ROUND_MODE       // round bg in state colors
+}; // enumBtnStyle
+
 
 // enum class enumFocusReason
 // {
@@ -143,14 +145,16 @@ enum class enumToolResult
 class aLayout_i;
 class aLayoutCentralWin;
 class aLayoutMainWin;
+class aLayoutHoriVert;
 
 class aToolBase;
 class aBorderResizeTool;
+class aButtonTool;
 class aParentCtrlTool;
 class aToolCb;
 class aToolManager;
 
-class aBaseWin_i;
+class aBaseWin_sys;
 class aBaseWin;
 
 class aCtrl;

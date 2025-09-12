@@ -17,6 +17,7 @@
 
 #include "aMainWin.h"
 #include "aLayoutMainWin.h"
+#include "aLayoutHoriVert.h"
 #include "aTitleBar.h"
 #include "aBorderResizeTool.h"
 #include "aToolBtn.h"
@@ -47,10 +48,39 @@ aMainWin::~aMainWin()
 
 
 /*******************************************************************************
+* aMainWin::onMinimize
+*******************************************************************************/
+void aMainWin::onMinimize(aBtn */*_pBtn*/)
+{
+    cout << __FUNCTION__ << endl;
+} // aMainWin::onMinimize
+
+
+/*******************************************************************************
+* aMainWin::onMaximize
+*******************************************************************************/
+void aMainWin::onMaximize(aBtn */*_pBtn*/)
+{
+    cout << __FUNCTION__ << endl;
+} // aMainWin::onMaximize
+
+
+/*******************************************************************************
+* aMainWin::onClose
+*******************************************************************************/
+void aMainWin::onClose(aBtn */*_pBtn*/)
+{
+    closeWin();
+} // aMainWin::onClose
+
+
+/*******************************************************************************
 * aMainWin::onSysCreateWin
 *******************************************************************************/
 bool aMainWin::onSysCreateWin()
 {
+    aToolBtn *pBtn;
+
     CHECK_PRE_CONDITION(aBaseWin::onSysCreateWin(), false);
 
     #ifdef _USE_QT_
@@ -63,11 +93,38 @@ bool aMainWin::onSysCreateWin()
 
     unique_ptr<aTitleBar> pTitleBar = make_unique<aTitleBar> (this);
     pTitleBar->createWin();
+    aLayoutHoriVert *pTitleBarLayout = dynamic_cast<aLayoutHoriVert *> (pTitleBar->layout());
 
-    // test tool btn
-    aToolBtn *pBtn = new aToolBtn(this, ":/Standard/Masked/32/folder.png", "");
+    // minimize button
+    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/minimize.png", "");
     pBtn->createWin();
-    pBtn->setGeometry(10, 2, 32, 32);
+    pBtn->setFixDim(pBtn->sysMetrics());
+    pBtn->addClickHandler([this](aBtn* btn) { onMinimize(btn); });
+    pTitleBarLayout->addChild(pBtn);
+
+    // maximize button
+    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/maximize.png", "");
+    pBtn->createWin();
+    pBtn->setCheckable(true);
+    pBtn->setFixDim(pBtn->sysMetrics());
+    pBtn->addClickHandler([this](aBtn* btn) { onMaximize(btn); });
+    pTitleBarLayout->addChild(pBtn);
+
+    // close button - disabled
+    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/close.png", "");
+    pBtn->createWin();
+    pBtn->setFixDim(pBtn->sysMetrics());
+    pBtn->setHoverColor(colRed);
+    pBtn->setEnabled(false);
+    pTitleBarLayout->addChild(pBtn);
+
+    // close button
+    pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/close.png", "");
+    pBtn->createWin();
+    pBtn->setFixDim(pBtn->sysMetrics());
+    pBtn->setHoverColor(colRed);
+    pBtn->addClickHandler([this](aBtn* btn) { onClose(btn); });
+    pTitleBarLayout->addChild(pBtn);
 
     // move the items
     pLayout->setTitleBar(std::move(pTitleBar));
@@ -78,42 +135,6 @@ bool aMainWin::onSysCreateWin()
 
     return true;
 } // aMainWin::onSysCreateWin
-
-
- /*******************************************************************************
- * aMainWin::onButtonPress
- *******************************************************************************/
- bool aMainWin::onButtonPress(u16          _u16Modifier,
-                              u16          _u16Btn,
-                              const aPoint &_pntLocal,
-                              const aPoint &_pntGlobal)
-{
-    return onToolMgrButtonPress(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
-} // aMainWin::onButtonPress
-
-
-/*******************************************************************************
-* aMainWin::onMouseMove
-*******************************************************************************/
-bool aMainWin::onMouseMove(u16             _u16Modifier,
-                           u16             _u16Btn,
-                           const aPoint    &_pntLocal,
-                           const aPoint    &_pntGlobal)
-{
-    return onToolMgrMouseMove(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
-} // aMainWin::onMouseMove
-
-
-/*******************************************************************************
-* aMainWin::onButtonRelease
-*******************************************************************************/
-bool aMainWin::onButtonRelease(u16             _u16Modifier,
-                               u16             _u16Btn,
-                               const aPoint    &_pntLocal,
-                               const aPoint    &_pntGlobal)
-{
-    return onToolMgrButtonRelease(_u16Modifier, _u16Btn, _pntLocal, _pntGlobal);
-} // aMainWin::onLDoubleClick
 
 
 } // namespace aWin

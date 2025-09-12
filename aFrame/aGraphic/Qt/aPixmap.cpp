@@ -82,6 +82,25 @@ void aPixmap::scale(s32    _s32W,
 } // aPixmap::scale
 
 
+/*******************************************************************************
+* aPixmap::setMaskedColor
+*******************************************************************************/
+void aPixmap::setMaskedColor(const aColor &_col)
+{
+    if (isValid())
+    {
+        // get the mask
+        QBitmap mask = QPixmap::mask();
+
+        // fill the background
+        QPixmap::fill(_col.toQColor());
+
+        // set the mask
+        QPixmap::setMask(mask);
+    }
+} // aPixmap::setMaskedColor
+
+
 } // namespace aGraphic
 } // namespace aFrame
 

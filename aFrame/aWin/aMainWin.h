@@ -39,25 +39,19 @@ class aMainWin : public aBaseWin,
 
 
     /*******************************************************************************
+    * ctrl handler
+    *******************************************************************************/
+    public:
+        void                onMinimize(aBtn *_pBtn);
+        void                onMaximize(aBtn *_pBtn);
+        void                onClose(aBtn *_pBtn);
+
+
+    /*******************************************************************************
     * aBaseWin interface
     *******************************************************************************/
     protected:
         virtual bool        onSysCreateWin() override;
-
-        bool                onButtonPress(u16           _u16Modifier,
-                                          u16           _u16Btn,
-                                          const aPoint  &_pntLocal,
-                                          const aPoint  &_pntGlobal) override;
-
-        bool                onMouseMove(u16             _u16Modifier,
-                                        u16             _u16Btn,
-                                        const aPoint    &_pntLocal,
-                                        const aPoint    &_pntGlobal) override;
-
-        bool                onButtonRelease(u16             _u16Modifier,
-                                            u16             _u16Btn,
-                                            const aPoint    &_pntLocal,
-                                            const aPoint    &_pntGlobal) override;
 }; // class aMainWin
 
 

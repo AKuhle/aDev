@@ -43,16 +43,43 @@ aToolBtn::~aToolBtn()
 
 
 /*******************************************************************************
+* aToolBtn::onPaintContentBg
+*******************************************************************************/
+void aToolBtn::onPaintContentBg()
+{
+    switch (btnStyle())
+    {
+        case enumBtnStyle::MASKED_MODE:
+            break;
+
+        case enumBtnStyle::MASKED_ROUND_MODE:
+            break;
+    }
+} // aToolBtn::onPaintContentBg
+
+
+/*******************************************************************************
 * aToolBtn::onPaintContent
 *******************************************************************************/
 void aToolBtn::onPaintContent()
 {
-    shared_ptr<aPixmap>     pix = pixmap();
     aPainter                p(this);
+    shared_ptr<aPixmap>     pPix        = pixmap();
+    aColor                  col         = stateColor();
 
-    if (pix)
+    switch (btnStyle())
     {
-        p.drawPixmap(*pix, 0, 0);
+        case enumBtnStyle::MASKED_MODE:
+            if (pPix)
+            {
+                pPix->setMaskedColor(col);
+
+                p.drawPixmap(*pPix, 0, 0);
+            }
+            break;
+
+        case enumBtnStyle::MASKED_ROUND_MODE:
+            break;
     }
 } // aToolBtn::onPaintContent
 

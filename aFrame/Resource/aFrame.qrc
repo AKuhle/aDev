@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>Standard/Masked/32/folder.png</file>
+        <file>Standard/Masked/32/close.png</file>
+        <file>Standard/Masked/32/maximize.png</file>
+        <file>Standard/Masked/32/minimize.png</file>
     </qresource>
 </RCC>
