@@ -47,6 +47,7 @@ class aString
         aString(const char *_pStr);
         aString(const c16 *_pStr);
         aString(const std::u16string &_str);
+        aString(const std::string &_str);
         virtual ~aString();
 
         aString&                operator=(const aString &_str);

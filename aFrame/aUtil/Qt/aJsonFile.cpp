@@ -16,14 +16,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QFile>
-#include <QJsonValue>
-#include <QJsonDocument>
-
-#include "aFrame_def.h"
 #include "aJsonFile.h"
-#include "aJsonObj.h"
-#include "aJsonValue.h"
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -34,13 +29,9 @@ namespace aUtil {
 /*******************************************************************************
 * aJsonFile::aJsonFile
 *******************************************************************************/
-aJsonFile::aJsonFile(const aPath    &_sFilePath)
-: m_sFilePath(_sFilePath)
+aJsonFile::aJsonFile(const aPath &_sPath)
+: m_sPath(_sPath)
 {
-    // create the first (root) json object for readAllValues
-    unique_ptr<QJsonObject> pObj = make_unique<QJsonObject> ();
-    m_vecObj.push_back(move(pObj));
-    m_vecIdx.push_back(m_vecObj.size() - 1);
 } // aJsonFile::aJsonFile
 
 
@@ -53,246 +44,332 @@ aJsonFile::~aJsonFile()
 
 
 /*******************************************************************************
-* aJsonFile::openLevel
+* aJsonFile::addValue
 *******************************************************************************/
-void aJsonFile::openLevel()
+void aJsonFile::addValue(const aString  &_sKey,
+                         int            _iValue)
 {
-    unique_ptr<QJsonObject> pObj = make_unique<QJsonObject> ();
-    m_vecObj.push_back(move(pObj));
-    m_vecIdx.push_back(m_vecObj.size() - 1);
-} // aJsonFile::openLevel
+    auto keys = splitKey(_sKey.to_stdString());
+
+    *getOrCreate(keys) = _iValue;
+} // aJsonFile::addValue
 
 
 /*******************************************************************************
-* aJsonFile::closeLevel
+* aJsonFile::addValue
 *******************************************************************************/
-void aJsonFile::closeLevel(const aString &_sKey)
+void aJsonFile::addValue(const aString  &_sKey,
+                         double         _dValue)
 {
-    unique_ptr<QJsonObject> &pActive = m_vecObj.at(m_vecIdx.back());
-    //unique_ptr<QJsonObject> &pActive = m_vecObj.back();
+    auto keys = splitKey(_sKey.to_stdString());
 
-    // skip to previous level
-    m_vecIdx.pop_back();
-    unique_ptr<QJsonObject> &pPrev = m_vecObj.at(m_vecIdx.back());
-    //unique_ptr<QJsonObject> &pPrev = m_vecObj.back();
-
-    pPrev->insert(_sKey.toQString(), *pActive.get());
-} // aJsonFile::closeLevel
+    *getOrCreate(keys) = _dValue;
+} // aJsonFile::addValue
 
 
 /*******************************************************************************
-* aJsonFile::add
+* aJsonFile::addValue
 *******************************************************************************/
-void aJsonFile::add(const aJsonValue &_val)
+void aJsonFile::addValue(const aString  &_sKey,
+                         const aString  &_sValue)
 {
-    unique_ptr<QJsonObject> &pObj = m_vecObj.at(m_vecIdx.back());
-    //unique_ptr<QJsonObject> &pObj = m_vecObj.back();
+    auto keys = splitKey(_sKey.to_stdString());
 
-    if (_val.isBool())
-    {
-        pObj->insert(_val.key().toQString(), QJsonValue(_val.toBool()));
-    }
-
-    if (_val.isDbl())
-    {
-        pObj->insert(_val.key().toQString(), QJsonValue(_val.toDbl()));
-    }
-
-    if (_val.isString())
-    {
-        pObj->insert(_val.key().toQString(), QJsonValue(_val.toString().toQString()));
-    }
-} // aJsonFile::add
+    *getOrCreate(keys) = _sValue.to_stdString();
+} // aJsonFile::addValue
 
 
 /*******************************************************************************
-* aJsonFile::write2File
+* aJsonFile::addValue
 *******************************************************************************/
-bool aJsonFile::write2File()
+void aJsonFile::addValue(const aString              &_sKey,
+                         const std::vector<aString> &_vValue)
 {
-    QFile   file(m_sFilePath.canonicalPath().toQString());
-    bool    bSuccess    = false;
+    std::vector<std::string>    vStrings;
 
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    for (auto s : _vValue)
     {
-        QJsonDocument jsonDoc(*m_vecObj.at(0));  // root obj at index 0
-        file.write(jsonDoc.toJson());
-        file.close();
-
-        bSuccess = true;
+        vStrings.push_back(s.to_stdString());
     }
 
-    return bSuccess;
-} // aJsonFile::write2File
+    auto keys = splitKey(_sKey.to_stdString());
+
+    *getOrCreate(keys) = vStrings;
+} // aJsonFile::addValue
+
+
+/*******************************************************************************
+* aJsonFile::readIntValue
+*******************************************************************************/
+int aJsonFile::readIntValue(const aString  &_sKey) const
+{
+    auto keys = splitKey(_sKey.to_stdString());
+
+    const Value* v = getValue(keys);
+
+    if (v && std::holds_alternative<int>(*v))
+    {
+        return std::get<int>(*v);
+    }
+
+    return 0;
+} // aJsonFile::readIntValue
+
+
+/*******************************************************************************
+* aJsonFile::readDoubleValue
+*******************************************************************************/
+double aJsonFile::readDoubleValue(const aString  &_sKey) const
+{
+    auto keys = splitKey(_sKey.to_stdString());
+
+    const Value* v = getValue(keys);
+
+    if (v && std::holds_alternative<double>(*v))
+    {
+        return std::get<double>(*v);
+    }
+
+    return 0.0;
+} // aJsonFile::readDoubleValue
 
 
 /*******************************************************************************
 * aJsonFile::readStringValue
 *******************************************************************************/
-aString aJsonFile::readStringValue(const aString &_sNestedKey)
+aString aJsonFile::readStringValue(const aString  &_sKey) const
 {
-    CHECK_PRE_CONDITION(_sNestedKey != "", "");
+    auto keys = splitKey(_sKey.to_stdString());
 
-    // eg. _sNestedKey = "key1:key2:color"
+    const Value *v = getValue(keys);
 
-    aString         sValue;
-
-    if (readJsonDoc()) // is only read once
+    if (v && std::holds_alternative<std::string>(*v))
     {
-        aVector<aString>	vecToken;
+        return std::get<std::string>(*v);
+    }
 
-        // split the keys
-        _sNestedKey.splitString(":", vecToken);
-        s32 s32KeyCount = vecToken.size();
-
-        // get the root obj
-        QJsonObject obj = m_jsonDoc.object();
-
-        // dive into the keys until the last key is reached
-        // last key defines the value
-        // key1:key2:color => dive int key1 -> key2, color ist the value tag
-        for (s32 i = 0; i < s32KeyCount - 1; i++)
-        {
-            QString sKey = vecToken.at(i).toQString();
-
-            if (!obj.contains(sKey)) {
-                //cout << "key >" << _sNestedKey << "< not found" << endl;
-                return "";
-            }
-            else
-            {
-                obj = obj[sKey].toObject();
-            }
-        }
-
-        // get the value
-        QString sValueKey = vecToken.at(s32KeyCount - 1).toQString();
-
-        if (!obj.contains(sValueKey))
-        {
-            //cout << "key " << _sNestedKey << " not found" << endl;
-            return "";
-        }
-        else
-        {
-            sValue = aString::fromQString(obj[sValueKey].toString());
-        }
-
-    } // if (!m_jsonDoc.isEmpty())
-
-    return sValue;
+    return "";
 } // aJsonFile::readStringValue
 
 
 /*******************************************************************************
-* aJsonFile::readAllValues
+* aJsonFile::readVectorValue
 *******************************************************************************/
-bool aJsonFile::readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _f_fVal,
-                              std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const
+std::vector<aString> aJsonFile::readVectorValue(const aString  &_sKey) const
 {
-    QFile               file(m_sFilePath.canonicalPath().toQString());
-    QString             sJsonFile;
-    bool                bSuccess    = false;
-    aVector<aString>    vecKeys;
+    auto keys = splitKey(_sKey.to_stdString());
 
-    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    const Value* v = getValue(keys);
+
+    if (v && std::holds_alternative<std::vector<std::string>>(*v))
     {
-        sJsonFile = file.readAll();
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(sJsonFile.toUtf8());
+        std::vector<std::string>    vS = std::get<std::vector<std::string>>(*v);
+        std::vector<aString>        vReturn;
 
-        // find the root object
-        if (jsonDoc.isObject())
+        for (auto s : vS)
         {
-            // start the iteration
-            readJsonObj(jsonDoc.object(), vecKeys, _f_fVal, _fObj);
+            vReturn.push_back(s);
+        }
 
-            bSuccess = true;
-        } // if (jsonDoc.isObject())
+        return vReturn;
     }
 
-    return bSuccess;
-} // aJsonFile::readAllValues
+    return {};
+} // aJsonFile::readVectorValue
 
 
 /*******************************************************************************
-* aJsonFile::readJsonDoc
+* aJsonFile::writeJsonFile
 *******************************************************************************/
-bool aJsonFile::readJsonDoc()
+bool aJsonFile::writeJsonFile() const
 {
-    // read the document in the first call
-    if (m_jsonDoc.isEmpty())
+    std::ofstream file(m_sPath.canonicalPath().to_stdString());
+
+    if (!file.is_open())
     {
-        QFile file(m_sFilePath.canonicalPath().toQString());
+        return false;
+    }
 
-        // read the json document into the member variable
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            cout << "json file" << m_sFilePath.canonicalPath() << " not found" << endl;
-        }
-        else
-        {
-            QByteArray data = file.readAll();
-            file.close();
+    writeJson(file, m_root, 0);
+    file.close();
 
-            // JSON parsen
-            QJsonParseError parseError;
-            m_jsonDoc = QJsonDocument::fromJson(data, &parseError);
-
-            if (parseError.error != QJsonParseError::NoError)
-            {
-                cout << "JSON Parse Error:" << aString::fromQString(parseError.errorString()) << endl;
-            }
-        }
-    } // if (m_jsonDoc.isEmpty())
-
-    return !m_jsonDoc.isEmpty();
-} // aJsonFile::readJsonDoc
+    return true;
+} // aJsonFile::writeJsonFile
 
 
 /*******************************************************************************
-* aJsonFile::readJsonObj
+* aJsonFile::convertJsonToValue
 *******************************************************************************/
-void aJsonFile::readJsonObj(const QJsonObject                                   &_obj,
-                            aVector<aString>                                    &_vecKeys,
-                            std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
-                            std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const
+namespace {
+Value convertJsonToValue(const nlohmann::json& j)
 {
-    QJsonObject::const_iterator     it;
+    if (j.is_object()) {
+        Object obj;
+        for (auto it = j.begin(); it != j.end(); ++it)
+            obj[it.key()] = convertJsonToValue(it.value());
+        return obj;
+    } else if (j.is_array()) {
+        std::vector<std::string> vec;
+        for (const auto& el : j)
+            vec.push_back(el.get<std::string>());
+        return vec;
+    } else if (j.is_string()) {
+        return j.get<std::string>();
+    } else if (j.is_number_integer()) {
+        return j.get<int>();
+    } else if (j.is_number_float()) {
+        return j.get<double>();
+    }
+    return {};
+}
+}
 
-    // iterate over all childs
-    for (it = _obj.begin(); it != _obj.end(); it++)
+
+/*******************************************************************************
+* aJsonFile::readJsonFile
+*******************************************************************************/
+bool aJsonFile::readJsonFile()
+{
+    std::ifstream file(m_sPath.canonicalPath().to_stdString());
+
+    if (!file.is_open())
     {
-        if (it->isObject())
-        {
-            // add the key to the vector of keys
-            _vecKeys.push_back(aString::fromQString(it.key()));
+        return false;
+    }
 
-            // call callback handler for objects
-            _fObj(_vecKeys, aJsonObj(it->toObject()));
+    nlohmann::json j;
 
-            // if the child is another json object => next recursion
-            readJsonObj(it->toObject(), _vecKeys, _fVal, _fObj);
+    try
+    {
+        file >> j;
+    }
+    catch (...)
+    {
+        file.close();
+        return false;
+    }
 
-            // remove the key from the vector of keys
-            _vecKeys.pop_back();
-        }
-        else if (it->isBool())
+    file.close();
+
+    if (j.is_object())
+        m_root = std::get<Object>(convertJsonToValue(j));
+    else
+        m_root.clear(); // oder Fehlerbehandlung
+
+    return true;
+} // aJsonFile::readJsonFile
+
+
+
+/*******************************************************************************
+* aJsonFile::splitKey
+*******************************************************************************/
+std::vector<std::string> aJsonFile::splitKey(const std::string &_key)
+{
+    std::vector<std::string>    result;
+    size_t                      start = 0;
+    size_t                      end = 0;
+
+    while ((end = _key.find(':', start)) != std::string::npos)
+    {
+        result.push_back(_key.substr(start, end - start));
+        start = end + 1;
+    }
+
+    result.push_back(_key.substr(start));
+
+    return result;
+} // aJsonFile::splitKey
+
+
+/*******************************************************************************
+* aJsonFile::getOrCreate
+*******************************************************************************/
+Value* aJsonFile::getOrCreate(std::vector<std::string> &_vKeys)
+{
+    std::map<std::string, Value>* current = &m_root;
+
+    for (size_t i = 0; i < _vKeys.size() - 1; ++i)
+    {
+        auto &val = (*current)[_vKeys[i]];
+
+        if (!std::holds_alternative<std::map<std::string, Value>>(val))
         {
-            aJsonValue  val(aString::fromQString(it.key()), it.value().toBool());
-            _fVal(_vecKeys, val);
+            val = std::map<std::string, Value>{};
         }
-        else if (it->isDouble())
+
+        current = &std::get<std::map<std::string, Value>>(val);
+    }
+
+    return &(*current) [_vKeys.back()];
+} // aJsonFile::getOrCreate
+
+
+/*******************************************************************************
+* aJsonFile::getValue
+*******************************************************************************/
+const Value* aJsonFile::getValue(const std::vector<std::string> &_vKeys) const
+{
+    const std::map<std::string, Value>* current = &m_root;
+
+    for (size_t i = 0; i < _vKeys.size() - 1; ++i)
+    {
+        auto it = current->find(_vKeys[i]);
+
+        if (it == current->end() || !std::holds_alternative<std::map<std::string, Value>>(it->second))
         {
-            aJsonValue  val(aString::fromQString(it.key()), it.value().toDouble());
-            _fVal(_vecKeys, val);
+            return nullptr;
         }
-        else if (it->isString())
-        {
-            aJsonValue  val(aString::fromQString(it.key()), aString::fromQString(it.value().toString()));
-            _fVal(_vecKeys, val);
+
+        current = &std::get<std::map<std::string, Value>>(it->second);
+    }
+
+    auto it = current->find(_vKeys.back());
+
+    if (it == current->end())
+    {
+        return nullptr;
+    }
+
+    return &it->second;
+} // aJsonFile::getValue
+
+
+/*******************************************************************************
+* aJsonFile::writeJson
+*******************************************************************************/
+void aJsonFile::writeJson(std::ostream  &os,
+                          const Value   &value,
+                          int           indent /*= 0*/) const
+{
+    std::string ind(indent, ' ');
+    if (std::holds_alternative<int>(value)) {
+        os << std::get<int>(value);
+    } else if (std::holds_alternative<double>(value)) {
+        os << std::get<double>(value);
+    } else if (std::holds_alternative<std::string>(value)) {
+        os << '"' << std::get<std::string>(value) << '"';
+    } else if (std::holds_alternative<std::vector<std::string>>(value)) {
+        os << "[";
+        const auto& vec = std::get<std::vector<std::string>>(value);
+        for (size_t i = 0; i < vec.size(); ++i) {
+            os << '"' << vec[i] << '"';
+            if (i + 1 < vec.size()) os << ", ";
         }
-    } // for...
-} // aJsonFile::readJsonObj
+        os << "]";
+    } else if (std::holds_alternative<std::map<std::string, Value>>(value)) {
+        os << "{\n";
+        const auto& obj = std::get<std::map<std::string, Value>>(value);
+        size_t count = 0;
+        for (const auto& pair : obj) {
+            os << ind << "  \"" << pair.first << "\": ";
+            writeJson(os, pair.second, indent + 2);
+            if (++count < obj.size()) os << ",\n";
+            else os << "\n";
+        }
+        os << ind << "}";
+    }
+} // aJsonFile::writeJson
 
 
 } // namespace aUtil

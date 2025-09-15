@@ -20,11 +20,11 @@
 #include <QByteArray>
 #include <QHostAddress>
 
-#include "aLib_def.h"
+#include "aFrame_def.h"
 #include "aString.h"
 
-using namespace aLib;
-using namespace aLib::aUtil;
+using namespace aFrame;
+using namespace aFrame::aUtil;
 using namespace std;
 
 
@@ -34,6 +34,7 @@ using namespace std;
 class Universe
 {
     private:
+        aString                 m_sName;
         u32                     m_u32Id;
 
         // artNet
@@ -43,9 +44,13 @@ class Universe
         QByteArray              m_dmxData           { m_u32DmxDataSize, 0 };
 
     public:
-        Universe(u32            _u32Id,
+        Universe(aString        m_sName,
+                 u32            _u32Id,
                  const aString  &_sIpAdr);
         ~Universe();
+
+        const aString&      name() const                        { return m_sName; }
+        void                setName(const aString &_sName)      { m_sName = _sName; }
 
         u32                 id() const              { return m_u32Id; }
 

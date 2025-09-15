@@ -26,6 +26,8 @@ using namespace aFrame::aApp;
 /*******************************************************************************
 * main
 *******************************************************************************/
+#ifndef __NO_FRAME_main__
+
 int main(int	_argc,
          char   *_argv[],
          char	**_envp)
@@ -46,3 +48,5 @@ int main(int	_argc,
 
     return iResult;
 } // main
+
+#endif

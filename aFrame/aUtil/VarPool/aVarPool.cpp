@@ -12,8 +12,6 @@
 *******************************************************************************/
 #include "aVarPool.h"
 #include "aJsonFile.h"
-#include "aJsonObj.h"
-#include "aJsonValue.h"
 #include "aString.h"
 #include "aColor.h"
 
@@ -79,80 +77,84 @@ aVarPool& aVarPool::operator=(const aVarPool &_rhs)
 /*******************************************************************************
 * aVarPool::writeToJsonFile
 *******************************************************************************/
-bool aVarPool::writeToJsonFile(const aPath &_sFilePath) const
+bool aVarPool::writeToJsonFile(const aPath &/*_sFilePath*/) const
 {
-    aJsonFile       jFile(_sFilePath);
-    bool            bSuccess = false;
+    return false;
 
-    // add the bools
-    jFile.openLevel();
-    for (auto &poolVar : m_mapBool)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("bool");
+    // aJsonFile       jFile(_sFilePath);
+    // bool            bSuccess = false;
 
-    // add the s64
-    jFile.openLevel();
-    for (auto &poolVar : m_mapS64)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("s64");
+    // // add the bools
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapBool)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("bool");
 
-    // add the u64
-    jFile.openLevel();
-    for (auto &poolVar : m_mapU64)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("u64");
+    // // add the s64
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapS64)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("s64");
 
-    // add the dbl
-    jFile.openLevel();
-    for (auto &poolVar : m_mapDbl)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("dbl");
+    // // add the u64
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapU64)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("u64");
 
-    // add the strings
-    jFile.openLevel();
-    for (auto &poolVar : m_mapString)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("string");
+    // // add the dbl
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapDbl)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("dbl");
 
-    // add the color
-    jFile.openLevel();
-    for (auto &poolVar : m_mapColor)
-    {
-        poolVar.second.add2JsonFile(jFile, poolVar.first);
-    }
-    jFile.closeLevel("color");
+    // // add the strings
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapString)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("string");
 
-    // write the file
-    bSuccess = jFile.write2File();
+    // // add the color
+    // jFile.openLevel();
+    // for (auto &poolVar : m_mapColor)
+    // {
+    //     poolVar.second.add2JsonFile(jFile, poolVar.first);
+    // }
+    // jFile.closeLevel("color");
 
-    return bSuccess;
+    // // write the file
+    // bSuccess = jFile.write2File();
+
+    // return bSuccess;
 } // aVarPool::writeToJsonFile
 
 
 /*******************************************************************************
 * aVarPool::readFromJsonFile
 *******************************************************************************/
- bool aVarPool::readFromJsonFile(const aPath &_sFilePath)
+ bool aVarPool::readFromJsonFile(const aPath &/*_sFilePath*/)
  {
-    aJsonFile       jFile(_sFilePath);
-    bool            bSuccess = false;
+     return false;
 
-    // read all entries
-    bSuccess = jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) { this->JsonValCallback(_vecKeys, _value); },
-                                   [this](const aVector<aString> &_vecKeys, const aJsonObj &_obj) { this->JsonObjCallback(_vecKeys, _obj); }
-    );
+    // aJsonFile       jFile(_sFilePath);
+    // bool            bSuccess = false;
 
-    return bSuccess;
+    // // read all entries
+    // bSuccess = jFile.readAllValues([this](const aVector<aString> &_vecKeys, const aJsonValue &_value) { this->JsonValCallback(_vecKeys, _value); },
+    //                                [this](const aVector<aString> &_vecKeys, const aJsonObj &_obj) { this->JsonObjCallback(_vecKeys, _obj); }
+    // );
+
+    // return bSuccess;
 } // aVarPool::readFromJsonFile
 
 
@@ -168,119 +170,6 @@ void aVarPool::clearAllEntries()
     m_mapString.clear();
     m_mapU64.clear();
 } // aVarPool::clearAllEntries
-
-
-/*******************************************************************************
-* aVarPool::JsonValCallback
-*******************************************************************************/
-void aVarPool::JsonValCallback(const aVector<aString> &_vecKeys,
-                               const aJsonValue       &_value)
-{
-    s32     s32Size = _vecKeys.size();
-
-//     // format, e.g.: bool -> valueID -> valueKey -> value
-//     // => keys must be al least e.g. bool -> vlaueID
-    if (s32Size == 2)
-    {
-        u32 id = _vecKeys.at(1).to_u32();
-
-        // check for bool
-        if (_vecKeys.at(0) == "bool")
-        {
-            if (_value.key() == "value")
-                setVal(id, _value.toBool());
-            else if (_value.key() == "default")
-                setDefVal(id, _value.toBool());
-        }
-
-        // check for color
-        if (_vecKeys.at(0) == "color")
-        {
-            if (_value.key() == "valueR")
-                setValR(id, _value.toDbl());
-            else if (_value.key() == "valueG")
-                setValG(id, _value.toDbl());
-            else if (_value.key() == "valueB")
-                setValB(id, _value.toDbl());
-            else if (_value.key() == "valueA")
-                setValA(id, _value.toDbl());
-
-            else if (_value.key() == "defaultR")
-                setDefR(id, _value.toDbl());
-            else if (_value.key() == "defaultG")
-                setDefG(id, _value.toDbl());
-            else if (_value.key() == "defaultB")
-                setDefB(id, _value.toDbl());
-            else if (_value.key() == "defaultA")
-                setDefA(id, _value.toDbl());
-        }
-
-        // check for dbl
-        else if (_vecKeys.at(0) == "dbl")
-        {
-            if (_value.key() == "value")
-                setVal(id, _value.toDbl());
-            else if (_value.key() == "default")
-                setDefVal(id, _value.toDbl());
-            else if (_value.key() == "min")
-                setMinVal(id, _value.toDbl());
-            else if (_value.key() == "max")
-                setMaxVal(id, _value.toDbl());
-            else if (_value.key() == "minMax")
-                setDblMinMax(id, _value.toBool());
-        }
-
-        // check for s64
-        else if (_vecKeys.at(0) == "s64")
-        {
-            if (_value.key() == "value")
-                setVal(id, _value.toDbl());
-            else if (_value.key() == "default")
-                setDefVal(id, _value.toDbl());
-            else if (_value.key() == "min")
-                setMinVal(id, _value.toDbl());
-            else if (_value.key() == "max")
-                setMaxVal(id, _value.toDbl());
-            else if (_value.key() == "minMax")
-                setS64MinMax(id, _value.toBool());
-        }
-
-        // check for string
-        else if (_vecKeys.at(0) == "string")
-        {
-            if (_value.key() == "value")
-                setVal(id, _value.toString());
-            else if (_value.key() == "default")
-                setDefVal(id, _value.toString());
-        }
-
-        // check for u64
-        else if (_vecKeys.at(0) == "u64")
-        {
-            if (_value.key() == "value")
-                setVal(id, _value.toDbl());
-            else if (_value.key() == "default")
-                setDefVal(id, _value.toDbl());
-            else if (_value.key() == "min")
-                setMinVal(id, _value.toDbl());
-            else if (_value.key() == "max")
-                setMaxVal(id, _value.toDbl());
-            else if (_value.key() == "minMax")
-                setU64MinMax(id, _value.toBool());
-        }
-
-    } // if...
-
-} // aVarPool::JsonValCallback
-
-
-/*******************************************************************************
-* aVarPool::JsonObjCallback
-*******************************************************************************/
-void aVarPool::JsonObjCallback(const aVector<aString> &/*_vecKeys*/,
-                               const aJsonObj         &/*_obj*/)
-{
-} // aVarPool::JsonObjCallback
 
 
 } // namespace aUtil

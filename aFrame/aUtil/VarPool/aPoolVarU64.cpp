@@ -17,7 +17,6 @@
 *******************************************************************************/
 #include "aPoolVarU64.h"
 #include "aJsonFile.h"
-#include "aJsonValue.h"
 
 
 /*******************************************************************************
@@ -63,19 +62,19 @@ aPoolVarU64& aPoolVarU64::operator=(const aPoolVarU64	&_rhs)
 /*******************************************************************************
 * aPoolVarU64::add2JsonFile
 *******************************************************************************/
-void aPoolVarU64::add2JsonFile(aJsonFile  &_jFile,
-                               u32        _u32keyID) const
+void aPoolVarU64::add2JsonFile(aJsonFile  &/*_jFile*/,
+                               u32        /*_u32keyID*/) const
 {
-    _jFile.openLevel();
+    // _jFile.openLevel();
 
-    _jFile.add(aJsonValue("value", (dbl) val()));
-    _jFile.add(aJsonValue("default", (dbl) defVal()));
-    _jFile.add(aJsonValue("min", (dbl) minVal()));
-    _jFile.add(aJsonValue("max", (dbl) maxVal()));
-    _jFile.add(aJsonValue("minMax", minMax()));
+    // _jFile.add(aJsonValue("value", (dbl) val()));
+    // _jFile.add(aJsonValue("default", (dbl) defVal()));
+    // _jFile.add(aJsonValue("min", (dbl) minVal()));
+    // _jFile.add(aJsonValue("max", (dbl) maxVal()));
+    // _jFile.add(aJsonValue("minMax", minMax()));
 
-    // key for this value is the id of this value
-    _jFile.closeLevel(aString::fromValue(_u32keyID));
+    // // key for this value is the id of this value
+    // _jFile.closeLevel(aString::fromValue(_u32keyID));
 } // aPoolVarU64::add2JsonFile
 
 

@@ -72,6 +72,16 @@ aString::aString(const std::u16string &_str)
 
 
 /*******************************************************************************
+* aString::aString
+*******************************************************************************/
+aString::aString(const std::string &_str)
+{
+    std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+    m_str = converter.from_bytes(_str);
+} // aString::aString
+
+
+/*******************************************************************************
 * aString::~aString
 *******************************************************************************/
 aString::~aString()

@@ -1,62 +1,61 @@
 /*******************************************************************************
-* \file BaseApp.h
-* \author Andreas Kuhlewind
-*
-* \brief
-*
-* $Revision: 69 $
-* $LastChangedDate: 2010-08-17 14:10:45 +0200 (Di, 17 Aug 2010) $
-* $LastChangedBy: akuhlewi $
-*
-*  Detailed description starts here.
-*******************************************************************************/
-
-
-/*******************************************************************************
 * includes
 *******************************************************************************/
-#include "mainWin.h"
-#include "ctrlPanel.h"
+#include "aFrame_def.h"
 
-using namespace aLib::aWin;
+#include "aAppBase.h"
+#include "mainWin.h"
+#include "aJsonFile.h"
+#include "aPath.h"
+
 using namespace std;
+using namespace aFrame::aApp;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
-* MainWin::onUpdateCmd
+* MainWin::onFileOpen
 *******************************************************************************/
-void MainWin::onUpdateCmd(u64     _u64Cmd,
-                          aDoc    */*_pDoc*/,
-                          aView   */*_pView*/,
-                          s64     /*_s64Param1*/,
-                          s64     /*_s64Param2*/,
-                          u64     /*_u64Param1*/,
-                          u64     /*_u64Param2*/,
-                          flt     /*_fltParam1*/,
-                          flt     /*_fltParam2*/,
-                          dbl     /*_dblParam1*/,
-                          dbl     /*_dblParam2*/,
-                          void    */*_pParam1*/,
-                          void    */*_pParam2*/)
+void MainWin::onFileOpen()
 {
-    // UPDATE_RESET_ALL
-    if (isBitsSet(_u64Cmd, UPDATE_RESET_ALL))
-    {
-        if (m_pCtrlPanel != nullptr)
-        {
-            m_pCtrlPanel->resetAllChannels();
+} // MainWin::onFileOpen
 
-            _u64Cmd |= UPDATE_GUI;
-        }
+
+/*******************************************************************************
+* MainWin::onFileSave
+*******************************************************************************/
+void MainWin::onFileSave()
+{
+    aPath   sPath = get_appPath();
+    sPath.append("qLights.json");
+
+    aJsonFile   f(sPath);
+
+    // save the controllers
+    for (const unique_ptr<Controller> &c : m_lstController)
+    {
+        f.addValue(aString("controller:") + c->name(), "Showtec NET-2/3 POCKET");
+        f.addValue(aString("controller:") + c->name() + ":adress", c->ipAdr());
     }
 
-    // UPDATE_GUI
-    if (isBitsSet(_u64Cmd, UPDATE_GUI))
-    {
-        if (m_pCtrlPanel != nullptr)
-        {
-            m_pCtrlPanel->updateGui();
-            updateAllCtrls();
-        }
-    }
-} // MainWin::onUpdateCmd
+
+    f.writeJsonFile();
+
+} // MainWin::onFileSave
+
+
+/*******************************************************************************
+* MainWin::onController
+*******************************************************************************/
+void MainWin::onController()
+{
+    //shared_ptr<Controller> pController = createController("Showtec NET-2/3 POCKET", "192.168.1.245", 2);
+} // MainWin::onController
+
+
+/*******************************************************************************
+* MainWin::onUniverse
+*******************************************************************************/
+void MainWin::onUniverse()
+{
+} // MainWin::onUniverse

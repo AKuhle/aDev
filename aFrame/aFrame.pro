@@ -35,11 +35,14 @@ DESTDIR = ../../../../Apps
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 DEFINES += AFRAME_LIBRARY
 DEFINES += _USE_QT_
+DEFINES += __NO_FRAME_main__
 
 
 ########################################################################
 # include pathes for aFrame
 ########################################################################
+INCLUDEPATH += json/include
+
 INCLUDEPATH += aApp
 INCLUDEPATH += aApp/Qt
 
@@ -135,8 +138,6 @@ HEADERS += \
     aUtil/Interface/aThread_i.h \
     aUtil/Interface/aUrl_sysi.h \
     aUtil/Qt/aJsonFile.h \
-    aUtil/Qt/aJsonObj.h \
-    aUtil/Qt/aJsonValue.h \
     aUtil/Qt/aProgressCb.h \
     aUtil/Qt/aProgressMgr.h \
     aUtil/Qt/aThread.h \
@@ -221,8 +222,6 @@ SOURCES += \
     aUtil/Cmds/aCmdStack.cpp \
     aUtil/Cmds/aCmdThread.cpp \
     aUtil/Qt/aJsonFile.cpp \
-    aUtil/Qt/aJsonObj.cpp \
-    aUtil/Qt/aJsonValue.cpp \
     aUtil/Qt/aProgressCb.cpp \
     aUtil/Qt/aProgressMgr.cpp \
     aUtil/Qt/aThread.cpp \

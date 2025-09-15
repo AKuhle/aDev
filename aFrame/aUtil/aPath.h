@@ -37,6 +37,7 @@ class aPath : std::filesystem::path
         aPath();
         aPath(const aPath  &_sPath);
         aPath(const aString  &_sPath);
+        aPath(const std::string  &_sPath);
         aPath(const std::filesystem::path &_path);
         aPath(const char *_pStr);
         virtual ~aPath();
@@ -48,6 +49,8 @@ class aPath : std::filesystem::path
 
         aPath           operator/(const char *_pStr) const;
         aPath           operator/(const aString &_str) const;
+
+        void            append(const aString &_str);
 
         aString         canonicalPath() const;
 

@@ -6,6 +6,10 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
+#ifdef _USE_QT_
+    #include <QCoreApplication>
+#endif // _USE_QT_
+
 #include "aFrame_def.h"
 #include "aApp_def.h"
 
@@ -52,7 +56,13 @@ aPath get_appName()
 *******************************************************************************/
 aPath get_appPath()
 {
-    return (get_aAppBase() != nullptr)?   get_aAppBase()->appPath() : aPath{};
+    #ifdef _USE_QT_
+        QString exePath = QCoreApplication::applicationDirPath();
+
+        return exePath.toStdString();
+    #endif // _USE_QT_
+
+    // return (get_aAppBase() != nullptr)?   get_aAppBase()->appPath() : aPath{};
 } // get_appPath
 
 

@@ -17,12 +17,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QJsonDocument>
-#include <QJsonObject>
-#include "aString.h"
+#include "aFrame_def.h"
 #include "aPath.h"
-#include "aUniquePtrVec.h"
-#include "aVector.h"
+#include <nlohmann/json.hpp>
 
 
 /*******************************************************************************
@@ -38,45 +35,72 @@ namespace aUtil {
 class aJsonValue;
 
 
+struct Value;
+using Object = std::map<std::string, Value>;
+struct Value : std::variant<int, double, std::string, std::vector<std::string>, Object> {
+    using variant::variant;
+};
+
+
 /*******************************************************************************
 * class aJsonFile
 *******************************************************************************/
 class aJsonFile
 {
     private:
-        aPath                           m_sFilePath;
-        QJsonDocument                   m_jsonDoc;
-        aUniquePtrVec<QJsonObject>      m_vecObj;
-        aVector<s32>                    m_vecIdx;
+        const aPath                     m_sPath;
+        Object                          m_root;
+
 
     public:
-        aJsonFile(const aPath  &_sFilePath);
+        aJsonFile(const aPath &_sPath);
         virtual ~aJsonFile();
 
 
-        // write member
-        void        openLevel();
-        void        closeLevel(const aString &_sKey);
+    // add members
+    public:
+        void                            addValue(const aString  &_sKey,
+                                                 int            _iValue);
 
-        void        add(const aJsonValue &_val);
+        void                            addValue(const aString  &_sKey,
+                                                 double         _dValue);
 
-        bool        write2File();
+        void                            addValue(const aString  &_sKey,
+                                                 const aString  &_sValue);
+
+        void                            addValue(const aString              &_sKey,
+                                                 const std::vector<aString> &_vValue);
+
+        // read members
+    public:
+        int                             readIntValue(const aString &_sKey) const;
+
+        double                          readDoubleValue(const aString &_sKey) const;
+
+        aString                         readStringValue(const aString &_sKey) const;
+
+        std::vector<aString>            readVectorValue(const aString &_sKey) const;
 
 
-        // read member
-        aString     readStringValue(const aString     &_sNestedKey);    // eg. "key1:key2:color"
+    // read/write the file
+    public:
+        bool                            writeJsonFile() const;
 
-        bool        readAllValues(std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
-                                  std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const;
+        bool                            readJsonFile();
 
+
+    // helper
     private:
-        bool        readJsonDoc();
+        static std::vector<std::string> splitKey(const std::string &_key);
 
-        void        readJsonObj(const QJsonObject                                   &_obj,
-                                aVector<aString>                                    &_vecKeys,
-                                std::function<void(const aVector<aString>&, const aJsonValue&)> _fVal,
-                                std::function<void(const aVector<aString>&, const aJsonObj&)> _fObj) const;
-}; // class aJsonFileI
+        Value*                          getOrCreate(std::vector<std::string> &_vKeys);
+
+        const Value*                    getValue(const std::vector<std::string> &_vKeys) const;
+
+        void                            writeJson(std::ostream  & os,
+                                                  const Value   &value,
+                                                  int           indent = 0) const;
+}; // class aJsonFile
 
 
 } // namespace aUtil

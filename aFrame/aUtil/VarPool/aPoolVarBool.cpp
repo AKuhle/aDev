@@ -17,7 +17,6 @@
 *******************************************************************************/
 #include "aPoolVarBool.h"
 #include "aJsonFile.h"
-#include "aJsonValue.h"
 
 
 /*******************************************************************************
@@ -51,16 +50,16 @@ aPoolVarBool& aPoolVarBool::operator=(const aPoolVarBool &_rhs)
 /*******************************************************************************
 * aPoolVarBool::add2JsonFile
 *******************************************************************************/
-void aPoolVarBool::add2JsonFile(aJsonFile  &_jFile,
-                                u32        _u32keyID) const
+void aPoolVarBool::add2JsonFile(aJsonFile  &/*_jFile*/,
+                                u32        /*_u32keyID*/) const
 {
-    _jFile.openLevel();
+    // _jFile.openLevel();
 
-    _jFile.add(aJsonValue("value", val()));
-    _jFile.add(aJsonValue("default", defVal()));
+    // _jFile.add(aJsonValue("value", val()));
+    // _jFile.add(aJsonValue("default", defVal()));
 
-    // key for this value is the id of this value
-    _jFile.closeLevel(aString::fromValue(_u32keyID));
+    // // key for this value is the id of this value
+    // _jFile.closeLevel(aString::fromValue(_u32keyID));
 } // aPoolVarBool::add2JsonFile
 
 

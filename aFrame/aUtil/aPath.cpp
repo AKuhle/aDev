@@ -63,6 +63,15 @@ aPath::aPath(const char *_pStr)
 /*******************************************************************************
 * aPath::aPath
 *******************************************************************************/
+aPath::aPath(const std::string  &_sPath)
+: std::filesystem::path(_sPath)
+{
+} // aPath::aPath
+
+
+/*******************************************************************************
+* aPath::aPath
+*******************************************************************************/
 aPath::aPath(const std::filesystem::path  &_path)
 : std::filesystem::path(_path)
 {
@@ -142,6 +151,15 @@ aPath aPath::operator/(const aString &_str) const
     p.append(_str.to_stdU16String());
 
     return p;
+} // aPath::operator+=
+
+
+/*******************************************************************************
+* aPath::append
+*******************************************************************************/
+void aPath::append(const aString &_str)
+{
+    std::filesystem::path::append(_str.to_stdString());
 } // aPath::operator+=
 
 

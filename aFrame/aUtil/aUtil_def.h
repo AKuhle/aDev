@@ -78,8 +78,6 @@ class aArgument;
 class aColor;
 class aDimension;
 class aJsonFile;
-class aJsonObj;
-class aJsonValue;
 class aMargin;
 class aPath;
 class aPoint;

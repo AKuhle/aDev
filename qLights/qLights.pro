@@ -10,6 +10,7 @@ CONFIG += c++17
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+DEFINES += __NO_FRAME_main__
 DEFINES += _USE_QT_
 
 
@@ -18,12 +19,12 @@ DEFINES += _USE_QT_
 ########################################################################
 CONFIG(debug, debug|release) {
 #        TARGET = qLightsd
-        TARGET = sample2d
+        TARGET = sample1d
         windows {
-                LIBS += ../../../../Apps/libaLibd.a
+                LIBS += ../../../../Apps/libaFramed.a
         }
         unix {
-                LIBS += ../Apps/libaLibd.a
+                LIBS += ../Apps/libaFramed.a
         }
 }
 
@@ -32,13 +33,13 @@ CONFIG(debug, debug|release) {
 # release configuration
 ########################################################################
 CONFIG(release, debug|release) {
-#        TARGET = qLights
-        TARGET = sample2
+#        TARGET = qLight
+        TARGET = sample1
         windows {
-                LIBS += ../../../../Apps/libaLib.a
+                LIBS += ../../../../Apps/libaFrame.a
         }
         unix {
-                LIBS += ../Apps/libaLib.a
+                LIBS += ../Apps/libaFrame.a
         }
 }
 
@@ -51,125 +52,66 @@ MOC_DIR = ../../../../GeneratedFiles/qLights
 DESTDIR = ../../../../Apps
 
 
-# Default rules for deployment.
-# qnx: target.path = /tmp/$${TARGET}/bin
-# else: unix:!android: target.path = /opt/$${TARGET}/bin
-# !isEmpty(target.path): INSTALLS += target
+########################################################################
+# include pathes for aFrame
+########################################################################
+INCLUDEPATH += ../aFrame/json/include
+
+INCLUDEPATH += ../aFrame
+
+INCLUDEPATH += ../aFrame/aApp
+INCLUDEPATH += ../aFrame/aApp/Qt
+
+INCLUDEPATH += ../aFrame/aUtil
+INCLUDEPATH += ../aFrame/aUtil/Cmds
+INCLUDEPATH += ../aFrame/aUtil/Collection
+INCLUDEPATH += ../aFrame/aUtil/Interface
+INCLUDEPATH += ../aFrame/aUtil/Qt
+INCLUDEPATH += ../aFrame/aUtil/VarPool
+
+INCLUDEPATH += ../aFrame/aMath
+INCLUDEPATH += ../aFrame/aMath/Obj2D
+INCLUDEPATH += ../aFrame/aMath/Obj3D
+
+INCLUDEPATH += ../aFrame/aGraphic
+INCLUDEPATH += ../aFrame/aGraphic/Interface
+INCLUDEPATH += ../aFrame/aGraphic/Qt
+INCLUDEPATH += ../aFrame/aGraphic/Style
+
+INCLUDEPATH += ../aFrame/aWin
+INCLUDEPATH += ../aFrame/aWin/Ctrl
+INCLUDEPATH += ../aFrame/aWin/Layout
+INCLUDEPATH += ../aFrame/aWin/Qt
+INCLUDEPATH += ../aFrame/aWin/Tools
 
 
 ########################################################################
-# include pathes for aLib
+# include PhotoLab
 ########################################################################
-INCLUDEPATH += ../aLib
-
-INCLUDEPATH += ../aLib/aApp
-INCLUDEPATH += ../aLib/aApp/Qt
-
-INCLUDEPATH += ../aLib/aCtrl
-INCLUDEPATH += ../aLib/aCtrl/Interface
-INCLUDEPATH += ../aLib/aCtrl/Qt
-
-INCLUDEPATH += ../aLib/aGraphic
-INCLUDEPATH += ../aLib/aGraphic/Interface
-INCLUDEPATH += ../aLib/aGraphic/Qt
-
-INCLUDEPATH += ../aLib/aUtil
-INCLUDEPATH += ../aLib/aUtil/Cmds
-INCLUDEPATH += ../aLib/aUtil/Collection
-INCLUDEPATH += ../aLib/aUtil/Interface
-INCLUDEPATH += ../aLib/aUtil/Qt
-INCLUDEPATH += ../aLib/aUtil/Tool
-INCLUDEPATH += ../aLib/aUtil/VarPool
-
-INCLUDEPATH += ../aLib/aMath
-INCLUDEPATH += ../aLib/aMath/Obj2D
-INCLUDEPATH += ../aLib/aMath/Obj3D
-
-INCLUDEPATH += ../aLib/aPic
-
-INCLUDEPATH += ../aLib/aWin
-INCLUDEPATH += ../aLib/aWin/DocView
-INCLUDEPATH += ../aLib/aWin/Interface
-INCLUDEPATH += ../aLib/aWin/Qt
-
-
-########################################################################
-# include qLights
-########################################################################
-INCLUDEPATH += App
 INCLUDEPATH += Classes
-INCLUDEPATH += Dialogs
-INCLUDEPATH += Forms
+INCLUDEPATH += Dlg
 INCLUDEPATH += Win
 
 
-########################################################################
-# HEADERS
-########################################################################
+SOURCES += \
+    Classes/controller.cpp \
+    Classes/universe.cpp \
+    Win/mainWin.cpp \
+    Win/mainWin_handler.cpp \
+    main.cpp
+
 HEADERS += \
-    App/qLightsApp.h \
-    App/qLights_defs.h \
-    Classes/bank.h \
-    Classes/channel.h \
-    Classes/chase.h \
     Classes/controller.h \
-    Classes/fader.h \
-    Classes/fixture.h \
-    Classes/scene.h \
     Classes/universe.h \
-    Dialogs/ctrlPanel.h \
-    Dialogs/dlgAddBank.h \
-    Dialogs/dlgAddChase.h \
-    Dialogs/dlgAddScene.h \
-    Dialogs/dlgRemoveScene.h \
-    Dialogs/scribbleStrip.h \
     Win/mainWin.h
 
-
-########################################################################
-# SOURCES
-########################################################################
-SOURCES += \
-    App/qLightsApp.cpp \
-    Classes/bank.cpp \
-    Classes/channel.cpp \
-    Classes/chase.cpp \
-    Classes/controller.cpp \
-    Classes/fader.cpp \
-    Classes/fixture.cpp \
-    Classes/scene.cpp \
-    Classes/universe.cpp \
-    Dialogs/ctrlPanel.cpp \
-    Dialogs/ctrlPanel_chase.cpp \
-    Dialogs/ctrlPanel_ctrl.cpp \
-    Dialogs/ctrlPanel_io.cpp \
-    Dialogs/dlgAddBank.cpp \
-    Dialogs/dlgAddChase.cpp \
-    Dialogs/dlgAddScene.cpp \
-    Dialogs/dlgRemoveScene.cpp \
-    Dialogs/scribbleStrip.cpp \
-    Win/mainWin.cpp \
-    Win/mainWin_ctrls.cpp \
-    Win/mainWin_handler.cpp
-
-
-########################################################################
-# resources
-########################################################################
-#RESOURCES += \
-#    Resource/Resource_Qt/photoLab.qrc
-
-
-########################################################################
-# forms
-########################################################################
 FORMS += \
-    Forms/dlgAddBank.ui \
-    Forms/dlgAddChase.ui \
-    Forms/dlgAddScene.ui \
-    Forms/dlgRemoveScene.ui \
-    Forms/formCtrlPanel.ui \
-    Forms/formMainWin.ui
+    Forms/mainWin.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    Resource/Resource_Qt/qLights.qrc
+    Resource/qLights.qrc

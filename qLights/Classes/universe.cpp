@@ -15,21 +15,21 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aJsonFile.h"
-#include "aJsonValue.h"
-
 #include "universe.h"
 
 using namespace std;
-using namespace aLib::aUtil;
+using namespace aFrame;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
 * Universe::Universe
 *******************************************************************************/
-Universe::Universe(u32              _u32Id,
+Universe::Universe(aString          _sName,
+                   u32              _u32Id,
                    const aString    &_sIpAdr)
-: m_u32Id(_u32Id),
+: m_sName(_sName),
+  m_u32Id(_u32Id),
   m_ipAdr(_sIpAdr.toQString()),
   m_dmxData(m_u32DmxDataSize, 0)
 {

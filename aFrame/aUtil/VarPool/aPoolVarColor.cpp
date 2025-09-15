@@ -12,7 +12,6 @@
 *******************************************************************************/
 #include "aPoolVarColor.h"
 #include "aJsonFile.h"
-#include "aJsonValue.h"
 
 
 /*******************************************************************************
@@ -46,23 +45,23 @@ aPoolVarColor& aPoolVarColor::operator=(const aPoolVarColor	&_rhs)
 /*******************************************************************************
 * aPoolVarColor::add2JsonFile
 *******************************************************************************/
-void aPoolVarColor::add2JsonFile(aJsonFile  &_jFile,
-                                 u32        _u32keyID) const
+void aPoolVarColor::add2JsonFile(aJsonFile  &/*_jFile*/,
+                                 u32        /*_u32keyID*/) const
 {
-    _jFile.openLevel();
+    // _jFile.openLevel();
 
-    _jFile.add(aJsonValue("valueR", val().r()));
-    _jFile.add(aJsonValue("valueG", val().g()));
-    _jFile.add(aJsonValue("valueB", val().b()));
-    _jFile.add(aJsonValue("valueA", val().a()));
+    // _jFile.add(aJsonValue("valueR", val().r()));
+    // _jFile.add(aJsonValue("valueG", val().g()));
+    // _jFile.add(aJsonValue("valueB", val().b()));
+    // _jFile.add(aJsonValue("valueA", val().a()));
 
-    _jFile.add(aJsonValue("defaultR", val().r()));
-    _jFile.add(aJsonValue("defaultG", val().g()));
-    _jFile.add(aJsonValue("defaultB", val().b()));
-    _jFile.add(aJsonValue("defaultA", val().a()));
+    // _jFile.add(aJsonValue("defaultR", val().r()));
+    // _jFile.add(aJsonValue("defaultG", val().g()));
+    // _jFile.add(aJsonValue("defaultB", val().b()));
+    // _jFile.add(aJsonValue("defaultA", val().a()));
 
-    // key for this value is the id of this value
-    _jFile.closeLevel(aString::fromValue(_u32keyID));
+    // // key for this value is the id of this value
+    // _jFile.closeLevel(aString::fromValue(_u32keyID));
 } // aPoolVarColor::add2Json
 
 } // namespace aUtil
