@@ -31,10 +31,16 @@ class MainWin : public QMainWindow
         MainWin(QWidget *parent = nullptr);
         ~MainWin();
 
+    private:
+        void                updateGui();
+
+
     private slots:
+        // ctrl-bar
         void                onFileOpen();
         void                onFileSave();
+        void                onPanel();
 
-        void                onController();
-        void                onUniverse();
+        // conbtroller panel
+        void                onAddController(bool _bChecked);
 }; // class MainWin

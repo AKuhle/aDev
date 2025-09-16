@@ -48,12 +48,11 @@ struct Value : std::variant<int, double, std::string, std::vector<std::string>, 
 class aJsonFile
 {
     private:
-        const aPath                     m_sPath;
         Object                          m_root;
 
 
     public:
-        aJsonFile(const aPath &_sPath);
+        aJsonFile();
         virtual ~aJsonFile();
 
 
@@ -84,9 +83,9 @@ class aJsonFile
 
     // read/write the file
     public:
-        bool                            writeJsonFile() const;
+        bool                            writeJsonFile(const aPath &_sPath) const;
 
-        bool                            readJsonFile();
+        bool                            readJsonFile(const aPath &_sPath);
 
 
     // helper

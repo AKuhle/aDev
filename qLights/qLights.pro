@@ -96,6 +96,7 @@ INCLUDEPATH += Win
 SOURCES += \
     Classes/controller.cpp \
     Classes/universe.cpp \
+    Dlg/dlgController.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     main.cpp
@@ -103,9 +104,11 @@ SOURCES += \
 HEADERS += \
     Classes/controller.h \
     Classes/universe.h \
+    Dlg/dlgController.h \
     Win/mainWin.h
 
 FORMS += \
+    Forms/dlgController.ui \
     Forms/mainWin.ui
 
 # Default rules for deployment.

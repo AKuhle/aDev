@@ -1,12 +1,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "ui_mainWin.h"
 #include "aFrame_def.h"
 
 #include "aAppBase.h"
 #include "mainWin.h"
 #include "aJsonFile.h"
 #include "aPath.h"
+
+#include "dlgcontroller.h"
 
 using namespace std;
 using namespace aFrame::aApp;
@@ -29,7 +32,7 @@ void MainWin::onFileSave()
     aPath   sPath = get_appPath();
     sPath.append("qLights.json");
 
-    aJsonFile   f(sPath);
+    aJsonFile   f;
 
     // save the controllers
     for (const unique_ptr<Controller> &c : m_lstController)
@@ -38,24 +41,27 @@ void MainWin::onFileSave()
         f.addValue(aString("controller:") + c->name() + ":adress", c->ipAdr());
     }
 
-
-    f.writeJsonFile();
+    f.writeJsonFile(sPath);
 
 } // MainWin::onFileSave
 
 
 /*******************************************************************************
-* MainWin::onController
+* MainWin::onPanel
 *******************************************************************************/
-void MainWin::onController()
+void MainWin::onPanel()
 {
-    //shared_ptr<Controller> pController = createController("Showtec NET-2/3 POCKET", "192.168.1.245", 2);
-} // MainWin::onController
+    m_pUi->m_pPanelDock->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    updateGui();
+} // MainWin::onPanel
 
 
 /*******************************************************************************
-* MainWin::onUniverse
+* MainWin::onAddController
 *******************************************************************************/
-void MainWin::onUniverse()
+void MainWin::onAddController(bool /*_bChecked*/)
 {
-} // MainWin::onUniverse
+    DlgController   dlg;
+
+    dlg.exec();
+} // MainWin::onAddController

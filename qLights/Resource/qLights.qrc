@@ -5,5 +5,7 @@
         <file>Std_32x32/file_open.png</file>
         <file>Std_32x32/file_save.png</file>
         <file>qLights/controller.png</file>
+        <file>Std_32x32/panel_right.png</file>
+        <file>Std_32x32/plus.png</file>
     </qresource>
 </RCC>

@@ -29,8 +29,7 @@ namespace aUtil {
 /*******************************************************************************
 * aJsonFile::aJsonFile
 *******************************************************************************/
-aJsonFile::aJsonFile(const aPath &_sPath)
-: m_sPath(_sPath)
+aJsonFile::aJsonFile()
 {
 } // aJsonFile::aJsonFile
 
@@ -181,9 +180,9 @@ std::vector<aString> aJsonFile::readVectorValue(const aString  &_sKey) const
 /*******************************************************************************
 * aJsonFile::writeJsonFile
 *******************************************************************************/
-bool aJsonFile::writeJsonFile() const
+bool aJsonFile::writeJsonFile(const aPath &_sPath) const
 {
-    std::ofstream file(m_sPath.canonicalPath().to_stdString());
+    std::ofstream file(_sPath.canonicalPath().to_stdString());
 
     if (!file.is_open())
     {
@@ -228,9 +227,9 @@ Value convertJsonToValue(const nlohmann::json& j)
 /*******************************************************************************
 * aJsonFile::readJsonFile
 *******************************************************************************/
-bool aJsonFile::readJsonFile()
+bool aJsonFile::readJsonFile(const aPath &_sPath)
 {
-    std::ifstream file(m_sPath.canonicalPath().to_stdString());
+    std::ifstream file(_sPath.canonicalPath().to_stdString());
 
     if (!file.is_open())
     {

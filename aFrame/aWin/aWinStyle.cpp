@@ -73,7 +73,8 @@ aWinStyle::~aWinStyle()
 void aWinStyle::setStyleFile(const aPath    &_path)
 {
     // create a new json file
-    m_pStyleFile = make_unique<aJsonFile> (_path);
+    m_pStyleFile = make_unique<aJsonFile> ();
+    m_pStyleFile->readJsonFile(_path);
 
     // try to read the bg from aBaseWin => we have a valid style file
     aString sBg = m_pStyleFile->readStringValue("aBaseWin:bg");

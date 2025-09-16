@@ -70,6 +70,8 @@ void aBaseWin::onSysResize(const aDimension   &/*_dOldDim*/,
 {
     if (m_pLayout)
     {
+        aRect r1 = contentRect();
+        aRect r2 = contentRect();
         m_pLayout->arrange(contentRect());
     }
 } // aBaseWin::onSysResize

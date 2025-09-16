@@ -43,6 +43,20 @@ aToolBtn::~aToolBtn()
 
 
 /*******************************************************************************
+* aBtaToolBtnn::onSysCreateWin
+*******************************************************************************/
+bool aToolBtn::onSysCreateWin()
+{
+    CHECK_PRE_CONDITION(aBtn::onSysCreateWin(), false);
+
+    // set the fixed size
+    setFixDim(sysMetrics());
+
+    return true;
+} // aToolBtn::onSysCreateWin
+
+
+/*******************************************************************************
 * aToolBtn::onPaintContentBg
 *******************************************************************************/
 void aToolBtn::onPaintContentBg()
