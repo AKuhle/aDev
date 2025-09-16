@@ -31,8 +31,14 @@ class MainWin : public QMainWindow
         MainWin(QWidget *parent = nullptr);
         ~MainWin();
 
-    private:
+        // controller
+        void                addController(const aString &_sName,
+                                          const aString &_sIpAdr);
+
+        // update
+        void                updateAll();
         void                updateGui();
+        void                updateControllerPanel();
 
 
     private slots:

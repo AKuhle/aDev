@@ -26,10 +26,7 @@ MainWin::MainWin(QWidget *parent)
 
     connect(m_pUi->m_pBtnAddController, &QToolButton::clicked, this, &MainWin::onAddController);
 
-    unique_ptr<Controller>  pController = make_unique<Controller> ("Showtec NET-2/3 POCKET", "192.168.1.245");
-    m_lstController.push_back(std::move(pController));
-
-    updateGui();
+    updateAll();
 } // MainWin::MainWin
 
 
@@ -43,10 +40,12 @@ MainWin::~MainWin()
 
 
 /*******************************************************************************
-* MainWin::updateGui
+* MainWin::addController
 *******************************************************************************/
-void MainWin::updateGui()
+void MainWin::addController(const aString &_sName,
+                            const aString &_sIpAdr)
 {
-    // action PanelDock
-    m_pUi->m_pActionPanelDock->setChecked(m_pUi->m_pPanelDock->isVisible());
-} // MainWin::updateGui
+    //unique_ptr<Controller>  pController = make_unique<Controller> ("Showtec NET-2/3 POCKET", "192.168.1.245");
+    unique_ptr<Controller>  pController = make_unique<Controller> (_sName, _sIpAdr);
+    m_lstController.push_back(std::move(pController));
+} // MainWin::addController

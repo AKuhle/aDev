@@ -99,6 +99,7 @@ SOURCES += \
     Dlg/dlgController.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
+    Win/mainWin_update.cpp \
     main.cpp
 
 HEADERS += \

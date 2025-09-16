@@ -3,6 +3,7 @@
 *******************************************************************************/
 #include "aFrame_def.h"
 
+#include "mainWin.h"
 #include "dlgController.h"
 #include "ui_dlgController.h"
 
@@ -12,9 +13,12 @@ using namespace std;
 /*******************************************************************************
 * DlgController::DlgController
 *******************************************************************************/
-DlgController::DlgController(QWidget *parent) :
-QDialog(parent),
-m_pUi(new Ui::DlgController)
+DlgController::DlgController(MainWin    *_pMainWin,
+                             Controller *_pController)
+: QDialog(_pMainWin),
+  m_pUi(new Ui::DlgController),
+  m_pMainWin(_pMainWin),
+  m_pController(_pController)
 {
     m_pUi->setupUi(this);
 
@@ -37,6 +41,11 @@ DlgController::~DlgController()
 *******************************************************************************/
 void DlgController::accept()
 {
+    m_pMainWin->addController(aString::fromQString(m_pUi->m_pName->text()),
+                              aString::fromQString(m_pUi->m_pAddress->text()));
+
+    m_pMainWin->updateControllerPanel();
+
     QDialog::accept();
 } // DlgController::accept
 

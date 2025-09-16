@@ -10,6 +10,7 @@
 #include "aPath.h"
 
 #include "dlgcontroller.h"
+#include "dlgController.h"
 
 using namespace std;
 using namespace aFrame::aApp;
@@ -21,6 +22,27 @@ using namespace aFrame::aUtil;
 *******************************************************************************/
 void MainWin::onFileOpen()
 {
+    aJsonFile   f;
+    s32         i, j;
+    aPath       sPath   = get_appPath();
+    sPath.append("qLights.json");
+
+    if (f.readJsonFile(sPath))
+    {
+        // load the controllers
+        m_lstController.clear();
+        i = f.readIntValue("controller:count");
+
+        for (j = 0; j < i; j++)
+        {
+            aString sName = f.readStringValue(aString("controller:") + aString::fromValue(j) + ":name");
+            aString sAddress = f.readStringValue(aString("controller:") + aString::fromValue(j) + ":address");
+
+            addController(sName, sAddress);
+        }
+    }
+
+    updateAll();
 } // MainWin::onFileOpen
 
 
@@ -29,20 +51,25 @@ void MainWin::onFileOpen()
 *******************************************************************************/
 void MainWin::onFileSave()
 {
-    aPath   sPath = get_appPath();
+    aJsonFile   f;
+    s32         i;
+    aPath       sPath   = get_appPath();
     sPath.append("qLights.json");
 
-    aJsonFile   f;
+    // save the controllers #
+    f.addValue(aString("controller:count"), m_lstController.size());
 
     // save the controllers
+    f.addValue(aString("controller:count"), m_lstController.size());
+    i = 0;
     for (const unique_ptr<Controller> &c : m_lstController)
     {
-        f.addValue(aString("controller:") + c->name(), "Showtec NET-2/3 POCKET");
-        f.addValue(aString("controller:") + c->name() + ":adress", c->ipAdr());
+        f.addValue(aString("controller:") + aString::fromValue(i) + ":name", c->name());
+        f.addValue(aString("controller:") + aString::fromValue(i) + ":address", c->ipAdr());
+        i++;
     }
 
     f.writeJsonFile(sPath);
-
 } // MainWin::onFileSave
 
 
@@ -61,7 +88,9 @@ void MainWin::onPanel()
 *******************************************************************************/
 void MainWin::onAddController(bool /*_bChecked*/)
 {
-    DlgController   dlg;
+    Controller *pController = nullptr;
+
+    DlgController   dlg(this, pController);
 
     dlg.exec();
 } // MainWin::onAddController
