@@ -9,5 +9,7 @@
         <file>Standard/Icons/32/panel_right.png</file>
         <file>Standard/Icons/32/plus.png</file>
         <file>Standard/Icons/32/database.png</file>
+        <file>Standard/Icons/32/edit.png</file>
+        <file>Standard/Icons/32/minus.png</file>
     </qresource>
 </RCC>

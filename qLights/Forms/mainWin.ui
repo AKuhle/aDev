@@ -2201,7 +2201,7 @@
      <x>0</x>
      <y>0</y>
      <width>1393</width>
-     <height>21</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2259,7 +2259,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <property name="iconSize">
         <size>
@@ -2286,6 +2286,28 @@
              <property name="icon">
               <iconset resource="../../aFrame/Resource/aFrame.qrc">
                <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnRemoveController">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/minus.png</normaloff>:/Standard/Icons/32/minus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnEditController">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/edit.png</normaloff>:/Standard/Icons/32/edit.png</iconset>
              </property>
             </widget>
            </item>
@@ -2360,6 +2382,28 @@
              <property name="icon">
               <iconset resource="../../aFrame/Resource/aFrame.qrc">
                <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnRemoveUniverse">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/minus.png</normaloff>:/Standard/Icons/32/minus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnEditUniverse">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/edit.png</normaloff>:/Standard/Icons/32/edit.png</iconset>
              </property>
             </widget>
            </item>
@@ -2443,6 +2487,28 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="m_pBtnRemoveDevice">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/minus.png</normaloff>:/Standard/Icons/32/minus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnEditDevice">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/edit.png</normaloff>:/Standard/Icons/32/edit.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_7">
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
@@ -2513,6 +2579,28 @@
              <property name="icon">
               <iconset resource="../../aFrame/Resource/aFrame.qrc">
                <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnRemoveFixture">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/minus.png</normaloff>:/Standard/Icons/32/minus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="m_pBtnEditFixture">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/edit.png</normaloff>:/Standard/Icons/32/edit.png</iconset>
              </property>
             </widget>
            </item>
@@ -2632,8 +2720,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../Resource/qLights.qrc"/>
   <include location="../../aFrame/Resource/aFrame.qrc"/>
+  <include location="../Resource/qLights.qrc"/>
  </resources>
  <connections/>
 </ui>
