@@ -182,7 +182,8 @@ std::vector<aString> aJsonFile::readVectorValue(const aString  &_sKey) const
 *******************************************************************************/
 bool aJsonFile::writeJsonFile(const aPath &_sPath) const
 {
-    std::ofstream file(_sPath.canonicalPath().to_stdString());
+    string sss = _sPath.canonicalPath().to_stdString();
+    std::ofstream file(sss);
 
     if (!file.is_open())
     {

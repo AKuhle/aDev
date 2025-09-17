@@ -1,0 +1,50 @@
+{
+  "controller": {
+    "0": {
+      "address": "192.168.1.245",
+      "name": "Showtec NET-2/3 POCKET"
+    },
+    "count": 1
+  },
+  "device": {
+    "0": {
+      "name": "eurolite TMH-S90"
+    },
+    "1": {
+      "name": "eurolite TMH-X4 / 16"
+    },
+    "2": {
+      "name": "eurolite TMH-X4 / 24"
+    },
+    "3": {
+      "name": "PAR"
+    },
+    "count": 4
+  },
+  "fixture": {
+    "0": {
+      "name": "Washer left"
+    },
+    "1": {
+      "name": "Washer right"
+    },
+    "2": {
+      "name": "Spot center"
+    },
+    "3": {
+      "name": "PAR left"
+    },
+    "4": {
+      "name": "PAR right"
+    },
+    "count": 5
+  },
+  "universe": {
+    "0": {
+      "controller": "Showtec NET-2/3 POCKET",
+      "id": 1,
+      "name": "uKMC"
+    },
+    "count": 1
+  }
+}

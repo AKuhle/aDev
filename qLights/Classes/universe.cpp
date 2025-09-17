@@ -16,6 +16,7 @@
 * includes
 *******************************************************************************/
 #include "universe.h"
+#include "aString.h"
 
 using namespace std;
 using namespace aFrame;
@@ -25,14 +26,20 @@ using namespace aFrame::aUtil;
 /*******************************************************************************
 * Universe::Universe
 *******************************************************************************/
-Universe::Universe(aString          _sName,
-                   u32              _u32Id,
-                   const aString    &_sIpAdr)
+Universe::Universe(aString                _sName,
+                   u32                    _u32Id,
+                   weak_ptr<Controller>   _pController)
 : m_sName(_sName),
   m_u32Id(_u32Id),
-  m_ipAdr(_sIpAdr.toQString()),
+  m_pController(_pController),
   m_dmxData(m_u32DmxDataSize, 0)
 {
+    shared_ptr<Controller> pC = _pController.lock();
+
+    if (pC)
+    {
+        m_hostAdr.setAddress(pC->ipAdr().toQString());
+    }
 } // m_artnetPacket::Universe
 
 
@@ -67,36 +74,41 @@ void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
 *******************************************************************************/
 void Universe::sendValues2Controller()
 {
-    QUdpSocket      udpSocket;
-    QByteArray      artnetPacket;
-
-    artnetPacket.append("Art-Net");                                 // Protokollkennung
-    artnetPacket.append('\0');                                      // Nullterminierung
-    artnetPacket.append((char) 0x00);                               // OpCode (Low Byte)
-    artnetPacket.append((char) 0x50);                               // OpCode (High Byte) -> ArtDMX
-    artnetPacket.append((char) 0x00);                               // Protokollversion (High Byte)
-    artnetPacket.append((char) 0x0E);                               // Protokollversion (Low Byte)
-    artnetPacket.append((char) 0x00);                               // Sequence (0 = keine Synchronisation)
-    artnetPacket.append((char) 0x00);                               // Physical (nicht verwendet)
-    artnetPacket.append((char) (m_u32Id & 0xFF));                   // Universum (Low Byte)
-    artnetPacket.append((char) ((m_u32Id >> 8) & 0xFF));            // Universum (High Byte)
-    artnetPacket.append((char) ((m_u32DmxDataSize >> 8) & 0xFF));   // DMX-Datenlänge (High Byte)
-    artnetPacket.append((char) m_u32DmxDataSize & 0xFF);            // DMX-Datenlänge (Low Byte)
-
-    // Füge DMX-Daten zum Paket hinzu
-    artnetPacket.append(m_dmxData.left(m_u32DmxDataSize));
-
-    // Senden des Pakets
-    qint64 bytesSent = udpSocket.writeDatagram(artnetPacket, m_ipAdr, m_u16Port);
-
-    if (bytesSent == -1)
+    if (!m_hostAdr.isNull())
     {
-        //std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
-    }
-    else
-    {
-        //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
-    }
+        QUdpSocket      udpSocket;
+        QByteArray      artnetPacket;
+
+        artnetPacket.append("Art-Net");                                 // Protokollkennung
+        artnetPacket.append('\0');                                      // Nullterminierung
+        artnetPacket.append((char) 0x00);                               // OpCode (Low Byte)
+        artnetPacket.append((char) 0x50);                               // OpCode (High Byte) -> ArtDMX
+        artnetPacket.append((char) 0x00);                               // Protokollversion (High Byte)
+        artnetPacket.append((char) 0x0E);                               // Protokollversion (Low Byte)
+        artnetPacket.append((char) 0x00);                               // Sequence (0 = keine Synchronisation)
+        artnetPacket.append((char) 0x00);                               // Physical (nicht verwendet)
+        artnetPacket.append((char) (m_u32Id & 0xFF));                   // Universum (Low Byte)
+        artnetPacket.append((char) ((m_u32Id >> 8) & 0xFF));            // Universum (High Byte)
+        artnetPacket.append((char) ((m_u32DmxDataSize >> 8) & 0xFF));   // DMX-Datenlänge (High Byte)
+        artnetPacket.append((char) m_u32DmxDataSize & 0xFF);            // DMX-Datenlänge (Low Byte)
+
+        // Füge DMX-Daten zum Paket hinzu
+        artnetPacket.append(m_dmxData.left(m_u32DmxDataSize));
+
+        // Senden des Pakets
+        qint64 bytesSent = udpSocket.writeDatagram(artnetPacket, m_hostAdr, m_u16Port);
+
+        if (bytesSent == -1)
+        {
+            //std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
+        }
+        else
+        {
+            //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+        }
+
+    } // if...
+
 } // Universe::sendValues2Controller
 
 

@@ -4,5 +4,10 @@
         <file>Standard/Masked/32/close.png</file>
         <file>Standard/Masked/32/maximize.png</file>
         <file>Standard/Masked/32/minimize.png</file>
+        <file>Standard/Icons/32/file_open.png</file>
+        <file>Standard/Icons/32/file_save.png</file>
+        <file>Standard/Icons/32/panel_right.png</file>
+        <file>Standard/Icons/32/plus.png</file>
+        <file>Standard/Icons/32/database.png</file>
     </qresource>
 </RCC>

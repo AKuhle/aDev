@@ -55,9 +55,8 @@ DESTDIR = ../../../../Apps
 ########################################################################
 # include pathes for aFrame
 ########################################################################
-INCLUDEPATH += ../aFrame/json/include
-
 INCLUDEPATH += ../aFrame
+INCLUDEPATH += ../aFrame/nlohmann_json/include
 
 INCLUDEPATH += ../aFrame/aApp
 INCLUDEPATH += ../aFrame/aApp/Qt
@@ -95,8 +94,13 @@ INCLUDEPATH += Win
 
 SOURCES += \
     Classes/controller.cpp \
+    Classes/device.cpp \
+    Classes/fixture.cpp \
     Classes/universe.cpp \
     Dlg/dlgController.cpp \
+    Dlg/dlgDevice.cpp \
+    Dlg/dlgFixture.cpp \
+    Dlg/dlgUniverse.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_update.cpp \
@@ -104,12 +108,20 @@ SOURCES += \
 
 HEADERS += \
     Classes/controller.h \
+    Classes/device.h \
+    Classes/fixture.h \
     Classes/universe.h \
     Dlg/dlgController.h \
+    Dlg/dlgDevice.h \
+    Dlg/dlgFixture.h \
+    Dlg/dlgUniverse.h \
     Win/mainWin.h
 
 FORMS += \
     Forms/dlgController.ui \
+    Forms/dlgDevice.ui \
+    Forms/dlgFixture.ui \
+    Forms/dlgUniverse.ui \
     Forms/mainWin.ui
 
 # Default rules for deployment.
@@ -118,4 +130,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    ../aFrame/Resource/aFrame.qrc \
     Resource/qLights.qrc

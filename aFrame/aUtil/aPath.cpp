@@ -91,7 +91,7 @@ aPath::~aPath()
 *******************************************************************************/
 aPath& aPath::operator=(const aPath &_path)
 {
-    *this += _path;
+    std::filesystem::path::operator=(_path);
 
     return *this;
 } // aPath::operator=
@@ -102,7 +102,7 @@ aPath& aPath::operator=(const aPath &_path)
 *******************************************************************************/
 aPath& aPath::operator=(const std::filesystem::path &_path)
 {
-    *this += _path;
+    std::filesystem::path::operator=(_path);
 
     return *this;
 } // aPath::operator=
@@ -113,7 +113,7 @@ aPath& aPath::operator=(const std::filesystem::path &_path)
 *******************************************************************************/
 aPath& aPath::operator=(const char *_pStr)
 {
-    *this += _pStr;
+    std::filesystem::path::operator=(_pStr);
 
     return *this;
 } // aPath::operator=

@@ -61,6 +61,7 @@ DESTDIR = ../../../../Apps
 # include pathes for aFrame
 ########################################################################
 INCLUDEPATH += ../aFrame
+INCLUDEPATH += ../aFrame/nlohmann_json/include
 
 INCLUDEPATH += ../aFrame/aApp
 INCLUDEPATH += ../aFrame/aApp/Qt

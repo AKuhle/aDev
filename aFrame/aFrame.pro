@@ -43,7 +43,7 @@ DEFINES += _USE_QT_
 ########################################################################
 # include pathes for aFrame
 ########################################################################
-INCLUDEPATH += json/include
+INCLUDEPATH += nlohmann_json/include
 
 INCLUDEPATH += aApp
 INCLUDEPATH += aApp/Qt
@@ -280,4 +280,5 @@ unix {
 
 DISTFILES += \
     Documents/boxModel.png \
-    Documents/dark_style.json
+    Documents/dark_style.json \
+    Documents/qLights.json

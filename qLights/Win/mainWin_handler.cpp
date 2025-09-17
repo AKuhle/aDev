@@ -9,8 +9,10 @@
 #include "aJsonFile.h"
 #include "aPath.h"
 
-#include "dlgcontroller.h"
 #include "dlgController.h"
+#include "dlgUniverse.h"
+#include "dlgDevice.h"
+#include "dlgFixture.h"
 
 using namespace std;
 using namespace aFrame::aApp;
@@ -23,22 +25,60 @@ using namespace aFrame::aUtil;
 void MainWin::onFileOpen()
 {
     aJsonFile   f;
-    s32         i, j;
+    s32         count, idx;
+
+    // set the path for the configuration
     aPath       sPath   = get_appPath();
     sPath.append("qLights.json");
+    sPath = "C:/Tools/aDev/aFrame/Documents/qLights.json";
 
     if (f.readJsonFile(sPath))
     {
         // load the controllers
         m_lstController.clear();
-        i = f.readIntValue("controller:count");
+        count = f.readIntValue("controller:count");
 
-        for (j = 0; j < i; j++)
+        for (idx = 0; idx < count; idx++)
         {
-            aString sName = f.readStringValue(aString("controller:") + aString::fromValue(j) + ":name");
-            aString sAddress = f.readStringValue(aString("controller:") + aString::fromValue(j) + ":address");
+            aString sName = f.readStringValue(aString("controller:") + aString::fromValue(idx) + ":name");
+            aString sAddress = f.readStringValue(aString("controller:") + aString::fromValue(idx) + ":address");
 
             addController(sName, sAddress);
+        }
+
+        // load the universes
+        m_lstUniverse.clear();
+        count = f.readIntValue("universe:count");
+
+        for (idx = 0; idx < count; idx++)
+        {
+            aString sName = f.readStringValue(aString("universe:") + aString::fromValue(idx) + ":name");
+            aString sController = f.readStringValue(aString("universe:") + aString::fromValue(idx) + ":controller");
+            s32 s32Id = f.readIntValue(aString("universe:") + aString::fromValue(idx) + ":id");
+
+            addUniverse(sName, sController, s32Id);
+        }
+
+        // load the devices
+        m_lstDevice.clear();
+        count = f.readIntValue("device:count");
+
+        for (idx = 0; idx < count; idx++)
+        {
+            aString sName = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":name");
+
+            addDevice(sName);
+        }
+
+        // load the fixtures
+        m_lstFixture.clear();
+        count = f.readIntValue("fixture:count");
+
+        for (idx = 0; idx < count; idx++)
+        {
+            aString sName = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":name");
+
+            addFixture(sName);
         }
     }
 
@@ -52,21 +92,69 @@ void MainWin::onFileOpen()
 void MainWin::onFileSave()
 {
     aJsonFile   f;
-    s32         i;
+    s32         idx;
+
+    // set the path for the configuration
     aPath       sPath   = get_appPath();
     sPath.append("qLights.json");
-
-    // save the controllers #
-    f.addValue(aString("controller:count"), m_lstController.size());
+    sPath = "C:/Tools/aDev/aFrame/Documents/qLights.json";
 
     // save the controllers
     f.addValue(aString("controller:count"), m_lstController.size());
-    i = 0;
-    for (const unique_ptr<Controller> &c : m_lstController)
+    idx = 0;
+    for (const shared_ptr<Controller> &c : m_lstController)
     {
-        f.addValue(aString("controller:") + aString::fromValue(i) + ":name", c->name());
-        f.addValue(aString("controller:") + aString::fromValue(i) + ":address", c->ipAdr());
-        i++;
+        f.addValue(aString("controller:") + aString::fromValue(idx) + ":name", c->name());
+        f.addValue(aString("controller:") + aString::fromValue(idx) + ":address", c->ipAdr());
+        idx++;
+    }
+
+    // save the universes
+    f.addValue(aString("universe:count"), m_lstUniverse.size());
+    idx = 0;
+    for (const shared_ptr<Universe> &pU : m_lstUniverse)
+    {
+        const Controller    *pC = pU->controller();
+
+        // universe name
+        f.addValue(aString("universe:") + aString::fromValue(idx) + ":name", pU->name());
+
+        if (pC)
+        {
+            // we have a controller
+            f.addValue(aString("universe:") + aString::fromValue(idx) + ":controller", pC->name());
+            f.addValue(aString("universe:") + aString::fromValue(idx) + ":id", (int) pU->id());
+        }
+        else
+        {
+            // no controller => no controller name and no universe id
+            f.addValue(aString("universe:") + aString::fromValue(idx) + ":controller", "");
+            f.addValue(aString("universe:") + aString::fromValue(idx) + ":id", -1);
+        }
+
+        idx++;
+    }
+
+    // save the devices
+    f.addValue(aString("device:count"), m_lstDevice.size());
+    idx = 0;
+    for (const shared_ptr<Device> &pD : m_lstDevice)
+    {
+        // device name
+        f.addValue(aString("device:") + aString::fromValue(idx) + ":name", pD->name());
+
+        idx++;
+    }
+
+    // save the fixtures
+    f.addValue(aString("fixture:count"), m_lstFixture.size());
+    idx = 0;
+    for (const shared_ptr<Fixture> &pF : m_lstFixture)
+    {
+        // device name
+        f.addValue(aString("fixture:") + aString::fromValue(idx) + ":name", pF->name());
+
+        idx++;
     }
 
     f.writeJsonFile(sPath);
@@ -94,3 +182,42 @@ void MainWin::onAddController(bool /*_bChecked*/)
 
     dlg.exec();
 } // MainWin::onAddController
+
+
+/*******************************************************************************
+* MainWin::onAddUniverse
+*******************************************************************************/
+void MainWin::onAddUniverse(bool /*_bChecked*/)
+{
+    Universe *pUniverse = nullptr;
+
+    DlgUniverse dlg(this, m_lstController, pUniverse);
+
+    dlg.exec();
+} // MainWin::onAddUniverse
+
+
+/*******************************************************************************
+* MainWin::onAddDevice
+*******************************************************************************/
+void MainWin::onAddDevice(bool /*_bChecked*/)
+{
+    Device *pDevice = nullptr;
+
+    DlgDevice dlg(this, pDevice);
+
+    dlg.exec();
+} // MainWin::onAddDevice
+
+
+/*******************************************************************************
+* MainWin::onAddFixture
+*******************************************************************************/
+void MainWin::onAddFixture(bool /*_bChecked*/)
+{
+    Fixture *pFixture = nullptr;
+
+    DlgFixture dlg(this, pFixture);
+
+    dlg.exec();
+} // MainWin::onAddFixture

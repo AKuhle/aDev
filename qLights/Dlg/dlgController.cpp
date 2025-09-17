@@ -21,9 +21,6 @@ DlgController::DlgController(MainWin    *_pMainWin,
   m_pController(_pController)
 {
     m_pUi->setupUi(this);
-
-    //connect(m_pUi->buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
-    //connect(m_pUi->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 } // DlgController::DlgController
 
 
@@ -41,10 +38,20 @@ DlgController::~DlgController()
 *******************************************************************************/
 void DlgController::accept()
 {
-    m_pMainWin->addController(aString::fromQString(m_pUi->m_pName->text()),
-                              aString::fromQString(m_pUi->m_pAddress->text()));
+    if (!m_pController)
+    {
+        // add a new controller
+        m_pMainWin->addController(aString::fromQString(m_pUi->m_pControllerName->text()),
+                                  aString::fromQString(m_pUi->m_pControllerAddress->text()));
+    }
+    else
+    {
+        // modify the existing controller
+        m_pController->setName(aString::fromQString(m_pUi->m_pControllerName->text()));
+        m_pController->setIpAdr(aString::fromQString(m_pUi->m_pControllerAddress->text()));
+    }
 
-    m_pMainWin->updateControllerPanel();
+    m_pMainWin->updateAll();
 
     QDialog::accept();
 } // DlgController::accept

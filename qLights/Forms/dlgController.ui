@@ -36,7 +36,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="m_pName"/>
+         <widget class="QLineEdit" name="m_pControllerName"/>
         </item>
        </layout>
       </item>
@@ -56,7 +56,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="m_pAddress"/>
+         <widget class="QLineEdit" name="m_pControllerAddress"/>
         </item>
        </layout>
       </item>

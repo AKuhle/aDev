@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1261</width>
+    <width>1393</width>
     <height>814</height>
    </rect>
   </property>
@@ -2200,8 +2200,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1261</width>
-     <height>17</height>
+     <width>1393</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2221,22 +2221,40 @@
    <addaction name="menuDevice"/>
   </widget>
   <widget class="QDockWidget" name="m_pPanelDock">
+   <property name="minimumSize">
+    <size>
+     <width>350</width>
+     <height>203</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>350</width>
+     <height>524287</height>
+    </size>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
       <widget class="QTabWidget" name="tabWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>0</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>200</width>
+         <width>16777215</width>
          <height>16777215</height>
         </size>
        </property>
@@ -2266,8 +2284,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset resource="../Resource/qLights.qrc">
-               <normaloff>:/Std_32x32/plus.png</normaloff>:/Std_32x32/plus.png</iconset>
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
              </property>
             </widget>
            </item>
@@ -2288,6 +2306,12 @@
          </item>
          <item>
           <widget class="QTableWidget" name="m_pControllerTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="frameShape">
             <enum>QFrame::Shape::Panel</enum>
            </property>
@@ -2325,6 +2349,150 @@
         <attribute name="title">
          <string/>
         </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_31">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QToolButton" name="m_pBtnAddUniverse">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="m_pUniverseTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::Panel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Sunken</enum>
+           </property>
+           <property name="columnCount">
+            <number>3</number>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Controller</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Id</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="icon">
+         <iconset resource="../../aFrame/Resource/aFrame.qrc">
+          <normaloff>:/Standard/Icons/32/database.png</normaloff>:/Standard/Icons/32/database.png</iconset>
+        </attribute>
+        <attribute name="title">
+         <string/>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_32">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QToolButton" name="m_pBtnAddDevice">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="m_pDeviceTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::Panel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Sunken</enum>
+           </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Channel #</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
        </widget>
        <widget class="QWidget" name="m_pTabFixtures">
         <attribute name="icon">
@@ -2334,6 +2502,71 @@
         <attribute name="title">
          <string/>
         </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_33">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QToolButton" name="m_pBtnAddFixture">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../../aFrame/Resource/aFrame.qrc">
+               <normaloff>:/Standard/Icons/32/plus.png</normaloff>:/Standard/Icons/32/plus.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="m_pFixtureTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Shape::Panel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Sunken</enum>
+           </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Channel #</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
      </item>
@@ -2357,8 +2590,8 @@
   </widget>
   <action name="m_pActionOpenFile">
    <property name="icon">
-    <iconset resource="../Resource/qLights.qrc">
-     <normaloff>:/Std_32x32/file_open.png</normaloff>:/Std_32x32/file_open.png</iconset>
+    <iconset resource="../../aFrame/Resource/aFrame.qrc">
+     <normaloff>:/Standard/Icons/32/file_open.png</normaloff>:/Standard/Icons/32/file_open.png</iconset>
    </property>
    <property name="text">
     <string>Open File</string>
@@ -2369,8 +2602,8 @@
   </action>
   <action name="m_pActionSaveFile">
    <property name="icon">
-    <iconset resource="../Resource/qLights.qrc">
-     <normaloff>:/Std_32x32/file_save.png</normaloff>:/Std_32x32/file_save.png</iconset>
+    <iconset resource="../../aFrame/Resource/aFrame.qrc">
+     <normaloff>:/Standard/Icons/32/file_save.png</normaloff>:/Standard/Icons/32/file_save.png</iconset>
    </property>
    <property name="text">
     <string>Save File...</string>
@@ -2384,8 +2617,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="../Resource/qLights.qrc">
-     <normaloff>:/Std_32x32/panel_right.png</normaloff>:/Std_32x32/panel_right.png</iconset>
+    <iconset resource="../../aFrame/Resource/aFrame.qrc">
+     <normaloff>:/Standard/Icons/32/panel_right.png</normaloff>:/Standard/Icons/32/panel_right.png</iconset>
    </property>
    <property name="text">
     <string>Panel</string>
@@ -2400,6 +2633,7 @@
  </widget>
  <resources>
   <include location="../Resource/qLights.qrc"/>
+  <include location="../../aFrame/Resource/aFrame.qrc"/>
  </resources>
  <connections/>
 </ui>

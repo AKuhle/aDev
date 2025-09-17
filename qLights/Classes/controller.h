@@ -18,7 +18,6 @@
 *******************************************************************************/
 #include "aFrame_def.h"
 #include "aString.h"
-#include "aMap.h"
 
 
 class Universe;
@@ -36,8 +35,6 @@ class Controller
     private:
         aString                         m_sName;
         aString                         m_sIpAdr;
-
-        //aMap<u32, shared_ptr<Universe>> m_mapUniverse;
 
     public:
         Controller(const aString &_sName,
