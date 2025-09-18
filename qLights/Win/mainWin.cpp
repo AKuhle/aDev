@@ -16,7 +16,8 @@ MainWin::MainWin(QWidget *parent)
 {
     m_pUi->setupUi(this);
 
-    // set the
+    // load the channel icon list
+    readChannelIcons();
 
     // connect the toolbar stuff
     connect(m_pUi->m_pActionOpenFile, &QAction::triggered, this, &MainWin::onFileOpen);
@@ -46,6 +47,24 @@ MainWin::~MainWin()
 {
     delete m_pUi;
 } // MainWin::~MainWin
+
+
+/*******************************************************************************
+* MainWin::readChannelIcons
+*******************************************************************************/
+void  MainWin::readChannelIcons()
+{
+    // path to the icons
+    std::string path = "C:/Tools/aDev/qLights/ChannelIcons";
+
+    for (const auto &entry : std::filesystem::directory_iterator(path))
+    {
+        if (entry.is_regular_file() && entry.path().extension() == ".png")
+        {
+            m_lstChannelIcon.push_back(QPixmap(QString::fromStdString(entry.path().string())));
+        }
+    }
+} // MainWin::readChannelIcons
 
 
 /*******************************************************************************

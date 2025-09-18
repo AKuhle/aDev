@@ -1,12 +1,16 @@
 /*******************************************************************************
 * include
 *******************************************************************************/
+#include <QCheckBox>
+
 #include "ui_DlgDevice.h"
 
 #include "aFrame_def.h"
 
 #include "mainWin.h"
-#include "DlgDevice.h"
+#include "dlgDevice.h"
+#include "dlgChannel.h"
+#include "channel.h"
 
 using namespace std;
 
@@ -14,14 +18,18 @@ using namespace std;
 /*******************************************************************************
 * DlgDevice::DlgDevice
 *******************************************************************************/
-DlgDevice::DlgDevice(MainWin  *_pMainWin,
-                     Device   *_pDevice)
+DlgDevice::DlgDevice(MainWin                *_pMainWin,
+                     const aVector<QPixmap> &_lstChannelIcon,
+                     Device                 *_pDevice)
 : QDialog(_pMainWin),
   m_pUi(new Ui::DlgDevice),
   m_pMainWin(_pMainWin),
-  m_pDevice(_pDevice)
+  m_pDevice(_pDevice),
+  m_lstChannelIcon(_lstChannelIcon)
 {
     m_pUi->setupUi(this);
+
+    connect(m_pUi->m_pBtnAddChannel, &QToolButton::clicked, this, &DlgDevice::onAddChannel);
 } // DlgDevice::DlgDevice
 
 
@@ -32,6 +40,41 @@ DlgDevice::~DlgDevice()
 {
     delete m_pUi;
 } // DlgDevice::~DlgDevice
+
+
+/*******************************************************************************
+* DlgDevice::addChannel
+*******************************************************************************/
+void DlgDevice::addChannel(s32              _s32ChannelNr,
+                           const aString    &_s32ChannelName,
+                           const QPixmap    &_pixmap,
+                           bool             _bBrigthness)
+{
+    QTableWidget    *pT         = m_pUi->m_pChannelTable;
+    int             iNewRow     = pT->rowCount();
+    QCheckBox       *pBright    = new QCheckBox;
+
+    // append a row
+    pT->insertRow(iNewRow);
+
+    // set the nr
+    pT->setItem(iNewRow, 0, new QTableWidgetItem(QString::number(_s32ChannelNr)));
+
+    // set the name
+    pT->setItem(iNewRow, 1, new QTableWidgetItem(_s32ChannelName.toQString()));
+
+    // set the icon
+    QTableWidgetItem *pItem = new QTableWidgetItem;
+    pItem->setIcon(QIcon(_pixmap));
+    pT->setItem(iNewRow, 2, pItem);
+
+    // set the brightness checkbox
+    pBright->setChecked(_bBrigthness);
+    pT->setCellWidget(iNewRow, 3, pBright);
+
+
+    //m_pChannelTable
+} // DlgDevice::addChannel
 
 
 /*******************************************************************************
@@ -64,3 +107,14 @@ void DlgDevice::reject()
 {
     QDialog::reject();
 } // DlgDevice::reject
+
+
+/*******************************************************************************
+* DlgDevice::onAddChannel
+*******************************************************************************/
+void DlgDevice::onAddChannel(bool /*_bChecked*/)
+{
+    DlgChannel dlg(this, m_lstChannelIcon);
+
+    dlg.exec();
+} // DlgDevice::onAddChannel

@@ -204,7 +204,7 @@ void MainWin::onAddDevice(bool /*_bChecked*/)
 {
     Device *pDevice = nullptr;
 
-    DlgDevice dlg(this, pDevice);
+    DlgDevice dlg(this, m_lstChannelIcon, pDevice);
 
     dlg.exec();
 } // MainWin::onAddDevice

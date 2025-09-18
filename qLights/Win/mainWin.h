@@ -7,6 +7,7 @@
 #include <QTableWidget>
 
 #include "aSharedPtrList.h"
+#include "aVector.h"
 #include "controller.h"
 #include "universe.h"
 #include "device.h"
@@ -33,6 +34,7 @@ class MainWin : public QMainWindow
         aSharedPtrList<Universe>        m_lstUniverse;
         aSharedPtrList<Device>          m_lstDevice;
         aSharedPtrList<Fixture>         m_lstFixture;
+        aVector<QPixmap>                m_lstChannelIcon;
 
     public:
         MainWin(QWidget *parent = nullptr);
@@ -61,11 +63,15 @@ class MainWin : public QMainWindow
         void                updateDevicePanel();
         void                updateFixturePanel();
 
+
     private:
         void                addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                s32              _s32Row,
                                                s32              _s32Col,
                                                const aString    &_sItem);
+
+        void                readChannelIcons();
+
 
     private slots:
         // ctrl-bar

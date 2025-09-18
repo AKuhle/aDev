@@ -93,10 +93,12 @@ INCLUDEPATH += Win
 
 
 SOURCES += \
+    Classes/channel.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
     Classes/fixture.cpp \
     Classes/universe.cpp \
+    Dlg/dlgChannel.cpp \
     Dlg/dlgController.cpp \
     Dlg/dlgDevice.cpp \
     Dlg/dlgFixture.cpp \
@@ -107,10 +109,12 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Classes/channel.h \
     Classes/controller.h \
     Classes/device.h \
     Classes/fixture.h \
     Classes/universe.h \
+    Dlg/dlgChannel.h \
     Dlg/dlgController.h \
     Dlg/dlgDevice.h \
     Dlg/dlgFixture.h \
@@ -118,6 +122,7 @@ HEADERS += \
     Win/mainWin.h
 
 FORMS += \
+    Forms/dlgChannel.ui \
     Forms/dlgController.ui \
     Forms/dlgDevice.ui \
     Forms/dlgFixture.ui \
