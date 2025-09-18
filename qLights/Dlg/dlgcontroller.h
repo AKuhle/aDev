@@ -32,6 +32,9 @@ class DlgController : public QDialog
         ~DlgController();
 
     private:
-        virtual void                        accept();
-        virtual void                        reject();
+        void                    setCtrls(Controller *_pController);
+        void                    readCtrls(Controller *_pController);
+
+        virtual void            accept();
+        virtual void            reject();
 }; // class DlgController

@@ -9,6 +9,8 @@
 class Controller;
 
 using namespace aFrame::aUtil;
+using namespace std;
+
 
 
 namespace Ui {
@@ -37,7 +39,7 @@ class DlgUniverse : public QDialog
 
     public:
         explicit DlgUniverse(MainWin                            *_pMainWin,
-                             const aSharedPtrList<Controller>   &_lstController,
+                             const list<shared_ptr<Controller>> &_lstController,
                              Universe                           *_pUniverse);
         ~DlgUniverse();
 

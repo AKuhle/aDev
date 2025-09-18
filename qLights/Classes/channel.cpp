@@ -26,7 +26,7 @@ using namespace aFrame::aUtil;
 * Channel::Channel
 *******************************************************************************/
 Channel::Channel(s32            _s32Nr,
-                 const aString  &_sName,
+                 const QString  &_sName,
                  const QPixmap  &_pixmap,
                  bool           _bBrightness)
 : m_s32Nr(_s32Nr),

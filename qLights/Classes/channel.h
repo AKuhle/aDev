@@ -35,7 +35,7 @@ class Channel
 {
     private:
         s32         m_s32Nr         { -1 };
-        aString     m_sName;
+        QString     m_sName;
         QPixmap     m_pixmap;
         bool        m_bBrightness   { false };
 
@@ -44,7 +44,7 @@ class Channel
 
     public:
         Channel(s32             _s32Nr,
-                const aString   &_sName,
+                const QString   &_sName,
                 const QPixmap   &_pixmap,
                 bool            _bBrightness);
 
@@ -52,7 +52,7 @@ class Channel
 
         s32                             nr() const                  { return m_s32Nr; }
 
-        aString                         name() const                { return m_sName; }
+        QString                         name() const                { return m_sName; }
 
         const QPixmap&                  pixmap() const              { return m_pixmap; }
 

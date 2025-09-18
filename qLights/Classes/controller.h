@@ -16,15 +16,14 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QString>
 #include "aFrame_def.h"
-#include "aString.h"
 
 
 class Universe;
 
 using namespace std;
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -33,19 +32,19 @@ using namespace aFrame::aUtil;
 class Controller
 {
     private:
-        aString                         m_sName;
-        aString                         m_sIpAdr;
+        QString                         m_sName;
+        QString                         m_sIpAdr;
 
     public:
-        Controller(const aString &_sName,
-                   const aString &_sIpAdr);
+        Controller(const QString &_sName,
+                   const QString &_sIpAdr);
         ~Controller();
 
-        const aString&                      name() const                        { return m_sName; }
-        void                                setName(const aString &_sName)      { m_sName = _sName; }
+        const QString&                      name() const                        { return m_sName; }
+        void                                setName(const QString &_sName)      { m_sName = _sName; }
 
-        const aString&                      ipAdr() const                       { return m_sIpAdr; }
-        void                                setIpAdr(const aString &_sIpAdr)    { m_sIpAdr = _sIpAdr; }
+        const QString&                      ipAdr() const                       { return m_sIpAdr; }
+        void                                setIpAdr(const QString &_sIpAdr)    { m_sIpAdr = _sIpAdr; }
 
         //void                                addUniverse(u32 _u32Id);
 

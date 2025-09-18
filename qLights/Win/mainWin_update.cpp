@@ -71,7 +71,7 @@ void MainWin::updateUniversePanel()
 
         addTableWidgetItem(pT, idx, 0, pU->name());                                     // univers name
         addTableWidgetItem(pT, idx, 1, ((pC)?   pC->name() : ""));                      // controller name
-        addTableWidgetItem(pT, idx, 2, ((pC)?   aString::fromValue(pU->id()) : ""));    // universe Id
+        addTableWidgetItem(pT, idx, 2, ((pC)?   QString::number(pU->id()) : ""));    // universe Id
 
         idx++;
     }
@@ -128,9 +128,9 @@ void MainWin::updateFixturePanel()
 void MainWin::addTableWidgetItem(QTableWidget   *_pTableWidget,
                                  s32            _s32Row,
                                  s32            _s32Col,
-                                 const aString  &_sItem)
+                                 const QString  &_sItem)
 {
-    QTableWidgetItem    *pItem = new QTableWidgetItem(_sItem.toQString());
+    QTableWidgetItem    *pItem = new QTableWidgetItem(_sItem);
 
     pItem->setFlags(pItem->flags() & ~Qt::ItemIsEditable);
 

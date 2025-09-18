@@ -26,7 +26,7 @@ using namespace aFrame::aUtil;
 /*******************************************************************************
 * Universe::Universe
 *******************************************************************************/
-Universe::Universe(aString                _sName,
+Universe::Universe(QString                _sName,
                    u32                    _u32Id,
                    weak_ptr<Controller>   _pController)
 : m_sName(_sName),
@@ -38,7 +38,7 @@ Universe::Universe(aString                _sName,
 
     if (pC)
     {
-        m_hostAdr.setAddress(pC->ipAdr().toQString());
+        m_hostAdr.setAddress(pC->ipAdr());
     }
 } // m_artnetPacket::Universe
 

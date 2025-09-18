@@ -26,6 +26,8 @@ MainWin::MainWin(QWidget *parent)
 
     // connect the controller stuff
     connect(m_pUi->m_pBtnAddController, &QToolButton::clicked, this, &MainWin::onAddController);
+    connect(m_pUi->m_pBtnRemoveController, &QToolButton::clicked, this, &MainWin::onRemoveController);
+    connect(m_pUi->m_pBtnEditController, &QToolButton::clicked, this, &MainWin::onEditController);
 
     // connect the universe stuff
     connect(m_pUi->m_pBtnAddUniverse, &QToolButton::clicked, this, &MainWin::onAddUniverse);
@@ -70,8 +72,8 @@ void  MainWin::readChannelIcons()
 /*******************************************************************************
 * MainWin::addController
 *******************************************************************************/
-void MainWin::addController(const aString &_sName,
-                            const aString &_sIpAdr)
+void MainWin::addController(const QString &_sName,
+                            const QString &_sIpAdr)
 {
     shared_ptr<Controller>  pController = make_shared<Controller> (_sName, _sIpAdr);
     m_lstController.push_back(std::move(pController));
@@ -79,10 +81,25 @@ void MainWin::addController(const aString &_sName,
 
 
 /*******************************************************************************
+* MainWin::findController
+*******************************************************************************/
+Controller* MainWin::findController(const QString &_sName)
+{
+    auto it = std::find_if(
+        m_lstController.begin(),
+        m_lstController.end(),
+        [&_sName](shared_ptr<Controller> pCtrl) { return pCtrl->name() == _sName; }
+        );
+
+    return (it != m_lstController.end())?   (*it).get() : nullptr;
+} // MainWin::findController
+
+
+/*******************************************************************************
 * MainWin::addUniverse
 *******************************************************************************/
-void MainWin::addUniverse(const aString   &_sName,
-                          const aString   &_sController,
+void MainWin::addUniverse(const QString   &_sName,
+                          const QString   &_sController,
                           s32             _s32Id)
 {
     auto it = std::find_if(m_lstController.begin(),
@@ -120,7 +137,7 @@ void MainWin::addUniverse(const aString   &_sName,
 /*******************************************************************************
 * MainWin::addDevice
 *******************************************************************************/
-void MainWin::addDevice(const aString &_sName)
+void MainWin::addDevice(const QString &_sName)
 {
     shared_ptr<Device>  pDevice = make_shared<Device> (_sName);
     m_lstDevice.push_back(std::move(pDevice));
@@ -130,7 +147,7 @@ void MainWin::addDevice(const aString &_sName)
 /*******************************************************************************
 * MainWin::addFixture
 *******************************************************************************/
-void MainWin::addFixture(const aString &_sName)
+void MainWin::addFixture(const QString &_sName)
 {
     shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName);
     m_lstFixture.push_back(std::move(pFixture));

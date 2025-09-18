@@ -19,14 +19,13 @@
 #include "universe.h"
 
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
 * Controller::Controller
 *******************************************************************************/
-Controller::Controller(const aString &_sName,
-                       const aString &_sIpAdr)
+Controller::Controller(const QString &_sName,
+                       const QString &_sIpAdr)
 : m_sName(_sName),
   m_sIpAdr(_sIpAdr)
   //m_s32UniverseMax(_s32UniverseMax)

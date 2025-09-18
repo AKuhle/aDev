@@ -46,7 +46,7 @@ DlgDevice::~DlgDevice()
 * DlgDevice::addChannel
 *******************************************************************************/
 void DlgDevice::addChannel(s32              _s32ChannelNr,
-                           const aString    &_s32ChannelName,
+                           const QString    &_s32ChannelName,
                            const QPixmap    &_pixmap,
                            bool             _bBrigthness)
 {
@@ -61,7 +61,7 @@ void DlgDevice::addChannel(s32              _s32ChannelNr,
     pT->setItem(iNewRow, 0, new QTableWidgetItem(QString::number(_s32ChannelNr)));
 
     // set the name
-    pT->setItem(iNewRow, 1, new QTableWidgetItem(_s32ChannelName.toQString()));
+    pT->setItem(iNewRow, 1, new QTableWidgetItem(_s32ChannelName));
 
     // set the icon
     QTableWidgetItem *pItem = new QTableWidgetItem;
@@ -85,7 +85,7 @@ void DlgDevice::accept()
     if (!m_pDevice)
     {
         // add a new device
-        m_pMainWin->addDevice(aString::fromQString(m_pUi->m_pDeviceName->text()));
+        m_pMainWin->addDevice(m_pUi->m_pDeviceName->text());
     }
     else
     {

@@ -19,13 +19,12 @@
 #include "universe.h"
 
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
 * Device::Device
 *******************************************************************************/
-Device::Device(const aString &_sName)
+Device::Device(const QString &_sName)
 : m_sName(_sName)
 {
 } // Device::Device

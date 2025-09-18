@@ -48,7 +48,7 @@ DlgChannel::~DlgChannel()
 void DlgChannel::accept()
 {
     s32     s32ChannelNr    = m_pUi->m_pChannelNr->text().toInt();
-    aString s32ChannelName  = aString::fromQString(m_pUi->m_pChannelName->text());
+    QString s32ChannelName  = m_pUi->m_pChannelName->text();
     bool    bBrigthness     = m_pUi->m_pChannelBrightness->isChecked();
 
     int     index = m_pUi->m_pChannelIcon->currentIndex();

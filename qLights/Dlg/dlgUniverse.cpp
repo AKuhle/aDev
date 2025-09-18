@@ -16,7 +16,7 @@ using namespace std;
 * DlgUniverse::DlgUniverse
 *******************************************************************************/
 DlgUniverse::DlgUniverse(MainWin                            *_pMainWin,
-                         const aSharedPtrList<Controller>   &_lstController,
+                         const list<shared_ptr<Controller>> &_lstController,
                          Universe                           *_pUniverse)
 : QDialog(_pMainWin),
   m_pUi(new Ui::DlgUniverse),
@@ -29,7 +29,7 @@ DlgUniverse::DlgUniverse(MainWin                            *_pMainWin,
     m_pUi->m_pUniverseController->addItem("None");
     for (auto &pController : _lstController)
     {
-        m_pUi->m_pUniverseController->addItem(pController->name().toQString());
+        m_pUi->m_pUniverseController->addItem(pController->name());
     }
 } // DlgUniverse::DlgUniverse
 
@@ -51,9 +51,9 @@ void DlgUniverse::accept()
     if (!m_pUniverse)
     {
         // add a new universe
-        m_pMainWin->addUniverse(aString::fromQString(m_pUi->m_pUniverseName->text()),
-                                aString::fromQString(m_pUi->m_pUniverseController->currentText()),
-                                aString::fromQString(m_pUi->m_pUniverseId->text()).to_s32());
+        m_pMainWin->addUniverse(m_pUi->m_pUniverseName->text(),
+                                m_pUi->m_pUniverseController->currentText(),
+                                m_pUi->m_pUniverseId->text().toInt());
     }
     else
     {

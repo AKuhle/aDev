@@ -5,6 +5,7 @@
 *******************************************************************************/
 #include <QDialog>
 #include "aUtil_def.h"
+#include "aVector.h"
 
 using namespace aFrame;
 using namespace aFrame::aUtil;
@@ -43,7 +44,7 @@ class DlgDevice : public QDialog
         ~DlgDevice();
 
         void                                addChannel(s32              _s32ChannelNr,
-                                                       const aString    &_s32ChannelName,
+                                                       const QString    &_s32ChannelName,
                                                        const QPixmap    &_pixmap,
                                                        bool             _bBrigthness);
 

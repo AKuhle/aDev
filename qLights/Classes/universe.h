@@ -19,13 +19,12 @@
 #include <QtNetwork/QUdpSocket>
 #include <QByteArray>
 #include <QHostAddress>
+#include <QString>
 
 #include "aFrame_def.h"
-#include "aString.h"
 #include "controller.h"
 
 using namespace aFrame;
-using namespace aFrame::aUtil;
 using namespace std;
 
 
@@ -35,7 +34,7 @@ using namespace std;
 class Universe
 {
     private:
-        aString                 m_sName;
+        QString                 m_sName;
         u32                     m_u32Id;
         weak_ptr<Controller>    m_pController;
 
@@ -46,13 +45,13 @@ class Universe
         QByteArray              m_dmxData           { m_u32DmxDataSize, 0 };
 
     public:
-        Universe(aString                m_sName,
+        Universe(QString                m_sName,
                  u32                    _u32Id,
                  weak_ptr<Controller>   _pController);
         ~Universe();
 
-        const aString&      name() const                        { return m_sName; }
-        void                setName(const aString &_sName)      { m_sName = _sName; }
+        const QString&      name() const                        { return m_sName; }
+        void                setName(const QString &_sName)      { m_sName = _sName; }
 
         u32                 id() const                          { return m_u32Id; }
 

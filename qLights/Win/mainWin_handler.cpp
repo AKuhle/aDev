@@ -1,6 +1,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aFrame_def.h"
+
 #include "ui_mainWin.h"
 #include "aFrame_def.h"
 
@@ -43,7 +45,7 @@ void MainWin::onFileOpen()
             aString sName = f.readStringValue(aString("controller:") + aString::fromValue(idx) + ":name");
             aString sAddress = f.readStringValue(aString("controller:") + aString::fromValue(idx) + ":address");
 
-            addController(sName, sAddress);
+            addController(sName.toQString(), sAddress.toQString());
         }
 
         // load the universes
@@ -56,7 +58,7 @@ void MainWin::onFileOpen()
             aString sController = f.readStringValue(aString("universe:") + aString::fromValue(idx) + ":controller");
             s32 s32Id = f.readIntValue(aString("universe:") + aString::fromValue(idx) + ":id");
 
-            addUniverse(sName, sController, s32Id);
+            addUniverse(sName.toQString(), sController.toQString(), s32Id);
         }
 
         // load the devices
@@ -67,7 +69,7 @@ void MainWin::onFileOpen()
         {
             aString sName = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":name");
 
-            addDevice(sName);
+            addDevice(sName.toQString());
         }
 
         // load the fixtures
@@ -78,7 +80,7 @@ void MainWin::onFileOpen()
         {
             aString sName = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":name");
 
-            addFixture(sName);
+            addFixture(sName.toQString());
         }
     }
 
@@ -100,29 +102,29 @@ void MainWin::onFileSave()
     sPath = "C:/Tools/aDev/aFrame/Documents/qLights.json";
 
     // save the controllers
-    f.addValue(aString("controller:count"), m_lstController.size());
+    f.addValue(aString("controller:count"), (int) m_lstController.size());
     idx = 0;
     for (const shared_ptr<Controller> &c : m_lstController)
     {
-        f.addValue(aString("controller:") + aString::fromValue(idx) + ":name", c->name());
-        f.addValue(aString("controller:") + aString::fromValue(idx) + ":address", c->ipAdr());
+        f.addValue(aString("controller:") + aString::fromValue(idx) + ":name", aString::fromQString(c->name()));
+        f.addValue(aString("controller:") + aString::fromValue(idx) + ":address", aString::fromQString(c->ipAdr()));
         idx++;
     }
 
     // save the universes
-    f.addValue(aString("universe:count"), m_lstUniverse.size());
+    f.addValue(aString("universe:count"), (int) m_lstUniverse.size());
     idx = 0;
     for (const shared_ptr<Universe> &pU : m_lstUniverse)
     {
         const Controller    *pC = pU->controller();
 
         // universe name
-        f.addValue(aString("universe:") + aString::fromValue(idx) + ":name", pU->name());
+        f.addValue(aString("universe:") + aString::fromValue(idx) + ":name", aString::fromQString(pU->name()));
 
         if (pC)
         {
             // we have a controller
-            f.addValue(aString("universe:") + aString::fromValue(idx) + ":controller", pC->name());
+            f.addValue(aString("universe:") + aString::fromValue(idx) + ":controller", aString::fromQString(pC->name()));
             f.addValue(aString("universe:") + aString::fromValue(idx) + ":id", (int) pU->id());
         }
         else
@@ -136,23 +138,23 @@ void MainWin::onFileSave()
     }
 
     // save the devices
-    f.addValue(aString("device:count"), m_lstDevice.size());
+    f.addValue(aString("device:count"), (int) m_lstDevice.size());
     idx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
         // device name
-        f.addValue(aString("device:") + aString::fromValue(idx) + ":name", pD->name());
+        f.addValue(aString("device:") + aString::fromValue(idx) + ":name", aString::fromQString(pD->name()));
 
         idx++;
     }
 
     // save the fixtures
-    f.addValue(aString("fixture:count"), m_lstFixture.size());
+    f.addValue(aString("fixture:count"), (int) m_lstFixture.size());
     idx = 0;
     for (const shared_ptr<Fixture> &pF : m_lstFixture)
     {
         // device name
-        f.addValue(aString("fixture:") + aString::fromValue(idx) + ":name", pF->name());
+        f.addValue(aString("fixture:") + aString::fromValue(idx) + ":name", aString::fromQString(pF->name()));
 
         idx++;
     }
@@ -182,6 +184,51 @@ void MainWin::onAddController(bool /*_bChecked*/)
 
     dlg.exec();
 } // MainWin::onAddController
+
+
+/*******************************************************************************
+* MainWin::onRemoveController
+*******************************************************************************/
+void MainWin::onRemoveController(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pControllerTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 0)->text();
+
+        m_lstController.remove_if([&sName](shared_ptr<Controller> pCtrl) {
+            return pCtrl->name() == sName;
+        });
+    }
+
+    updateAll();
+} // MainWin::onRemoveController
+
+
+/*******************************************************************************
+* MainWin::onEditController
+*******************************************************************************/
+void MainWin::onEditController(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pControllerTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 0)->text();
+
+        Controller *pController = findController(sName);
+
+        DlgController   dlg(this, pController);
+        dlg.exec();
+    }
+} // MainWin::onEditController
 
 
 /*******************************************************************************

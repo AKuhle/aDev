@@ -16,15 +16,15 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QString>
+
 #include "aFrame_def.h"
-#include "aString.h"
 
 
 class Universe;
 
 using namespace std;
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -33,14 +33,14 @@ using namespace aFrame::aUtil;
 class Device
 {
     private:
-        aString                         m_sName;
+        QString                         m_sName;
 
     public:
-        Device(const aString &_sName);
+        Device(const QString &_sName);
         ~Device();
 
-        const aString&                      name() const                        { return m_sName; }
-        void                                setName(const aString &_sName)      { m_sName = _sName; }
+        const QString&                      name() const                        { return m_sName; }
+        void                                setName(const QString &_sName)      { m_sName = _sName; }
 
         //void                                addUniverse(u32 _u32Id);
 

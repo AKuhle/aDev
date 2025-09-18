@@ -42,7 +42,7 @@ void DlgFixture::accept()
     if (!m_pFixture)
     {
         // add a new device
-        m_pMainWin->addFixture(aString::fromQString(m_pUi->m_pFixtureName->text()));
+        m_pMainWin->addFixture(m_pUi->m_pFixtureName->text());
     }
     else
     {

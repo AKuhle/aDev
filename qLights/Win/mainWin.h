@@ -30,10 +30,10 @@ class MainWin : public QMainWindow
 
     private:
         Ui::MainWin                     *m_pUi      { nullptr };
-        aSharedPtrList<Controller>      m_lstController;
-        aSharedPtrList<Universe>        m_lstUniverse;
-        aSharedPtrList<Device>          m_lstDevice;
-        aSharedPtrList<Fixture>         m_lstFixture;
+        list<shared_ptr<Controller>>    m_lstController;
+        list<shared_ptr<Universe>>      m_lstUniverse;
+        list<shared_ptr<Device>>        m_lstDevice;
+        list<shared_ptr<Fixture>>       m_lstFixture;
         aVector<QPixmap>                m_lstChannelIcon;
 
     public:
@@ -41,19 +41,21 @@ class MainWin : public QMainWindow
         ~MainWin();
 
         // controller
-        void                addController(const aString &_sName,
-                                          const aString &_sIpAdr);
+        void                addController(const QString &_sName,
+                                          const QString &_sIpAdr);
+        Controller*         findController(const QString &_sName);
+
 
         // universe
-        void                addUniverse(const aString   &_sName,
-                                        const aString   &_sController,
+        void                addUniverse(const QString   &_sName,
+                                        const QString   &_sController,
                                         s32             _s32Id);
 
         // device
-        void                addDevice(const aString &_sName);
+        void                addDevice(const QString &_sName);
 
         // fixture
-        void                addFixture(const aString &_sName);
+        void                addFixture(const QString &_sName);
 
         // update
         void                updateAll();
@@ -68,7 +70,7 @@ class MainWin : public QMainWindow
         void                addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                s32              _s32Row,
                                                s32              _s32Col,
-                                               const aString    &_sItem);
+                                               const QString    &_sItem);
 
         void                readChannelIcons();
 
@@ -81,6 +83,9 @@ class MainWin : public QMainWindow
 
         // conbtroller panel
         void                onAddController(bool _bChecked);
+        void                onRemoveController(bool _bChecked);
+        void                onEditController(bool _bChecked);
+
         void                onAddUniverse(bool _bChecked);
         void                onAddDevice(bool _bChecked);
         void                onAddFixture(bool _bChecked);

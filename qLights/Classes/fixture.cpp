@@ -19,13 +19,12 @@
 #include "universe.h"
 
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
 * Fixture::Fixture
 *******************************************************************************/
-Fixture::Fixture(const aString &_sName)
+Fixture::Fixture(const QString &_sName)
 : m_sName(_sName)
 {
 } // Fixture::Fixture
