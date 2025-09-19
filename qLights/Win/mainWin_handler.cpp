@@ -178,7 +178,7 @@ void MainWin::onPanel()
 *******************************************************************************/
 void MainWin::onAddController(bool /*_bChecked*/)
 {
-    Controller *pController = nullptr;
+    shared_ptr<Controller> pController;
 
     DlgController   dlg(this, pController);
 
@@ -200,9 +200,10 @@ void MainWin::onRemoveController(bool /*_bChecked*/)
     {
         QString sName = pT->item(s32Row, 0)->text();
 
-        m_lstController.remove_if([&sName](shared_ptr<Controller> pCtrl) {
-            return pCtrl->name() == sName;
-        });
+        m_lstController.remove_if([&sName](shared_ptr<Controller> pCtrl)
+                                    {
+                                        return pCtrl->name() == sName;
+                                    });
     }
 
     updateAll();
@@ -223,7 +224,7 @@ void MainWin::onEditController(bool /*_bChecked*/)
     {
         QString sName = pT->item(s32Row, 0)->text();
 
-        Controller *pController = findController(sName);
+        shared_ptr<Controller> pController = findController(sName);
 
         DlgController   dlg(this, pController);
         dlg.exec();
@@ -236,12 +237,58 @@ void MainWin::onEditController(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onAddUniverse(bool /*_bChecked*/)
 {
-    Universe *pUniverse = nullptr;
+    shared_ptr<Universe> pUniverse;
 
     DlgUniverse dlg(this, m_lstController, pUniverse);
 
     dlg.exec();
 } // MainWin::onAddUniverse
+
+
+/*******************************************************************************
+* MainWin::onRemoveUniverse
+*******************************************************************************/
+void MainWin::onRemoveUniverse(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pUniverseTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 0)->text();
+
+        m_lstUniverse.remove_if([&sName](shared_ptr<Universe> pCtrl)
+                                    {
+                                        return pCtrl->name() == sName;
+                                    });
+    }
+
+    updateAll();
+} // MainWin::onRemoveUniverse
+
+
+/*******************************************************************************
+* MainWin::onEditUniverse
+*******************************************************************************/
+void MainWin::onEditUniverse(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pUniverseTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 0)->text();
+
+        shared_ptr<Universe> pUniverse = findUniverse(sName);
+
+        DlgUniverse   dlg(this, pUniverse);
+        dlg.exec();
+    }
+} // MainWin::onEditUniverse
 
 
 /*******************************************************************************

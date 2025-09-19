@@ -16,7 +16,6 @@
 * includes
 *******************************************************************************/
 #include "aRect.h"
-#include "aVector.h"
 
 
 using namespace std;

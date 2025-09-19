@@ -15,9 +15,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aVector.h"
-
-//#include "aParametricLine2D.h"
+#include "vectorHelper.h"
 
 using namespace std;
 
@@ -290,7 +288,7 @@ void aRect2D<T>::expand(T _tValue)
 *******************************************************************************/
 template<class T>
 void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
-                           aVector<aPoint>      &_vIntersect) const
+                           vector<aPoint>       &_vIntersect) const
 {
     dbl     tMin = __DBL_MAX__;
     dbl     tLine, tSegment;
@@ -302,8 +300,7 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
     {
         if (tLine < tMin)
         {
-            _vIntersect.push_front(math2WinY(p1.value()));
-            tMin = tLine;
+            push_front(_vIntersect, math2WinY(p1.value()));
         }
         else
         {
@@ -317,7 +314,7 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
     {
         if (tLine < tMin)
         {
-            _vIntersect.push_front(math2WinY(p2.value()));
+            push_front(_vIntersect, math2WinY(p2.value()));
             tMin = tLine;
         }
         else
@@ -332,7 +329,7 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
     {
         if (tLine < tMin)
         {
-            _vIntersect.push_front(math2WinY(p3.value()));
+            push_front(_vIntersect, math2WinY(p3.value()));
             tMin = tLine;
         }
         else
@@ -347,7 +344,7 @@ void aRect2D<T>::intersect(aParametricLine2D<T> &_line,
     {
         if (tLine < tMin)
         {
-            _vIntersect.push_front(math2WinY(p4.value()));
+            push_front(_vIntersect, math2WinY(p4.value()));
             tMin = tLine;
         }
         else

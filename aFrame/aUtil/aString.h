@@ -23,6 +23,8 @@
 #include "aFrame_def.h"
 #include "aUtil_def.h"
 
+using namespace std;
+
 
 /*******************************************************************************
 * namespace
@@ -114,7 +116,7 @@ class aString
         bool                    contains(const char *_pSubStr) const;
 
         void                    splitString(const aString       _sDelim,			//!< could be multiple, e.g. "|@-" => this split at | or @ or -
-                                            aVector<aString>	&_vecToken) const;
+                                            vector<aString>     &_vecToken) const;
 
 #ifdef _USE_QT_
             static aString      fromQString(const QString &_str);

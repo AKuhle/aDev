@@ -4,11 +4,12 @@
 * includes
 *******************************************************************************/
 #include <QDialog>
-#include "aUtil_def.h"
+
+#include "aFrame_def.h"
+
+using namespace std;
 
 class Controller;
-
-using namespace aFrame::aUtil;
 
 
 namespace Ui {
@@ -35,7 +36,7 @@ class DlgChannel : public QDialog
 
     public:
         explicit DlgChannel(DlgDevice               *_pDlgDevice,
-                            const aVector<QPixmap>  &_lstChannelIcon);
+                            const vector<QPixmap>   &_lstChannelIcon);
         ~DlgChannel();
 
     private:

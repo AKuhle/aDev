@@ -35,15 +35,18 @@ class DlgUniverse : public QDialog
     private:
         Ui::DlgUniverse         *m_pUi;
         MainWin                 *m_pMainWin;
-        Universe                *m_pUniverse;
+        shared_ptr<Universe>    m_pUniverse;
 
     public:
         explicit DlgUniverse(MainWin                            *_pMainWin,
                              const list<shared_ptr<Controller>> &_lstController,
-                             Universe                           *_pUniverse);
+                             shared_ptr<Universe>               _pUniverse);
         ~DlgUniverse();
 
     private:
-        virtual void                        accept();
-        virtual void                        reject();
+        void                    setCtrls(shared_ptr<Universe> _pUniverse);
+        void                    readCtrls(shared_ptr<Universe> _pUniverse);
+
+        virtual void            accept();
+        virtual void            reject();
 }; // class DlgUniverse

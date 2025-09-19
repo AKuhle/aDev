@@ -15,7 +15,6 @@
 #include "aString.h"
 #include "aCtrl.h"
 #include "aToolMgr.h"
-#include "aVector.h"
 
 using namespace std;
 

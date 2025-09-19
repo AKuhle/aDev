@@ -50,9 +50,9 @@ INCLUDEPATH += aApp/Qt
 
 INCLUDEPATH += aUtil
 INCLUDEPATH += aUtil/Cmds
-INCLUDEPATH += aUtil/Collection
 INCLUDEPATH += aUtil/Interface
 INCLUDEPATH += aUtil/Qt
+INCLUDEPATH += aUtil/StdHelper
 INCLUDEPATH += aUtil/VarPool
 
 INCLUDEPATH += aMath
@@ -119,21 +119,6 @@ HEADERS += \
     aUtil/Cmds/aCmdMgr.h \
     aUtil/Cmds/aCmdStack.h \
     aUtil/Cmds/aCmdThread.h \
-    aUtil/Collection/aMap.h \
-    aUtil/Collection/aPtrList.h \
-    aUtil/Collection/aPtrList.inl \
-    aUtil/Collection/aSharedPtrList.h \
-    aUtil/Collection/aSharedPtrList.inl \
-    aUtil/Collection/aSharedPtrVector.h \
-    aUtil/Collection/aSharedPtrVector.inl \
-    aUtil/Collection/aUniquePtrDeque.h \
-    aUtil/Collection/aUniquePtrDeque.inl \
-    aUtil/Collection/aUniquePtrList.h \
-    aUtil/Collection/aUniquePtrList.inl \
-    aUtil/Collection/aUniquePtrVec.h \
-    aUtil/Collection/aUniquePtrVec.inl \
-    aUtil/Collection/aVector.h \
-    aUtil/Collection/aVector.inl \
     aUtil/Interface/aProgressCbI.h \
     aUtil/Interface/aProgressMgrI.h \
     aUtil/Interface/aThreadCb_i.h \
@@ -144,6 +129,8 @@ HEADERS += \
     aUtil/Qt/aProgressMgr.h \
     aUtil/Qt/aThread.h \
     aUtil/Qt/aUrl_sys.h \
+    aUtil/StdHelper/listHelper.h \
+    aUtil/StdHelper/vectorHelper.h \
     aUtil/VarPool/aPoolVarBase.h \
     aUtil/VarPool/aPoolVarBool.h \
     aUtil/VarPool/aPoolVarColor.h \

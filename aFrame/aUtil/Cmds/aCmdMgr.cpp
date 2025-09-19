@@ -12,6 +12,7 @@
 * includes
 *******************************************************************************/
 #include "aCmdMgr.h"
+#include "listHelper.h"
 
 using namespace std;
 
@@ -75,7 +76,7 @@ void aCmdMgr::manageCmd(enumCmdMsg  _eCmdMsg,
                         aCmdBase    *_pCmd,
                         bool        _bSuccess)
 {
-    std::shared_ptr<aCmdBase>   pCmd = m_lstCmds.find(_pCmd);
+    std::shared_ptr<aCmdBase> pCmd = findPtrInSharedPtrList(m_lstCmds, _pCmd);
     CHECK_PRE_CONDITION_VOID(pCmd != nullptr);
 
     switch (_eCmdMsg)
@@ -96,7 +97,7 @@ void aCmdMgr::manageCmd(enumCmdMsg  _eCmdMsg,
                 // prepare failed => do failed
                 onPrepareFailed(pCmd);
                 onCmdProcessingEnd(pCmd);
-                m_lstCmds.removeElement(pCmd);
+                removePtrInSharedPtrList(m_lstCmds, _pCmd);
             }
             break;
         }
@@ -109,14 +110,14 @@ void aCmdMgr::manageCmd(enumCmdMsg  _eCmdMsg,
                 // cmd successfully executed
                 onDoDone(pCmd);
                 onCmdProcessingEnd(pCmd);
-                m_lstCmds.removeElement(pCmd);
+                removePtrInSharedPtrList(m_lstCmds, _pCmd);
             }
             else
             {
                 // do failed
                 onDoFailed(pCmd);
                 onCmdProcessingEnd(pCmd);
-                m_lstCmds.removeElement(pCmd);
+                removePtrInSharedPtrList(m_lstCmds, _pCmd);
             }
             break;
         } // case qCmd::MANAGE_CMD_DO

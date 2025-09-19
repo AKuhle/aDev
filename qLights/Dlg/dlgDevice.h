@@ -4,9 +4,10 @@
 * includes
 *******************************************************************************/
 #include <QDialog>
+#include "aFrame_def.h"
 #include "aUtil_def.h"
-#include "aVector.h"
 
+using namespace std;
 using namespace aFrame;
 using namespace aFrame::aUtil;
 
@@ -35,11 +36,11 @@ class DlgDevice : public QDialog
         Ui::DlgDevice           *m_pUi;
         MainWin                 *m_pMainWin;
         Device                  *m_pDevice;
-        const aVector<QPixmap>  &m_lstChannelIcon;
+        const vector<QPixmap>   &m_lstChannelIcon;
 
     public:
         explicit DlgDevice(MainWin                  *_pMainWin,
-                           const aVector<QPixmap>   &_lstChannelIcon,
+                           const vector<QPixmap>    &_lstChannelIcon,
                            Device                   *_pDevice);
         ~DlgDevice();
 

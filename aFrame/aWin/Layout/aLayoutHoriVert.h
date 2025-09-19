@@ -14,7 +14,6 @@
 *******************************************************************************/
 #include "aWin_def.h"
 #include "aLayout_i.h"
-#include "aPtrList.h"
 
 using namespace std;
 using namespace aFrame::aWin;
@@ -35,7 +34,7 @@ class aLayoutHoriVert : public aLayout_i
 {
     private:
         enumOrientation     m_eOrientation      { enumOrientation::Hori };
-        aPtrList<aBaseWin>  m_lstChilds;
+        list<aBaseWin *>    m_lstChilds;
 
     public:
         aLayoutHoriVert();

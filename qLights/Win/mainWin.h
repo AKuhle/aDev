@@ -6,15 +6,11 @@
 #include <QMainWindow>
 #include <QTableWidget>
 
-#include "aSharedPtrList.h"
-#include "aVector.h"
 #include "controller.h"
 #include "universe.h"
 #include "device.h"
 #include "fixture.h"
 
-
-using namespace aFrame::aUtil;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWin; }
@@ -34,59 +30,70 @@ class MainWin : public QMainWindow
         list<shared_ptr<Universe>>      m_lstUniverse;
         list<shared_ptr<Device>>        m_lstDevice;
         list<shared_ptr<Fixture>>       m_lstFixture;
-        aVector<QPixmap>                m_lstChannelIcon;
+        vector<QPixmap>                 m_lstChannelIcon;
 
     public:
         MainWin(QWidget *parent = nullptr);
         ~MainWin();
 
         // controller
-        void                addController(const QString &_sName,
+        void                    addController(const QString &_sName,
                                           const QString &_sIpAdr);
-        Controller*         findController(const QString &_sName);
+
+        shared_ptr<Controller>  findController(const QString &_sName);
 
 
         // universe
-        void                addUniverse(const QString   &_sName,
-                                        const QString   &_sController,
-                                        s32             _s32Id);
+        void                    addUniverse(const QString   &_sName,
+                                            const QString   &_sController,
+                                            s32             _s32Id);
+
+        shared_ptr<Universe>    findUniverse(const QString &_sName);
 
         // device
-        void                addDevice(const QString &_sName);
+        void                    addDevice(const QString &_sName);
+
+        shared_ptr<Device>      findDevice(const QString &_sName);
 
         // fixture
-        void                addFixture(const QString &_sName);
+        void                    addFixture(const QString &_sName);
+
+        shared_ptr<Fixture>     findFixture(const QString &_sName);
 
         // update
-        void                updateAll();
-        void                updateGui();
-        void                updateControllerPanel();
-        void                updateUniversePanel();
-        void                updateDevicePanel();
-        void                updateFixturePanel();
+        void                    updateAll();
+        void                    updateGui();
+        void                    updateControllerPanel();
+        void                    updateUniversePanel();
+        void                    updateDevicePanel();
+        void                    updateFixturePanel();
 
 
     private:
-        void                addTableWidgetItem(QTableWidget     *_pTableWidget,
-                                               s32              _s32Row,
-                                               s32              _s32Col,
-                                               const QString    &_sItem);
+        void                    addTableWidgetItem(QTableWidget     *_pTableWidget,
+                                                   s32              _s32Row,
+                                                   s32              _s32Col,
+                                                   const QString    &_sItem);
 
-        void                readChannelIcons();
+        void                    readChannelIcons();
 
 
     private slots:
         // ctrl-bar
-        void                onFileOpen();
-        void                onFileSave();
-        void                onPanel();
+        void                    onFileOpen();
+        void                    onFileSave();
+        void                    onPanel();
 
         // conbtroller panel
-        void                onAddController(bool _bChecked);
-        void                onRemoveController(bool _bChecked);
-        void                onEditController(bool _bChecked);
+        void                    onAddController(bool _bChecked);
+        void                    onRemoveController(bool _bChecked);
+        void                    onEditController(bool _bChecked);
 
-        void                onAddUniverse(bool _bChecked);
-        void                onAddDevice(bool _bChecked);
-        void                onAddFixture(bool _bChecked);
+        void                    onAddUniverse(bool _bChecked);
+        void                    onRemoveUniverse(bool _bChecked);
+        void                    onEditUniverse(bool _bChecked);
+
+        void                    onAddDevice(bool _bChecked);
+
+        void                    onAddFixture(bool _bChecked);
 }; // class MainWin

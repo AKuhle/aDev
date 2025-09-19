@@ -16,7 +16,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aSharedPtrList.h"
+#include "aFrame_def.h"
+
 #include "aCmdBase.h"
 
 using namespace std;
@@ -38,7 +39,7 @@ class aCmdMgr
     friend class aCmdThread;
 
     private:
-        aSharedPtrList<aCmdBase>    m_lstCmds;
+        list<shared_ptr<aCmdBase>>    m_lstCmds;
 
     protected:
         aCmdMgr();

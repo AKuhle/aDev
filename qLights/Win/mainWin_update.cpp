@@ -69,9 +69,25 @@ void MainWin::updateUniversePanel()
     {
         const Controller    *pC = pU->controller();
 
+        // univers name
         addTableWidgetItem(pT, idx, 0, pU->name());                                     // univers name
-        addTableWidgetItem(pT, idx, 1, ((pC)?   pC->name() : ""));                      // controller name
-        addTableWidgetItem(pT, idx, 2, ((pC)?   QString::number(pU->id()) : ""));    // universe Id
+
+        if (pC)
+        {
+            // universe has a controller
+            addTableWidgetItem(pT, idx, 1, pC->name());                 // controller name
+
+            addTableWidgetItem(pT, idx, 2, QString::number(pU->id()));   // universe Id
+            pT->item(idx, 2)->setTextAlignment(Qt::AlignHCenter);
+        }
+        else
+        {
+            // universe don't has a controller
+            addTableWidgetItem(pT, idx, 1, "no Controller");                 // controller name
+
+            addTableWidgetItem(pT, idx, 2, "-");   // universe Id
+            pT->item(idx, 2)->setTextAlignment(Qt::AlignHCenter);
+        }
 
         idx++;
     }

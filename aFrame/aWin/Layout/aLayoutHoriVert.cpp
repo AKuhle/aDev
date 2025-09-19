@@ -13,7 +13,6 @@
 *******************************************************************************/
 #include "aLayoutHoriVert.h"
 #include "aBaseWin.h"
-#include "aVector.h"
 
 using namespace aFrame::aUtil;
 
@@ -129,7 +128,7 @@ void aLayoutHoriVert::arrangeHori(const aRect &_r)
     s32                 space   = _r.w() - demand.w();
     s32                 l       = _r.l();
     s32                 y;
-    aVector<SizeTuple>  vTup;
+    vector<SizeTuple>   vTup;
 
     s32 idx = 0;
     for (auto pChild : m_lstChilds)

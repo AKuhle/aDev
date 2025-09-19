@@ -15,7 +15,6 @@
 #include "aString.h"
 #include "aCtrl.h"
 #include "aToolMgr.h"
-#include "aVector.h"
 
 using namespace std;
 
@@ -49,7 +48,7 @@ class aBtn : public aCtrl,
         bool                    m_bCheckable    { false };
         bool                    m_bChecked      { false };
 
-        aVector<ClickHandler>   m_vClickHandler;
+        vector<ClickHandler>    m_vClickHandler;
 
     protected:
         aBtn(aBaseWin        *_pParent,

@@ -65,13 +65,6 @@ enum class enumCmdMsg
 /*******************************************************************************
 * classes
 *******************************************************************************/
-template <typename Tkey, typename T2> class aMap;
-template <typename T> class aVector;
-template <typename T> class aPtrList;
-template <typename T> class aUniquePtrList;
-template <typename T> class aSharedPtrList;
-template <typename T> class aSharedPtVector;
-template <typename T> class aUniquePtrDeque;
 template <typename T> class aPoolVarBase;
 
 class aArgument;

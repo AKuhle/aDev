@@ -33,9 +33,9 @@ class aCmdStack : public aCmdMgr
 {
     private:
         //qSpList<aCmdBase>          m_lstSnapshot;
-        aSharedPtrList<aCmdBase>    m_lstUndo;
-        aSharedPtrList<aCmdBase>    m_lstRedo;
-        s32                         m_s32MaxUndo        { 10 };
+        list<shared_ptr<aCmdBase>>  m_lstUndo;
+        list<shared_ptr<aCmdBase>>  m_lstRedo;
+        u32                         m_u32MaxUndo        { 10 };
 
         //std::shared_ptr<aCmdBase>  m_pSelectedSnapshot;
 
@@ -44,15 +44,15 @@ class aCmdStack : public aCmdMgr
         virtual ~aCmdStack();
 
     public:
-        void                            executeCmd(shared_ptr<aCmdBase>   _pCmd);
+        void                                executeCmd(shared_ptr<aCmdBase>   _pCmd);
 
         // initialize the undo cmd stack with the cmd and
         // clears the redo stack.
         // the command is not beeing executed
-        void                            setCmd(shared_ptr<aCmdBase> _pCmd);
+        void                                setCmd(shared_ptr<aCmdBase> _pCmd);
 
         // the active command is the top most undo command
-        aCmdBase*                       activeCmd() const;
+        aCmdBase*                           activeCmd() const;
 
         // add a snapshoot at the end of the list
 //            void                    AddSnapshot(std::shared_ptr<aCmdBase>	_pCmd);
@@ -62,14 +62,14 @@ class aCmdStack : public aCmdMgr
 //            void                    SelectSnapshot(std::shared_ptr<aCmdBase> _pCmd);
 
 //            const qSpList<aCmdBase>&   SnapshotList() const        { return m_lstSnapshot; }
-        const aSharedPtrList<aCmdBase>& undoList() const;
-        const aSharedPtrList<aCmdBase>& redoList() const;
+        const list<shared_ptr<aCmdBase>>&   undoList() const;
+        const list<shared_ptr<aCmdBase>>&   redoList() const;
 
-        bool                            canUndo() const;
-        bool                            canRedo() const;
+        bool                                canUndo() const;
+        bool                                canRedo() const;
 
-        void                            undoCmd();
-        void                            redoCmd();
+        void                                undoCmd();
+        void                                redoCmd();
 
         // "jumps" to the given command -> the given command is moved to the
         // top of the undo stack.
@@ -87,16 +87,16 @@ class aCmdStack : public aCmdMgr
     * call back functions
     *******************************************************************************/
     protected:
-        virtual void                    onUndoDone(const shared_ptr<aCmdBase> &_pCmd);
-        virtual void                    onUndoFailed(const shared_ptr<aCmdBase> &_pCmd);
+        virtual void                        onUndoDone(const shared_ptr<aCmdBase> &_pCmd);
+        virtual void                        onUndoFailed(const shared_ptr<aCmdBase> &_pCmd);
 
-        virtual void                    onRedoDone(const shared_ptr<aCmdBase> &_pCmd);
-        virtual void                    onRedoFailed(const shared_ptr<aCmdBase> &_pCmd);
+        virtual void                        onRedoDone(const shared_ptr<aCmdBase> &_pCmd);
+        virtual void                        onRedoFailed(const shared_ptr<aCmdBase> &_pCmd);
 
     private:
-        virtual void                    manageCmd(enumCmdMsg    _eCmdMsg,
-                                                  aCmdBase      *_pCmd,
-                                                  bool          _bSuccess);
+        virtual void                        manageCmd(enumCmdMsg    _eCmdMsg,
+                                                      aCmdBase      *_pCmd,
+                                                      bool          _bSuccess);
 }; // class aCmdStack
 
 

@@ -99,7 +99,7 @@ s32 aStyleItemFillGradient::angle() const
 void aStyleItemFillGradient::draw(aPainter       &_p,
                                   const aRect    &_r)
 {
-    aVector<aPoint> vIntersect;
+    vector<aPoint> vIntersect;
 
     // calculate the intersection of the content rect with the
     // parametric line through the centerpoint

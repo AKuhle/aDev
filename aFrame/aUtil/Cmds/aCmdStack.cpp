@@ -11,7 +11,11 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aFrame_def.h"
+#include "listHelper.h"
 #include "aCmdStack.h"
+
+using namespace std;
 
 
 /*******************************************************************************
@@ -128,7 +132,7 @@ aCmdBase* aCmdStack::activeCmd() const
 /*******************************************************************************
 * aCmdStack::undoList
 *******************************************************************************/
-const aSharedPtrList<aCmdBase>& aCmdStack::undoList() const
+const list<shared_ptr<aCmdBase>>& aCmdStack::undoList() const
 {
     return m_lstUndo;
 } // aCmdStack::undoList
@@ -137,7 +141,7 @@ const aSharedPtrList<aCmdBase>& aCmdStack::undoList() const
 /*******************************************************************************
 * aCmdStack::redoList
 *******************************************************************************/
-const aSharedPtrList<aCmdBase>& aCmdStack::redoList() const
+const list<shared_ptr<aCmdBase>>& aCmdStack::redoList() const
 {
     return m_lstRedo;
 } // aCmdStack::redoList
@@ -260,10 +264,10 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
                           bool          _bSuccess)
 {
     // command can be in undo or redo list
-    std::shared_ptr<aCmdBase> pCmd = m_lstUndo.find(_pCmd);
+    std::shared_ptr<aCmdBase> pCmd = findPtrInSharedPtrList(m_lstUndo, _pCmd);
     if (pCmd == nullptr)
     {
-        pCmd = m_lstRedo.find(_pCmd);
+        pCmd = findPtrInSharedPtrList(m_lstRedo, _pCmd);
     }
     CHECK_PRE_CONDITION_VOID(pCmd != nullptr);
 
@@ -284,7 +288,7 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
             {
                 // prepare failed => do failed
                 onPrepareFailed(pCmd);
-                m_lstUndo.removeElement(pCmd);
+                removePtrInSharedPtrList(m_lstUndo, _pCmd);
 
                 onCmdProcessingEnd(pCmd);
             }
@@ -302,11 +306,11 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
                 // empty the redo stack
                 m_lstRedo.clear();
 
-                // remove undo steps > m_s32MaxUndo
-                // m_s32MaxUndo steps => m_s32MaxUndo + 1 commands
-                if (m_lstUndo.size() > m_s32MaxUndo + 1)
+                // remove undo steps > m_u32MaxUndo
+                // m_u32MaxUndo steps => m_u32MaxUndo + 1 commands
+                if (m_lstUndo.size() > m_u32MaxUndo + 1)
                 {
-                    while (m_lstUndo.size() > m_s32MaxUndo + 1)
+                    while (m_lstUndo.size() > m_u32MaxUndo + 1)
                     {
                         m_lstUndo.pop_front();
                     }
@@ -321,7 +325,7 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
             {
                 // do failed
                 onDoFailed(pCmd);
-                m_lstUndo.removeElement(pCmd);
+                removePtrInSharedPtrList(m_lstUndo, _pCmd);
 
                 onCmdProcessingEnd(pCmd);
             }
@@ -336,7 +340,8 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
                 if (_bSuccess)
                 {
                     // undo succes => move the current undo-cmd to the redo stack
-                    shared_ptr<aCmdBase> pCmd = m_lstUndo.getAndPopBack();
+                    shared_ptr<aCmdBase> pCmd = m_lstUndo.back();
+                    m_lstUndo.pop_back();
                     m_lstRedo.push_back(std::move(pCmd));
 
                     onUndoDone(m_lstRedo.back());
@@ -366,7 +371,8 @@ void aCmdStack::manageCmd(enumCmdMsg    _eCmdMsg,
                 if (_bSuccess)
                 {
                     // redo succes => move the current redo-cmd to the undo stack
-                    shared_ptr<aCmdBase> pCmd = m_lstRedo.getAndPopBack();
+                    shared_ptr<aCmdBase> pCmd = m_lstRedo.back();
+                    m_lstRedo.pop_back();
                     m_lstUndo.push_back(std::move(pCmd));
 
                     onRedoDone(m_lstUndo.back());

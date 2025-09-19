@@ -16,9 +16,11 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMap.h"
-#include "aVector.h"
+#include "aFrame_def.h"
+
 #include "aString.h"
+
+using namespace std;
 
 
 /*******************************************************************************
@@ -34,7 +36,7 @@ namespace aUtil {
 class aArgument
 {
     private:
-        aMap<aString, aVector<aString>>		m_mapArg;
+        map<aString, vector<aString>>		m_mapArg;
 
     public:
         void				parseAndAddArgument(const aString	&_sArgument);
@@ -47,16 +49,16 @@ class aArgument
 
         // get multiple values by key
         bool				values(const aString	&_sKey,
-                                   aVector<u16>		&_arValues) const;
+                                   vector<u16>		&_arValues) const;
 
         bool				values(const aString	&_sKey,
-                                   aVector<s16>		&_arValues) const;
+                                   vector<s16>		&_arValues) const;
 
         bool				values(const aString	&_sKey,
-                                   aVector<flt>		&_arValues) const;
+                                   vector<flt>		&_arValues) const;
 
         bool				values(const aString	&_sKey,
-                                   aVector<aString> &_arValues) const;
+                                   vector<aString> &_arValues) const;
 
         // get values by key
         bool				value(const aString		&_sKey,

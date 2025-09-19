@@ -20,16 +20,14 @@
 
 #include "aHelper.h"
 
-//#include "aVector.h"
-
 #include "aMathObj2D.h"
 #include "aDimension2D.h"
 #include "aPoint2D.h"
-#include "aVector.h"
 #include "aParametricLine2D.h"
 
 #include "aRect.h"
 
+using namespace std;
 using namespace aFrame;
 using namespace aFrame::aUtil;
 
@@ -142,7 +140,7 @@ class aRect2D : public aMathObj2D
         // 2 intersections => line cuts rectangle
         // _vIntersect: the intersect points in direction of the line
         void                    intersect(aParametricLine2D<T>  &_line,
-                                          aVector<aPoint>       &_vIntersect) const;
+                                          vector<aPoint>        &_vIntersect) const;
 
         // edge include => l() <= x <= r(); b() <= y <= t()
         bool					pointInRect(const aPoint2D<T> &_v2d) const;

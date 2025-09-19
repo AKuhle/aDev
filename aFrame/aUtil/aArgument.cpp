@@ -35,8 +35,8 @@ void aArgument::parseAndAddArgument(const aString &_sArg)
 {
     // general format: arg=34,55,66
 
-    aVector<aString>		vecToken;
-    aVector<aString>		vecValues;
+    vector<aString>		vecToken;
+    vector<aString>		vecValues;
 
     // split Argument and values
     _sArg.splitString("=", vecToken);
@@ -78,7 +78,7 @@ void aArgument::reportArgument(const aString    &_sKey,
 *******************************************************************************/
 bool aArgument::hasKey(const aString		&_sKey) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     return ((cit = m_mapArg.find(_sKey)) != m_mapArg.end());
 } // aArgument::hasKey
@@ -88,9 +88,9 @@ bool aArgument::hasKey(const aString		&_sKey) const
 * aArgument::values
 *******************************************************************************/
 bool aArgument::values(const aString    &_sKey,
-                       aVector<u16>		&_vecValues) const
+                       vector<u16>		&_vecValues) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -110,9 +110,9 @@ bool aArgument::values(const aString    &_sKey,
 * aArgument::values
 *******************************************************************************/
 bool aArgument::values(const aString    &_sKey,
-                       aVector<s16>		&_vecValues) const
+                       vector<s16>		&_vecValues) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -132,9 +132,9 @@ bool aArgument::values(const aString    &_sKey,
 * aArgument::values
 *******************************************************************************/
 bool aArgument::values(const aString    &_sKey,
-                       aVector<flt>		&_vecValues) const
+                       vector<flt>		&_vecValues) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -154,9 +154,9 @@ bool aArgument::values(const aString    &_sKey,
 * aArgument::values
 *******************************************************************************/
 bool aArgument::values(const aString	&_sKey,
-                       aVector<aString> &_vecValues) const
+                       vector<aString> &_vecValues) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -179,7 +179,7 @@ bool aArgument::value(const aString     &_sKey,
                       u16               &_u16Value,
                       const u16         &_u16Default /*= 0*/) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -204,7 +204,7 @@ bool aArgument::value(const aString     &_sKey,
                       s16				&_s16Value,
                       const s16			_s16Default /*= 0*/) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -228,7 +228,7 @@ bool aArgument::value(const aString     &_sKey,
                       flt				&_fValue,
                       const flt			_fDefault /*= 0*/) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {
@@ -252,7 +252,7 @@ bool aArgument::value(const aString     &_sKey,
                       aString			&_sValue,
                       const aString		_sDefault /*= ""*/) const
 {
-    aMap<aString, aVector<aString>>::const_iterator     cit;
+    map<aString, vector<aString>>::const_iterator     cit;
 
     if ((cit = m_mapArg.find(_sKey)) != m_mapArg.end())
     {

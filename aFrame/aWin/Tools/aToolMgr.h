@@ -18,8 +18,9 @@
 #include "aUtil_def.h"
 #include "aWin_def.h"
 
-#include "aUniquePtrVec.h"
 
+
+using namespace std;
 using namespace aFrame;
 using namespace aFrame::aUtil;
 using namespace aFrame::aWin;
@@ -38,7 +39,7 @@ namespace aWin {
 class aToolMgr
 {
     private:
-        aUniquePtrVec<aToolBase>    m_vTools;
+        vector<unique_ptr<aToolBase>>    m_vTools;
 
 
     /*******************************************************************************

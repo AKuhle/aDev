@@ -14,8 +14,8 @@ using namespace std;
 /*******************************************************************************
 * DlgController::DlgController
 *******************************************************************************/
-DlgController::DlgController(MainWin    *_pMainWin,
-                             Controller *_pController)
+DlgController::DlgController(MainWin                *_pMainWin,
+                             shared_ptr<Controller> _pController)
 : QDialog(_pMainWin),
   m_pUi(new Ui::DlgController),
   m_pMainWin(_pMainWin),
@@ -42,7 +42,7 @@ DlgController::~DlgController()
 /*******************************************************************************
 * DlgController::setCtrls
 *******************************************************************************/
-void DlgController::setCtrls(Controller *_pController)
+void DlgController::setCtrls(shared_ptr<Controller> _pController)
 {
     if (_pController)
     {
@@ -55,7 +55,7 @@ void DlgController::setCtrls(Controller *_pController)
 /*******************************************************************************
 * DlgController::readCtrls
 *******************************************************************************/
-void DlgController::readCtrls(Controller *_pController)
+void DlgController::readCtrls(shared_ptr<Controller> _pController)
 {
     if (_pController)
     {

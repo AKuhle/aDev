@@ -27,11 +27,11 @@ using namespace aFrame::aUtil;
 * Universe::Universe
 *******************************************************************************/
 Universe::Universe(QString                _sName,
-                   u32                    _u32Id,
-                   weak_ptr<Controller>   _pController)
+                   weak_ptr<Controller>   _pController,
+                   u32                    _u32Id)
 : m_sName(_sName),
-  m_u32Id(_u32Id),
   m_pController(_pController),
+  m_u32Id(_u32Id),
   m_dmxData(m_u32DmxDataSize, 0)
 {
     shared_ptr<Controller> pC = _pController.lock();

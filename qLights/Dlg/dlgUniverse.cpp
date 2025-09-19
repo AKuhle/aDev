@@ -17,7 +17,7 @@ using namespace std;
 *******************************************************************************/
 DlgUniverse::DlgUniverse(MainWin                            *_pMainWin,
                          const list<shared_ptr<Controller>> &_lstController,
-                         Universe                           *_pUniverse)
+                         shared_ptr<Universe>               _pUniverse)
 : QDialog(_pMainWin),
   m_pUi(new Ui::DlgUniverse),
   m_pMainWin(_pMainWin),
@@ -31,6 +31,11 @@ DlgUniverse::DlgUniverse(MainWin                            *_pMainWin,
     {
         m_pUi->m_pUniverseController->addItem(pController->name());
     }
+
+    if (m_pUniverse)
+    {
+        setCtrls(m_pUniverse);
+    }
 } // DlgUniverse::DlgUniverse
 
 
@@ -41,6 +46,38 @@ DlgUniverse::~DlgUniverse()
 {
     delete m_pUi;
 } // DlgUniverse::~DlgUniverse
+
+
+/*******************************************************************************
+* DlgUniverse::setCtrls
+*******************************************************************************/
+void DlgUniverse::setCtrls(shared_ptr<Universe> _pUniverse)
+{
+    if (_pUniverse)
+    {
+        m_pUi->m_pUniverseName->setText(_pController->name());
+        m_pUi->m_pControllerAddress->setText(_pController->ipAdr());
+    }
+} // DlgUniverse::setCtrls
+
+
+/*******************************************************************************
+* DlgUniverse::readCtrls
+*******************************************************************************/
+void DlgUniverse::readCtrls(shared_ptr<Universe> _pUniverse)
+{
+    if (_pUniverse)
+    {
+        // set the universe name
+        _pUniverse->setName(m_pUi->m_pUniverseName->text());
+
+        // set the universe
+        QString sCtrkName = _pUniverse->setController(m_pUi->m_pUniverseController->currentText());
+
+        // set the id
+        _pUniverse->setId(m_pUi->m_pUniverseId->text().toInt());
+    }
+} // DlgUniverse::readCtrls
 
 
 /*******************************************************************************
@@ -57,9 +94,7 @@ void DlgUniverse::accept()
     }
     else
     {
-        // modify the existing controller
-        // m_pController->setName(m_pUi->m_pControllerName->text());
-        // m_pController->setIpAdr(m_pUi->m_pControllerAddress->text());
+        readCtrls(m_pUniverse);
     }
 
     m_pMainWin->updateAll();

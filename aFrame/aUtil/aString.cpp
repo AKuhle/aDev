@@ -14,7 +14,6 @@
 * includes
 *******************************************************************************/
 #include "aString.h"
-#include "aVector.h"
 
 
 /*******************************************************************************
@@ -541,8 +540,8 @@ bool aString::contains(const char *_pSubStr) const
 /*******************************************************************************
 * aString::splitString
 *******************************************************************************/
-void aString::splitString(const aString      _sDelim, // e.g. "|@-" => this split at | or @ or -
-                          aVector<aString>   &_vecToken) const
+void aString::splitString(const aString     _sDelim, // e.g. "|@-" => this split at | or @ or -
+                          vector<aString>   &_vecToken) const
 {
     aString 				sToken;
     string::size_type		pos			= 0;

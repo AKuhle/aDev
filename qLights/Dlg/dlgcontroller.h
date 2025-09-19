@@ -2,6 +2,10 @@
 
 #include <QDialog>
 
+#include "aFrame_def.h"
+
+using namespace std;
+
 namespace Ui {
 class DlgController;
 }
@@ -24,16 +28,16 @@ class DlgController : public QDialog
     private:
         Ui::DlgController       *m_pUi;
         MainWin                 *m_pMainWin;
-        Controller              *m_pController;
+        shared_ptr<Controller>  m_pController;
 
     public:
-        explicit DlgController(MainWin    *_pMainWin,
-                               Controller *_pController);
+        explicit DlgController(MainWin                  *_pMainWin,
+                               shared_ptr<Controller>   _pController);
         ~DlgController();
 
     private:
-        void                    setCtrls(Controller *_pController);
-        void                    readCtrls(Controller *_pController);
+        void                    setCtrls(shared_ptr<Controller> _pController);
+        void                    readCtrls(shared_ptr<Controller> _pController);
 
         virtual void            accept();
         virtual void            reject();

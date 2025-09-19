@@ -31,6 +31,8 @@ MainWin::MainWin(QWidget *parent)
 
     // connect the universe stuff
     connect(m_pUi->m_pBtnAddUniverse, &QToolButton::clicked, this, &MainWin::onAddUniverse);
+    connect(m_pUi->m_pBtnRemoveUniverse, &QToolButton::clicked, this, &MainWin::onRemoveUniverse);
+    connect(m_pUi->m_pBtnEditUniverse, &QToolButton::clicked, this, &MainWin::onEditUniverse);
 
     // connect the device stuff
     connect(m_pUi->m_pBtnAddDevice, &QToolButton::clicked, this, &MainWin::onAddDevice);
@@ -83,15 +85,14 @@ void MainWin::addController(const QString &_sName,
 /*******************************************************************************
 * MainWin::findController
 *******************************************************************************/
-Controller* MainWin::findController(const QString &_sName)
+shared_ptr<Controller> MainWin::findController(const QString &_sName)
 {
-    auto it = std::find_if(
-        m_lstController.begin(),
-        m_lstController.end(),
-        [&_sName](shared_ptr<Controller> pCtrl) { return pCtrl->name() == _sName; }
-        );
+    auto it = std::find_if(m_lstController.begin(),
+                           m_lstController.end(),
+                          [&_sName](shared_ptr<Controller> pCtrl) { return pCtrl->name() == _sName; }
+                          );
 
-    return (it != m_lstController.end())?   (*it).get() : nullptr;
+    return (it != m_lstController.end())?   (*it) : nullptr;
 } // MainWin::findController
 
 
@@ -115,7 +116,7 @@ void MainWin::addUniverse(const QString   &_sName,
         // create an universe with an controller
         std::weak_ptr<Controller> wp = *it;
 
-        shared_ptr<Universe>  pUniverse = make_shared<Universe> (_sName, _s32Id, wp);
+        shared_ptr<Universe>  pUniverse = make_shared<Universe> (_sName, wp, _s32Id);
         m_lstUniverse.push_back(std::move(pUniverse));
     }
     else
@@ -123,15 +124,24 @@ void MainWin::addUniverse(const QString   &_sName,
         std::weak_ptr<Controller> wp;
 
         // create an universe w/o an controller
-        shared_ptr<Universe>  pUniverse = make_shared<Universe> (_sName, _s32Id, wp);
+        shared_ptr<Universe>  pUniverse = make_shared<Universe> (_sName, wp, _s32Id);
         m_lstUniverse.push_back(std::move(pUniverse));
     }
-
-
-    //unique_ptr<Controller>  pController = make_unique<Controller> ("Showtec NET-2/3 POCKET", "192.168.1.245");
-    //unique_ptr<Controller>  pController = make_unique<Controller> (_sName, _sIpAdr);
-    //m_lstController.push_back(std::move(pController));
 } // MainWin::addUniverse
+
+
+/*******************************************************************************
+* MainWin::findUniverse
+*******************************************************************************/
+shared_ptr<Universe> MainWin::findUniverse(const QString &_sName)
+{
+    auto it = std::find_if(m_lstUniverse.begin(),
+                           m_lstUniverse.end(),
+                          [&_sName](shared_ptr<Universe> pCtrl) { return pCtrl->name() == _sName; }
+                          );
+
+    return (it != m_lstUniverse.end())?   (*it) : nullptr;
+} // MainWin::findUniverse
 
 
 /*******************************************************************************
@@ -145,6 +155,20 @@ void MainWin::addDevice(const QString &_sName)
 
 
 /*******************************************************************************
+* MainWin::findDevice
+*******************************************************************************/
+shared_ptr<Device> MainWin::findDevice(const QString &_sName)
+{
+    auto it = std::find_if(m_lstDevice.begin(),
+                           m_lstDevice.end(),
+                          [&_sName](shared_ptr<Device> pCtrl) { return pCtrl->name() == _sName; }
+                          );
+
+    return (it != m_lstDevice.end())?   (*it) : nullptr;
+} // MainWin::findDevice
+
+
+/*******************************************************************************
 * MainWin::addFixture
 *******************************************************************************/
 void MainWin::addFixture(const QString &_sName)
@@ -152,3 +176,17 @@ void MainWin::addFixture(const QString &_sName)
     shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName);
     m_lstFixture.push_back(std::move(pFixture));
 } // MainWin::addFixture
+
+
+/*******************************************************************************
+* MainWin::findFixture
+*******************************************************************************/
+shared_ptr<Fixture> MainWin::findFixture(const QString &_sName)
+{
+    auto it = std::find_if(m_lstFixture.begin(),
+                           m_lstFixture.end(),
+                          [&_sName](shared_ptr<Fixture> pCtrl) { return pCtrl->name() == _sName; }
+                          );
+
+    return (it != m_lstFixture.end())?   (*it) : nullptr;
+} // MainWin::findFixture

@@ -18,8 +18,6 @@
 *******************************************************************************/
 #include "aUtil_def.h"
 
-#include "aVector.h"
-
 #include "aPoolVarBool.h"
 #include "aPoolVarColor.h"
 #include "aPoolVarDbl.h"

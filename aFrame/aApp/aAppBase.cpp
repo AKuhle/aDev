@@ -114,7 +114,7 @@ void aAppBase::parseArgs(int	_argc,
                          char   *_argv[],
                          char	** /*_envp*/)
 {
-    aVector<aString>		vecToken;
+    vector<aString>		vecToken;
 
                                         // e.g.: "\temp\out\test.txt"
     aString                 sName;      // e.g.: "test"

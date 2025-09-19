@@ -35,8 +35,8 @@ class Universe
 {
     private:
         QString                 m_sName;
-        u32                     m_u32Id;
         weak_ptr<Controller>    m_pController;
+        u32                     m_u32Id;
 
         // artNet
         QHostAddress            m_hostAdr;
@@ -46,16 +46,18 @@ class Universe
 
     public:
         Universe(QString                m_sName,
-                 u32                    _u32Id,
-                 weak_ptr<Controller>   _pController);
+                 weak_ptr<Controller>   _pController,
+                 u32                    _u32Id);
         ~Universe();
 
-        const QString&      name() const                        { return m_sName; }
-        void                setName(const QString &_sName)      { m_sName = _sName; }
+        const QString&      name() const                                { return m_sName; }
+        void                setName(const QString &_sName)              { m_sName = _sName; }
 
-        u32                 id() const                          { return m_u32Id; }
+        const Controller*   controller() const                          { return m_pController.lock().get(); }
+        void                setController(weak_ptr<Controller> _pC)     { m_pController = _pC; }
 
-        const Controller*   controller() const                  { return m_pController.lock().get(); }
+        u32                 id() const                                  { return m_u32Id; }
+        void                setId(u32 _u32Id)                           { m_u32Id = _u32Id; }
 
         void                setDmxChannelValue(s32      _s32DmxChannelNr,
                                                u8       _u8Value,

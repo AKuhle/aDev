@@ -18,7 +18,7 @@ using namespace std;
 * DlgChannel::DlgChannel
 *******************************************************************************/
 DlgChannel::DlgChannel(DlgDevice               *_pDlgDevice,
-                       const aVector<QPixmap>  &_lstChannelIcon)
+                       const vector<QPixmap>    &_lstChannelIcon)
 : QDialog(_pDlgDevice),
   m_pUi(new Ui::DlgChannel),
   m_pDlgDevice(_pDlgDevice)
