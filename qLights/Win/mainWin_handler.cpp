@@ -32,7 +32,7 @@ void MainWin::onFileOpen()
     // set the path for the configuration
     aPath       sPath   = get_appPath();
     sPath.append("qLights.json");
-    sPath = "C:/Tools/aDev/aFrame/Documents/qLights.json";
+    sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
 
     if (f.readJsonFile(sPath))
     {
@@ -67,9 +67,13 @@ void MainWin::onFileOpen()
 
         for (idx = 0; idx < count; idx++)
         {
+            // device name
             aString sName = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":name");
 
-            addDevice(sName.toQString());
+            // device image
+            aString sImage = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":image");
+
+            addDevice(sName.toQString(), sImage.toQString());
         }
 
         // load the fixtures
@@ -78,6 +82,7 @@ void MainWin::onFileOpen()
 
         for (idx = 0; idx < count; idx++)
         {
+            // fixture name
             aString sName = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":name");
 
             addFixture(sName.toQString());
@@ -99,7 +104,7 @@ void MainWin::onFileSave()
     // set the path for the configuration
     aPath       sPath   = get_appPath();
     sPath.append("qLights.json");
-    sPath = "C:/Tools/aDev/aFrame/Documents/qLights.json";
+    sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
 
     // save the controllers
     f.addValue(aString("controller:count"), (int) m_lstController.size());
@@ -144,6 +149,11 @@ void MainWin::onFileSave()
     {
         // device name
         f.addValue(aString("device:") + aString::fromValue(idx) + ":name", aString::fromQString(pD->name()));
+
+        // device image
+        QString sss = pD->pixmapName();
+        sss.replace(QChar(92), QChar(47)); // 92 = '\', 47 = '/'
+        f.addValue(aString("device:") + aString::fromValue(idx) + ":image", aString::fromQString(sss));
 
         idx++;
     }
@@ -259,9 +269,9 @@ void MainWin::onRemoveUniverse(bool /*_bChecked*/)
     {
         QString sName = pT->item(s32Row, 0)->text();
 
-        m_lstUniverse.remove_if([&sName](shared_ptr<Universe> pCtrl)
+        m_lstUniverse.remove_if([&sName](shared_ptr<Universe> pUniverse)
                                     {
-                                        return pCtrl->name() == sName;
+                                        return pUniverse->name() == sName;
                                     });
     }
 
@@ -285,7 +295,7 @@ void MainWin::onEditUniverse(bool /*_bChecked*/)
 
         shared_ptr<Universe> pUniverse = findUniverse(sName);
 
-        DlgUniverse   dlg(this, pUniverse);
+        DlgUniverse   dlg(this, m_lstController, pUniverse);
         dlg.exec();
     }
 } // MainWin::onEditUniverse
@@ -296,12 +306,58 @@ void MainWin::onEditUniverse(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onAddDevice(bool /*_bChecked*/)
 {
-    Device *pDevice = nullptr;
+    shared_ptr<Device> pDevice;
 
-    DlgDevice dlg(this, m_lstChannelIcon, pDevice);
+    DlgDevice dlg(this, m_lstDeviceIconName, m_lstChannelIcon, pDevice);
 
     dlg.exec();
 } // MainWin::onAddDevice
+
+
+/*******************************************************************************
+* MainWin::onRemoveDevice
+*******************************************************************************/
+void MainWin::onRemoveDevice(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pDeviceTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 0)->text();
+
+        m_lstDevice.remove_if([&sName](shared_ptr<Device> pDevice)
+                                    {
+                                        return pDevice->name() == sName;
+                                    });
+    }
+
+    updateAll();
+} // MainWin::onRemoveDevice
+
+
+/*******************************************************************************
+* MainWin::onEditDevice
+*******************************************************************************/
+void MainWin::onEditDevice(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pDeviceTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 1)->text();
+
+        shared_ptr<Device> pDevice = findDevice(sName);
+
+        DlgDevice   dlg(this, m_lstDeviceIconName, m_lstChannelIcon, pDevice);
+        dlg.exec();
+    }
+} // MainWin::onEditDevice
 
 
 /*******************************************************************************

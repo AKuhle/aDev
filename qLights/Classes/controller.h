@@ -46,8 +46,6 @@ class Controller
         const QString&                      ipAdr() const                       { return m_sIpAdr; }
         void                                setIpAdr(const QString &_sIpAdr)    { m_sIpAdr = _sIpAdr; }
 
-        //void                                addUniverse(u32 _u32Id);
-
         // void                                setDmxChannelValue(s32      _s32UniverseId,
         //                                                        s32      _s32DmxChannelNr,
         //                                                        u8       _u8Value,

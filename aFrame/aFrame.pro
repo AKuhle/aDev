@@ -267,5 +267,4 @@ unix {
 
 DISTFILES += \
     Documents/boxModel.png \
-    Documents/dark_style.json \
-    Documents/qLights.json
+    Documents/dark_style.json

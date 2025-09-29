@@ -24,9 +24,11 @@ using namespace aFrame;
 /*******************************************************************************
 * Device::Device
 *******************************************************************************/
-Device::Device(const QString &_sName)
+Device::Device(const QString &_sName,
+               const QString &_sPixmap)
 : m_sName(_sName)
 {
+    setPixmap(_sPixmap);
 } // Device::Device
 
 
@@ -36,6 +38,17 @@ Device::Device(const QString &_sName)
 Device::~Device()
 {
 } // Device::~Device
+
+
+/*******************************************************************************
+* Device::setPixmap
+*******************************************************************************/
+void Device::setPixmap(const QString &_sPixmapName)
+{
+    m_sPixmapName = _sPixmapName;
+
+    m_pixmap.load(m_sPixmapName);
+} // setPixmap
 
 
 /*******************************************************************************

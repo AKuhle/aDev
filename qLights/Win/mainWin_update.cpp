@@ -70,24 +70,13 @@ void MainWin::updateUniversePanel()
         const Controller    *pC = pU->controller();
 
         // univers name
-        addTableWidgetItem(pT, idx, 0, pU->name());                                     // univers name
+        addTableWidgetItem(pT, idx, 0, pU->name());
 
-        if (pC)
-        {
-            // universe has a controller
-            addTableWidgetItem(pT, idx, 1, pC->name());                 // controller name
+        // controller name
+        addTableWidgetItem(pT, idx, 1, (pC)?   pC->name() : "no Controller");
 
-            addTableWidgetItem(pT, idx, 2, QString::number(pU->id()));   // universe Id
-            pT->item(idx, 2)->setTextAlignment(Qt::AlignHCenter);
-        }
-        else
-        {
-            // universe don't has a controller
-            addTableWidgetItem(pT, idx, 1, "no Controller");                 // controller name
-
-            addTableWidgetItem(pT, idx, 2, "-");   // universe Id
-            pT->item(idx, 2)->setTextAlignment(Qt::AlignHCenter);
-        }
+        // universe Id
+        addTableWidgetItem(pT, idx, 2, QString::number(pU->id()));
 
         idx++;
     }
@@ -108,8 +97,19 @@ void MainWin::updateDevicePanel()
     s32 idx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
-        // controller name
-        addTableWidgetItem(pT, idx, 0, pD->name());
+        // set the row size to 64
+        pT->setRowHeight(idx, 64);
+
+        // device image
+        const QPixmap &pix = pD->pixmap();
+
+        if (!pix.isNull())
+        {
+            addTableWidgetItem(pT, idx, 0, pix);
+        }
+
+        // device name
+        addTableWidgetItem(pT, idx, 1, pD->name());
 
         idx++;
     }
@@ -147,6 +147,23 @@ void MainWin::addTableWidgetItem(QTableWidget   *_pTableWidget,
                                  const QString  &_sItem)
 {
     QTableWidgetItem    *pItem = new QTableWidgetItem(_sItem);
+
+    pItem->setFlags(pItem->flags() & ~Qt::ItemIsEditable);
+
+    _pTableWidget->setItem(_s32Row, _s32Col, pItem);
+} // MainWin::addTableWidgetItem
+
+
+/*******************************************************************************
+* MainWin::addTableWidgetItem
+*******************************************************************************/
+void MainWin::addTableWidgetItem(QTableWidget   *_pTableWidget,
+                                 s32            _s32Row,
+                                 s32            _s32Col,
+                                 const QPixmap  &_pixmap)
+{
+    QTableWidgetItem    *pItem = new QTableWidgetItem();
+    pItem->setIcon(QIcon(_pixmap));
 
     pItem->setFlags(pItem->flags() & ~Qt::ItemIsEditable);
 

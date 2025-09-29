@@ -19,6 +19,7 @@
 #include <QString>
 
 #include "aFrame_def.h"
+#include "channel.h"
 
 
 class Universe;
@@ -34,13 +35,24 @@ class Device
 {
     private:
         QString                         m_sName;
+        QString                         m_sPixmapName;
+        QPixmap                         m_pixmap;
+        list<shared_ptr<Channel>>       m_lstChannel;
 
     public:
-        Device(const QString &_sName);
+        Device(const QString &_sName,
+               const QString &_sPixmap);
         ~Device();
 
-        const QString&                      name() const                        { return m_sName; }
-        void                                setName(const QString &_sName)      { m_sName = _sName; }
+        const QString&                      name() const                                                { return m_sName; }
+        void                                setName(const QString &_sName)                              { m_sName = _sName; }
+
+        const QPixmap&                      pixmap() const                                              { return m_pixmap; }
+        const QString&                      pixmapName() const                                          { return m_sPixmapName; }
+        void                                setPixmap(const QString &_sPixmapName);
+
+        const list<shared_ptr<Channel>>     &channel() const                                            { return m_lstChannel; }
+        void                                setChannel(const list<shared_ptr<Channel>> &_lstChannel)    { m_lstChannel = _lstChannel; }
 
         //void                                addUniverse(u32 _u32Id);
 

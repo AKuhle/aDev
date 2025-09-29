@@ -2201,7 +2201,7 @@
      <x>0</x>
      <y>0</y>
      <width>1393</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2258,8 +2258,11 @@
          <height>16777215</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string/>
+       </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <property name="iconSize">
         <size>
@@ -2538,7 +2541,7 @@
             <enum>QFrame::Shadow::Sunken</enum>
            </property>
            <property name="columnCount">
-            <number>2</number>
+            <number>3</number>
            </property>
            <attribute name="horizontalHeaderVisible">
             <bool>true</bool>
@@ -2546,6 +2549,11 @@
            <attribute name="verticalHeaderVisible">
             <bool>true</bool>
            </attribute>
+           <column>
+            <property name="text">
+             <string>Image</string>
+            </property>
+           </column>
            <column>
             <property name="text">
              <string>Name</string>
@@ -2720,8 +2728,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../../aFrame/Resource/aFrame.qrc"/>
   <include location="../Resource/qLights.qrc"/>
+  <include location="../../aFrame/Resource/aFrame.qrc"/>
  </resources>
  <connections/>
 </ui>

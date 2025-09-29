@@ -19,6 +19,8 @@ MainWin::MainWin(QWidget *parent)
     // load the channel icon list
     readChannelIcons();
 
+    m_pUi->m_pDeviceTable->setIconSize(QSize(64, 64)); // set the icon size for all cells
+
     // connect the toolbar stuff
     connect(m_pUi->m_pActionOpenFile, &QAction::triggered, this, &MainWin::onFileOpen);
     connect(m_pUi->m_pActionSaveFile, &QAction::triggered, this, &MainWin::onFileSave);
@@ -36,6 +38,8 @@ MainWin::MainWin(QWidget *parent)
 
     // connect the device stuff
     connect(m_pUi->m_pBtnAddDevice, &QToolButton::clicked, this, &MainWin::onAddDevice);
+    connect(m_pUi->m_pBtnRemoveDevice, &QToolButton::clicked, this, &MainWin::onRemoveDevice);
+    connect(m_pUi->m_pBtnEditDevice, &QToolButton::clicked, this, &MainWin::onEditDevice);
 
     // connect the fixture stuff
     connect(m_pUi->m_pBtnAddFixture, &QToolButton::clicked, this, &MainWin::onAddFixture);
@@ -58,8 +62,8 @@ MainWin::~MainWin()
 *******************************************************************************/
 void  MainWin::readChannelIcons()
 {
-    // path to the icons
-    std::string path = "C:/Tools/aDev/qLights/ChannelIcons";
+    // read the channel icons
+    std::string path = "C:/Tools/aDev/qLights/Icons/Channel";
 
     for (const auto &entry : std::filesystem::directory_iterator(path))
     {
@@ -68,7 +72,43 @@ void  MainWin::readChannelIcons()
             m_lstChannelIcon.push_back(QPixmap(QString::fromStdString(entry.path().string())));
         }
     }
+
+    // read the device icons
+    path = "C:/Tools/aDev/qLights/Icons/Device";
+
+    for (const auto &entry : std::filesystem::directory_iterator(path))
+    {
+        if (entry.is_regular_file() && entry.path().extension() == ".png")
+        {
+            QString     sFile = QString::fromStdString(entry.path().string());
+
+            if (sFile.contains("std.png"))
+            {
+                // insert the standard image at the beginning of the list
+                m_lstDeviceIconName.insert(m_lstDeviceIconName.begin(), sFile);
+            }
+            else
+            {
+                m_lstDeviceIconName.push_back(sFile);
+            }
+        }
+    }
 } // MainWin::readChannelIcons
+
+
+/*******************************************************************************
+* MainWin::selectComboBoxItem
+*******************************************************************************/
+void  MainWin::selectComboBoxItem(QComboBox     *_pCombo,
+                                  const QString &_sItem)
+{
+    int index = _pCombo->findText(_sItem);
+
+    if (index != -1)
+    {
+        _pCombo->setCurrentIndex(index);
+    }
+} // MainWin::selectComboBoxItem
 
 
 /*******************************************************************************
@@ -94,6 +134,20 @@ shared_ptr<Controller> MainWin::findController(const QString &_sName)
 
     return (it != m_lstController.end())?   (*it) : nullptr;
 } // MainWin::findController
+
+
+/*******************************************************************************
+* MainWin::findUniverse
+*******************************************************************************/
+shared_ptr<Universe> MainWin::findUniverse(const QString &_sName)
+{
+    auto it = std::find_if(m_lstUniverse.begin(),
+                           m_lstUniverse.end(),
+                          [&_sName](shared_ptr<Universe> pCtrl) { return pCtrl->name() == _sName; }
+                          );
+
+    return (it != m_lstUniverse.end())?   (*it) : nullptr;
+} // MainWin::findUniverse
 
 
 /*******************************************************************************
@@ -131,25 +185,12 @@ void MainWin::addUniverse(const QString   &_sName,
 
 
 /*******************************************************************************
-* MainWin::findUniverse
-*******************************************************************************/
-shared_ptr<Universe> MainWin::findUniverse(const QString &_sName)
-{
-    auto it = std::find_if(m_lstUniverse.begin(),
-                           m_lstUniverse.end(),
-                          [&_sName](shared_ptr<Universe> pCtrl) { return pCtrl->name() == _sName; }
-                          );
-
-    return (it != m_lstUniverse.end())?   (*it) : nullptr;
-} // MainWin::findUniverse
-
-
-/*******************************************************************************
 * MainWin::addDevice
 *******************************************************************************/
-void MainWin::addDevice(const QString &_sName)
+void MainWin::addDevice(const QString &_sName,
+                        const QString &_sImage)
 {
-    shared_ptr<Device>  pDevice = make_shared<Device> (_sName);
+    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage);
     m_lstDevice.push_back(std::move(pDevice));
 } // MainWin::addDevice
 

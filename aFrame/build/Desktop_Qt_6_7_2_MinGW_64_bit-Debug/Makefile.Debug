@@ -203,8 +203,7 @@ OBJECTS       = debug/aAppMainWin.o \
 		debug/moc_aBaseWin.o
 
 DIST          = Documents/boxModel.png \
-		Documents/dark_style.json \
-		Documents/qLights.json ..\..\aApp\aAppBase.h \
+		Documents/dark_style.json ..\..\aApp\aAppBase.h \
 		..\..\aApp\aAppMainWin.h \
 		..\..\aApp\aApp_def.h \
 		..\..\aApp\main.h \

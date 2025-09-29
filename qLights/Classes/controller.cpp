@@ -42,18 +42,6 @@ Controller::~Controller()
 
 
 /*******************************************************************************
-* Controller::addUniverse
-*******************************************************************************/
-// void Controller::addUniverse(u32 _u32Id)
-// {
-//     if (m_mapUniverse.size() < m_s32UniverseMax)
-//     {
-//         m_mapUniverse[_u32Id] = make_shared<Universe> (_u32Id, m_sIpAdr);
-//     }
-// } // Controller::addUniverse
-
-
-/*******************************************************************************
 * Controller::setDmxChannelValue
 *******************************************************************************/
 // void Controller::setDmxChannelValue(s32      _s32UniverseId,

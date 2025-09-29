@@ -51,33 +51,25 @@ DlgUniverse::~DlgUniverse()
 /*******************************************************************************
 * DlgUniverse::setCtrls
 *******************************************************************************/
-void DlgUniverse::setCtrls(shared_ptr<Universe> _pUniverse)
-{
-    if (_pUniverse)
-    {
-        m_pUi->m_pUniverseName->setText(_pController->name());
-        m_pUi->m_pControllerAddress->setText(_pController->ipAdr());
-    }
-} // DlgUniverse::setCtrls
-
-
-/*******************************************************************************
-* DlgUniverse::readCtrls
-*******************************************************************************/
-void DlgUniverse::readCtrls(shared_ptr<Universe> _pUniverse)
+void DlgUniverse::setCtrls(const shared_ptr<Universe> _pUniverse)
 {
     if (_pUniverse)
     {
         // set the universe name
-        _pUniverse->setName(m_pUi->m_pUniverseName->text());
+        m_pUi->m_pUniverseName->setText(_pUniverse->name());
 
-        // set the universe
-        QString sCtrkName = _pUniverse->setController(m_pUi->m_pUniverseController->currentText());
+        // set the controller by the controller name
+        const Controller    *pCtrl = _pUniverse->controller();
+        if (pCtrl)
+        {
+            MainWin::selectComboBoxItem(m_pUi->m_pUniverseController,
+                                        pCtrl->name());
+        } // if (pCtrl)
 
-        // set the id
-        _pUniverse->setId(m_pUi->m_pUniverseId->text().toInt());
+        // set the universe id
+        m_pUi->m_pUniverseId->setText(QString::number(_pUniverse->id()));
     }
-} // DlgUniverse::readCtrls
+} // DlgUniverse::setCtrls
 
 
 /*******************************************************************************
@@ -94,7 +86,15 @@ void DlgUniverse::accept()
     }
     else
     {
-        readCtrls(m_pUniverse);
+        // universe name
+        m_pUniverse->setName(m_pUi->m_pUniverseName->text());
+
+        // universe controller
+        shared_ptr<Controller> pC = m_pMainWin->findController(m_pUi->m_pUniverseController->currentText());
+        m_pUniverse->setController(pC); // pC could be a nullptr!
+
+        // universe id
+        m_pUniverse->setId(m_pUi->m_pUniverseId->text().toInt());
     }
 
     m_pMainWin->updateAll();

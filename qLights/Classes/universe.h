@@ -45,7 +45,7 @@ class Universe
         QByteArray              m_dmxData           { m_u32DmxDataSize, 0 };
 
     public:
-        Universe(QString                m_sName,
+        Universe(QString                _sName,
                  weak_ptr<Controller>   _pController,
                  u32                    _u32Id);
         ~Universe();

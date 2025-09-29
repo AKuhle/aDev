@@ -44,8 +44,7 @@ class DlgUniverse : public QDialog
         ~DlgUniverse();
 
     private:
-        void                    setCtrls(shared_ptr<Universe> _pUniverse);
-        void                    readCtrls(shared_ptr<Universe> _pUniverse);
+        void                    setCtrls(const shared_ptr<Universe> _pUniverse);
 
         virtual void            accept();
         virtual void            reject();

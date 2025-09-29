@@ -5,6 +5,7 @@
 *******************************************************************************/
 #include <QMainWindow>
 #include <QTableWidget>
+#include <QComboBox>
 
 #include "controller.h"
 #include "universe.h"
@@ -30,6 +31,8 @@ class MainWin : public QMainWindow
         list<shared_ptr<Universe>>      m_lstUniverse;
         list<shared_ptr<Device>>        m_lstDevice;
         list<shared_ptr<Fixture>>       m_lstFixture;
+
+        vector<QString>                 m_lstDeviceIconName;
         vector<QPixmap>                 m_lstChannelIcon;
 
     public:
@@ -44,14 +47,15 @@ class MainWin : public QMainWindow
 
 
         // universe
+        shared_ptr<Universe>    findUniverse(const QString &_sName);
+
         void                    addUniverse(const QString   &_sName,
                                             const QString   &_sController,
                                             s32             _s32Id);
 
-        shared_ptr<Universe>    findUniverse(const QString &_sName);
-
         // device
-        void                    addDevice(const QString &_sName);
+        void                    addDevice(const QString &_sName,
+                                          const QString &_sImage);
 
         shared_ptr<Device>      findDevice(const QString &_sName);
 
@@ -68,12 +72,21 @@ class MainWin : public QMainWindow
         void                    updateDevicePanel();
         void                    updateFixturePanel();
 
+        // public Qt helper
+        static void             selectComboBoxItem(QComboBox     *_pCombo,
+                                                   const QString &_sItem);
+
 
     private:
         void                    addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                    s32              _s32Row,
                                                    s32              _s32Col,
                                                    const QString    &_sItem);
+
+        void                    addTableWidgetItem(QTableWidget     *_pTableWidget,
+                                                   s32              _s32Row,
+                                                   s32              _s32Col,
+                                                   const QPixmap    &_pixmap);
 
         void                    readChannelIcons();
 
@@ -94,6 +107,8 @@ class MainWin : public QMainWindow
         void                    onEditUniverse(bool _bChecked);
 
         void                    onAddDevice(bool _bChecked);
+        void                    onRemoveDevice(bool _bChecked);
+        void                    onEditDevice(bool _bChecked);
 
         void                    onAddFixture(bool _bChecked);
 }; // class MainWin

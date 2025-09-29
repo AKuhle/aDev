@@ -113,6 +113,7 @@ HEADERS += \
     Classes/controller.h \
     Classes/device.h \
     Classes/fixture.h \
+    Classes/qLights_def.h \
     Classes/universe.h \
     Dlg/dlgChannel.h \
     Dlg/dlgController.h \
@@ -137,3 +138,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     ../aFrame/Resource/aFrame.qrc \
     Resource/qLights.qrc
+
+DISTFILES += \
+    Documents/qLights.json
