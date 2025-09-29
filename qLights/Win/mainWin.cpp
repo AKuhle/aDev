@@ -69,7 +69,7 @@ void  MainWin::readChannelIcons()
     {
         if (entry.is_regular_file() && entry.path().extension() == ".png")
         {
-            m_lstChannelIcon.push_back(QPixmap(QString::fromStdString(entry.path().string())));
+            m_lstChannelIcon.push_back(QString::fromStdString(entry.path().string()));
         }
     }
 
@@ -187,10 +187,11 @@ void MainWin::addUniverse(const QString   &_sName,
 /*******************************************************************************
 * MainWin::addDevice
 *******************************************************************************/
-void MainWin::addDevice(const QString &_sName,
-                        const QString &_sImage)
+void MainWin::addDevice(const QString                       &_sName,
+                        const QString                       &_sImage,
+                        const vector<shared_ptr<Channel>>   &_vChannel)
 {
-    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage);
+    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _vChannel);
     m_lstDevice.push_back(std::move(pDevice));
 } // MainWin::addDevice
 

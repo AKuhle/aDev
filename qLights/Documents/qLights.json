@@ -8,22 +8,41 @@
   },
   "device": {
     "0": {
+      "channelCount": 0,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-s90.png",
       "name": "eurolite TMH-S90"
     },
     "1": {
+      "channelCount": 0,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 16"
     },
     "2": {
-      "image": "",
+      "channelCount": 0,
+      "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 24"
     },
     "3": {
-      "image": "",
+      "channelCount": 0,
+      "image": "C:/Tools/aDev/qLights/Icons/Device/par.png",
       "name": "PAR"
     },
-    "count": 4
+    "4": {
+      "channel0": {
+        "name": "1",
+        "nr": "1",
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel\blue.png"
+      },
+      "channel1": {
+        "name": "4",
+        "nr": "4",
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel\brightnessAll.png"
+      },
+      "channelCount": 2,
+      "image": "C:/Tools/aDev/qLights/Icons/Device/std.png",
+      "name": "test"
+    },
+    "count": 5
   },
   "fixture": {
     "0": {

@@ -5,11 +5,10 @@
 *******************************************************************************/
 #include <QDialog>
 #include "aFrame_def.h"
-#include "aUtil_def.h"
+#include "qLights_def.h"
 
 using namespace std;
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 namespace Ui {
@@ -37,19 +36,19 @@ class DlgDevice : public QDialog
         MainWin                 *m_pMainWin;
         shared_ptr<Device>      m_pDevice;
         const vector<QString>   &m_lstDeviceIconName;
-        const vector<QPixmap>   &m_lstChannelIcon;
+        const vector<QString>   &m_lstChannelIcon;
         s32                     m_s32ImageIdx       { 0 };
 
     public:
         explicit DlgDevice(MainWin                  *_pMainWin,
                            const vector<QString>    &_lstDeviceIconName,
-                           const vector<QPixmap>    &_lstChannelIcon,
+                           const vector<QString>    &_lstChannelIcon,
                            shared_ptr<Device>       _pDevice);
         ~DlgDevice();
 
         void                    addChannel(s32              _s32ChannelNr,
                                            const QString    &_s32ChannelName,
-                                           const QPixmap    &_pixmap,
+                                           const QString    &_sPixmapName,
                                            bool             _bBrigthness);
 
     private:
@@ -64,4 +63,5 @@ class DlgDevice : public QDialog
         void                    onNextImage(bool _bChecked);
 
         void                    onAddChannel(bool _bChecked);
+        void                    onRemoveChannel(bool _bChecked);
 }; // class DlgDevice

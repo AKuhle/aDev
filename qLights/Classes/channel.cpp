@@ -27,13 +27,14 @@ using namespace aFrame::aUtil;
 *******************************************************************************/
 Channel::Channel(s32            _s32Nr,
                  const QString  &_sName,
-                 const QPixmap  &_pixmap,
+                 const QString  &_sPixmapName,
                  bool           _bBrightness)
 : m_s32Nr(_s32Nr),
   m_sName(_sName),
-  m_pixmap(_pixmap),
+  m_sPixmapName(_sPixmapName),
   m_bBrightness(_bBrightness)
 {
+    m_pixmap.load(_sPixmapName);
 } // Channel::Channel
 
 

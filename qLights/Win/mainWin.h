@@ -7,6 +7,7 @@
 #include <QTableWidget>
 #include <QComboBox>
 
+#include "qLights_def.h"
 #include "controller.h"
 #include "universe.h"
 #include "device.h"
@@ -33,7 +34,7 @@ class MainWin : public QMainWindow
         list<shared_ptr<Fixture>>       m_lstFixture;
 
         vector<QString>                 m_lstDeviceIconName;
-        vector<QPixmap>                 m_lstChannelIcon;
+        vector<QString>                 m_lstChannelIcon;
 
     public:
         MainWin(QWidget *parent = nullptr);
@@ -54,8 +55,9 @@ class MainWin : public QMainWindow
                                             s32             _s32Id);
 
         // device
-        void                    addDevice(const QString &_sName,
-                                          const QString &_sImage);
+        void                    addDevice(const QString                     &_sName,
+                                          const QString                     &_sImage,
+                                          const vector<shared_ptr<Channel>> &_vChannel);
 
         shared_ptr<Device>      findDevice(const QString &_sName);
 

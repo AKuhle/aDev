@@ -21,7 +21,7 @@ using namespace std;
 *******************************************************************************/
 DlgDevice::DlgDevice(MainWin                *_pMainWin,
                      const vector<QString>  &_lstDeviceIconName,
-                     const vector<QPixmap>  &_lstChannelIcon,
+                     const vector<QString>  &_lstChannelIcon,
                      shared_ptr<Device>     _pDevice)
 : QDialog(_pMainWin),
   m_pUi(new Ui::DlgDevice),
@@ -42,9 +42,11 @@ DlgDevice::DlgDevice(MainWin                *_pMainWin,
 
     // connect the add prev/next button
     connect(m_pUi->m_pPrev, &QToolButton::clicked, this, &DlgDevice::onPrevImage);
+    connect(m_pUi->m_pNext, &QToolButton::clicked, this, &DlgDevice::onNextImage);
 
     // connect the add channel button
-    connect(m_pUi->m_pNext, &QToolButton::clicked, this, &DlgDevice::onNextImage);
+    connect(m_pUi->m_pBtnAddChannel, &QToolButton::clicked, this, &DlgDevice::onAddChannel);
+    connect(m_pUi->m_pBtnRemoveChannel, &QToolButton::clicked, this, &DlgDevice::onRemoveChannel);
 } // DlgDevice::DlgDevice
 
 
@@ -62,7 +64,7 @@ DlgDevice::~DlgDevice()
 *******************************************************************************/
 void DlgDevice::addChannel(s32              _s32ChannelNr,
                            const QString    &_s32ChannelName,
-                           const QPixmap    &_pixmap,
+                           const QString    &_sPixmapName,
                            bool             _bBrigthness)
 {
     QTableWidget    *pT         = m_pUi->m_pChannelTable;
@@ -79,8 +81,9 @@ void DlgDevice::addChannel(s32              _s32ChannelNr,
 
     // set the icon
     QTableWidgetItem *pItem = new QTableWidgetItem;
-    pItem->setIcon(QIcon(_pixmap));
+    pItem->setIcon(QIcon(QPixmap(_sPixmapName)));
     pItem->setTextAlignment(Qt::AlignHCenter);
+    pItem->setData(Qt::UserRole, QVariant(_sPixmapName));
     pT->setItem(iNewRow, 2, pItem);
 
     // set the brightness checkbox
@@ -97,8 +100,8 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
 {
     if (_pDevice)
     {
-        const list<shared_ptr<Channel>> lstChannel  = _pDevice->channel();
-        QTableWidget                    *pT         = m_pUi->m_pChannelTable;
+        const vector<shared_ptr<Channel>>   vChannel  = _pDevice->channel();
+        QTableWidget                        *pT         = m_pUi->m_pChannelTable;
 
         // set the device name
         m_pUi->m_pDeviceName->setText(_pDevice->name());
@@ -110,7 +113,7 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
         pT->clear();
 
         // set the channel of the device
-        for (auto pChannel : lstChannel)
+        for (auto pChannel : vChannel)
         {
             int             iNewRow     = pT->rowCount();
 
@@ -127,6 +130,7 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
             QTableWidgetItem *pItem = new QTableWidgetItem;
             pItem->setIcon(QIcon(pChannel->pixmap()));
             pItem->setTextAlignment(Qt::AlignHCenter);
+            pItem->setData(Qt::UserRole, QVariant(pChannel->pixmapName()));
             pT->setItem(iNewRow, 2, pItem);
 
             // set the brightness checkbox
@@ -154,6 +158,11 @@ void DlgDevice::setDeviceIcon(const QString &_path)
 {
     QPixmap pm(_path);
 
+    if (pm.isNull() && m_lstDeviceIconName.size() > 0)
+    {
+        pm.load(m_lstDeviceIconName.at(0));
+    }
+
     if (!pm.isNull())
     {
         pm = pm.scaled(64, 64);
@@ -169,11 +178,29 @@ void DlgDevice::setDeviceIcon(const QString &_path)
 *******************************************************************************/
 void DlgDevice::accept()
 {
+    QTableWidget                    *pT         = m_pUi->m_pChannelTable;
+    vector<shared_ptr<Channel>>     vChannel;
+
+    // put the channels in a vector
+    for (int row = 0; row < pT->rowCount(); ++row)
+    {
+        s32         s32ChannelNr    = pT->item(row, 0)->text().toInt();
+        QString     s32ChannelName  = pT->item(row, 0)->text();
+
+        QString     sPixmapName     = pT->item(row, 2)->data(Qt::UserRole).toString();
+
+        QCheckBox   *pBright        = qobject_cast<QCheckBox*>(pT->cellWidget(row, 3));
+        bool        bBrightness     = pBright->isChecked();
+
+        vChannel.push_back(make_shared<Channel> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
+    }
+
     if (!m_pDevice)
     {
         // add a new device
         m_pMainWin->addDevice(m_pUi->m_pDeviceName->text(),
-                              m_lstDeviceIconName.at(m_s32ImageIdx));
+                              m_lstDeviceIconName.at(m_s32ImageIdx),
+                              vChannel);
     }
     else
     {
@@ -235,6 +262,7 @@ void DlgDevice::onNextImage(bool /*_bChecked*/)
 
 } // DlgDevice::onNextImage
 
+
 /*******************************************************************************
 * DlgDevice::onAddChannel
 *******************************************************************************/
@@ -244,3 +272,11 @@ void DlgDevice::onAddChannel(bool /*_bChecked*/)
 
     dlg.exec();
 } // DlgDevice::onAddChannel
+
+
+/*******************************************************************************
+* DlgDevice::onRemoveChannel
+*******************************************************************************/
+void DlgDevice::onRemoveChannel(bool /*_bChecked*/)
+{
+} // DlgDevice::onRemoveChannel

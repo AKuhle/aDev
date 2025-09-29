@@ -16,7 +16,7 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -D__NO_FRAME_main__ -DAFRAME_LIBRARY -D_USE_QT_ -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I../../../aFrame -I. -I../../nlohmann_json/include -I../../aApp -I../../aApp/Qt -I../../aUtil -I../../aUtil/Cmds -I../../aUtil/Collection -I../../aUtil/Interface -I../../aUtil/Qt -I../../aUtil/VarPool -I../../aMath -I../../aMath/Obj2D -I../../aMath/Obj3D -I../../aGraphic -I../../aGraphic/Interface -I../../aGraphic/Qt -I../../aGraphic/Style -I../../aWin -I../../aWin/Ctrl -I../../aWin/Layout -I../../aWin/Qt -I../../aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I../../../../GeneratedFiles/aFrame -I/include -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ 
+INCPATH       = -I../../../aFrame -I. -I../../nlohmann_json/include -I../../aApp -I../../aApp/Qt -I../../aUtil -I../../aUtil/Cmds -I../../aUtil/Interface -I../../aUtil/Qt -I../../aUtil/StdHelper -I../../aUtil/VarPool -I../../aMath -I../../aMath/Obj2D -I../../aMath/Obj3D -I../../aGraphic -I../../aGraphic/Interface -I../../aGraphic/Qt -I../../aGraphic/Style -I../../aWin -I../../aWin/Ctrl -I../../aWin/Layout -I../../aWin/Qt -I../../aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I../../../../GeneratedFiles/aFrame -I/include -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ 
 LIB        =        ar -rc
 QMAKE         = C:\Qt\6.7.1\mingw_64\bin\qmake.exe
 DEL_FILE      = del
@@ -203,8 +203,7 @@ OBJECTS       = release/aAppMainWin.o \
 		release/moc_aBaseWin.o
 
 DIST          = Documents/boxModel.png \
-		Documents/dark_style.json \
-		Documents/qLights.json ..\..\aApp\aAppBase.h \
+		Documents/dark_style.json ..\..\aApp\aAppBase.h \
 		..\..\aApp\aAppMainWin.h \
 		..\..\aApp\aApp_def.h \
 		..\..\aApp\main.h \
@@ -248,21 +247,6 @@ DIST          = Documents/boxModel.png \
 		..\..\aUtil\Cmds\aCmdMgr.h \
 		..\..\aUtil\Cmds\aCmdStack.h \
 		..\..\aUtil\Cmds\aCmdThread.h \
-		..\..\aUtil\Collection\aMap.h \
-		..\..\aUtil\Collection\aPtrList.h \
-		..\..\aUtil\Collection\aPtrList.inl \
-		..\..\aUtil\Collection\aSharedPtrList.h \
-		..\..\aUtil\Collection\aSharedPtrList.inl \
-		..\..\aUtil\Collection\aSharedPtrVector.h \
-		..\..\aUtil\Collection\aSharedPtrVector.inl \
-		..\..\aUtil\Collection\aUniquePtrDeque.h \
-		..\..\aUtil\Collection\aUniquePtrDeque.inl \
-		..\..\aUtil\Collection\aUniquePtrList.h \
-		..\..\aUtil\Collection\aUniquePtrList.inl \
-		..\..\aUtil\Collection\aUniquePtrVec.h \
-		..\..\aUtil\Collection\aUniquePtrVec.inl \
-		..\..\aUtil\Collection\aVector.h \
-		..\..\aUtil\Collection\aVector.inl \
 		..\..\aUtil\Interface\aProgressCbI.h \
 		..\..\aUtil\Interface\aProgressMgrI.h \
 		..\..\aUtil\Interface\aThreadCb_i.h \
@@ -273,6 +257,8 @@ DIST          = Documents/boxModel.png \
 		..\..\aUtil\Qt\aProgressMgr.h \
 		..\..\aUtil\Qt\aThread.h \
 		..\..\aUtil\Qt\aUrl_sys.h \
+		..\..\aUtil\StdHelper\listHelper.h \
+		..\..\aUtil\StdHelper\vectorHelper.h \
 		..\..\aUtil\VarPool\aPoolVarBase.h \
 		..\..\aUtil\VarPool\aPoolVarBool.h \
 		..\..\aUtil\VarPool\aPoolVarColor.h \
@@ -413,7 +399,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) aFrame.zip $(SOURCES) $(DIST) ..\..\aFrame.pro C:\Qt\6.7.1\mingw_64\mkspecs\features\spec_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\device_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\common\sanitize.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\gcc-base.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\g++-base.conf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\6.7.1\mingw_64\mkspecs\common\windows-vulkan.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\g++-win32.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\windows-desktop.conf C:\Qt\6.7.1\mingw_64\mkspecs\qconfig.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_core.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_help.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_network.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\features\qt_functions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qt_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\win32-g++\qmake.conf C:\Qt\6.7.1\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\6.7.1\mingw_64\mkspecs\features\exclusive_builds.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\toolchain.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\default_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\default_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resolve_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\default_post.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\build_pass.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qml_debug.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\precompile_header.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\warn_on.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\permissions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qt.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resources_functions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resources.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\moc.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\opengl.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\uic.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qmake_use.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\file_copies.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\windows.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\testcase_targets.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\exceptions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\yacc.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\lex.prf ..\..\aFrame.pro C:\Qt\6.7.1\mingw_64\lib\Qt6Widgets.prl C:\Qt\6.7.1\mingw_64\lib\Qt6Gui.prl C:\Qt\6.7.1\mingw_64\lib\Qt6Core.prl    C:\Qt\6.7.1\mingw_64\mkspecs\features\data\dummy.cpp ..\..\aApp\aAppBase.h ..\..\aApp\aAppMainWin.h ..\..\aApp\aApp_def.h ..\..\aApp\main.h ..\..\aFrame_def.h ..\..\aFrame_global.h ..\..\aFrame.h ..\..\aGraphic\Interface\aBrushI.h ..\..\aGraphic\Interface\aCursorI.h ..\..\aGraphic\Interface\aPainterI.h ..\..\aGraphic\Interface\aPenI.h ..\..\aGraphic\Interface\aPixmapI.h ..\..\aGraphic\Qt\aBrush.h ..\..\aGraphic\Qt\aCursor.h ..\..\aGraphic\Qt\aPainter.h ..\..\aGraphic\Qt\aPen.h ..\..\aGraphic\Qt\aPixmap.h ..\..\aGraphic\Style\aStyleItem.h ..\..\aGraphic\Style\aStyleItemBorder.h ..\..\aGraphic\Style\aStyleItemBorderSolid.h ..\..\aGraphic\Style\aStyleItemBorderSolidFrame.h ..\..\aGraphic\Style\aStyleItemFill.h ..\..\aGraphic\Style\aStyleItemFillGradient.h ..\..\aGraphic\Style\aStyleItemFillSolid.h ..\..\aGraphic\aGraphic_def.h ..\..\aMath\Obj2D\aDimension2D.h ..\..\aMath\Obj2D\aDimension2D.inl ..\..\aMath\Obj2D\aMathObj2D.h ..\..\aMath\Obj2D\aParametricLine2D.h ..\..\aMath\Obj2D\aParametricLine2D.inl ..\..\aMath\Obj2D\aPoint2D.h ..\..\aMath\Obj2D\aPoint2D.inl ..\..\aMath\Obj2D\aRect2D.h ..\..\aMath\Obj2D\aRect2D.inl ..\..\aMath\Obj2D\aVector2D.h ..\..\aMath\Obj2D\aVector2D.inl ..\..\aMath\Obj3D\aMathObj3D.h ..\..\aMath\aMathObj.h ..\..\aMath\aMath_def.h ..\..\aUtil\Cmds\aCmd.h ..\..\aUtil\Cmds\aCmdBase.h ..\..\aUtil\Cmds\aCmdMgr.h ..\..\aUtil\Cmds\aCmdStack.h ..\..\aUtil\Cmds\aCmdThread.h ..\..\aUtil\Collection\aMap.h ..\..\aUtil\Collection\aPtrList.h ..\..\aUtil\Collection\aPtrList.inl ..\..\aUtil\Collection\aSharedPtrList.h ..\..\aUtil\Collection\aSharedPtrList.inl ..\..\aUtil\Collection\aSharedPtrVector.h ..\..\aUtil\Collection\aSharedPtrVector.inl ..\..\aUtil\Collection\aUniquePtrDeque.h ..\..\aUtil\Collection\aUniquePtrDeque.inl ..\..\aUtil\Collection\aUniquePtrList.h ..\..\aUtil\Collection\aUniquePtrList.inl ..\..\aUtil\Collection\aUniquePtrVec.h ..\..\aUtil\Collection\aUniquePtrVec.inl ..\..\aUtil\Collection\aVector.h ..\..\aUtil\Collection\aVector.inl ..\..\aUtil\Interface\aProgressCbI.h ..\..\aUtil\Interface\aProgressMgrI.h ..\..\aUtil\Interface\aThreadCb_i.h ..\..\aUtil\Interface\aThread_i.h ..\..\aUtil\Interface\aUrl_sysi.h ..\..\aUtil\Qt\aJsonFile.h ..\..\aUtil\Qt\aProgressCb.h ..\..\aUtil\Qt\aProgressMgr.h ..\..\aUtil\Qt\aThread.h ..\..\aUtil\Qt\aUrl_sys.h ..\..\aUtil\VarPool\aPoolVarBase.h ..\..\aUtil\VarPool\aPoolVarBool.h ..\..\aUtil\VarPool\aPoolVarColor.h ..\..\aUtil\VarPool\aPoolVarDbl.h ..\..\aUtil\VarPool\aPoolVarS64.h ..\..\aUtil\VarPool\aPoolVarString.h ..\..\aUtil\VarPool\aPoolVarU64.h ..\..\aUtil\VarPool\aVarPool.h ..\..\aUtil\VarPool\qBaseVarPool.inl ..\..\aUtil\aArgument.h ..\..\aUtil\aColor.h ..\..\aUtil\aDimension.h ..\..\aUtil\aHelper.h ..\..\aUtil\aHelper.inl ..\..\aUtil\aMargin.h ..\..\aUtil\aPath.h ..\..\aUtil\aPoint.h ..\..\aUtil\aRect.h ..\..\aUtil\aStopwatch.h ..\..\aUtil\aString.h ..\..\aUtil\aSynchronize.h ..\..\aUtil\aUrl.h ..\..\aUtil\aUrl_qt.h ..\..\aUtil\aUtil_def.h ..\..\aUtil\aVersionInfo.h ..\..\aWin\Ctrl\aBtn.h ..\..\aWin\Ctrl\aCtrl.h ..\..\aWin\Ctrl\aPushBtn.h ..\..\aWin\Ctrl\aSpacer.h ..\..\aWin\Ctrl\aToolBtn.h ..\..\aWin\Layout\aLayoutCentralWin.h ..\..\aWin\Layout\aLayoutHoriVert.h ..\..\aWin\Layout\aLayoutMainWin.h ..\..\aWin\Layout\aLayout_i.h ..\..\aWin\Qt\aBaseWin_sys.h ..\..\aWin\Tools\aBorderResizeTool.h ..\..\aWin\Tools\aBtnTool.h ..\..\aWin\Tools\aParentCtrlTool.h ..\..\aWin\Tools\aToolBase.h ..\..\aWin\Tools\aToolCb.h ..\..\aWin\Tools\aToolMgr.h ..\..\aWin\aBaseWin.h ..\..\aWin\aMainWin.h ..\..\aWin\aMainWinMdi.h ..\..\aWin\aTitleBar.h ..\..\aWin\aToolBar.h ..\..\aWin\aWinStyle.h ..\..\aWin\aWin_def.h  ..\..\aApp\Qt\aAppMainWin.cpp ..\..\aApp\aAppBase.cpp ..\..\aApp\main.cpp ..\..\aFrame.cpp ..\..\aGraphic\Interface\aPainterI.cpp ..\..\aGraphic\Qt\aBrush.cpp ..\..\aGraphic\Qt\aCursor.cpp ..\..\aGraphic\Qt\aPainter.cpp ..\..\aGraphic\Qt\aPen.cpp ..\..\aGraphic\Qt\aPixmap.cpp ..\..\aGraphic\Style\aStyleItem.cpp ..\..\aGraphic\Style\aStyleItemBorder.cpp ..\..\aGraphic\Style\aStyleItemBorderSolid.cpp ..\..\aGraphic\Style\aStyleItemBorderSolidFrame.cpp ..\..\aGraphic\Style\aStyleItemFill.cpp ..\..\aGraphic\Style\aStyleItemFillGradient.cpp ..\..\aGraphic\Style\aStyleItemFillSolid.cpp ..\..\aMath\Obj2D\aMathObj2D.cpp ..\..\aMath\Obj3D\aMathObj3D.cpp ..\..\aMath\aMathObj.cpp ..\..\aUtil\Cmds\aCmd.cpp ..\..\aUtil\Cmds\aCmdBase.cpp ..\..\aUtil\Cmds\aCmdMgr.cpp ..\..\aUtil\Cmds\aCmdStack.cpp ..\..\aUtil\Cmds\aCmdThread.cpp ..\..\aUtil\Qt\aJsonFile.cpp ..\..\aUtil\Qt\aProgressCb.cpp ..\..\aUtil\Qt\aProgressMgr.cpp ..\..\aUtil\Qt\aThread.cpp ..\..\aUtil\Qt\aUrl_sys.cpp ..\..\aUtil\VarPool\aPoolVarBool.cpp ..\..\aUtil\VarPool\aPoolVarColor.cpp ..\..\aUtil\VarPool\aPoolVarDbl.cpp ..\..\aUtil\VarPool\aPoolVarS64.cpp ..\..\aUtil\VarPool\aPoolVarString.cpp ..\..\aUtil\VarPool\aPoolVarU64.cpp ..\..\aUtil\VarPool\aVarPool.cpp ..\..\aUtil\aArgument.cpp ..\..\aUtil\aColor.cpp ..\..\aUtil\aDimension.cpp ..\..\aUtil\aHelper.cpp ..\..\aUtil\aMargin.cpp ..\..\aUtil\aPath.cpp ..\..\aUtil\aPoint.cpp ..\..\aUtil\aRect.cpp ..\..\aUtil\aStopwatch.cpp ..\..\aUtil\aString.cpp ..\..\aUtil\aUrl.cpp ..\..\aUtil\aVersionInfo.cpp ..\..\aWin\Ctrl\aBtn.cpp ..\..\aWin\Ctrl\aCtrl.cpp ..\..\aWin\Ctrl\aPushBtn.cpp ..\..\aWin\Ctrl\aSpacer.cpp ..\..\aWin\Ctrl\aToolBtn.cpp ..\..\aWin\Layout\aLayoutCentralWin.cpp ..\..\aWin\Layout\aLayoutHoriVert.cpp ..\..\aWin\Layout\aLayoutMainWin.cpp ..\..\aWin\Layout\aLayout_i.cpp ..\..\aWin\Qt\aBaseWin_sys.cpp ..\..\aWin\Tools\aBorderResizeTool.cpp ..\..\aWin\Tools\aBtnTool.cpp ..\..\aWin\Tools\aParentCtrlTool.cpp ..\..\aWin\Tools\aToolBase.cpp ..\..\aWin\Tools\aToolCb.cpp ..\..\aWin\Tools\aToolMgr.cpp ..\..\aWin\aBaseWin.cpp ..\..\aWin\aBaseWin_events.cpp ..\..\aWin\aBaseWin_handler.cpp ..\..\aWin\aMainWin.cpp ..\..\aWin\aMainWinMdi.cpp ..\..\aWin\aTitleBar.cpp ..\..\aWin\aToolBar.cpp ..\..\aWin\aWinStyle.cpp     
+	$(ZIP) aFrame.zip $(SOURCES) $(DIST) ..\..\aFrame.pro C:\Qt\6.7.1\mingw_64\mkspecs\features\spec_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\device_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\common\sanitize.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\gcc-base.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\g++-base.conf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf C:\Qt\6.7.1\mingw_64\mkspecs\common\windows-vulkan.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\g++-win32.conf C:\Qt\6.7.1\mingw_64\mkspecs\common\windows-desktop.conf C:\Qt\6.7.1\mingw_64\mkspecs\qconfig.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_freetype.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_ext_libpng.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_charts.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_charts_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_core.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_help.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssettings.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_linguist.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_network.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_png_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3d.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_shadertools.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_tools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\6.7.1\mingw_64\mkspecs\features\qt_functions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qt_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\win32-g++\qmake.conf C:\Qt\6.7.1\mingw_64\mkspecs\features\spec_post.prf .qmake.stash C:\Qt\6.7.1\mingw_64\mkspecs\features\exclusive_builds.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\toolchain.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\default_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\default_pre.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resolve_config.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\default_post.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\build_pass.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qml_debug.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\precompile_header.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\warn_on.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\permissions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qt.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resources_functions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\resources.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\moc.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\opengl.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\uic.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\qmake_use.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\file_copies.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\win32\windows.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\testcase_targets.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\exceptions.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\yacc.prf C:\Qt\6.7.1\mingw_64\mkspecs\features\lex.prf ..\..\aFrame.pro C:\Qt\6.7.1\mingw_64\lib\Qt6Widgets.prl C:\Qt\6.7.1\mingw_64\lib\Qt6Gui.prl C:\Qt\6.7.1\mingw_64\lib\Qt6Core.prl    C:\Qt\6.7.1\mingw_64\mkspecs\features\data\dummy.cpp ..\..\aApp\aAppBase.h ..\..\aApp\aAppMainWin.h ..\..\aApp\aApp_def.h ..\..\aApp\main.h ..\..\aFrame_def.h ..\..\aFrame_global.h ..\..\aFrame.h ..\..\aGraphic\Interface\aBrushI.h ..\..\aGraphic\Interface\aCursorI.h ..\..\aGraphic\Interface\aPainterI.h ..\..\aGraphic\Interface\aPenI.h ..\..\aGraphic\Interface\aPixmapI.h ..\..\aGraphic\Qt\aBrush.h ..\..\aGraphic\Qt\aCursor.h ..\..\aGraphic\Qt\aPainter.h ..\..\aGraphic\Qt\aPen.h ..\..\aGraphic\Qt\aPixmap.h ..\..\aGraphic\Style\aStyleItem.h ..\..\aGraphic\Style\aStyleItemBorder.h ..\..\aGraphic\Style\aStyleItemBorderSolid.h ..\..\aGraphic\Style\aStyleItemBorderSolidFrame.h ..\..\aGraphic\Style\aStyleItemFill.h ..\..\aGraphic\Style\aStyleItemFillGradient.h ..\..\aGraphic\Style\aStyleItemFillSolid.h ..\..\aGraphic\aGraphic_def.h ..\..\aMath\Obj2D\aDimension2D.h ..\..\aMath\Obj2D\aDimension2D.inl ..\..\aMath\Obj2D\aMathObj2D.h ..\..\aMath\Obj2D\aParametricLine2D.h ..\..\aMath\Obj2D\aParametricLine2D.inl ..\..\aMath\Obj2D\aPoint2D.h ..\..\aMath\Obj2D\aPoint2D.inl ..\..\aMath\Obj2D\aRect2D.h ..\..\aMath\Obj2D\aRect2D.inl ..\..\aMath\Obj2D\aVector2D.h ..\..\aMath\Obj2D\aVector2D.inl ..\..\aMath\Obj3D\aMathObj3D.h ..\..\aMath\aMathObj.h ..\..\aMath\aMath_def.h ..\..\aUtil\Cmds\aCmd.h ..\..\aUtil\Cmds\aCmdBase.h ..\..\aUtil\Cmds\aCmdMgr.h ..\..\aUtil\Cmds\aCmdStack.h ..\..\aUtil\Cmds\aCmdThread.h ..\..\aUtil\Interface\aProgressCbI.h ..\..\aUtil\Interface\aProgressMgrI.h ..\..\aUtil\Interface\aThreadCb_i.h ..\..\aUtil\Interface\aThread_i.h ..\..\aUtil\Interface\aUrl_sysi.h ..\..\aUtil\Qt\aJsonFile.h ..\..\aUtil\Qt\aProgressCb.h ..\..\aUtil\Qt\aProgressMgr.h ..\..\aUtil\Qt\aThread.h ..\..\aUtil\Qt\aUrl_sys.h ..\..\aUtil\StdHelper\listHelper.h ..\..\aUtil\StdHelper\vectorHelper.h ..\..\aUtil\VarPool\aPoolVarBase.h ..\..\aUtil\VarPool\aPoolVarBool.h ..\..\aUtil\VarPool\aPoolVarColor.h ..\..\aUtil\VarPool\aPoolVarDbl.h ..\..\aUtil\VarPool\aPoolVarS64.h ..\..\aUtil\VarPool\aPoolVarString.h ..\..\aUtil\VarPool\aPoolVarU64.h ..\..\aUtil\VarPool\aVarPool.h ..\..\aUtil\VarPool\qBaseVarPool.inl ..\..\aUtil\aArgument.h ..\..\aUtil\aColor.h ..\..\aUtil\aDimension.h ..\..\aUtil\aHelper.h ..\..\aUtil\aHelper.inl ..\..\aUtil\aMargin.h ..\..\aUtil\aPath.h ..\..\aUtil\aPoint.h ..\..\aUtil\aRect.h ..\..\aUtil\aStopwatch.h ..\..\aUtil\aString.h ..\..\aUtil\aSynchronize.h ..\..\aUtil\aUrl.h ..\..\aUtil\aUrl_qt.h ..\..\aUtil\aUtil_def.h ..\..\aUtil\aVersionInfo.h ..\..\aWin\Ctrl\aBtn.h ..\..\aWin\Ctrl\aCtrl.h ..\..\aWin\Ctrl\aPushBtn.h ..\..\aWin\Ctrl\aSpacer.h ..\..\aWin\Ctrl\aToolBtn.h ..\..\aWin\Layout\aLayoutCentralWin.h ..\..\aWin\Layout\aLayoutHoriVert.h ..\..\aWin\Layout\aLayoutMainWin.h ..\..\aWin\Layout\aLayout_i.h ..\..\aWin\Qt\aBaseWin_sys.h ..\..\aWin\Tools\aBorderResizeTool.h ..\..\aWin\Tools\aBtnTool.h ..\..\aWin\Tools\aParentCtrlTool.h ..\..\aWin\Tools\aToolBase.h ..\..\aWin\Tools\aToolCb.h ..\..\aWin\Tools\aToolMgr.h ..\..\aWin\aBaseWin.h ..\..\aWin\aMainWin.h ..\..\aWin\aMainWinMdi.h ..\..\aWin\aTitleBar.h ..\..\aWin\aToolBar.h ..\..\aWin\aWinStyle.h ..\..\aWin\aWin_def.h  ..\..\aApp\Qt\aAppMainWin.cpp ..\..\aApp\aAppBase.cpp ..\..\aApp\main.cpp ..\..\aFrame.cpp ..\..\aGraphic\Interface\aPainterI.cpp ..\..\aGraphic\Qt\aBrush.cpp ..\..\aGraphic\Qt\aCursor.cpp ..\..\aGraphic\Qt\aPainter.cpp ..\..\aGraphic\Qt\aPen.cpp ..\..\aGraphic\Qt\aPixmap.cpp ..\..\aGraphic\Style\aStyleItem.cpp ..\..\aGraphic\Style\aStyleItemBorder.cpp ..\..\aGraphic\Style\aStyleItemBorderSolid.cpp ..\..\aGraphic\Style\aStyleItemBorderSolidFrame.cpp ..\..\aGraphic\Style\aStyleItemFill.cpp ..\..\aGraphic\Style\aStyleItemFillGradient.cpp ..\..\aGraphic\Style\aStyleItemFillSolid.cpp ..\..\aMath\Obj2D\aMathObj2D.cpp ..\..\aMath\Obj3D\aMathObj3D.cpp ..\..\aMath\aMathObj.cpp ..\..\aUtil\Cmds\aCmd.cpp ..\..\aUtil\Cmds\aCmdBase.cpp ..\..\aUtil\Cmds\aCmdMgr.cpp ..\..\aUtil\Cmds\aCmdStack.cpp ..\..\aUtil\Cmds\aCmdThread.cpp ..\..\aUtil\Qt\aJsonFile.cpp ..\..\aUtil\Qt\aProgressCb.cpp ..\..\aUtil\Qt\aProgressMgr.cpp ..\..\aUtil\Qt\aThread.cpp ..\..\aUtil\Qt\aUrl_sys.cpp ..\..\aUtil\VarPool\aPoolVarBool.cpp ..\..\aUtil\VarPool\aPoolVarColor.cpp ..\..\aUtil\VarPool\aPoolVarDbl.cpp ..\..\aUtil\VarPool\aPoolVarS64.cpp ..\..\aUtil\VarPool\aPoolVarString.cpp ..\..\aUtil\VarPool\aPoolVarU64.cpp ..\..\aUtil\VarPool\aVarPool.cpp ..\..\aUtil\aArgument.cpp ..\..\aUtil\aColor.cpp ..\..\aUtil\aDimension.cpp ..\..\aUtil\aHelper.cpp ..\..\aUtil\aMargin.cpp ..\..\aUtil\aPath.cpp ..\..\aUtil\aPoint.cpp ..\..\aUtil\aRect.cpp ..\..\aUtil\aStopwatch.cpp ..\..\aUtil\aString.cpp ..\..\aUtil\aUrl.cpp ..\..\aUtil\aVersionInfo.cpp ..\..\aWin\Ctrl\aBtn.cpp ..\..\aWin\Ctrl\aCtrl.cpp ..\..\aWin\Ctrl\aPushBtn.cpp ..\..\aWin\Ctrl\aSpacer.cpp ..\..\aWin\Ctrl\aToolBtn.cpp ..\..\aWin\Layout\aLayoutCentralWin.cpp ..\..\aWin\Layout\aLayoutHoriVert.cpp ..\..\aWin\Layout\aLayoutMainWin.cpp ..\..\aWin\Layout\aLayout_i.cpp ..\..\aWin\Qt\aBaseWin_sys.cpp ..\..\aWin\Tools\aBorderResizeTool.cpp ..\..\aWin\Tools\aBtnTool.cpp ..\..\aWin\Tools\aParentCtrlTool.cpp ..\..\aWin\Tools\aToolBase.cpp ..\..\aWin\Tools\aToolCb.cpp ..\..\aWin\Tools\aToolMgr.cpp ..\..\aWin\aBaseWin.cpp ..\..\aWin\aBaseWin_events.cpp ..\..\aWin\aBaseWin_handler.cpp ..\..\aWin\aMainWin.cpp ..\..\aWin\aMainWinMdi.cpp ..\..\aWin\aTitleBar.cpp ..\..\aWin\aToolBar.cpp ..\..\aWin\aWinStyle.cpp     
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\aAppMainWin.o release\aAppBase.o release\main.o release\aFrame.o release\aPainterI.o release\aBrush.o release\aCursor.o release\aPainter.o release\aPen.o release\aPixmap.o release\aStyleItem.o release\aStyleItemBorder.o release\aStyleItemBorderSolid.o release\aStyleItemBorderSolidFrame.o release\aStyleItemFill.o release\aStyleItemFillGradient.o release\aStyleItemFillSolid.o release\aMathObj2D.o release\aMathObj3D.o release\aMathObj.o release\aCmd.o release\aCmdBase.o release\aCmdMgr.o release\aCmdStack.o release\aCmdThread.o release\aJsonFile.o release\aProgressCb.o release\aProgressMgr.o release\aThread.o release\aUrl_sys.o release\aPoolVarBool.o release\aPoolVarColor.o release\aPoolVarDbl.o release\aPoolVarS64.o release\aPoolVarString.o release\aPoolVarU64.o release\aVarPool.o release\aArgument.o release\aColor.o release\aDimension.o release\aHelper.o release\aMargin.o release\aPath.o release\aPoint.o release\aRect.o release\aStopwatch.o release\aString.o release\aUrl.o release\aVersionInfo.o release\aBtn.o release\aCtrl.o release\aPushBtn.o release\aSpacer.o release\aToolBtn.o release\aLayoutCentralWin.o release\aLayoutHoriVert.o release\aLayoutMainWin.o release\aLayout_i.o release\aBaseWin_sys.o release\aBorderResizeTool.o release\aBtnTool.o release\aParentCtrlTool.o release\aToolBase.o release\aToolCb.o release\aToolMgr.o release\aBaseWin.o release\aBaseWin_events.o release\aBaseWin_handler.o release\aMainWin.o release\aMainWinMdi.o release\aTitleBar.o release\aToolBar.o release\aWinStyle.o release\moc_aProgressCb.o release\moc_aProgressMgr.o release\moc_aThread.o release\moc_aBaseWin.o
@@ -554,7 +540,7 @@ compiler_moc_header_clean:
 		../../aUtil/Interface/aProgressCbI.h \
 		../../../../GeneratedFiles/aFrame/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aProgressCb.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aProgressCb.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/StdHelper -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aProgressCb.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aProgressCb.cpp
 
 ../../../../GeneratedFiles/aFrame/moc_aProgressMgr.cpp: ../../aUtil/Qt/aProgressMgr.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QObject \
@@ -666,7 +652,7 @@ compiler_moc_header_clean:
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QString \
 		../../../../GeneratedFiles/aFrame/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aProgressMgr.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aProgressMgr.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/StdHelper -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aProgressMgr.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aProgressMgr.cpp
 
 ../../../../GeneratedFiles/aFrame/moc_aThread.cpp: ../../aUtil/Qt/aThread.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QThread \
@@ -862,7 +848,7 @@ compiler_moc_header_clean:
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../../../GeneratedFiles/aFrame/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aThread.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aThread.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/StdHelper -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aUtil\Qt\aThread.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aThread.cpp
 
 ../../../../GeneratedFiles/aFrame/moc_aBaseWin.cpp: ../../aWin/aBaseWin.h \
 		C:/Qt/6.7.1/mingw_64/include/QtWidgets/QWidget \
@@ -1075,7 +1061,7 @@ compiler_moc_header_clean:
 		../../aGraphic/Style/aStyleItem.h \
 		../../../../GeneratedFiles/aFrame/moc_predefs.h \
 		C:/Qt/6.7.1/mingw_64/bin/moc.exe
-	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aWin\aBaseWin.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aBaseWin.cpp
+	C:\Qt\6.7.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/aFrame/moc_predefs.h -IC:/Qt/6.7.1/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/StdHelper -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Qt/6.7.1/mingw_64/include -IC:/Qt/6.7.1/mingw_64/include/QtWidgets -IC:/Qt/6.7.1/mingw_64/include/QtGui -IC:/Qt/6.7.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\aWin\aBaseWin.h -o ..\..\..\..\GeneratedFiles\aFrame\moc_aBaseWin.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1293,9 +1279,6 @@ release/aAppMainWin.o: ../../aApp/Qt/aAppMainWin.cpp C:/Qt/6.7.1/mingw_64/includ
 		../../aUtil/aUtil_def.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QUrl \
 		../../aUtil/aArgument.h \
-		../../aUtil/Collection/aMap.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aUtil/aPath.h \
 		../../aWin/aMainWin.h \
 		../../aWin/aBaseWin.h \
@@ -1317,9 +1300,7 @@ release/aAppMainWin.o: ../../aApp/Qt/aAppMainWin.cpp C:/Qt/6.7.1/mingw_64/includ
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aAppMainWin.o ..\..\aApp\Qt\aAppMainWin.cpp
 
 release/aAppBase.o: ../../aApp/aAppBase.cpp C:/Qt/6.7.1/mingw_64/include/QtCore/QCoreApplication \
@@ -1462,9 +1443,6 @@ release/aAppBase.o: ../../aApp/aAppBase.cpp C:/Qt/6.7.1/mingw_64/include/QtCore/
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QUrl \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qurl.h \
 		../../aUtil/aArgument.h \
-		../../aUtil/Collection/aMap.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aUtil/aPath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aAppBase.o ..\..\aApp\aAppBase.cpp
 
@@ -1559,9 +1537,6 @@ release/main.o: ../../aApp/main.cpp ../../aFrame_def.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringmatcher.h \
 		../../aUtil/aArgument.h \
-		../../aUtil/Collection/aMap.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aUtil/aPath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\aApp\main.cpp
 
@@ -3022,9 +2997,7 @@ release/aStyleItem.o: ../../aGraphic/Style/aStyleItem.cpp ../../aFrame_def.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QColor \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItem.o ..\..\aGraphic\Style\aStyleItem.cpp
 
 release/aStyleItemBorder.o: ../../aGraphic/Style/aStyleItemBorder.cpp ../../aFrame_def.h \
@@ -3288,9 +3261,7 @@ release/aStyleItemBorder.o: ../../aGraphic/Style/aStyleItemBorder.cpp ../../aFra
 		../../aWin/aWinStyle.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemBorder.o ..\..\aGraphic\Style\aStyleItemBorder.cpp
 
 release/aStyleItemBorderSolid.o: ../../aGraphic/Style/aStyleItemBorderSolid.cpp ../../aFrame_def.h \
@@ -3561,9 +3532,7 @@ release/aStyleItemBorderSolid.o: ../../aGraphic/Style/aStyleItemBorderSolid.cpp 
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aWin/aMainWin.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemBorderSolid.o ..\..\aGraphic\Style\aStyleItemBorderSolid.cpp
 
 release/aStyleItemBorderSolidFrame.o: ../../aGraphic/Style/aStyleItemBorderSolidFrame.cpp ../../aFrame_def.h \
@@ -3838,9 +3807,7 @@ release/aStyleItemBorderSolidFrame.o: ../../aGraphic/Style/aStyleItemBorderSolid
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QPen \
 		../../aGraphic/Interface/aPenI.h \
 		../../aWin/aMainWin.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemBorderSolidFrame.o ..\..\aGraphic\Style\aStyleItemBorderSolidFrame.cpp
 
 release/aStyleItemFill.o: ../../aGraphic/Style/aStyleItemFill.cpp ../../aFrame_def.h \
@@ -4103,9 +4070,7 @@ release/aStyleItemFill.o: ../../aGraphic/Style/aStyleItemFill.cpp ../../aFrame_d
 		../../aUtil/aColor.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QColor \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemFill.o ..\..\aGraphic\Style\aStyleItemFill.cpp
 
 release/aStyleItemFillGradient.o: ../../aGraphic/Style/aStyleItemFillGradient.cpp ../../aFrame_def.h \
@@ -4363,8 +4328,6 @@ release/aStyleItemFillGradient.o: ../../aGraphic/Style/aStyleItemFillGradient.cp
 		../../aMath/Obj2D/aDimension2D.inl \
 		../../aMath/Obj2D/aPoint2D.h \
 		../../aMath/Obj2D/aPoint2D.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aMath/Obj2D/aParametricLine2D.h \
 		../../aMath/Obj2D/aVector2D.h \
 		../../aMath/Obj2D/aVector2D.inl \
@@ -4374,6 +4337,7 @@ release/aStyleItemFillGradient.o: ../../aGraphic/Style/aStyleItemFillGradient.cp
 		../../aUtil/aDimension.h \
 		../../aUtil/aPoint.h \
 		../../aMath/Obj2D/aRect2D.inl \
+		../../aUtil/StdHelper/vectorHelper.h \
 		../../aGraphic/Qt/aPainter.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QPainter \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qpainter.h \
@@ -4387,9 +4351,7 @@ release/aStyleItemFillGradient.o: ../../aGraphic/Style/aStyleItemFillGradient.cp
 		../../aWin/aWinStyle.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aWin/aMainWin.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemFillGradient.o ..\..\aGraphic\Style\aStyleItemFillGradient.cpp
 
 release/aStyleItemFillSolid.o: ../../aGraphic/Style/aStyleItemFillSolid.cpp ../../aFrame_def.h \
@@ -4658,9 +4620,7 @@ release/aStyleItemFillSolid.o: ../../aGraphic/Style/aStyleItemFillSolid.cpp ../.
 		../../aWin/Layout/aLayout_i.h \
 		../../aWin/aWinStyle.h \
 		../../aWin/aMainWin.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aStyleItemFillSolid.o ..\..\aGraphic\Style\aStyleItemFillSolid.cpp
 
 release/aMathObj2D.o: ../../aMath/Obj2D/aMathObj2D.cpp ../../aMath/Obj2D/aMathObj2D.h \
@@ -4784,9 +4744,7 @@ release/aCmd.o: ../../aUtil/Cmds/aCmd.cpp ../../aUtil/Cmds/aCmd.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qbindingstorage.h \
 		../../aUtil/Interface/aProgressMgrI.h \
-		../../aUtil/Cmds/aCmdMgr.h \
-		../../aUtil/Collection/aSharedPtrList.h \
-		../../aUtil/Collection/aSharedPtrList.inl
+		../../aUtil/Cmds/aCmdMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aCmd.o ..\..\aUtil\Cmds\aCmd.cpp
 
 release/aCmdBase.o: ../../aUtil/Cmds/aCmdBase.cpp ../../aUtil/Cmds/aCmdBase.h \
@@ -4901,9 +4859,7 @@ release/aCmdBase.o: ../../aUtil/Cmds/aCmdBase.cpp ../../aUtil/Cmds/aCmdBase.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aCmdBase.o ..\..\aUtil\Cmds\aCmdBase.cpp
 
 release/aCmdMgr.o: ../../aUtil/Cmds/aCmdMgr.cpp ../../aUtil/Cmds/aCmdMgr.h \
-		../../aUtil/Collection/aSharedPtrList.h \
 		../../aFrame_def.h \
-		../../aUtil/Collection/aSharedPtrList.inl \
 		../../aUtil/Cmds/aCmdBase.h \
 		../../aUtil/aUtil_def.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QUrl \
@@ -5011,14 +4967,14 @@ release/aCmdMgr.o: ../../aUtil/Cmds/aCmdMgr.cpp ../../aUtil/Cmds/aCmdMgr.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qscopeguard.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qobject_impl.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qbindingstorage.h \
-		../../aUtil/Interface/aProgressMgrI.h
+		../../aUtil/Interface/aProgressMgrI.h \
+		../../aUtil/StdHelper/listHelper.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aCmdMgr.o ..\..\aUtil\Cmds\aCmdMgr.cpp
 
-release/aCmdStack.o: ../../aUtil/Cmds/aCmdStack.cpp ../../aUtil/Cmds/aCmdStack.h \
+release/aCmdStack.o: ../../aUtil/Cmds/aCmdStack.cpp ../../aFrame_def.h \
+		../../aUtil/StdHelper/listHelper.h \
+		../../aUtil/Cmds/aCmdStack.h \
 		../../aUtil/Cmds/aCmdMgr.h \
-		../../aUtil/Collection/aSharedPtrList.h \
-		../../aFrame_def.h \
-		../../aUtil/Collection/aSharedPtrList.inl \
 		../../aUtil/Cmds/aCmdBase.h \
 		../../aUtil/aUtil_def.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QUrl \
@@ -5329,9 +5285,7 @@ release/aCmdThread.o: ../../aUtil/Cmds/aCmdThread.cpp ../../aUtil/Cmds/aCmdThrea
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../aUtil/Cmds/aCmdMgr.h \
-		../../aUtil/Collection/aSharedPtrList.h \
-		../../aUtil/Collection/aSharedPtrList.inl
+		../../aUtil/Cmds/aCmdMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aCmdThread.o ..\..\aUtil\Cmds\aCmdThread.cpp
 
 release/aJsonFile.o: ../../aUtil/Qt/aJsonFile.cpp ../../aUtil/Qt/aJsonFile.h \
@@ -6917,8 +6871,6 @@ release/aVarPool.o: ../../aUtil/VarPool/aVarPool.cpp ../../aUtil/VarPool/aVarPoo
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringlist.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qalgorithms.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringmatcher.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aUtil/VarPool/aPoolVarBool.h \
 		../../aUtil/VarPool/aPoolVarBase.h \
 		../../aUtil/VarPool/aPoolVarColor.h \
@@ -6988,9 +6940,6 @@ release/aVarPool.o: ../../aUtil/VarPool/aVarPool.cpp ../../aUtil/VarPool/aVarPoo
 
 release/aArgument.o: ../../aUtil/aArgument.cpp ../../aFrame_def.h \
 		../../aUtil/aArgument.h \
-		../../aUtil/Collection/aMap.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aUtil/aString.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qstring.h \
@@ -7377,9 +7326,7 @@ release/aRect.o: ../../aUtil/aRect.cpp ../../aUtil/aRect.h \
 		../../aMath/Obj2D/aMathObj2D.h \
 		../../aMath/aMathObj.h \
 		../../aUtil/aDimension.h \
-		../../aUtil/aPoint.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		../../aUtil/aPoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aRect.o ..\..\aUtil\aRect.cpp
 
 release/aStopwatch.o: ../../aUtil/aStopwatch.cpp ../../aUtil/aStopwatch.h \
@@ -7560,9 +7507,7 @@ release/aString.o: ../../aUtil/aString.cpp ../../aUtil/aString.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qbytearraylist.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringlist.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qalgorithms.h \
-		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringmatcher.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		C:/Qt/6.7.1/mingw_64/include/QtCore/qstringmatcher.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aString.o ..\..\aUtil\aString.cpp
 
 release/aUrl.o: ../../aUtil/aUrl.cpp ../../aUtil/aString.h \
@@ -7963,10 +7908,6 @@ release/aBtn.o: ../../aWin/Ctrl/aBtn.cpp ../../aWin/Ctrl/aBtn.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
 		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aGraphic/Qt/aPixmap.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QPixmap \
 		../../aGraphic/Interface/aPixmapI.h \
@@ -8400,11 +8341,7 @@ release/aPushBtn.o: ../../aWin/Ctrl/aPushBtn.cpp ../../aWin/Ctrl/aPushBtn.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aPushBtn.o ..\..\aWin\Ctrl\aPushBtn.cpp
 
 release/aSpacer.o: ../../aWin/Ctrl/aSpacer.cpp ../../aWin/Ctrl/aSpacer.h \
@@ -8620,11 +8557,7 @@ release/aSpacer.o: ../../aWin/Ctrl/aSpacer.cpp ../../aWin/Ctrl/aSpacer.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aSpacer.o ..\..\aWin\Ctrl\aSpacer.cpp
 
 release/aToolBtn.o: ../../aWin/Ctrl/aToolBtn.cpp ../../aWin/Ctrl/aToolBtn.h \
@@ -8842,10 +8775,6 @@ release/aToolBtn.o: ../../aWin/Ctrl/aToolBtn.cpp ../../aWin/Ctrl/aToolBtn.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
 		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aGraphic/Qt/aPainter.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QPainter \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qpainter.h \
@@ -9267,8 +9196,6 @@ release/aLayoutHoriVert.o: ../../aWin/Layout/aLayoutHoriVert.cpp ../../aWin/Layo
 		../../aMath/aMathObj.h \
 		../../aUtil/aDimension.h \
 		../../aUtil/aPoint.h \
-		../../aUtil/Collection/aPtrList.h \
-		../../aUtil/Collection/aPtrList.inl \
 		../../aWin/aBaseWin.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QSinglePointEvent \
 		../../aGraphic/aGraphic_def.h \
@@ -9280,9 +9207,7 @@ release/aLayoutHoriVert.o: ../../aWin/Layout/aLayoutHoriVert.cpp ../../aWin/Layo
 		C:/Qt/6.7.1/mingw_64/include/QtGui/QColor \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
-		../../aGraphic/Style/aStyleItem.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		../../aGraphic/Style/aStyleItem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aLayoutHoriVert.o ..\..\aWin\Layout\aLayoutHoriVert.cpp
 
 release/aLayoutMainWin.o: ../../aWin/Layout/aLayoutMainWin.cpp ../../aWin/Layout/aLayoutMainWin.h \
@@ -9498,9 +9423,7 @@ release/aLayoutMainWin.o: ../../aWin/Layout/aLayoutMainWin.cpp ../../aWin/Layout
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aLayoutMainWin.o ..\..\aWin\Layout\aLayoutMainWin.cpp
 
 release/aLayout_i.o: ../../aWin/Layout/aLayout_i.cpp ../../aWin/Layout/aLayout_i.h \
@@ -10367,11 +10290,7 @@ release/aBtnTool.o: ../../aWin/Tools/aBtnTool.cpp ../../aWin/Tools/aBtnTool.h \
 		../../aUtil/aString.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/QString \
 		../../aWin/Ctrl/aCtrl.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aBtnTool.o ..\..\aWin\Tools\aBtnTool.cpp
 
 release/aParentCtrlTool.o: ../../aWin/Tools/aParentCtrlTool.cpp ../../aWin/Tools/aParentCtrlTool.h \
@@ -10990,8 +10909,6 @@ release/aToolCb.o: ../../aWin/Tools/aToolCb.cpp ../../aWin/Tools/aToolCb.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
 		../../aWin/Tools/aToolBase.h \
 		../../aUtil/aPoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aToolCb.o ..\..\aWin\Tools\aToolCb.cpp
@@ -11187,8 +11104,6 @@ release/aToolMgr.o: ../../aWin/Tools/aToolMgr.cpp ../../aWin/Tools/aToolMgr.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.7.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.7.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
 		../../aWin/Tools/aToolBase.h \
 		../../aUtil/aPoint.h \
 		../../aWin/Tools/aToolCb.h
@@ -11618,9 +11533,7 @@ release/aBaseWin_events.o: ../../aWin/aBaseWin_events.cpp ../../aWin/aBaseWin.h 
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aBaseWin_events.o ..\..\aWin\aBaseWin_events.cpp
 
 release/aBaseWin_handler.o: ../../aWin/aBaseWin_handler.cpp ../../aGraphic/Qt/aPainter.h \
@@ -12055,13 +11968,9 @@ release/aMainWin.o: ../../aWin/aMainWin.cpp C:/Qt/6.7.1/mingw_64/include/QtWidge
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
 		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
 		../../aWin/Layout/aLayoutMainWin.h \
 		../../aWin/Layout/aLayoutCentralWin.h \
 		../../aWin/Layout/aLayoutHoriVert.h \
-		../../aUtil/Collection/aPtrList.h \
-		../../aUtil/Collection/aPtrList.inl \
 		../../aWin/aTitleBar.h \
 		../../aWin/aToolBar.h \
 		../../aWin/Tools/aBorderResizeTool.h \
@@ -12279,9 +12188,7 @@ release/aMainWinMdi.o: ../../aWin/aMainWinMdi.cpp ../../aFrame_def.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl
+		../../aWin/Tools/aToolMgr.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aMainWinMdi.o ..\..\aWin\aMainWinMdi.cpp
 
 release/aTitleBar.o: ../../aWin/aTitleBar.cpp ../../aFrame_def.h \
@@ -12496,8 +12403,6 @@ release/aTitleBar.o: ../../aWin/aTitleBar.cpp ../../aFrame_def.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
 		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
 		../../aWin/Tools/aParentCtrlTool.h \
 		../../aWin/Tools/aToolBase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aTitleBar.o ..\..\aWin\aTitleBar.cpp
@@ -12712,9 +12617,7 @@ release/aToolBar.o: ../../aWin/aToolBar.cpp ../../aFrame_def.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Layout/aLayoutHoriVert.h \
-		../../aUtil/Collection/aPtrList.h \
-		../../aUtil/Collection/aPtrList.inl
+		../../aWin/Layout/aLayoutHoriVert.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aToolBar.o ..\..\aWin\aToolBar.cpp
 
 release/aWinStyle.o: ../../aWin/aWinStyle.cpp ../../aFrame_def.h \
@@ -12978,13 +12881,9 @@ release/aWinStyle.o: ../../aWin/aWinStyle.cpp ../../aFrame_def.h \
 		../../aMath/aMathObj.h \
 		../../aUtil/aPoint.h \
 		../../aWin/Tools/aToolMgr.h \
-		../../aUtil/Collection/aUniquePtrVec.h \
-		../../aUtil/Collection/aUniquePtrVec.inl \
 		../../aWin/Ctrl/aPushBtn.h \
 		../../aWin/Ctrl/aBtn.h \
 		../../aWin/Ctrl/aCtrl.h \
-		../../aUtil/Collection/aVector.h \
-		../../aUtil/Collection/aVector.inl \
 		../../aWin/Ctrl/aToolBtn.h \
 		../../aWin/aTitleBar.h \
 		../../aWin/aToolBar.h \

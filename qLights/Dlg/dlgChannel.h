@@ -5,7 +5,7 @@
 *******************************************************************************/
 #include <QDialog>
 
-#include "aFrame_def.h"
+#include "qLights_def.h"
 
 using namespace std;
 
@@ -36,7 +36,7 @@ class DlgChannel : public QDialog
 
     public:
         explicit DlgChannel(DlgDevice               *_pDlgDevice,
-                            const vector<QPixmap>   &_lstChannelIcon);
+                            const vector<QString>   &_lstChannelIcon);
         ~DlgChannel();
 
     private:

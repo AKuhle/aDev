@@ -17,8 +17,8 @@ using namespace std;
 /*******************************************************************************
 * DlgChannel::DlgChannel
 *******************************************************************************/
-DlgChannel::DlgChannel(DlgDevice               *_pDlgDevice,
-                       const vector<QPixmap>    &_lstChannelIcon)
+DlgChannel::DlgChannel(DlgDevice                *_pDlgDevice,
+                       const vector<QString>    &_lstChannelIcon)
 : QDialog(_pDlgDevice),
   m_pUi(new Ui::DlgChannel),
   m_pDlgDevice(_pDlgDevice)
@@ -26,9 +26,13 @@ DlgChannel::DlgChannel(DlgDevice               *_pDlgDevice,
     m_pUi->setupUi(this);
 
     // fill the combo box with the icons
-    for (auto &pixmap : _lstChannelIcon)
+    for (auto &rscName : _lstChannelIcon)
     {
-        m_pUi->m_pChannelIcon->addItem(QIcon(pixmap), "");
+        QPixmap pixmap(rscName);
+        QIcon icon(pixmap.scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+        m_pUi->m_pChannelIcon->addItem(icon, "", QVariant(rscName));
+        //m_pUi->m_pChannelIcon->setItemData(m_pUi->m_pChannelIcon->count()-1, Qt::AlignCenter, Qt::TextAlignmentRole);
     }
 } // DlgChannel::DlgChannel
 
@@ -52,10 +56,9 @@ void DlgChannel::accept()
     bool    bBrigthness     = m_pUi->m_pChannelBrightness->isChecked();
 
     int     index = m_pUi->m_pChannelIcon->currentIndex();
-    QIcon   icon = m_pUi->m_pChannelIcon->itemIcon(index);
-    QPixmap pixmap = icon.pixmap(48, 48); // Größe nach Bedarf wählen
+    QString sPixmap = m_pUi->m_pChannelIcon->itemData(index).toString();
 
-    m_pDlgDevice->addChannel(s32ChannelNr, s32ChannelName, pixmap, bBrigthness);
+    m_pDlgDevice->addChannel(s32ChannelNr, s32ChannelName, sPixmap, bBrigthness);
 
     QDialog::accept();
 } // DlgChannel::accept

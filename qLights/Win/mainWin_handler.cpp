@@ -4,7 +4,6 @@
 #include "aFrame_def.h"
 
 #include "ui_mainWin.h"
-#include "aFrame_def.h"
 
 #include "aAppBase.h"
 #include "mainWin.h"
@@ -73,7 +72,10 @@ void MainWin::onFileOpen()
             // device image
             aString sImage = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":image");
 
-            addDevice(sName.toQString(), sImage.toQString());
+            // device channels
+            vector<shared_ptr<Channel>> vChannel;
+
+            addDevice(sName.toQString(), sImage.toQString(), vChannel);
         }
 
         // load the fixtures
@@ -147,13 +149,30 @@ void MainWin::onFileSave()
     idx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
+        aString     sPre = aString("device:") + aString::fromValue(idx);
+
         // device name
-        f.addValue(aString("device:") + aString::fromValue(idx) + ":name", aString::fromQString(pD->name()));
+        f.addValue(sPre + ":name", aString::fromQString(pD->name()));
 
         // device image
         QString sss = pD->pixmapName();
         sss.replace(QChar(92), QChar(47)); // 92 = '\', 47 = '/'
-        f.addValue(aString("device:") + aString::fromValue(idx) + ":image", aString::fromQString(sss));
+        f.addValue(sPre + ":image", aString::fromQString(sss));
+
+        // device channels
+        const vector<shared_ptr<Channel>>   &vChannel   = pD->channel();
+        s32                                 iChannelIdx = 0;
+
+        f.addValue(sPre + aString(":channelCount"), (int) vChannel.size()); // device channel count
+        for (auto pC : vChannel)
+        {
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr", aString::fromValue(pC->nr()));
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":name", aString::fromQString(pC->name()));
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName", aString::fromQString(pC->pixmapName()));
+
+            iChannelIdx++;
+        }
+
 
         idx++;
     }

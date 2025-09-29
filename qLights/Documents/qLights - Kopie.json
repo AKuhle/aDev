@@ -8,15 +8,19 @@
   },
   "device": {
     "0": {
+      "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-s90.png",
       "name": "eurolite TMH-S90"
     },
     "1": {
+      "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 16"
     },
     "2": {
+      "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 24"
     },
     "3": {
+      "image": "C:/Tools/aDev/qLights/Icons/Device/par.png",
       "name": "PAR"
     },
     "count": 4
