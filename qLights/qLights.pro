@@ -103,6 +103,8 @@ SOURCES += \
     Dlg/dlgDevice.cpp \
     Dlg/dlgFixture.cpp \
     Dlg/dlgUniverse.cpp \
+    Win/bankButton.cpp \
+    Win/fixtureTable.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_update.cpp \
@@ -120,6 +122,8 @@ HEADERS += \
     Dlg/dlgDevice.h \
     Dlg/dlgFixture.h \
     Dlg/dlgUniverse.h \
+    Win/bankButton.h \
+    Win/fixtureTable.h \
     Win/mainWin.h
 
 FORMS += \

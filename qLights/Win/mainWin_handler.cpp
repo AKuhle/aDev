@@ -66,14 +66,29 @@ void MainWin::onFileOpen()
 
         for (idx = 0; idx < count; idx++)
         {
+            aString     sPre = aString("device:") + aString::fromValue(idx);
+
             // device name
-            aString sName = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":name");
+            aString sName = f.readStringValue(sPre + ":name");
 
             // device image
-            aString sImage = f.readStringValue(aString("device:") + aString::fromValue(idx) + ":image");
+            aString sImage = f.readStringValue(sPre + ":image");
 
             // device channels
             vector<shared_ptr<Channel>> vChannel;
+
+            s32 channelCount = f.readIntValue(sPre + aString(":channelCount"));
+            cout << "channelCount" << channelCount << endl;
+
+            for (s32 iChannelIdx = 0; iChannelIdx <  channelCount; iChannelIdx++)
+            {
+                s32 s32Nr = f.readIntValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr");
+                QString sName = f.readStringValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":name").toQString();
+                QString sPixmapName = f.readStringValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName").toQString();
+                bool bBrightness = f.readBoolValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright");
+
+                vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName, bBrightness));
+            }
 
             addDevice(sName.toQString(), sImage.toQString(), vChannel);
         }
@@ -85,9 +100,11 @@ void MainWin::onFileOpen()
         for (idx = 0; idx < count; idx++)
         {
             // fixture name
-            aString sName = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":name");
+            QString sName = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":name").toQString();
+            QString sDevice = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":device").toQString();
+            shared_ptr<Device> pDevice = findDevice(sDevice);
 
-            addFixture(sName.toQString());
+            addFixture(sName, pDevice);
         }
     }
 
@@ -155,9 +172,7 @@ void MainWin::onFileSave()
         f.addValue(sPre + ":name", aString::fromQString(pD->name()));
 
         // device image
-        QString sss = pD->pixmapName();
-        sss.replace(QChar(92), QChar(47)); // 92 = '\', 47 = '/'
-        f.addValue(sPre + ":image", aString::fromQString(sss));
+        f.addValue(sPre + ":image", aString::fromQString(pD->pixmapName()));
 
         // device channels
         const vector<shared_ptr<Channel>>   &vChannel   = pD->channel();
@@ -166,9 +181,10 @@ void MainWin::onFileSave()
         f.addValue(sPre + aString(":channelCount"), (int) vChannel.size()); // device channel count
         for (auto pC : vChannel)
         {
-            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr", aString::fromValue(pC->nr()));
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr", (int) pC->nr());
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":name", aString::fromQString(pC->name()));
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName", aString::fromQString(pC->pixmapName()));
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright", pC->isBrightness());
 
             iChannelIdx++;
         }
@@ -182,8 +198,11 @@ void MainWin::onFileSave()
     idx = 0;
     for (const shared_ptr<Fixture> &pF : m_lstFixture)
     {
-        // device name
+        // fixture name
         f.addValue(aString("fixture:") + aString::fromValue(idx) + ":name", aString::fromQString(pF->name()));
+
+        // device name
+        f.addValue(aString("fixture:") + aString::fromValue(idx) + ":device", aString::fromQString(pF->device()->name()));
 
         idx++;
     }
@@ -198,7 +217,7 @@ void MainWin::onFileSave()
 void MainWin::onPanel()
 {
     m_pUi->m_pPanelDock->setVisible(!m_pUi->m_pPanelDock->isVisible());
-    updateGui();
+    updatePanel();
 } // MainWin::onPanel
 
 
@@ -345,7 +364,7 @@ void MainWin::onRemoveDevice(bool /*_bChecked*/)
     // -1 => now row selected
     if (s32Row >= 0)
     {
-        QString sName = pT->item(s32Row, 0)->text();
+        QString sName = pT->item(s32Row, 1)->text();
 
         m_lstDevice.remove_if([&sName](shared_ptr<Device> pDevice)
                                     {
@@ -384,9 +403,187 @@ void MainWin::onEditDevice(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onAddFixture(bool /*_bChecked*/)
 {
-    Fixture *pFixture = nullptr;
-
-    DlgFixture dlg(this, pFixture);
+    DlgFixture dlg(this, m_lstDevice, nullptr);
 
     dlg.exec();
 } // MainWin::onAddFixture
+
+
+/*******************************************************************************
+* MainWin::onRemoveFixture
+*******************************************************************************/
+void MainWin::onRemoveFixture(bool /*_bChecked*/)
+{
+} // MainWin::onRemoveFixture
+
+
+/*******************************************************************************
+* MainWin::onEditFixture
+*******************************************************************************/
+void MainWin::onEditFixture(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pFixtureTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 1)->text();
+
+        shared_ptr<Fixture> pFixture = findFixture(sName);
+
+        DlgFixture   dlg(this, m_lstDevice, pFixture);
+        dlg.exec();
+    }
+} // MainWin::onEditFixture
+
+
+/*******************************************************************************
+* MainWin::onBankButton_1
+*******************************************************************************/
+void MainWin::onBankButton_1(bool /*_bChecked*/)
+{
+    m_s32ActiveBank = BANK_1;
+    updateBankButtons();
+} // MainWin::onBankButton_1
+
+
+/*******************************************************************************
+* MainWin::onBankButton_2
+*******************************************************************************/
+void MainWin::onBankButton_2(bool /*_bChecked*/)
+{
+    m_s32ActiveBank = BANK_2;
+    updateBankButtons();
+} // MainWin::onBankButton_2
+
+
+/*******************************************************************************
+* MainWin::onBankButton_3
+*******************************************************************************/
+void MainWin::onBankButton_3(bool /*_bChecked*/)
+{
+    m_s32ActiveBank = BANK_3;
+    updateBankButtons();
+} // MainWin::onBankButton_3
+
+
+/*******************************************************************************
+* MainWin::onBankButton_4
+*******************************************************************************/
+void MainWin::onBankButton_4(bool /*_bChecked*/)
+{
+    m_s32ActiveBank = BANK_4;
+    updateBankButtons();
+} // MainWin::onBankButton_4
+
+
+/*******************************************************************************
+* MainWin::onBankButton_5
+*******************************************************************************/
+void MainWin::onBankButton_5(bool /*_bChecked*/)
+{
+    m_s32ActiveBank = BANK_5;
+    updateBankButtons();
+} // MainWin::onBankButton_5
+
+
+/*******************************************************************************
+* MainWin::onSceneButton_1
+*******************************************************************************/
+void MainWin::onSceneButton_1(bool /*_bChecked*/)
+{
+    m_s32ActiveScene = SCENE_1;
+    updateSceneButtons();
+} // MainWin::onSceneButton_1
+
+
+/*******************************************************************************
+* MainWin::onSceneButton_2
+*******************************************************************************/
+void MainWin::onSceneButton_2(bool /*_bChecked*/)
+{
+    m_s32ActiveScene = SCENE_2;
+    updateSceneButtons();
+} // MainWin::onSceneButton_2
+
+
+/*******************************************************************************
+* MainWin::onSceneButton_3
+*******************************************************************************/
+void MainWin::onSceneButton_3(bool /*_bChecked*/)
+{
+    m_s32ActiveScene = SCENE_3;
+    updateSceneButtons();
+} // MainWin::onSceneButton_3
+
+
+/*******************************************************************************
+* MainWin::onSceneButton_4
+*******************************************************************************/
+void MainWin::onSceneButton_4(bool /*_bChecked*/)
+{
+    m_s32ActiveScene = SCENE_4;
+    updateSceneButtons();
+} // MainWin::onSceneButton_4
+
+
+/*******************************************************************************
+* MainWin::onSceneButton_5
+*******************************************************************************/
+void MainWin::onSceneButton_5(bool /*_bChecked*/)
+{
+    m_s32ActiveScene = SCENE_5;
+    updateSceneButtons();
+} // MainWin::onSceneButton_5
+
+
+/*******************************************************************************
+* MainWin::onChaseButton_1
+*******************************************************************************/
+void MainWin::onChaseButton_1(bool /*_bChecked*/)
+{
+    m_s32ActiveChase = CHASE_1;
+    updateChaseButtons();
+} // MainWin::onChaseButton_1
+
+
+/*******************************************************************************
+* MainWin::onChaseButton_2
+*******************************************************************************/
+void MainWin::onChaseButton_2(bool /*_bChecked*/)
+{
+    m_s32ActiveChase = CHASE_2;
+    updateChaseButtons();
+} // MainWin::onChaseButton_2
+
+
+/*******************************************************************************
+* MainWin::onChaseButton_3
+*******************************************************************************/
+void MainWin::onChaseButton_3(bool /*_bChecked*/)
+{
+    m_s32ActiveChase = CHASE_3;
+    updateChaseButtons();
+} // MainWin::onChaseButton_3
+
+
+/*******************************************************************************
+* MainWin::onChaseButton_4
+*******************************************************************************/
+void MainWin::onChaseButton_4(bool /*_bChecked*/)
+{
+    m_s32ActiveChase = CHASE_4;
+    updateChaseButtons();
+} // MainWin::onChaseButton_4
+
+
+/*******************************************************************************
+* MainWin::onChaseButton_5
+*******************************************************************************/
+void MainWin::onChaseButton_5(bool /*_bChecked*/)
+{
+    m_s32ActiveChase = CHASE_5;
+    updateChaseButtons();
+} // MainWin::onChaseButton_5

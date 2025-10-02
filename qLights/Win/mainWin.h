@@ -27,14 +27,40 @@ class MainWin : public QMainWindow
     Q_OBJECT
 
     private:
-        Ui::MainWin                     *m_pUi      { nullptr };
-        list<shared_ptr<Controller>>    m_lstController;
-        list<shared_ptr<Universe>>      m_lstUniverse;
-        list<shared_ptr<Device>>        m_lstDevice;
-        list<shared_ptr<Fixture>>       m_lstFixture;
+        Ui::MainWin                         *m_pUi      { nullptr };
+        list<shared_ptr<Controller>>        m_lstController;
+        list<shared_ptr<Universe>>          m_lstUniverse;
+        list<shared_ptr<Device>>            m_lstDevice;
+        list<shared_ptr<Fixture>>           m_lstFixture;
 
-        vector<QString>                 m_lstDeviceIconName;
-        vector<QString>                 m_lstChannelIcon;
+        vector<QString>                     m_lstDeviceIconName;
+        vector<QString>                     m_lstChannelIcon;
+
+        // active buttons
+        s32                                 m_s32ActiveBank     { BANK_1 };
+        s32                                 m_s32ActiveScene    { SCENE_1 };
+        s32                                 m_s32ActiveChase    { CHASE_1 };
+
+        // bank buttons
+        vector<vector<shared_ptr<Fixture>>> m_banks { { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+                                                      { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+                                                      { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+                                                      { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+                                                      { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr } };
+
+        // scene buttons
+        // vector<vector<shared_ptr<Fixture>>> m_banks { { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr } };
+
+        // bank buttons
+        // vector<vector<shared_ptr<Fixture>>> m_banks { { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
+        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr } };
 
     public:
         MainWin(QWidget *parent = nullptr);
@@ -62,13 +88,20 @@ class MainWin : public QMainWindow
         shared_ptr<Device>      findDevice(const QString &_sName);
 
         // fixture
-        void                    addFixture(const QString &_sName);
+        void                    addFixture(const QString        &_sName,
+                                           shared_ptr<Device>   _pDevice);
 
         shared_ptr<Fixture>     findFixture(const QString &_sName);
 
         // update
         void                    updateAll();
-        void                    updateGui();
+
+        void                    updatePanel();
+
+        void                    updateBankButtons();
+        void                    updateSceneButtons();
+        void                    updateChaseButtons();
+
         void                    updateControllerPanel();
         void                    updateUniversePanel();
         void                    updateDevicePanel();
@@ -80,12 +113,17 @@ class MainWin : public QMainWindow
 
 
     private:
-        void                    addTableWidgetItem(QTableWidget     *_pTableWidget,
+        static void             addTableWidgetItem(QTableWidget     *_pTableWidget,
+                                                   s32              _s32Row,
+                                                   s32              _s32Col,
+                                                   s32              _s32Value);
+
+        static void             addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                    s32              _s32Row,
                                                    s32              _s32Col,
                                                    const QString    &_sItem);
 
-        void                    addTableWidgetItem(QTableWidget     *_pTableWidget,
+        static void             addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                    s32              _s32Row,
                                                    s32              _s32Col,
                                                    const QPixmap    &_pixmap);
@@ -113,4 +151,24 @@ class MainWin : public QMainWindow
         void                    onEditDevice(bool _bChecked);
 
         void                    onAddFixture(bool _bChecked);
+        void                    onRemoveFixture(bool _bChecked);
+        void                    onEditFixture(bool _bChecked);
+
+        void                    onBankButton_1(bool _bChecked);
+        void                    onBankButton_2(bool _bChecked);
+        void                    onBankButton_3(bool _bChecked);
+        void                    onBankButton_4(bool _bChecked);
+        void                    onBankButton_5(bool _bChecked);
+
+        void                    onSceneButton_1(bool _bChecked);
+        void                    onSceneButton_2(bool _bChecked);
+        void                    onSceneButton_3(bool _bChecked);
+        void                    onSceneButton_4(bool _bChecked);
+        void                    onSceneButton_5(bool _bChecked);
+
+        void                    onChaseButton_1(bool _bChecked);
+        void                    onChaseButton_2(bool _bChecked);
+        void                    onChaseButton_3(bool _bChecked);
+        void                    onChaseButton_4(bool _bChecked);
+        void                    onChaseButton_5(bool _bChecked);
 }; // class MainWin

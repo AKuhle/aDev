@@ -8,6 +8,8 @@ debug/dlgController.o
 debug/dlgDevice.o
 debug/dlgFixture.o
 debug/dlgUniverse.o
+debug/bankButton.o
+debug/fixtureTable.o
 debug/mainWin.o
 debug/mainWin_handler.o
 debug/mainWin_update.o
@@ -19,4 +21,6 @@ debug/moc_dlgController.o
 debug/moc_dlgDevice.o
 debug/moc_dlgFixture.o
 debug/moc_dlgUniverse.o
+debug/moc_bankButton.o
+debug/moc_fixtureTable.o
 debug/moc_mainWin.o

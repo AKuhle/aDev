@@ -8,18 +8,346 @@
   },
   "device": {
     "0": {
+      "channel0": {
+        "bright": 0,
+        "name": "Pan",
+        "nr": 1,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan.png"
+      },
+      "channel1": {
+        "bright": 0,
+        "name": "Pan fine",
+        "nr": 2,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-fine.png"
+      },
+      "channel10": {
+        "bright": 0,
+        "name": "Gobo rot speed",
+        "nr": 11,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/gobo_rot_speed.png"
+      },
+      "channel11": {
+        "bright": 0,
+        "name": "Focus",
+        "nr": 12,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/focus.png"
+      },
+      "channel12": {
+        "bright": 0,
+        "name": "Prisma",
+        "nr": 13,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/prisma.png"
+      },
+      "channel13": {
+        "bright": 0,
+        "name": "Function",
+        "nr": 14,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/function1.png"
+      },
+      "channel14": {
+        "bright": 0,
+        "name": "Reset",
+        "nr": 15,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/reset.png"
+      },
+      "channel2": {
+        "bright": 0,
+        "name": "Tilt",
+        "nr": 3,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt.png"
+      },
+      "channel3": {
+        "bright": 0,
+        "name": "Tilt fine",
+        "nr": 4,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt-fine.png"
+      },
+      "channel4": {
+        "bright": 0,
+        "name": "Pan/Tilt Speed",
+        "nr": 5,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-tilt-speed.png"
+      },
+      "channel5": {
+        "bright": 1,
+        "name": "Brightness",
+        "nr": 6,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/brightness.png"
+      },
+      "channel6": {
+        "bright": 0,
+        "name": "Strobe",
+        "nr": 7,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/strobe.png"
+      },
+      "channel7": {
+        "bright": 0,
+        "name": "Color Wheel",
+        "nr": 8,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/color-wheel.png"
+      },
+      "channel8": {
+        "bright": 0,
+        "name": "Gobo static",
+        "nr": 9,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/gobo_stat_01.png"
+      },
+      "channel9": {
+        "bright": 0,
+        "name": "Gobo rotate",
+        "nr": 10,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/gobo_rot_01.png"
+      },
+      "channelCount": 15,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-s90.png",
       "name": "eurolite TMH-S90"
     },
     "1": {
+      "channel0": {
+        "bright": 0,
+        "name": "Pan",
+        "nr": 1,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan.png"
+      },
+      "channel1": {
+        "bright": 0,
+        "name": "Pan fine",
+        "nr": 2,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-fine.png"
+      },
+      "channel10": {
+        "bright": 0,
+        "name": "White",
+        "nr": 11,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/white.png"
+      },
+      "channel11": {
+        "bright": 0,
+        "name": "Zoom",
+        "nr": 12,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/zoom.png"
+      },
+      "channel12": {
+        "bright": 0,
+        "name": "Color Speed",
+        "nr": 14,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/color-speed.png"
+      },
+      "channel13": {
+        "bright": 0,
+        "name": "Function",
+        "nr": 15,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/function1.png"
+      },
+      "channel14": {
+        "bright": 0,
+        "name": "Reset",
+        "nr": 16,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/reset.png"
+      },
+      "channel2": {
+        "bright": 0,
+        "name": "Tilt",
+        "nr": 3,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt.png"
+      },
+      "channel3": {
+        "bright": 0,
+        "name": "Tilt fine",
+        "nr": 4,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt-fine.png"
+      },
+      "channel4": {
+        "bright": 0,
+        "name": "Pan/Tilt Speed",
+        "nr": 5,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-tilt-speed.png"
+      },
+      "channel5": {
+        "bright": 1,
+        "name": "Brightness",
+        "nr": 6,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/brightness.png"
+      },
+      "channel6": {
+        "bright": 0,
+        "name": "Strobe",
+        "nr": 7,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/strobe.png"
+      },
+      "channel7": {
+        "bright": 0,
+        "name": "Red",
+        "nr": 8,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/red.png"
+      },
+      "channel8": {
+        "bright": 0,
+        "name": "Green",
+        "nr": 9,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/green.png"
+      },
+      "channel9": {
+        "bright": 0,
+        "name": "Blue",
+        "nr": 10,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/blue.png"
+      },
+      "channelCount": 15,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 16"
     },
     "2": {
+      "channel0": {
+        "bright": 0,
+        "name": "Pan",
+        "nr": 1,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan.png"
+      },
+      "channel1": {
+        "bright": 0,
+        "name": "Pan fine",
+        "nr": 2,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-fine.png"
+      },
+      "channel10": {
+        "bright": 0,
+        "name": "Blue 1",
+        "nr": 11,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/blue1.png"
+      },
+      "channel11": {
+        "bright": 0,
+        "name": "White 1",
+        "nr": 12,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/white1.png"
+      },
+      "channel12": {
+        "bright": 0,
+        "name": "Red 2",
+        "nr": 13,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/red2.png"
+      },
+      "channel13": {
+        "bright": 0,
+        "name": "Green 2",
+        "nr": 14,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/green2.png"
+      },
+      "channel14": {
+        "bright": 0,
+        "name": "Blue 2",
+        "nr": 15,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/blue2.png"
+      },
+      "channel15": {
+        "bright": 0,
+        "name": "White 2",
+        "nr": 16,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/white2.png"
+      },
+      "channel16": {
+        "bright": 0,
+        "name": "Red 3",
+        "nr": 17,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/red3.png"
+      },
+      "channel17": {
+        "bright": 0,
+        "name": "Green 3",
+        "nr": 18,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/green3.png"
+      },
+      "channel18": {
+        "bright": 0,
+        "name": "Blue 3",
+        "nr": 19,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/blue3.png"
+      },
+      "channel19": {
+        "bright": 0,
+        "name": "White 3",
+        "nr": 20,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/white3.png"
+      },
+      "channel2": {
+        "bright": 0,
+        "name": "Tilt",
+        "nr": 3,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt.png"
+      },
+      "channel20": {
+        "bright": 0,
+        "name": "Color Speed",
+        "nr": 22,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/color-speed.png"
+      },
+      "channel21": {
+        "bright": 0,
+        "name": "Function",
+        "nr": 23,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/function1.png"
+      },
+      "channel22": {
+        "bright": 0,
+        "name": "Reset",
+        "nr": 24,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/reset.png"
+      },
+      "channel3": {
+        "bright": 0,
+        "name": "Tilt fine",
+        "nr": 4,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/tilt-fine.png"
+      },
+      "channel4": {
+        "bright": 0,
+        "name": "Pan/Tilt Speed",
+        "nr": 5,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/pan-tilt-speed.png"
+      },
+      "channel5": {
+        "bright": 0,
+        "name": "Zoom",
+        "nr": 6,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/zoom.png"
+      },
+      "channel6": {
+        "bright": 1,
+        "name": "Brightness",
+        "nr": 7,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/brightness.png"
+      },
+      "channel7": {
+        "bright": 0,
+        "name": "Strobe",
+        "nr": 8,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/strobe.png"
+      },
+      "channel8": {
+        "bright": 0,
+        "name": "Red 1",
+        "nr": 9,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/red1.png"
+      },
+      "channel9": {
+        "bright": 0,
+        "name": "Green 1",
+        "nr": 10,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/green1.png"
+      },
+      "channelCount": 23,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 24"
     },
     "3": {
+      "channel0": {
+        "bright": 1,
+        "name": "Brightness",
+        "nr": 1,
+        "pixmapName": "C:/Tools/aDev/qLights/Icons/Channel/brightness.png"
+      },
+      "channelCount": 1,
       "image": "C:/Tools/aDev/qLights/Icons/Device/par.png",
       "name": "PAR"
     },

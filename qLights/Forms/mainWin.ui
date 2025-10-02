@@ -36,7 +36,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="m_pBankBtn_1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -49,7 +49,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="m_pBankBtn_2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -62,7 +62,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_3">
+          <widget class="QRadioButton" name="m_pBankBtn_3">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -75,7 +75,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_4">
+          <widget class="QRadioButton" name="m_pBankBtn_4">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -88,7 +88,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_5">
+          <widget class="QRadioButton" name="m_pBankBtn_5">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -118,70 +118,70 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="BankButton" name="pushButton">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="BankButton" name="pushButton_2">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="BankButton" name="pushButton_3">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="BankButton" name="pushButton_4">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="BankButton" name="pushButton_5">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="BankButton" name="pushButton_6">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="BankButton" name="pushButton_7">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="BankButton" name="pushButton_8">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="BankButton" name="pushButton_9">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_10">
+          <widget class="BankButton" name="pushButton_10">
            <property name="text">
             <string/>
            </property>
@@ -213,7 +213,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QRadioButton" name="radioButton_6">
+          <widget class="QRadioButton" name="m_pSceneBtn_1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -226,7 +226,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_7">
+          <widget class="QRadioButton" name="m_pSceneBtn_2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -239,7 +239,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_8">
+          <widget class="QRadioButton" name="m_pSceneBtn_3">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -252,7 +252,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_9">
+          <widget class="QRadioButton" name="m_pSceneBtn_4">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -265,7 +265,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_10">
+          <widget class="QRadioButton" name="m_pSceneBtn_5">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -390,7 +390,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QRadioButton" name="radioButton_11">
+          <widget class="QRadioButton" name="m_pChaseBtn_1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -403,7 +403,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_12">
+          <widget class="QRadioButton" name="m_pChaseBtn_2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -416,7 +416,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_13">
+          <widget class="QRadioButton" name="m_pChaseBtn_3">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -429,7 +429,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_14">
+          <widget class="QRadioButton" name="m_pChaseBtn_4">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -442,7 +442,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_15">
+          <widget class="QRadioButton" name="m_pChaseBtn_5">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -2262,7 +2262,7 @@
         <string/>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <property name="iconSize">
         <size>
@@ -2628,7 +2628,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="m_pFixtureTable">
+          <widget class="FixtureTable" name="m_pFixtureTable">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -2652,12 +2652,12 @@
            </attribute>
            <column>
             <property name="text">
-             <string>Name</string>
+             <string>Image</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Channel #</string>
+             <string>Name</string>
             </property>
            </column>
           </widget>
@@ -2727,9 +2727,21 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FixtureTable</class>
+   <extends>QTableWidget</extends>
+   <header location="global">fixtureTable.h</header>
+  </customwidget>
+  <customwidget>
+   <class>BankButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">bankButton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
-  <include location="../Resource/qLights.qrc"/>
   <include location="../../aFrame/Resource/aFrame.qrc"/>
+  <include location="../Resource/qLights.qrc"/>
  </resources>
  <connections/>
 </ui>

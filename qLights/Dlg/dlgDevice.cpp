@@ -38,6 +38,7 @@ DlgDevice::DlgDevice(MainWin                *_pMainWin,
     m_pUi->m_pImage->setAutoFillBackground(true);
     m_pUi->m_pImage->setPalette(palette);
 
+    // set the cobtrols for the given device
     setCtrls(m_pDevice);
 
     // connect the add prev/next button
@@ -110,7 +111,7 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
         setDeviceIcon(_pDevice->pixmapName());
 
         // empty the previous table
-        pT->clear();
+        pT->clearContents();
 
         // set the channel of the device
         for (auto pChannel : vChannel)
@@ -166,10 +167,19 @@ void DlgDevice::setDeviceIcon(const QString &_path)
     if (!pm.isNull())
     {
         pm = pm.scaled(64, 64);
-
-        // set the standard image
         m_pUi->m_pImage->setPixmap(pm);
+
+        // set the ImageIdx
+        for (u16 i= 0; i< m_lstDeviceIconName.size(); i++)
+        {
+            if (m_lstDeviceIconName.at(i) == _path)
+            {
+                m_s32ImageIdx = i;
+                break;
+            }
+        }
     }
+
 } // DlgDevice::setDeviceIcon
 
 
@@ -185,7 +195,7 @@ void DlgDevice::accept()
     for (int row = 0; row < pT->rowCount(); ++row)
     {
         s32         s32ChannelNr    = pT->item(row, 0)->text().toInt();
-        QString     s32ChannelName  = pT->item(row, 0)->text();
+        QString     s32ChannelName  = pT->item(row, 1)->text();
 
         QString     sPixmapName     = pT->item(row, 2)->data(Qt::UserRole).toString();
 
@@ -209,6 +219,8 @@ void DlgDevice::accept()
 
         // set the device name
         m_pDevice->setPixmap(m_lstDeviceIconName.at(m_s32ImageIdx));
+
+        m_pDevice->setChannel(vChannel);
 
         // modify the existing device
         // m_pController->setName(aString::fromQString(m_pUi->m_pControllerName->text()));
@@ -279,4 +291,13 @@ void DlgDevice::onAddChannel(bool /*_bChecked*/)
 *******************************************************************************/
 void DlgDevice::onRemoveChannel(bool /*_bChecked*/)
 {
+    QTableWidget *pT = m_pUi->m_pChannelTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        pT->removeRow(s32Row);
+    }
 } // DlgDevice::onRemoveChannel

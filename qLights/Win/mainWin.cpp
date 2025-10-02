@@ -19,7 +19,9 @@ MainWin::MainWin(QWidget *parent)
     // load the channel icon list
     readChannelIcons();
 
+    // set the icon size in the tables
     m_pUi->m_pDeviceTable->setIconSize(QSize(64, 64)); // set the icon size for all cells
+    m_pUi->m_pFixtureTable->setIconSize(QSize(64, 64)); // set the icon size for all cells
 
     // connect the toolbar stuff
     connect(m_pUi->m_pActionOpenFile, &QAction::triggered, this, &MainWin::onFileOpen);
@@ -43,6 +45,30 @@ MainWin::MainWin(QWidget *parent)
 
     // connect the fixture stuff
     connect(m_pUi->m_pBtnAddFixture, &QToolButton::clicked, this, &MainWin::onAddFixture);
+    connect(m_pUi->m_pBtnRemoveFixture, &QToolButton::clicked, this, &MainWin::onRemoveFixture);
+    connect(m_pUi->m_pBtnEditFixture, &QToolButton::clicked, this, &MainWin::onEditFixture);
+
+    // connect the bank buttons
+    connect(m_pUi->m_pBankBtn_1, &QPushButton::clicked, this, &MainWin::onBankButton_1);
+    connect(m_pUi->m_pBankBtn_2, &QPushButton::clicked, this, &MainWin::onBankButton_2);
+    connect(m_pUi->m_pBankBtn_3, &QPushButton::clicked, this, &MainWin::onBankButton_3);
+    connect(m_pUi->m_pBankBtn_4, &QPushButton::clicked, this, &MainWin::onBankButton_4);
+    connect(m_pUi->m_pBankBtn_5, &QPushButton::clicked, this, &MainWin::onBankButton_5);
+
+    // connect the Scene buttons
+    connect(m_pUi->m_pSceneBtn_1, &QPushButton::clicked, this, &MainWin::onSceneButton_1);
+    connect(m_pUi->m_pSceneBtn_2, &QPushButton::clicked, this, &MainWin::onSceneButton_2);
+    connect(m_pUi->m_pSceneBtn_3, &QPushButton::clicked, this, &MainWin::onSceneButton_3);
+    connect(m_pUi->m_pSceneBtn_4, &QPushButton::clicked, this, &MainWin::onSceneButton_4);
+    connect(m_pUi->m_pSceneBtn_5, &QPushButton::clicked, this, &MainWin::onSceneButton_5);
+
+    // connect the Chase buttons
+    connect(m_pUi->m_pChaseBtn_1, &QPushButton::clicked, this, &MainWin::onChaseButton_1);
+    connect(m_pUi->m_pChaseBtn_2, &QPushButton::clicked, this, &MainWin::onChaseButton_2);
+    connect(m_pUi->m_pChaseBtn_3, &QPushButton::clicked, this, &MainWin::onChaseButton_3);
+    connect(m_pUi->m_pChaseBtn_4, &QPushButton::clicked, this, &MainWin::onChaseButton_4);
+    connect(m_pUi->m_pChaseBtn_5, &QPushButton::clicked, this, &MainWin::onChaseButton_5);
+
 
     updateAll();
 } // MainWin::MainWin
@@ -69,7 +95,10 @@ void  MainWin::readChannelIcons()
     {
         if (entry.is_regular_file() && entry.path().extension() == ".png")
         {
-            m_lstChannelIcon.push_back(QString::fromStdString(entry.path().string()));
+            QString     sFile = QString::fromStdString(entry.path().string());
+            sFile.replace(QChar(92), QChar(47)); // 92 = '\', 47 = '/'
+
+            m_lstChannelIcon.push_back(sFile);
         }
     }
 
@@ -81,6 +110,7 @@ void  MainWin::readChannelIcons()
         if (entry.is_regular_file() && entry.path().extension() == ".png")
         {
             QString     sFile = QString::fromStdString(entry.path().string());
+            sFile.replace(QChar(92), QChar(47)); // 92 = '\', 47 = '/'
 
             if (sFile.contains("std.png"))
             {
@@ -213,9 +243,10 @@ shared_ptr<Device> MainWin::findDevice(const QString &_sName)
 /*******************************************************************************
 * MainWin::addFixture
 *******************************************************************************/
-void MainWin::addFixture(const QString &_sName)
+void MainWin::addFixture(const QString      &_sName,
+                         shared_ptr<Device> _pDevice)
 {
-    shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName);
+    shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName, _pDevice);
     m_lstFixture.push_back(std::move(pFixture));
 } // MainWin::addFixture
 

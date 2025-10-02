@@ -46,6 +46,16 @@ aJsonFile::~aJsonFile()
 * aJsonFile::addValue
 *******************************************************************************/
 void aJsonFile::addValue(const aString  &_sKey,
+                         bool           _bValue)
+{
+    addValue(_sKey, (int) _bValue);
+} // aJsonFile::addValue
+
+
+/*******************************************************************************
+* aJsonFile::addValue
+*******************************************************************************/
+void aJsonFile::addValue(const aString  &_sKey,
                          int            _iValue)
 {
     auto keys = splitKey(_sKey.to_stdString());
@@ -95,6 +105,15 @@ void aJsonFile::addValue(const aString              &_sKey,
 
     *getOrCreate(keys) = vStrings;
 } // aJsonFile::addValue
+
+
+/*******************************************************************************
+* aJsonFile::readBoolValue
+*******************************************************************************/
+bool aJsonFile::readBoolValue(const aString  &_sKey) const
+{
+    return (bool) readIntValue(_sKey);
+} // aJsonFile::readBoolValue
 
 
 /*******************************************************************************
@@ -203,23 +222,33 @@ bool aJsonFile::writeJsonFile(const aPath &_sPath) const
 namespace {
 Value convertJsonToValue(const nlohmann::json& j)
 {
-    if (j.is_object()) {
+    if (j.is_object())
+    {
         Object obj;
         for (auto it = j.begin(); it != j.end(); ++it)
             obj[it.key()] = convertJsonToValue(it.value());
         return obj;
-    } else if (j.is_array()) {
+    }
+    else if (j.is_array())
+    {
         std::vector<std::string> vec;
         for (const auto& el : j)
             vec.push_back(el.get<std::string>());
         return vec;
-    } else if (j.is_string()) {
+    }
+    else if (j.is_string())
+    {
         return j.get<std::string>();
-    } else if (j.is_number_integer()) {
+    }
+    else if (j.is_number_integer())
+    {
         return j.get<int>();
-    } else if (j.is_number_float()) {
+    }
+    else if (j.is_number_float())
+    {
         return j.get<double>();
     }
+
     return {};
 }
 }
@@ -287,7 +316,7 @@ std::vector<std::string> aJsonFile::splitKey(const std::string &_key)
 *******************************************************************************/
 Value* aJsonFile::getOrCreate(std::vector<std::string> &_vKeys)
 {
-    std::map<std::string, Value>* current = &m_root;
+    Object* current = &m_root;
 
     for (size_t i = 0; i < _vKeys.size() - 1; ++i)
     {

@@ -2,6 +2,7 @@
 * includes
 *******************************************************************************/
 #include "ui_mainWin.h"
+#include "qLights_def.h"
 #include "mainWin.h"
 
 using namespace std;
@@ -12,7 +13,12 @@ using namespace std;
 *******************************************************************************/
 void MainWin::updateAll()
 {
-    updateGui();
+    updatePanel();
+
+    updateBankButtons();
+    updateSceneButtons();
+    updateChaseButtons();
+
     updateControllerPanel();
     updateUniversePanel();
     updateDevicePanel();
@@ -21,13 +27,52 @@ void MainWin::updateAll()
 
 
 /*******************************************************************************
-* MainWin::updateGui
+* MainWin::updatePanel
 *******************************************************************************/
-void MainWin::updateGui()
+void MainWin::updatePanel()
 {
     // action PanelDock
     m_pUi->m_pActionPanelDock->setChecked(m_pUi->m_pPanelDock->isVisible());
-} // MainWin::updateGui
+} // MainWin::updatePanel
+
+
+/*******************************************************************************
+* MainWin::updateBankButtons
+*******************************************************************************/
+void MainWin::updateBankButtons()
+{
+    m_pUi->m_pBankBtn_1->setChecked(m_s32ActiveBank == BANK_1);
+    m_pUi->m_pBankBtn_2->setChecked(m_s32ActiveBank == BANK_2);
+    m_pUi->m_pBankBtn_3->setChecked(m_s32ActiveBank == BANK_3);
+    m_pUi->m_pBankBtn_4->setChecked(m_s32ActiveBank == BANK_4);
+    m_pUi->m_pBankBtn_5->setChecked(m_s32ActiveBank == BANK_5);
+} // MainWin::updateBankButtons
+
+
+/*******************************************************************************
+* MainWin::updateSceneButtons
+*******************************************************************************/
+void MainWin::updateSceneButtons()
+{
+    m_pUi->m_pSceneBtn_1->setChecked(m_s32ActiveBank == SCENE_1);
+    m_pUi->m_pSceneBtn_2->setChecked(m_s32ActiveBank == SCENE_2);
+    m_pUi->m_pSceneBtn_3->setChecked(m_s32ActiveBank == SCENE_3);
+    m_pUi->m_pSceneBtn_4->setChecked(m_s32ActiveBank == SCENE_4);
+    m_pUi->m_pSceneBtn_5->setChecked(m_s32ActiveBank == SCENE_5);
+} // MainWin::updateSceneButtons
+
+
+/*******************************************************************************
+* MainWin::updateChaseButtons
+*******************************************************************************/
+void MainWin::updateChaseButtons()
+{
+    m_pUi->m_pChaseBtn_1->setChecked(m_s32ActiveBank == CHASE_1);
+    m_pUi->m_pChaseBtn_2->setChecked(m_s32ActiveBank == CHASE_2);
+    m_pUi->m_pChaseBtn_3->setChecked(m_s32ActiveBank == CHASE_3);
+    m_pUi->m_pChaseBtn_4->setChecked(m_s32ActiveBank == CHASE_4);
+    m_pUi->m_pChaseBtn_5->setChecked(m_s32ActiveBank == CHASE_5);
+} // MainWin::updateChaseButtons
 
 
 /*******************************************************************************
@@ -93,7 +138,7 @@ void MainWin::updateDevicePanel()
     pT->clearContents();
     pT->setRowCount(m_lstDevice.size());
 
-    // iterate over all controllers
+    // iterate over all devices
     s32 idx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
@@ -102,7 +147,6 @@ void MainWin::updateDevicePanel()
 
         // device image
         const QPixmap &pix = pD->pixmap();
-
         if (!pix.isNull())
         {
             addTableWidgetItem(pT, idx, 0, pix);
@@ -110,6 +154,9 @@ void MainWin::updateDevicePanel()
 
         // device name
         addTableWidgetItem(pT, idx, 1, pD->name());
+
+        // channel count
+        addTableWidgetItem(pT, idx, 2, pD->channelCount());
 
         idx++;
     }
@@ -126,16 +173,42 @@ void MainWin::updateFixturePanel()
     pT->clearContents();
     pT->setRowCount(m_lstFixture.size());
 
-    // iterate over all controllers
+    // iterate over all fixtures
     s32 idx = 0;
     for (const shared_ptr<Fixture> &pF : m_lstFixture)
     {
-        // controller name
-        addTableWidgetItem(pT, idx, 0, pF->name());
+        // set the row size to 64
+        pT->setRowHeight(idx, 64);
+
+        // device image
+        const QPixmap &pix = pF->device()->pixmap();
+        if (!pix.isNull())
+        {
+            addTableWidgetItem(pT, idx, 0, pix);
+        }
+
+        // fixture name
+        addTableWidgetItem(pT, idx, 1, pF->name());
 
         idx++;
     }
 } // MainWin::updateFixturePanel
+
+
+/*******************************************************************************
+* MainWin::addTableWidgetItem
+*******************************************************************************/
+void MainWin::addTableWidgetItem(QTableWidget   *_pTableWidget,
+                                 s32            _s32Row,
+                                 s32            _s32Col,
+                                 s32            _s32Value)
+{
+    QTableWidgetItem    *pItem = new QTableWidgetItem(QString::number(_s32Value));
+
+    pItem->setFlags(pItem->flags() & ~Qt::ItemIsEditable);
+
+    _pTableWidget->setItem(_s32Row, _s32Col, pItem);
+} // MainWin::addTableWidgetItem
 
 
 /*******************************************************************************

@@ -53,6 +53,7 @@ class Device
         void                                setPixmap(const QString &_sPixmapName);
 
         const vector<shared_ptr<Channel>>   &channel() const                                            { return m_vChannel; }
+        s32                                 channelCount() const                                        { return m_vChannel.size(); }
         void                                setChannel(const vector<shared_ptr<Channel>> &_vChannel)    { m_vChannel = _vChannel; }
 
         //void                                addUniverse(u32 _u32Id);

@@ -19,11 +19,11 @@
 #include <QString>
 #include "aFrame_def.h"
 
-
-class Universe;
+class Device;
 
 using namespace std;
 using namespace aFrame;
+
 
 
 /*******************************************************************************
@@ -32,14 +32,20 @@ using namespace aFrame;
 class Fixture
 {
     private:
-        QString                         m_sName;
+        QString             m_sName;
+        shared_ptr<Device>  m_pDevice;
 
     public:
-        Fixture(const QString &_sName);
+        Fixture(const QString       &_sName,
+                shared_ptr<Device>  _pDevice);
         ~Fixture();
 
-        const QString&                      name() const                        { return m_sName; }
-        void                                setName(const QString &_sName)      { m_sName = _sName; }
+        const QString&                      name() const                            { return m_sName; }
+        void                                setName(const QString &_sName)          { m_sName = _sName; }
+
+        shared_ptr<Device>                  device() const                          { return m_pDevice; }
+        void                                setDevice(shared_ptr<Device>  _pDevice) { m_pDevice = _pDevice; }
+
 
         //void                                addUniverse(u32 _u32Id);
 

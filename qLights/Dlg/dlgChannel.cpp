@@ -25,11 +25,15 @@ DlgChannel::DlgChannel(DlgDevice                *_pDlgDevice,
 {
     m_pUi->setupUi(this);
 
-    // fill the combo box with the icons
+    // set icon size and centered
+    m_pUi->m_pChannelIcon->setIconSize(QSize(36, 36));
+    m_pUi->m_pChannelIcon->setStyleSheet("QComboBox QAbstractItemView::item { qproperty-textAlignment: 'AlignCenter'; }");
+
+    // fill the combo box with the channel icons
     for (auto &rscName : _lstChannelIcon)
     {
         QPixmap pixmap(rscName);
-        QIcon icon(pixmap.scaled(64, 64, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        QIcon icon(pixmap.scaled(36, 36, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
         m_pUi->m_pChannelIcon->addItem(icon, "", QVariant(rscName));
         //m_pUi->m_pChannelIcon->setItemData(m_pUi->m_pChannelIcon->count()-1, Qt::AlignCenter, Qt::TextAlignmentRole);

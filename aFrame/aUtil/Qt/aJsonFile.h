@@ -37,7 +37,9 @@ class aJsonValue;
 
 struct Value;
 using Object = std::map<std::string, Value>;
-struct Value : std::variant<int, double, std::string, std::vector<std::string>, Object> {
+
+struct Value : std::variant<int, double, std::string, std::vector<std::string>, Object>
+{
     using variant::variant;
 };
 
@@ -59,6 +61,9 @@ class aJsonFile
     // add members
     public:
         void                            addValue(const aString  &_sKey,
+                                                 bool           _bValue);
+
+        void                            addValue(const aString  &_sKey,
                                                  int            _iValue);
 
         void                            addValue(const aString  &_sKey,
@@ -72,6 +77,8 @@ class aJsonFile
 
         // read members
     public:
+        bool                            readBoolValue(const aString &_sKey) const;
+
         int                             readIntValue(const aString &_sKey) const;
 
         double                          readDoubleValue(const aString &_sKey) const;
