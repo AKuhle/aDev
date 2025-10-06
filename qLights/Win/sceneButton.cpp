@@ -31,34 +31,22 @@ void SceneButton::init()
 
 
 /*******************************************************************************
+* SceneButton::setScene
+*******************************************************************************/
+void SceneButton::setScene(shared_ptr<Scene> _pScene)
+{
+    m_pScene = _pScene;
+
+    setText((m_pScene)?   m_pScene->name() : "");
+} // SceneButton::setScene
+
+
+/*******************************************************************************
 * SceneButton::~SceneButton
 *******************************************************************************/
 SceneButton::~SceneButton()
 {
 } // SceneButton::~SceneButtonß
-
-
-// /*******************************************************************************
-// * SceneButton::setFixture
-// *******************************************************************************/
-// void SceneButton::setFixture(shared_ptr<Fixture> _pFixture)
-// {
-//     setFixedHeight(32);
-//     setIconSize(QSize(30, 30));
-
-//     m_pFixture = _pFixture;
-
-//     if (m_pFixture)
-//     {
-//         setIcon(QIcon(m_pFixture->device()->pixmap()));
-//         setText(m_pFixture->name());
-//     }
-//     else
-//     {
-//         setIcon(QIcon());
-//         setText("");
-//     }
-// } // SceneButton::setFixture
 
 
 /*******************************************************************************
@@ -83,19 +71,6 @@ void SceneButton::onAssignScene()
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        const list<shared_ptr<Universe>> &lstUniverse  = MainWin::instance()->universes();
-        QString                          sSceneName    = dlg.name();
-
-        // set the button text to the scene name
-        setText(sSceneName);
-
-        // create a new scene
-        m_pScene = make_shared<Scene> (sSceneName);
-
-        for (auto pUniverse : lstUniverse)
-        {
-            m_pScene->addUniverse(pUniverse, pUniverse->dmxData());
-        }
-
+        MainWin::instance()->assignScene(this, dlg.name());
     }
 } // SceneButton::onAssignScene

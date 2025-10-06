@@ -16,10 +16,14 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include "aFrame_def.h"
+
 #include <QColor>
 #include <QPixmap>
 
 #include "aFrame_def.h"
+
+class Universe;
 
 
 /*******************************************************************************
@@ -51,7 +55,8 @@ constexpr aFrame::s32       CHASE_3 { 2 };
 constexpr aFrame::s32       CHASE_4 { 3 };
 constexpr aFrame::s32       CHASE_5 { 4 };
 
-//using ChannelIconTuple = std::tuple<QString, QPixmap>;
+
+using UniverseTuple = std::tuple<std::shared_ptr<Universe>, QByteArray>;
 
 
 /*******************************************************************************

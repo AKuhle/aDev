@@ -255,18 +255,29 @@ void MainWin::onFileSave()
     // save the scenes
     f.addValue(aString("scenes:scene_set_count"), SCENE_SET_COUNT);
     f.addValue(aString("scenes:scene_button_count"), SCENE_BTN_COUNT);
+    f.addValue(aString("scenes:universe_count"), (int) m_lstUniverse.size());
 
     for (s32 iSet = 0; iSet < SCENE_SET_COUNT; iSet++)
     {
         for (s32 iScene = 0; iScene < SCENE_BTN_COUNT; iScene++)
         {
             aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
-            SceneButton *pSceneBtn = m_vvSceneButtons.at(iSet).at(iScene);
-            shared_ptr<Scene> pScene = pSceneBtn->scene();
+            auto tup  = m_vvSceneButtons.at(iSet).at(iScene);
+            shared_ptr<Scene> pScene = std::get<1> (tup);
 
             if (pScene)
             {
+                //const list<UniverseTuple> &lstTup = pScene->universes();
+
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
+
+                // for (auto pUniverse : m_lstUniverse)
+                // {
+                //     const QByteArray    &byteArray = pUniverse->dmxData();
+                //     std::vector<u8> vec(byteArray.constBegin(), byteArray.constEnd());
+
+                //     f.addValue("scenes:1", vec);
+                // }
             }
             else
             {
@@ -274,15 +285,6 @@ void MainWin::onFileSave()
                 f.addValue(sKey + ":name", aString("-"));
             }
         }
-    }
-
-
-    for (auto pUniverse : m_lstUniverse)
-    {
-        const QByteArray    &byteArray = pUniverse->dmxData();
-        std::vector<u8> vec(byteArray.constBegin(), byteArray.constEnd());
-
-        f.addValue("scenes:1", vec);
     }
 
     // write the file to disk

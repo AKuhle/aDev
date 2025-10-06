@@ -40,8 +40,6 @@ class Channel
         QPixmap     m_pixmap;
         bool        m_bBrightness   { false };
 
-        s32         m_s32Value      { 0 };
-
 
     public:
         Channel(s32             _s32Nr,
@@ -60,6 +58,6 @@ class Channel
 
         bool                            isBrightness() const        { return m_bBrightness; }
 
-        void                            setValue(s32 _s32Value)     { m_s32Value = _s32Value; }
-        s32                             value() const               { return m_s32Value; }
+        // void                            setValue(s32 _s32Value)     { m_s32Value = _s32Value; }
+        // s32                             value() const               { return m_s32Value; }
 }; // class Channel

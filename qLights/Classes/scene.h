@@ -16,7 +16,7 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "qLights_def.h"
 
 #include <QByteArray>
 #include <QString>
@@ -34,20 +34,17 @@ class Scene
 {
     private:
         QString                 m_sName;
-        shared_ptr<Universe>    m_pUniverse;
-        QByteArray              m_dmxData;
+        list<UniverseTuple>     m_lstUniverse;
+
 
     public:
         Scene(const QString   &_sName);
 
         ~Scene();
 
-        QString                 name() const        { return m_sName; }
+        QString                     name() const        { return m_sName; }
 
-        shared_ptr<Universe>    universe() const    { return m_pUniverse; }
+        const list<UniverseTuple>&  universes() const    { return m_lstUniverse; }
 
-        const QByteArray&       dmxData() const     { return m_dmxData; }
-
-        void                    addUniverse(shared_ptr<Universe>    _pUniverse,
-                                            const QByteArray        &_dmxData);
+        void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
 }; // class Scene

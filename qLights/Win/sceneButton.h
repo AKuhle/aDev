@@ -26,7 +26,7 @@ class SceneButton : public QPushButton
 
         void                init();
 
-        //void        setScene(shared_ptr<Fixture> _pFixture);
+        void                setScene(shared_ptr<Scene> _pScene);
         shared_ptr<Scene>   scene()     { return m_pScene; }
 
 

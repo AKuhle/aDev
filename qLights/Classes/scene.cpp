@@ -16,6 +16,7 @@
 * includes
 *******************************************************************************/
 #include "scene.h"
+#include "universe.h"
 
 
 
@@ -37,11 +38,13 @@ Scene::~Scene()
 
 
 /*******************************************************************************
-* Scene::addUniverse
+* Scene::addUniverses
 *******************************************************************************/
-void Scene::addUniverse(shared_ptr<Universe>    _pUniverse,
-                        const QByteArray        &_dmxData)
+void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)
 {
-    m_pUniverse = _pUniverse;
-    m_dmxData = _dmxData;
-} // Scene::addUniverse
+    for (auto pUniverse : _lstUniverse)
+    {
+        UniverseTuple tup = std::make_tuple(pUniverse, pUniverse->dmxData());
+        m_lstUniverse.push_back(tup);
+    }
+} // Scene::addUniverses

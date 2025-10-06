@@ -53,6 +53,6 @@ class Fader  :public QSlider
                                           shared_ptr<Channel> _pChannel);
 
     private slots:
-        void                onSliderMoved(int value);
+        void                onSliderMoved(int _iValue);
 
 }; // class Fader

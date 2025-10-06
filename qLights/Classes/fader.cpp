@@ -79,18 +79,17 @@ void Fader::init(ScribbleStrip *_pScribbleStrip)
 /*******************************************************************************
 * Fader::onSliderMoved
 *******************************************************************************/
-void Fader::onSliderMoved(int value)
+void Fader::onSliderMoved(int _iValue)
 {
+    cout << _iValue << endl;
+
     CHECK_PRE_CONDITION_VOID(m_pFixture);
     CHECK_PRE_CONDITION_VOID(m_pChannel);
     CHECK_PRE_CONDITION_VOID(m_pFixture->universe());
 
-    // set the value in the channel
-    m_pChannel->setValue(value);
-
     // set the value in the universe
     m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
                                             m_pChannel->nr(),
-                                            (u8) value,
+                                            (u8) _iValue,
                                             true);
 } // Fader::onSliderMoved

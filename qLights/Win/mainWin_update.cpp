@@ -67,6 +67,14 @@ void MainWin::updateSceneButtons()
     m_pUi->m_pSceneSelector_3->setChecked(m_s32ActiveScene == SCENE_3);
     m_pUi->m_pSceneSelector_4->setChecked(m_s32ActiveScene == SCENE_4);
     m_pUi->m_pSceneSelector_5->setChecked(m_s32ActiveScene == SCENE_5);
+
+    vector<SceneTuple> &vScene = m_vvSceneButtons.at(m_s32ActiveScene);
+
+    for (SceneTuple &tup : vScene)
+    {
+        (std::get<0> (tup))->setScene(std::get<1> (tup));
+
+    }
 } // MainWin::updateSceneButtons
 
 

@@ -5,6 +5,7 @@
 
 #include "ui_mainWin.h"
 #include "mainWin.h"
+#include "scene.h"
 
 using namespace std;
 
@@ -134,35 +135,35 @@ void MainWin::createCtrlVectors()
     // generate SCENE_COUNT sets of SCENE_BTN_COUNT buttons
     for (s32 i = 0; i < SCENE_SET_COUNT; i++)
     {
-        vector<SceneButton *>  m_vSceneSet;
+        vector<SceneTuple>  m_vSceneSet;
 
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_1);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_2);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_3);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_4);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_5);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_6);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_7);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_8);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_9);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_10);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_11);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_12);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_13);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_14);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_15);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_16);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_17);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_18);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_19);
-        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_20);
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_1, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_2, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_3, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_4, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_5, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_6, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_7, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_8, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_9, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_10, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_11, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_12, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_13, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_14, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_15, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_16, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_17, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_18, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_19, nullptr));
+        m_vSceneSet.push_back(make_tuple(m_pUi->m_pSceneBtn_20, nullptr));
 
         m_vvSceneButtons.push_back(m_vSceneSet);
     }
     // initialize the scene buttons
-    for (auto pScene : m_vvSceneButtons.at(0))
+    for (auto tup : m_vvSceneButtons.at(0))
     {
-        pScene->init();
+        std::get<0>(tup)->init();
     }
 
 
@@ -440,6 +441,30 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
         }
     }
 } // MainWin::assignFixture
+
+
+/*******************************************************************************
+* MainWin::assignScene
+*******************************************************************************/
+void MainWin::assignScene(SceneButton   *_pSceneBtn,
+                          const QString &_sSceneName)
+{
+    for (SceneTuple &tup : m_vvSceneButtons.at(m_s32ActiveScene))
+    {
+        if (std::get<0> (tup) == _pSceneBtn)
+        {
+            // create a new scene
+            shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName);
+            pScene->addUniverses(m_lstUniverse);
+
+            // set the scene in the tuple of the current set
+            std::get<1> (tup) = pScene;
+
+            // set the scene in the button
+            _pSceneBtn->setScene(pScene);
+        }
+    }
+} // MainWin::assignScene
 
 
 /*******************************************************************************
