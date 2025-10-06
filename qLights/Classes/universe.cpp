@@ -59,8 +59,12 @@ void Universe::setChannelValue(s32  _s32FixtureAdress,
                                u8   _u8Value,
                                bool _bSend)
 {
+    cout << "Adress: " << _s32FixtureAdress <<
+            "Channel:" << _s32ChannelNr <<
+            "Value:" << _u8Value << endl;
+
     // set the new channel value
-    m_dmxData[_s32FixtureAdress + _s32ChannelNr - 1] = _u8Value;
+    m_dmxData[_s32FixtureAdress + _s32ChannelNr-2] = _u8Value;
 
     if (_bSend)
     {
@@ -105,7 +109,7 @@ void Universe::sendValues2Controller()
         }
         else
         {
-            std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+            //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
         }
 
     } // if...
