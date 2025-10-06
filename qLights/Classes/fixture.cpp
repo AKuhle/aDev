@@ -24,10 +24,14 @@ using namespace aFrame;
 /*******************************************************************************
 * Fixture::Fixture
 *******************************************************************************/
-Fixture::Fixture(const QString      &_sName,
-                 shared_ptr<Device> _pDevice)
+Fixture::Fixture(const QString          &_sName,
+                 shared_ptr<Device>     _pDevice,
+                 shared_ptr<Universe>   _pUniverse,
+                 s32                    _s32Adress)
 : m_sName(_sName),
-  m_pDevice(_pDevice)
+  m_pDevice(_pDevice),
+  m_pUniverse(_pUniverse),
+  m_s32Adress(_s32Adress)
 {
 } // Fixture::Fixture
 

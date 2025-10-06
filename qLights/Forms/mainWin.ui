@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1393</width>
-    <height>814</height>
+    <width>1455</width>
+    <height>998</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>qLights</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_26">
+   <layout class="QVBoxLayout" name="verticalLayout_30">
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="sizePolicy">
@@ -32,11 +32,11 @@
       <property name="title">
        <string>Banks</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_28">
+      <layout class="QVBoxLayout" name="verticalLayout_26">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QRadioButton" name="m_pBankBtn_1">
+          <widget class="QRadioButton" name="m_pBankSelector_1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -49,7 +49,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pBankBtn_2">
+          <widget class="QRadioButton" name="m_pBankSelector_2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -62,7 +62,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pBankBtn_3">
+          <widget class="QRadioButton" name="m_pBankSelector_3">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -75,7 +75,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pBankBtn_4">
+          <widget class="QRadioButton" name="m_pBankSelector_4">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -88,7 +88,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pBankBtn_5">
+          <widget class="QRadioButton" name="m_pBankSelector_5">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -113,75 +113,445 @@
            </property>
           </spacer>
          </item>
+         <item>
+          <widget class="QPushButton" name="m_pClearBank">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="palette">
+            <palette>
+             <active>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>170</red>
+                 <green>85</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </active>
+             <inactive>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>170</red>
+                 <green>85</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </inactive>
+             <disabled>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>170</red>
+                 <green>85</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </disabled>
+            </palette>
+           </property>
+           <property name="text">
+            <string>Clear Bank</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="BankButton" name="pushButton">
+          <widget class="BankButton" name="m_pBankBtn_1">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_2">
+          <widget class="BankButton" name="m_pBankBtn_2">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_3">
+          <widget class="BankButton" name="m_pBankBtn_3">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_4">
+          <widget class="BankButton" name="m_pBankBtn_4">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_5">
+          <widget class="BankButton" name="m_pBankBtn_5">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_6">
+          <widget class="BankButton" name="m_pBankBtn_6">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_7">
+          <widget class="BankButton" name="m_pBankBtn_7">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_8">
+          <widget class="BankButton" name="m_pBankBtn_8">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_9">
+          <widget class="BankButton" name="m_pBankBtn_9">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="BankButton" name="pushButton_10">
+          <widget class="BankButton" name="m_pBankBtn_10">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_11">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_12">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_13">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_14">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_15">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_16">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_17">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_18">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_19">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="BankButton" name="m_pBankBtn_20">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -209,11 +579,11 @@
       <property name="title">
        <string>Scenes</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_29">
+      <layout class="QVBoxLayout" name="verticalLayout_28">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QRadioButton" name="m_pSceneBtn_1">
+          <widget class="QRadioButton" name="m_pSceneSelector_1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -226,7 +596,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pSceneBtn_2">
+          <widget class="QRadioButton" name="m_pSceneSelector_2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -239,7 +609,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pSceneBtn_3">
+          <widget class="QRadioButton" name="m_pSceneSelector_3">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -252,7 +622,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pSceneBtn_4">
+          <widget class="QRadioButton" name="m_pSceneSelector_4">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -265,7 +635,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="m_pSceneBtn_5">
+          <widget class="QRadioButton" name="m_pSceneSelector_5">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -366,182 +736,330 @@
          </item>
         </layout>
        </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="title">
-       <string>Chases</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_30">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
          <item>
-          <widget class="QRadioButton" name="m_pChaseBtn_1">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="m_pChaseBtn_2">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="m_pChaseBtn_3">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="m_pChaseBtn_4">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QRadioButton" name="m_pChaseBtn_5">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <item>
-          <widget class="QPushButton" name="pushButton_21">
+          <widget class="QPushButton" name="pushButton_31">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_22">
+          <widget class="QPushButton" name="pushButton_32">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_23">
+          <widget class="QPushButton" name="pushButton_33">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_24">
+          <widget class="QPushButton" name="pushButton_34">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_25">
+          <widget class="QPushButton" name="pushButton_35">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_26">
+          <widget class="QPushButton" name="pushButton_36">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_27">
+          <widget class="QPushButton" name="pushButton_37">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_28">
+          <widget class="QPushButton" name="pushButton_38">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_29">
+          <widget class="QPushButton" name="pushButton_39">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_30">
+          <widget class="QPushButton" name="pushButton_40">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="title">
+          <string>Chases</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_29">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <item>
+             <widget class="QRadioButton" name="m_pChaseSelector_1">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="m_pChaseSelector_2">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="m_pChaseSelector_3">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>3</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="m_pChaseSelector_4">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>4</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="m_pChaseSelector_5">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>5</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QPushButton" name="pushButton_21">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_22">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_23">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_24">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_25">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_26">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_27">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_28">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_29">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_30">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QPushButton" name="pushButton_41">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_42">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_43">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_44">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_45">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_46">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_47">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_48">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_49">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_50">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -580,7 +1098,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QWidget" name="widget" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_1">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -593,10 +1111,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider">
+          <widget class="Fader" name="m_pFader_1">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -644,7 +1165,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QWidget" name="widget_2" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -657,10 +1178,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_2">
+          <widget class="Fader" name="m_pFader_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -708,7 +1232,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QWidget" name="widget_3" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -721,10 +1245,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_3">
+          <widget class="Fader" name="m_pFader_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -772,7 +1299,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QWidget" name="widget_4" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -785,10 +1312,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_4">
+          <widget class="Fader" name="m_pFader_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -836,7 +1366,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QWidget" name="widget_5" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -849,10 +1379,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_5">
+          <widget class="Fader" name="m_pFader_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -900,7 +1433,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QWidget" name="widget_6" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_6">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -913,10 +1446,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_6">
+          <widget class="Fader" name="m_pFader_6">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -964,7 +1500,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QWidget" name="widget_7" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_7">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -977,10 +1513,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_7">
+          <widget class="Fader" name="m_pFader_7">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1028,7 +1567,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_8">
          <item>
-          <widget class="QWidget" name="widget_8" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_8">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1041,10 +1580,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_8">
+          <widget class="Fader" name="m_pFader_8">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1092,7 +1634,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QWidget" name="widget_9" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_9">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1105,10 +1647,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_9">
+          <widget class="Fader" name="m_pFader_9">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1156,7 +1701,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_10">
          <item>
-          <widget class="QWidget" name="widget_10" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_10">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1169,10 +1714,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_10">
+          <widget class="Fader" name="m_pFader_10">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1220,7 +1768,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_11">
          <item>
-          <widget class="QWidget" name="widget_11" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_11">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1233,10 +1781,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_11">
+          <widget class="Fader" name="m_pFader_11">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1284,7 +1835,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_12">
          <item>
-          <widget class="QWidget" name="widget_12" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_12">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1297,10 +1848,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_12">
+          <widget class="Fader" name="m_pFader_12">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1348,7 +1902,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_13">
          <item>
-          <widget class="QWidget" name="widget_13" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_13">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1361,10 +1915,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_13">
+          <widget class="Fader" name="m_pFader_13">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1412,7 +1969,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_14">
          <item>
-          <widget class="QWidget" name="widget_14" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_14">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1425,10 +1982,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_14">
+          <widget class="Fader" name="m_pFader_14">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1476,7 +2036,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_15">
          <item>
-          <widget class="QWidget" name="widget_15" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_15">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1489,10 +2049,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_15">
+          <widget class="Fader" name="m_pFader_15">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1540,7 +2103,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
-          <widget class="QWidget" name="widget_16" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_16">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1553,10 +2116,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_16">
+          <widget class="Fader" name="m_pFader_16">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1604,7 +2170,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_17">
          <item>
-          <widget class="QWidget" name="widget_17" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_17">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1617,10 +2183,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_17">
+          <widget class="Fader" name="m_pFader_17">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1668,7 +2237,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_18">
          <item>
-          <widget class="QWidget" name="widget_18" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_18">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1681,10 +2250,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_18">
+          <widget class="Fader" name="m_pFader_18">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1732,7 +2304,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_19">
          <item>
-          <widget class="QWidget" name="widget_19" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_19">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1745,10 +2317,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_19">
+          <widget class="Fader" name="m_pFader_19">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1796,7 +2371,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_20">
          <item>
-          <widget class="QWidget" name="widget_20" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_20">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1809,10 +2384,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_20">
+          <widget class="Fader" name="m_pFader_20">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1860,7 +2438,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_21">
          <item>
-          <widget class="QWidget" name="widget_21" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_21">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1873,10 +2451,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_21">
+          <widget class="Fader" name="m_pFader_21">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1924,7 +2505,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_22">
          <item>
-          <widget class="QWidget" name="widget_22" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_22">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1937,10 +2518,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_22">
+          <widget class="Fader" name="m_pFader_22">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1988,7 +2572,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_23">
          <item>
-          <widget class="QWidget" name="widget_23" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_23">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2001,10 +2585,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_23">
+          <widget class="Fader" name="m_pFader_23">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2052,7 +2639,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_24">
          <item>
-          <widget class="QWidget" name="widget_24" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_24">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2065,10 +2652,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_24">
+          <widget class="Fader" name="m_pFader_24">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2129,7 +2719,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_25">
          <item>
-          <widget class="QWidget" name="widget_25" native="true">
+          <widget class="ScribbleStrip" name="m_pScribbleStrip_m">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2142,10 +2732,13 @@
              <height>32</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="verticalSlider_25">
+          <widget class="Fader" name="m_pFader_m">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2200,8 +2793,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1393</width>
-     <height>21</height>
+     <width>1455</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2224,7 +2817,7 @@
    <property name="minimumSize">
     <size>
      <width>350</width>
-     <height>203</height>
+     <height>252</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -2642,7 +3235,7 @@
             <enum>QFrame::Shadow::Sunken</enum>
            </property>
            <property name="columnCount">
-            <number>2</number>
+            <number>3</number>
            </property>
            <attribute name="horizontalHeaderVisible">
             <bool>true</bool>
@@ -2658,6 +3251,11 @@
            <column>
             <property name="text">
              <string>Name</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Adress</string>
             </property>
            </column>
           </widget>
@@ -2738,10 +3336,20 @@
    <extends>QPushButton</extends>
    <header location="global">bankButton.h</header>
   </customwidget>
+  <customwidget>
+   <class>Fader</class>
+   <extends>QSlider</extends>
+   <header location="global">fader.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ScribbleStrip</class>
+   <extends>QLabel</extends>
+   <header>scribbleStrip.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../aFrame/Resource/aFrame.qrc"/>
   <include location="../Resource/qLights.qrc"/>
+  <include location="../../aFrame/Resource/aFrame.qrc"/>
  </resources>
  <connections/>
 </ui>

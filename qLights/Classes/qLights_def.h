@@ -28,6 +28,7 @@
 constexpr QColor    colDeviceImageBg(120, 120, 120);
 
 constexpr aFrame::s32       BANK_COUNT { 5 };
+constexpr aFrame::s32       BANK_BTN_COUNT { 20 };
 constexpr aFrame::s32       BANK_1 { 0 };
 constexpr aFrame::s32       BANK_2 { 1 };
 constexpr aFrame::s32       BANK_3 { 2 };

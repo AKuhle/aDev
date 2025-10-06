@@ -21,7 +21,6 @@ class DlgUniverse;
 /*******************************************************************************
 * class DlgUniverse
 *******************************************************************************/
-class MainWin;
 class Universe;
 
 
@@ -34,11 +33,10 @@ class DlgUniverse : public QDialog
 
     private:
         Ui::DlgUniverse         *m_pUi;
-        MainWin                 *m_pMainWin;
         shared_ptr<Universe>    m_pUniverse;
 
     public:
-        explicit DlgUniverse(MainWin                            *_pMainWin,
+        explicit DlgUniverse(QWidget                            *_pParent,
                              const list<shared_ptr<Controller>> &_lstController,
                              shared_ptr<Universe>               _pUniverse);
         ~DlgUniverse();

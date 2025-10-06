@@ -3,5 +3,6 @@
         <file>qLights/appIcon.png</file>
         <file>qLights/universe.png</file>
         <file>qLights/controller.png</file>
+        <file>qLights/unused.png</file>
     </qresource>
 </RCC>

@@ -19,7 +19,6 @@ class DlgDevice;
 /*******************************************************************************
 * class DlgDevice
 *******************************************************************************/
-class MainWin;
 class Device;
 class Channel;
 
@@ -33,14 +32,13 @@ class DlgDevice : public QDialog
 
     private:
         Ui::DlgDevice           *m_pUi;
-        MainWin                 *m_pMainWin;
         shared_ptr<Device>      m_pDevice;
         const vector<QString>   &m_lstDeviceIconName;
         const vector<QString>   &m_lstChannelIcon;
         s32                     m_s32ImageIdx       { 0 };
 
     public:
-        explicit DlgDevice(MainWin                  *_pMainWin,
+        explicit DlgDevice(QWidget                  *_pParent,
                            const vector<QString>    &_lstDeviceIconName,
                            const vector<QString>    &_lstChannelIcon,
                            shared_ptr<Device>       _pDevice);

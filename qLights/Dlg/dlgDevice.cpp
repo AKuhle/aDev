@@ -19,13 +19,12 @@ using namespace std;
 /*******************************************************************************
 * DlgDevice::DlgDevice
 *******************************************************************************/
-DlgDevice::DlgDevice(MainWin                *_pMainWin,
+DlgDevice::DlgDevice(QWidget                *_pParent,
                      const vector<QString>  &_lstDeviceIconName,
                      const vector<QString>  &_lstChannelIcon,
                      shared_ptr<Device>     _pDevice)
-: QDialog(_pMainWin),
+: QDialog(_pParent),
   m_pUi(new Ui::DlgDevice),
-  m_pMainWin(_pMainWin),
   m_pDevice(_pDevice),
   m_lstDeviceIconName(_lstDeviceIconName),
   m_lstChannelIcon(_lstChannelIcon)
@@ -208,9 +207,9 @@ void DlgDevice::accept()
     if (!m_pDevice)
     {
         // add a new device
-        m_pMainWin->addDevice(m_pUi->m_pDeviceName->text(),
-                              m_lstDeviceIconName.at(m_s32ImageIdx),
-                              vChannel);
+        MainWin::instance()->addDevice(m_pUi->m_pDeviceName->text(),
+                                       m_lstDeviceIconName.at(m_s32ImageIdx),
+                                       vChannel);
     }
     else
     {
@@ -227,7 +226,7 @@ void DlgDevice::accept()
         // m_pController->setIpAdr(aString::fromQString(m_pUi->m_pControllerAddress->text()));
     }
 
-    m_pMainWin->updateAll();
+    MainWin::instance()->updateAll();
 
     QDialog::accept();
 } // DlgDevice::accept

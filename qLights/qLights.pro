@@ -96,7 +96,9 @@ SOURCES += \
     Classes/channel.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
+    Classes/fader.cpp \
     Classes/fixture.cpp \
+    Classes/scribbleStrip.cpp \
     Classes/universe.cpp \
     Dlg/dlgChannel.cpp \
     Dlg/dlgController.cpp \
@@ -114,8 +116,10 @@ HEADERS += \
     Classes/channel.h \
     Classes/controller.h \
     Classes/device.h \
+    Classes/fader.h \
     Classes/fixture.h \
     Classes/qLights_def.h \
+    Classes/scribbleStrip.h \
     Classes/universe.h \
     Dlg/dlgChannel.h \
     Dlg/dlgController.h \

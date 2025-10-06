@@ -14,11 +14,10 @@ using namespace std;
 /*******************************************************************************
 * DlgController::DlgController
 *******************************************************************************/
-DlgController::DlgController(MainWin                *_pMainWin,
+DlgController::DlgController(QWidget                *_pParent,
                              shared_ptr<Controller> _pController)
-: QDialog(_pMainWin),
+: QDialog(_pParent),
   m_pUi(new Ui::DlgController),
-  m_pMainWin(_pMainWin),
   m_pController(_pController)
 {
     m_pUi->setupUi(this);
@@ -73,7 +72,7 @@ void DlgController::accept()
     if (!m_pController)
     {
         // add a new controller
-        m_pMainWin->addController(m_pUi->m_pControllerName->text(),
+        MainWin::instance()->addController(m_pUi->m_pControllerName->text(),
                                   m_pUi->m_pControllerAddress->text());
     }
     else
@@ -82,7 +81,7 @@ void DlgController::accept()
         readCtrls(m_pController);
     }
 
-    m_pMainWin->updateAll();
+    MainWin::instance()->updateAll();
 
     QDialog::accept();
 } // DlgController::accept

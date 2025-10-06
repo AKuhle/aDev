@@ -14,7 +14,6 @@ class DlgController;
 /*******************************************************************************
 * class DlgController
 *******************************************************************************/
-class MainWin;
 class Controller;
 
 
@@ -27,11 +26,10 @@ class DlgController : public QDialog
 
     private:
         Ui::DlgController       *m_pUi;
-        MainWin                 *m_pMainWin;
         shared_ptr<Controller>  m_pController;
 
     public:
-        explicit DlgController(MainWin                  *_pMainWin,
+        explicit DlgController(QWidget                  *_pParent,
                                shared_ptr<Controller>   _pController);
         ~DlgController();
 

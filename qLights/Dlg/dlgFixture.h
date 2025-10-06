@@ -21,9 +21,9 @@ class DlgFixture;
 /*******************************************************************************
 * class DlgFixture
 *******************************************************************************/
-class MainWin;
 class Fixture;
 class Device;
+class Universe;
 
 
 /*******************************************************************************
@@ -35,13 +35,14 @@ class DlgFixture : public QDialog
 
     private:
         Ui::DlgFixture              *m_pUi;
-        MainWin                     *m_pMainWin;
         list<shared_ptr<Device>>    m_lstDevice;
+        list<shared_ptr<Universe>>  m_lstUniverse;
         shared_ptr<Fixture>         m_pFixture;
 
     public:
-        explicit DlgFixture(MainWin                     *_pMainWin,
+        explicit DlgFixture(QWidget                     *_pParent,
                             list<shared_ptr<Device>>    _lstDevice,
+                            list<shared_ptr<Universe>>  _lstUniverse,
                             shared_ptr<Fixture>         _pFixture);
         ~DlgFixture();
 

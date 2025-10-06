@@ -41,11 +41,19 @@ void MainWin::updatePanel()
 *******************************************************************************/
 void MainWin::updateBankButtons()
 {
-    m_pUi->m_pBankBtn_1->setChecked(m_s32ActiveBank == BANK_1);
-    m_pUi->m_pBankBtn_2->setChecked(m_s32ActiveBank == BANK_2);
-    m_pUi->m_pBankBtn_3->setChecked(m_s32ActiveBank == BANK_3);
-    m_pUi->m_pBankBtn_4->setChecked(m_s32ActiveBank == BANK_4);
-    m_pUi->m_pBankBtn_5->setChecked(m_s32ActiveBank == BANK_5);
+    m_pUi->m_pBankSelector_1->setChecked(m_s32ActiveBank == BANK_1);
+    m_pUi->m_pBankSelector_2->setChecked(m_s32ActiveBank == BANK_2);
+    m_pUi->m_pBankSelector_3->setChecked(m_s32ActiveBank == BANK_3);
+    m_pUi->m_pBankSelector_4->setChecked(m_s32ActiveBank == BANK_4);
+    m_pUi->m_pBankSelector_5->setChecked(m_s32ActiveBank == BANK_5);
+
+    vector<BankTuple> &vBank = m_vvFixturesOfBank.at(m_s32ActiveBank);
+
+    for (BankTuple &tup : vBank)
+    {
+        (std::get<0> (tup))->setFixture(std::get<1> (tup));
+
+    }
 } // MainWin::updateBankButtons
 
 
@@ -54,11 +62,11 @@ void MainWin::updateBankButtons()
 *******************************************************************************/
 void MainWin::updateSceneButtons()
 {
-    m_pUi->m_pSceneBtn_1->setChecked(m_s32ActiveBank == SCENE_1);
-    m_pUi->m_pSceneBtn_2->setChecked(m_s32ActiveBank == SCENE_2);
-    m_pUi->m_pSceneBtn_3->setChecked(m_s32ActiveBank == SCENE_3);
-    m_pUi->m_pSceneBtn_4->setChecked(m_s32ActiveBank == SCENE_4);
-    m_pUi->m_pSceneBtn_5->setChecked(m_s32ActiveBank == SCENE_5);
+    m_pUi->m_pSceneSelector_1->setChecked(m_s32ActiveScene == SCENE_1);
+    m_pUi->m_pSceneSelector_2->setChecked(m_s32ActiveScene == SCENE_2);
+    m_pUi->m_pSceneSelector_3->setChecked(m_s32ActiveScene == SCENE_3);
+    m_pUi->m_pSceneSelector_4->setChecked(m_s32ActiveScene == SCENE_4);
+    m_pUi->m_pSceneSelector_5->setChecked(m_s32ActiveScene == SCENE_5);
 } // MainWin::updateSceneButtons
 
 
@@ -67,11 +75,11 @@ void MainWin::updateSceneButtons()
 *******************************************************************************/
 void MainWin::updateChaseButtons()
 {
-    m_pUi->m_pChaseBtn_1->setChecked(m_s32ActiveBank == CHASE_1);
-    m_pUi->m_pChaseBtn_2->setChecked(m_s32ActiveBank == CHASE_2);
-    m_pUi->m_pChaseBtn_3->setChecked(m_s32ActiveBank == CHASE_3);
-    m_pUi->m_pChaseBtn_4->setChecked(m_s32ActiveBank == CHASE_4);
-    m_pUi->m_pChaseBtn_5->setChecked(m_s32ActiveBank == CHASE_5);
+    m_pUi->m_pChaseSelector_1->setChecked(m_s32ActiveChase == CHASE_1);
+    m_pUi->m_pChaseSelector_2->setChecked(m_s32ActiveChase == CHASE_2);
+    m_pUi->m_pChaseSelector_3->setChecked(m_s32ActiveChase == CHASE_3);
+    m_pUi->m_pChaseSelector_4->setChecked(m_s32ActiveChase == CHASE_4);
+    m_pUi->m_pChaseSelector_5->setChecked(m_s32ActiveChase == CHASE_5);
 } // MainWin::updateChaseButtons
 
 
@@ -112,7 +120,7 @@ void MainWin::updateUniversePanel()
     s32 idx = 0;
     for (const shared_ptr<Universe> &pU : m_lstUniverse)
     {
-        const Controller    *pC = pU->controller();
+        shared_ptr<Controller> pC = pU->controller();
 
         // univers name
         addTableWidgetItem(pT, idx, 0, pU->name());
@@ -189,6 +197,9 @@ void MainWin::updateFixturePanel()
 
         // fixture name
         addTableWidgetItem(pT, idx, 1, pF->name());
+
+        // fixture adress
+        addTableWidgetItem(pT, idx, 2, QString::number(pF->adress()));
 
         idx++;
     }
