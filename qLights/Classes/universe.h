@@ -59,10 +59,14 @@ class Universe
         u32                     id() const                                  { return m_u32Id; }
         void                    setId(u32 _u32Id)                           { m_u32Id = _u32Id; }
 
-        void                    setDmxChannelValue(s32      _s32DmxChannelNr,
-                                                   u8       _u8Value,
-                                                   bool     _bSend);
+        void                    setChannelValue(s32      _s32FixtureAdress,
+                                                s32      _s32ChannelNr,
+                                                u8       _u8Value,
+                                                bool     _bSend);
 
+        const QByteArray&       dmxData() const                             { return m_dmxData; }
+
+    private:
         void                    sendValues2Controller();
 
         // void                setDmxValues(const QByteArray    &_values,

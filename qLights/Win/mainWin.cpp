@@ -102,8 +102,8 @@ MainWin::~MainWin()
 *******************************************************************************/
 void MainWin::createCtrlVectors()
 {
-    // iterate over all banks
-    for (s32 i = 0; i < BANK_COUNT; i++)
+    // generate BANK_COUNT sets of BANK_BTN_COUNT buttons
+    for (s32 i = 0; i < BANK_SET_COUNT; i++)
     {
         vector<BankTuple>  m_vBankTuple;
 
@@ -128,61 +128,126 @@ void MainWin::createCtrlVectors()
         m_vBankTuple.push_back(make_tuple(m_pUi->m_pBankBtn_19, nullptr));
         m_vBankTuple.push_back(make_tuple(m_pUi->m_pBankBtn_20, nullptr));
 
-        m_vvFixturesOfBank.push_back(m_vBankTuple);
-
-        // faders
-        m_vFaders.push_back(m_pUi->m_pFader_1);
-        m_vFaders.push_back(m_pUi->m_pFader_2);
-        m_vFaders.push_back(m_pUi->m_pFader_3);
-        m_vFaders.push_back(m_pUi->m_pFader_4);
-        m_vFaders.push_back(m_pUi->m_pFader_5);
-        m_vFaders.push_back(m_pUi->m_pFader_6);
-        m_vFaders.push_back(m_pUi->m_pFader_7);
-        m_vFaders.push_back(m_pUi->m_pFader_8);
-        m_vFaders.push_back(m_pUi->m_pFader_9);
-        m_vFaders.push_back(m_pUi->m_pFader_10);
-        m_vFaders.push_back(m_pUi->m_pFader_11);
-        m_vFaders.push_back(m_pUi->m_pFader_12);
-        m_vFaders.push_back(m_pUi->m_pFader_13);
-        m_vFaders.push_back(m_pUi->m_pFader_14);
-        m_vFaders.push_back(m_pUi->m_pFader_15);
-        m_vFaders.push_back(m_pUi->m_pFader_16);
-        m_vFaders.push_back(m_pUi->m_pFader_17);
-        m_vFaders.push_back(m_pUi->m_pFader_18);
-        m_vFaders.push_back(m_pUi->m_pFader_19);
-        m_vFaders.push_back(m_pUi->m_pFader_20);
-        m_vFaders.push_back(m_pUi->m_pFader_21);
-        m_vFaders.push_back(m_pUi->m_pFader_22);
-        m_vFaders.push_back(m_pUi->m_pFader_23);
-        m_vFaders.push_back(m_pUi->m_pFader_24);
-        m_vFaders.push_back(m_pUi->m_pFader_m);
-
-        m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1);
-        m_pUi->m_pFader_2->init(m_pUi->m_pScribbleStrip_2);
-        m_pUi->m_pFader_3->init(m_pUi->m_pScribbleStrip_3);
-        m_pUi->m_pFader_4->init(m_pUi->m_pScribbleStrip_4);
-        m_pUi->m_pFader_5->init(m_pUi->m_pScribbleStrip_5);
-        m_pUi->m_pFader_6->init(m_pUi->m_pScribbleStrip_6);
-        m_pUi->m_pFader_7->init(m_pUi->m_pScribbleStrip_7);
-        m_pUi->m_pFader_8->init(m_pUi->m_pScribbleStrip_8);
-        m_pUi->m_pFader_9->init(m_pUi->m_pScribbleStrip_9);
-        m_pUi->m_pFader_10->init(m_pUi->m_pScribbleStrip_10);
-        m_pUi->m_pFader_11->init(m_pUi->m_pScribbleStrip_11);
-        m_pUi->m_pFader_12->init(m_pUi->m_pScribbleStrip_12);
-        m_pUi->m_pFader_13->init(m_pUi->m_pScribbleStrip_13);
-        m_pUi->m_pFader_14->init(m_pUi->m_pScribbleStrip_14);
-        m_pUi->m_pFader_15->init(m_pUi->m_pScribbleStrip_15);
-        m_pUi->m_pFader_16->init(m_pUi->m_pScribbleStrip_16);
-        m_pUi->m_pFader_17->init(m_pUi->m_pScribbleStrip_17);
-        m_pUi->m_pFader_18->init(m_pUi->m_pScribbleStrip_18);
-        m_pUi->m_pFader_19->init(m_pUi->m_pScribbleStrip_19);
-        m_pUi->m_pFader_20->init(m_pUi->m_pScribbleStrip_20);
-        m_pUi->m_pFader_21->init(m_pUi->m_pScribbleStrip_21);
-        m_pUi->m_pFader_22->init(m_pUi->m_pScribbleStrip_22);
-        m_pUi->m_pFader_23->init(m_pUi->m_pScribbleStrip_23);
-        m_pUi->m_pFader_24->init(m_pUi->m_pScribbleStrip_24);
-        m_pUi->m_pFader_m->init(m_pUi->m_pScribbleStrip_m);
+        m_vvBankButtons.push_back(m_vBankTuple);
     }
+
+    // generate SCENE_COUNT sets of SCENE_BTN_COUNT buttons
+    for (s32 i = 0; i < SCENE_SET_COUNT; i++)
+    {
+        vector<SceneButton *>  m_vSceneSet;
+
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_1);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_2);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_3);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_4);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_5);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_6);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_7);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_8);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_9);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_10);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_11);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_12);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_13);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_14);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_15);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_16);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_17);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_18);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_19);
+        m_vSceneSet.push_back(m_pUi->m_pSceneBtn_20);
+
+        m_vvSceneButtons.push_back(m_vSceneSet);
+    }
+    // initialize the scene buttons
+    for (auto pScene : m_vvSceneButtons.at(0))
+    {
+        pScene->init();
+    }
+
+
+    // generate CHASE_COUNT sets of CHASE_BTN_COUNT buttons
+    for (s32 i = 0; i < CHASE_SET_COUNT; i++)
+    {
+        vector<ChaseTuple>  m_vChaseTuple;
+
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_1, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_2, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_3, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_4, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_5, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_6, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_7, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_8, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_9, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_10, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_11, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_12, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_13, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_14, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_15, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_16, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_17, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_18, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_19, nullptr));
+        m_vChaseTuple.push_back(make_tuple(m_pUi->m_pChaseBtn_20, nullptr));
+
+        m_vvChaseButtons.push_back(m_vChaseTuple);
+    }
+
+    // faders
+    m_vFaders.push_back(m_pUi->m_pFader_1);
+    m_vFaders.push_back(m_pUi->m_pFader_2);
+    m_vFaders.push_back(m_pUi->m_pFader_3);
+    m_vFaders.push_back(m_pUi->m_pFader_4);
+    m_vFaders.push_back(m_pUi->m_pFader_5);
+    m_vFaders.push_back(m_pUi->m_pFader_6);
+    m_vFaders.push_back(m_pUi->m_pFader_7);
+    m_vFaders.push_back(m_pUi->m_pFader_8);
+    m_vFaders.push_back(m_pUi->m_pFader_9);
+    m_vFaders.push_back(m_pUi->m_pFader_10);
+    m_vFaders.push_back(m_pUi->m_pFader_11);
+    m_vFaders.push_back(m_pUi->m_pFader_12);
+    m_vFaders.push_back(m_pUi->m_pFader_13);
+    m_vFaders.push_back(m_pUi->m_pFader_14);
+    m_vFaders.push_back(m_pUi->m_pFader_15);
+    m_vFaders.push_back(m_pUi->m_pFader_16);
+    m_vFaders.push_back(m_pUi->m_pFader_17);
+    m_vFaders.push_back(m_pUi->m_pFader_18);
+    m_vFaders.push_back(m_pUi->m_pFader_19);
+    m_vFaders.push_back(m_pUi->m_pFader_20);
+    m_vFaders.push_back(m_pUi->m_pFader_21);
+    m_vFaders.push_back(m_pUi->m_pFader_22);
+    m_vFaders.push_back(m_pUi->m_pFader_23);
+    m_vFaders.push_back(m_pUi->m_pFader_24);
+    m_vFaders.push_back(m_pUi->m_pFader_m);
+
+    // set the scribble strip for the faders
+    m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1);
+    m_pUi->m_pFader_2->init(m_pUi->m_pScribbleStrip_2);
+    m_pUi->m_pFader_3->init(m_pUi->m_pScribbleStrip_3);
+    m_pUi->m_pFader_4->init(m_pUi->m_pScribbleStrip_4);
+    m_pUi->m_pFader_5->init(m_pUi->m_pScribbleStrip_5);
+    m_pUi->m_pFader_6->init(m_pUi->m_pScribbleStrip_6);
+    m_pUi->m_pFader_7->init(m_pUi->m_pScribbleStrip_7);
+    m_pUi->m_pFader_8->init(m_pUi->m_pScribbleStrip_8);
+    m_pUi->m_pFader_9->init(m_pUi->m_pScribbleStrip_9);
+    m_pUi->m_pFader_10->init(m_pUi->m_pScribbleStrip_10);
+    m_pUi->m_pFader_11->init(m_pUi->m_pScribbleStrip_11);
+    m_pUi->m_pFader_12->init(m_pUi->m_pScribbleStrip_12);
+    m_pUi->m_pFader_13->init(m_pUi->m_pScribbleStrip_13);
+    m_pUi->m_pFader_14->init(m_pUi->m_pScribbleStrip_14);
+    m_pUi->m_pFader_15->init(m_pUi->m_pScribbleStrip_15);
+    m_pUi->m_pFader_16->init(m_pUi->m_pScribbleStrip_16);
+    m_pUi->m_pFader_17->init(m_pUi->m_pScribbleStrip_17);
+    m_pUi->m_pFader_18->init(m_pUi->m_pScribbleStrip_18);
+    m_pUi->m_pFader_19->init(m_pUi->m_pScribbleStrip_19);
+    m_pUi->m_pFader_20->init(m_pUi->m_pScribbleStrip_20);
+    m_pUi->m_pFader_21->init(m_pUi->m_pScribbleStrip_21);
+    m_pUi->m_pFader_22->init(m_pUi->m_pScribbleStrip_22);
+    m_pUi->m_pFader_23->init(m_pUi->m_pScribbleStrip_23);
+    m_pUi->m_pFader_24->init(m_pUi->m_pScribbleStrip_24);
+    m_pUi->m_pFader_m->init(m_pUi->m_pScribbleStrip_m);
 
 } // MainWin::createCtrlVectors
 
@@ -365,7 +430,7 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
 {
     shared_ptr<Fixture>  pFixture = findFixture(_sFixtureName);
 
-    for (BankTuple &tup : m_vvFixturesOfBank.at(m_s32ActiveBank))
+    for (BankTuple &tup : m_vvBankButtons.at(m_s32ActiveBank))
     {
         if (std::get<0> (tup) == _pBankBtn)
         {
@@ -382,6 +447,22 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
 *******************************************************************************/
 void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
 {
+    const vector<shared_ptr<Channel>>   &vChannel   = _pFixture->device()->channel();
+    s32                                 iChannelIdx = 1;
+    shared_ptr<Channel>                 pChannel;
+
+    for (Fader *pFader : m_vFaders)
+    {
+        auto it = std::find_if(vChannel.begin(), vChannel.end(),
+                               [iChannelIdx](const std::shared_ptr<Channel> &ch)
+                               { return ch && ch->nr() == iChannelIdx; } );
+
+        pChannel = (it != vChannel.end())?   *it : nullptr;
+
+        pFader->assignChannel(_pFixture, pChannel);
+
+        iChannelIdx++;
+    }
 } // MainWin::assignFaders
 
 

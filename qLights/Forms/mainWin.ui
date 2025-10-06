@@ -665,70 +665,70 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QPushButton" name="pushButton_11">
+          <widget class="SceneButton" name="m_pSceneBtn_1">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_12">
+          <widget class="SceneButton" name="m_pSceneBtn_2">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_13">
+          <widget class="SceneButton" name="m_pSceneBtn_3">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_14">
+          <widget class="SceneButton" name="m_pSceneBtn_4">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_15">
+          <widget class="SceneButton" name="m_pSceneBtn_5">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_16">
+          <widget class="SceneButton" name="m_pSceneBtn_6">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_17">
+          <widget class="SceneButton" name="m_pSceneBtn_7">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_18">
+          <widget class="SceneButton" name="m_pSceneBtn_8">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_19">
+          <widget class="SceneButton" name="m_pSceneBtn_9">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_20">
+          <widget class="SceneButton" name="m_pSceneBtn_10">
            <property name="text">
             <string/>
            </property>
@@ -739,70 +739,70 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_14">
          <item>
-          <widget class="QPushButton" name="pushButton_31">
+          <widget class="SceneButton" name="m_pSceneBtn_11">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_32">
+          <widget class="SceneButton" name="m_pSceneBtn_12">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_33">
+          <widget class="SceneButton" name="m_pSceneBtn_13">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_34">
+          <widget class="SceneButton" name="m_pSceneBtn_14">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_35">
+          <widget class="SceneButton" name="m_pSceneBtn_15">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_36">
+          <widget class="SceneButton" name="m_pSceneBtn_16">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_37">
+          <widget class="SceneButton" name="m_pSceneBtn_17">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_38">
+          <widget class="SceneButton" name="m_pSceneBtn_18">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_39">
+          <widget class="SceneButton" name="m_pSceneBtn_19">
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_40">
+          <widget class="SceneButton" name="m_pSceneBtn_20">
            <property name="text">
             <string/>
            </property>
@@ -913,70 +913,70 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QPushButton" name="pushButton_21">
+             <widget class="ChaseButton" name="m_pChaseBtn_1">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_22">
+             <widget class="ChaseButton" name="m_pChaseBtn_2">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_23">
+             <widget class="ChaseButton" name="m_pChaseBtn_3">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_24">
+             <widget class="ChaseButton" name="m_pChaseBtn_4">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_25">
+             <widget class="ChaseButton" name="m_pChaseBtn_5">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_26">
+             <widget class="ChaseButton" name="m_pChaseBtn_6">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_27">
+             <widget class="ChaseButton" name="m_pChaseBtn_7">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_28">
+             <widget class="ChaseButton" name="m_pChaseBtn_8">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_29">
+             <widget class="ChaseButton" name="m_pChaseBtn_9">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_30">
+             <widget class="ChaseButton" name="m_pChaseBtn_10">
               <property name="text">
                <string/>
               </property>
@@ -987,70 +987,70 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_15">
             <item>
-             <widget class="QPushButton" name="pushButton_41">
+             <widget class="ChaseButton" name="m_pChaseBtn_11">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_42">
+             <widget class="ChaseButton" name="m_pChaseBtn_12">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_43">
+             <widget class="ChaseButton" name="m_pChaseBtn_13">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_44">
+             <widget class="ChaseButton" name="m_pChaseBtn_14">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_45">
+             <widget class="ChaseButton" name="m_pChaseBtn_15">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_46">
+             <widget class="ChaseButton" name="m_pChaseBtn_16">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_47">
+             <widget class="ChaseButton" name="m_pChaseBtn_17">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_48">
+             <widget class="ChaseButton" name="m_pChaseBtn_18">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_49">
+             <widget class="ChaseButton" name="m_pChaseBtn_19">
               <property name="text">
                <string/>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_50">
+             <widget class="ChaseButton" name="m_pChaseBtn_20">
               <property name="text">
                <string/>
               </property>
@@ -1121,13 +1121,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1188,13 +1188,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1255,13 +1255,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1322,13 +1322,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1389,13 +1389,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1456,13 +1456,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1523,13 +1523,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1590,13 +1590,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1657,13 +1657,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1724,13 +1724,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1791,13 +1791,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1858,13 +1858,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1925,13 +1925,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -1992,13 +1992,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2059,13 +2059,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2126,13 +2126,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2193,13 +2193,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2260,13 +2260,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2327,13 +2327,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2394,13 +2394,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2461,13 +2461,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2528,13 +2528,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2595,13 +2595,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2662,13 +2662,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2742,13 +2742,13 @@
            <property name="minimumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>32</width>
-             <height>256</height>
+             <height>16777215</height>
             </size>
            </property>
            <property name="maximum">
@@ -2794,7 +2794,7 @@
      <x>0</x>
      <y>0</y>
      <width>1455</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -3345,6 +3345,16 @@
    <class>ScribbleStrip</class>
    <extends>QLabel</extends>
    <header>scribbleStrip.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SceneButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">sceneButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ChaseButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">chaseButton.h</header>
   </customwidget>
  </customwidgets>
  <resources>

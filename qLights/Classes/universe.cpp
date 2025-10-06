@@ -52,21 +52,22 @@ Universe::~Universe()
 
 
 /*******************************************************************************
-* Universe::setDmxChannelValue
+* Universe::setChannelValue
 *******************************************************************************/
-void Universe::setDmxChannelValue(s32   _s32DmxChannelNr,
-                                  u8    _u8Value,
-                                  bool  _bSend)
+void Universe::setChannelValue(s32  _s32FixtureAdress,
+                               s32  _s32ChannelNr,
+                               u8   _u8Value,
+                               bool _bSend)
 {
     // set the new channel value
-    m_dmxData[_s32DmxChannelNr] = _u8Value;
+    m_dmxData[_s32FixtureAdress + _s32ChannelNr - 1] = _u8Value;
 
     if (_bSend)
     {
         sendValues2Controller();
     } // if (_bSend)
 
-} // Universe::setDmxChannelValue
+} // Universe::setChannelValue
 
 
 /*******************************************************************************
@@ -100,11 +101,11 @@ void Universe::sendValues2Controller()
 
         if (bytesSent == -1)
         {
-            //std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
+            std::cerr << "Fehler beim Senden des Pakets: " << udpSocket.errorString().toStdString() << std::endl;
         }
         else
         {
-            //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+            std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
         }
 
     } // if...

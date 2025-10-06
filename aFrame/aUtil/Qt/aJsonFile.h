@@ -38,7 +38,12 @@ class aJsonValue;
 struct Value;
 using Object = std::map<std::string, Value>;
 
-struct Value : std::variant<int, double, std::string, std::vector<std::string>, Object>
+struct Value : std::variant<int,
+                            double,
+                            std::string,
+                            std::vector<u8>,
+                            std::vector<std::string>,
+                            Object>
 {
     using variant::variant;
 };
@@ -72,6 +77,9 @@ class aJsonFile
         void                            addValue(const aString  &_sKey,
                                                  const aString  &_sValue);
 
+        void                            addValue(const aString          &_sKey,
+                                                 const std::vector<u8>  &_vValue);
+
         void                            addValue(const aString              &_sKey,
                                                  const std::vector<aString> &_vValue);
 
@@ -85,7 +93,9 @@ class aJsonFile
 
         aString                         readStringValue(const aString &_sKey) const;
 
-        std::vector<aString>            readVectorValue(const aString &_sKey) const;
+        //std::vector<u8>                 readVectorU8(const aString &_sKey) const;
+
+        std::vector<aString>            readVectorString(const aString &_sKey) const;
 
 
     // read/write the file

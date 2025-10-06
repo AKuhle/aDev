@@ -47,7 +47,7 @@ void MainWin::updateBankButtons()
     m_pUi->m_pBankSelector_4->setChecked(m_s32ActiveBank == BANK_4);
     m_pUi->m_pBankSelector_5->setChecked(m_s32ActiveBank == BANK_5);
 
-    vector<BankTuple> &vBank = m_vvFixturesOfBank.at(m_s32ActiveBank);
+    vector<BankTuple> &vBank = m_vvBankButtons.at(m_s32ActiveBank);
 
     for (BankTuple &tup : vBank)
     {

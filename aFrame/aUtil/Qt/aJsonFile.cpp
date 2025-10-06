@@ -91,6 +91,18 @@ void aJsonFile::addValue(const aString  &_sKey,
 /*******************************************************************************
 * aJsonFile::addValue
 *******************************************************************************/
+void aJsonFile::addValue(const aString          &_sKey,
+                         const std::vector<u8>  &_vValue)
+{
+    auto keys = splitKey(_sKey.to_stdString());
+
+    *getOrCreate(keys) = _vValue;
+} // aJsonFile::addValue
+
+
+/*******************************************************************************
+* aJsonFile::addValue
+*******************************************************************************/
 void aJsonFile::addValue(const aString              &_sKey,
                          const std::vector<aString> &_vValue)
 {
@@ -171,9 +183,35 @@ aString aJsonFile::readStringValue(const aString  &_sKey) const
 
 
 /*******************************************************************************
-* aJsonFile::readVectorValue
+* aJsonFile::readVectorU8
 *******************************************************************************/
-std::vector<aString> aJsonFile::readVectorValue(const aString  &_sKey) const
+// std::vector<aString> aJsonFile::readVectorU8(const aString  &_sKey) const
+// {
+//     auto keys = splitKey(_sKey.to_stdString());
+
+//     const Value* v = getValue(keys);
+
+//     if (v && std::holds_alternative<std::vector<u8>>(*v))
+//     {
+//         std::vector<std::string>    vS = std::get<std::vector<std::string>>(*v);
+//         std::vector<aString>        vReturn;
+
+//         for (auto s : vS)
+//         {
+//             vReturn.push_back(s);
+//         }
+
+//         return vReturn;
+//     }
+
+//     return {};
+// } // aJsonFile::readVectorU8
+
+
+/*******************************************************************************
+* aJsonFile::readVectorString
+*******************************************************************************/
+std::vector<aString> aJsonFile::readVectorString(const aString  &_sKey) const
 {
     auto keys = splitKey(_sKey.to_stdString());
 
@@ -193,7 +231,7 @@ std::vector<aString> aJsonFile::readVectorValue(const aString  &_sKey) const
     }
 
     return {};
-} // aJsonFile::readVectorValue
+} // aJsonFile::readVectorString
 
 
 /*******************************************************************************
@@ -316,21 +354,21 @@ std::vector<std::string> aJsonFile::splitKey(const std::string &_key)
 *******************************************************************************/
 Value* aJsonFile::getOrCreate(std::vector<std::string> &_vKeys)
 {
-    Object* current = &m_root;
+    Object *pCurrentObj = &m_root;
 
     for (size_t i = 0; i < _vKeys.size() - 1; ++i)
     {
-        auto &val = (*current)[_vKeys[i]];
+        auto &val = (*pCurrentObj)[_vKeys[i]];
 
         if (!std::holds_alternative<std::map<std::string, Value>>(val))
         {
             val = std::map<std::string, Value>{};
         }
 
-        current = &std::get<std::map<std::string, Value>>(val);
+        pCurrentObj = &std::get<std::map<std::string, Value>>(val);
     }
 
-    return &(*current) [_vKeys.back()];
+    return &(*pCurrentObj) [_vKeys.back()];
 } // aJsonFile::getOrCreate
 
 
@@ -372,23 +410,44 @@ void aJsonFile::writeJson(std::ostream  &os,
                           int           indent /*= 0*/) const
 {
     std::string ind(indent, ' ');
-    if (std::holds_alternative<int>(value)) {
+    if (std::holds_alternative<int> (value))
+    {
         os << std::get<int>(value);
-    } else if (std::holds_alternative<double>(value)) {
+    }
+    else if (std::holds_alternative<double> (value))
+    {
         os << std::get<double>(value);
-    } else if (std::holds_alternative<std::string>(value)) {
+    }
+    else if (std::holds_alternative<std::string> (value))
+    {
         os << '"' << std::get<std::string>(value) << '"';
-    } else if (std::holds_alternative<std::vector<std::string>>(value)) {
+    }
+    else if (std::holds_alternative<std::vector<u8>> (value))
+    {
         os << "[";
-        const auto& vec = std::get<std::vector<std::string>>(value);
-        for (size_t i = 0; i < vec.size(); ++i) {
+        const auto &vec = std::get<std::vector<u8>> (value);
+        for (size_t i = 0; i < vec.size(); ++i)
+        {
             os << '"' << vec[i] << '"';
             if (i + 1 < vec.size()) os << ", ";
         }
         os << "]";
-    } else if (std::holds_alternative<std::map<std::string, Value>>(value)) {
+    }
+    else if (std::holds_alternative<std::vector<std::string>> (value))
+    {
+        os << "[";
+        const auto& vec = std::get<std::vector<std::string>> (value);
+        for (size_t i = 0; i < vec.size(); ++i)
+        {
+            os << '"' << vec[i] << '"';
+            if (i + 1 < vec.size()) os << ", ";
+        }
+        os << "]";
+    }
+    else if (std::holds_alternative<std::map<std::string, Value>> (value))
+    {
         os << "{\n";
-        const auto& obj = std::get<std::map<std::string, Value>>(value);
+        const auto& obj = std::get<std::map<std::string, Value>> (value);
         size_t count = 0;
         for (const auto& pair : obj) {
             os << ind << "  \"" << pair.first << "\": ";

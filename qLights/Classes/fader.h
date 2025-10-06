@@ -22,6 +22,7 @@
 #include "aFrame_def.h"
 
 class Channel;
+class Fixture;
 
 
 using namespace std;
@@ -34,8 +35,11 @@ using namespace aFrame;
 *******************************************************************************/
 class Fader  :public QSlider
 {
+    Q_OBJECT
+
     private:
         ScribbleStrip           *m_pScribbleStrip;
+        shared_ptr<Fixture>     m_pFixture;
         shared_ptr<Channel>     m_pChannel;
 
     public:
@@ -45,19 +49,10 @@ class Fader  :public QSlider
 
         void                init(ScribbleStrip *_pScribbleStrip);
 
-        void                setChannel(shared_ptr<Channel> _pChannel);
+        void                assignChannel(shared_ptr<Fixture> _pFixture,
+                                          shared_ptr<Channel> _pChannel);
 
+    private slots:
+        void                onSliderMoved(int value);
 
-        //void                                addUniverse(u32 _u32Id);
-
-        // void                                setDmxChannelValue(s32      _s32UniverseId,
-        //                                                        s32      _s32DmxChannelNr,
-        //                                                        u8       _u8Value,
-        //                                                        bool     _bSend);
-
-        //void                                sendAllUniverses();
-
-        //shared_ptr<Universe>                universe(u32 _u32Id);
-
-        //void                                resetAllUniverses();
 }; // class Fader

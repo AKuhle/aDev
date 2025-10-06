@@ -11,10 +11,14 @@
 #include "controller.h"
 #include "universe.h"
 #include "device.h"
-#include "fixture.h"
 #include "fader.h"
 
 class BankButton;
+class SceneButton;
+class ChaseButton;
+class Fixture;
+class Scene;
+class Chase;
 
 
 QT_BEGIN_NAMESPACE
@@ -48,39 +52,36 @@ class MainWin : public QMainWindow
 
         // bank buttons
         using BankTuple = std::tuple<BankButton *, shared_ptr<Fixture>>;
-        vector<vector<BankTuple>>           m_vvFixturesOfBank;
+        vector<vector<BankTuple>>           m_vvBankButtons;
+
+        // scene buttons
+        //using SceneTuple = std::tuple<SceneButton *, shared_ptr<Scene>>;
+        vector<vector<SceneButton *>>       m_vvSceneButtons;
+
+        // chase buttons
+        using ChaseTuple = std::tuple<ChaseButton *, shared_ptr<Chase>>;
+        vector<vector<ChaseTuple>>          m_vvChaseButtons;
 
         // faders
         vector<Fader *>                     m_vFaders;
 
-        // scene buttons
-        // vector<vector<shared_ptr<Fixture>>> m_banks { { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr } };
-
-        // bank buttons
-        // vector<vector<shared_ptr<Fixture>>> m_banks { { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr },
-        //                                               { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr } };
 
     public:
         MainWin(QWidget *parent = nullptr);
         ~MainWin();
 
-        static MainWin*         instance()       { return m_pInstance; }
+        static MainWin*         instance()                  { return m_pInstance; }
 
         // controller
         void                    addController(const QString &_sName,
-                                          const QString &_sIpAdr);
+                                              const QString &_sIpAdr);
 
         shared_ptr<Controller>  findController(const QString &_sName);
 
 
         // universe
+        const list<shared_ptr<Universe>>& universes() const  { return m_lstUniverse; }
+
         shared_ptr<Universe>    findUniverse(const QString &_sName);
 
         void                    addUniverse(const QString   &_sName,

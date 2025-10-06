@@ -25,7 +25,7 @@ class DlgController : public QDialog
     Q_OBJECT
 
     private:
-        Ui::DlgController       *m_pUi;
+        Ui::DlgController       *m_pUi          { nullptr };
         shared_ptr<Controller>  m_pController;
 
     public:

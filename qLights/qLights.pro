@@ -94,47 +94,58 @@ INCLUDEPATH += Win
 
 SOURCES += \
     Classes/channel.cpp \
+    Classes/chase.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
     Classes/fader.cpp \
     Classes/fixture.cpp \
+    Classes/scene.cpp \
     Classes/scribbleStrip.cpp \
     Classes/universe.cpp \
     Dlg/dlgChannel.cpp \
     Dlg/dlgController.cpp \
     Dlg/dlgDevice.cpp \
     Dlg/dlgFixture.cpp \
+    Dlg/dlgScene.cpp \
     Dlg/dlgUniverse.cpp \
     Win/bankButton.cpp \
+    Win/chaseButton.cpp \
     Win/fixtureTable.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_update.cpp \
+    Win/sceneButton.cpp \
     main.cpp
 
 HEADERS += \
     Classes/channel.h \
+    Classes/chase.h \
     Classes/controller.h \
     Classes/device.h \
     Classes/fader.h \
     Classes/fixture.h \
     Classes/qLights_def.h \
+    Classes/scene.h \
     Classes/scribbleStrip.h \
     Classes/universe.h \
     Dlg/dlgChannel.h \
     Dlg/dlgController.h \
     Dlg/dlgDevice.h \
     Dlg/dlgFixture.h \
+    Dlg/dlgScene.h \
     Dlg/dlgUniverse.h \
     Win/bankButton.h \
+    Win/chaseButton.h \
     Win/fixtureTable.h \
-    Win/mainWin.h
+    Win/mainWin.h \
+    Win/sceneButton.h
 
 FORMS += \
     Forms/dlgChannel.ui \
     Forms/dlgController.ui \
     Forms/dlgDevice.ui \
     Forms/dlgFixture.ui \
+    Forms/dlgScene.ui \
     Forms/dlgUniverse.ui \
     Forms/mainWin.ui
 
