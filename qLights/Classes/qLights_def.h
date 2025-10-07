@@ -56,7 +56,7 @@ constexpr aFrame::s32       CHASE_4 { 3 };
 constexpr aFrame::s32       CHASE_5 { 4 };
 
 
-using UniverseTuple = std::tuple<std::shared_ptr<Universe>, QByteArray>;
+using UniverseTuple = std::tuple<std::shared_ptr<Universe>, std::vector<aFrame::u8>>;
 
 
 /*******************************************************************************

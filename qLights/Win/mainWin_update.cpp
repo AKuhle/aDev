@@ -13,11 +13,12 @@ using namespace std;
 *******************************************************************************/
 void MainWin::updateAll()
 {
-    updatePanel();
+    updateToolbar();
 
     updateBankButtons();
     updateSceneButtons();
     updateChaseButtons();
+    updateFaders();
 
     updateControllerPanel();
     updateUniversePanel();
@@ -27,13 +28,16 @@ void MainWin::updateAll()
 
 
 /*******************************************************************************
-* MainWin::updatePanel
+* MainWin::updateToolbar
 *******************************************************************************/
-void MainWin::updatePanel()
+void MainWin::updateToolbar()
 {
     // action PanelDock
     m_pUi->m_pActionPanelDock->setChecked(m_pUi->m_pPanelDock->isVisible());
-} // MainWin::updatePanel
+
+    // action show values
+    m_pUi->m_pActionShowValues->setChecked(isShowValues());
+} // MainWin::updateToolbar
 
 
 /*******************************************************************************
@@ -89,6 +93,18 @@ void MainWin::updateChaseButtons()
     m_pUi->m_pChaseSelector_4->setChecked(m_s32ActiveChase == CHASE_4);
     m_pUi->m_pChaseSelector_5->setChecked(m_s32ActiveChase == CHASE_5);
 } // MainWin::updateChaseButtons
+
+
+/*******************************************************************************
+* MainWin::updateFaders
+*******************************************************************************/
+void MainWin::updateFaders()
+{
+    for (Fader *pFader : m_vFaders)
+    {
+        pFader->updatePosition();
+    }
+} // MainWin::updateFaders
 
 
 /*******************************************************************************

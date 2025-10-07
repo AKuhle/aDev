@@ -16,6 +16,7 @@ using namespace std;
 SceneButton::SceneButton(QWidget *parent)
 : QPushButton(parent)
 {
+    connect(this, &QPushButton::clicked, this, &SceneButton::onClicked);
 } // SceneButton::SceneButton
 
 
@@ -74,3 +75,19 @@ void SceneButton::onAssignScene()
         MainWin::instance()->assignScene(this, dlg.name());
     }
 } // SceneButton::onAssignScene
+
+
+/*******************************************************************************
+* SceneButton::onClicked
+*******************************************************************************/
+void SceneButton::onClicked()
+{
+    const list<UniverseTuple> &lstTup = m_pScene->universes();
+
+    for (auto &tup : lstTup)
+    {
+        std::get<0> (tup)->setDmxData(std::get<1> (tup), true);
+    }
+
+    MainWin::instance()->updateFaders();
+} // SceneButton::onClicked

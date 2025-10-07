@@ -50,6 +50,8 @@ class MainWin : public QMainWindow
         s32                                 m_s32ActiveScene    { SCENE_1 };
         s32                                 m_s32ActiveChase    { CHASE_1 };
 
+        bool                                m_bShowValues       { false };
+
         // bank buttons
         // all sets have the same buttons, but diefferent Fixtures per layer
         using BankTuple = std::tuple<BankButton *, shared_ptr<Fixture>>;
@@ -74,6 +76,8 @@ class MainWin : public QMainWindow
         ~MainWin();
 
         static MainWin*         instance()                  { return m_pInstance; }
+
+        bool                    isShowValues() const        { return m_bShowValues; }
 
         // controller
         void                    addController(const QString &_sName,
@@ -121,11 +125,12 @@ class MainWin : public QMainWindow
         // update
         void                    updateAll();
 
-        void                    updatePanel();
+        void                    updateToolbar();
 
         void                    updateBankButtons();
         void                    updateSceneButtons();
         void                    updateChaseButtons();
+        void                    updateFaders();
 
         void                    updateControllerPanel();
         void                    updateUniversePanel();
@@ -163,6 +168,7 @@ class MainWin : public QMainWindow
         void                    onFileOpen();
         void                    onFileSave();
         void                    onPanel();
+        void                    onShowValues();
 
         // conbtroller panel
         void                    onAddController(bool _bChecked);

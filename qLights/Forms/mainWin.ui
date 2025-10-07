@@ -1139,7 +1139,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="FaderInfo" name="m_pFaderInfo_1">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1206,7 +1206,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="FaderInfo" name="m_pFaderInfo_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1273,7 +1273,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_3">
+          <widget class="FaderInfo" name="m_pFaderInfo_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1340,7 +1340,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_4">
+          <widget class="FaderInfo" name="m_pFaderInfo_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1407,7 +1407,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="FaderInfo" name="m_pFaderInfo_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1474,7 +1474,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_6">
+          <widget class="FaderInfo" name="m_pFaderInfo_6">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1541,7 +1541,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_7">
+          <widget class="FaderInfo" name="m_pFaderInfo_7">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1608,7 +1608,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_8">
+          <widget class="FaderInfo" name="m_pFaderInfo_8">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1675,7 +1675,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_9">
+          <widget class="FaderInfo" name="m_pFaderInfo_9">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1742,7 +1742,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_10">
+          <widget class="FaderInfo" name="m_pFaderInfo_10">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1809,7 +1809,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_11">
+          <widget class="FaderInfo" name="m_pFaderInfo_11">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1876,7 +1876,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_12">
+          <widget class="FaderInfo" name="m_pFaderInfo_12">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1943,7 +1943,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_13">
+          <widget class="FaderInfo" name="m_pFaderInfo_13">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2010,7 +2010,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_14">
+          <widget class="FaderInfo" name="m_pFaderInfo_14">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2077,7 +2077,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_15">
+          <widget class="FaderInfo" name="m_pFaderInfo_15">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2144,7 +2144,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_16">
+          <widget class="FaderInfo" name="m_pFaderInfo_16">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2211,7 +2211,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_17">
+          <widget class="FaderInfo" name="m_pFaderInfo_17">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2278,7 +2278,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_18">
+          <widget class="FaderInfo" name="m_pFaderInfo_18">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2345,7 +2345,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_19">
+          <widget class="FaderInfo" name="m_pFaderInfo_19">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2412,7 +2412,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_20">
+          <widget class="FaderInfo" name="m_pFaderInfo_20">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2479,7 +2479,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_21">
+          <widget class="FaderInfo" name="m_pFaderInfo_21">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2546,7 +2546,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_22">
+          <widget class="FaderInfo" name="m_pFaderInfo_22">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2613,7 +2613,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_23">
+          <widget class="FaderInfo" name="m_pFaderInfo_23">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2680,7 +2680,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_24">
+          <widget class="FaderInfo" name="m_pFaderInfo_24">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2760,7 +2760,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_25">
+          <widget class="FaderInfo" name="m_pFaderInfo_m">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -3281,6 +3281,7 @@
    <addaction name="m_pActionSaveFile"/>
    <addaction name="separator"/>
    <addaction name="m_pActionPanelDock"/>
+   <addaction name="m_pActionShowValues"/>
   </widget>
   <action name="m_pActionOpenFile">
    <property name="icon">
@@ -3324,6 +3325,21 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="m_pActionShowValues">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/showValue.png</normaloff>:/qLights/showValue.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Values</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -3355,6 +3371,11 @@
    <class>ChaseButton</class>
    <extends>QPushButton</extends>
    <header location="global">chaseButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FaderInfo</class>
+   <extends>QLabel</extends>
+   <header location="global">faderInfo.h</header>
   </customwidget>
  </customwidgets>
  <resources>

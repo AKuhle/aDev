@@ -41,6 +41,7 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pActionOpenFile, &QAction::triggered, this, &MainWin::onFileOpen);
     connect(m_pUi->m_pActionSaveFile, &QAction::triggered, this, &MainWin::onFileSave);
     connect(m_pUi->m_pActionPanelDock, &QAction::triggered, this, &MainWin::onPanel);
+    connect(m_pUi->m_pActionShowValues, &QAction::triggered, this, &MainWin::onShowValues);
 
     // connect the controller stuff
     connect(m_pUi->m_pBtnAddController, &QToolButton::clicked, this, &MainWin::onAddController);
@@ -224,31 +225,31 @@ void MainWin::createCtrlVectors()
     m_vFaders.push_back(m_pUi->m_pFader_m);
 
     // set the scribble strip for the faders
-    m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1);
-    m_pUi->m_pFader_2->init(m_pUi->m_pScribbleStrip_2);
-    m_pUi->m_pFader_3->init(m_pUi->m_pScribbleStrip_3);
-    m_pUi->m_pFader_4->init(m_pUi->m_pScribbleStrip_4);
-    m_pUi->m_pFader_5->init(m_pUi->m_pScribbleStrip_5);
-    m_pUi->m_pFader_6->init(m_pUi->m_pScribbleStrip_6);
-    m_pUi->m_pFader_7->init(m_pUi->m_pScribbleStrip_7);
-    m_pUi->m_pFader_8->init(m_pUi->m_pScribbleStrip_8);
-    m_pUi->m_pFader_9->init(m_pUi->m_pScribbleStrip_9);
-    m_pUi->m_pFader_10->init(m_pUi->m_pScribbleStrip_10);
-    m_pUi->m_pFader_11->init(m_pUi->m_pScribbleStrip_11);
-    m_pUi->m_pFader_12->init(m_pUi->m_pScribbleStrip_12);
-    m_pUi->m_pFader_13->init(m_pUi->m_pScribbleStrip_13);
-    m_pUi->m_pFader_14->init(m_pUi->m_pScribbleStrip_14);
-    m_pUi->m_pFader_15->init(m_pUi->m_pScribbleStrip_15);
-    m_pUi->m_pFader_16->init(m_pUi->m_pScribbleStrip_16);
-    m_pUi->m_pFader_17->init(m_pUi->m_pScribbleStrip_17);
-    m_pUi->m_pFader_18->init(m_pUi->m_pScribbleStrip_18);
-    m_pUi->m_pFader_19->init(m_pUi->m_pScribbleStrip_19);
-    m_pUi->m_pFader_20->init(m_pUi->m_pScribbleStrip_20);
-    m_pUi->m_pFader_21->init(m_pUi->m_pScribbleStrip_21);
-    m_pUi->m_pFader_22->init(m_pUi->m_pScribbleStrip_22);
-    m_pUi->m_pFader_23->init(m_pUi->m_pScribbleStrip_23);
-    m_pUi->m_pFader_24->init(m_pUi->m_pScribbleStrip_24);
-    m_pUi->m_pFader_m->init(m_pUi->m_pScribbleStrip_m);
+    m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1, m_pUi->m_pFaderInfo_1, "1");
+    m_pUi->m_pFader_2->init(m_pUi->m_pScribbleStrip_2, m_pUi->m_pFaderInfo_2, "2");
+    m_pUi->m_pFader_3->init(m_pUi->m_pScribbleStrip_3, m_pUi->m_pFaderInfo_3, "3");
+    m_pUi->m_pFader_4->init(m_pUi->m_pScribbleStrip_4, m_pUi->m_pFaderInfo_4, "4");
+    m_pUi->m_pFader_5->init(m_pUi->m_pScribbleStrip_5, m_pUi->m_pFaderInfo_5, "5");
+    m_pUi->m_pFader_6->init(m_pUi->m_pScribbleStrip_6, m_pUi->m_pFaderInfo_6, "6");
+    m_pUi->m_pFader_7->init(m_pUi->m_pScribbleStrip_7, m_pUi->m_pFaderInfo_7, "7");
+    m_pUi->m_pFader_8->init(m_pUi->m_pScribbleStrip_8, m_pUi->m_pFaderInfo_8, "8");
+    m_pUi->m_pFader_9->init(m_pUi->m_pScribbleStrip_9, m_pUi->m_pFaderInfo_9, "9");
+    m_pUi->m_pFader_10->init(m_pUi->m_pScribbleStrip_10, m_pUi->m_pFaderInfo_10, "10");
+    m_pUi->m_pFader_11->init(m_pUi->m_pScribbleStrip_11, m_pUi->m_pFaderInfo_11, "11");
+    m_pUi->m_pFader_12->init(m_pUi->m_pScribbleStrip_12, m_pUi->m_pFaderInfo_12, "12");
+    m_pUi->m_pFader_13->init(m_pUi->m_pScribbleStrip_13, m_pUi->m_pFaderInfo_13, "13");
+    m_pUi->m_pFader_14->init(m_pUi->m_pScribbleStrip_14, m_pUi->m_pFaderInfo_14, "14");
+    m_pUi->m_pFader_15->init(m_pUi->m_pScribbleStrip_15, m_pUi->m_pFaderInfo_15, "15");
+    m_pUi->m_pFader_16->init(m_pUi->m_pScribbleStrip_16, m_pUi->m_pFaderInfo_16, "16");
+    m_pUi->m_pFader_17->init(m_pUi->m_pScribbleStrip_17, m_pUi->m_pFaderInfo_17, "17");
+    m_pUi->m_pFader_18->init(m_pUi->m_pScribbleStrip_18, m_pUi->m_pFaderInfo_18, "18");
+    m_pUi->m_pFader_19->init(m_pUi->m_pScribbleStrip_19, m_pUi->m_pFaderInfo_19, "19");
+    m_pUi->m_pFader_20->init(m_pUi->m_pScribbleStrip_20, m_pUi->m_pFaderInfo_20, "20");
+    m_pUi->m_pFader_21->init(m_pUi->m_pScribbleStrip_21, m_pUi->m_pFaderInfo_21, "21");
+    m_pUi->m_pFader_22->init(m_pUi->m_pScribbleStrip_22, m_pUi->m_pFaderInfo_22, "22");
+    m_pUi->m_pFader_23->init(m_pUi->m_pScribbleStrip_23, m_pUi->m_pFaderInfo_23, "23");
+    m_pUi->m_pFader_24->init(m_pUi->m_pScribbleStrip_24, m_pUi->m_pFaderInfo_24, "24");
+    m_pUi->m_pFader_m->init(m_pUi->m_pScribbleStrip_m, m_pUi->m_pFaderInfo_m, "Msr");
 
 } // MainWin::createCtrlVectors
 

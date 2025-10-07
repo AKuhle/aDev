@@ -183,32 +183,6 @@ aString aJsonFile::readStringValue(const aString  &_sKey) const
 
 
 /*******************************************************************************
-* aJsonFile::readVectorU8
-*******************************************************************************/
-// std::vector<aString> aJsonFile::readVectorU8(const aString  &_sKey) const
-// {
-//     auto keys = splitKey(_sKey.to_stdString());
-
-//     const Value* v = getValue(keys);
-
-//     if (v && std::holds_alternative<std::vector<u8>>(*v))
-//     {
-//         std::vector<std::string>    vS = std::get<std::vector<std::string>>(*v);
-//         std::vector<aString>        vReturn;
-
-//         for (auto s : vS)
-//         {
-//             vReturn.push_back(s);
-//         }
-
-//         return vReturn;
-//     }
-
-//     return {};
-// } // aJsonFile::readVectorU8
-
-
-/*******************************************************************************
 * aJsonFile::readVectorString
 *******************************************************************************/
 std::vector<aString> aJsonFile::readVectorString(const aString  &_sKey) const
@@ -233,6 +207,31 @@ std::vector<aString> aJsonFile::readVectorString(const aString  &_sKey) const
     return {};
 } // aJsonFile::readVectorString
 
+
+/*******************************************************************************
+* aJsonFile::readVectorU8
+*******************************************************************************/
+std::vector<u8> aJsonFile::readVectorU8(const aString  &_sKey) const
+{
+    auto keys = splitKey(_sKey.to_stdString());
+
+    const Value* v = getValue(keys);
+
+    if (v && std::holds_alternative<std::vector<std::string>>(*v))
+    {
+        std::vector<std::string>    vS = std::get<std::vector<std::string>>(*v);
+        std::vector<u8>             vReturn;
+
+        for (auto s : vS)
+        {
+            vReturn.push_back(static_cast<u8>(std::stoi(s)));
+        }
+
+        return vReturn;
+    }
+
+    return {};
+} // aJsonFile::readVectorU8
 
 /*******************************************************************************
 * aJsonFile::writeJsonFile
@@ -428,7 +427,7 @@ void aJsonFile::writeJson(std::ostream  &os,
         const auto &vec = std::get<std::vector<u8>> (value);
         for (size_t i = 0; i < vec.size(); ++i)
         {
-            os << '"' << vec[i] << '"';
+            os << '"' << std::to_string(vec[i]) << '"';
             if (i + 1 < vec.size()) os << ", ";
         }
         os << "]";

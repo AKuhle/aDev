@@ -52,6 +52,17 @@ Universe::~Universe()
 
 
 /*******************************************************************************
+* Universe::channelValue
+*******************************************************************************/
+u8 Universe::channelValue(s32  _s32FixtureAdress,
+                          s32  _s32ChannelNr) const
+{
+    // get the channel value
+    return m_dmxData[_s32FixtureAdress + _s32ChannelNr-2];
+} // Universe::channelValue
+
+
+/*******************************************************************************
 * Universe::setChannelValue
 *******************************************************************************/
 void Universe::setChannelValue(s32  _s32FixtureAdress,
@@ -59,10 +70,6 @@ void Universe::setChannelValue(s32  _s32FixtureAdress,
                                u8   _u8Value,
                                bool _bSend)
 {
-    cout << "Adress: " << _s32FixtureAdress <<
-            "Channel:" << _s32ChannelNr <<
-            "Value:" << _u8Value << endl;
-
     // set the new channel value
     m_dmxData[_s32FixtureAdress + _s32ChannelNr-2] = _u8Value;
 
@@ -70,8 +77,38 @@ void Universe::setChannelValue(s32  _s32FixtureAdress,
     {
         sendValues2Controller();
     } // if (_bSend)
-
 } // Universe::setChannelValue
+
+
+/*******************************************************************************
+* Universe::dmxData
+*******************************************************************************/
+vector<u8> Universe::dmxData() const
+{
+    // Anzahl der Elemente berechnen
+    size_t count = m_dmxData.size() / sizeof(u8);
+
+    // Vektor mit den Daten füllen
+    std::vector<u8> vec(reinterpret_cast<const u8*> (m_dmxData.constData()),
+                        reinterpret_cast<const u8*> (m_dmxData.constData()) + count);
+
+    return vec;
+} // Universe::dmxData
+
+
+/*******************************************************************************
+* Universe::setDmxData
+*******************************************************************************/
+void Universe::setDmxData(const vector<u8> &_data,
+                          bool             _bSend)
+{
+    m_dmxData = QByteArray (reinterpret_cast<const char *> (_data.data()), _data.size() * sizeof(u8));
+
+    if (_bSend)
+    {
+        sendValues2Controller();
+    } // if (_bSend)
+} // Universe::setDmxData
 
 
 /*******************************************************************************

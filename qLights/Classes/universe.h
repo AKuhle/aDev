@@ -59,12 +59,17 @@ class Universe
         u32                     id() const                                  { return m_u32Id; }
         void                    setId(u32 _u32Id)                           { m_u32Id = _u32Id; }
 
+        u8                      channelValue(s32      _s32FixtureAdress,
+                                             s32      _s32ChannelNr) const;
+
         void                    setChannelValue(s32      _s32FixtureAdress,
                                                 s32      _s32ChannelNr,
                                                 u8       _u8Value,
                                                 bool     _bSend);
 
-        const QByteArray&       dmxData() const                             { return m_dmxData; }
+        vector<u8>              dmxData() const;
+        void                    setDmxData(const vector<u8> &_data,
+                                           bool             _bSend);
 
     private:
         void                    sendValues2Controller();

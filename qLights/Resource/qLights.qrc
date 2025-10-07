@@ -4,5 +4,6 @@
         <file>qLights/universe.png</file>
         <file>qLights/controller.png</file>
         <file>qLights/unused.png</file>
+        <file>qLights/showValue.png</file>
     </qresource>
 </RCC>

@@ -98,6 +98,7 @@ SOURCES += \
     Classes/controller.cpp \
     Classes/device.cpp \
     Classes/fader.cpp \
+    Classes/faderInfo.cpp \
     Classes/fixture.cpp \
     Classes/scene.cpp \
     Classes/scribbleStrip.cpp \
@@ -123,6 +124,7 @@ HEADERS += \
     Classes/controller.h \
     Classes/device.h \
     Classes/fader.h \
+    Classes/faderInfo.h \
     Classes/fixture.h \
     Classes/qLights_def.h \
     Classes/scene.h \

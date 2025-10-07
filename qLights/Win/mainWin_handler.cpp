@@ -10,6 +10,7 @@
 #include "aJsonFile.h"
 #include "aPath.h"
 #include "scene.h"
+#include "universe.h"
 
 #include "dlgController.h"
 #include "dlgUniverse.h"
@@ -132,6 +133,72 @@ void MainWin::onFileOpen()
         }
     }
 
+    // load the scenes
+    s32 scene_set_count = f.readIntValue(aString("scenes:scene_set_count"));
+    s32 scene_button_count = f.readIntValue(aString("scenes:scene_button_count"));
+
+    for (s32 iSet = 0; iSet < scene_set_count; iSet++)
+    {
+        for (s32 iScene = 0; iScene < scene_button_count; iScene++)
+        {
+            aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
+            auto &tup  = m_vvSceneButtons.at(iSet).at(iScene);
+
+            QString sSceneName = f.readStringValue(sKey + ":name").toQString();
+
+            if (sSceneName != "-")
+            {
+                s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
+                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName);
+                list<shared_ptr<Universe>> lstUniverses;
+
+                std::get<0> (tup)->setScene(pScene);
+                std::get<1> (tup) = pScene;
+
+                for (int iUni = 0; iUni < s32UniCount; iUni++)
+                {
+                    aString sKeyU = sKey + ":universe" + aString::fromValue(iUni);
+                    QString sUniName = f.readStringValue(sKeyU + ":name").toQString();
+                    shared_ptr<Universe> pUni = findUniverse(sUniName);
+
+                    std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
+
+                    // set the dmx data in the universe
+                    pUni->setDmxData(vecDmxData, false);
+
+                    // add the universe to the list
+                    lstUniverses.push_back(pUni);
+                }
+
+                // add the universes with the data
+                pScene->addUniverses(lstUniverses);
+            }
+            else
+            {
+                std::get<0> (tup)->setScene(nullptr);
+                std::get<1> (tup) = nullptr;
+            }
+
+                // const list<UniverseTuple> &lstUniverses = pScene->universes();
+                // f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
+                // f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
+
+                // int iUni = 0;
+                // for (const shared_ptr<Universe> &pUniverse : m_lstUniverse)
+                // {
+                //     // add the universe name
+                //     f.addValue(sKeyU + ":name", aString::fromQString(pUniverse->name()));
+
+                //     // add the dmx data
+                //     const QByteArray    &byteArray = pUniverse->dmxData();
+                //     std::vector<u8>     vec(byteArray.constBegin(), byteArray.constEnd());
+                //     f.addValue(sKeyU + ":data", vec);
+
+                //     iUni++;
+                // }
+        }
+    }
+
     updateAll();
 } // MainWin::onFileOpen
 
@@ -242,7 +309,7 @@ void MainWin::onFileSave()
 
     for (s32 iBank = 0; iBank < BANK_SET_COUNT; iBank++)
     {
-        for (s32 iFix = 0; iFix < BANK_SET_COUNT; iFix++)
+        for (s32 iFix = 0; iFix < BANK_BTN_COUNT; iFix++)
         {
             aString sKey = aString("banks:") + aString::fromValue(iBank) + "-" + aString::fromValue(iFix);
             shared_ptr<Fixture> pFix = std::get<1> (m_vvBankButtons.at(iBank).at(iFix));
@@ -255,7 +322,6 @@ void MainWin::onFileSave()
     // save the scenes
     f.addValue(aString("scenes:scene_set_count"), SCENE_SET_COUNT);
     f.addValue(aString("scenes:scene_button_count"), SCENE_BTN_COUNT);
-    f.addValue(aString("scenes:universe_count"), (int) m_lstUniverse.size());
 
     for (s32 iSet = 0; iSet < SCENE_SET_COUNT; iSet++)
     {
@@ -267,17 +333,24 @@ void MainWin::onFileSave()
 
             if (pScene)
             {
-                //const list<UniverseTuple> &lstTup = pScene->universes();
-
+                const list<UniverseTuple> &lstUniverses = pScene->universes();
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
+                f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
 
-                // for (auto pUniverse : m_lstUniverse)
-                // {
-                //     const QByteArray    &byteArray = pUniverse->dmxData();
-                //     std::vector<u8> vec(byteArray.constBegin(), byteArray.constEnd());
+                int iUni = 0;
+                for (const shared_ptr<Universe> &pUniverse : m_lstUniverse)
+                {
+                    aString             sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
 
-                //     f.addValue("scenes:1", vec);
-                // }
+                    // add the universe name
+                    f.addValue(sKeyU + ":name", aString::fromQString(pUniverse->name()));
+
+                    // add the dmx data
+                    std::vector<u8>     vecDmxData = pUniverse->dmxData();
+                    f.addValue(sKeyU + ":data", vecDmxData);
+
+                    iUni++;
+                }
             }
             else
             {
@@ -298,8 +371,20 @@ void MainWin::onFileSave()
 void MainWin::onPanel()
 {
     m_pUi->m_pPanelDock->setVisible(!m_pUi->m_pPanelDock->isVisible());
-    updatePanel();
+    updateToolbar();
 } // MainWin::onPanel
+
+
+/*******************************************************************************
+* MainWin::onShowValues
+*******************************************************************************/
+void MainWin::onShowValues()
+{
+    m_bShowValues = !m_bShowValues;
+
+    updateToolbar();
+    updateFaders();
+} // MainWin::onShowValues
 
 
 /*******************************************************************************
@@ -330,9 +415,7 @@ void MainWin::onRemoveController(bool /*_bChecked*/)
         QString sName = pT->item(s32Row, 0)->text();
 
         m_lstController.remove_if([&sName](shared_ptr<Controller> pCtrl)
-                                    {
-                                        return pCtrl->name() == sName;
-                                    });
+                                   { return pCtrl->name() == sName; });
     }
 
     updateAll();

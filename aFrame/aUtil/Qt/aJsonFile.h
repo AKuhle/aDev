@@ -93,7 +93,7 @@ class aJsonFile
 
         aString                         readStringValue(const aString &_sKey) const;
 
-        //std::vector<u8>                 readVectorU8(const aString &_sKey) const;
+        std::vector<u8>                 readVectorU8(const aString &_sKey) const;
 
         std::vector<aString>            readVectorString(const aString &_sKey) const;
 
