@@ -22,6 +22,7 @@ class DlgScene;
 * class DlgScene
 *******************************************************************************/
 class DlgDevice;
+class Scene;
 
 
 /*******************************************************************************
@@ -35,7 +36,8 @@ class DlgScene : public QDialog
         Ui::DlgScene        *m_pUi          { nullptr };
 
     public:
-        explicit DlgScene(SceneButton *_pParent);
+        explicit DlgScene(SceneButton       *_pParent,
+                          shared_ptr<Scene> _pScene);
         ~DlgScene();
 
         QString             name() const;
@@ -43,4 +45,5 @@ class DlgScene : public QDialog
     private:
         virtual void        accept();
         virtual void        reject();
+
 }; // class DlgScene

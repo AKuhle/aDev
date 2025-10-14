@@ -1,6 +1,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QMessageBox>
+
 #include "aFrame_def.h"
 
 #include "ui_mainWin.h"
@@ -27,6 +29,13 @@ using namespace aFrame::aUtil;
 *******************************************************************************/
 void MainWin::onFileOpen()
 {
+    // ask for loading
+    if (QMessageBox::question(this, "Load", "Replace Current Configuration?",
+                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+    {
+        return;
+    }
+
     aJsonFile   f;
     s32         count, idx;
 
@@ -80,7 +89,6 @@ void MainWin::onFileOpen()
             vector<shared_ptr<Channel>> vChannel;
 
             s32 channelCount = f.readIntValue(sPre + aString(":channelCount"));
-            cout << "channelCount" << channelCount << endl;
 
             for (s32 iChannelIdx = 0; iChannelIdx <  channelCount; iChannelIdx++)
             {
@@ -208,6 +216,13 @@ void MainWin::onFileOpen()
 *******************************************************************************/
 void MainWin::onFileSave()
 {
+    // ask for saving
+    if (QMessageBox::question(this, "Save", "Overwrite Configuration?",
+                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+    {
+        return;
+    }
+
     aJsonFile   f;
     s32         idx;
 
@@ -323,12 +338,14 @@ void MainWin::onFileSave()
     f.addValue(aString("scenes:scene_set_count"), SCENE_SET_COUNT);
     f.addValue(aString("scenes:scene_button_count"), SCENE_BTN_COUNT);
 
+    // iterate over all scene sets
     for (s32 iSet = 0; iSet < SCENE_SET_COUNT; iSet++)
     {
+        // iterate over all scene button within the current set
         for (s32 iScene = 0; iScene < SCENE_BTN_COUNT; iScene++)
         {
             aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
-            auto tup  = m_vvSceneButtons.at(iSet).at(iScene);
+            const SceneTuple &tup  = m_vvSceneButtons.at(iSet).at(iScene);
             shared_ptr<Scene> pScene = std::get<1> (tup);
 
             if (pScene)
@@ -338,16 +355,17 @@ void MainWin::onFileSave()
                 f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
 
                 int iUni = 0;
-                for (const shared_ptr<Universe> &pUniverse : m_lstUniverse)
+                for (const UniverseTuple &uniTuple : lstUniverses)
                 {
-                    aString             sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
+                    shared_ptr<Universe>    pUni        = std::get<0> (uniTuple);
+                    const vector<u8>        &vDmxData   = std::get<1> (uniTuple);
+                    aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
 
                     // add the universe name
-                    f.addValue(sKeyU + ":name", aString::fromQString(pUniverse->name()));
+                    f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
 
                     // add the dmx data
-                    std::vector<u8>     vecDmxData = pUniverse->dmxData();
-                    f.addValue(sKeyU + ":data", vecDmxData);
+                    f.addValue(sKeyU + ":data", vDmxData);
 
                     iUni++;
                 }
@@ -608,8 +626,17 @@ void MainWin::onEditFixture(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onBankSelector_1(bool /*_bChecked*/)
 {
-    m_s32ActiveBank = BANK_1;
-    updateBankButtons();
+    if (m_s32ActiveBank != BANK_1)
+    {
+        m_s32ActiveBank = BANK_1;
+        m_pActiveFixture = nullptr;
+
+        activateBankButton(m_pActiveFixture);
+
+        updateBankButtons();
+
+        assignFaders(nullptr);
+    }
 } // MainWin::onBankSelector_1
 
 
@@ -618,8 +645,17 @@ void MainWin::onBankSelector_1(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onBankSelector_2(bool /*_bChecked*/)
 {
-    m_s32ActiveBank = BANK_2;
-    updateBankButtons();
+    if (m_s32ActiveBank != BANK_2)
+    {
+        m_s32ActiveBank = BANK_2;
+        m_pActiveFixture = nullptr;
+
+        activateBankButton(m_pActiveFixture);
+
+        updateBankButtons();
+
+        assignFaders(nullptr);
+    }
 } // MainWin::onBankSelector_2
 
 
@@ -628,8 +664,17 @@ void MainWin::onBankSelector_2(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onBankSelector_3(bool /*_bChecked*/)
 {
-    m_s32ActiveBank = BANK_3;
-    updateBankButtons();
+    if (m_s32ActiveBank != BANK_3)
+    {
+        m_s32ActiveBank = BANK_3;
+        m_pActiveFixture = nullptr;
+
+        activateBankButton(m_pActiveFixture);
+
+        updateBankButtons();
+
+        assignFaders(nullptr);
+    }
 } // MainWin::onBankSelector_3
 
 
@@ -638,8 +683,17 @@ void MainWin::onBankSelector_3(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onBankSelector_4(bool /*_bChecked*/)
 {
-    m_s32ActiveBank = BANK_4;
-    updateBankButtons();
+    if (m_s32ActiveBank != BANK_4)
+    {
+        m_s32ActiveBank = BANK_4;
+        m_pActiveFixture = nullptr;
+
+        activateBankButton(m_pActiveFixture);
+
+        updateBankButtons();
+
+        assignFaders(nullptr);
+    }
 } // MainWin::onBankSelector_4
 
 
@@ -648,8 +702,17 @@ void MainWin::onBankSelector_4(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onBankSelector_5(bool /*_bChecked*/)
 {
-    m_s32ActiveBank = BANK_5;
-    updateBankButtons();
+    if (m_s32ActiveBank != BANK_5)
+    {
+        m_s32ActiveBank = BANK_5;
+        m_pActiveFixture = nullptr;
+
+        activateBankButton(m_pActiveFixture);
+
+        updateBankButtons();
+
+        assignFaders(nullptr);
+    }
 } // MainWin::onBankSelector_5
 
 
@@ -667,7 +730,33 @@ void MainWin::onClearBank(bool /*_bChecked*/)
     }
 
     updateBankButtons();
+
+    assignFaders(nullptr);
 } // MainWin::onClearBank
+
+
+/*******************************************************************************
+* MainWin::onResetFixtures
+*******************************************************************************/
+void MainWin::onResetFixtures(bool /*_bChecked*/)
+{
+    vector<BankTuple> &vTup = m_vvBankButtons.at(m_s32ActiveBank);
+
+    for (BankTuple &tup : vTup)
+    {
+        shared_ptr<Fixture> pFix = std::get<1> (tup);
+
+        if (pFix)
+        {
+            pFix->resetFixture(false);
+        }
+    }
+
+    // send all universes to update the reseted fixtures
+    sendAllUniverses();
+
+    updateFaders();
+} // MainWin::onResetFixtures
 
 
 /*******************************************************************************

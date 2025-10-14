@@ -71,8 +71,10 @@ class Universe
         void                    setDmxData(const vector<u8> &_data,
                                            bool             _bSend);
 
+        void                    sendDmxData() const;
+
     private:
-        void                    sendValues2Controller();
+        void                    sendValues2Controller() const;
 
         // void                setDmxValues(const QByteArray    &_values,
         //                                  bool                _bSend);

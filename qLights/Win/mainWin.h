@@ -45,30 +45,35 @@ class MainWin : public QMainWindow
         vector<QString>                     m_lstDeviceIconName;
         vector<QString>                     m_lstChannelIcon;
 
+        QColor                              m_colPushBtnBg;
+        QColor                              m_colActive         { 0, 110, 98 };
+
         // active buttons
         s32                                 m_s32ActiveBank     { BANK_1 };
         s32                                 m_s32ActiveScene    { SCENE_1 };
         s32                                 m_s32ActiveChase    { CHASE_1 };
+        shared_ptr<Fixture>                 m_pActiveFixture;
 
         bool                                m_bShowValues       { false };
 
         // bank buttons
-        // all sets have the same buttons, but diefferent Fixtures per layer
+        // all sets have the same buttons, but different Fixtures per layer
         using BankTuple = std::tuple<BankButton *, shared_ptr<Fixture>>;
         vector<vector<BankTuple>>           m_vvBankButtons;
 
         // scene buttons
-        // all sets have the same buttons, but diefferent scenes per layer
+        // all sets have the same buttons, but different scenes per layer
         using SceneTuple = std::tuple<SceneButton *, shared_ptr<Scene>>;
         vector<vector<SceneTuple>>          m_vvSceneButtons;
 
         // chase buttons
-        // all sets have the same buttons, but diefferent chases per layer
+        // all sets have the same buttons, but different chases per layer
         using ChaseTuple = std::tuple<ChaseButton *, shared_ptr<Chase>>;
         vector<vector<ChaseTuple>>          m_vvChaseButtons;
 
         // faders
         vector<Fader *>                     m_vFaders;
+        Fader                               *m_pMasterFader { nullptr };
 
 
     public:
@@ -95,6 +100,9 @@ class MainWin : public QMainWindow
                                             const QString   &_sController,
                                             s32             _s32Id);
 
+        void                    sendAllUniverses();
+
+
         // device
         void                    addDevice(const QString                     &_sName,
                                           const QString                     &_sImage,
@@ -109,6 +117,8 @@ class MainWin : public QMainWindow
                                            s32                  _s32Adress);
 
         // banks
+        void                    activateBankButton(shared_ptr<Fixture> _pFixture);
+
         void                    assignFixture(BankButton    *_pBankBtn,
                                               const QString &_sFixtureName);
 
@@ -116,9 +126,10 @@ class MainWin : public QMainWindow
         void                    assignScene(SceneButton   *_pBankBtn,
                                             const QString &_sSceneName);
 
+        void                    removeScene(SceneButton   *_pBankBtn);
+
         // faders
         void                    assignFaders(shared_ptr<Fixture> _pFixture);
-
 
         shared_ptr<Fixture>     findFixture(const QString &_sName);
 
@@ -143,7 +154,7 @@ class MainWin : public QMainWindow
 
 
     private:
-        void                    createCtrlVectors();
+        void                    initMember();
 
         static void             addTableWidgetItem(QTableWidget     *_pTableWidget,
                                                    s32              _s32Row,
@@ -170,7 +181,7 @@ class MainWin : public QMainWindow
         void                    onPanel();
         void                    onShowValues();
 
-        // conbtroller panel
+        // controller panel
         void                    onAddController(bool _bChecked);
         void                    onRemoveController(bool _bChecked);
         void                    onEditController(bool _bChecked);
@@ -193,6 +204,7 @@ class MainWin : public QMainWindow
         void                    onBankSelector_4(bool _bChecked);
         void                    onBankSelector_5(bool _bChecked);
         void                    onClearBank(bool _bChecked);
+        void                    onResetFixtures(bool _bChecked);
 
         void                    onSceneSelector_1(bool _bChecked);
         void                    onSceneSelector_2(bool _bChecked);

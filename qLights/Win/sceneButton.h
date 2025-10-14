@@ -33,5 +33,6 @@ class SceneButton : public QPushButton
     private slots:
         void                showContextMenu(const QPoint &_pos);
         void                onAssignScene();
+        void                onRemoveScene();
         void                onClicked();
 }; // class MainWin

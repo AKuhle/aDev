@@ -57,6 +57,8 @@ class Fixture
         s32                                 adress() const                                  { return m_s32Adress; }
         void                                setAdress(s32 _s32Adress)                       { m_s32Adress = _s32Adress; }
 
+        void                                resetFixture(bool _bSend);
+
         //void                                addUniverse(u32 _u32Id);
 
         // void                                setDmxChannelValue(s32      _s32UniverseId,
@@ -67,6 +69,4 @@ class Fixture
         //void                                sendAllUniverses();
 
         //shared_ptr<Universe>                universe(u32 _u32Id);
-
-        //void                                resetAllUniverses();
 }; // class Fixture

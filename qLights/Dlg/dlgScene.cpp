@@ -5,6 +5,7 @@
 
 #include "aFrame_def.h"
 #include "sceneButton.h"
+#include "scene.h"
 
 #include "dlgScene.h"
 
@@ -14,11 +15,18 @@ using namespace std;
 /*******************************************************************************
 * DlgScene::DlgScene
 *******************************************************************************/
-DlgScene::DlgScene(SceneButton *_pParent)
+DlgScene::DlgScene(SceneButton          *_pParent,
+                   shared_ptr<Scene>    _pScene)
 : QDialog(_pParent),
   m_pUi(new Ui::DlgScene)
 {
     m_pUi->setupUi(this);
+
+    // set the scene name
+    if (_pScene)
+    {
+        m_pUi->m_pSceneName->setText(_pScene->name());
+    }
 } // DlgScene::DlgScene
 
 

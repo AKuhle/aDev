@@ -5356,7 +5356,35 @@ release/fixture.o: ../../Classes/fixture.cpp ../../Classes/Fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
-		../../Classes/controller.h
+		../../Classes/controller.h \
+		../../Classes/device.h \
+		../../Classes/channel.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\fixture.o ..\..\Classes\fixture.cpp
 
 release/scene.o: ../../Classes/scene.cpp ../../Classes/scene.h \
@@ -7006,12 +7034,14 @@ release/dlgScene.o: ../../Dlg/dlgScene.cpp ../../../../GeneratedFiles/qLights/ui
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../Dlg/dlgScene.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
+		../../Classes/scene.h \
 		../../Classes/qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
+		../../Dlg/dlgScene.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\dlgScene.o ..\..\Dlg\dlgScene.cpp
 
 release/dlgUniverse.o: ../../Dlg/dlgUniverse.cpp ../../../aFrame/aFrame_def.h \
@@ -8158,14 +8188,10 @@ release/mainWin.o: ../../Win/mainWin.cpp ../../../../Qt/6.7.2/mingw_64/include/Q
 		../../Classes/scene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainWin.o ..\..\Win\mainWin.cpp
 
-release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_def.h \
-		../../../../GeneratedFiles/qLights/ui_mainWin.h \
-		../../../aFrame/aApp/aAppBase.h \
-		../../../aFrame/aUtil/aVersionInfo.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
+release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobal.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversionchecks.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtconfiginclude.h \
@@ -8210,11 +8236,25 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtresource.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qttranslation.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringview.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearray.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrefcount.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydata.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpair.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydatapointer.h \
@@ -8236,12 +8276,6 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringbuilder.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
@@ -8249,21 +8283,6 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
-		../../../aFrame/aUtil/aArgument.h \
-		../../../aFrame/aUtil/aPath.h \
-		../../Win/mainWin.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreevent.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetatype.h \
@@ -8322,6 +8341,7 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbitmap.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qevent.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qeventpoint.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvector2d.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvectornd.h \
@@ -8356,6 +8376,20 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qinputmethod.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		../../../aFrame/aFrame_def.h \
+		../../../../GeneratedFiles/qLights/ui_mainWin.h \
+		../../../aFrame/aApp/aAppBase.h \
+		../../../aFrame/aUtil/aVersionInfo.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../aFrame/aUtil/aArgument.h \
+		../../../aFrame/aUtil/aPath.h \
+		../../Win/mainWin.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
@@ -8451,7 +8485,6 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../aFrame/aFrame_
 		../../Classes/scene.h \
 		../../Dlg/dlgController.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		../../Dlg/dlgUniverse.h \
 		../../Dlg/dlgDevice.h \
 		../../Dlg/dlgFixture.h

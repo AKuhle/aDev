@@ -102,7 +102,7 @@ void MainWin::updateFaders()
 {
     for (Fader *pFader : m_vFaders)
     {
-        pFader->updatePosition();
+        pFader->update();
     }
 } // MainWin::updateFaders
 

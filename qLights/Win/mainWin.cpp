@@ -27,8 +27,8 @@ MainWin::MainWin(QWidget *parent)
 
     m_pUi->setupUi(this);
 
-    // create the button layers
-    createCtrlVectors();
+    // init the member variables
+    initMember();
 
     // load the channel icon list
     readChannelIcons();
@@ -70,6 +70,7 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pBankSelector_4, &QPushButton::clicked, this, &MainWin::onBankSelector_4);
     connect(m_pUi->m_pBankSelector_5, &QPushButton::clicked, this, &MainWin::onBankSelector_5);
     connect(m_pUi->m_pClearBank, &QPushButton::clicked, this, &MainWin::onClearBank);
+    connect(m_pUi->m_pResetFixtures, &QPushButton::clicked, this, &MainWin::onResetFixtures);
 
     // connect the Scene buttons
     connect(m_pUi->m_pSceneSelector_1, &QPushButton::clicked, this, &MainWin::onSceneSelector_1);
@@ -100,9 +101,9 @@ MainWin::~MainWin()
 
 
 /*******************************************************************************
-* MainWin::createCtrlVectors
+* MainWin::initMember
 *******************************************************************************/
-void MainWin::createCtrlVectors()
+void MainWin::initMember()
 {
     // generate BANK_COUNT sets of BANK_BTN_COUNT buttons
     for (s32 i = 0; i < BANK_SET_COUNT; i++)
@@ -222,7 +223,8 @@ void MainWin::createCtrlVectors()
     m_vFaders.push_back(m_pUi->m_pFader_22);
     m_vFaders.push_back(m_pUi->m_pFader_23);
     m_vFaders.push_back(m_pUi->m_pFader_24);
-    m_vFaders.push_back(m_pUi->m_pFader_m);
+
+    m_pMasterFader = m_pUi->m_pFader_m;
 
     // set the scribble strip for the faders
     m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1, m_pUi->m_pFaderInfo_1, "1");
@@ -249,9 +251,14 @@ void MainWin::createCtrlVectors()
     m_pUi->m_pFader_22->init(m_pUi->m_pScribbleStrip_22, m_pUi->m_pFaderInfo_22, "22");
     m_pUi->m_pFader_23->init(m_pUi->m_pScribbleStrip_23, m_pUi->m_pFaderInfo_23, "23");
     m_pUi->m_pFader_24->init(m_pUi->m_pScribbleStrip_24, m_pUi->m_pFaderInfo_24, "24");
-    m_pUi->m_pFader_m->init(m_pUi->m_pScribbleStrip_m, m_pUi->m_pFaderInfo_m, "Msr");
 
-} // MainWin::createCtrlVectors
+    m_pMasterFader->init(m_pUi->m_pScribbleStrip_m, m_pUi->m_pFaderInfo_m, "Msr");
+    m_pMasterFader->setEnabled(true);
+
+    // all buttons have the same bg color => get this color from any button
+    m_colPushBtnBg = m_pUi->m_pBankBtn_1->palette().color(QPalette::Button);
+
+} // MainWin::initMember
 
 
 /*******************************************************************************
@@ -386,6 +393,18 @@ void MainWin::addUniverse(const QString   &_sName,
 
 
 /*******************************************************************************
+* MainWin::sendAllUniverses
+*******************************************************************************/
+void MainWin::sendAllUniverses()
+{
+    for (auto &_pUniverse : m_lstUniverse)
+    {
+        _pUniverse->sendDmxData();
+    }
+} // MainWin::sendAllUniverses
+
+
+/*******************************************************************************
 * MainWin::addDevice
 *******************************************************************************/
 void MainWin::addDevice(const QString                       &_sName,
@@ -425,6 +444,38 @@ void MainWin::addFixture(const QString          &_sName,
 
 
 /*******************************************************************************
+* MainWin::activateBankButton
+*******************************************************************************/
+void MainWin::activateBankButton(shared_ptr<Fixture> _pFixture)
+{
+    for (BankTuple &tup : m_vvBankButtons.at(m_s32ActiveBank))
+    {
+        // get the button
+        BankButton  *pBtn       = std::get<0> (tup);
+
+        if (_pFixture && std::get<1> (tup) == _pFixture)
+        {
+            // _pFixture != nullptr AND _pFixture assigned to the button
+            // => set active color
+            pBtn->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                .arg(m_colActive.red())
+                                .arg(m_colActive.green())
+                                .arg(m_colActive.blue()));
+        }
+        else
+        {
+            // _pFixture == nullptr OR _pFixture not assigned to the button
+            // => set standard bg color
+            pBtn->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                .arg(m_colPushBtnBg.red())
+                                .arg(m_colPushBtnBg.green())
+                                .arg(m_colPushBtnBg.blue()));
+        }
+    }
+} // MainWin::activateBankButton
+
+
+/*******************************************************************************
 * MainWin::assignFixture
 *******************************************************************************/
 void MainWin::assignFixture(BankButton    *_pBankBtn,
@@ -450,11 +501,12 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
 void MainWin::assignScene(SceneButton   *_pSceneBtn,
                           const QString &_sSceneName)
 {
+    // search the scene in the vector of scene buttons
     for (SceneTuple &tup : m_vvSceneButtons.at(m_s32ActiveScene))
     {
         if (std::get<0> (tup) == _pSceneBtn)
         {
-            // create a new scene
+            // scene button found => create a new scene
             shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName);
             pScene->addUniverses(m_lstUniverse);
 
@@ -469,23 +521,57 @@ void MainWin::assignScene(SceneButton   *_pSceneBtn,
 
 
 /*******************************************************************************
+* MainWin::removeScene
+*******************************************************************************/
+void MainWin::removeScene(SceneButton   *_pSceneBtn)
+{
+    // search the scene in the vector of scene buttons in the current set
+    for (SceneTuple &tup : m_vvSceneButtons.at(m_s32ActiveScene))
+    {
+        if (std::get<0> (tup) == _pSceneBtn)
+        {
+            // remove the scene from the tuple of the current set
+            std::get<1> (tup) = nullptr;
+
+            // remove the scene in the button
+            _pSceneBtn->setScene(nullptr);
+        }
+    }
+} // MainWin::removeScene
+
+
+/*******************************************************************************
 * MainWin::assignFaders
 *******************************************************************************/
 void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
 {
-    const vector<shared_ptr<Channel>>   &vChannel   = _pFixture->device()->channel();
+    // _pFixture can be nullptr
+
+    // set the button with the selected fixture to active
+    m_pActiveFixture = _pFixture;
+    activateBankButton(m_pActiveFixture);
+
     s32                                 iChannelIdx = 1;
     shared_ptr<Channel>                 pChannel;
 
     for (Fader *pFader : m_vFaders)
     {
-        auto it = std::find_if(vChannel.begin(), vChannel.end(),
-                               [iChannelIdx](const std::shared_ptr<Channel> &ch)
-                               { return ch && ch->nr() == iChannelIdx; } );
+        if (_pFixture)
+        {
+            const vector<shared_ptr<Channel>> &vChannel = _pFixture->device()->channel();
 
-        pChannel = (it != vChannel.end())?   *it : nullptr;
+            auto it = std::find_if(vChannel.begin(), vChannel.end(),
+                                   [iChannelIdx](const std::shared_ptr<Channel> &ch)
+                                   { return ch && ch->nr() == iChannelIdx; } );
 
-        pFader->assignChannel(_pFixture, pChannel);
+            pChannel = (it != vChannel.end())?   *it : nullptr;
+
+            pFader->assignChannel(_pFixture, pChannel);
+        }
+        else
+        {
+            pFader->assignChannel(nullptr, nullptr);
+        }
 
         iChannelIdx++;
     }

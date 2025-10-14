@@ -26,6 +26,7 @@ SceneButton::SceneButton(QWidget *parent)
 void SceneButton::init()
 {
     setContextMenuPolicy(Qt::CustomContextMenu);
+
     connect(this, &QPushButton::customContextMenuRequested,
             this, &SceneButton::showContextMenu);
 } // SceneButton::init
@@ -57,8 +58,14 @@ void SceneButton::showContextMenu(const QPoint &_pos)
 {
     QMenu menu(this);
 
+    // action: set scene
     QAction *saveAction = menu.addAction("Set Scene");
     connect(saveAction, &QAction::triggered, this, &SceneButton::onAssignScene);
+
+    // action: remove scene
+    QAction *removeAction = menu.addAction("Remove Scene");
+    connect(removeAction, &QAction::triggered, this, &SceneButton::onRemoveScene);
+
     menu.exec(mapToGlobal(_pos));
 } // SceneButton::showContextMenu
 
@@ -68,7 +75,7 @@ void SceneButton::showContextMenu(const QPoint &_pos)
 *******************************************************************************/
 void SceneButton::onAssignScene()
 {
-    DlgScene dlg(this);
+    DlgScene dlg(this, m_pScene);
 
     if (dlg.exec() == QDialog::Accepted)
     {
@@ -78,16 +85,33 @@ void SceneButton::onAssignScene()
 
 
 /*******************************************************************************
+* SceneButton::onRemoveScene
+*******************************************************************************/
+void SceneButton::onRemoveScene()
+{
+    MainWin::instance()->removeScene(this);
+} // SceneButton::onRemoveScene
+
+
+/*******************************************************************************
 * SceneButton::onClicked
 *******************************************************************************/
 void SceneButton::onClicked()
 {
+    CHECK_PRE_CONDITION_VOID(m_pScene);
+
     const list<UniverseTuple> &lstTup = m_pScene->universes();
 
     for (auto &tup : lstTup)
     {
-        std::get<0> (tup)->setDmxData(std::get<1> (tup), true);
+        std::shared_ptr<Universe>   pUniverse = std::get<0> (tup);
+
+        if (pUniverse)
+        {
+            pUniverse->setDmxData(std::get<1> (tup), true);
+
+            MainWin::instance()->updateFaders();
+        }
     }
 
-    MainWin::instance()->updateFaders();
 } // SceneButton::onClicked

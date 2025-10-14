@@ -112,9 +112,18 @@ void Universe::setDmxData(const vector<u8> &_data,
 
 
 /*******************************************************************************
+* Universe::sendDmxData
+*******************************************************************************/
+void Universe::sendDmxData() const
+{
+    sendValues2Controller();
+} // Universe::sendDmxData
+
+
+/*******************************************************************************
 * Universe::sendValues2Controller
 *******************************************************************************/
-void Universe::sendValues2Controller()
+void Universe::sendValues2Controller() const
 {
     if (!m_hostAdr.isNull())
     {

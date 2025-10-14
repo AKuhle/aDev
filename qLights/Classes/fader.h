@@ -54,13 +54,13 @@ class Fader : public QSlider
                                  FaderInfo      *_pFaderInfo,
                                  QString        _sFaderNr);
 
-        void                updatePosition();
-
         void                assignChannel(shared_ptr<Fixture> _pFixture,
                                           shared_ptr<Channel> _pChannel);
 
+        void                update();
+
     private:
-        void                setInfo();
+        void                updateInfo();
 
     private slots:
         void                onSliderMoved(int _iValue);

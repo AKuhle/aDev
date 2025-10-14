@@ -42,6 +42,24 @@ Fader::~Fader()
 
 
 /*******************************************************************************
+* Fader::init
+*******************************************************************************/
+void Fader::init(ScribbleStrip  *_pScribbleStrip,
+                 FaderInfo      *_pFaderInfo,
+                 QString        _sFaderNr)
+{
+    m_pScribbleStrip    = _pScribbleStrip;
+    m_pFaderInfo        = _pFaderInfo;
+
+    m_pFaderInfo->init(_sFaderNr);
+
+    updateInfo();
+
+    assignChannel(nullptr, nullptr);
+} // Fader::init
+
+
+/*******************************************************************************
 * Fader::assignChannel
 *******************************************************************************/
 void Fader::assignChannel(shared_ptr<Fixture> _pFixture,
@@ -50,15 +68,24 @@ void Fader::assignChannel(shared_ptr<Fixture> _pFixture,
     m_pFixture = _pFixture;
     m_pChannel = _pChannel;
 
+    update();
+} // Fader::assignChannel
+
+
+/*******************************************************************************
+* Fader::update
+*******************************************************************************/
+void Fader::update()
+{
     setFixedHeight(280);
 
-    if (_pChannel)
+    if (m_pChannel)
     {
         // channel assignes => fader enabled
         setEnabled(true);
 
         // scribble strip icon
-        m_pScribbleStrip->setPixmap(_pChannel->pixmap());
+        m_pScribbleStrip->setPixmap(m_pChannel->pixmap());
 
         // set the fader position
         u8 u8Val = m_pFixture->universe()->channelValue(m_pFixture->adress(),
@@ -71,48 +98,15 @@ void Fader::assignChannel(shared_ptr<Fixture> _pFixture,
         m_pScribbleStrip->setPixmap(QPixmap(":/qLights/unused.png"));
         setValue(0);
     }
-} // Fader::assignChannel
+
+    updateInfo();
+} // Fader::update
 
 
 /*******************************************************************************
-* Fader::init
+* Fader::updateInfo
 *******************************************************************************/
-void Fader::init(ScribbleStrip  *_pScribbleStrip,
-                 FaderInfo      *_pFaderInfo,
-                 QString        _sFaderNr)
-{
-    m_pScribbleStrip    = _pScribbleStrip;
-    m_pFaderInfo        = _pFaderInfo;
-
-    m_pFaderInfo->init(_sFaderNr);
-
-    setInfo();
-
-    assignChannel(nullptr, nullptr);
-} // Fader::init
-
-
-/*******************************************************************************
-* Fader::updatePosition
-*******************************************************************************/
-void Fader::updatePosition()
-{
-    CHECK_PRE_CONDITION_VOID(m_pFixture);
-    CHECK_PRE_CONDITION_VOID(m_pChannel);
-    CHECK_PRE_CONDITION_VOID(m_pFixture->universe());
-
-    u8 u8Val = m_pFixture->universe()->channelValue(m_pFixture->adress(),
-                                                    m_pChannel->nr());
-    setValue(u8Val);
-
-    setInfo();
-} // Fader::updatePosition
-
-
-/*******************************************************************************
-* Fader::setInfo
-*******************************************************************************/
-void Fader::setInfo()
+void Fader::updateInfo()
 {
     int     iVal = 0;
 
@@ -123,7 +117,7 @@ void Fader::setInfo()
     }
 
     m_pFaderInfo->setInfo(QString::number(iVal));
-} // Fader::setInfo
+} // Fader::updateInfo
 
 
 /*******************************************************************************
@@ -142,6 +136,5 @@ void Fader::onSliderMoved(int _iValue)
                                             m_pChannel->nr(),
                                             (u8) _iValue,
                                             true);
-    setInfo();
-
+    updateInfo();
 } // Fader::onSliderMoved
