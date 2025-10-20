@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file Channel.cpp
+* \file ChannelBright.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,35 +10,35 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
+#pragma once
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "Channel.h"
-#include "universe.h"
+#include "channel.h"
 
+
+class Universe;
+
+using namespace std;
 using namespace aFrame;
 using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
-* Channel::Channel
+* class ChannelBright
 *******************************************************************************/
-Channel::Channel(s32            _s32Nr,
-                 const QString  &_sName,
-                 const QString  &_sPixmapName)
-: m_s32Nr(_s32Nr),
-  m_sName(_sName),
-  m_sPixmapName(_sPixmapName)
+class ChannelBright : public Channel
 {
-    m_pixmap.load(_sPixmapName);
-} // Channel::Channel
+    private:
 
+    public:
+        ChannelBright(s32             _s32Nr,
+                      const QString   &_sName,
+                      const QString   &_sPixmapName);
 
-/*******************************************************************************
-* Channel::~Channel
-*******************************************************************************/
-Channel::~Channel()
-{
-} // Channel::~Channel
+        ~ChannelBright();
+
+        bool                    isBrightnessChannel() const override    { return true; }
+}; // class ChannelBright

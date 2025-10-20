@@ -37,6 +37,12 @@ void MainWin::updateToolbar()
 
     // action show values
     m_pUi->m_pActionShowValues->setChecked(isShowValues());
+
+    // ligth and fase buttons
+    m_pUi->m_pFadeIn->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pFadeOut->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pSwitchOn->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pSwitchOff->setVisible(!m_pUi->m_pPanelDock->isVisible());
 } // MainWin::updateToolbar
 
 
@@ -104,7 +110,20 @@ void MainWin::updateFaders()
     {
         pFader->update();
     }
+
+    // update the master button
+    updateMasterFader();
 } // MainWin::updateFaders
+
+
+/*******************************************************************************
+* MainWin::updateMasterFader
+*******************************************************************************/
+void MainWin::updateMasterFader()
+{
+    // update the master fader
+    m_pMasterFader->update();
+} // MainWin::updateMasterFader
 
 
 /*******************************************************************************

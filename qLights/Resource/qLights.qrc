@@ -5,5 +5,8 @@
         <file>qLights/controller.png</file>
         <file>qLights/unused.png</file>
         <file>qLights/showValue.png</file>
+        <file>Std_48x48/fade_in.png</file>
+        <file>Std_48x48/fade_out.png</file>
+        <file>qLights/brightnessMasked.png</file>
     </qresource>
 </RCC>

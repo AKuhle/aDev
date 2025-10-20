@@ -12,6 +12,7 @@
 #include "dlgDevice.h"
 #include "dlgChannel.h"
 #include "channel.h"
+#include "channel_bright.h"
 
 using namespace std;
 
@@ -135,7 +136,7 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
 
             // set the brightness checkbox
             QCheckBox *pBright = new QCheckBox;
-            pBright->setChecked(pChannel->isBrightness());
+            pBright->setChecked(pChannel->isBrightnessChannel());
             pT->setCellWidget(iNewRow, 3, pBright);
         }
     }
@@ -146,7 +147,6 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
         {
             setDeviceIcon(m_lstDeviceIconName.at(0));
         }
-
     }
 } // DlgDevice::setCtrls
 
@@ -201,7 +201,14 @@ void DlgDevice::accept()
         QCheckBox   *pBright        = qobject_cast<QCheckBox*>(pT->cellWidget(row, 3));
         bool        bBrightness     = pBright->isChecked();
 
-        vChannel.push_back(make_shared<Channel> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
+        if (bBrightness)
+        {
+            vChannel.push_back(make_shared<ChannelBright> (s32ChannelNr, s32ChannelName, sPixmapName));
+        }
+        else
+        {
+            vChannel.push_back(make_shared<Channel> (s32ChannelNr, s32ChannelName, sPixmapName));
+        }
     }
 
     if (!m_pDevice)

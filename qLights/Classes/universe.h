@@ -24,6 +24,8 @@
 #include "aFrame_def.h"
 #include "controller.h"
 
+class Channel;
+
 using namespace aFrame;
 using namespace std;
 
@@ -62,16 +64,18 @@ class Universe
         u8                      channelValue(s32      _s32FixtureAdress,
                                              s32      _s32ChannelNr) const;
 
-        void                    setChannelValue(s32      _s32FixtureAdress,
-                                                s32      _s32ChannelNr,
-                                                u8       _u8Value,
-                                                bool     _bSend);
+        void                    setChannelValue(s32                 _s32FixtureAdress,
+                                                shared_ptr<Channel> _pChannel,
+                                                u8                  _u8Value,
+                                                bool                _bSend);
 
         vector<u8>              dmxData() const;
         void                    setDmxData(const vector<u8> &_data,
                                            bool             _bSend);
 
         void                    sendDmxData() const;
+
+        void                    reset(bool _bSend);
 
     private:
         void                    sendValues2Controller() const;

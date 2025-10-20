@@ -6,12 +6,14 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QComboBox>
+#include <QPushButton>
 
 #include "qLights_def.h"
 #include "controller.h"
 #include "universe.h"
 #include "device.h"
 #include "fader.h"
+#include "masterButton.h"
 
 class BankButton;
 class SceneButton;
@@ -36,7 +38,7 @@ class MainWin : public QMainWindow
     private:
         static MainWin                      *m_pInstance;
 
-        Ui::MainWin                         *m_pUi      { nullptr };
+        Ui::MainWin                         *m_pUi                  { nullptr };
         list<shared_ptr<Controller>>        m_lstController;
         list<shared_ptr<Universe>>          m_lstUniverse;
         list<shared_ptr<Device>>            m_lstDevice;
@@ -46,15 +48,22 @@ class MainWin : public QMainWindow
         vector<QString>                     m_lstChannelIcon;
 
         QColor                              m_colPushBtnBg;
-        QColor                              m_colActive         { 0, 110, 98 };
+        QColor                              m_colActive             { 0, 110, 98 };
 
         // active buttons
-        s32                                 m_s32ActiveBank     { BANK_1 };
-        s32                                 m_s32ActiveScene    { SCENE_1 };
-        s32                                 m_s32ActiveChase    { CHASE_1 };
+        s32                                 m_s32ActiveBank         { BANK_1 };
+        s32                                 m_s32ActiveScene        { SCENE_1 };
+        s32                                 m_s32ActiveChase        { CHASE_1 };
         shared_ptr<Fixture>                 m_pActiveFixture;
 
-        bool                                m_bShowValues       { false };
+        bool                                m_bShowValues           { false };
+
+        static u8                           m_u8MasterBrightness;
+
+        // fade in/out values to fade the master brightness
+        float                               m_fFaderValue;
+        float                               m_fFaderStep;
+        u8                                  m_u8FaderInterval;
 
         // bank buttons
         // all sets have the same buttons, but different Fixtures per layer
@@ -73,7 +82,7 @@ class MainWin : public QMainWindow
 
         // faders
         vector<Fader *>                     m_vFaders;
-        Fader                               *m_pMasterFader { nullptr };
+        Fader                               *m_pMasterFader         { nullptr };
 
 
     public:
@@ -92,7 +101,7 @@ class MainWin : public QMainWindow
 
 
         // universe
-        const list<shared_ptr<Universe>>& universes() const  { return m_lstUniverse; }
+        const list<shared_ptr<Universe>>& universes() const     { return m_lstUniverse; }
 
         shared_ptr<Universe>    findUniverse(const QString &_sName);
 
@@ -100,7 +109,12 @@ class MainWin : public QMainWindow
                                             const QString   &_sController,
                                             s32             _s32Id);
 
+        void                    resetAllUniverses(bool _bSend);
+
         void                    sendAllUniverses();
+
+        void                    setMasterBrightness(u8 _u8Value);
+        static u8               masterBrightness()  { return m_u8MasterBrightness; }
 
 
         // device
@@ -142,6 +156,7 @@ class MainWin : public QMainWindow
         void                    updateSceneButtons();
         void                    updateChaseButtons();
         void                    updateFaders();
+        void                    updateMasterFader();
 
         void                    updateControllerPanel();
         void                    updateUniversePanel();
@@ -172,7 +187,6 @@ class MainWin : public QMainWindow
                                                    const QPixmap    &_pixmap);
 
         void                    readChannelIcons();
-
 
     private slots:
         // ctrl-bar
@@ -217,4 +231,10 @@ class MainWin : public QMainWindow
         void                    onChaseSelector_3(bool _bChecked);
         void                    onChaseSelector_4(bool _bChecked);
         void                    onChaseSelector_5(bool _bChecked);
+
+        void                    onFaderIn(bool _bChecked);
+        void                    onFaderOut(bool _bChecked);
+        void                    onSwitchOn(bool _bChecked);
+        void                    onSwitchOff(bool _bChecked);
+        void                    onFade();
 }; // class MainWin

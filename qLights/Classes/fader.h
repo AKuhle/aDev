@@ -44,6 +44,7 @@ class Fader : public QSlider
         shared_ptr<Fixture>     m_pFixture;
         shared_ptr<Channel>     m_pChannel;
         s32                     m_s32ChannelNr  { 0 };
+        bool                    m_bMasterFader  { false };
 
     public:
         Fader(QWidget *_pParent);
@@ -53,6 +54,8 @@ class Fader : public QSlider
         void                init(ScribbleStrip  *_pScribbleStrip,
                                  FaderInfo      *_pFaderInfo,
                                  QString        _sFaderNr);
+
+        void                setMasterFader()    { m_bMasterFader = true; }
 
         void                assignChannel(shared_ptr<Fixture> _pFixture,
                                           shared_ptr<Channel> _pChannel);

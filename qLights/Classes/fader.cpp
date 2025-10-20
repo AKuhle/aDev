@@ -20,6 +20,8 @@
 #include "channel.h"
 #include "fixture.h"
 
+#include "mainWin.h"
+
 using namespace aFrame;
 
 
@@ -29,7 +31,7 @@ using namespace aFrame;
 Fader::Fader(QWidget *_pParent)
 : QSlider(_pParent)
 {
-    connect(this, &QSlider::sliderMoved, this, &Fader::onSliderMoved);
+    connect(this, &QSlider::valueChanged, this, &Fader::onSliderMoved);
 } // Fader::Fader
 
 
@@ -92,6 +94,14 @@ void Fader::update()
                                                         m_pChannel->nr());
         setValue(u8Val);
     }
+    else if (m_bMasterFader)
+    {
+        u8 u8Val = MainWin::instance()->masterBrightness();
+
+        setEnabled(true);
+        m_pScribbleStrip->setPixmap(QPixmap(":/qLights/brightnessMasked.png"));
+        setValue(u8Val);
+    }
     else
     {
         setEnabled(false);
@@ -125,16 +135,27 @@ void Fader::updateInfo()
 *******************************************************************************/
 void Fader::onSliderMoved(int _iValue)
 {
-    cout << _iValue << endl;
+    if (m_bMasterFader)
+    {
+        MainWin::instance()->setMasterBrightness((u8) _iValue);
 
-    CHECK_PRE_CONDITION_VOID(m_pFixture);
-    CHECK_PRE_CONDITION_VOID(m_pChannel);
-    CHECK_PRE_CONDITION_VOID(m_pFixture->universe());
+        m_pScribbleStrip->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                      .arg(_iValue)
+                                      .arg(_iValue)
+                                      .arg(_iValue));
+    }
+    else
+    {
+        CHECK_PRE_CONDITION_VOID(m_pFixture);
+        CHECK_PRE_CONDITION_VOID(m_pChannel);
+        CHECK_PRE_CONDITION_VOID(m_pFixture->universe());
 
-    // set the value in the universe
-    m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
-                                            m_pChannel->nr(),
-                                            (u8) _iValue,
-                                            true);
-    updateInfo();
+        // set the value in the universe
+        m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
+                                                m_pChannel->nr(),
+                                                (u8) _iValue,
+                                                true);
+
+        updateInfo();
+    }
 } // Fader::onSliderMoved

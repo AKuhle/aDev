@@ -2,6 +2,7 @@
 * includes
 *******************************************************************************/
 #include <QMessageBox>
+#include <QTimer>
 
 #include "aFrame_def.h"
 
@@ -13,6 +14,7 @@
 #include "aPath.h"
 #include "scene.h"
 #include "universe.h"
+#include "channel_bright.h"
 
 #include "dlgController.h"
 #include "dlgUniverse.h"
@@ -97,7 +99,14 @@ void MainWin::onFileOpen()
                 QString sPixmapName = f.readStringValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName").toQString();
                 bool bBrightness = f.readBoolValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright");
 
-                vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName, bBrightness));
+                if (bBrightness)
+                {
+                    vChannel.push_back(make_shared<ChannelBright> (s32Nr, sName, sPixmapName));
+                }
+                else
+                {
+                    vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName));
+                }
             }
 
             addDevice(sName.toQString(), sImage.toQString(), vChannel);
@@ -186,26 +195,10 @@ void MainWin::onFileOpen()
                 std::get<0> (tup)->setScene(nullptr);
                 std::get<1> (tup) = nullptr;
             }
-
-                // const list<UniverseTuple> &lstUniverses = pScene->universes();
-                // f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
-                // f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
-
-                // int iUni = 0;
-                // for (const shared_ptr<Universe> &pUniverse : m_lstUniverse)
-                // {
-                //     // add the universe name
-                //     f.addValue(sKeyU + ":name", aString::fromQString(pUniverse->name()));
-
-                //     // add the dmx data
-                //     const QByteArray    &byteArray = pUniverse->dmxData();
-                //     std::vector<u8>     vec(byteArray.constBegin(), byteArray.constEnd());
-                //     f.addValue(sKeyU + ":data", vec);
-
-                //     iUni++;
-                // }
         }
     }
+
+    resetAllUniverses(true);
 
     updateAll();
 } // MainWin::onFileOpen
@@ -290,7 +283,7 @@ void MainWin::onFileSave()
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr", (int) pC->nr());
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":name", aString::fromQString(pC->name()));
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName", aString::fromQString(pC->pixmapName()));
-            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright", pC->isBrightness());
+            f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright", pC->isBrightnessChannel());
 
             iChannelIdx++;
         }
@@ -857,3 +850,81 @@ void MainWin::onChaseSelector_5(bool /*_bChecked*/)
     m_s32ActiveChase = CHASE_5;
     updateChaseButtons();
 } // MainWin::onChaseSelector_5
+
+
+/*******************************************************************************
+* MainWin::onFaderIn
+*******************************************************************************/
+void MainWin::onFaderIn(bool /*_bChecked*/)
+{
+    int     iSteps          = 20;
+    int     iDuration_ms    = 2000;
+
+    m_fFaderValue           = m_u8MasterBrightness;
+    m_fFaderStep            = (255.f - m_fFaderValue) / iSteps;
+    m_u8FaderInterval       = iDuration_ms / iSteps;
+
+    QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
+} // MainWin::onFaderIn
+
+
+/*******************************************************************************
+* MainWin::onFaderOut
+*******************************************************************************/
+void MainWin::onFaderOut(bool /*_bChecked*/)
+{
+    int     iSteps          = 20;
+    int     iDuration_ms    = 2000;
+
+    m_fFaderValue           = m_u8MasterBrightness;
+    m_fFaderStep            = -m_fFaderValue / iSteps;
+    m_u8FaderInterval       = iDuration_ms / iSteps;
+
+    QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
+} // MainWin::onFaderOut
+
+
+/*******************************************************************************
+* MainWin::onSwitchOn
+*******************************************************************************/
+void MainWin::onSwitchOn(bool /*_bChecked*/)
+{
+    setMasterBrightness(255);
+} // MainWin::onSwitchOn
+
+
+/*******************************************************************************
+* MainWin::onSwitchOff
+*******************************************************************************/
+void MainWin::onSwitchOff(bool /*_bChecked*/)
+{
+    setMasterBrightness(0);
+} // MainWin::onSwitchOff
+
+
+/*******************************************************************************
+* MainWin::onFade
+*******************************************************************************/
+void MainWin::onFade()
+{
+    if (m_fFaderStep < 0)
+    {
+        // fade out
+        m_fFaderValue = m_fFaderValue + m_fFaderStep;
+        setMasterBrightness(static_cast<u8> (max(0.f, m_fFaderValue)));
+        if (m_u8MasterBrightness > 0)
+        {
+            QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
+        }
+    }
+    else
+    {
+        // fade in
+        m_fFaderValue = m_fFaderValue + m_fFaderStep;
+        setMasterBrightness(static_cast<u8> (min(255.f, m_fFaderValue)));
+        if (m_u8MasterBrightness < 255)
+        {
+            QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
+        }
+    }
+} // MainWin::onFade

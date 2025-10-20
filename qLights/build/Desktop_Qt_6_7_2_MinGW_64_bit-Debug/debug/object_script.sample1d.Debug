@@ -1,4 +1,5 @@
 debug/channel.o
+debug/channel_bright.o
 debug/chase.o
 debug/controller.o
 debug/device.o
@@ -20,6 +21,7 @@ debug/fixtureTable.o
 debug/mainWin.o
 debug/mainWin_handler.o
 debug/mainWin_update.o
+debug/masterButton.o
 debug/sceneButton.o
 debug/main.o
 debug/qrc_aFrame.o
@@ -36,4 +38,5 @@ debug/moc_bankButton.o
 debug/moc_chaseButton.o
 debug/moc_fixtureTable.o
 debug/moc_mainWin.o
+debug/moc_masterButton.o
 debug/moc_sceneButton.o

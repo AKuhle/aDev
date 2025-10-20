@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file Channel.cpp
+* \file ChannelBright.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -15,30 +15,26 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "Channel.h"
+#include "Channel_bright.h"
 #include "universe.h"
 
 using namespace aFrame;
-using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
-* Channel::Channel
+* ChannelBright::ChannelBright
 *******************************************************************************/
-Channel::Channel(s32            _s32Nr,
-                 const QString  &_sName,
-                 const QString  &_sPixmapName)
-: m_s32Nr(_s32Nr),
-  m_sName(_sName),
-  m_sPixmapName(_sPixmapName)
+ChannelBright::ChannelBright(s32            _s32Nr,
+                             const QString  &_sName,
+                             const QString  &_sPixmapName)
+: Channel(_s32Nr, _sName, _sPixmapName)
 {
-    m_pixmap.load(_sPixmapName);
-} // Channel::Channel
+} // ChannelBright::ChannelBright
 
 
 /*******************************************************************************
-* Channel::~Channel
+* ChannelBright::~ChannelBright
 *******************************************************************************/
-Channel::~Channel()
+ChannelBright::~ChannelBright()
 {
-} // Channel::~Channel
+} // ChannelBright::~ChannelBright

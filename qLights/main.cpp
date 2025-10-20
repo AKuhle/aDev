@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     MainWin w;
     w.show();
+    w.updateAll();
 
     return app.exec();
 } // main

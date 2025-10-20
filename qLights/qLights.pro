@@ -15,6 +15,14 @@ DEFINES += _USE_QT_
 
 
 ########################################################################
+# QMAKE_LFLAGS
+########################################################################
+# stack size
+QMAKE_LFLAGS += -Wl,--stack,8388608      # for MinGW
+#QMAKE_LFLAGS += /F8388608                # for Visual Studio
+
+
+########################################################################
 # debug configuration
 ########################################################################
 CONFIG(debug, debug|release) {
@@ -94,6 +102,7 @@ INCLUDEPATH += Win
 
 SOURCES += \
     Classes/channel.cpp \
+    Classes/channel_bright.cpp \
     Classes/chase.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
@@ -115,11 +124,13 @@ SOURCES += \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_update.cpp \
+    Win/masterButton.cpp \
     Win/sceneButton.cpp \
     main.cpp
 
 HEADERS += \
     Classes/channel.h \
+    Classes/channel_bright.h \
     Classes/chase.h \
     Classes/controller.h \
     Classes/device.h \
@@ -140,6 +151,7 @@ HEADERS += \
     Win/chaseButton.h \
     Win/fixtureTable.h \
     Win/mainWin.h \
+    Win/masterButton.h \
     Win/sceneButton.h
 
 FORMS += \

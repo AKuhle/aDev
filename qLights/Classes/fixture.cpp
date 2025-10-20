@@ -71,6 +71,28 @@ void Fixture::resetFixture(bool _bSend)
 
 
 /*******************************************************************************
+* Fixture::updateBrightness
+*******************************************************************************/
+void Fixture::updateBrightness(bool _bSend)
+{
+    const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
+
+    for (shared_ptr<Channel> pC : vChannel)
+    {
+        if (pC->isBrightnessChannel())
+        {
+
+        }
+    }
+
+    if (_bSend)
+    {
+        m_pUniverse->sendDmxData();
+    }
+} // Fixture::updateBrightness
+
+
+/*******************************************************************************
 * Fixture::addUniverse
 *******************************************************************************/
 // void Fixture::addUniverse(u32 _u32Id)

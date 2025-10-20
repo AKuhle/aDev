@@ -65,10 +65,10 @@ u8 Universe::channelValue(s32  _s32FixtureAdress,
 /*******************************************************************************
 * Universe::setChannelValue
 *******************************************************************************/
-void Universe::setChannelValue(s32  _s32FixtureAdress,
-                               s32  _s32ChannelNr,
-                               u8   _u8Value,
-                               bool _bSend)
+void Universe::setChannelValue(s32                  _s32FixtureAdress,
+                               shared_ptr<Channel>  _pChannel,
+                               u8                   _u8Value,
+                               bool                 _bSend)
 {
     // set the new channel value
     m_dmxData[_s32FixtureAdress + _s32ChannelNr-2] = _u8Value;
@@ -118,6 +118,20 @@ void Universe::sendDmxData() const
 {
     sendValues2Controller();
 } // Universe::sendDmxData
+
+
+/*******************************************************************************
+* Universe::reset
+*******************************************************************************/
+void Universe::reset(bool _bSend)
+{
+    m_dmxData.fill(0);
+
+    if (_bSend)
+    {
+        sendValues2Controller();
+    } // if (_bSend)
+} // Universe::reset
 
 
 /*******************************************************************************

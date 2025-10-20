@@ -13,7 +13,8 @@ using namespace std;
 /*******************************************************************************
 * statics
 *******************************************************************************/
-MainWin *MainWin::m_pInstance    { nullptr };
+MainWin *MainWin::m_pInstance           { nullptr };
+u8      MainWin::m_u8MasterBrightness   { 255 };
 
 
 /*******************************************************************************
@@ -86,8 +87,11 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pChaseSelector_4, &QPushButton::clicked, this, &MainWin::onChaseSelector_4);
     connect(m_pUi->m_pChaseSelector_5, &QPushButton::clicked, this, &MainWin::onChaseSelector_5);
 
-
-    updateAll();
+    // connect the fader buttons
+    connect(m_pUi->m_pFadeIn, &QPushButton::clicked, this, &MainWin::onFaderIn);
+    connect(m_pUi->m_pFadeOut, &QPushButton::clicked, this, &MainWin::onFaderOut);
+    connect(m_pUi->m_pSwitchOn, &QPushButton::clicked, this, &MainWin::onSwitchOn);
+    connect(m_pUi->m_pSwitchOff, &QPushButton::clicked, this, &MainWin::onSwitchOff);
 } // MainWin::MainWin
 
 
@@ -224,7 +228,20 @@ void MainWin::initMember()
     m_vFaders.push_back(m_pUi->m_pFader_23);
     m_vFaders.push_back(m_pUi->m_pFader_24);
 
+    // set the master fader
     m_pMasterFader = m_pUi->m_pFader_m;
+    m_pMasterFader->setMasterFader();
+
+    // set the bg of the switch on/off buttons
+    m_pUi->m_pSwitchOn->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                  .arg(255)
+                                  .arg(255)
+                                  .arg(0));
+
+    m_pUi->m_pSwitchOff->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                  .arg(0)
+                                  .arg(0)
+                                  .arg(0));
 
     // set the scribble strip for the faders
     m_pUi->m_pFader_1->init(m_pUi->m_pScribbleStrip_1, m_pUi->m_pFaderInfo_1, "1");
@@ -393,6 +410,18 @@ void MainWin::addUniverse(const QString   &_sName,
 
 
 /*******************************************************************************
+* MainWin::resetAllUniverses
+*******************************************************************************/
+void MainWin::resetAllUniverses(bool _bSend)
+{
+    for (auto &_pUniverse : m_lstUniverse)
+    {
+        _pUniverse->reset(_bSend);
+    }
+} // MainWin::resetAllUniverses
+
+
+/*******************************************************************************
 * MainWin::sendAllUniverses
 *******************************************************************************/
 void MainWin::sendAllUniverses()
@@ -402,6 +431,27 @@ void MainWin::sendAllUniverses()
         _pUniverse->sendDmxData();
     }
 } // MainWin::sendAllUniverses
+
+
+/*******************************************************************************
+* MainWin::setMasterBrightness
+*******************************************************************************/
+void MainWin::setMasterBrightness(u8 _u8Value)
+{
+    CHECK_PRE_CONDITION_VOID(m_pMasterFader);
+
+    m_u8MasterBrightness = _u8Value;
+
+    updateMasterFader();
+
+    // update the brightness in all fixtures
+    for (shared_ptr<Fixture> pF : m_lstFixture)
+    {
+        pF->updateBrightness(false);
+    }
+    // finale send the data to the universes
+    sendAllUniverses();
+} // MainWin::setMasterBrightness
 
 
 /*******************************************************************************
