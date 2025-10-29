@@ -2,7 +2,9 @@ release/channel.o
 release/chase.o
 release/controller.o
 release/device.o
+release/dmxData.o
 release/fader.o
+release/faderInfo.o
 release/fixture.o
 release/scene.o
 release/scribbleStrip.o
@@ -24,6 +26,7 @@ release/main.o
 release/qrc_aFrame.o
 release/qrc_qLights.o
 release/moc_fader.o
+release/moc_faderInfo.o
 release/moc_dlgChannel.o
 release/moc_dlgController.o
 release/moc_dlgDevice.o

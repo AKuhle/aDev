@@ -446,15 +446,9 @@ void MainWin::setMasterBrightness(u8    _u8Value,
     updateMasterFader();
 
     // update the brightness in all fixtures
-    for (shared_ptr<Fixture> pF : m_lstFixture)
+    for (shared_ptr<Universe> pU : m_lstUniverse)
     {
-        pF->updateBrightness(false);
-    }
-
-    // finaly send the data to the universes
-    if (_bSend)
-    {
-        sendAllUniverses();
+        pU->updateBrightness(_bSend);
     }
 } // MainWin::setMasterBrightness
 

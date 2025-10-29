@@ -59,8 +59,6 @@ class Fixture
 
         void                                resetFixture(bool _bSend);
 
-        void                                updateBrightness(bool _bSend);
-
         //void                                addUniverse(u32 _u32Id);
 
         // void                                setDmxChannelValue(s32      _s32UniverseId,

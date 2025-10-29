@@ -13,7 +13,6 @@
 #include "universe.h"
 #include "device.h"
 #include "fader.h"
-#include "masterButton.h"
 
 class BankButton;
 class SceneButton;

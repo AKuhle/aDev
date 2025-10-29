@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1455</width>
+    <width>1467</width>
     <height>998</height>
    </rect>
   </property>
@@ -2986,7 +2986,7 @@
           </widget>
          </item>
          <item>
-          <widget class="MasterButton" name="m_pSwitchOn">
+          <widget class="QPushButton" name="m_pSwitchOn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -3076,8 +3076,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1455</width>
-     <height>21</height>
+     <width>1467</width>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -3660,15 +3660,10 @@
    <extends>QLabel</extends>
    <header location="global">faderInfo.h</header>
   </customwidget>
-  <customwidget>
-   <class>MasterButton</class>
-   <extends>QPushButton</extends>
-   <header location="global">masterButton.h</header>
-  </customwidget>
  </customwidgets>
  <resources>
-  <include location="../Resource/qLights.qrc"/>
   <include location="../../aFrame/Resource/aFrame.qrc"/>
+  <include location="../Resource/qLights.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -124,7 +124,6 @@ SOURCES += \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_update.cpp \
-    Win/masterButton.cpp \
     Win/sceneButton.cpp \
     main.cpp
 
@@ -150,7 +149,6 @@ HEADERS += \
     Win/chaseButton.h \
     Win/fixtureTable.h \
     Win/mainWin.h \
-    Win/masterButton.h \
     Win/sceneButton.h \
     qLights_def.h
 

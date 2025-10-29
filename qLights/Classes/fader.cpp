@@ -79,6 +79,8 @@ void Fader::assignChannel(shared_ptr<Fixture> _pFixture,
 *******************************************************************************/
 void Fader::update()
 {
+    QSignalBlocker blocker(this); // since Qt 5.2
+
     setFixedHeight(280);
 
     if (m_pChannel)

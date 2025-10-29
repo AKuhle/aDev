@@ -2,7 +2,9 @@ debug/channel.o
 debug/chase.o
 debug/controller.o
 debug/device.o
+debug/dmxData.o
 debug/fader.o
+debug/faderInfo.o
 debug/fixture.o
 debug/scene.o
 debug/scribbleStrip.o
@@ -24,6 +26,7 @@ debug/main.o
 debug/qrc_aFrame.o
 debug/qrc_qLights.o
 debug/moc_fader.o
+debug/moc_faderInfo.o
 debug/moc_dlgChannel.o
 debug/moc_dlgController.o
 debug/moc_dlgDevice.o

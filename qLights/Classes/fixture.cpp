@@ -53,7 +53,7 @@ void Fixture::resetFixture(bool _bSend)
     const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
 
     // set all channel values to 0
-    for (auto pChannel : vChannel)
+    for (auto &pChannel : vChannel)
     {
         // set the value in the universe
         m_pUniverse->setChannelValue(m_s32Adress,
@@ -68,28 +68,6 @@ void Fixture::resetFixture(bool _bSend)
     }
 
 } // Fixture::resetFixture
-
-
-/*******************************************************************************
-* Fixture::updateBrightness
-*******************************************************************************/
-void Fixture::updateBrightness(bool _bSend)
-{
-    const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
-
-    for (shared_ptr<Channel> pC : vChannel)
-    {
-        if (pC->isBrightnessChannel())
-        {
-
-        }
-    }
-
-    if (_bSend)
-    {
-        m_pUniverse->sendDmxData();
-    }
-} // Fixture::updateBrightness
 
 
 /*******************************************************************************

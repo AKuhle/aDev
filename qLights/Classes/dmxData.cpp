@@ -108,7 +108,10 @@ void DmxData::updateSendValue(s32 _dmxIdx)
     {
         // brightness channel => send value depends on master brighness
         float   fFactor = static_cast<float> (MainWin::masterBrightness()) / 255.f;
-        u8      u8Val   = static_cast<u8> (fFactor * m_arValue.at(_dmxIdx));
+        char    cValue  = m_arValue.at(_dmxIdx);
+        int     iValue  = static_cast<int> (cValue);
+
+        u8      u8Val   = static_cast<u8> (fFactor * iValue);
 
         m_arSend[_dmxIdx] = u8Val;
     }

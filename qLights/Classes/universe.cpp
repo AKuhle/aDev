@@ -212,7 +212,7 @@ void Universe::sendValues2Controller() const
         }
         else
         {
-            //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+           std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
         }
 
     } // if...
