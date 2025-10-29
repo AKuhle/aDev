@@ -90,9 +90,7 @@ void Fader::update()
         m_pScribbleStrip->setPixmap(m_pChannel->pixmap());
 
         // set the fader position
-        u8 u8Val = m_pFixture->universe()->channelValue(m_pFixture->adress(),
-                                                        m_pChannel->nr());
-        setValue(u8Val);
+        setValue(m_pChannel->channelValue());
     }
     else if (m_bMasterFader)
     {
@@ -122,8 +120,7 @@ void Fader::updateInfo()
 
     if (m_pFixture && m_pChannel && m_pFixture->universe())
     {
-        iVal = m_pFixture->universe()->channelValue(m_pFixture->adress(),
-                                                    m_pChannel->nr());
+        iVal = m_pChannel->channelValue();
     }
 
     m_pFaderInfo->setInfo(QString::number(iVal));
@@ -137,7 +134,7 @@ void Fader::onSliderMoved(int _iValue)
 {
     if (m_bMasterFader)
     {
-        MainWin::instance()->setMasterBrightness((u8) _iValue);
+        MainWin::instance()->setMasterBrightness((u8) _iValue, true);
 
         m_pScribbleStrip->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
                                       .arg(_iValue)
@@ -152,7 +149,7 @@ void Fader::onSliderMoved(int _iValue)
 
         // set the value in the universe
         m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
-                                                m_pChannel->nr(),
+                                                m_pChannel,
                                                 (u8) _iValue,
                                                 true);
 

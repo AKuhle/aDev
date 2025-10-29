@@ -33,17 +33,21 @@ using namespace aFrame::aUtil;
 *******************************************************************************/
 class Channel
 {
+    friend class Universe;
+
     private:
         s32         m_s32Nr         { -1 };
         QString     m_sName;
         QString     m_sPixmapName;
         QPixmap     m_pixmap;
-
+        u8          m_u8Value       { 0 };
+        bool        m_bBright       { false };
 
     public:
         Channel(s32             _s32Nr,
                 const QString   &_sName,
-                const QString   &_sPixmapName);
+                const QString   &_sPixmapName,
+                bool            _bBright);
 
         ~Channel();
 
@@ -51,11 +55,14 @@ class Channel
 
         QString                         name() const                { return m_sName; }
 
+        u8                              channelValue() const        { return m_u8Value; }
+
         const QString&                  pixmapName() const          { return m_sPixmapName; }
         const QPixmap&                  pixmap() const              { return m_pixmap; }
 
-        virtual bool                    isBrightnessChannel() const { return false; }
+        virtual bool                    isBrightnessChannel() const { return m_bBright; }
 
-        // void                            setValue(s32 _s32Value)     { m_s32Value = _s32Value; }
-        // s32                             value() const               { return m_s32Value; }
+    private:
+        // channel value can only be set via universe
+        void                            setChannelValue(u8 _value)  { m_u8Value = _value; }
 }; // class Channel

@@ -17,14 +17,14 @@
 * includes
 *******************************************************************************/
 #include <QtNetwork/QUdpSocket>
-#include <QByteArray>
 #include <QHostAddress>
-#include <QString>
 
 #include "aFrame_def.h"
 #include "controller.h"
+#include "dmxData.h"
 
 class Channel;
+class Fixture;
 
 using namespace aFrame;
 using namespace std;
@@ -39,12 +39,11 @@ class Universe
         QString                 m_sName;
         shared_ptr<Controller>  m_pController;
         u32                     m_u32Id;
+        DmxData                 m_dmxData;
 
         // artNet
         QHostAddress            m_hostAdr;
         const u16               m_u16Port           { 6454 };
-        const u32               m_u32DmxDataSize    { 512 };
-        QByteArray              m_dmxData           { m_u32DmxDataSize, 0 };
 
     public:
         Universe(QString                _sName,
@@ -61,28 +60,27 @@ class Universe
         u32                     id() const                                  { return m_u32Id; }
         void                    setId(u32 _u32Id)                           { m_u32Id = _u32Id; }
 
-        u8                      channelValue(s32      _s32FixtureAdress,
-                                             s32      _s32ChannelNr) const;
+        void                    attachFixture(shared_ptr<Fixture> _pFixture);
 
         void                    setChannelValue(s32                 _s32FixtureAdress,
                                                 shared_ptr<Channel> _pChannel,
                                                 u8                  _u8Value,
                                                 bool                _bSend);
 
-        vector<u8>              dmxData() const;
-        void                    setDmxData(const vector<u8> &_data,
+        const QByteArray&       dmxDataValue() const                        { return m_dmxData.dmxDataValue(); }
+
+        // void                    dmxData(vector<u8> &_vData,
+        //                                 vector<u8> &_vBright) const;
+
+        void                    setDmxData(const QByteArray &_arData,
                                            bool             _bSend);
 
         void                    sendDmxData() const;
 
         void                    reset(bool _bSend);
 
+        void                    updateBrightness(bool _bSend);
+
     private:
         void                    sendValues2Controller() const;
-
-        // void                setDmxValues(const QByteArray    &_values,
-        //                                  bool                _bSend);
-
-        // u8                  dmxChannelValue(u32   _u32ChannelOs,
-        //                                     u32   _u32Channel);
 }; // class Universe

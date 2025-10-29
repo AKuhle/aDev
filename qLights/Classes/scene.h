@@ -22,6 +22,7 @@
 #include <QString>
 
 using namespace std;
+using namespace aFrame;
 
 class Universe;
 
@@ -35,16 +36,19 @@ class Scene
     private:
         QString                 m_sName;
         list<UniverseTuple>     m_lstUniverse;
-
+        u8                      m_u8MasterBrighness     { 0 };
 
     public:
-        Scene(const QString   &_sName);
+        Scene(const QString   &_sName,
+              u8              _u8MasterBrighness);
 
         ~Scene();
 
-        QString                     name() const        { return m_sName; }
+        QString                     name() const                { return m_sName; }
 
-        const list<UniverseTuple>&  universes() const    { return m_lstUniverse; }
+        u8                          masterBrighness() const     { return m_u8MasterBrighness; }
+
+        const list<UniverseTuple>&  universes() const           { return m_lstUniverse; }
 
         void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
 }; // class Scene

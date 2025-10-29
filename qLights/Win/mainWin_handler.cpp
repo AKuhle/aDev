@@ -14,7 +14,6 @@
 #include "aPath.h"
 #include "scene.h"
 #include "universe.h"
-#include "channel_bright.h"
 
 #include "dlgController.h"
 #include "dlgUniverse.h"
@@ -99,14 +98,7 @@ void MainWin::onFileOpen()
                 QString sPixmapName = f.readStringValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName").toQString();
                 bool bBrightness = f.readBoolValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright");
 
-                if (bBrightness)
-                {
-                    vChannel.push_back(make_shared<ChannelBright> (s32Nr, sName, sPixmapName));
-                }
-                else
-                {
-                    vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName));
-                }
+                vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName, bBrightness));
             }
 
             addDevice(sName.toQString(), sImage.toQString(), vChannel);
@@ -128,6 +120,8 @@ void MainWin::onFileOpen()
             shared_ptr<Universe> pUniverse = findUniverse(sUniverse);
             s32 s32Adress = f.readStringValue(aString("fixture:") + aString::fromValue(idx) + ":adress").to_s32();
 
+            // create the fixture
+            // this also attaches the fixture to the universe, which sets e.g. the brightness flags
             addFixture(sName, pDevice, pUniverse, s32Adress);
         }
     }
@@ -163,10 +157,10 @@ void MainWin::onFileOpen()
 
             QString sSceneName = f.readStringValue(sKey + ":name").toQString();
 
-            if (sSceneName != "-")
+            if (false && sSceneName != "-")
             {
                 s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
-                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName);
+                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, m_u8MasterBrightness);
                 list<shared_ptr<Universe>> lstUniverses;
 
                 std::get<0> (tup)->setScene(pScene);
@@ -181,7 +175,7 @@ void MainWin::onFileOpen()
                     std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
 
                     // set the dmx data in the universe
-                    pUni->setDmxData(vecDmxData, false);
+                    //pUni->setDmxData(vecDmxData, false);
 
                     // add the universe to the list
                     lstUniverses.push_back(pUni);
@@ -351,8 +345,13 @@ void MainWin::onFileSave()
                 for (const UniverseTuple &uniTuple : lstUniverses)
                 {
                     shared_ptr<Universe>    pUni        = std::get<0> (uniTuple);
-                    const vector<u8>        &vDmxData   = std::get<1> (uniTuple);
                     aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
+
+                    // create vector from dmx data
+                    size_t count = std::get<1> (uniTuple).size() / sizeof(u8);
+                    std::vector<u8> vDmxData(reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()),
+                                             reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()) + count);
+
 
                     // add the universe name
                     f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
@@ -889,7 +888,7 @@ void MainWin::onFaderOut(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onSwitchOn(bool /*_bChecked*/)
 {
-    setMasterBrightness(255);
+    setMasterBrightness(255, true);
 } // MainWin::onSwitchOn
 
 
@@ -898,7 +897,7 @@ void MainWin::onSwitchOn(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onSwitchOff(bool /*_bChecked*/)
 {
-    setMasterBrightness(0);
+    setMasterBrightness(0, true);
 } // MainWin::onSwitchOff
 
 
@@ -911,7 +910,7 @@ void MainWin::onFade()
     {
         // fade out
         m_fFaderValue = m_fFaderValue + m_fFaderStep;
-        setMasterBrightness(static_cast<u8> (max(0.f, m_fFaderValue)));
+        setMasterBrightness(static_cast<u8> (max(0.f, m_fFaderValue)), true);
         if (m_u8MasterBrightness > 0)
         {
             QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
@@ -921,7 +920,7 @@ void MainWin::onFade()
     {
         // fade in
         m_fFaderValue = m_fFaderValue + m_fFaderStep;
-        setMasterBrightness(static_cast<u8> (min(255.f, m_fFaderValue)));
+        setMasterBrightness(static_cast<u8> (min(255.f, m_fFaderValue)), true);
         if (m_u8MasterBrightness < 255)
         {
             QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));

@@ -17,6 +17,9 @@
 *******************************************************************************/
 #include "universe.h"
 #include "aString.h"
+#include "channel.h"
+#include "mainWin.h"
+#include "fixture.h"
 
 using namespace std;
 using namespace aFrame;
@@ -31,8 +34,7 @@ Universe::Universe(QString                _sName,
                    u32                    _u32Id)
 : m_sName(_sName),
   m_pController(_pController),
-  m_u32Id(_u32Id),
-  m_dmxData(m_u32DmxDataSize, 0)
+  m_u32Id(_u32Id)
 {
     shared_ptr<Controller> pC = _pController.lock();
 
@@ -52,14 +54,20 @@ Universe::~Universe()
 
 
 /*******************************************************************************
-* Universe::channelValue
+* Universe::attachFixture
 *******************************************************************************/
-u8 Universe::channelValue(s32  _s32FixtureAdress,
-                          s32  _s32ChannelNr) const
+void Universe::attachFixture(shared_ptr<Fixture> _pFixture)
 {
-    // get the channel value
-    return m_dmxData[_s32FixtureAdress + _s32ChannelNr-2];
-} // Universe::channelValue
+    shared_ptr<Device>                  pDevice = _pFixture->device();
+    CHECK_PRE_CONDITION_VOID(pDevice);
+
+    vector<shared_ptr<Channel>>   vChannel = pDevice->channel();
+
+    for (shared_ptr<Channel> &c : vChannel)
+    {
+        setChannelValue(_pFixture->adress(), c, 0, false);
+    }
+} // Universe::attachFixture
 
 
 /*******************************************************************************
@@ -70,8 +78,14 @@ void Universe::setChannelValue(s32                  _s32FixtureAdress,
                                u8                   _u8Value,
                                bool                 _bSend)
 {
+    s32     dmxIdx = _s32FixtureAdress + _pChannel->nr() - 2;
+    bool    bBright = _pChannel->isBrightnessChannel();
+
     // set the new channel value
-    m_dmxData[_s32FixtureAdress + _s32ChannelNr-2] = _u8Value;
+    _pChannel->setChannelValue(_u8Value);
+
+    // set the value in the dmx-arrays
+    m_dmxData.setValue(dmxIdx, _u8Value, bBright);
 
     if (_bSend)
     {
@@ -83,26 +97,41 @@ void Universe::setChannelValue(s32                  _s32FixtureAdress,
 /*******************************************************************************
 * Universe::dmxData
 *******************************************************************************/
-vector<u8> Universe::dmxData() const
-{
-    // Anzahl der Elemente berechnen
-    size_t count = m_dmxData.size() / sizeof(u8);
+// void Universe::dmxData(vector<u8> &_vData,
+//                        vector<u8> &_vBright) const
+// {
+//     _vData.clear();
+//     _vBright.clear();
 
-    // Vektor mit den Daten füllen
-    std::vector<u8> vec(reinterpret_cast<const u8*> (m_dmxData.constData()),
-                        reinterpret_cast<const u8*> (m_dmxData.constData()) + count);
+//     const QByteArray    &arValue = m_dmxData.dmxDataValue();
+//     const QByteArray    &arBright = m_dmxData.dmxDataBright();
 
-    return vec;
-} // Universe::dmxData
+//     // Anzahl der Elemente berechnen
+//     size_t count = arValue.size() / sizeof(u8);
+
+//     // fill value vector
+//     std::vector<u8> vValue(reinterpret_cast<const u8*> (arValue.constData()),
+//                            reinterpret_cast<const u8*> (arValue.constData()) + count);
+//     _vData = vValue;
+
+//     // brightness vector
+//     std::vector<u8> vBright(reinterpret_cast<const u8*> (arBright.constData()),
+//                             reinterpret_cast<const u8*> (arBright.constData()) + count);
+//     _vBright = vBright;
+
+// QByteArray dmxValue = QByteArray (reinterpret_cast<const char *> (_vValue.data()), _vValue.size() * sizeof(u8));
+// QByteArray dmxBright = QByteArray (reinterpret_cast<const char *> (_vBright.data()), _vBright.size() * sizeof(u8));
+
+// } // Universe::dmxData
 
 
 /*******************************************************************************
 * Universe::setDmxData
 *******************************************************************************/
-void Universe::setDmxData(const vector<u8> &_data,
-                          bool             _bSend)
+void Universe::setDmxData(const QByteArray  &_arData,
+                          bool              _bSend)
 {
-    m_dmxData = QByteArray (reinterpret_cast<const char *> (_data.data()), _data.size() * sizeof(u8));
+    m_dmxData.setDmxData(_arData);
 
     if (_bSend)
     {
@@ -125,13 +154,27 @@ void Universe::sendDmxData() const
 *******************************************************************************/
 void Universe::reset(bool _bSend)
 {
-    m_dmxData.fill(0);
+    m_dmxData.reset();
 
     if (_bSend)
     {
         sendValues2Controller();
     } // if (_bSend)
 } // Universe::reset
+
+
+/*******************************************************************************
+* Universe::updateBrightness
+*******************************************************************************/
+void Universe::updateBrightness(bool _bSend)
+{
+    m_dmxData.updateBrightness();
+
+    if (_bSend)
+    {
+        sendValues2Controller();
+    } // if (_bSend)
+} // Universe::updateBrightness
 
 
 /*******************************************************************************
@@ -154,11 +197,11 @@ void Universe::sendValues2Controller() const
         artnetPacket.append((char) 0x00);                               // Physical (nicht verwendet)
         artnetPacket.append((char) (m_u32Id & 0xFF));                   // Universum (Low Byte)
         artnetPacket.append((char) ((m_u32Id >> 8) & 0xFF));            // Universum (High Byte)
-        artnetPacket.append((char) ((m_u32DmxDataSize >> 8) & 0xFF));   // DMX-Datenlänge (High Byte)
-        artnetPacket.append((char) m_u32DmxDataSize & 0xFF);            // DMX-Datenlänge (Low Byte)
+        artnetPacket.append((char) ((DMX_DATA_SIZE >> 8) & 0xFF));      // DMX-Datenlänge (High Byte)
+        artnetPacket.append((char) DMX_DATA_SIZE & 0xFF);               // DMX-Datenlänge (Low Byte)
 
         // Füge DMX-Daten zum Paket hinzu
-        artnetPacket.append(m_dmxData.left(m_u32DmxDataSize));
+        artnetPacket.append(m_dmxData.dmxDataSend().left(DMX_DATA_SIZE));
 
         // Senden des Pakets
         qint64 bytesSent = udpSocket.writeDatagram(artnetPacket, m_hostAdr, m_u16Port);
@@ -175,41 +218,3 @@ void Universe::sendValues2Controller() const
     } // if...
 
 } // Universe::sendValues2Controller
-
-
-// /*******************************************************************************
-// * Universe::setDmxValues
-// *******************************************************************************/
-// // void Universe::setDmxValues(const QByteArray &_values,
-// //                             bool             _bSend)
-// // {
-// //     // set the new channel value
-// //     m_dmxData = _values;
-
-// //     if (_bSend)
-// //     {
-// //         sendDmxValues();
-// //     } // if (_bSend)
-// // } // Universe::setDmxValues
-
-
-// /*******************************************************************************
-// * Universe::sendUniverse
-// *******************************************************************************/
-// void Universe::sendUniverse()
-// {
-//     sendDmxValues();
-
-// } // Universe::sendUniverse
-
-
-// /*******************************************************************************
-// * Universe::dmxChannelValue
-// *******************************************************************************/
-// // u8 Universe::dmxChannelValue(u32   _u32ChannelOs,
-// //                              u32   _u32Channel)
-// // {
-// //     // set the new channel value
-// //     u32 uChannel = _u32ChannelOs + _u32Channel - 1;
-// //     return m_dmxData[uChannel - 1];
-// // } // Universe::dmxChannelValue

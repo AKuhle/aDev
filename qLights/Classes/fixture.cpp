@@ -57,7 +57,7 @@ void Fixture::resetFixture(bool _bSend)
     {
         // set the value in the universe
         m_pUniverse->setChannelValue(m_s32Adress,
-                                     pChannel->nr(),
+                                     pChannel,
                                      (u8) 0,
                                      false);
     }

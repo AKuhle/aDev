@@ -24,12 +24,15 @@
 #include "aFrame_def.h"
 
 class Universe;
+class DmxData;
 
 
 /*******************************************************************************
 * gloabl constants
 *******************************************************************************/
 constexpr QColor    colDeviceImageBg(120, 120, 120);
+
+constexpr aFrame::u32       DMX_DATA_SIZE       { 512 };
 
 constexpr aFrame::s32       BANK_SET_COUNT { 5 };
 constexpr aFrame::s32       BANK_BTN_COUNT { 20 };
@@ -56,14 +59,4 @@ constexpr aFrame::s32       CHASE_4 { 3 };
 constexpr aFrame::s32       CHASE_5 { 4 };
 
 
-using UniverseTuple = std::tuple<std::shared_ptr<Universe>, std::vector<aFrame::u8>>;
-
-
-/*******************************************************************************
-* structs
-*******************************************************************************/
-// struct structChannelIcn
-// {
-//     QString     rscName;
-//     QPixmap     pixmap;
-// };
+using UniverseTuple = std::tuple<std::shared_ptr<Universe>, QByteArray>;

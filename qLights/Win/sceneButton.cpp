@@ -100,6 +100,9 @@ void SceneButton::onClicked()
 {
     CHECK_PRE_CONDITION_VOID(m_pScene);
 
+    // set the master brightness of the scene BEFORE the universes
+    MainWin::instance()->setMasterBrightness(m_pScene->masterBrighness(), false);
+
     const list<UniverseTuple> &lstTup = m_pScene->universes();
 
     for (auto &tup : lstTup)

@@ -102,10 +102,10 @@ INCLUDEPATH += Win
 
 SOURCES += \
     Classes/channel.cpp \
-    Classes/channel_bright.cpp \
     Classes/chase.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
+    Classes/dmxData.cpp \
     Classes/fader.cpp \
     Classes/faderInfo.cpp \
     Classes/fixture.cpp \
@@ -130,14 +130,13 @@ SOURCES += \
 
 HEADERS += \
     Classes/channel.h \
-    Classes/channel_bright.h \
     Classes/chase.h \
     Classes/controller.h \
     Classes/device.h \
+    Classes/dmxData.h \
     Classes/fader.h \
     Classes/faderInfo.h \
     Classes/fixture.h \
-    Classes/qLights_def.h \
     Classes/scene.h \
     Classes/scribbleStrip.h \
     Classes/universe.h \
@@ -152,7 +151,8 @@ HEADERS += \
     Win/fixtureTable.h \
     Win/mainWin.h \
     Win/masterButton.h \
-    Win/sceneButton.h
+    Win/sceneButton.h \
+    qLights_def.h
 
 FORMS += \
     Forms/dlgChannel.ui \

@@ -23,8 +23,10 @@
 /*******************************************************************************
 * Scene::Scene
 *******************************************************************************/
-Scene::Scene(const QString  &_sName)
-: m_sName(_sName)
+Scene::Scene(const QString  &_sName,
+             u8             _u8MasterBrighness)
+: m_sName(_sName),
+  m_u8MasterBrighness(_u8MasterBrighness)
 {
 } // Scene::Scene
 
@@ -44,7 +46,7 @@ void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)
 {
     for (auto pUniverse : _lstUniverse)
     {
-        UniverseTuple tup = std::make_tuple(pUniverse, pUniverse->dmxData());
+        UniverseTuple tup = std::make_tuple(pUniverse, pUniverse->dmxDataValue());
         m_lstUniverse.push_back(tup);
     }
 } // Scene::addUniverses

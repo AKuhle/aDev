@@ -113,7 +113,8 @@ class MainWin : public QMainWindow
 
         void                    sendAllUniverses();
 
-        void                    setMasterBrightness(u8 _u8Value);
+        void                    setMasterBrightness(u8      _u8Value,
+                                                    bool    _bSend);
         static u8               masterBrightness()  { return m_u8MasterBrightness; }
 
 

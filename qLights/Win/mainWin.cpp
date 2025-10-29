@@ -436,7 +436,8 @@ void MainWin::sendAllUniverses()
 /*******************************************************************************
 * MainWin::setMasterBrightness
 *******************************************************************************/
-void MainWin::setMasterBrightness(u8 _u8Value)
+void MainWin::setMasterBrightness(u8    _u8Value,
+                                  bool  _bSend)
 {
     CHECK_PRE_CONDITION_VOID(m_pMasterFader);
 
@@ -449,8 +450,12 @@ void MainWin::setMasterBrightness(u8 _u8Value)
     {
         pF->updateBrightness(false);
     }
-    // finale send the data to the universes
-    sendAllUniverses();
+
+    // finaly send the data to the universes
+    if (_bSend)
+    {
+        sendAllUniverses();
+    }
 } // MainWin::setMasterBrightness
 
 
@@ -488,7 +493,13 @@ void MainWin::addFixture(const QString          &_sName,
                          shared_ptr<Universe>   _pUniverse,
                          s32                    _s32Adress)
 {
+    // create the new fixture
     shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName, _pDevice, _pUniverse, _s32Adress);
+
+    // init the dmx-values in the universe
+    _pUniverse->attachFixture(pFixture);
+
+    // add the fixture to the fixture list
     m_lstFixture.push_back(std::move(pFixture));
 } // MainWin::addFixture
 
@@ -557,7 +568,7 @@ void MainWin::assignScene(SceneButton   *_pSceneBtn,
         if (std::get<0> (tup) == _pSceneBtn)
         {
             // scene button found => create a new scene
-            shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName);
+            shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName, m_u8MasterBrightness);
             pScene->addUniverses(m_lstUniverse);
 
             // set the scene in the tuple of the current set

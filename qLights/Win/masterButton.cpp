@@ -39,6 +39,6 @@ void MasterButton::onClicked()
 
     u8Bright = ((u8Bright) == 0)?   255 : 0;
 
-    MainWin::instance()->setMasterBrightness(u8Bright);
+    MainWin::instance()->setMasterBrightness(u8Bright, true);
 
 } // MasterButton::onClicked
