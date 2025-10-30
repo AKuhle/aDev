@@ -60,7 +60,8 @@ class Channel
         const QString&                  pixmapName() const          { return m_sPixmapName; }
         const QPixmap&                  pixmap() const              { return m_pixmap; }
 
-        virtual bool                    isBrightnessChannel() const { return m_bBright; }
+        bool                            isBrightnessChannel() const { return m_bBright; }
+
 
     private:
         // channel value can only be set via universe

@@ -33,6 +33,14 @@ void SceneButton::init()
 
 
 /*******************************************************************************
+* SceneButton::~SceneButton
+*******************************************************************************/
+SceneButton::~SceneButton()
+{
+} // SceneButton::~SceneButton
+
+
+/*******************************************************************************
 * SceneButton::setScene
 *******************************************************************************/
 void SceneButton::setScene(shared_ptr<Scene> _pScene)
@@ -41,14 +49,6 @@ void SceneButton::setScene(shared_ptr<Scene> _pScene)
 
     setText((m_pScene)?   m_pScene->name() : "");
 } // SceneButton::setScene
-
-
-/*******************************************************************************
-* SceneButton::~SceneButton
-*******************************************************************************/
-SceneButton::~SceneButton()
-{
-} // SceneButton::~SceneButtonß
 
 
 /*******************************************************************************
@@ -111,10 +111,15 @@ void SceneButton::onClicked()
 
         if (pUniverse)
         {
+            // set the new universe data which was stored in the scene
             pUniverse->setDmxData(std::get<1> (tup), true);
-
-            MainWin::instance()->updateFaders();
         }
     }
+
+    // update all channel values
+    MainWin::instance()->updateAllChannelValuesFromUniverse();
+
+    // update the faders
+    MainWin::instance()->updateFaders();
 
 } // SceneButton::onClicked

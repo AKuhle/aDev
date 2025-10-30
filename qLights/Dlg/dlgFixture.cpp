@@ -43,7 +43,7 @@ DlgFixture::DlgFixture(QWidget                      *_pParent,
         //m_pUi->m_pChannelIcon->setItemData(m_pUi->m_pChannelIcon->count()-1, Qt::AlignCenter, Qt::TextAlignmentRole);
     }
 
-    // fill the combo box with the device icons
+    // fill the combo box with the universe names
     for (auto pUniverse : m_lstUniverse)
     {
         const QString   &name   = pUniverse->name();

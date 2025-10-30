@@ -201,6 +201,11 @@ void MainWin::initMember()
 
         m_vvChaseButtons.push_back(m_vChaseTuple);
     }
+    // initialize the chase buttons
+    for (auto tup : m_vvChaseButtons.at(0))
+    {
+        std::get<0>(tup)->init();
+    }
 
     // faders
     m_vFaders.push_back(m_pUi->m_pFader_1);
@@ -596,6 +601,33 @@ void MainWin::removeScene(SceneButton   *_pSceneBtn)
 
 
 /*******************************************************************************
+* MainWin::getAllSceneNames
+*******************************************************************************/
+vector<QString> MainWin::getAllSceneNames() const
+{
+    vector<QString> vScenes;
+
+    // iterate over all scene sets
+    for (s32 iSet = 0; iSet < SCENE_SET_COUNT; iSet++)
+    {
+        // iterate over all scene button within the current set
+        for (s32 iScene = 0; iScene < SCENE_BTN_COUNT; iScene++)
+        {
+            const SceneTuple &tup  = m_vvSceneButtons.at(iSet).at(iScene);
+            shared_ptr<Scene> pScene = std::get<1> (tup);
+
+            if (pScene)
+            {
+                vScenes.push_back(pScene->name());
+            }
+        }
+    }
+
+    return vScenes;
+} // MainWin::getAllSceneNames
+
+
+/*******************************************************************************
 * MainWin::assignFaders
 *******************************************************************************/
 void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
@@ -631,6 +663,18 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
         iChannelIdx++;
     }
 } // MainWin::assignFaders
+
+
+/*******************************************************************************
+* MainWin::updateAllChannelValuesFromUniverse
+*******************************************************************************/
+void MainWin::updateAllChannelValuesFromUniverse()
+{
+    for (shared_ptr<Fixture> pF : m_lstFixture)
+    {
+        pF->updateAllChannelValuesFromUniverse();
+    }
+} // MainWin::updateAllChannelValuesFromUniverse
 
 
 /*******************************************************************************

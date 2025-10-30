@@ -95,34 +95,15 @@ void Universe::setChannelValue(s32                  _s32FixtureAdress,
 
 
 /*******************************************************************************
-* Universe::dmxData
+* Universe::channelValue
 *******************************************************************************/
-// void Universe::dmxData(vector<u8> &_vData,
-//                        vector<u8> &_vBright) const
-// {
-//     _vData.clear();
-//     _vBright.clear();
+u8 Universe::channelValue(s32    _s32FixtureAdress,
+                          s32    _s32ChannelNr) const
+{
+    s32     dmxIdx = _s32FixtureAdress +_s32ChannelNr - 2;
 
-//     const QByteArray    &arValue = m_dmxData.dmxDataValue();
-//     const QByteArray    &arBright = m_dmxData.dmxDataBright();
-
-//     // Anzahl der Elemente berechnen
-//     size_t count = arValue.size() / sizeof(u8);
-
-//     // fill value vector
-//     std::vector<u8> vValue(reinterpret_cast<const u8*> (arValue.constData()),
-//                            reinterpret_cast<const u8*> (arValue.constData()) + count);
-//     _vData = vValue;
-
-//     // brightness vector
-//     std::vector<u8> vBright(reinterpret_cast<const u8*> (arBright.constData()),
-//                             reinterpret_cast<const u8*> (arBright.constData()) + count);
-//     _vBright = vBright;
-
-// QByteArray dmxValue = QByteArray (reinterpret_cast<const char *> (_vValue.data()), _vValue.size() * sizeof(u8));
-// QByteArray dmxBright = QByteArray (reinterpret_cast<const char *> (_vBright.data()), _vBright.size() * sizeof(u8));
-
-// } // Universe::dmxData
+    return m_dmxData.value(dmxIdx);
+} // Universe::channelValue
 
 
 /*******************************************************************************
@@ -182,6 +163,8 @@ void Universe::updateBrightness(bool _bSend)
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
+    return;
+
     if (!m_hostAdr.isNull())
     {
         QUdpSocket      udpSocket;

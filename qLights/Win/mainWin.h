@@ -142,12 +142,17 @@ class MainWin : public QMainWindow
 
         void                    removeScene(SceneButton   *_pBankBtn);
 
+        vector<QString>         getAllSceneNames() const;
+
         // faders
         void                    assignFaders(shared_ptr<Fixture> _pFixture);
+        void                    updateAllChannelValuesFromUniverse();
 
         shared_ptr<Fixture>     findFixture(const QString &_sName);
 
         // update
+        void                    initGui();  // reset all active banks/scenes etc.
+
         void                    updateAll();
 
         void                    updateToolbar();

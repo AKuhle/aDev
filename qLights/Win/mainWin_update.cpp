@@ -9,6 +9,18 @@ using namespace std;
 
 
 /*******************************************************************************
+* MainWin::initGui
+*******************************************************************************/
+void MainWin::initGui()
+{
+    m_s32ActiveBank = BANK_1;
+    m_s32ActiveScene = SCENE_1;
+    m_s32ActiveChase = CHASE_1;
+    m_pActiveFixture = nullptr;
+} // MainWin::initGui
+
+
+/*******************************************************************************
 * MainWin::updateAll
 *******************************************************************************/
 void MainWin::updateAll()
@@ -111,7 +123,7 @@ void MainWin::updateFaders()
         pFader->update();
     }
 
-    // update the master button
+    // update the master fader
     updateMasterFader();
 } // MainWin::updateFaders
 

@@ -44,11 +44,12 @@ class Scene
 
         ~Scene();
 
-        QString                     name() const                { return m_sName; }
+        QString                     name() const                    { return m_sName; }
 
-        u8                          masterBrighness() const     { return m_u8MasterBrighness; }
+        void                        setMasterBrighness(u8 _bright)  {  m_u8MasterBrighness = _bright; }
+        u8                          masterBrighness() const         { return m_u8MasterBrighness; }
 
-        const list<UniverseTuple>&  universes() const           { return m_lstUniverse; }
+        const list<UniverseTuple>&  universes() const               { return m_lstUniverse; }
 
         void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
 }; // class Scene

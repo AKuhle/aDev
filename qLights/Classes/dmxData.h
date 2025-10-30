@@ -41,6 +41,8 @@ class DmxData
                                              u8     _u8Value,
                                              bool   _bBright);
 
+        u8                          value(s32 _s32DmxIdx) const;
+
         void                        reset();
 
         void                        updateBrightness();

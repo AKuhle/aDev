@@ -47,6 +47,9 @@ void MainWin::onFileOpen()
 
     if (f.readJsonFile(sPath))
     {
+        // reset the current gui
+        initGui();
+
         // load the controllers
         m_lstController.clear();
         count = f.readIntValue("controller:count");
@@ -155,27 +158,39 @@ void MainWin::onFileOpen()
             aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
             auto &tup  = m_vvSceneButtons.at(iSet).at(iScene);
 
+            // load the scene name
             QString sSceneName = f.readStringValue(sKey + ":name").toQString();
 
-            if (false && sSceneName != "-")
+            if (sSceneName != "-")
             {
-                s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
-                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, m_u8MasterBrightness);
                 list<shared_ptr<Universe>> lstUniverses;
 
+                // read the master brightness of the scene
+                u8 u8MasterBrightness = static_cast<u8> (f.readIntValue(sKey + ":master_brightness"));
+
+                // create the scene
+                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, u8MasterBrightness);
                 std::get<0> (tup)->setScene(pScene);
                 std::get<1> (tup) = pScene;
+
+
+                // read the universe count
+                s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
 
                 for (int iUni = 0; iUni < s32UniCount; iUni++)
                 {
                     aString sKeyU = sKey + ":universe" + aString::fromValue(iUni);
+
+                    // read the universe name
                     QString sUniName = f.readStringValue(sKeyU + ":name").toQString();
                     shared_ptr<Universe> pUni = findUniverse(sUniName);
 
                     std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
+                    QByteArray arDmxData(reinterpret_cast<const char*>(vecDmxData.data()),
+                                         static_cast<int>(vecDmxData.size()));
 
                     // set the dmx data in the universe
-                    //pUni->setDmxData(vecDmxData, false);
+                    pUni->setDmxData(arDmxData, false);
 
                     // add the universe to the list
                     lstUniverses.push_back(pUni);
@@ -338,7 +353,14 @@ void MainWin::onFileSave()
             if (pScene)
             {
                 const list<UniverseTuple> &lstUniverses = pScene->universes();
+
+                // save the scene name
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
+
+                // save the master brighness
+                f.addValue(sKey + ":master_brightness", (int) pScene->masterBrighness());
+
+                // save the universe count
                 f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
 
                 int iUni = 0;
@@ -351,7 +373,6 @@ void MainWin::onFileSave()
                     size_t count = std::get<1> (uniTuple).size() / sizeof(u8);
                     std::vector<u8> vDmxData(reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()),
                                              reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()) + count);
-
 
                     // add the universe name
                     f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));

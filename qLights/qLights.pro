@@ -113,6 +113,7 @@ SOURCES += \
     Classes/scribbleStrip.cpp \
     Classes/universe.cpp \
     Dlg/dlgChannel.cpp \
+    Dlg/dlgChase.cpp \
     Dlg/dlgController.cpp \
     Dlg/dlgDevice.cpp \
     Dlg/dlgFixture.cpp \
@@ -140,6 +141,7 @@ HEADERS += \
     Classes/scribbleStrip.h \
     Classes/universe.h \
     Dlg/dlgChannel.h \
+    Dlg/dlgChase.h \
     Dlg/dlgController.h \
     Dlg/dlgDevice.h \
     Dlg/dlgFixture.h \
@@ -154,6 +156,7 @@ HEADERS += \
 
 FORMS += \
     Forms/dlgChannel.ui \
+    Forms/dlgChase.ui \
     Forms/dlgController.ui \
     Forms/dlgDevice.ui \
     Forms/dlgFixture.ui \

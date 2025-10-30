@@ -55,6 +55,16 @@ void DmxData::setValue(s32      _s32DmxIdx,
 
 
 /*******************************************************************************
+* DmxData::value
+*******************************************************************************/
+u8 DmxData::value(s32 _s32DmxIdx) const
+{
+    // set the value
+    return static_cast<u8>(static_cast<unsigned char>(m_arValue.at(_s32DmxIdx)));
+} // DmxData::value
+
+
+/*******************************************************************************
 * DmxData::reset
 *******************************************************************************/
 void DmxData::reset()
@@ -108,9 +118,7 @@ void DmxData::updateSendValue(s32 _dmxIdx)
     {
         // brightness channel => send value depends on master brighness
         float   fFactor = static_cast<float> (MainWin::masterBrightness()) / 255.f;
-        char    cValue  = m_arValue.at(_dmxIdx);
-        int     iValue  = static_cast<int> (cValue);
-
+        int     iValue  = static_cast<float>(static_cast<unsigned char>(m_arValue.at(_dmxIdx)));
         u8      u8Val   = static_cast<u8> (fFactor * iValue);
 
         m_arSend[_dmxIdx] = u8Val;

@@ -67,10 +67,11 @@ class Universe
                                                 u8                  _u8Value,
                                                 bool                _bSend);
 
-        const QByteArray&       dmxDataValue() const                        { return m_dmxData.dmxDataValue(); }
+        u8                      channelValue(s32    _s32FixtureAdress,
+                                             s32    _s32ChannelNr) const;
 
-        // void                    dmxData(vector<u8> &_vData,
-        //                                 vector<u8> &_vBright) const;
+
+        const QByteArray&       dmxDataValue() const                        { return m_dmxData.dmxDataValue(); }
 
         void                    setDmxData(const QByteArray &_arData,
                                            bool             _bSend);
