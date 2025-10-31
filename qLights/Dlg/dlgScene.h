@@ -43,6 +43,8 @@ class DlgScene : public QDialog
         QString             name() const;
 
     private:
+        void                setCtrls(const shared_ptr<Scene> _pScene);
+
         virtual void        accept();
         virtual void        reject();
 

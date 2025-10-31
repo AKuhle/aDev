@@ -22,11 +22,8 @@ DlgScene::DlgScene(SceneButton          *_pParent,
 {
     m_pUi->setupUi(this);
 
-    // set the scene name
-    if (_pScene)
-    {
-        m_pUi->m_pSceneName->setText(_pScene->name());
-    }
+    // initialize the ctrls
+    setCtrls(_pScene);
 } // DlgScene::DlgScene
 
 
@@ -46,6 +43,19 @@ QString DlgScene::name() const
 {
     return m_pUi->m_pSceneName->text();
 } // DlgScene::name
+
+
+/*******************************************************************************
+* DlgScene::setCtrls
+*******************************************************************************/
+void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
+{
+    // set the scene name
+    if (_pScene)
+    {
+        m_pUi->m_pSceneName->setText(_pScene->name());
+    }
+} // DlgScene::setCtrls
 
 
 /*******************************************************************************

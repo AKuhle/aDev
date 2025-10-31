@@ -35,7 +35,7 @@ class Scene
 {
     private:
         QString                 m_sName;
-        list<UniverseTuple>     m_lstUniverse;
+        list<stUniverseInfo>    m_lstUniverse;
         u8                      m_u8MasterBrighness     { 0 };
 
     public:
@@ -49,7 +49,7 @@ class Scene
         void                        setMasterBrighness(u8 _bright)  {  m_u8MasterBrighness = _bright; }
         u8                          masterBrighness() const         { return m_u8MasterBrighness; }
 
-        const list<UniverseTuple>&  universes() const               { return m_lstUniverse; }
+        const list<stUniverseInfo>& universes() const               { return m_lstUniverse; }
 
         void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
 }; // class Scene

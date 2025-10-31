@@ -103,16 +103,16 @@ void SceneButton::onClicked()
     // set the master brightness of the scene BEFORE the universes
     MainWin::instance()->setMasterBrightness(m_pScene->masterBrighness(), false);
 
-    const list<UniverseTuple> &lstTup = m_pScene->universes();
+    const list<stUniverseInfo> &lstUniverseInfo = m_pScene->universes();
 
-    for (auto &tup : lstTup)
+    for (auto &uInfo : lstUniverseInfo)
     {
-        std::shared_ptr<Universe>   pUniverse = std::get<0> (tup);
+        std::shared_ptr<Universe>   pUniverse = uInfo.pUniverse;
 
         if (pUniverse)
         {
             // set the new universe data which was stored in the scene
-            pUniverse->setDmxData(std::get<1> (tup), true);
+            pUniverse->setDmxData(uInfo.data, true);
         }
     }
 

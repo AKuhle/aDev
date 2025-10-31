@@ -1,5 +1,6 @@
 debug/channel.o
 debug/chase.o
+debug/chaseStep.o
 debug/controller.o
 debug/device.o
 debug/dmxData.o

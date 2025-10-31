@@ -129,7 +129,10 @@ void MainWin::onFileOpen()
         }
     }
 
+
+    ///////////////////////////////////////////
     // load the banks
+    ///////////////////////////////////////////
     s32 bank_count = f.readIntValue(aString("banks:bank_set_count"));
     s32 bank_button_count = f.readIntValue(aString("banks:bank_button_count"));
 
@@ -140,14 +143,17 @@ void MainWin::onFileOpen()
             aString sKey = aString("banks:") + aString::fromValue(iBank) + "-" + aString::fromValue(iFix);
             QString sFixName = f.readStringValue(sKey).toQString();
             shared_ptr<Fixture> pFix = findFixture(sFixName);
-            BankTuple &tup = m_vvBankButtons.at(iBank).at(iFix);
+            stBankBtn &bankBtn = m_vvBankButtons.at(iBank).at(iFix);
 
             // set the fixture in the tuple
-            std::get<1> (tup) = pFix;
+            bankBtn.pFixture = pFix;
         }
     }
 
+
+    ///////////////////////////////////////////
     // load the scenes
+    ///////////////////////////////////////////
     s32 scene_set_count = f.readIntValue(aString("scenes:scene_set_count"));
     s32 scene_button_count = f.readIntValue(aString("scenes:scene_button_count"));
 
@@ -156,7 +162,7 @@ void MainWin::onFileOpen()
         for (s32 iScene = 0; iScene < scene_button_count; iScene++)
         {
             aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
-            auto &tup  = m_vvSceneButtons.at(iSet).at(iScene);
+            auto &sceneBtn  = m_vvSceneButtons.at(iSet).at(iScene);
 
             // load the scene name
             QString sSceneName = f.readStringValue(sKey + ":name").toQString();
@@ -170,8 +176,8 @@ void MainWin::onFileOpen()
 
                 // create the scene
                 shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, u8MasterBrightness);
-                std::get<0> (tup)->setScene(pScene);
-                std::get<1> (tup) = pScene;
+                sceneBtn.pBtn->setScene(pScene);
+                sceneBtn.pScene = pScene;
 
 
                 // read the universe count
@@ -201,14 +207,41 @@ void MainWin::onFileOpen()
             }
             else
             {
-                std::get<0> (tup)->setScene(nullptr);
-                std::get<1> (tup) = nullptr;
+                sceneBtn.pBtn->setScene(nullptr);
+                sceneBtn.pScene = nullptr;
             }
         }
     }
 
-    resetAllUniverses(true);
 
+    ///////////////////////////////////////////
+    // load the chases
+    ///////////////////////////////////////////
+    s32 chase_set_count = f.readIntValue(aString("chases:chase_set_count"));
+    s32 chase_button_count = f.readIntValue(aString("chases:chase_button_count"));
+
+    for (s32 iSet = 0; iSet < chase_set_count; iSet++)
+    {
+        for (s32 iChase = 0; iChase < chase_button_count; iChase++)
+        {
+            aString sKey = aString("chases:") + aString::fromValue(iSet) + "-" + aString::fromValue(iChase);
+            auto &chaseBtn  = m_vvChaseButtons.at(iSet).at(iChase);
+
+            // load the chase name
+            QString sChaseName = f.readStringValue(sKey + ":name").toQString();
+
+            if (sChaseName != "-")
+            {
+                // create the chase
+                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName);
+                chaseBtn.pBtn->setChase(pChase);
+                chaseBtn.pChase = pChase;
+            }
+        }
+    }
+
+    // reset all universes and update all
+    resetAllUniverses(true);
     updateAll();
 } // MainWin::onFileOpen
 
@@ -329,14 +362,16 @@ void MainWin::onFileSave()
         for (s32 iFix = 0; iFix < BANK_BTN_COUNT; iFix++)
         {
             aString sKey = aString("banks:") + aString::fromValue(iBank) + "-" + aString::fromValue(iFix);
-            shared_ptr<Fixture> pFix = std::get<1> (m_vvBankButtons.at(iBank).at(iFix));
+            shared_ptr<Fixture> pFix = m_vvBankButtons.at(iBank).at(iFix).pFixture;
             QString sFix = (pFix)?   pFix->name() : "";
 
             f.addValue(sKey, aString::fromQString(sFix));
         }
     }
 
+    ///////////////////////////////////////////
     // save the scenes
+    ///////////////////////////////////////////
     f.addValue(aString("scenes:scene_set_count"), SCENE_SET_COUNT);
     f.addValue(aString("scenes:scene_button_count"), SCENE_BTN_COUNT);
 
@@ -347,12 +382,12 @@ void MainWin::onFileSave()
         for (s32 iScene = 0; iScene < SCENE_BTN_COUNT; iScene++)
         {
             aString sKey = aString("scenes:") + aString::fromValue(iSet) + "-" + aString::fromValue(iScene);
-            const SceneTuple &tup  = m_vvSceneButtons.at(iSet).at(iScene);
-            shared_ptr<Scene> pScene = std::get<1> (tup);
+            const stSceneBtn &sceneBtn  = m_vvSceneButtons.at(iSet).at(iScene);
+            shared_ptr<Scene> pScene = sceneBtn.pScene;
 
             if (pScene)
             {
-                const list<UniverseTuple> &lstUniverses = pScene->universes();
+                const list<stUniverseInfo> &lstUniverses = pScene->universes();
 
                 // save the scene name
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
@@ -364,15 +399,15 @@ void MainWin::onFileSave()
                 f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
 
                 int iUni = 0;
-                for (const UniverseTuple &uniTuple : lstUniverses)
+                for (const stUniverseInfo &uInfo : lstUniverses)
                 {
-                    shared_ptr<Universe>    pUni        = std::get<0> (uniTuple);
+                    shared_ptr<Universe>    pUni        = uInfo.pUniverse;
                     aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
 
                     // create vector from dmx data
-                    size_t count = std::get<1> (uniTuple).size() / sizeof(u8);
-                    std::vector<u8> vDmxData(reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()),
-                                             reinterpret_cast<const u8*> (std::get<1> (uniTuple).constData()) + count);
+                    size_t count = uInfo.data.size() / sizeof(u8);
+                    std::vector<u8> vDmxData(reinterpret_cast<const u8*> (uInfo.data.constData()),
+                                             reinterpret_cast<const u8*> (uInfo.data.constData()) + count);
 
                     // add the universe name
                     f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
@@ -386,6 +421,37 @@ void MainWin::onFileSave()
             else
             {
                 // no scene for this button
+                f.addValue(sKey + ":name", aString("-"));
+            }
+        }
+    }
+
+
+    ///////////////////////////////////////////
+    // save the chases
+    ///////////////////////////////////////////
+    f.addValue(aString("chases:chase_set_count"), CHASE_SET_COUNT);
+    f.addValue(aString("chases:chase_button_count"), CHASE_BTN_COUNT);
+
+    // iterate over all chase sets
+    for (s32 iSet = 0; iSet < CHASE_SET_COUNT; iSet++)
+    {
+        // iterate over all scene button within the current set
+        for (s32 iChase = 0; iChase < CHASE_BTN_COUNT; iChase++)
+        {
+            aString sKey = aString("chases:") + aString::fromValue(iSet) + "-" + aString::fromValue(iChase);
+            const stChaseBtn &chaseBtn  = m_vvChaseButtons.at(iSet).at(iChase);
+            shared_ptr<Chase> pChase = chaseBtn.pChase;
+
+            if (pChase)
+            {
+                // save the chase name
+                f.addValue(sKey + ":name", aString::fromQString(pChase->name()));
+
+            }
+            else
+            {
+                // no chase for this button
                 f.addValue(sKey + ":name", aString("-"));
             }
         }
@@ -734,12 +800,12 @@ void MainWin::onBankSelector_5(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onClearBank(bool /*_bChecked*/)
 {
-    vector<BankTuple> &vTup = m_vvBankButtons.at(m_s32ActiveBank);
+    vector<stBankBtn> &vBankBtn = m_vvBankButtons.at(m_s32ActiveBank);
 
-    for (BankTuple &tup : vTup)
+    for (stBankBtn &bankBtn : vBankBtn)
     {
-        (std::get<0> (tup))->setFixture(nullptr);
-        (std::get<1> (tup)) = nullptr;
+        bankBtn.pBtn->setFixture(nullptr);
+        bankBtn.pFixture = nullptr;
     }
 
     updateBankButtons();
@@ -753,11 +819,11 @@ void MainWin::onClearBank(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onResetFixtures(bool /*_bChecked*/)
 {
-    vector<BankTuple> &vTup = m_vvBankButtons.at(m_s32ActiveBank);
+    vector<stBankBtn> &vBankBtn = m_vvBankButtons.at(m_s32ActiveBank);
 
-    for (BankTuple &tup : vTup)
+    for (stBankBtn &bankBtn : vBankBtn)
     {
-        shared_ptr<Fixture> pFix = std::get<1> (tup);
+        shared_ptr<Fixture> pFix = bankBtn.pFixture;
 
         if (pFix)
         {

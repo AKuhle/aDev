@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file Scene.cpp
+* \file ChaseStep.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -15,38 +15,25 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "scene.h"
-#include "universe.h"
+#include "chaseStep.h"
 
-
-
-/*******************************************************************************
-* Scene::Scene
-*******************************************************************************/
-Scene::Scene(const QString  &_sName,
-             u8             _u8MasterBrighness)
-: m_sName(_sName),
-  m_u8MasterBrighness(_u8MasterBrighness)
-{
-} // Scene::Scene
+using namespace aFrame;
 
 
 /*******************************************************************************
-* Scene::~Scene
+* ChaseStep::ChaseStep
 *******************************************************************************/
-Scene::~Scene()
+ChaseStep::ChaseStep(shared_ptr<Scene>   /*_pStartScene*/,
+                     shared_ptr<Scene>   /*_pEndScene*/,
+                     u32                 _u32Duration_ms)
+: m_u32Duration_ms(_u32Duration_ms)
 {
-} // Scene::~Scene
+} // ChaseStep::ChaseStep
 
 
 /*******************************************************************************
-* Scene::addUniverses
+* ChaseStep::~ChaseStep
 *******************************************************************************/
-void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)
+ChaseStep::~ChaseStep()
 {
-    for (auto pUniverse : _lstUniverse)
-    {
-        stUniverseInfo uInfo(pUniverse, pUniverse->dmxDataValue());
-        m_lstUniverse.push_back(uInfo);
-    }
-} // Scene::addUniverses
+} // ChaseStep::~ChaseStep

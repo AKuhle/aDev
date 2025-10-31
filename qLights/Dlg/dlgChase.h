@@ -6,6 +6,7 @@
 #include <QDialog>
 #include "aFrame_def.h"
 #include "qLights_def.h"
+#include "chaseStep.h"
 
 using namespace std;
 using namespace aFrame;
@@ -38,13 +39,17 @@ class DlgChase : public QDialog
                           shared_ptr<Chase> _pChase);
         ~DlgChase();
 
-    private:
-        void                    setCtrls(const shared_ptr<Chase> _pChase);
+        QString                         name() const;
 
-        virtual void            accept();
-        virtual void            reject();
+        vector<shared_ptr<ChaseStep>>   chaseSteps() const;
+
+    private:
+        void                            setCtrls(const shared_ptr<Chase> _pChase);
+
+        virtual void                    accept();
+        virtual void                    reject();
 
     private slots:
-        void                    onAddScene(bool _bChecked);
-        void                    onRemoveScene(bool _bChecked);
+        void                            onAddScene(bool _bChecked);
+        void                            onRemoveScene(bool _bChecked);
 }; // class DlgChase

@@ -44,6 +44,10 @@ void MainWin::updateAll()
 *******************************************************************************/
 void MainWin::updateToolbar()
 {
+    // load/save btn only visible, when side pane is visible
+    m_pUi->m_pActionOpenFile->setEnabled(m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionSaveFile->setEnabled(m_pUi->m_pPanelDock->isVisible());
+
     // action PanelDock
     m_pUi->m_pActionPanelDock->setChecked(m_pUi->m_pPanelDock->isVisible());
 
@@ -69,11 +73,11 @@ void MainWin::updateBankButtons()
     m_pUi->m_pBankSelector_4->setChecked(m_s32ActiveBank == BANK_4);
     m_pUi->m_pBankSelector_5->setChecked(m_s32ActiveBank == BANK_5);
 
-    vector<BankTuple> &vBank = m_vvBankButtons.at(m_s32ActiveBank);
+    vector<stBankBtn> &vBank = m_vvBankButtons.at(m_s32ActiveBank);
 
-    for (BankTuple &tup : vBank)
+    for (stBankBtn bankBtn : vBank)
     {
-        (std::get<0> (tup))->setFixture(std::get<1> (tup));
+        bankBtn.pBtn->setFixture(bankBtn.pFixture);
 
     }
 } // MainWin::updateBankButtons
@@ -84,18 +88,20 @@ void MainWin::updateBankButtons()
 *******************************************************************************/
 void MainWin::updateSceneButtons()
 {
+    // check the actice scene set
     m_pUi->m_pSceneSelector_1->setChecked(m_s32ActiveScene == SCENE_1);
     m_pUi->m_pSceneSelector_2->setChecked(m_s32ActiveScene == SCENE_2);
     m_pUi->m_pSceneSelector_3->setChecked(m_s32ActiveScene == SCENE_3);
     m_pUi->m_pSceneSelector_4->setChecked(m_s32ActiveScene == SCENE_4);
     m_pUi->m_pSceneSelector_5->setChecked(m_s32ActiveScene == SCENE_5);
 
-    vector<SceneTuple> &vScene = m_vvSceneButtons.at(m_s32ActiveScene);
+    // get the vector of scene buttons for the active set
+    vector<stSceneBtn> &vSceneBtn = m_vvSceneButtons.at(m_s32ActiveScene);
 
-    for (SceneTuple &tup : vScene)
+    // update the buttons with the assigne scene for the active set
+    for (stSceneBtn &sceneBtn : vSceneBtn)
     {
-        (std::get<0> (tup))->setScene(std::get<1> (tup));
-
+        sceneBtn.pBtn->setScene(sceneBtn.pScene);
     }
 } // MainWin::updateSceneButtons
 
@@ -105,11 +111,21 @@ void MainWin::updateSceneButtons()
 *******************************************************************************/
 void MainWin::updateChaseButtons()
 {
+    // check the actice chase set
     m_pUi->m_pChaseSelector_1->setChecked(m_s32ActiveChase == CHASE_1);
     m_pUi->m_pChaseSelector_2->setChecked(m_s32ActiveChase == CHASE_2);
     m_pUi->m_pChaseSelector_3->setChecked(m_s32ActiveChase == CHASE_3);
     m_pUi->m_pChaseSelector_4->setChecked(m_s32ActiveChase == CHASE_4);
     m_pUi->m_pChaseSelector_5->setChecked(m_s32ActiveChase == CHASE_5);
+
+    // get the vector of chase buttons for the active set
+    vector<stChaseBtn> &vChaseBtn = m_vvChaseButtons.at(m_s32ActiveChase);
+
+    // update the buttons with the assigne scene for the active set
+    for (stChaseBtn &chaseBtn : vChaseBtn)
+    {
+        chaseBtn.pBtn->setChase(chaseBtn.pChase);
+    }
 } // MainWin::updateChaseButtons
 
 

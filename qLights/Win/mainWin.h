@@ -66,18 +66,15 @@ class MainWin : public QMainWindow
 
         // bank buttons
         // all sets have the same buttons, but different Fixtures per layer
-        using BankTuple = std::tuple<BankButton *, shared_ptr<Fixture>>;
-        vector<vector<BankTuple>>           m_vvBankButtons;
+        vector<vector<stBankBtn>>           m_vvBankButtons;
 
         // scene buttons
         // all sets have the same buttons, but different scenes per layer
-        using SceneTuple = std::tuple<SceneButton *, shared_ptr<Scene>>;
-        vector<vector<SceneTuple>>          m_vvSceneButtons;
+        vector<vector<stSceneBtn>>          m_vvSceneButtons;
 
         // chase buttons
         // all sets have the same buttons, but different chases per layer
-        using ChaseTuple = std::tuple<ChaseButton *, shared_ptr<Chase>>;
-        vector<vector<ChaseTuple>>          m_vvChaseButtons;
+        vector<vector<stChaseBtn>>          m_vvChaseButtons;
 
         // faders
         vector<Fader *>                     m_vFaders;
@@ -140,9 +137,18 @@ class MainWin : public QMainWindow
         void                    assignScene(SceneButton   *_pBankBtn,
                                             const QString &_sSceneName);
 
-        void                    removeScene(SceneButton   *_pBankBtn);
+        shared_ptr<Scene>       findScene(const QString &_sName);
+
+
+        void                    removeScene(SceneButton   *_pSceneBtn);
 
         vector<QString>         getAllSceneNames() const;
+
+        // chases
+        void                    assignChase(ChaseButton         *_pBankBtn,
+                                            shared_ptr<Chase>   _pChase);
+
+        void                    removeChase(ChaseButton   *_pBankBtn);
 
         // faders
         void                    assignFaders(shared_ptr<Fixture> _pFixture);

@@ -94,7 +94,7 @@
            </column>
            <column>
             <property name="text">
-             <string>Duration/s</string>
+             <string>Duration/ms</string>
             </property>
            </column>
           </widget>

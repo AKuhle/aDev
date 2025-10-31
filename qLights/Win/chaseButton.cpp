@@ -79,7 +79,21 @@ void ChaseButton::onAssignChase()
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        //MainWin::instance()->assignScene(this, dlg.name());
+        QString                         sChaseName  = dlg.name();
+        vector<shared_ptr<ChaseStep>>   vSteps      = dlg.chaseSteps();
+
+        shared_ptr<Chase>   pChase      = make_shared<Chase> (sChaseName);
+
+        // iterate over all steps
+        for (shared_ptr<ChaseStep> pStep : vSteps)
+        {
+            if (pStep)
+            {
+
+            }
+        }
+
+        MainWin::instance()->assignChase(this, pChase);
     }
 } // ChaseButton::onAssignChase
 
@@ -89,7 +103,7 @@ void ChaseButton::onAssignChase()
 *******************************************************************************/
 void ChaseButton::onRemoveChase()
 {
-    // MainWin::instance()->removeScene(this);
+    MainWin::instance()->removeChase(this);
 } // ChaseButton::onRemoveChase
 
 

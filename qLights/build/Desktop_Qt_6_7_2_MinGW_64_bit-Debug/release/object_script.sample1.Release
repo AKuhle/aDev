@@ -1,5 +1,6 @@
 release/channel.o
 release/chase.o
+release/chaseStep.o
 release/controller.o
 release/device.o
 release/dmxData.o

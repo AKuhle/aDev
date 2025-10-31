@@ -10,6 +10,8 @@
 
 #include "mainWin.h"
 #include "dlgChase.h"
+#include "chase.h"
+#include "chaseStep.h"
 
 using namespace std;
 
@@ -44,50 +46,54 @@ DlgChase::~DlgChase()
 
 
 /*******************************************************************************
+* DlgChase::name
+*******************************************************************************/
+QString DlgChase::name() const
+{
+    return m_pUi->m_pChaseName->text();
+} // DlgChase::name
+
+
+/*******************************************************************************
+* DlgChase::chaseSteps
+*******************************************************************************/
+vector<shared_ptr<ChaseStep>> DlgChase::chaseSteps() const
+{
+    QTableWidget                    *pT         = m_pUi->m_pChaseTable;
+    int                             iRowCount   = pT->rowCount();
+
+    vector<shared_ptr<ChaseStep>>   vSteps;
+
+    // iterate over all chase steps
+    for (int row = 0; row < iRowCount; ++row)
+    {
+        // duration for his step
+        u32 u32Duration_ms = pT->item(row, 1)->text().toInt();
+
+        // start scene for this step
+        QString sStart = pT->item(row, 0)->text();
+        shared_ptr<Scene> pStartScene = MainWin::instance()->findScene(sStart);
+
+        QString sEnd = (row < iRowCount-1)?    pT->item(row, 0)->text() : "";
+        shared_ptr<Scene> pEndScene = MainWin::instance()->findScene(sEnd);
+
+        shared_ptr<ChaseStep> pStep = make_shared<ChaseStep> (pStartScene, pEndScene, u32Duration_ms);
+
+        vSteps.push_back(pStep);
+    }
+
+    return vSteps;
+} // DlgChase::chaseSteps
+
+
+/*******************************************************************************
 * DlgChase::setCtrls
 *******************************************************************************/
 void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
 {
     if (_pChase)
     {
-        // const vector<shared_ptr<Channel>>   vChannel  = _pDevice->channel();
-        // QTableWidget                        *pT         = m_pUi->m_pChannelTable;
-
-        // // set the device name
-        // m_pUi->m_pDeviceName->setText(_pDevice->name());
-
-        // // set the device image
-        // setDeviceIcon(_pDevice->pixmapName());
-
-        // // empty the previous table
-        // pT->clearContents();
-
-        // // set the channel of the device
-        // for (auto pChannel : vChannel)
-        // {
-        //     int             iNewRow     = pT->rowCount();
-
-        //     // append a row
-        //     pT->insertRow(iNewRow);
-
-        //     // set the nr
-        //     pT->setItem(iNewRow, 0, new QTableWidgetItem(QString::number(pChannel->nr())));
-
-        //     // set the name
-        //     pT->setItem(iNewRow, 1, new QTableWidgetItem(pChannel->name()));
-
-        //     // set the icon
-        //     QTableWidgetItem *pItem = new QTableWidgetItem;
-        //     pItem->setIcon(QIcon(pChannel->pixmap()));
-        //     pItem->setTextAlignment(Qt::AlignHCenter);
-        //     pItem->setData(Qt::UserRole, QVariant(pChannel->pixmapName()));
-        //     pT->setItem(iNewRow, 2, pItem);
-
-        //     // set the brightness checkbox
-        //     QCheckBox *pBright = new QCheckBox;
-        //     pBright->setChecked(pChannel->isBrightnessChannel());
-        //     pT->setCellWidget(iNewRow, 3, pBright);
-        // }
+        m_pUi->m_pChaseName->setText(_pChase->name());
     }
 } // DlgChase::setCtrls
 
@@ -97,47 +103,6 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
 *******************************************************************************/
 void DlgChase::accept()
 {
-    // QTableWidget                    *pT         = m_pUi->m_pChannelTable;
-    // vector<shared_ptr<Channel>>     vChannel;
-
-    // // put the channels in a vector
-    // for (int row = 0; row < pT->rowCount(); ++row)
-    // {
-    //     s32         s32ChannelNr    = pT->item(row, 0)->text().toInt();
-    //     QString     s32ChannelName  = pT->item(row, 1)->text();
-
-    //     QString     sPixmapName     = pT->item(row, 2)->data(Qt::UserRole).toString();
-
-    //     QCheckBox   *pBright        = qobject_cast<QCheckBox*>(pT->cellWidget(row, 3));
-    //     bool        bBrightness     = pBright->isChecked();
-
-    //     vChannel.push_back(make_shared<Channel> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
-    // }
-
-    // if (!m_pDevice)
-    // {
-    //     // add a new device
-    //     MainWin::instance()->addDevice(m_pUi->m_pDeviceName->text(),
-    //                                    m_lstDeviceIconName.at(m_s32ImageIdx),
-    //                                    vChannel);
-    // }
-    // else
-    // {
-    //     // set the device name
-    //     m_pDevice->setName(m_pUi->m_pDeviceName->text());
-
-    //     // set the device name
-    //     m_pDevice->setPixmap(m_lstDeviceIconName.at(m_s32ImageIdx));
-
-    //     m_pDevice->setChannel(vChannel);
-
-    //     // modify the existing device
-    //     // m_pController->setName(aString::fromQString(m_pUi->m_pControllerName->text()));
-    //     // m_pController->setIpAdr(aString::fromQString(m_pUi->m_pControllerAddress->text()));
-    // }
-
-    // MainWin::instance()->updateAll();
-
     QDialog::accept();
 } // DlgChase::accept
 

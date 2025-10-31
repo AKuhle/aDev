@@ -23,8 +23,18 @@
 
 #include "aFrame_def.h"
 
+using namespace std;
+using namespace aFrame;
+
 class Universe;
 class DmxData;
+class BankButton;
+class SceneButton;
+class ChaseButton;
+class Fixture;
+class Universe;
+class Scene;
+class Chase;
 
 
 /*******************************************************************************
@@ -59,4 +69,69 @@ constexpr aFrame::s32       CHASE_4 { 3 };
 constexpr aFrame::s32       CHASE_5 { 4 };
 
 
-using UniverseTuple = std::tuple<std::shared_ptr<Universe>, QByteArray>;
+/*******************************************************************************
+* struct stBankBtn
+*******************************************************************************/
+struct stBankBtn
+{
+    BankButton              *pBtn;
+    shared_ptr<Fixture>     pFixture;
+
+    stBankBtn(BankButton          *_pBtn,
+              shared_ptr<Fixture> _pFixture)
+    {
+        pBtn = _pBtn;
+        pFixture = _pFixture;
+    }
+}; // stBankBtn
+
+
+/*******************************************************************************
+* struct stSceneBtn
+*******************************************************************************/
+struct stSceneBtn
+{
+    SceneButton         *pBtn;
+    shared_ptr<Scene>   pScene;
+
+    stSceneBtn(SceneButton       *_pBtn,
+               shared_ptr<Scene> _pScene)
+    {
+        pBtn = _pBtn;
+        pScene = _pScene;
+    }
+}; // stSceneBtn
+
+
+/*******************************************************************************
+* struct stChaseBtn
+*******************************************************************************/
+struct stChaseBtn
+{
+    ChaseButton         *pBtn;
+    shared_ptr<Chase>   pChase;
+
+    stChaseBtn(ChaseButton       *_pBtn,
+               shared_ptr<Chase> _pChase)
+    {
+        pBtn = _pBtn;
+        pChase = _pChase;
+    }
+}; // stChaseBtn
+
+
+/*******************************************************************************
+* struct stUniverseInfo
+*******************************************************************************/
+struct stUniverseInfo
+{
+    shared_ptr<Universe>    pUniverse;
+    QByteArray              data;
+
+    stUniverseInfo(shared_ptr<Universe>  _pUniverse,
+                   const QByteArray      &_data)
+    {
+        pUniverse = _pUniverse;
+        data = _data;
+    }
+}; // stUniverseInfo
