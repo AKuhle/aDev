@@ -2,6 +2,7 @@
 * includes
 *******************************************************************************/
 #include <QPushButton>
+#include <QMessageBox>
 
 #include "ui_mainWin.h"
 #include "mainWin.h"
@@ -115,26 +116,26 @@ void MainWin::initMember()
     {
         vector<stBankBtn>  m_vBankBtn;
 
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_1, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_2, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_3, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_4, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_5, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_6, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_7, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_8, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_9, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_10, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_11, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_12, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_13, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_14, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_15, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_16, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_17, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_18, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_19, nullptr));
-        m_vBankBtn.push_back(stBankBtn(m_pUi->m_pBankBtn_20, nullptr));
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_1, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_2, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_3, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_4, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_5, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_6, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_7, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_8, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_9, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_10, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_11, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_12, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_13, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_14, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_15, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_16, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_17, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_18, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_19, nullptr });
+        m_vBankBtn.push_back(stBankBtn { m_pUi->m_pBankBtn_20, nullptr });
 
         m_vvBankButtons.push_back(m_vBankBtn);
     }
@@ -144,26 +145,26 @@ void MainWin::initMember()
     {
         vector<stSceneBtn>  m_vSceneSet;
 
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_1, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_2, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_3, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_4, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_5, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_6, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_7, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_8, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_9, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_10, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_11, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_12, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_13, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_14, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_15, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_16, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_17, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_18, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_19, nullptr));
-        m_vSceneSet.push_back(stSceneBtn(m_pUi->m_pSceneBtn_20, nullptr));
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_1, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_2, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_3, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_4, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_5, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_6, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_7, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_8, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_9, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_10, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_11, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_12, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_13, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_14, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_15, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_16, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_17, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_18, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_19, nullptr });
+        m_vSceneSet.push_back(stSceneBtn { m_pUi->m_pSceneBtn_20, nullptr });
 
         m_vvSceneButtons.push_back(m_vSceneSet);
     }
@@ -179,26 +180,26 @@ void MainWin::initMember()
     {
         vector<stChaseBtn>  m_vChaseTuple;
 
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_1, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_2, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_3, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_4, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_5, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_6, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_7, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_8, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_9, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_10, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_11, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_12, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_13, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_14, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_15, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_16, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_17, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_18, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_19, nullptr));
-        m_vChaseTuple.push_back(stChaseBtn(m_pUi->m_pChaseBtn_20, nullptr));
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_1, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_2, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_3, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_4, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_5, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_6, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_7, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_8, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_9, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_10, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_11, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_12, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_13, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_14, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_15, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_16, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_17, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_18, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_19, nullptr });
+        m_vChaseTuple.push_back(stChaseBtn { m_pUi->m_pChaseBtn_20, nullptr });
 
         m_vvChaseButtons.push_back(m_vChaseTuple);
     }
@@ -609,11 +610,30 @@ shared_ptr<Scene> MainWin::findScene(const QString &_sName)
 *******************************************************************************/
 void MainWin::removeScene(SceneButton   *_pSceneBtn)
 {
+    CHECK_PRE_CONDITION_VOID(_pSceneBtn);
+
     // search the scene in the vector of scene buttons in the current set
     for (stSceneBtn &sceneBtn : m_vvSceneButtons.at(m_s32ActiveScene))
     {
-        if (sceneBtn.pBtn == _pSceneBtn)
+        if (sceneBtn.pBtn == _pSceneBtn && sceneBtn.pScene != nullptr)
         {
+            vector<shared_ptr<Chase>> vChases = getAllChases();
+            for (const shared_ptr<Chase> &pChase : vChases)
+            {
+                // scene is used in a chase => deletion not possible
+                if (pChase->isSceneInChase(sceneBtn.pScene->name()))
+                {
+                    QMessageBox msgBox;
+
+                    msgBox.setIcon(QMessageBox::Warning);
+                    msgBox.setWindowTitle("Warning");
+                    msgBox.setText("Scene is used in a chase,\nand can't be deleted!");     // Mehrzeiliger Text
+                    msgBox.exec();
+
+                    return;
+                }
+            }
+
             // remove the scene from the tuple of the current set
             sceneBtn.pScene = nullptr;
 
@@ -690,6 +710,33 @@ void MainWin::removeChase(ChaseButton   *_pChaseBtn)
         }
     }
 } // MainWin::removeChase
+
+
+/*******************************************************************************
+* MainWin::getAllChases
+*******************************************************************************/
+vector<shared_ptr<Chase>> MainWin::getAllChases() const
+{
+    vector<shared_ptr<Chase>> vChases;
+
+    // iterate over all scene sets
+    for (s32 iSet = 0; iSet < CHASE_SET_COUNT; iSet++)
+    {
+        // iterate over all scene button within the current set
+        for (s32 iChase = 0; iChase < CHASE_BTN_COUNT; iChase++)
+        {
+            const stChaseBtn &chaseBtn  = m_vvChaseButtons.at(iSet).at(iChase);
+            shared_ptr<Chase> pChase = chaseBtn.pChase;
+
+            if (pChase)
+            {
+                vChases.push_back(pChase);
+            }
+        }
+    }
+
+    return vChases;
+} // MainWin::getAllChases
 
 
 /*******************************************************************************

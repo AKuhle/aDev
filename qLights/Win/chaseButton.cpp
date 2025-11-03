@@ -2,6 +2,7 @@
 * includes
 *******************************************************************************/
 #include <QMenu>
+#include "qLights_def.h"
 #include "chaseButton.h"
 #include "dlgChase.h"
 #include "chase.h"
@@ -79,15 +80,17 @@ void ChaseButton::onAssignChase()
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        QString                         sChaseName  = dlg.name();
-        vector<shared_ptr<ChaseStep>>   vSteps      = dlg.chaseSteps();
+        QString             sChaseName  = dlg.name();
+        bool                bBlackStart = dlg.isBlackStart();
+        vector<stChaseStep> vSteps      = dlg.chaseSteps();
 
-        shared_ptr<Chase>   pChase      = make_shared<Chase> (sChaseName);
+        // create the chase
+        shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vSteps);
 
         // iterate over all steps
-        for (shared_ptr<ChaseStep> pStep : vSteps)
+        for (const stChaseStep &step : vSteps)
         {
-            if (pStep)
+            if (step.u32Duration_ms == 0)
             {
 
             }
@@ -112,4 +115,8 @@ void ChaseButton::onRemoveChase()
 *******************************************************************************/
 void ChaseButton::onClicked()
 {
+    if (m_pChase)
+    {
+        m_pChase->startChase();
+    }
 } // ChaseButton::onClicked

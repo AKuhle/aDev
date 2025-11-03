@@ -11,7 +11,6 @@
 #include "mainWin.h"
 #include "dlgChase.h"
 #include "chase.h"
-#include "chaseStep.h"
 
 using namespace std;
 
@@ -33,6 +32,11 @@ DlgChase::DlgChase(QWidget              *_pParent,
     // connect the add channel button
     connect(m_pUi->m_pBtnAddScene, &QToolButton::clicked, this, &DlgChase::onAddScene);
     connect(m_pUi->m_pBtnRemoveScene, &QToolButton::clicked, this, &DlgChase::onRemoveScene);
+
+    // disable enter for ok button
+    QPushButton *pOkBtn = m_pUi->buttonBox->button(QDialogButtonBox::Ok);
+    pOkBtn->setAutoDefault(false);
+    pOkBtn->setDefault(false);
 } // DlgChase::DlgChase
 
 
@@ -55,31 +59,41 @@ QString DlgChase::name() const
 
 
 /*******************************************************************************
+* DlgChase::isBlackStart
+*******************************************************************************/
+bool DlgChase::isBlackStart() const
+{
+    return m_pUi->m_pBlackStart->isChecked();
+} // DlgChase::isBlackStart
+
+
+/*******************************************************************************
 * DlgChase::chaseSteps
 *******************************************************************************/
-vector<shared_ptr<ChaseStep>> DlgChase::chaseSteps() const
+vector<stChaseStep> DlgChase::chaseSteps() const
 {
-    QTableWidget                    *pT         = m_pUi->m_pChaseTable;
-    int                             iRowCount   = pT->rowCount();
-
-    vector<shared_ptr<ChaseStep>>   vSteps;
+    QTableWidget            *pT         = m_pUi->m_pChaseTable;
+    int                     iRowCount   = pT->rowCount();
+    vector<stChaseStep>     vSteps;
 
     // iterate over all chase steps
-    for (int row = 0; row < iRowCount; ++row)
+    for (int row = 0; row < iRowCount; row++)
     {
+        int u32Duration_ms = 0;
+
+        // get the scene name
+        QComboBox   *pCombo     = qobject_cast<QComboBox*>(pT->cellWidget(row, 0));
+        QString     sSceneName  = (pCombo)?   pCombo->currentText() : "";
+
         // duration for his step
-        u32 u32Duration_ms = pT->item(row, 1)->text().toInt();
+        QLineEdit *pLine = qobject_cast<QLineEdit*>(pT->cellWidget(row, 1));
+        if (pLine)
+        {
+            u32Duration_ms = pLine->text().toInt();
+        }
 
-        // start scene for this step
-        QString sStart = pT->item(row, 0)->text();
-        shared_ptr<Scene> pStartScene = MainWin::instance()->findScene(sStart);
-
-        QString sEnd = (row < iRowCount-1)?    pT->item(row, 0)->text() : "";
-        shared_ptr<Scene> pEndScene = MainWin::instance()->findScene(sEnd);
-
-        shared_ptr<ChaseStep> pStep = make_shared<ChaseStep> (pStartScene, pEndScene, u32Duration_ms);
-
-        vSteps.push_back(pStep);
+        // add the step to the vector
+        vSteps.push_back (stChaseStep { sSceneName, static_cast<unsigned int> (u32Duration_ms) } );
     }
 
     return vSteps;
@@ -93,7 +107,48 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
 {
     if (_pChase)
     {
+        QTableWidget    *pTable = m_pUi->m_pChaseTable;
+        vector<QString> vScenes = MainWin::instance()->getAllSceneNames();
+
+        // set the chase name
         m_pUi->m_pChaseName->setText(_pChase->name());
+
+        // set the black start flag
+        m_pUi->m_pBlackStart->setChecked(_pChase->isBlackStart());
+
+        // set the steps
+        const vector<stChaseStep> &vSteps = _pChase->chaseSteps();
+
+
+        // generate a line for each step
+        for (const stChaseStep &step : vSteps)
+        {
+            QString sSceneName = step.sSceneName;
+            u32     s32Duration = step.u32Duration_ms;
+            int     iRowIdx = pTable->rowCount();
+
+            // append a row
+            pTable->insertRow(iRowIdx);
+
+            // create and add the combo box
+            QComboBox   *pCombo = new QComboBox();
+            for (QString &sScene : vScenes)
+            {
+                pCombo->addItem(sScene);
+            }
+            int idx = pCombo->findText(sSceneName);
+            if (idx != -1)
+            {
+                pCombo->setCurrentIndex(idx);
+            }
+            pTable->setCellWidget(iRowIdx, 0, pCombo);
+
+            // create and add line edit
+            QLineEdit *pLine = new QLineEdit();
+            pLine->setValidator(new QIntValidator(pLine)); // Nur Ganzzahlen erlaubt
+            pLine->setText(QString::number(s32Duration));
+            pTable->setCellWidget(iRowIdx, 1, pLine);
+        }
     }
 } // DlgChase::setCtrls
 
@@ -138,6 +193,11 @@ void DlgChase::onAddScene(bool /*_bChecked*/)
     }
     pT->setCellWidget(iNewRow, 0, pCombo);
 
+    // create the line edit
+    QLineEdit *pLine = new QLineEdit();
+    pLine->setValidator(new QIntValidator(pLine)); // Nur Ganzzahlen erlaubt
+    pLine->setText(QString::number(0));                         // Initialwert setzen    //QLineEdit   *pLine = new QLineEdit();
+    pT->setCellWidget(iNewRow, 1, pLine);
 } // DlgChase::onAddScene
 
 
@@ -146,13 +206,13 @@ void DlgChase::onAddScene(bool /*_bChecked*/)
 *******************************************************************************/
 void DlgChase::onRemoveScene(bool /*_bChecked*/)
 {
-    // QTableWidget *pT = m_pUi->m_pChannelTable;
+    QTableWidget *pT = m_pUi->m_pChaseTable;
 
-    // s32 s32Row = pT->currentRow();
+    s32 s32Row = pT->currentRow();
 
-    // // -1 => now row selected
-    // if (s32Row >= 0)
-    // {
-    //     pT->removeRow(s32Row);
-    // }
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        pT->removeRow(s32Row);
+    }
 } // DlgChase::onRemoveScene

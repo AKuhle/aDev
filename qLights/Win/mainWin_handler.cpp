@@ -232,8 +232,25 @@ void MainWin::onFileOpen()
 
             if (sChaseName != "-")
             {
+                vector<stChaseStep>   vSteps;
+
+                // load the blackStart
+                bool bBlackStart = f.readBoolValue(sKey + ":black_start");
+
+                // read the number of steps
+                int iSteps = f.readIntValue(sKey + ":no_of_steps");
+
+                // read the steps
+                for (int i = 0; i < iSteps; i++)
+                {
+                    QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":sceneName").toQString();
+                    int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
+
+                    vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
+                }
+
                 // create the chase
-                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName);
+                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vSteps);
                 chaseBtn.pBtn->setChase(pChase);
                 chaseBtn.pChase = pChase;
             }
@@ -445,9 +462,24 @@ void MainWin::onFileSave()
 
             if (pChase)
             {
+                const vector<stChaseStep>   &vSteps = pChase->chaseSteps();
+                int                         iStep   = 0;
+
                 // save the chase name
                 f.addValue(sKey + ":name", aString::fromQString(pChase->name()));
 
+                // save the blackStart
+                f.addValue(sKey + ":black_start", pChase->isBlackStart());
+
+                // save number of chase steps
+                f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
+
+                for (const stChaseStep &step : vSteps)
+                {
+                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":sceneName", aString::fromQString(step.sSceneName));
+                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
+                    iStep++;
+                }
             }
             else
             {

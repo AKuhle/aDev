@@ -67,7 +67,7 @@ class Universe
                                                 u8                  _u8Value,
                                                 bool                _bSend);
 
-        u8                      channelValue(s32    _s32FixtureAdress,
+        u8                      channelValue(s32    _s32Adress,
                                              s32    _s32ChannelNr) const;
 
 

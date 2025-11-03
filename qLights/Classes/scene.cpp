@@ -46,7 +46,29 @@ void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)
 {
     for (auto pUniverse : _lstUniverse)
     {
-        stUniverseInfo uInfo(pUniverse, pUniverse->dmxDataValue());
+        stUniverseInfo uInfo { pUniverse, pUniverse->dmxDataValue() };
         m_lstUniverse.push_back(uInfo);
     }
 } // Scene::addUniverses
+
+
+/*******************************************************************************
+* Scene::channelValue
+*******************************************************************************/
+u8 Scene::channelValue(const shared_ptr<Universe>   _pUniverse,
+                       s32                          _s32FixtureAdress,
+                       s32                          _s32ChannelNr) const
+{
+    for (const stUniverseInfo &stU : m_lstUniverse)
+    {
+        if (stU.pUniverse == _pUniverse)
+        {
+            s32     dmxIdx = _s32FixtureAdress +_s32ChannelNr - 2;
+
+            return static_cast<u8>(static_cast<unsigned char>(stU.data.at(dmxIdx)));
+        }
+    }
+
+    cout << "!!!!! ERROR: no channel value found in Scene::channelValue" << endl;
+    return 0;
+} // Scene::channelValue

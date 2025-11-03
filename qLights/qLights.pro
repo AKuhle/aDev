@@ -103,7 +103,6 @@ INCLUDEPATH += Win
 SOURCES += \
     Classes/channel.cpp \
     Classes/chase.cpp \
-    Classes/chaseStep.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
     Classes/dmxData.cpp \
@@ -132,7 +131,6 @@ SOURCES += \
 HEADERS += \
     Classes/channel.h \
     Classes/chase.h \
-    Classes/chaseStep.h \
     Classes/controller.h \
     Classes/device.h \
     Classes/dmxData.h \

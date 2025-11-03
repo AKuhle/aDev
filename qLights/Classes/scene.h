@@ -52,4 +52,9 @@ class Scene
         const list<stUniverseInfo>& universes() const               { return m_lstUniverse; }
 
         void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
+
+        u8                          channelValue(const shared_ptr<Universe> _pUniverse,
+                                                 s32                        _s32FixtureAdress,
+                                                 s32                        _s32ChannelNr) const;
+
 }; // class Scene

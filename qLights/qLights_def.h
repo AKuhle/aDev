@@ -77,12 +77,6 @@ struct stBankBtn
     BankButton              *pBtn;
     shared_ptr<Fixture>     pFixture;
 
-    stBankBtn(BankButton          *_pBtn,
-              shared_ptr<Fixture> _pFixture)
-    {
-        pBtn = _pBtn;
-        pFixture = _pFixture;
-    }
 }; // stBankBtn
 
 
@@ -94,12 +88,6 @@ struct stSceneBtn
     SceneButton         *pBtn;
     shared_ptr<Scene>   pScene;
 
-    stSceneBtn(SceneButton       *_pBtn,
-               shared_ptr<Scene> _pScene)
-    {
-        pBtn = _pBtn;
-        pScene = _pScene;
-    }
 }; // stSceneBtn
 
 
@@ -110,13 +98,6 @@ struct stChaseBtn
 {
     ChaseButton         *pBtn;
     shared_ptr<Chase>   pChase;
-
-    stChaseBtn(ChaseButton       *_pBtn,
-               shared_ptr<Chase> _pChase)
-    {
-        pBtn = _pBtn;
-        pChase = _pChase;
-    }
 }; // stChaseBtn
 
 
@@ -127,11 +108,14 @@ struct stUniverseInfo
 {
     shared_ptr<Universe>    pUniverse;
     QByteArray              data;
-
-    stUniverseInfo(shared_ptr<Universe>  _pUniverse,
-                   const QByteArray      &_data)
-    {
-        pUniverse = _pUniverse;
-        data = _data;
-    }
 }; // stUniverseInfo
+
+
+/*******************************************************************************
+* struct stChaseStep
+*******************************************************************************/
+struct stChaseStep
+{
+    QString     sSceneName;
+    u32         u32Duration_ms;
+}; // stChaseStep
