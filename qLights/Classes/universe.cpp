@@ -163,8 +163,6 @@ void Universe::updateBrightness(bool _bSend)
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
-    return;
-
     if (!m_hostAdr.isNull())
     {
         QUdpSocket      udpSocket;
@@ -195,7 +193,7 @@ void Universe::sendValues2Controller() const
         }
         else
         {
-           std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
+           //std::cout << "Art-Net-Paket erfolgreich gesendet. Bytes gesendet: " << bytesSent << std::endl;
         }
 
     } // if...

@@ -34,6 +34,10 @@ Chase::Chase(const QString              &_sName,
 {
     // create steps for activation
     createRunSteps();
+
+    // connect the timer
+    connect(&m_timer, &QTimer::timeout, this, &Chase::onTimeout);
+    m_timer.setSingleShot(true);
 } // Chase::Chase
 
 
@@ -70,7 +74,7 @@ void Chase::startChase()
     m_s32Steps = m_vRunSteps.at(0).u32Duration_ms / m_u32StepTime_ms;    // m_u32StepTime_ms for each step
     m_s32CurrentStep = 0;
 
-    cout << m_s32Steps << endl;
+    m_timer.start(m_u32StepTime_ms);
 } // Chase::startChase
 
 
@@ -102,20 +106,21 @@ void Chase::createRunSteps()
 
             // iterate over all channels in the fixture
             const vector<shared_ptr<Channel>> &vChannel = pFix->device()->channel();
-            for (shared_ptr<Channel> pChannel : vChannel)
+            for (const shared_ptr<Channel> &pChannel : vChannel)
             {
-                s32 nr = pChannel->nr();
-
-                float startValue   = static_cast<float> (runStep.pStartScene->channelValue(pU, adress, nr));
-                float endValue     = static_cast<float> (runStep.pEndScene->channelValue(pU, adress, nr));
+                float startValue   = static_cast<float> (runStep.pStartScene->channelValue(pU, adress, pChannel->nr()));
+                float endValue     = static_cast<float> (runStep.pEndScene->channelValue(pU, adress, pChannel->nr()));
 
                 if (startValue != endValue)
                 {
-                    stChannelStep channelStep { pU, adress, nr, startValue, endValue };
+                    stChannelStep channelStep { pU, adress, pChannel, startValue, endValue };
 
                     runStep.vChannelStep.push_back(channelStep);
 
-                    cout << "channel " << nr << ": " << startValue << " -> " << endValue << endl;
+                    if (std::find(m_vAffectedFixtures.begin(), m_vAffectedFixtures.end(), pFix) == m_vAffectedFixtures.end())
+                    {
+                        m_vAffectedFixtures.push_back(pFix);
+                    }
                 }
             }
         }
@@ -124,3 +129,35 @@ void Chase::createRunSteps()
     }
 
 } // Chase::createRunSteps
+
+
+/*******************************************************************************
+* Chase::onTimeout
+*******************************************************************************/
+void Chase::onTimeout()
+{
+    const stRunStep &runStep = m_vRunSteps.at(m_s32RunStepIdx);
+
+    for (const stChannelStep &channelStep : runStep.vChannelStep)
+    {
+        float fDelta = channelStep.fEndValue - channelStep.fStartValue;
+
+        float fNewValue = channelStep.fStartValue + ((float) m_s32CurrentStep) / m_s32Steps * fDelta;
+
+        channelStep.pUniverse->setChannelValue(channelStep.s32FixtureAdress,
+                                               channelStep.pChannel,
+                                               static_cast<u8> (fNewValue),
+                                               false);
+    }
+
+    // send the data
+    MainWin::instance()->sendAllUniverses();
+
+    if (m_s32CurrentStep < m_s32Steps)
+    {
+        m_s32CurrentStep++;
+
+        m_timer.start(m_u32StepTime_ms);
+    }
+
+} // Chase::onTimeout

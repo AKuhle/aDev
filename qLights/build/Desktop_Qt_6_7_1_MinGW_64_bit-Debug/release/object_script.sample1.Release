@@ -10,6 +10,7 @@ release/scene.o
 release/scribbleStrip.o
 release/universe.o
 release/dlgChannel.o
+release/dlgChase.o
 release/dlgController.o
 release/dlgDevice.o
 release/dlgFixture.o
@@ -25,9 +26,11 @@ release/sceneButton.o
 release/main.o
 release/qrc_aFrame.o
 release/qrc_qLights.o
+release/moc_chase.o
 release/moc_fader.o
 release/moc_faderInfo.o
 release/moc_dlgChannel.o
+release/moc_dlgChase.o
 release/moc_dlgController.o
 release/moc_dlgDevice.o
 release/moc_dlgFixture.o

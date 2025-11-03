@@ -10,6 +10,7 @@ debug/scene.o
 debug/scribbleStrip.o
 debug/universe.o
 debug/dlgChannel.o
+debug/dlgChase.o
 debug/dlgController.o
 debug/dlgDevice.o
 debug/dlgFixture.o
@@ -25,9 +26,11 @@ debug/sceneButton.o
 debug/main.o
 debug/qrc_aFrame.o
 debug/qrc_qLights.o
+debug/moc_chase.o
 debug/moc_fader.o
 debug/moc_faderInfo.o
 debug/moc_dlgChannel.o
+debug/moc_dlgChase.o
 debug/moc_dlgController.o
 debug/moc_dlgDevice.o
 debug/moc_dlgFixture.o

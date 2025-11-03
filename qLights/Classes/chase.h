@@ -21,41 +21,47 @@
 
 #include "qLights_def.h"
 
+class Channel;
+class Fixture;
+
 
 /*******************************************************************************
 * class Chase
 *******************************************************************************/
-class Chase
+class Chase : public QObject
 {
+    Q_OBJECT
+
     private:
         struct stChannelStep
         {
             shared_ptr<Universe>    pUniverse;
             s32                     s32FixtureAdress;
-            s32                     s32ChannelNr;
+            shared_ptr<Channel>     pChannel;
             float                   fStartValue;
             float                   fEndValue;
         }; // stChannelStep
 
         struct stRunStep
         {
-            shared_ptr<Scene>       pStartScene;
-            shared_ptr<Scene>       pEndScene;
-            u32                     u32Duration_ms;
-            vector<stChannelStep>   vChannelStep;
+            shared_ptr<Scene>           pStartScene;
+            shared_ptr<Scene>           pEndScene;
+            u32                         u32Duration_ms;
+            vector<stChannelStep>       vChannelStep;
         }; // stRunStep
 
-        QString             m_sName;
-        bool                m_bBlackStart       { false };
-        vector<stChaseStep> m_vSteps;
-        vector<stRunStep>   m_vRunSteps;
+        QString                     m_sName;
+        bool                        m_bBlackStart       { false };
+        vector<stChaseStep>         m_vSteps;
+        vector<stRunStep>           m_vRunSteps;
+        vector<shared_ptr<Fixture>> m_vAffectedFixtures;
 
         // member for running the chase
-        QTimer              m_timer;
-        s32                 m_s32RunStepIdx;
-        s32                 m_s32Steps;
-        s32                 m_s32CurrentStep;
-        const u32           m_u32StepTime_ms    { 100 };
+        QTimer                      m_timer;
+        s32                         m_s32RunStepIdx;
+        s32                         m_s32Steps;
+        s32                         m_s32CurrentStep;
+        const u32                   m_u32StepTime_ms    { 100 };
 
     public:
         Chase(const QString             &_sName,
@@ -78,4 +84,7 @@ class Chase
 
     private:
         void                        createRunSteps();
+
+    private slots:
+        void                        onTimeout();
 }; // class Chase
