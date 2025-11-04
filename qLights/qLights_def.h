@@ -40,12 +40,14 @@ class Chase;
 /*******************************************************************************
 * gloabl constants
 *******************************************************************************/
-constexpr QColor    colDeviceImageBg(120, 120, 120);
+constexpr QColor            colDeviceImageBg(120, 120, 120);
 
-constexpr aFrame::u32       DMX_DATA_SIZE       { 512 };
+constexpr aFrame::u32       UNIVERSE_UPDATE_TIME_MS     { 100 };
 
-constexpr aFrame::s32       BANK_SET_COUNT { 5 };
-constexpr aFrame::s32       BANK_BTN_COUNT { 20 };
+constexpr aFrame::u32       DMX_DATA_SIZE               { 512 };
+
+constexpr aFrame::s32       BANK_SET_COUNT              { 5 };
+constexpr aFrame::s32       BANK_BTN_COUNT              { 20 };
 constexpr aFrame::s32       BANK_1 { 0 };
 constexpr aFrame::s32       BANK_2 { 1 };
 constexpr aFrame::s32       BANK_3 { 2 };

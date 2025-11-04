@@ -48,7 +48,7 @@ Fixture::~Fixture()
 /*******************************************************************************
 * Fixture::resetFixture
 *******************************************************************************/
-void Fixture::resetFixture(bool _bSend)
+void Fixture::resetFixture()
 {
     const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
 
@@ -58,13 +58,7 @@ void Fixture::resetFixture(bool _bSend)
         // set the value in the universe
         m_pUniverse->setChannelValue(m_s32Adress,
                                      pChannel,
-                                     (u8) 0,
-                                     false);
-    }
-
-    if (_bSend)
-    {
-        m_pUniverse->sendDmxData();
+                                     (u8) 0);
     }
 
 } // Fixture::resetFixture
@@ -83,7 +77,6 @@ void Fixture::updateAllChannelValuesFromUniverse()
         // set the value in the universe
         m_pUniverse->setChannelValue(m_s32Adress,
                                      pChannel,
-                                     m_pUniverse->channelValue(m_s32Adress, pChannel->nr()),
-                                     false);
+                                     m_pUniverse->channelValue(m_s32Adress, pChannel->nr()));
     }
 } // Fixture::updateAllChannelValuesFromUniverse

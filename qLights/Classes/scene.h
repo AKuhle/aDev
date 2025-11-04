@@ -57,6 +57,5 @@ class Scene
                                                  s32                        _s32FixtureAdress,
                                                  s32                        _s32ChannelNr) const;
 
-        void                        applySceneData2Fixture(shared_ptr<Fixture>  _pFix,
-                                                           bool                 _bSend);
+        void                        applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const;
 }; // class Scene

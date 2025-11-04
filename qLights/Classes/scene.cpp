@@ -17,7 +17,9 @@
 *******************************************************************************/
 #include "scene.h"
 #include "universe.h"
-
+#include "fixture.h"
+#include "device.h"
+#include "channel.h"
 
 
 /*******************************************************************************
@@ -72,3 +74,21 @@ u8 Scene::channelValue(const shared_ptr<Universe>   _pUniverse,
     cout << "!!!!! ERROR: no channel value found in Scene::channelValue" << endl;
     return 0;
 } // Scene::channelValue
+
+
+/*******************************************************************************
+* Scene::applySceneData2Fixture
+*******************************************************************************/
+void Scene::applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const
+{
+    const vector<shared_ptr<Channel>> &vChannel = _pFix->device()->channel();
+    shared_ptr<Universe>              pUniverse = _pFix->universe();
+    s32                               s32Adress = _pFix->adress();
+
+    for (const shared_ptr<Channel> &pChannel : vChannel)
+    {
+        u8 u8ChannelValue = channelValue(pUniverse, s32Adress, pChannel->nr());
+
+        pUniverse->setChannelValue(s32Adress, pChannel, u8ChannelValue);
+    }
+} // Scene::applySceneData2Fixture

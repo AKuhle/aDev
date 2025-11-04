@@ -105,13 +105,10 @@ class MainWin : public QMainWindow
                                                 const QString   &_sController,
                                                 s32             _s32Id);
 
-        void                        resetAllUniverses(bool _bSend);
+        void                        resetAllUniverses();
 
-        void                        sendAllUniverses();
-
-        void                        setMasterBrightness(u8      _u8Value,
-                                                        bool    _bSend);
-        static u8                   masterBrightness()  { return m_u8MasterBrightness; }
+        void                        setMasterBrightness(u8      _u8Value);
+        static u8                   masterBrightness()          { return m_u8MasterBrightness; }
 
 
         // device
@@ -147,6 +144,9 @@ class MainWin : public QMainWindow
         vector<QString>             getAllSceneNames() const;
 
         // chases
+        void                        activateChaseButton(Chase   *_pChase,
+                                                        bool    _bActive);
+
         void                        assignChase(ChaseButton         *_pBankBtn,
                                                 shared_ptr<Chase>   _pChase);
 

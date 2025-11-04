@@ -196,7 +196,7 @@ void MainWin::onFileOpen()
                                          static_cast<int>(vecDmxData.size()));
 
                     // set the dmx data in the universe
-                    pUni->setDmxData(arDmxData, false);
+                    pUni->setDmxData(arDmxData);
 
                     // add the universe to the list
                     lstUniverses.push_back(pUni);
@@ -232,25 +232,35 @@ void MainWin::onFileOpen()
 
             if (sChaseName != "-")
             {
-                vector<stChaseStep>   vSteps;
+                vector<QString>         vFixture;
+                vector<stChaseStep>     vSteps;
 
                 // load the blackStart
                 bool bBlackStart = f.readBoolValue(sKey + ":black_start");
 
+                // read the number of fixtures
+                int iFixturesCount = f.readIntValue(sKey + ":no_of_fixtures");
+                // read the fixture names
+                for (int iFix = 0; iFix < iFixturesCount; iFix++)
+                {
+                    QString sFixName = f.readStringValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name").toQString();
+
+                    vFixture.push_back(sFixName);
+                }
+
                 // read the number of steps
                 int iSteps = f.readIntValue(sKey + ":no_of_steps");
-
                 // read the steps
                 for (int i = 0; i < iSteps; i++)
                 {
-                    QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":sceneName").toQString();
+                    QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":scene_name").toQString();
                     int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
 
                     vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
                 }
 
                 // create the chase
-                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vSteps);
+                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vFixture, vSteps);
                 chaseBtn.pBtn->setChase(pChase);
                 chaseBtn.pChase = pChase;
             }
@@ -258,7 +268,7 @@ void MainWin::onFileOpen()
     }
 
     // reset all universes and update all
-    resetAllUniverses(true);
+    resetAllUniverses();
     updateAll();
 } // MainWin::onFileOpen
 
@@ -462,8 +472,10 @@ void MainWin::onFileSave()
 
             if (pChase)
             {
-                const vector<stChaseStep>   &vSteps = pChase->chaseSteps();
-                int                         iStep   = 0;
+                const vector<shared_ptr<Fixture>>   &vFix = pChase->fixtures();
+                const vector<stChaseStep>           &vSteps = pChase->chaseSteps();
+                int                                 iStep   = 0;
+                int                                 iFix   = 0;
 
                 // save the chase name
                 f.addValue(sKey + ":name", aString::fromQString(pChase->name()));
@@ -471,12 +483,19 @@ void MainWin::onFileSave()
                 // save the blackStart
                 f.addValue(sKey + ":black_start", pChase->isBlackStart());
 
-                // save number of chase steps
-                f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
+                // save number of fixtures and the names
+                f.addValue(sKey + ":no_of_fixtures", (int) vFix.size());
+                for (const shared_ptr<Fixture> &pFix : vFix)
+                {
+                    f.addValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name", aString::fromQString(pFix->name()));
+                    iFix++;
+                }
 
+                // save number of chase steps and the steps
+                f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
                 for (const stChaseStep &step : vSteps)
                 {
-                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":sceneName", aString::fromQString(step.sSceneName));
+                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":scene_name", aString::fromQString(step.sSceneName));
                     f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
                     iStep++;
                 }
@@ -707,6 +726,22 @@ void MainWin::onAddFixture(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onRemoveFixture(bool /*_bChecked*/)
 {
+    QTableWidget *pT = m_pUi->m_pFixtureTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        QString sName = pT->item(s32Row, 1)->text();
+
+        m_lstFixture.remove_if([&sName](shared_ptr<Fixture> pFixture)
+                                    {
+                                        return pFixture->name() == sName;
+                                    });
+    }
+
+    updateAll();
 } // MainWin::onRemoveFixture
 
 
@@ -859,12 +894,9 @@ void MainWin::onResetFixtures(bool /*_bChecked*/)
 
         if (pFix)
         {
-            pFix->resetFixture(false);
+            pFix->resetFixture();
         }
     }
-
-    // send all universes to update the reseted fixtures
-    sendAllUniverses();
 
     updateFaders();
 } // MainWin::onResetFixtures
@@ -1007,7 +1039,7 @@ void MainWin::onFaderOut(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onSwitchOn(bool /*_bChecked*/)
 {
-    setMasterBrightness(255, true);
+    setMasterBrightness(255);
 } // MainWin::onSwitchOn
 
 
@@ -1016,7 +1048,7 @@ void MainWin::onSwitchOn(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onSwitchOff(bool /*_bChecked*/)
 {
-    setMasterBrightness(0, true);
+    setMasterBrightness(0);
 } // MainWin::onSwitchOff
 
 
@@ -1029,7 +1061,7 @@ void MainWin::onFade()
     {
         // fade out
         m_fFaderValue = m_fFaderValue + m_fFaderStep;
-        setMasterBrightness(static_cast<u8> (max(0.f, m_fFaderValue)), true);
+        setMasterBrightness(static_cast<u8> (max(0.f, m_fFaderValue)));
         if (m_u8MasterBrightness > 0)
         {
             QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
@@ -1039,7 +1071,7 @@ void MainWin::onFade()
     {
         // fade in
         m_fFaderValue = m_fFaderValue + m_fFaderStep;
-        setMasterBrightness(static_cast<u8> (min(255.f, m_fFaderValue)), true);
+        setMasterBrightness(static_cast<u8> (min(255.f, m_fFaderValue)));
         if (m_u8MasterBrightness < 255)
         {
             QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));

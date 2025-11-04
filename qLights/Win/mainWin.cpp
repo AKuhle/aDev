@@ -419,32 +419,19 @@ void MainWin::addUniverse(const QString   &_sName,
 /*******************************************************************************
 * MainWin::resetAllUniverses
 *******************************************************************************/
-void MainWin::resetAllUniverses(bool _bSend)
+void MainWin::resetAllUniverses()
 {
     for (auto &_pUniverse : m_lstUniverse)
     {
-        _pUniverse->reset(_bSend);
+        _pUniverse->reset();
     }
 } // MainWin::resetAllUniverses
 
 
 /*******************************************************************************
-* MainWin::sendAllUniverses
-*******************************************************************************/
-void MainWin::sendAllUniverses()
-{
-    for (auto &_pUniverse : m_lstUniverse)
-    {
-        _pUniverse->sendDmxData();
-    }
-} // MainWin::sendAllUniverses
-
-
-/*******************************************************************************
 * MainWin::setMasterBrightness
 *******************************************************************************/
-void MainWin::setMasterBrightness(u8    _u8Value,
-                                  bool  _bSend)
+void MainWin::setMasterBrightness(u8    _u8Value)
 {
     CHECK_PRE_CONDITION_VOID(m_pMasterFader);
 
@@ -455,7 +442,7 @@ void MainWin::setMasterBrightness(u8    _u8Value,
     // update the brightness in all fixtures
     for (shared_ptr<Universe> pU : m_lstUniverse)
     {
-        pU->updateBrightness(_bSend);
+        pU->updateBrightness();
     }
 } // MainWin::setMasterBrightness
 
@@ -669,6 +656,42 @@ vector<QString> MainWin::getAllSceneNames() const
 
     return vScenes;
 } // MainWin::getAllSceneNames
+
+
+/*******************************************************************************
+* MainWin::activateChaseButton
+*******************************************************************************/
+void MainWin::activateChaseButton(Chase   *_pChase,
+                                  bool    _bActive)
+{
+    for (stChaseBtn &chaseBtn : m_vvChaseButtons.at(m_s32ActiveChase))
+    {
+        if (chaseBtn.pChase && chaseBtn.pChase.get() == _pChase)
+        {
+            if (_bActive)
+            {
+                // _pFixture != nullptr AND _pFixture assigned to the button
+                // => set active color
+                chaseBtn.pBtn->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                             .arg(128)
+                                             .arg(0)
+                                             .arg(0));
+            }
+            else
+            {
+                // _pFixture == nullptr OR _pFixture not assigned to the button
+                // => set standard bg color
+                chaseBtn.pBtn->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
+                                             .arg(m_colPushBtnBg.red())
+                                             .arg(m_colPushBtnBg.green())
+                                             .arg(m_colPushBtnBg.blue()));
+            }
+
+            // btn marked => return
+            return;
+        }
+    }
+} // MainWin::activateChaseButton
 
 
 /*******************************************************************************

@@ -27,11 +27,23 @@
 *******************************************************************************/
 Chase::Chase(const QString              &_sName,
              bool                       _bBlackStart,
+             const vector<QString>      &_vFixture,
              const vector<stChaseStep>  &_vSteps)
 : m_sName(_sName),
   m_bBlackStart(_bBlackStart),
   m_vSteps(_vSteps)
 {
+    // store affected fixtures
+    for (const QString &_sFix : _vFixture)
+    {
+        shared_ptr<Fixture> pFix = MainWin::instance()->findFixture(_sFix);
+
+        if (pFix)
+        {
+            m_vAffectedFixtures.push_back(pFix);
+        }
+    }
+
     // create steps for activation
     createRunSteps();
 
@@ -66,16 +78,41 @@ bool Chase::isSceneInChase(const QString &_sName)
 *******************************************************************************/
 void Chase::startChase()
 {
-    cout << "chase >" << m_sName.toStdString() << "< running" << endl;
+    CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 1);
 
-    CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 0);
+    // initialize the fixtures with the start scene
+    for (shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        m_vRunSteps.at(0).pStartScene->applySceneData2Fixture(pFix);
+    }
 
+    // prepare the timer
     m_s32RunStepIdx = 0;
-    m_s32Steps = m_vRunSteps.at(0).u32Duration_ms / m_u32StepTime_ms;    // m_u32StepTime_ms for each step
+
+    // mark the active chasebutton as activated
+    MainWin::instance()->activateChaseButton(this, true);
+
+    // execute the first step
+    executeRunStep(m_vRunSteps.at(0));
+} // Chase::startChase
+
+
+/*******************************************************************************
+* Chase::executeRunStep
+*******************************************************************************/
+void Chase::executeRunStep(const stRunStep &_stRunStep)
+{
+    // prepare the timer
     m_s32CurrentStep = 0;
 
+    // decrease the nr of steps about 10% to compensate the time
+    // which is neccessary for the calculation.
+    // this matches the duration time for the chase better
+    m_s32Steps = _stRunStep.u32Duration_ms / m_u32StepTime_ms;    // m_u32StepTime_ms for each step
+    m_s32Steps = static_cast<s32> (0.9 * m_s32Steps);
+
     m_timer.start(m_u32StepTime_ms);
-} // Chase::startChase
+} // Chase::executeRunStep
 
 
 /*******************************************************************************
@@ -84,7 +121,6 @@ void Chase::startChase()
 void Chase::createRunSteps()
 {
     MainWin                         *pMainWin   = MainWin::instance();
-    const list<shared_ptr<Fixture>> &lstFix     = pMainWin->getAllFixtures();
 
     // delete previous stuff
     m_vRunSteps.clear();
@@ -99,7 +135,7 @@ void Chase::createRunSteps()
         runStep.u32Duration_ms  = m_vSteps.at(iStep).u32Duration_ms;
 
         // iterate over all fixtures
-        for (const shared_ptr<Fixture> &pFix : lstFix)
+        for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
         {
             shared_ptr<Universe>    pU      = pFix->universe();
             s32                     adress  = pFix->adress();
@@ -116,11 +152,6 @@ void Chase::createRunSteps()
                     stChannelStep channelStep { pU, adress, pChannel, startValue, endValue };
 
                     runStep.vChannelStep.push_back(channelStep);
-
-                    if (std::find(m_vAffectedFixtures.begin(), m_vAffectedFixtures.end(), pFix) == m_vAffectedFixtures.end())
-                    {
-                        m_vAffectedFixtures.push_back(pFix);
-                    }
                 }
             }
         }
@@ -146,18 +177,33 @@ void Chase::onTimeout()
 
         channelStep.pUniverse->setChannelValue(channelStep.s32FixtureAdress,
                                                channelStep.pChannel,
-                                               static_cast<u8> (fNewValue),
-                                               false);
+                                               static_cast<u8> (fNewValue));
     }
 
-    // send the data
-    MainWin::instance()->sendAllUniverses();
+    // update the faders
+    MainWin::instance()->updateFaders();
 
+    // start the next step
     if (m_s32CurrentStep < m_s32Steps)
     {
         m_s32CurrentStep++;
 
         m_timer.start(m_u32StepTime_ms);
+    }
+    else
+    {
+        // scene end reached => move to next run step
+        if (m_s32RunStepIdx < ((s32) m_vRunSteps.size()) - 1)
+        {
+            m_s32RunStepIdx++;
+
+            executeRunStep(m_vRunSteps.at(m_s32RunStepIdx));
+        }
+        else
+        {
+            // no more steps => mark the active chasebutton as activated
+            MainWin::instance()->activateChaseButton(this, false);
+        }
     }
 
 } // Chase::onTimeout

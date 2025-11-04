@@ -11,6 +11,7 @@
 #include "mainWin.h"
 #include "dlgChase.h"
 #include "chase.h"
+#include "fixture.h"
 
 using namespace std;
 
@@ -29,7 +30,11 @@ DlgChase::DlgChase(QWidget              *_pParent,
     // set the controls for the given device
     setCtrls(m_pChase);
 
-    // connect the add channel button
+    // connect the add/remove fixture button
+    connect(m_pUi->m_pBtnAddFixture, &QToolButton::clicked, this, &DlgChase::onAddFixture);
+    connect(m_pUi->m_pBtnRemoveFixture, &QToolButton::clicked, this, &DlgChase::onRemoveFixture);
+
+    // connect the add/remove scene button
     connect(m_pUi->m_pBtnAddScene, &QToolButton::clicked, this, &DlgChase::onAddScene);
     connect(m_pUi->m_pBtnRemoveScene, &QToolButton::clicked, this, &DlgChase::onRemoveScene);
 
@@ -65,6 +70,30 @@ bool DlgChase::isBlackStart() const
 {
     return m_pUi->m_pBlackStart->isChecked();
 } // DlgChase::isBlackStart
+
+
+/*******************************************************************************
+* DlgChase::fixtureNames
+*******************************************************************************/
+vector<QString> DlgChase::fixtureNames() const
+{
+    QTableWidget            *pT         = m_pUi->m_pFixtureTable;
+    int                     iRowCount   = pT->rowCount();
+    vector<QString>         vFix;
+
+    // iterate over all chase steps
+    for (int row = 0; row < iRowCount; row++)
+    {
+        // get the scene name
+        QComboBox   *pCombo     = qobject_cast<QComboBox*>(pT->cellWidget(row, 0));
+        QString     sFixName    = (pCombo)?   pCombo->currentText() : "";
+
+        // add the step to the vector
+        vFix.push_back(sFixName);
+    }
+
+    return vFix;
+} // DlgChase::fixtureNames
 
 
 /*******************************************************************************
@@ -107,8 +136,10 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
 {
     if (_pChase)
     {
-        QTableWidget    *pTable = m_pUi->m_pChaseTable;
-        vector<QString> vScenes = MainWin::instance()->getAllSceneNames();
+        QTableWidget                    *pTable         = m_pUi->m_pChaseTable;
+        QTableWidget                    *pFixtureTable  = m_pUi->m_pFixtureTable;
+        vector<QString>                 vScenes         = MainWin::instance()->getAllSceneNames();
+        const list<shared_ptr<Fixture>> &lstAllFixtures = MainWin::instance()->getAllFixtures();
 
         // set the chase name
         m_pUi->m_pChaseName->setText(_pChase->name());
@@ -116,9 +147,32 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
         // set the black start flag
         m_pUi->m_pBlackStart->setChecked(_pChase->isBlackStart());
 
+        // set the fixtures
+        const vector<shared_ptr<Fixture>> &vChaseFixtures = _pChase->fixtures();
+        for (shared_ptr<Fixture> pChaseFix : vChaseFixtures)
+        {
+            QComboBox   *pCombo = new QComboBox();
+            int         iRowIdx = pTable->rowCount();
+
+            pFixtureTable->insertRow(iRowIdx);
+
+            // add all fixture names
+            for (const shared_ptr<Fixture> &pAllFix : lstAllFixtures)
+            {
+                pCombo->addItem(pAllFix->name());
+            }
+
+            int idx = pCombo->findText(pChaseFix->name());
+            if (idx != -1)
+            {
+                pCombo->setCurrentIndex(idx);
+            }
+
+            pFixtureTable->setCellWidget(iRowIdx, 0, pCombo);
+        }
+
         // set the steps
         const vector<stChaseStep> &vSteps = _pChase->chaseSteps();
-
 
         // generate a line for each step
         for (const stChaseStep &step : vSteps)
@@ -169,6 +223,49 @@ void DlgChase::reject()
 {
     QDialog::reject();
 } // DlgChase::reject
+
+
+/*******************************************************************************
+* DlgChase::onAddFixture
+*******************************************************************************/
+void DlgChase::onAddFixture(bool /*_bChecked*/)
+{
+    QTableWidget                    *pT             = m_pUi->m_pFixtureTable;
+    const list<shared_ptr<Fixture>> &lstFixtures    = MainWin::instance()->getAllFixtures();
+    int                             iNewRow         = pT->rowCount();
+
+    // append a row
+    pT->insertRow(iNewRow);
+
+    // create the combo box
+    QComboBox   *pCombo = new QComboBox();
+
+    // add all fixture names
+    for (const shared_ptr<Fixture> &pFix : lstFixtures)
+    {
+        pCombo->addItem(pFix->name());
+    }
+
+    pT->setCellWidget(iNewRow, 0, pCombo);
+
+} // DlgChase::onAddFixture
+
+
+/*******************************************************************************
+* DlgChase::onRemoveFixture
+*******************************************************************************/
+void DlgChase::onRemoveFixture(bool /*_bChecked*/)
+{
+    QTableWidget *pT = m_pUi->m_pFixtureTable;
+
+    s32 s32Row = pT->currentRow();
+
+    // -1 => now row selected
+    if (s32Row >= 0)
+    {
+        pT->removeRow(s32Row);
+    }
+} // DlgChase::onRemoveFixture
 
 
 /*******************************************************************************

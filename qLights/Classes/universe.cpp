@@ -42,6 +42,13 @@ Universe::Universe(QString                _sName,
     {
         m_hostAdr.setAddress(pC->ipAdr());
     }
+
+    // set the data changed flag to false
+    setDmxChangeFlag(false);
+
+    // start the send timer
+    connect(&m_sendTimer, &QTimer::timeout, this, &Universe::onSendTimer);
+    m_sendTimer.start(UNIVERSE_UPDATE_TIME_MS);
 } // m_artnetPacket::Universe
 
 
@@ -65,7 +72,7 @@ void Universe::attachFixture(shared_ptr<Fixture> _pFixture)
 
     for (shared_ptr<Channel> &c : vChannel)
     {
-        setChannelValue(_pFixture->adress(), c, 0, false);
+        setChannelValue(_pFixture->adress(), c, 0);
     }
 } // Universe::attachFixture
 
@@ -75,8 +82,7 @@ void Universe::attachFixture(shared_ptr<Fixture> _pFixture)
 *******************************************************************************/
 void Universe::setChannelValue(s32                  _s32FixtureAdress,
                                shared_ptr<Channel>  _pChannel,
-                               u8                   _u8Value,
-                               bool                 _bSend)
+                               u8                   _u8Value)
 {
     s32     dmxIdx = _s32FixtureAdress + _pChannel->nr() - 2;
     bool    bBright = _pChannel->isBrightnessChannel();
@@ -85,12 +91,15 @@ void Universe::setChannelValue(s32                  _s32FixtureAdress,
     _pChannel->setChannelValue(_u8Value);
 
     // set the value in the dmx-arrays
-    m_dmxData.setValue(dmxIdx, _u8Value, bBright);
-
-    if (_bSend)
     {
-        sendValues2Controller();
-    } // if (_bSend)
+        ExclusiveDmxData dmxData(m_dmxData);
+
+        dmxData->setValue(dmxIdx, _u8Value, bBright);
+
+        // dmx data ere beeing changed
+        setDmxChangeFlag(true);
+    }
+
 } // Universe::setChannelValue
 
 
@@ -101,60 +110,67 @@ u8 Universe::channelValue(s32    _s32FixtureAdress,
                           s32    _s32ChannelNr) const
 {
     s32     dmxIdx = _s32FixtureAdress +_s32ChannelNr - 2;
+    u8      u8Value;
 
-    return m_dmxData.value(dmxIdx);
+    {
+        SharedDmxData dmxData(m_dmxData);
+        u8Value = dmxData->value(dmxIdx);
+    }
+
+    return u8Value;
 } // Universe::channelValue
+
+
+/*******************************************************************************
+* Universe::dmxDataValue
+*******************************************************************************/
+QByteArray Universe::dmxDataValue() const
+{
+    SharedDmxData dmxData(m_dmxData);
+
+    return dmxData->dmxDataValue();
+} // Universe::dmxDataValue
 
 
 /*******************************************************************************
 * Universe::setDmxData
 *******************************************************************************/
-void Universe::setDmxData(const QByteArray  &_arData,
-                          bool              _bSend)
+void Universe::setDmxData(const QByteArray  &_arData)
 {
-    m_dmxData.setDmxData(_arData);
+    ExclusiveDmxData dmxData(m_dmxData);
 
-    if (_bSend)
-    {
-        sendValues2Controller();
-    } // if (_bSend)
+    dmxData->setDmxData(_arData);
+
+    // dmx data ere beeing changed
+    setDmxChangeFlag(true);
 } // Universe::setDmxData
-
-
-/*******************************************************************************
-* Universe::sendDmxData
-*******************************************************************************/
-void Universe::sendDmxData() const
-{
-    sendValues2Controller();
-} // Universe::sendDmxData
 
 
 /*******************************************************************************
 * Universe::reset
 *******************************************************************************/
-void Universe::reset(bool _bSend)
+void Universe::reset()
 {
-    m_dmxData.reset();
+    ExclusiveDmxData dmxData(m_dmxData);
 
-    if (_bSend)
-    {
-        sendValues2Controller();
-    } // if (_bSend)
+    dmxData->reset();
+
+    // dmx data ere beeing changed
+    setDmxChangeFlag(true);
 } // Universe::reset
 
 
 /*******************************************************************************
 * Universe::updateBrightness
 *******************************************************************************/
-void Universe::updateBrightness(bool _bSend)
+void Universe::updateBrightness()
 {
-    m_dmxData.updateBrightness();
+    ExclusiveDmxData dmxData(m_dmxData);
 
-    if (_bSend)
-    {
-        sendValues2Controller();
-    } // if (_bSend)
+    dmxData->updateBrightness();
+
+    // dmx data ere beeing changed
+    setDmxChangeFlag(true);
 } // Universe::updateBrightness
 
 
@@ -163,6 +179,8 @@ void Universe::updateBrightness(bool _bSend)
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
+    return;
+
     if (!m_hostAdr.isNull())
     {
         QUdpSocket      udpSocket;
@@ -182,7 +200,11 @@ void Universe::sendValues2Controller() const
         artnetPacket.append((char) DMX_DATA_SIZE & 0xFF);               // DMX-Datenlänge (Low Byte)
 
         // Füge DMX-Daten zum Paket hinzu
-        artnetPacket.append(m_dmxData.dmxDataSend().left(DMX_DATA_SIZE));
+        {
+            SharedDmxData dmxData(m_dmxData);
+
+            artnetPacket.append(dmxData->dmxDataSend().left(DMX_DATA_SIZE));
+        }
 
         // Senden des Pakets
         qint64 bytesSent = udpSocket.writeDatagram(artnetPacket, m_hostAdr, m_u16Port);
@@ -199,3 +221,42 @@ void Universe::sendValues2Controller() const
     } // if...
 
 } // Universe::sendValues2Controller
+
+
+/*******************************************************************************
+* Universe::setDmxChangeFlag
+*******************************************************************************/
+void Universe::setDmxChangeFlag(bool _bChanged)
+{
+    // reset the changed flag
+    {
+        ExclusiveChangeFlag bSync(m_SyncDataChaged);
+        *bSync = _bChanged;
+    }
+} // Universe::setDmxChangeFlag
+
+
+/*******************************************************************************
+* Universe::isDmxChangeFlag
+*******************************************************************************/
+bool Universe::isDmxChangeFlag() const
+{
+    SharedChangeFlag bSync(m_SyncDataChaged);
+
+    return bSync.get();
+} // Universe::isDmxChangeFlag
+
+
+/*******************************************************************************
+* Universe::onSendTimer
+*******************************************************************************/
+void Universe::onSendTimer()
+{
+    if (isDmxChangeFlag())
+    {
+        sendValues2Controller();
+
+        // reset the changed flag
+        setDmxChangeFlag(false);
+    }
+} // Universe::onSendTimer

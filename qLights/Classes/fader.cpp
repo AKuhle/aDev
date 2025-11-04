@@ -136,7 +136,7 @@ void Fader::onSliderMoved(int _iValue)
 {
     if (m_bMasterFader)
     {
-        MainWin::instance()->setMasterBrightness((u8) _iValue, true);
+        MainWin::instance()->setMasterBrightness((u8) _iValue);
 
         m_pScribbleStrip->setStyleSheet(QString("background-color: rgb(%1, %2, %3);")
                                       .arg(_iValue)
@@ -152,8 +152,7 @@ void Fader::onSliderMoved(int _iValue)
         // set the value in the universe
         m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
                                                 m_pChannel,
-                                                (u8) _iValue,
-                                                true);
+                                                (u8) _iValue);
 
         updateInfo();
     }

@@ -21,6 +21,7 @@
 
 #include "qLights_def.h"
 
+
 class Channel;
 class Fixture;
 
@@ -61,30 +62,34 @@ class Chase : public QObject
         s32                         m_s32RunStepIdx;
         s32                         m_s32Steps;
         s32                         m_s32CurrentStep;
-        const u32                   m_u32StepTime_ms    { 100 };
+        const u32                   m_u32StepTime_ms    { UNIVERSE_UPDATE_TIME_MS };
 
     public:
         Chase(const QString             &_sName,
               bool                      _bBlackStart,
+              const vector<QString>     &_vFixture,
               const vector<stChaseStep> &_vSteps);
 
         ~Chase();
 
-        QString                     name() const                        { return m_sName; }
+        QString                             name() const                        { return m_sName; }
 
-        const vector<stChaseStep>&  chaseSteps() const                  { return m_vSteps; }
+        const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
 
-        bool                        isBlackStart() const                { return m_bBlackStart; }
-        void                        setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
+        const vector<stChaseStep>&          chaseSteps() const                  { return m_vSteps; }
 
-        bool                        isSceneInChase(const QString &_sName);
+        bool                                isBlackStart() const                { return m_bBlackStart; }
+        void                                setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
 
-        void                        startChase();
+        bool                                isSceneInChase(const QString &_sName);
+
+        void                                startChase();
 
 
     private:
-        void                        createRunSteps();
+        void                                createRunSteps();
+        void                                executeRunStep(const stRunStep &_stRunStep);
 
     private slots:
-        void                        onTimeout();
+        void                                onTimeout();
 }; // class Chase

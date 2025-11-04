@@ -101,7 +101,7 @@ void SceneButton::onClicked()
     CHECK_PRE_CONDITION_VOID(m_pScene);
 
     // set the master brightness of the scene BEFORE the universes
-    MainWin::instance()->setMasterBrightness(m_pScene->masterBrighness(), false);
+    MainWin::instance()->setMasterBrightness(m_pScene->masterBrighness());
 
     const list<stUniverseInfo> &lstUniverseInfo = m_pScene->universes();
 
@@ -112,7 +112,7 @@ void SceneButton::onClicked()
         if (pUniverse)
         {
             // set the new universe data which was stored in the scene
-            pUniverse->setDmxData(uInfo.data, true);
+            pUniverse->setDmxData(uInfo.data);
         }
     }
 
