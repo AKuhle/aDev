@@ -54,9 +54,17 @@ void MainWin::updateToolbar()
     // action show values
     m_pUi->m_pActionShowValues->setChecked(isShowValues());
 
-    // ligth and fase buttons
-    m_pUi->m_pFadeIn->setVisible(!m_pUi->m_pPanelDock->isVisible());
-    m_pUi->m_pFadeOut->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    // ligth and fade buttons
+    m_pUi->m_pActionFade_in_1s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_in_2s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_in_3s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_in_5s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_in_10s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_out_1s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_out_2s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_out_3s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_out_5s->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pActionFade_out_10s->setVisible(!m_pUi->m_pPanelDock->isVisible());
     m_pUi->m_pSwitchOn->setVisible(!m_pUi->m_pPanelDock->isVisible());
     m_pUi->m_pSwitchOff->setVisible(!m_pUi->m_pPanelDock->isVisible());
 } // MainWin::updateToolbar

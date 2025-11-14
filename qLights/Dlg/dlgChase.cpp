@@ -136,10 +136,10 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
 {
     if (_pChase)
     {
-        QTableWidget                    *pTable         = m_pUi->m_pChaseTable;
-        QTableWidget                    *pFixtureTable  = m_pUi->m_pFixtureTable;
-        vector<QString>                 vScenes         = MainWin::instance()->getAllSceneNames();
-        const list<shared_ptr<Fixture>> &lstAllFixtures = MainWin::instance()->getAllFixtures();
+        // QTableWidget                    *pTable         = m_pUi->m_pChaseTable;
+        // QTableWidget                    *pFixtureTable  = m_pUi->m_pFixtureTable;
+        // vector<QString>                 vScenes         = MainWin::instance()->getAllSceneNames();
+        // const list<shared_ptr<Fixture>> &lstAllFixtures = MainWin::instance()->getAllFixtures();
 
         // set the chase name
         m_pUi->m_pChaseName->setText(_pChase->name());
@@ -147,62 +147,62 @@ void DlgChase::setCtrls(const shared_ptr<Chase> _pChase)
         // set the black start flag
         m_pUi->m_pBlackStart->setChecked(_pChase->isBlackStart());
 
-        // set the fixtures
-        const vector<shared_ptr<Fixture>> &vChaseFixtures = _pChase->fixtures();
-        for (shared_ptr<Fixture> pChaseFix : vChaseFixtures)
-        {
-            QComboBox   *pCombo = new QComboBox();
-            int         iRowIdx = pTable->rowCount();
+        // // set the fixtures
+        // const vector<shared_ptr<Fixture>> &vChaseFixtures = _pChase->fixtures();
+        // for (shared_ptr<Fixture> pChaseFix : vChaseFixtures)
+        // {
+        //     QComboBox   *pCombo = new QComboBox();
+        //     int         iRowIdx = pTable->rowCount();
 
-            pFixtureTable->insertRow(iRowIdx);
+        //     pFixtureTable->insertRow(iRowIdx);
 
-            // add all fixture names
-            for (const shared_ptr<Fixture> &pAllFix : lstAllFixtures)
-            {
-                pCombo->addItem(pAllFix->name());
-            }
+        //     // add all fixture names
+        //     for (const shared_ptr<Fixture> &pAllFix : lstAllFixtures)
+        //     {
+        //         pCombo->addItem(pAllFix->name());
+        //     }
 
-            int idx = pCombo->findText(pChaseFix->name());
-            if (idx != -1)
-            {
-                pCombo->setCurrentIndex(idx);
-            }
+        //     int idx = pCombo->findText(pChaseFix->name());
+        //     if (idx != -1)
+        //     {
+        //         pCombo->setCurrentIndex(idx);
+        //     }
 
-            pFixtureTable->setCellWidget(iRowIdx, 0, pCombo);
-        }
+        //     pFixtureTable->setCellWidget(iRowIdx, 0, pCombo);
+        // }
 
-        // set the steps
-        const vector<stChaseStep> &vSteps = _pChase->chaseSteps();
+        // // set the steps
+        // const vector<stChaseStep> &vSteps = _pChase->chaseSteps();
 
-        // generate a line for each step
-        for (const stChaseStep &step : vSteps)
-        {
-            QString sSceneName = step.sSceneName;
-            u32     s32Duration = step.u32Duration_ms;
-            int     iRowIdx = pTable->rowCount();
+        // // generate a line for each step
+        // for (const stChaseStep &step : vSteps)
+        // {
+        //     QString sSceneName = step.sSceneName;
+        //     u32     s32Duration = step.u32Duration_ms;
+        //     int     iRowIdx = pTable->rowCount();
 
-            // append a row
-            pTable->insertRow(iRowIdx);
+        //     // append a row
+        //     pTable->insertRow(iRowIdx);
 
-            // create and add the combo box
-            QComboBox   *pCombo = new QComboBox();
-            for (QString &sScene : vScenes)
-            {
-                pCombo->addItem(sScene);
-            }
-            int idx = pCombo->findText(sSceneName);
-            if (idx != -1)
-            {
-                pCombo->setCurrentIndex(idx);
-            }
-            pTable->setCellWidget(iRowIdx, 0, pCombo);
+        //     // create and add the combo box
+        //     QComboBox   *pCombo = new QComboBox();
+        //     for (QString &sScene : vScenes)
+        //     {
+        //         pCombo->addItem(sScene);
+        //     }
+        //     int idx = pCombo->findText(sSceneName);
+        //     if (idx != -1)
+        //     {
+        //         pCombo->setCurrentIndex(idx);
+        //     }
+        //     pTable->setCellWidget(iRowIdx, 0, pCombo);
 
-            // create and add line edit
-            QLineEdit *pLine = new QLineEdit();
-            pLine->setValidator(new QIntValidator(pLine)); // Nur Ganzzahlen erlaubt
-            pLine->setText(QString::number(s32Duration));
-            pTable->setCellWidget(iRowIdx, 1, pLine);
-        }
+        //     // create and add line edit
+        //     QLineEdit *pLine = new QLineEdit();
+        //     pLine->setValidator(new QIntValidator(pLine)); // Nur Ganzzahlen erlaubt
+        //     pLine->setText(QString::number(s32Duration));
+        //     pTable->setCellWidget(iRowIdx, 1, pLine);
+        // }
     }
 } // DlgChase::setCtrls
 

@@ -46,6 +46,15 @@ QString DlgScene::name() const
 
 
 /*******************************************************************************
+* DlgScene::isBlackStart
+*******************************************************************************/
+bool DlgScene::isBlackStart() const
+{
+    return m_pUi->m_pBlackStart->isChecked();
+} // DlgScene::isBlackStart
+
+
+/*******************************************************************************
 * DlgScene::setCtrls
 *******************************************************************************/
 void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
@@ -54,6 +63,9 @@ void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
     if (_pScene)
     {
         m_pUi->m_pSceneName->setText(_pScene->name());
+
+        // set the black start flag
+        m_pUi->m_pBlackStart->setChecked(_pScene->isBlackStart());
     }
 } // DlgScene::setCtrls
 

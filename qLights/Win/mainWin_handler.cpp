@@ -90,7 +90,7 @@ void MainWin::onFileOpen()
             aString sImage = f.readStringValue(sPre + ":image");
 
             // device channels
-            vector<shared_ptr<Channel>> vChannel;
+            vector<shared_ptr<ChannelDevice>> vChannel;
 
             s32 channelCount = f.readIntValue(sPre + aString(":channelCount"));
 
@@ -101,7 +101,7 @@ void MainWin::onFileOpen()
                 QString sPixmapName = f.readStringValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":pixmapName").toQString();
                 bool bBrightness = f.readBoolValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":bright");
 
-                vChannel.push_back(make_shared<Channel> (s32Nr, sName, sPixmapName, bBrightness));
+                vChannel.push_back(make_shared<ChannelDevice> (s32Nr, sName, sPixmapName, bBrightness));
             }
 
             addDevice(sName.toQString(), sImage.toQString(), vChannel);
@@ -169,41 +169,41 @@ void MainWin::onFileOpen()
 
             if (sSceneName != "-")
             {
-                list<shared_ptr<Universe>> lstUniverses;
+                // load the blackStart
+                bool bBlackStart = f.readBoolValue(sKey + ":black_start");
 
-                // read the master brightness of the scene
-                u8 u8MasterBrightness = static_cast<u8> (f.readIntValue(sKey + ":master_brightness"));
+                // list<shared_ptr<Universe>> lstUniverses;
 
                 // create the scene
-                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, u8MasterBrightness);
+                shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, bBlackStart);
                 sceneBtn.pBtn->setScene(pScene);
                 sceneBtn.pScene = pScene;
 
 
-                // read the universe count
-                s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
+                // // read the universe count
+                // s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
 
-                for (int iUni = 0; iUni < s32UniCount; iUni++)
-                {
-                    aString sKeyU = sKey + ":universe" + aString::fromValue(iUni);
+                // for (int iUni = 0; iUni < s32UniCount; iUni++)
+                // {
+                //     aString sKeyU = sKey + ":universe" + aString::fromValue(iUni);
 
-                    // read the universe name
-                    QString sUniName = f.readStringValue(sKeyU + ":name").toQString();
-                    shared_ptr<Universe> pUni = findUniverse(sUniName);
+                //     // read the universe name
+                //     QString sUniName = f.readStringValue(sKeyU + ":name").toQString();
+                //     shared_ptr<Universe> pUni = findUniverse(sUniName);
 
-                    std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
-                    QByteArray arDmxData(reinterpret_cast<const char*>(vecDmxData.data()),
-                                         static_cast<int>(vecDmxData.size()));
+                //     std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
+                //     QByteArray arDmxData(reinterpret_cast<const char*>(vecDmxData.data()),
+                //                          static_cast<int>(vecDmxData.size()));
 
-                    // set the dmx data in the universe
-                    pUni->setDmxData(arDmxData);
+                //     // set the dmx data in the universe
+                //     pUni->setDmxData(arDmxData);
 
-                    // add the universe to the list
-                    lstUniverses.push_back(pUni);
-                }
+                //     // add the universe to the list
+                //     lstUniverses.push_back(pUni);
+                // }
 
-                // add the universes with the data
-                pScene->addUniverses(lstUniverses);
+                // // add the universes with the data
+                // pScene->addUniverses(lstUniverses);
             }
             else
             {
@@ -232,35 +232,35 @@ void MainWin::onFileOpen()
 
             if (sChaseName != "-")
             {
-                vector<QString>         vFixture;
-                vector<stChaseStep>     vSteps;
+                // vector<QString>         vFixture;
+                // vector<stChaseStep>     vSteps;
 
                 // load the blackStart
                 bool bBlackStart = f.readBoolValue(sKey + ":black_start");
 
-                // read the number of fixtures
-                int iFixturesCount = f.readIntValue(sKey + ":no_of_fixtures");
-                // read the fixture names
-                for (int iFix = 0; iFix < iFixturesCount; iFix++)
-                {
-                    QString sFixName = f.readStringValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name").toQString();
+                // // read the number of fixtures
+                // int iFixturesCount = f.readIntValue(sKey + ":no_of_fixtures");
+                // // read the fixture names
+                // for (int iFix = 0; iFix < iFixturesCount; iFix++)
+                // {
+                //     QString sFixName = f.readStringValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name").toQString();
 
-                    vFixture.push_back(sFixName);
-                }
+                //     vFixture.push_back(sFixName);
+                // }
 
-                // read the number of steps
-                int iSteps = f.readIntValue(sKey + ":no_of_steps");
-                // read the steps
-                for (int i = 0; i < iSteps; i++)
-                {
-                    QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":scene_name").toQString();
-                    int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
+                // // read the number of steps
+                // int iSteps = f.readIntValue(sKey + ":no_of_steps");
+                // // read the steps
+                // for (int i = 0; i < iSteps; i++)
+                // {
+                //     QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":scene_name").toQString();
+                //     int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
 
-                    vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
-                }
+                //     vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
+                // }
 
                 // create the chase
-                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vFixture, vSteps);
+                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart);//, vFixture, vSteps);
                 chaseBtn.pBtn->setChase(pChase);
                 chaseBtn.pChase = pChase;
             }
@@ -343,8 +343,8 @@ void MainWin::onFileSave()
         f.addValue(sPre + ":image", aString::fromQString(pD->pixmapName()));
 
         // device channels
-        const vector<shared_ptr<Channel>>   &vChannel   = pD->channel();
-        s32                                 iChannelIdx = 0;
+        const vector<shared_ptr<ChannelDevice>> &vChannel   = pD->channel();
+        s32                                     iChannelIdx = 0;
 
         f.addValue(sPre + aString(":channelCount"), (int) vChannel.size()); // device channel count
         for (auto pC : vChannel)
@@ -414,36 +414,36 @@ void MainWin::onFileSave()
 
             if (pScene)
             {
-                const list<stUniverseInfo> &lstUniverses = pScene->universes();
+                //const list<stUniverseInfo> &lstUniverses = pScene->universes();
 
                 // save the scene name
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
 
-                // save the master brighness
-                f.addValue(sKey + ":master_brightness", (int) pScene->masterBrighness());
+                // save the blackStart
+                f.addValue(sKey + ":black_start", pScene->isBlackStart());
 
-                // save the universe count
-                f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
+                // // save the universe count
+                // f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
 
-                int iUni = 0;
-                for (const stUniverseInfo &uInfo : lstUniverses)
-                {
-                    shared_ptr<Universe>    pUni        = uInfo.pUniverse;
-                    aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
+                // int iUni = 0;
+                // for (const stUniverseInfo &uInfo : lstUniverses)
+                // {
+                //     shared_ptr<Universe>    pUni        = uInfo.pUniverse;
+                //     aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
 
-                    // create vector from dmx data
-                    size_t count = uInfo.data.size() / sizeof(u8);
-                    std::vector<u8> vDmxData(reinterpret_cast<const u8*> (uInfo.data.constData()),
-                                             reinterpret_cast<const u8*> (uInfo.data.constData()) + count);
+                //     // create vector from dmx data
+                //     size_t count = uInfo.data.size() / sizeof(u8);
+                //     std::vector<u8> vDmxData(reinterpret_cast<const u8*> (uInfo.data.constData()),
+                //                              reinterpret_cast<const u8*> (uInfo.data.constData()) + count);
 
-                    // add the universe name
-                    f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
+                //     // add the universe name
+                //     f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
 
-                    // add the dmx data
-                    f.addValue(sKeyU + ":data", vDmxData);
+                //     // add the dmx data
+                //     f.addValue(sKeyU + ":data", vDmxData);
 
-                    iUni++;
-                }
+                //     iUni++;
+                // }
             }
             else
             {
@@ -472,10 +472,10 @@ void MainWin::onFileSave()
 
             if (pChase)
             {
-                const vector<shared_ptr<Fixture>>   &vFix = pChase->fixtures();
-                const vector<stChaseStep>           &vSteps = pChase->chaseSteps();
-                int                                 iStep   = 0;
-                int                                 iFix   = 0;
+                // const vector<shared_ptr<Fixture>>   &vFix = pChase->fixtures();
+                // const vector<stChaseStep>           &vSteps = pChase->chaseSteps();
+                // int                                 iStep   = 0;
+                // int                                 iFix   = 0;
 
                 // save the chase name
                 f.addValue(sKey + ":name", aString::fromQString(pChase->name()));
@@ -483,22 +483,22 @@ void MainWin::onFileSave()
                 // save the blackStart
                 f.addValue(sKey + ":black_start", pChase->isBlackStart());
 
-                // save number of fixtures and the names
-                f.addValue(sKey + ":no_of_fixtures", (int) vFix.size());
-                for (const shared_ptr<Fixture> &pFix : vFix)
-                {
-                    f.addValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name", aString::fromQString(pFix->name()));
-                    iFix++;
-                }
+                // // save number of fixtures and the names
+                // f.addValue(sKey + ":no_of_fixtures", (int) vFix.size());
+                // for (const shared_ptr<Fixture> &pFix : vFix)
+                // {
+                //     f.addValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name", aString::fromQString(pFix->name()));
+                //     iFix++;
+                // }
 
-                // save number of chase steps and the steps
-                f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
-                for (const stChaseStep &step : vSteps)
-                {
-                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":scene_name", aString::fromQString(step.sSceneName));
-                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
-                    iStep++;
-                }
+                // // save number of chase steps and the steps
+                // f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
+                // for (const stChaseStep &step : vSteps)
+                // {
+                //     f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":scene_name", aString::fromQString(step.sSceneName));
+                //     f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
+                //     iStep++;
+                // }
             }
             else
             {
@@ -1003,35 +1003,47 @@ void MainWin::onChaseSelector_5(bool /*_bChecked*/)
 
 
 /*******************************************************************************
-* MainWin::onFaderIn
+* MainWin::onFader...
 *******************************************************************************/
-void MainWin::onFaderIn(bool /*_bChecked*/)
-{
-    int     iSteps          = 20;
-    int     iDuration_ms    = 2000;
+void MainWin::onFaderIn_1s(bool /*_bChecked*/)      { onStartFaderIn(20, 1000); }
+void MainWin::onFaderIn_2s(bool /*_bChecked*/)      { onStartFaderIn(40, 2000); }
+void MainWin::onFaderIn_3s(bool /*_bChecked*/)      { onStartFaderIn(60, 3000); }
+void MainWin::onFaderIn_5s(bool /*_bChecked*/)      { onStartFaderIn(100, 5000); }
+void MainWin::onFaderIn_10s(bool /*_bChecked*/)     { onStartFaderIn(200, 10000); }
 
-    m_fFaderValue           = m_u8MasterBrightness;
-    m_fFaderStep            = (255.f - m_fFaderValue) / iSteps;
-    m_u8FaderInterval       = iDuration_ms / iSteps;
-
-    QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
-} // MainWin::onFaderIn
+void MainWin::onFaderOut_1s(bool /*_bChecked*/)     { onStartFaderOut(20, 1000); }
+void MainWin::onFaderOut_2s(bool /*_bChecked*/)     { onStartFaderOut(40, 2000); }
+void MainWin::onFaderOut_3s(bool /*_bChecked*/)     { onStartFaderOut(60, 3000); }
+void MainWin::onFaderOut_5s(bool /*_bChecked*/)     { onStartFaderOut(100, 5000); }
+void MainWin::onFaderOut_10s(bool /*_bChecked*/)    { onStartFaderOut(200, 10000); }
 
 
 /*******************************************************************************
-* MainWin::onFaderOut
+* MainWin::onStartFaderIn
 *******************************************************************************/
-void MainWin::onFaderOut(bool /*_bChecked*/)
+void MainWin::onStartFaderIn(int    _iSteps,
+                             int    _iDuration_ms)
 {
-    int     iSteps          = 20;
-    int     iDuration_ms    = 2000;
-
     m_fFaderValue           = m_u8MasterBrightness;
-    m_fFaderStep            = -m_fFaderValue / iSteps;
-    m_u8FaderInterval       = iDuration_ms / iSteps;
+    m_fFaderStep            = (255.f - m_fFaderValue) / _iSteps;
+    m_u8FaderInterval       = _iDuration_ms / _iSteps;
 
     QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
-} // MainWin::onFaderOut
+} // MainWin::onStartFaderIn
+
+
+/*******************************************************************************
+* MainWin::onStartFaderOut
+*******************************************************************************/
+void MainWin::onStartFaderOut(int    _iSteps,
+                              int    _iDuration_ms)
+{
+    m_fFaderValue           = m_u8MasterBrightness;
+    m_fFaderStep            = -m_fFaderValue / _iSteps;
+    m_u8FaderInterval       = _iDuration_ms / _iSteps;
+
+    QTimer::singleShot(m_u8FaderInterval, this, SLOT(onFade()));
+} // MainWin::onStartFaderOut
 
 
 /*******************************************************************************

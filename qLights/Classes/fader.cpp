@@ -17,7 +17,7 @@
 *******************************************************************************/
 #include "Fader.h"
 #include "universe.h"
-#include "channel.h"
+#include "channelDevice.h"
 #include "fixture.h"
 
 #include "mainWin.h"
@@ -150,9 +150,7 @@ void Fader::onSliderMoved(int _iValue)
         CHECK_PRE_CONDITION_VOID(m_pFixture->universe());
 
         // set the value in the universe
-        m_pFixture->universe()->setChannelValue(m_pFixture->adress(),
-                                                m_pChannel,
-                                                (u8) _iValue);
+        m_pFixture->setChannelValue(m_pChannel, (u8) _iValue);
 
         updateInfo();
     }

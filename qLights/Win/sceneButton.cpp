@@ -79,7 +79,7 @@ void SceneButton::onAssignScene()
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        MainWin::instance()->assignScene(this, dlg.name());
+        MainWin::instance()->assignScene(this, dlg.name(), dlg.isBlackStart());
     }
 } // SceneButton::onAssignScene
 
@@ -100,26 +100,23 @@ void SceneButton::onClicked()
 {
     CHECK_PRE_CONDITION_VOID(m_pScene);
 
-    // set the master brightness of the scene BEFORE the universes
-    MainWin::instance()->setMasterBrightness(m_pScene->masterBrighness());
+    // const list<stUniverseInfo> &lstUniverseInfo = m_pScene->universes();
 
-    const list<stUniverseInfo> &lstUniverseInfo = m_pScene->universes();
+    // for (auto &uInfo : lstUniverseInfo)
+    // {
+    //     std::shared_ptr<Universe>   pUniverse = uInfo.pUniverse;
 
-    for (auto &uInfo : lstUniverseInfo)
-    {
-        std::shared_ptr<Universe>   pUniverse = uInfo.pUniverse;
+    //     if (pUniverse)
+    //     {
+    //         // set the new universe data which was stored in the scene
+    //         pUniverse->setDmxData(uInfo.data);
+    //     }
+    // }
 
-        if (pUniverse)
-        {
-            // set the new universe data which was stored in the scene
-            pUniverse->setDmxData(uInfo.data);
-        }
-    }
+    // // update all channel values
+    // MainWin::instance()->updateAllChannelValuesFromUniverse();
 
-    // update all channel values
-    MainWin::instance()->updateAllChannelValuesFromUniverse();
-
-    // update the faders
-    MainWin::instance()->updateFaders();
+    // // update the faders
+    // MainWin::instance()->updateFaders();
 
 } // SceneButton::onClicked

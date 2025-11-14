@@ -25,7 +25,6 @@
 #include "aSynchronize.h"
 
 #include "controller.h"
-#include "dmxData.h"
 
 class Channel;
 class Fixture;
@@ -37,13 +36,17 @@ using namespace std;
 
 /*******************************************************************************
 * class Universe
+*
+* each universe sends periodically the DMX data, if they have changed.
+* Therefor no update call is neccassary. Just set the channel values, and
+* it will be updated (sended) within the next refresh (e.b´g. each 100ms)
 *******************************************************************************/
 class Universe : public QObject
 {
     Q_OBJECT
 
     private:
-        using SynchronizedDmxData = aSynchronized<DmxData>;
+        using SynchronizedDmxData = aSynchronized<QByteArray>;
         using ExclusiveDmxData = aExclusiveAccessor<SynchronizedDmxData>;
         using SharedDmxData = aSharedAccessor<SynchronizedDmxData>;
 
@@ -81,14 +84,9 @@ class Universe : public QObject
         u32                     id() const                                  { return m_u32Id; }
         void                    setId(u32 _u32Id)                           { m_u32Id = _u32Id; }
 
-        void                    attachFixture(shared_ptr<Fixture> _pFixture);
-
-        void                    setChannelValue(s32                 _s32FixtureAdress,
-                                                shared_ptr<Channel> _pChannel,
-                                                u8                  _u8Value);
-
-        u8                      channelValue(s32    _s32Adress,
-                                             s32    _s32ChannelNr) const;
+        void                    setDmxValue(s32 _s32FixtureAdress,
+                                            s32 _32ChannelNr,
+                                            u8  _u8Value);
 
 
         QByteArray              dmxDataValue() const;
@@ -96,8 +94,6 @@ class Universe : public QObject
         void                    setDmxData(const QByteArray &_arData);
 
         void                    reset();
-
-        void                    updateBrightness();
 
 
     private:

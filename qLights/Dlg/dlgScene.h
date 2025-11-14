@@ -42,6 +42,9 @@ class DlgScene : public QDialog
 
         QString             name() const;
 
+        bool                isBlackStart() const;
+
+
     private:
         void                setCtrls(const shared_ptr<Scene> _pScene);
 

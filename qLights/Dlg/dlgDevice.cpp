@@ -11,7 +11,7 @@
 #include "mainWin.h"
 #include "dlgDevice.h"
 #include "dlgChannel.h"
-#include "channel.h"
+#include "channelDevice.h"
 
 using namespace std;
 
@@ -100,8 +100,8 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
 {
     if (_pDevice)
     {
-        const vector<shared_ptr<Channel>>   vChannel  = _pDevice->channel();
-        QTableWidget                        *pT         = m_pUi->m_pChannelTable;
+        const vector<shared_ptr<ChannelDevice>> vChannel    = _pDevice->channel();
+        QTableWidget                            *pT         = m_pUi->m_pChannelTable;
 
         // set the device name
         m_pUi->m_pDeviceName->setText(_pDevice->name());
@@ -186,8 +186,8 @@ void DlgDevice::setDeviceIcon(const QString &_path)
 *******************************************************************************/
 void DlgDevice::accept()
 {
-    QTableWidget                    *pT         = m_pUi->m_pChannelTable;
-    vector<shared_ptr<Channel>>     vChannel;
+    QTableWidget                        *pT         = m_pUi->m_pChannelTable;
+    vector<shared_ptr<ChannelDevice>>   vChannel;
 
     // put the channels in a vector
     for (int row = 0; row < pT->rowCount(); ++row)
@@ -200,7 +200,7 @@ void DlgDevice::accept()
         QCheckBox   *pBright        = qobject_cast<QCheckBox*>(pT->cellWidget(row, 3));
         bool        bBrightness     = pBright->isChecked();
 
-        vChannel.push_back(make_shared<Channel> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
+        vChannel.push_back(make_shared<ChannelDevice> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
     }
 
     if (!m_pDevice)

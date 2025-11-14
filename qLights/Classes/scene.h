@@ -34,28 +34,28 @@ class Universe;
 class Scene
 {
     private:
-        QString                 m_sName;
-        list<stUniverseInfo>    m_lstUniverse;
-        u8                      m_u8MasterBrighness     { 0 };
+        QString                     m_sName;
+        bool                        m_bBlackStart           { false };
+        vector<shared_ptr<Fixture>> m_vAffectedFixtures;
 
     public:
-        Scene(const QString   &_sName,
-              u8              _u8MasterBrighness);
+        Scene(const QString &_sName,
+              bool          _bBlackStart);
 
         ~Scene();
 
-        QString                     name() const                    { return m_sName; }
+        QString                     name() const                        { return m_sName; }
 
-        void                        setMasterBrighness(u8 _bright)  {  m_u8MasterBrighness = _bright; }
-        u8                          masterBrighness() const         { return m_u8MasterBrighness; }
+        bool                        isBlackStart() const                { return m_bBlackStart; }
+        void                        setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
 
-        const list<stUniverseInfo>& universes() const               { return m_lstUniverse; }
+        //const list<stUniverseInfo>& universes() const                   { return m_lstUniverse; }
 
-        void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
+        //void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
 
-        u8                          channelValue(const shared_ptr<Universe> _pUniverse,
-                                                 s32                        _s32FixtureAdress,
-                                                 s32                        _s32ChannelNr) const;
+        //u8                          channelValue(const shared_ptr<Universe> _pUniverse,
+        //                                         s32                        _s32FixtureAdress,
+        //                                         s32                        _s32ChannelNr) const;
 
-        void                        applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const;
+        //void                        applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const;
 }; // class Scene

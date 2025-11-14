@@ -29,12 +29,8 @@ Channel::Channel(s32            _s32Nr,
                  const QString  &_sName,
                  const QString  &_sPixmapName,
                  bool           _bBright)
-: m_s32Nr(_s32Nr),
-  m_sName(_sName),
-  m_sPixmapName(_sPixmapName),
-  m_bBright(_bBright)
+: ChannelDevice(_s32Nr, _sName, _sPixmapName, _bBright)
 {
-    m_pixmap.load(_sPixmapName);
 } // Channel::Channel
 
 

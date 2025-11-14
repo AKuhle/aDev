@@ -19,7 +19,7 @@
 #include <QString>
 
 #include "aFrame_def.h"
-#include "channel.h"
+#include "channelDevice.h"
 
 
 class Universe;
@@ -34,38 +34,25 @@ using namespace aFrame;
 class Device
 {
     private:
-        QString                         m_sName;
-        QString                         m_sPixmapName;
-        QPixmap                         m_pixmap;
-        vector<shared_ptr<Channel>>     m_vChannel;
+        QString                             m_sName;
+        QString                             m_sPixmapName;
+        QPixmap                             m_pixmap;
+        vector<shared_ptr<ChannelDevice>>   m_vChannel;
 
     public:
-        Device(const QString                        &_sName,
-               const QString                        &_sPixmap,
-               const vector<shared_ptr<Channel>>    &_vChannel);
+        Device(const QString                            &_sName,
+               const QString                            &_sPixmap,
+               const vector<shared_ptr<ChannelDevice>>  &_vChannel);
         ~Device();
 
-        const QString&                      name() const                                                { return m_sName; }
-        void                                setName(const QString &_sName)                              { m_sName = _sName; }
+        const QString&                          name() const                                                    { return m_sName; }
+        void                                    setName(const QString &_sName)                                  { m_sName = _sName; }
 
-        const QPixmap&                      pixmap() const                                              { return m_pixmap; }
-        const QString&                      pixmapName() const                                          { return m_sPixmapName; }
-        void                                setPixmap(const QString &_sPixmapName);
+        const QPixmap&                          pixmap() const                                                  { return m_pixmap; }
+        const QString&                          pixmapName() const                                              { return m_sPixmapName; }
+        void                                    setPixmap(const QString &_sPixmapName);
 
-        const vector<shared_ptr<Channel>>   &channel() const                                            { return m_vChannel; }
-        s32                                 channelCount() const                                        { return m_vChannel.size(); }
-        void                                setChannel(const vector<shared_ptr<Channel>> &_vChannel)    { m_vChannel = _vChannel; }
-
-        //void                                addUniverse(u32 _u32Id);
-
-        // void                                setDmxChannelValue(s32      _s32UniverseId,
-        //                                                        s32      _s32DmxChannelNr,
-        //                                                        u8       _u8Value,
-        //                                                        bool     _bSend);
-
-        //void                                sendAllUniverses();
-
-        //shared_ptr<Universe>                universe(u32 _u32Id);
-
-        //void                                resetAllUniverses();
+        const vector<shared_ptr<ChannelDevice>> &channel() const                                                { return m_vChannel; }
+        s32                                     channelCount() const                                            { return m_vChannel.size(); }
+        void                                    setChannel(const vector<shared_ptr<ChannelDevice>> &_vChannel)  { m_vChannel = _vChannel; }
 }; // class Device

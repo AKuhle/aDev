@@ -102,10 +102,10 @@ INCLUDEPATH += Win
 
 SOURCES += \
     Classes/channel.cpp \
+    Classes/channelDevice.cpp \
     Classes/chase.cpp \
     Classes/controller.cpp \
     Classes/device.cpp \
-    Classes/dmxData.cpp \
     Classes/fader.cpp \
     Classes/faderInfo.cpp \
     Classes/fixture.cpp \
@@ -130,10 +130,10 @@ SOURCES += \
 
 HEADERS += \
     Classes/channel.h \
+    Classes/channelDevice.h \
     Classes/chase.h \
     Classes/controller.h \
     Classes/device.h \
-    Classes/dmxData.h \
     Classes/fader.h \
     Classes/faderInfo.h \
     Classes/fixture.h \

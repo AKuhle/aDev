@@ -2957,35 +2957,6 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_34">
          <item>
-          <widget class="QPushButton" name="m_pFadeIn">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../Resource/qLights.qrc">
-             <normaloff>:/Std_48x48/fade_in.png</normaloff>:/Std_48x48/fade_in.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="m_pSwitchOn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
@@ -3035,35 +3006,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="m_pFadeOut">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../Resource/qLights.qrc">
-             <normaloff>:/Std_48x48/fade_out.png</normaloff>:/Std_48x48/fade_out.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
       </layout>
@@ -3077,7 +3019,7 @@
      <x>0</x>
      <y>0</y>
      <width>1467</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -3550,7 +3492,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="m_pToolbar">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -3565,6 +3507,20 @@
    <addaction name="separator"/>
    <addaction name="m_pActionPanelDock"/>
    <addaction name="m_pActionShowValues"/>
+   <addaction name="m_pActionFade_in_1s"/>
+   <addaction name="m_pActionFade_out_1s"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionFade_in_2s"/>
+   <addaction name="m_pActionFade_out_2s"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionFade_in_3s"/>
+   <addaction name="m_pActionFade_out_3s"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionFade_in_5s"/>
+   <addaction name="m_pActionFade_out_5s"/>
+   <addaction name="separator"/>
+   <addaction name="m_pActionFade_in_10s"/>
+   <addaction name="m_pActionFade_out_10s"/>
   </widget>
   <action name="m_pActionOpenFile">
    <property name="icon">
@@ -3618,6 +3574,126 @@
    </property>
    <property name="text">
     <string>Show Values</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_in_1s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_in_1.png</normaloff>:/qLights/fade_in_1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade in 1s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_out_1s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_out_1.png</normaloff>:/qLights/fade_out_1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade out 1s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_in_2s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_in_2.png</normaloff>:/qLights/fade_in_2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade in 2s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_out_2s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_out_2.png</normaloff>:/qLights/fade_out_2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade out 2s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_in_3s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_in_3.png</normaloff>:/qLights/fade_in_3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade in 3s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_out_3s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_out_3.png</normaloff>:/qLights/fade_out_3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade out 3s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_in_5s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_in_5.png</normaloff>:/qLights/fade_in_5.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade in 5s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_out_5s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_out_5.png</normaloff>:/qLights/fade_out_5.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade out 5s</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_in_10s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_in_10.png</normaloff>:/qLights/fade_in_10.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade in 10S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionFade_out_10s">
+   <property name="icon">
+    <iconset resource="../Resource/qLights.qrc">
+     <normaloff>:/qLights/fade_out_10.png</normaloff>:/qLights/fade_out_10.png</iconset>
+   </property>
+   <property name="text">
+    <string>Fade out 10s</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

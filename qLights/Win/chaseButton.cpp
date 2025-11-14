@@ -86,7 +86,7 @@ void ChaseButton::onAssignChase()
         vector<stChaseStep> vSteps      = dlg.chaseSteps();
 
         // create the chase
-        shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, vFixture, vSteps);
+        shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart);//, vFixture, vSteps);
 
         // iterate over all steps
         for (const stChaseStep &step : vSteps)
@@ -116,8 +116,8 @@ void ChaseButton::onRemoveChase()
 *******************************************************************************/
 void ChaseButton::onClicked()
 {
-    if (m_pChase)
-    {
-        m_pChase->startChase();
-    }
+    // if (m_pChase)
+    // {
+    //     m_pChase->startChase();
+    // }
 } // ChaseButton::onClicked

@@ -28,7 +28,12 @@ MainWin::MainWin(QWidget *parent)
 {
     m_pInstance = this;
 
+    // prpare the gui
     m_pUi->setupUi(this);
+    // insert a spacer before fade in 1s
+    QWidget *pSpacer = new QWidget();
+    pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    m_pUi->m_pToolbar->insertWidget(m_pUi->m_pActionFade_in_1s, pSpacer);
 
     // init the member variables
     initMember();
@@ -90,8 +95,17 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pChaseSelector_5, &QPushButton::clicked, this, &MainWin::onChaseSelector_5);
 
     // connect the fader buttons
-    connect(m_pUi->m_pFadeIn, &QPushButton::clicked, this, &MainWin::onFaderIn);
-    connect(m_pUi->m_pFadeOut, &QPushButton::clicked, this, &MainWin::onFaderOut);
+    connect(m_pUi->m_pActionFade_in_1s, &QAction::triggered, this, &MainWin::onFaderIn_1s);
+    connect(m_pUi->m_pActionFade_in_2s, &QAction::triggered, this, &MainWin::onFaderIn_2s);
+    connect(m_pUi->m_pActionFade_in_3s, &QAction::triggered, this, &MainWin::onFaderIn_3s);
+    connect(m_pUi->m_pActionFade_in_5s, &QAction::triggered, this, &MainWin::onFaderIn_5s);
+    connect(m_pUi->m_pActionFade_in_10s, &QAction::triggered, this, &MainWin::onFaderIn_10s);
+    connect(m_pUi->m_pActionFade_out_1s, &QAction::triggered, this, &MainWin::onFaderOut_1s);
+    connect(m_pUi->m_pActionFade_out_2s, &QAction::triggered, this, &MainWin::onFaderOut_2s);
+    connect(m_pUi->m_pActionFade_out_3s, &QAction::triggered, this, &MainWin::onFaderOut_3s);
+    connect(m_pUi->m_pActionFade_out_5s, &QAction::triggered, this, &MainWin::onFaderOut_5s);
+    connect(m_pUi->m_pActionFade_out_10s, &QAction::triggered, this, &MainWin::onFaderOut_10s);
+
     connect(m_pUi->m_pSwitchOn, &QPushButton::clicked, this, &MainWin::onSwitchOn);
     connect(m_pUi->m_pSwitchOff, &QPushButton::clicked, this, &MainWin::onSwitchOff);
 } // MainWin::MainWin
@@ -431,7 +445,7 @@ void MainWin::resetAllUniverses()
 /*******************************************************************************
 * MainWin::setMasterBrightness
 *******************************************************************************/
-void MainWin::setMasterBrightness(u8    _u8Value)
+void MainWin::setMasterBrightness(u8 _u8Value)
 {
     CHECK_PRE_CONDITION_VOID(m_pMasterFader);
 
@@ -439,10 +453,10 @@ void MainWin::setMasterBrightness(u8    _u8Value)
 
     updateMasterFader();
 
-    // update the brightness in all fixtures
-    for (shared_ptr<Universe> pU : m_lstUniverse)
+    // update the brightness for all fixtures
+    for (shared_ptr<Fixture> pFix : m_lstFixture)
     {
-        pU->updateBrightness();
+        pFix->updateMasterBrightness();
     }
 } // MainWin::setMasterBrightness
 
@@ -450,9 +464,9 @@ void MainWin::setMasterBrightness(u8    _u8Value)
 /*******************************************************************************
 * MainWin::addDevice
 *******************************************************************************/
-void MainWin::addDevice(const QString                       &_sName,
-                        const QString                       &_sImage,
-                        const vector<shared_ptr<Channel>>   &_vChannel)
+void MainWin::addDevice(const QString                           &_sName,
+                        const QString                           &_sImage,
+                        const vector<shared_ptr<ChannelDevice>> &_vChannel)
 {
     shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _vChannel);
     m_lstDevice.push_back(std::move(pDevice));
@@ -483,9 +497,6 @@ void MainWin::addFixture(const QString          &_sName,
 {
     // create the new fixture
     shared_ptr<Fixture>  pFixture = make_shared<Fixture> (_sName, _pDevice, _pUniverse, _s32Adress);
-
-    // init the dmx-values in the universe
-    _pUniverse->attachFixture(pFixture);
 
     // add the fixture to the fixture list
     m_lstFixture.push_back(std::move(pFixture));
@@ -545,7 +556,8 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
 * MainWin::assignScene
 *******************************************************************************/
 void MainWin::assignScene(SceneButton   *_pSceneBtn,
-                          const QString &_sSceneName)
+                          const QString &_sSceneName,
+                          bool          _bBlackStart)
 {
     // search the scene in the vector of scene buttons
     for (stSceneBtn &sceneBtn : m_vvSceneButtons.at(m_s32ActiveScene))
@@ -553,8 +565,8 @@ void MainWin::assignScene(SceneButton   *_pSceneBtn,
         if (sceneBtn.pBtn == _pSceneBtn)
         {
             // scene button found => create a new scene
-            shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName, m_u8MasterBrightness);
-            pScene->addUniverses(m_lstUniverse);
+            shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName, _bBlackStart);
+            //pScene->addUniverses(m_lstUniverse);
 
             // set the scene in the tuple of the current set
             sceneBtn.pScene = pScene;
@@ -607,18 +619,19 @@ void MainWin::removeScene(SceneButton   *_pSceneBtn)
             vector<shared_ptr<Chase>> vChases = getAllChases();
             for (const shared_ptr<Chase> &pChase : vChases)
             {
-                // scene is used in a chase => deletion not possible
-                if (pChase->isSceneInChase(sceneBtn.pScene->name()))
-                {
-                    QMessageBox msgBox;
+                if (pChase){}// avoid warning
+                // // scene is used in a chase => deletion not possible
+                // if (pChase->isSceneInChase(sceneBtn.pScene->name()))
+                // {
+                //     QMessageBox msgBox;
 
-                    msgBox.setIcon(QMessageBox::Warning);
-                    msgBox.setWindowTitle("Warning");
-                    msgBox.setText("Scene is used in a chase,\nand can't be deleted!");     // Mehrzeiliger Text
-                    msgBox.exec();
+                //     msgBox.setIcon(QMessageBox::Warning);
+                //     msgBox.setWindowTitle("Warning");
+                //     msgBox.setText("Scene is used in a chase,\nand can't be deleted!");     // Mehrzeiliger Text
+                //     msgBox.exec();
 
-                    return;
-                }
+                //     return;
+                // }
             }
 
             // remove the scene from the tuple of the current set
@@ -780,7 +793,7 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
     {
         if (_pFixture)
         {
-            const vector<shared_ptr<Channel>> &vChannel = _pFixture->device()->channel();
+            const vector<shared_ptr<Channel>> &vChannel = _pFixture->channel();
 
             auto it = std::find_if(vChannel.begin(), vChannel.end(),
                                    [iChannelIdx](const std::shared_ptr<Channel> &ch)
@@ -803,13 +816,13 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
 /*******************************************************************************
 * MainWin::updateAllChannelValuesFromUniverse
 *******************************************************************************/
-void MainWin::updateAllChannelValuesFromUniverse()
-{
-    for (shared_ptr<Fixture> pF : m_lstFixture)
-    {
-        pF->updateAllChannelValuesFromUniverse();
-    }
-} // MainWin::updateAllChannelValuesFromUniverse
+// void MainWin::updateAllChannelValuesFromUniverse()
+// {
+//     for (shared_ptr<Fixture> pF : m_lstFixture)
+//     {
+//         pF->updateAllChannelValuesFromUniverse();
+//     }
+// } // MainWin::updateAllChannelValuesFromUniverse
 
 
 /*******************************************************************************

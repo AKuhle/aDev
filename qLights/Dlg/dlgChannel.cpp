@@ -8,7 +8,7 @@
 #include "mainWin.h"
 #include "dlgChannel.h"
 #include "controller.h"
-#include "channel.h"
+#include "channelDevice.h"
 #include "dlgDevice.h"
 
 using namespace std;

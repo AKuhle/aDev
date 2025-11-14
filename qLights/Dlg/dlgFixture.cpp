@@ -28,6 +28,25 @@ DlgFixture::DlgFixture(QWidget                      *_pParent,
 {
     m_pUi->setupUi(this);
 
+    // set the cobtrols for the given fixture
+    setCtrls(_pFixture);
+} // DlgFixture::DlgFixture
+
+
+/*******************************************************************************
+* DlgFixture::~DlgFixture
+*************************************s******************************************/
+DlgFixture::~DlgFixture()
+{
+    delete m_pUi;
+} // DlgFixture::~DlgFixture
+
+
+/*******************************************************************************
+* DlgFixture::setCtrls
+*******************************************************************************/
+void DlgFixture::setCtrls(const shared_ptr<Fixture> _pFixture)
+{
     // set icon size for the device combo box
     m_pUi->m_pDevice->setIconSize(QSize(36, 36));
 
@@ -48,36 +67,15 @@ DlgFixture::DlgFixture(QWidget                      *_pParent,
     {
         const QString   &name   = pUniverse->name();
 
-        m_pUi->m_pUniverse->addItem(name);
+        m_pUi->m_pUniverse->addItem(name, QVariant(name));
     }
 
-    // set the cobtrols for the given fixture
-    setCtrls(_pFixture);
-} // DlgFixture::DlgFixture
-
-
-/*******************************************************************************
-* DlgFixture::~DlgFixture
-*************************************s******************************************/
-DlgFixture::~DlgFixture()
-{
-    delete m_pUi;
-} // DlgFixture::~DlgFixture
-
-
-/*******************************************************************************
-* DlgFixture::setCtrls
-*******************************************************************************/
-void DlgFixture::setCtrls(const shared_ptr<Fixture> _pFixture)
-{
     if (_pFixture)
     {
         m_pUi->m_pFixtureName->setText(_pFixture->name());
         MainWin::selectComboBoxItem(m_pUi->m_pUniverse, _pFixture->universe()->name());
         m_pUi->m_pAdress->setValue(_pFixture->adress());
     }
-
-//comboBox->addItem(QIcon("pfad/zum/bild.png"), "Text");
 } // DlgFixture::setCtrls
 
 

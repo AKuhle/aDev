@@ -15,9 +15,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "Fixture.h"
+#include "fixture.h"
 #include "universe.h"
 #include "device.h"
+#include "mainWin.h"
 
 using namespace aFrame;
 
@@ -34,6 +35,24 @@ Fixture::Fixture(const QString          &_sName,
   m_pUniverse(_pUniverse),
   m_s32Adress(_s32Adress)
 {
+    // create channels which are conform to the device channels
+    const vector<shared_ptr<ChannelDevice>> &vChannelDevice = m_pDevice->channel();
+    for (shared_ptr<ChannelDevice> pChannelDevice : vChannelDevice)
+    {
+        shared_ptr<Channel> pC = make_shared<Channel> (pChannelDevice->nr(),
+                                                       pChannelDevice->name(),
+                                                       pChannelDevice->pixmapName(),
+                                                       pChannelDevice->isBrightnessChannel());
+
+        // save the master brightness for this fixture separate for efficiency
+        if (pC->isBrightnessChannel())
+        {
+            m_pChannelBright = pC;
+        }
+
+        m_vChannel.push_back(pC);
+    }
+
 } // Fixture::Fixture
 
 
@@ -46,19 +65,105 @@ Fixture::~Fixture()
 
 
 /*******************************************************************************
+* Fixture::setChannelValue
+*******************************************************************************/
+void Fixture::setChannelValue(shared_ptr<Channel>   _pChannel,
+                              u8                    _u8Value)
+{
+    CHECK_PRE_CONDITION_VOID(m_pUniverse);
+
+    // set the value in the channel
+    _pChannel->setChannelValue(_u8Value);
+
+    // set the value in the universe
+    dbl dValue  = static_cast<dbl> (_u8Value);
+
+    if (_pChannel->isBrightnessChannel())
+    {
+        // brightness channel => take master brightness into account
+        dbl dMaster = static_cast<dbl> (MainWin::instance()->masterBrightness());
+        dValue *= dMaster / 255.;
+
+    }
+
+    m_pUniverse->setDmxValue(m_s32Adress, _pChannel->nr(), static_cast<u8> (dValue));
+} // Fixture::setChannelValue
+
+
+/*******************************************************************************
+* Fixture::updateMasterBrightness
+*******************************************************************************/
+void Fixture::updateMasterBrightness()
+{
+    CHECK_PRE_CONDITION_VOID(m_pChannelBright);
+
+    setChannelValue(m_pChannelBright, m_pChannelBright->channelValue());
+
+} // Fixture::updateMasterBrightness
+
+
+/*******************************************************************************
+* Fixture::overrideBrightness
+*******************************************************************************/
+// void Fixture::overrideBrightness(u8 _u8Brightness)
+// {
+//     // just one override
+//     if (!m_bOverrideBrightness)
+//     {
+//         const vector<shared_ptr<Channel>> &vChannels = m_pDevice->channel();
+
+//         for (shared_ptr<Channel> pChannel : vChannels)
+//         {
+//             // there should be just one brightness channel per fixture
+//             if (pChannel->isBrightnessChannel())
+//             {
+//                 m_u8LastBrightness = pChannel->channelValue();
+//                 m_pUniverse->setChannelValue(m_s32Adress, pChannel, _u8Brightness);
+//                 break;
+//             }
+//         }
+
+//         m_bOverrideBrightness = true;
+//     }
+// } // Fixture::overrideBrightness
+
+
+// /*******************************************************************************
+// * Fixture::restoreBrightness
+// *******************************************************************************/
+// void Fixture::restoreBrightness()
+// {
+//     // restore only, if overridden
+//     if (m_bOverrideBrightness)
+//     {
+//         const vector<shared_ptr<Channel>> &vChannels = m_pDevice->channel();
+
+//         for (shared_ptr<Channel> pChannel : vChannels)
+//         {
+//             // there should be just one brightness channel per fixture
+//             if (pChannel->isBrightnessChannel())
+//             {
+//                 m_u8LastBrightness = pChannel->channelValue();
+//                 m_pUniverse->setChannelValue(m_s32Adress, pChannel, m_u8LastBrightness);
+//                 break;
+//             }
+//         }
+
+//         m_bOverrideBrightness = false;
+//     }
+// } // Fixture::restoreBrightness
+
+
+/*******************************************************************************
 * Fixture::resetFixture
 *******************************************************************************/
 void Fixture::resetFixture()
 {
-    const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
-
     // set all channel values to 0
-    for (auto &pChannel : vChannel)
+    for (auto &pChannel : m_vChannel)
     {
         // set the value in the universe
-        m_pUniverse->setChannelValue(m_s32Adress,
-                                     pChannel,
-                                     (u8) 0);
+        m_pUniverse->setDmxValue(m_s32Adress, pChannel->nr(), (u8) 0);
     }
 
 } // Fixture::resetFixture
@@ -67,16 +172,16 @@ void Fixture::resetFixture()
 /*******************************************************************************
 * Fixture::updateAllChannelValuesFromUniverse
 *******************************************************************************/
-void Fixture::updateAllChannelValuesFromUniverse()
-{
-    const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
+// void Fixture::updateAllChannelValuesFromUniverse()
+// {
+//     const vector<shared_ptr<Channel>>   &vChannel = m_pDevice->channel();
 
-    // set all channel values to 0
-    for (auto &pChannel : vChannel)
-    {
-        // set the value in the universe
-        m_pUniverse->setChannelValue(m_s32Adress,
-                                     pChannel,
-                                     m_pUniverse->channelValue(m_s32Adress, pChannel->nr()));
-    }
-} // Fixture::updateAllChannelValuesFromUniverse
+//     // set all channel values to 0
+//     for (auto &pChannel : vChannel)
+//     {
+//         // set the value in the universe
+//         m_pUniverse->setChannelValue(m_s32Adress,
+//                                      pChannel,
+//                                      m_pUniverse->channelValue(m_s32Adress, pChannel->nr()));
+//     }
+// } // Fixture::updateAllChannelValuesFromUniverse

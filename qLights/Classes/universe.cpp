@@ -17,7 +17,7 @@
 *******************************************************************************/
 #include "universe.h"
 #include "aString.h"
-#include "channel.h"
+#include "channelDevice.h"
 #include "mainWin.h"
 #include "fixture.h"
 
@@ -43,6 +43,13 @@ Universe::Universe(QString                _sName,
         m_hostAdr.setAddress(pC->ipAdr());
     }
 
+    // initialize the byte array
+    {
+        ExclusiveDmxData dmxData(m_dmxData);
+        dmxData->fill(0, DMX_DATA_SIZE);
+    }
+
+
     // set the data changed flag to false
     setDmxChangeFlag(false);
 
@@ -61,64 +68,24 @@ Universe::~Universe()
 
 
 /*******************************************************************************
-* Universe::attachFixture
+* Universe::setDmxValue
 *******************************************************************************/
-void Universe::attachFixture(shared_ptr<Fixture> _pFixture)
+void Universe::setDmxValue(s32  _s32FixtureAdress,
+                           s32  _32ChannelNr,
+                           u8   _u8Value)
 {
-    shared_ptr<Device>                  pDevice = _pFixture->device();
-    CHECK_PRE_CONDITION_VOID(pDevice);
-
-    vector<shared_ptr<Channel>>   vChannel = pDevice->channel();
-
-    for (shared_ptr<Channel> &c : vChannel)
-    {
-        setChannelValue(_pFixture->adress(), c, 0);
-    }
-} // Universe::attachFixture
-
-
-/*******************************************************************************
-* Universe::setChannelValue
-*******************************************************************************/
-void Universe::setChannelValue(s32                  _s32FixtureAdress,
-                               shared_ptr<Channel>  _pChannel,
-                               u8                   _u8Value)
-{
-    s32     dmxIdx = _s32FixtureAdress + _pChannel->nr() - 2;
-    bool    bBright = _pChannel->isBrightnessChannel();
-
-    // set the new channel value
-    _pChannel->setChannelValue(_u8Value);
+    s32     dmxIdx = _s32FixtureAdress + _32ChannelNr - 2;
 
     // set the value in the dmx-arrays
     {
         ExclusiveDmxData dmxData(m_dmxData);
-
-        dmxData->setValue(dmxIdx, _u8Value, bBright);
+        (*dmxData)[dmxIdx] = _u8Value;
 
         // dmx data ere beeing changed
         setDmxChangeFlag(true);
     }
 
-} // Universe::setChannelValue
-
-
-/*******************************************************************************
-* Universe::channelValue
-*******************************************************************************/
-u8 Universe::channelValue(s32    _s32FixtureAdress,
-                          s32    _s32ChannelNr) const
-{
-    s32     dmxIdx = _s32FixtureAdress +_s32ChannelNr - 2;
-    u8      u8Value;
-
-    {
-        SharedDmxData dmxData(m_dmxData);
-        u8Value = dmxData->value(dmxIdx);
-    }
-
-    return u8Value;
-} // Universe::channelValue
+} // Universe::setDmxValue
 
 
 /*******************************************************************************
@@ -128,7 +95,7 @@ QByteArray Universe::dmxDataValue() const
 {
     SharedDmxData dmxData(m_dmxData);
 
-    return dmxData->dmxDataValue();
+    return *dmxData;
 } // Universe::dmxDataValue
 
 
@@ -139,7 +106,7 @@ void Universe::setDmxData(const QByteArray  &_arData)
 {
     ExclusiveDmxData dmxData(m_dmxData);
 
-    dmxData->setDmxData(_arData);
+    *dmxData = _arData;
 
     // dmx data ere beeing changed
     setDmxChangeFlag(true);
@@ -153,7 +120,7 @@ void Universe::reset()
 {
     ExclusiveDmxData dmxData(m_dmxData);
 
-    dmxData->reset();
+    dmxData->fill(0);
 
     // dmx data ere beeing changed
     setDmxChangeFlag(true);
@@ -161,24 +128,12 @@ void Universe::reset()
 
 
 /*******************************************************************************
-* Universe::updateBrightness
-*******************************************************************************/
-void Universe::updateBrightness()
-{
-    ExclusiveDmxData dmxData(m_dmxData);
-
-    dmxData->updateBrightness();
-
-    // dmx data ere beeing changed
-    setDmxChangeFlag(true);
-} // Universe::updateBrightness
-
-
-/*******************************************************************************
 * Universe::sendValues2Controller
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
+    return;
+
     if (!m_hostAdr.isNull())
     {
         QUdpSocket      udpSocket;
@@ -201,7 +156,7 @@ void Universe::sendValues2Controller() const
         {
             SharedDmxData dmxData(m_dmxData);
 
-            artnetPacket.append(dmxData->dmxDataSend().left(DMX_DATA_SIZE));
+            artnetPacket.append(dmxData->left(DMX_DATA_SIZE));
         }
 
         // Senden des Pakets

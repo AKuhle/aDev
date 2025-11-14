@@ -107,14 +107,14 @@ class MainWin : public QMainWindow
 
         void                        resetAllUniverses();
 
-        void                        setMasterBrightness(u8      _u8Value);
+        void                        setMasterBrightness(u8 _u8Value);
         static u8                   masterBrightness()          { return m_u8MasterBrightness; }
 
 
         // device
-        void                        addDevice(const QString                     &_sName,
-                                              const QString                     &_sImage,
-                                              const vector<shared_ptr<Channel>> &_vChannel);
+        void                        addDevice(const QString                             &_sName,
+                                              const QString                             &_sImage,
+                                              const vector<shared_ptr<ChannelDevice>>   &_vChannel);
 
         shared_ptr<Device>          findDevice(const QString &_sName);
 
@@ -134,7 +134,8 @@ class MainWin : public QMainWindow
 
         // scenes
         void                        assignScene(SceneButton   *_pBankBtn,
-                                            const QString &_sSceneName);
+                                                const QString &_sSceneName,
+                                                bool          _bBlackStart);
 
         shared_ptr<Scene>           findScene(const QString &_sName);
 
@@ -156,7 +157,7 @@ class MainWin : public QMainWindow
 
         // faders
         void                        assignFaders(shared_ptr<Fixture> _pFixture);
-        void                        updateAllChannelValuesFromUniverse();
+        //void                        updateAllChannelValuesFromUniverse();
 
         shared_ptr<Fixture>         findFixture(const QString &_sName);
 
@@ -203,6 +204,13 @@ class MainWin : public QMainWindow
 
         void                        readChannelIcons();
 
+        void                        onStartFaderIn(int    _iSteps,
+                                                   int    _iDuration_ms);
+
+        void                        onStartFaderOut(int    _iSteps,
+                                                    int    _iDuration_ms);
+
+
     private slots:
         // ctrl-bar
         void                        onFileOpen();
@@ -247,9 +255,17 @@ class MainWin : public QMainWindow
         void                        onChaseSelector_4(bool _bChecked);
         void                        onChaseSelector_5(bool _bChecked);
 
-        void                        onFaderIn(bool _bChecked);
-        void                        onFaderOut(bool _bChecked);
+        void                        onFaderIn_1s(bool _bChecked);
+        void                        onFaderIn_2s(bool _bChecked);
+        void                        onFaderIn_3s(bool _bChecked);
+        void                        onFaderIn_5s(bool _bChecked);
+        void                        onFaderIn_10s(bool _bChecked);
+        void                        onFaderOut_1s(bool _bChecked);
+        void                        onFaderOut_2s(bool _bChecked);
+        void                        onFaderOut_3s(bool _bChecked);
+        void                        onFaderOut_5s(bool _bChecked);
+        void                        onFaderOut_10s(bool _bChecked);
+        void                        onFade();
         void                        onSwitchOn(bool _bChecked);
         void                        onSwitchOff(bool _bChecked);
-        void                        onFade();
 }; // class MainWin

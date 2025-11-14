@@ -51,10 +51,10 @@ OBJECTS_DIR   = debug
 ####### Files
 
 SOURCES       = ..\..\Classes\channel.cpp \
+		..\..\Classes\channelDevice.cpp \
 		..\..\Classes\chase.cpp \
 		..\..\Classes\controller.cpp \
 		..\..\Classes\device.cpp \
-		..\..\Classes\dmxData.cpp \
 		..\..\Classes\fader.cpp \
 		..\..\Classes\faderInfo.cpp \
 		..\..\Classes\fixture.cpp \
@@ -94,10 +94,10 @@ SOURCES       = ..\..\Classes\channel.cpp \
 		..\..\..\..\GeneratedFiles\qLights\moc_mainWin.cpp \
 		..\..\..\..\GeneratedFiles\qLights\moc_sceneButton.cpp
 OBJECTS       = debug/channel.o \
+		debug/channelDevice.o \
 		debug/chase.o \
 		debug/controller.o \
 		debug/device.o \
-		debug/dmxData.o \
 		debug/fader.o \
 		debug/faderInfo.o \
 		debug/fixture.o \
@@ -139,10 +139,10 @@ OBJECTS       = debug/channel.o \
 		debug/moc_sceneButton.o
 
 DIST          = Documents/qLights.json ..\..\Classes\channel.h \
+		..\..\Classes\channelDevice.h \
 		..\..\Classes\chase.h \
 		..\..\Classes\controller.h \
 		..\..\Classes\device.h \
-		..\..\Classes\dmxData.h \
 		..\..\Classes\fader.h \
 		..\..\Classes\faderInfo.h \
 		..\..\Classes\fixture.h \
@@ -162,10 +162,10 @@ DIST          = Documents/qLights.json ..\..\Classes\channel.h \
 		..\..\Win\mainWin.h \
 		..\..\Win\sceneButton.h \
 		..\..\qLights_def.h ..\..\Classes\channel.cpp \
+		..\..\Classes\channelDevice.cpp \
 		..\..\Classes\chase.cpp \
 		..\..\Classes\controller.cpp \
 		..\..\Classes\device.cpp \
-		..\..\Classes\dmxData.cpp \
 		..\..\Classes\fader.cpp \
 		..\..\Classes\faderInfo.cpp \
 		..\..\Classes\fixture.cpp \
@@ -206,10 +206,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) sample1d.zip $(SOURCES) $(DIST) ..\..\qLights.pro ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\spec_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\device_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\sanitize.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\gcc-base.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\g++-base.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\g++-win32.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\windows-desktop.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\qconfig.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_freetype.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_libpng.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_charts.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssettings.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_linguist.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_png_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3d.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_shadertools.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_tools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt_functions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\win32-g++\qmake.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\toolchain.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\default_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resolve_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\default_post.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\build_pass.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qml_debug.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\precompile_header.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\warn_on.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\permissions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resources_functions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resources.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\moc.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\opengl.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\uic.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qmake_use.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\file_copies.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\windows.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\testcase_targets.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exceptions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\yacc.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\lex.prf ..\..\qLights.pro ..\..\..\aFrame\Resource\aFrame.qrc ..\..\Resource\qLights.qrc ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Widgets.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Gui.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Network.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Core.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6EntryPoint.prl   ..\..\..\aFrame\Resource\aFrame.qrc ..\..\Resource\qLights.qrc ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\data\dummy.cpp ..\..\Classes\channel.h ..\..\Classes\chase.h ..\..\Classes\controller.h ..\..\Classes\device.h ..\..\Classes\dmxData.h ..\..\Classes\fader.h ..\..\Classes\faderInfo.h ..\..\Classes\fixture.h ..\..\Classes\scene.h ..\..\Classes\scribbleStrip.h ..\..\Classes\universe.h ..\..\Dlg\dlgChannel.h ..\..\Dlg\dlgChase.h ..\..\Dlg\dlgController.h ..\..\Dlg\dlgDevice.h ..\..\Dlg\dlgFixture.h ..\..\Dlg\dlgScene.h ..\..\Dlg\dlgUniverse.h ..\..\Win\bankButton.h ..\..\Win\chaseButton.h ..\..\Win\fixtureTable.h ..\..\Win\mainWin.h ..\..\Win\sceneButton.h ..\..\qLights_def.h  ..\..\Classes\channel.cpp ..\..\Classes\chase.cpp ..\..\Classes\controller.cpp ..\..\Classes\device.cpp ..\..\Classes\dmxData.cpp ..\..\Classes\fader.cpp ..\..\Classes\faderInfo.cpp ..\..\Classes\fixture.cpp ..\..\Classes\scene.cpp ..\..\Classes\scribbleStrip.cpp ..\..\Classes\universe.cpp ..\..\Dlg\dlgChannel.cpp ..\..\Dlg\dlgChase.cpp ..\..\Dlg\dlgController.cpp ..\..\Dlg\dlgDevice.cpp ..\..\Dlg\dlgFixture.cpp ..\..\Dlg\dlgScene.cpp ..\..\Dlg\dlgUniverse.cpp ..\..\Win\bankButton.cpp ..\..\Win\chaseButton.cpp ..\..\Win\fixtureTable.cpp ..\..\Win\mainWin.cpp ..\..\Win\mainWin_handler.cpp ..\..\Win\mainWin_update.cpp ..\..\Win\sceneButton.cpp ..\..\main.cpp ..\..\Forms\dlgChannel.ui ..\..\Forms\dlgChase.ui ..\..\Forms\dlgController.ui ..\..\Forms\dlgDevice.ui ..\..\Forms\dlgFixture.ui ..\..\Forms\dlgScene.ui ..\..\Forms\dlgUniverse.ui ..\..\Forms\mainWin.ui    
+	$(ZIP) sample1d.zip $(SOURCES) $(DIST) ..\..\qLights.pro ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\spec_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\device_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\sanitize.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\gcc-base.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\g++-base.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\windows-vulkan.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\g++-win32.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\common\windows-desktop.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\qconfig.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_freetype.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_libjpeg.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_ext_libpng.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_charts.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_charts_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_chartsqml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_chartsqml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_core.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_core_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_dbus.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designer.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_entrypoint_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_example_icons_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_freetype_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_gui.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_harfbuzz_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_help.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_help_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_jpeg_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsanimation.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsanimation_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsfolderlistmodel_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labsqmlmodels_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssettings.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssettings_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labssharedimage_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_labswavefrontmesh_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_linguist.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediaquick_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_network.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_network_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_opengl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_openglwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_png_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatch_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatchconversions_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qdoccatchgenerators_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlbuiltins_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcompiler_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcore.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlcore_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmldom_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlintegration_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmllocalstorage_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlls_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlnetwork.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlnetwork_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltoolingsettings_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmltyperegistrar_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3d.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3d_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3deffects.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3deffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticles.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dutils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick3dutils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basic_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2basicstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusion_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2fusionstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imagine_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2imaginestyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2impl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2material_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2materialstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universal_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2universalstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrols2windowsstyleimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickcontrolstestutilsprivate_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2quickimpl_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickdialogs2utils_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickeffects_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicklayouts_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktestutilsprivate_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimeline.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimeline_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quicktimelineblendtrees_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_shadertools.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_shadertools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_spatialaudio.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_spatialaudio_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_sql.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svg.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_svgwidgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_testlib.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_tools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uitools.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_widgets.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_xml.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\modules\qt_lib_zlib_private.pri ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt_functions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\win32-g++\qmake.conf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exclusive_builds.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\toolchain.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\default_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\default_pre.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resolve_config.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exclusive_builds_post.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\default_post.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\build_pass.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qml_debug.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\precompile_header.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\warn_on.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\permissions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qt.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resources_functions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\resources.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\moc.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\opengl.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\uic.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\qmake_use.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\file_copies.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\win32\windows.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\testcase_targets.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\exceptions.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\yacc.prf ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\lex.prf ..\..\qLights.pro ..\..\..\aFrame\Resource\aFrame.qrc ..\..\Resource\qLights.qrc ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Widgets.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Gui.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Network.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6Core.prl ..\..\..\..\Qt\6.7.2\mingw_64\lib\Qt6EntryPoint.prl   ..\..\..\aFrame\Resource\aFrame.qrc ..\..\Resource\qLights.qrc ..\..\..\..\Qt\6.7.2\mingw_64\mkspecs\features\data\dummy.cpp ..\..\Classes\channel.h ..\..\Classes\channelDevice.h ..\..\Classes\chase.h ..\..\Classes\controller.h ..\..\Classes\device.h ..\..\Classes\fader.h ..\..\Classes\faderInfo.h ..\..\Classes\fixture.h ..\..\Classes\scene.h ..\..\Classes\scribbleStrip.h ..\..\Classes\universe.h ..\..\Dlg\dlgChannel.h ..\..\Dlg\dlgChase.h ..\..\Dlg\dlgController.h ..\..\Dlg\dlgDevice.h ..\..\Dlg\dlgFixture.h ..\..\Dlg\dlgScene.h ..\..\Dlg\dlgUniverse.h ..\..\Win\bankButton.h ..\..\Win\chaseButton.h ..\..\Win\fixtureTable.h ..\..\Win\mainWin.h ..\..\Win\sceneButton.h ..\..\qLights_def.h  ..\..\Classes\channel.cpp ..\..\Classes\channelDevice.cpp ..\..\Classes\chase.cpp ..\..\Classes\controller.cpp ..\..\Classes\device.cpp ..\..\Classes\fader.cpp ..\..\Classes\faderInfo.cpp ..\..\Classes\fixture.cpp ..\..\Classes\scene.cpp ..\..\Classes\scribbleStrip.cpp ..\..\Classes\universe.cpp ..\..\Dlg\dlgChannel.cpp ..\..\Dlg\dlgChase.cpp ..\..\Dlg\dlgController.cpp ..\..\Dlg\dlgDevice.cpp ..\..\Dlg\dlgFixture.cpp ..\..\Dlg\dlgScene.cpp ..\..\Dlg\dlgUniverse.cpp ..\..\Win\bankButton.cpp ..\..\Win\chaseButton.cpp ..\..\Win\fixtureTable.cpp ..\..\Win\mainWin.cpp ..\..\Win\mainWin_handler.cpp ..\..\Win\mainWin_update.cpp ..\..\Win\sceneButton.cpp ..\..\main.cpp ..\..\Forms\dlgChannel.ui ..\..\Forms\dlgChase.ui ..\..\Forms\dlgController.ui ..\..\Forms\dlgDevice.ui ..\..\Forms\dlgFixture.ui ..\..\Forms\dlgScene.ui ..\..\Forms\dlgUniverse.ui ..\..\Forms\mainWin.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\channel.o debug\chase.o debug\controller.o debug\device.o debug\dmxData.o debug\fader.o debug\faderInfo.o debug\fixture.o debug\scene.o debug\scribbleStrip.o debug\universe.o debug\dlgChannel.o debug\dlgChase.o debug\dlgController.o debug\dlgDevice.o debug\dlgFixture.o debug\dlgScene.o debug\dlgUniverse.o debug\bankButton.o debug\chaseButton.o debug\fixtureTable.o debug\mainWin.o debug\mainWin_handler.o debug\mainWin_update.o debug\sceneButton.o debug\main.o debug\qrc_aFrame.o debug\qrc_qLights.o debug\moc_chase.o debug\moc_fader.o debug\moc_faderInfo.o debug\moc_universe.o debug\moc_dlgChannel.o debug\moc_dlgChase.o debug\moc_dlgController.o debug\moc_dlgDevice.o debug\moc_dlgFixture.o debug\moc_dlgScene.o debug\moc_dlgUniverse.o debug\moc_bankButton.o debug\moc_chaseButton.o debug\moc_fixtureTable.o debug\moc_mainWin.o debug\moc_sceneButton.o
+	-$(DEL_FILE) debug\channel.o debug\channelDevice.o debug\chase.o debug\controller.o debug\device.o debug\fader.o debug\faderInfo.o debug\fixture.o debug\scene.o debug\scribbleStrip.o debug\universe.o debug\dlgChannel.o debug\dlgChase.o debug\dlgController.o debug\dlgDevice.o debug\dlgFixture.o debug\dlgScene.o debug\dlgUniverse.o debug\bankButton.o debug\chaseButton.o debug\fixtureTable.o debug\mainWin.o debug\mainWin_handler.o debug\mainWin_update.o debug\sceneButton.o debug\main.o debug\qrc_aFrame.o debug\qrc_qLights.o debug\moc_chase.o debug\moc_fader.o debug\moc_faderInfo.o debug\moc_universe.o debug\moc_dlgChannel.o debug\moc_dlgChase.o debug\moc_dlgController.o debug\moc_dlgDevice.o debug\moc_dlgFixture.o debug\moc_dlgScene.o debug\moc_dlgUniverse.o debug\moc_bankButton.o debug\moc_chaseButton.o debug\moc_fixtureTable.o debug\moc_mainWin.o debug\moc_sceneButton.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -246,14 +246,22 @@ debug/qrc_aFrame.cpp: ../../../aFrame/Resource/aFrame.qrc \
 
 debug/qrc_qLights.cpp: ../../Resource/qLights.qrc \
 		../../../../Qt/6.7.2/mingw_64/bin/rcc.exe \
-		../../Resource/Std_48x48/fade_in.png \
-		../../Resource/Std_48x48/fade_out.png \
+		../../Resource/qLights/fade_out_10.png \
+		../../Resource/qLights/fade_out_2.png \
+		../../Resource/qLights/fade_in_5.png \
+		../../Resource/qLights/fade_out_1.png \
+		../../Resource/qLights/fade_out_5.png \
 		../../Resource/qLights/appIcon.png \
+		../../Resource/qLights/fade_in_1.png \
 		../../Resource/qLights/controller.png \
+		../../Resource/qLights/fade_in_3.png \
+		../../Resource/qLights/fade_out_3.png \
 		../../Resource/qLights/showValue.png \
 		../../Resource/qLights/brightnessMasked.png \
+		../../Resource/qLights/fade_in_2.png \
 		../../Resource/qLights/universe.png \
-		../../Resource/qLights/unused.png
+		../../Resource/qLights/unused.png \
+		../../Resource/qLights/fade_in_10.png
 	C:\Tools\Qt\6.7.2\mingw_64\bin\rcc.exe -name qLights --no-zstd ..\..\Resource\qLights.qrc -o debug\qrc_qLights.cpp
 
 compiler_moc_predefs_make_all: ../../../../GeneratedFiles/qLights/moc_predefs.h
@@ -369,13 +377,8 @@ compiler_moc_header_clean:
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
-		../../../aFrame/aUtil/aStopwatch.h \
-		../../../aFrame/aFrame_def.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../qLights_def.h \
+		../../../aFrame/aFrame_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
@@ -953,7 +956,6 @@ compiler_moc_header_clean:
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../Classes/dmxData.h \
 		../../../../GeneratedFiles/qLights/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	C:\Tools\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/qLights/moc_predefs.h -IC:/Tools/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/qLights -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Tools/aDev/qLights/Classes -IC:/Tools/aDev/qLights/Dlg -IC:/Tools/aDev/qLights/Win -IC:/Tools/Qt/6.7.2/mingw_64/include -IC:/Tools/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Tools/Qt/6.7.2/mingw_64/include/QtGui -IC:/Tools/Qt/6.7.2/mingw_64/include/QtNetwork -IC:/Tools/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Tools/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\Classes\universe.h -o ..\..\..\..\GeneratedFiles\qLights\moc_universe.cpp
@@ -2517,6 +2519,12 @@ compiler_moc_header_clean:
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../GeneratedFiles/qLights/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	C:\Tools\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/qLights/moc_predefs.h -IC:/Tools/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/qLights -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Tools/aDev/qLights/Classes -IC:/Tools/aDev/qLights/Dlg -IC:/Tools/aDev/qLights/Win -IC:/Tools/Qt/6.7.2/mingw_64/include -IC:/Tools/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Tools/Qt/6.7.2/mingw_64/include/QtGui -IC:/Tools/Qt/6.7.2/mingw_64/include/QtNetwork -IC:/Tools/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Tools/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\Win\bankButton.h -o ..\..\..\..\GeneratedFiles\qLights\moc_bankButton.cpp
@@ -2716,10 +2724,6 @@ compiler_moc_header_clean:
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../../aFrame/aUtil/aStopwatch.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
@@ -3167,9 +3171,8 @@ compiler_moc_header_clean:
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -3377,6 +3380,12 @@ compiler_moc_header_clean:
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../GeneratedFiles/qLights/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	C:\Tools\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/qLights/moc_predefs.h -IC:/Tools/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/qLights -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Tools/aDev/qLights/Classes -IC:/Tools/aDev/qLights/Dlg -IC:/Tools/aDev/qLights/Win -IC:/Tools/Qt/6.7.2/mingw_64/include -IC:/Tools/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Tools/Qt/6.7.2/mingw_64/include/QtGui -IC:/Tools/Qt/6.7.2/mingw_64/include/QtNetwork -IC:/Tools/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Tools/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\Win\sceneButton.h -o ..\..\..\..\GeneratedFiles\qLights\moc_sceneButton.cpp
@@ -3820,6 +3829,12 @@ compiler_uic_clean:
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -4399,6 +4414,12 @@ compiler_uic_clean:
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -4593,10 +4614,6 @@ compiler_uic_clean:
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../../aFrame/aUtil/aStopwatch.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
@@ -4806,6 +4823,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 debug/channel.o: ../../Classes/channel.cpp ../../Classes/Channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aFrame_def.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
@@ -4960,9 +4978,166 @@ debug/channel.o: ../../Classes/channel.cpp ../../Classes/Channel.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/controller.h \
-		../../Classes/dmxData.h
+		../../Classes/controller.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\channel.o ..\..\Classes\channel.cpp
+
+debug/channelDevice.o: ../../Classes/channelDevice.cpp ../../Classes/ChannelDevice.h \
+		../../../aFrame/aFrame_def.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversionchecks.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtconfiginclude.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qconfig.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtcore-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtconfigmacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtcoreexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qassert.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtnoop.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtypes.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversion.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlogging.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qflags.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qatomic.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qyieldcpu.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qconstructormacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdarwinhelpers.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qexceptionhandling.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qforeach.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qttypetraits.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionpointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmalloc.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qminmax.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnumeric.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qoverload.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qswap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtresource.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qttranslation.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearray.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrefcount.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydata.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpair.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydatapointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydataops.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainertools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20functional.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20memory.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringfwd.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20type_traits.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringliteral.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringalgorithms.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlatin1stringview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qanystringview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qutf8stringview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringtokenizer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
+		../../Classes/universe.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetatype.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcomparehelpers.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfloat16.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmath.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterable.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetacontainer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainerinfo.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtaggedpointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdebug.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtextstream.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontiguouscache.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qset.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhash.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
+		../../../aFrame/aUtil/aSynchronize.h \
+		../../Classes/controller.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\channelDevice.o ..\..\Classes\channelDevice.cpp
 
 debug/chase.o: ../../Classes/chase.cpp ../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
@@ -5195,9 +5370,8 @@ debug/chase.o: ../../Classes/chase.cpp ../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -5210,10 +5384,10 @@ debug/chase.o: ../../Classes/chase.cpp ../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		../../Classes/faderInfo.h \
 		../../Classes/fixture.h \
+		../../Classes/channel.h \
 		../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
-		../../Classes/chase.h \
-		../../../aFrame/aUtil/aStopwatch.h
+		../../Classes/chase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\chase.o ..\..\Classes\chase.cpp
 
 debug/controller.o: ../../Classes/controller.cpp ../../Classes/controller.h \
@@ -5366,8 +5540,7 @@ debug/controller.o: ../../Classes/controller.cpp ../../Classes/controller.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
-		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h
+		../../../aFrame/aUtil/aSynchronize.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\controller.o ..\..\Classes\controller.cpp
 
 debug/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
@@ -5445,7 +5618,7 @@ debug/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
 		../../../aFrame/aFrame_def.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -5526,256 +5699,8 @@ debug/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/controller.h \
-		../../Classes/dmxData.h
+		../../Classes/controller.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\device.o ..\..\Classes\device.cpp
-
-debug/dmxData.o: ../../Classes/dmxData.cpp ../../Win/mainWin.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversionchecks.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtconfiginclude.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qconfig.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtcore-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtconfigmacros.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtcoreexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompilerdetection.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qprocessordetection.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsystemdetection.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtdeprecationmarkers.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qassert.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtnoop.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtypes.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtversion.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtclasshelpermacros.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtypeinfo.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainerfwd.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsysinfo.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlogging.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qflags.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qatomic.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasicatomic.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qatomic_cxx11.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qgenericatomic.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qyieldcpu.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qconstructormacros.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdarwinhelpers.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qexceptionhandling.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qforeach.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qttypetraits.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionpointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qglobalstatic.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmalloc.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qminmax.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnumeric.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qoverload.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qswap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtresource.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qttranslation.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnamespace.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtmetamacros.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearray.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrefcount.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydata.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpair.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydatapointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qarraydataops.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainertools_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20functional.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20memory.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearrayview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringfwd.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q20type_traits.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringliteral.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringalgorithms.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlatin1stringview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qanystringview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qutf8stringview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringtokenizer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringbuilder.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreevent.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetatype.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcomparehelpers.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdatastream.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfloat16.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmath.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterable.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetacontainer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontainerinfo.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtaggedpointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbindingstorage.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qkeysequence.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qicon.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdebug.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtextstream.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcontiguouscache.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qset.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhash.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpalette.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbrush.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfont.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qendian.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfontmetrics.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfontinfo.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qsizepolicy.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcursor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbitmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qevent.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qeventpoint.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvector2d.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvectornd.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpointingdevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qinputdevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qscreen.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QList \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QObject \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QRect \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QSize \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QSizeF \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QTransform \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnativeinterface.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qscreen_platform.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreapplication.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdeadlinetimer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qelapsedtimer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qeventloop.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfuture.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfutureinterface.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmutex.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtsan_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qresultstore.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfuture_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qthreadpool.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qthread.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrunnable.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qexception.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpromise.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtableview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemview.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qitemselectionmodel.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabbar.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qrubberband.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QComboBox \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcombobox.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		../../qLights_def.h \
-		../../../aFrame/aFrame_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
-		../../Classes/controller.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../Classes/universe.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
-		../../Classes/device.h \
-		../../Classes/channel.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
-		../../Classes/fader.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
-		../../Classes/scribbleStrip.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
-		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
-		../../Classes/faderInfo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dmxData.o ..\..\Classes\dmxData.cpp
 
 debug/fader.o: ../../Classes/fader.cpp ../../Classes/Fader.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
@@ -5992,12 +5917,12 @@ debug/fader.o: ../../Classes/fader.cpp ../../Classes/Fader.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
-		../../Classes/dmxData.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../Classes/fixture.h \
+		../../Classes/channel.h \
 		../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -6262,9 +6187,8 @@ debug/faderInfo.o: ../../Classes/faderInfo.cpp ../../Classes/faderInfo.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -6273,7 +6197,7 @@ debug/faderInfo.o: ../../Classes/faderInfo.cpp ../../Classes/faderInfo.h \
 		../../Classes/scribbleStrip.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\faderInfo.o ..\..\Classes\faderInfo.cpp
 
-debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/Fixture.h \
+debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstring.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qchar.h \
@@ -6348,6 +6272,48 @@ debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/Fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdatastream.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
 		../../Classes/universe.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
@@ -6356,26 +6322,12 @@ debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/Fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobject.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreevent.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmetatype.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcompare.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcomparehelpers.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdatastream.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfloat16.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmath.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterable.h \
@@ -6401,37 +6353,96 @@ debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/Fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpolygon.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qregion.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h
+		../../Win/mainWin.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qwidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qkeysequence.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qicon.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qvariant.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpalette.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qendian.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfontmetrics.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qbitmap.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qevent.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qeventpoint.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvector2d.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvectornd.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpointingdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qinputdevice.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qscreen.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QList \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QObject \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QRect \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QSize \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QSizeF \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QTransform \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qnativeinterface.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qscreen_platform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qelapsedtimer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qeventloop.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfuture.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfutureinterface.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmutex.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtsan_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qresultstore.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfuture_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qthreadpool.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qthread.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrunnable.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qexception.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpromise.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qinputmethod.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtableview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QComboBox \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcombobox.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		../../Classes/fader.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
+		../../Classes/scribbleStrip.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
+		../../Classes/faderInfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\fixture.o ..\..\Classes\fixture.cpp
 
 debug/scene.o: ../../Classes/scene.cpp ../../Classes/scene.h \
@@ -6587,7 +6598,14 @@ debug/scene.o: ../../Classes/scene.cpp ../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
-		../../Classes/dmxData.h
+		../../Classes/fixture.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
+		../../Classes/device.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\scene.o ..\..\Classes\scene.cpp
 
 debug/scribbleStrip.o: ../../Classes/scribbleStrip.cpp ../../Classes/scribbleStrip.h \
@@ -6935,12 +6953,11 @@ debug/universe.o: ../../Classes/universe.cpp ../../Classes/universe.h \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../Classes/dmxData.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -7029,7 +7046,8 @@ debug/universe.o: ../../Classes/universe.cpp ../../Classes/universe.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		../../Classes/faderInfo.h \
-		../../Classes/fixture.h
+		../../Classes/fixture.h \
+		../../Classes/channel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\universe.o ..\..\Classes\universe.cpp
 
 debug/dlgChannel.o: ../../Dlg/dlgChannel.cpp ../../../aFrame/aFrame_def.h \
@@ -7263,9 +7281,8 @@ debug/dlgChannel.o: ../../Dlg/dlgChannel.cpp ../../../aFrame/aFrame_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -7516,9 +7533,8 @@ debug/dlgChase.o: ../../Dlg/dlgChase.cpp ../../../../Qt/6.7.2/mingw_64/include/Q
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -7534,8 +7550,8 @@ debug/dlgChase.o: ../../Dlg/dlgChase.cpp ../../../../Qt/6.7.2/mingw_64/include/Q
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		../../Classes/chase.h \
-		../../../aFrame/aUtil/aStopwatch.h \
-		../../Classes/fixture.h
+		../../Classes/fixture.h \
+		../../Classes/channel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dlgChase.o ..\..\Dlg\dlgChase.cpp
 
 debug/dlgController.o: ../../Dlg/dlgController.cpp ../../../../GeneratedFiles/qLights/ui_dlgController.h \
@@ -7770,9 +7786,8 @@ debug/dlgController.o: ../../Dlg/dlgController.cpp ../../../../GeneratedFiles/qL
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -8022,9 +8037,8 @@ debug/dlgDevice.o: ../../Dlg/dlgDevice.cpp ../../../../Qt/6.7.2/mingw_64/include
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -8273,9 +8287,8 @@ debug/dlgFixture.o: ../../Dlg/dlgFixture.cpp ../../../aFrame/aFrame_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -8290,7 +8303,8 @@ debug/dlgFixture.o: ../../Dlg/dlgFixture.cpp ../../../aFrame/aFrame_def.h \
 		../../Dlg/dlgFixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
-		../../Classes/fixture.h
+		../../Classes/fixture.h \
+		../../Classes/channel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dlgFixture.o ..\..\Dlg\dlgFixture.cpp
 
 debug/dlgScene.o: ../../Dlg/dlgScene.cpp ../../../../GeneratedFiles/qLights/ui_dlgScene.h \
@@ -8486,10 +8500,15 @@ debug/dlgScene.o: ../../Dlg/dlgScene.cpp ../../../../GeneratedFiles/qLights/ui_d
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qguiapplication_platform.h \
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../Classes/scene.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
 		../../Dlg/dlgScene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
@@ -8727,9 +8746,8 @@ debug/dlgUniverse.o: ../../Dlg/dlgUniverse.cpp ../../../aFrame/aFrame_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -8981,9 +8999,8 @@ debug/bankButton.o: ../../Win/bankButton.cpp ../../../../Qt/6.7.2/mingw_64/inclu
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -8996,7 +9013,8 @@ debug/bankButton.o: ../../Win/bankButton.cpp ../../../../Qt/6.7.2/mingw_64/inclu
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
 		../../Classes/faderInfo.h \
 		../../Win/bankButton.h \
-		../../Classes/fixture.h
+		../../Classes/fixture.h \
+		../../Classes/channel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\bankButton.o ..\..\Win\bankButton.cpp
 
 debug/chaseButton.o: ../../Win/chaseButton.cpp ../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
@@ -9199,10 +9217,6 @@ debug/chaseButton.o: ../../Win/chaseButton.cpp ../../../../Qt/6.7.2/mingw_64/inc
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../../aFrame/aUtil/aStopwatch.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../Dlg/dlgChase.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
@@ -9241,9 +9255,11 @@ debug/chaseButton.o: ../../Win/chaseButton.cpp ../../../../Qt/6.7.2/mingw_64/inc
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../Classes/fader.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../Classes/scribbleStrip.h \
@@ -9701,9 +9717,8 @@ debug/mainWin.o: ../../Win/mainWin.cpp ../../../../Qt/6.7.2/mingw_64/include/QtW
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -9717,8 +9732,7 @@ debug/mainWin.o: ../../Win/mainWin.cpp ../../../../Qt/6.7.2/mingw_64/include/QtW
 		../../Classes/faderInfo.h \
 		../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
-		../../Classes/chase.h \
-		../../../aFrame/aUtil/aStopwatch.h
+		../../Classes/chase.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainWin.o ..\..\Win\mainWin.cpp
 
 debug/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
@@ -9964,9 +9978,8 @@ debug/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../../Qt/6.7.2/ming
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../Classes/fader.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../Classes/scribbleStrip.h \
@@ -10263,9 +10276,8 @@ debug/mainWin_update.o: ../../Win/mainWin_update.cpp ../../../../GeneratedFiles/
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -10473,12 +10485,17 @@ debug/sceneButton.o: ../../Win/sceneButton.cpp ../../../../Qt/6.7.2/mingw_64/inc
 		../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
 		../../../aFrame/aFrame_def.h \
+		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../Dlg/dlgScene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
 		../../Win/mainWin.h \
@@ -10519,12 +10536,7 @@ debug/sceneButton.o: ../../Win/sceneButton.cpp ../../../../Qt/6.7.2/mingw_64/inc
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../Classes/fader.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../Classes/scribbleStrip.h \
@@ -10766,9 +10778,8 @@ debug/main.o: ../../main.cpp ../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../../aFrame/aUtil/aSynchronize.h \
-		../../Classes/dmxData.h \
 		../../Classes/device.h \
-		../../Classes/channel.h \
+		../../Classes/channelDevice.h \
 		../../../aFrame/aUtil/aString.h \
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \

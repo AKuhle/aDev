@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file Device.cpp
+* \file ChannelDevice.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -15,39 +15,32 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "Device.h"
+#include "ChannelDevice.h"
 #include "universe.h"
 
 using namespace aFrame;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
-* Device::Device
+* ChannelDevice::ChannelDevice
 *******************************************************************************/
-Device::Device(const QString                            &_sName,
-               const QString                            &_sPixmap,
-               const vector<shared_ptr<ChannelDevice>>  &_vChannel)
-: m_sName(_sName),
-  m_vChannel(_vChannel)
+ChannelDevice::ChannelDevice(s32            _s32Nr,
+                 const QString  &_sName,
+                 const QString  &_sPixmapName,
+                 bool           _bBright)
+: m_s32Nr(_s32Nr),
+  m_sName(_sName),
+  m_sPixmapName(_sPixmapName),
+  m_bBright(_bBright)
 {
-    setPixmap(_sPixmap);
-} // Device::Device
+    m_pixmap.load(_sPixmapName);
+} // ChannelDevice::ChannelDevice
 
 
 /*******************************************************************************
-* Device::~Device
+* ChannelDevice::~ChannelDevice
 *******************************************************************************/
-Device::~Device()
+ChannelDevice::~ChannelDevice()
 {
-} // Device::~Device
-
-
-/*******************************************************************************
-* Device::setPixmap
-*******************************************************************************/
-void Device::setPixmap(const QString &_sPixmapName)
-{
-    m_sPixmapName = _sPixmapName;
-
-    m_pixmap.load(m_sPixmapName);
-} // setPixmap
+} // ChannelDevice::~ChannelDeviceV
