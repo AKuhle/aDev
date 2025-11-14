@@ -29,6 +29,7 @@ debug/qrc_qLights.o
 debug/moc_chase.o
 debug/moc_fader.o
 debug/moc_faderInfo.o
+debug/moc_universe.o
 debug/moc_dlgChannel.o
 debug/moc_dlgChase.o
 debug/moc_dlgController.o

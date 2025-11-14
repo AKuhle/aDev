@@ -78,7 +78,7 @@ bool Chase::isSceneInChase(const QString &_sName)
 *******************************************************************************/
 void Chase::startChase()
 {
-    CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 1);
+    CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 0);
 
     // initialize the fixtures with the start scene
     for (shared_ptr<Fixture> &pFix : m_vAffectedFixtures)

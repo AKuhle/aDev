@@ -29,6 +29,7 @@ release/qrc_qLights.o
 release/moc_chase.o
 release/moc_fader.o
 release/moc_faderInfo.o
+release/moc_universe.o
 release/moc_dlgChannel.o
 release/moc_dlgChase.o
 release/moc_dlgController.o
