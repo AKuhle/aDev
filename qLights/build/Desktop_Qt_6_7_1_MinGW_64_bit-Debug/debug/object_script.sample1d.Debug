@@ -1,8 +1,8 @@
 debug/channel.o
+debug/channelDevice.o
 debug/chase.o
 debug/controller.o
 debug/device.o
-debug/dmxData.o
 debug/fader.o
 debug/faderInfo.o
 debug/fixture.o

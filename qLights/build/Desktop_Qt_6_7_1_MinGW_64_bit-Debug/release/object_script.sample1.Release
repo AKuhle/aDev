@@ -1,8 +1,8 @@
 release/channel.o
+release/channelDevice.o
 release/chase.o
 release/controller.o
 release/device.o
-release/dmxData.o
 release/fader.o
 release/faderInfo.o
 release/fixture.o
