@@ -38,20 +38,5 @@ aLayout_i::~aLayout_i()
 } // aLayout_i::~aLayout_i
 
 
-/*******************************************************************************
-* aLayout_i::layoutDemandOfChild
-*******************************************************************************/
-aDimension aLayout_i::layoutDemandOfChild(const aBaseWin *_pChild)
-{
-    aDimension  d = _pChild->minDim();
-
-    if (_pChild->layout())
-    {
-        d = d.max(_pChild->layout()->layoutDemand());
-    }
-
-    return d;
-} // aLayout_i::layoutDemandOfChild
-
 } // namespace aWin
 } // namespace aFrame

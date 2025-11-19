@@ -72,18 +72,18 @@ constexpr u32   TF_NONE                 = 0x00000001;
 
 
 /*******************************************************************************
-* dock positions
+* dock positions (for aToolBar, aDockWin, etc.)
 *******************************************************************************/
-// constexpr u32   DOCK_POS_NONE           = 0x00000000;
-// constexpr u32   DOCK_POS_L              = 0x00000001;   // left
-// constexpr u32   DOCK_POS_R              = 0x00000002;   // right
-// constexpr u32   DOCK_POS_T              = 0x00000004;   // top
-// constexpr u32   DOCK_POS_B              = 0x00000008;   // bottom
-// constexpr u32   DOCK_POS_FLOATING       = 0x00000010;
+constexpr u32   DOCK_POS_NONE           = 0x00000000;
+constexpr u32   DOCK_POS_L              = 0x00000001;   // left
+constexpr u32   DOCK_POS_R              = 0x00000002;   // right
+constexpr u32   DOCK_POS_T              = 0x00000004;   // top
+constexpr u32   DOCK_POS_B              = 0x00000008;   // bottom
+constexpr u32   DOCK_POS_FLOATING       = 0x00000010;
 
-// constexpr u32   DOCK_POS_LR             = DOCK_POS_L + DOCK_POS_R;
-// constexpr u32   DOCK_POS_TB             = DOCK_POS_T + DOCK_POS_B;
-// constexpr u32   DOCK_POS_LRTB           = DOCK_POS_LR + DOCK_POS_TB;
+constexpr u32   DOCK_POS_LR             = DOCK_POS_L + DOCK_POS_R;
+constexpr u32   DOCK_POS_TB             = DOCK_POS_T + DOCK_POS_B;
+constexpr u32   DOCK_POS_LRTB           = DOCK_POS_LR + DOCK_POS_TB;
 
 
 /*******************************************************************************

@@ -36,18 +36,23 @@ class aLayoutHoriVert : public aLayout_i
         enumOrientation     m_eOrientation      { enumOrientation::Hori };
         list<aBaseWin *>    m_lstChilds;
 
+
     public:
         aLayoutHoriVert();
         virtual ~aLayoutHoriVert();
 
         void                addChild(aBaseWin *_pWin);
 
-        aDimension          layoutDemand() const override;
         void                arrange(const aRect &_r) override;
 
+
+    protected:
+        aDimension          layoutMinDim() const override;
+
+
     private:
-        aDimension          layoutDemandHori() const;
-        aDimension          layoutDemandVert() const;
+        aDimension          layoutMinDimHori() const;
+        aDimension          layoutMinDimVert() const;
 
         void                arrangeHori(const aRect &_r);
         void                arrangeVert(const aRect &_r);

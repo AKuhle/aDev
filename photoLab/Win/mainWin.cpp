@@ -21,6 +21,7 @@
 #include "aTitleBar.h"
 #include "aSpacer.h"
 #include "aToolBtn.h"
+#include "aLayoutMainWin.h"
 
 using namespace aFrame::aApp;
 using namespace aFrame::aWin;
@@ -104,6 +105,18 @@ bool MainWin::onCreateWin()
 // *******************************************************************************/
 bool MainWin::onCreateChilds()
 {
+    createTitlebar();
+    createStdTooBar();
+
+    return true;
+} // MainWin::onCreateChilds
+
+
+// /*******************************************************************************
+// * MainWin::createTitlebar
+// *******************************************************************************/
+void MainWin::createTitlebar()
+{
     aTitleBar   *pTitleBar = titleBar();
     aToolBtn    *pBtn;
     aSpacer     *pSpacer;
@@ -136,14 +149,6 @@ bool MainWin::onCreateChilds()
     pBtn->addClickHandler([this](aBtn* btn) { onMaximize(btn); });
     pTitleBar->addChild(pBtn);
 
-    // // close button - disabled
-    // pBtn = new aToolBtn(pTitleBar.get(), ":/Standard/Masked/32/close.png", "");
-    // pBtn->createWin();
-    // pBtn->setFixDim(pBtn->sysMetrics());
-    // pBtn->setHoverColor(colRed);
-    // pBtn->setEnabled(false);
-    // pTitleBarLayout->addChild(pBtn);
-
     // close button
     pBtn = new aToolBtn(pTitleBar, ":/Standard/Masked/32/close.png", "");
     pBtn->createWin();
@@ -151,9 +156,35 @@ bool MainWin::onCreateChilds()
     pBtn->setHoverColor(colRed);
     pBtn->addClickHandler([this](aBtn* btn) { onClose(btn); });
     pTitleBar->addChild(pBtn);
+} // MainWin::createTitlebar
 
-    return true;
-} // MainWin::onCreateChilds
+
+// /*******************************************************************************
+// * MainWin::createStdTooBar
+// *******************************************************************************/
+void MainWin::createStdTooBar()
+{
+    aLayoutMainWin *pLayoutMw = dynamic_cast<aLayoutMainWin *> (layout());
+    CHECK_PRE_CONDITION_VOID(pLayoutMw);
+
+    // create the toolbar
+    unique_ptr<aToolBar> pToolBar = make_unique<aToolBar> (this);
+    pToolBar->createWin();
+    pToolBar->setAllowedDockPosition(DOCK_POS_T);
+    pToolBar->setDockPosition(DOCK_POS_T);
+
+    aToolBtn    *pBtn;
+
+    // open file button
+    pBtn = new aToolBtn(pToolBar.get(), ":/Standard/Masked/32/folder.png", "");
+    pBtn->createWin();
+    pBtn->setFixDim(pBtn->sysMetrics());
+    pBtn->addClickHandler([this](aBtn* btn) { onOpenFile(btn); });
+    pToolBar->addChild(pBtn);
+
+    // add the toolbat to the main window
+    pLayoutMw->addToolBar(std::move(pToolBar));
+} // MainWin::createStdTooBar
 
 
 // /*******************************************************************************

@@ -51,9 +51,10 @@ float                                    aWinStyle::m_fSysMetricsFactor { 1. };
 *******************************************************************************/
 aWinStyle::aWinStyle()
 {
-    m_mapClassOrder["aBaseWin"] = std::vector<aString>   { "aBaseWin" };
-    m_mapClassOrder["aMainWin"] = std::vector<aString>   { "aMainWin", "aBaseWin" };
-    m_mapClassOrder["aTitleBar"] = std::vector<aString>  { "aTitleBar", "aBaseWin" };
+    m_mapClassOrder["aBaseWin"] = std::vector<aString>  { "aBaseWin" };
+    m_mapClassOrder["aMainWin"] = std::vector<aString>  { "aMainWin", "aBaseWin" };
+    m_mapClassOrder["aToolBar"] = std::vector<aString>  { "aToolBar", "aBaseWin" };
+    m_mapClassOrder["aTitleBar"] = std::vector<aString> { "aTitleBar", "aToolBar", "aBaseWin" };
     m_mapClassOrder["aPushBtn"] = std::vector<aString>  { "aPushBtn", "aBtn", "aBaseWin" };
     m_mapClassOrder["aToolBtn"] = std::vector<aString>  { "aToolBtn", "aBtn", "aBaseWin" };
 } // aWinStyle::aWinStyle
@@ -100,18 +101,27 @@ void aWinStyle::setWinStyle()
         {
             setStyle4WinClass("aMainWin");
         }
+
         else if (dynamic_cast<aTitleBar *> (pBaseWin) != nullptr)
         {
             setStyle4WinClass("aTitleBar");
         }
+
+        else if (dynamic_cast<aToolBar *> (pBaseWin) != nullptr)
+        {
+            setStyle4WinClass("aToolBar");
+        }
+
         else if (dynamic_cast<aPushBtn *> (pBaseWin) != nullptr)
         {
             setStyle4WinClass("aPushBtn");
         }
+
         else if (dynamic_cast<aToolBtn *> (pBaseWin) != nullptr)
         {
             setStyle4WinClass("aToolBtn");
         }
+
         else
         {
             setStyle4WinClass("aBaseWin");

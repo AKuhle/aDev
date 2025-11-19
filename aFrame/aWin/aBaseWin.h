@@ -116,10 +116,9 @@ class aBaseWin : public aBaseWin_sys,
         void                    setMinDim(const aDimension &_minDim);
         void                    setMinDim(s32 _s32MinW,
                                           s32 _s32MinH);
-        s32                     minW() const                        { return aBaseWin_sys::minW(); }
-        s32                     minH() const                        { return aBaseWin_sys::minH(); }
-        aDimension              minDim() const                      { return aDimension(aBaseWin_sys::minW(),
-                                                                                        aBaseWin_sys::minH()); }
+        s32                     minW() const;
+        s32                     minH() const;
+        aDimension              minDim() const;
 
         void                    setMaxW(s32 _s32MaxW)               { aBaseWin_sys::setMaxW(_s32MaxW); }
         void                    setMaxH(s32 _s32MaxH)               { aBaseWin_sys::setMaxH(_s32MaxH); }

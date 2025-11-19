@@ -86,6 +86,12 @@ class MainWin : public aMainWinMdi
 
         bool                isBusy() const;
 
+
+    private:
+        void                createTitlebar();
+        void                createStdTooBar();
+
+
     //     const StatusBar&    mwStatusBar() const         { return *m_pStatusBar; }
     //     StatusBar&          mwStatusBar()               { return *m_pStatusBar; }
 
@@ -124,6 +130,7 @@ class MainWin : public aMainWinMdi
         void                onMinimize(aBtn *_pBtn);
         void                onMaximize(aBtn *_pBtn);
         void                onClose(aBtn *_pBtn);
+        void                onOpenFile(aBtn *_pBtn);
 
 
     /*******************************************************************************

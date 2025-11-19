@@ -14,6 +14,8 @@
 #include "aLayoutMainWin.h"
 #include "aTitleBar.h"
 
+namespace U = aFrame::aUtil;
+
 
 /*******************************************************************************
 * namespace
@@ -66,20 +68,12 @@ aTitleBar* aLayoutMainWin::titleBar()
 
 
 /*******************************************************************************
-* aLayoutMainWin::layoutDemand
+* aLayoutMainWin::titleBar
 *******************************************************************************/
-aDimension aLayoutMainWin::layoutDemand() const
+void aLayoutMainWin::addToolBar(unique_ptr<aToolBar> _pToolBar)
 {
-    aDimension   dimMin = aLayoutCentralWin::layoutDemand();
-
-    // add the minDim of the titlebar
-    if (m_pTitleBar)
-    {
-        dimMin += layoutDemandOfChild(m_pTitleBar.get());
-    }
-
-    return dimMin;
-} // aLayoutMainWin::layoutDemand
+    m_lstToolBar.push_back(std::move(_pToolBar));
+} // aLayoutMainWin::titleBar
 
 
 /*******************************************************************************
@@ -87,26 +81,75 @@ aDimension aLayoutMainWin::layoutDemand() const
 *******************************************************************************/
 void aLayoutMainWin::arrange(const aRect &_r)
 {
-    aRect r = _r;
+    aRect       r = _r;
+    aDimension  dim;
+
 
     // set the titlebar
     if (m_pTitleBar)
     {
-        aDimension dimTitle = layoutDemandOfChild(m_pTitleBar.get());
+        dim = m_pTitleBar->minDim();
 
-        m_pTitleBar->setGeometry(r.l(), r.t(), r.w(), dimTitle.h());
-        r.y() += dimTitle.h();
-        r.h() -= dimTitle.h();
+        m_pTitleBar->setGeometry(r.l(), r.t(), r.w(), dim.h());
+        r.y() += dim.h();
+        r.h() -= dim.h();
+    }
+
+    // add the toolbars
+    for (unique_ptr<aToolBar> &pToolBar : m_lstToolBar)
+    {
+        // upper toolbars
+        if (pToolBar->dockPosition() == DOCK_POS_T)
+        {
+            dim = pToolBar->minDim();
+
+            pToolBar->setGeometry(r.l(), r.t(), r.w(), dim.h());
+            r.y() += dim.h();
+            r.h() -= dim.h();
+        }
+        else if (pToolBar->dockPosition() == DOCK_POS_B)
+        {
+
+        }
+        else if (pToolBar->dockPosition() == DOCK_POS_L)
+        {
+
+        }
+        else if (pToolBar->dockPosition() == DOCK_POS_R)
+        {
+
+        }
     }
 
     // set the central win
     if (centralWin())
     {
-        aDimension dimTitle = layoutDemandOfChild(m_pTitleBar.get());
-
-        m_pTitleBar->setGeometry(r);
+        centralWin()->setGeometry(r);
     }
 } // aLayoutMainWin::arrange
+
+
+/*******************************************************************************
+* aLayoutMainWin::layoutMinDim
+*******************************************************************************/
+aDimension aLayoutMainWin::layoutMinDim() const
+{
+    aDimension  dim;
+
+    // min = minDim of central window
+    aDimension  dimMin = aLayoutCentralWin::layoutMinDim();
+
+    // add the minDim of the titlebar
+    if (m_pTitleBar)
+    {
+        dim = m_pTitleBar->minDim();
+
+        dimMin.h() += dim.h();
+        dimMin.w() = U::max(dimMin.w(), dim.w());
+    }
+
+    return dimMin;
+} // aLayoutMainWin::layoutMinDim
 
 
 } // namespace aWin

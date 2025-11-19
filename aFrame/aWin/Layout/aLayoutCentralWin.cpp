@@ -41,22 +41,6 @@ aLayoutCentralWin::~aLayoutCentralWin()
 
 
 /*******************************************************************************
-* aLayoutCentralWin::layoutDemand
-*******************************************************************************/
-aDimension aLayoutCentralWin::layoutDemand() const
-{
-    aDimension   dMin;
-
-    if (m_pCentralWin)
-    {
-        dMin += layoutDemandOfChild(m_pCentralWin);
-    }
-
-    return dMin;
-} // aLayoutCentralWin::layoutDemand
-
-
-/*******************************************************************************
 * aLayoutCentralWin::arrange
 *******************************************************************************/
 void aLayoutCentralWin::arrange(const aRect &_r)
@@ -66,6 +50,22 @@ void aLayoutCentralWin::arrange(const aRect &_r)
         m_pCentralWin->setGeometry(_r);
     }
 } // aLayoutCentralWin::arrange
+
+
+/*******************************************************************************
+* aLayoutCentralWin::layoutMinDim
+*******************************************************************************/
+aDimension aLayoutCentralWin::layoutMinDim() const
+{
+    aDimension   dMin;
+
+    if (m_pCentralWin)
+    {
+        dMin += m_pCentralWin->minDim();
+    }
+
+    return dMin;
+} // aLayoutCentralWin::layoutMinDim
 
 
 } // namespace aWin

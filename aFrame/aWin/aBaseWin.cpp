@@ -101,6 +101,57 @@ void aBaseWin::setMinDim(s32 _s32MinW,
 
 
 /*******************************************************************************
+* aBaseWin::minW
+*******************************************************************************/
+s32 aBaseWin::minW() const
+{
+    aDimension  dim(aBaseWin_sys::minW(),
+                    aBaseWin_sys::minH());
+
+    if (m_pLayout)
+    {
+        dim = dim.max(m_pLayout->layoutMinDim());
+    }
+
+    return dim.w();
+} // aBaseWin::minW
+
+
+/*******************************************************************************
+* aBaseWin::minH
+*******************************************************************************/
+s32 aBaseWin::minH() const
+{
+    aDimension  dim(aBaseWin_sys::minW(),
+                    aBaseWin_sys::minH());
+
+    if (m_pLayout)
+    {
+        dim = dim.max(m_pLayout->layoutMinDim());
+    }
+
+    return dim.h();
+} // aBaseWin::minH
+
+
+/*******************************************************************************
+* aBaseWin::minDim
+*******************************************************************************/
+aDimension aBaseWin::minDim() const
+{
+    aDimension  dim(aBaseWin_sys::minW(),
+                    aBaseWin_sys::minH());
+
+    if (m_pLayout)
+    {
+        dim = dim.max(m_pLayout->layoutMinDim());
+    }
+
+    return dim;
+} // aBaseWin::minDim
+
+
+/*******************************************************************************
 * aBaseWin::setMaxDim
 *******************************************************************************/
 void aBaseWin::setMaxDim(const aDimension &_maxDim)

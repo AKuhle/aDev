@@ -34,8 +34,10 @@ class aLayoutCentralWin : public aLayout_i
     protected:
         aBaseWin    *m_pCentralWin  { nullptr };
 
+
     protected:
         aLayoutCentralWin();
+
 
     public:
         virtual ~aLayoutCentralWin();
@@ -44,8 +46,11 @@ class aLayoutCentralWin : public aLayout_i
         const aBaseWin*     centralWin() const              { return m_pCentralWin; }
         aBaseWin*           centralWin()                    { return m_pCentralWin; }
 
-        aDimension          layoutDemand() const override;
         void                arrange(const aRect &_r) override;
+
+
+    protected:
+        aDimension          layoutMinDim() const override;
 }; // class aLayoutCentralWin
 
 

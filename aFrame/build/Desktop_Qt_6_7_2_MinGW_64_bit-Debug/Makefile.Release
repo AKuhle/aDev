@@ -13,7 +13,7 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -D__NO_FRAME_main__ -DAFRAME_LIBRARY -D_USE_QT_ -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DAFRAME_LIBRARY -D_USE_QT_ -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I../../../aFrame -I. -I../../nlohmann_json/include -I../../aApp -I../../aApp/Qt -I../../aUtil -I../../aUtil/Cmds -I../../aUtil/Interface -I../../aUtil/Qt -I../../aUtil/StdHelper -I../../aUtil/VarPool -I../../aMath -I../../aMath/Obj2D -I../../aMath/Obj3D -I../../aGraphic -I../../aGraphic/Interface -I../../aGraphic/Qt -I../../aGraphic/Style -I../../aWin -I../../aWin/Ctrl -I../../aWin/Layout -I../../aWin/Qt -I../../aWin/Tools -I../../../../Qt/6.7.2/mingw_64/include -I../../../../Qt/6.7.2/mingw_64/include/QtWidgets -I../../../../Qt/6.7.2/mingw_64/include/QtGui -I../../../../Qt/6.7.2/mingw_64/include/QtCore -I../../../../GeneratedFiles/aFrame -I/include -I../../../../Qt/6.7.2/mingw_64/mkspecs/win32-g++ 
@@ -12617,7 +12617,14 @@ release/aToolBar.o: ../../aWin/aToolBar.cpp ../../aFrame_def.h \
 		../../aGraphic/Style/aStyleItemFillSolid.h \
 		../../aGraphic/Style/aStyleItemFill.h \
 		../../aGraphic/Style/aStyleItem.h \
-		../../aWin/Layout/aLayoutHoriVert.h
+		../../aWin/Layout/aLayoutHoriVert.h \
+		../../aGraphic/Qt/aPainter.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPainter \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpainter.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextoption.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../aGraphic/Interface/aPainterI.h \
+		../../aGraphic/Style/aStyleItemBorder.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\aToolBar.o ..\..\aWin\aToolBar.cpp
 
 release/aWinStyle.o: ../../aWin/aWinStyle.cpp ../../aFrame_def.h \

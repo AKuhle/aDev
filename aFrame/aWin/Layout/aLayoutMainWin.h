@@ -32,18 +32,25 @@ namespace aWin {
 class aLayoutMainWin : public aLayoutCentralWin
 {
     private:
-        unique_ptr<aTitleBar>   m_pTitleBar;
+        unique_ptr<aTitleBar>       m_pTitleBar;
+        list<unique_ptr<aToolBar>>  m_lstToolBar;
+
 
     public:
         aLayoutMainWin();
         virtual ~aLayoutMainWin();
 
-        void                setTitleBar(unique_ptr<aTitleBar>   _pTitleBar);
+        void                setTitleBar(unique_ptr<aTitleBar> _pTitleBar);
         const aTitleBar*    titleBar() const;
         aTitleBar*          titleBar();
 
-        aDimension          layoutDemand() const override;
+        void                addToolBar(unique_ptr<aToolBar> _pToolBar);
+
         void                arrange(const aRect &_r) override;
+
+
+    protected:
+        aDimension          layoutMinDim() const override;
 }; // class aLayoutMainWin
 
 

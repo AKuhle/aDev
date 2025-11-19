@@ -21,7 +21,6 @@ using namespace std;
 using namespace aFrame::aUtil;
 using namespace aFrame::aWin;
 
-
 /*******************************************************************************
 * namespace
 *******************************************************************************/
@@ -29,22 +28,27 @@ namespace aFrame {
 namespace aWin {
 
 
+
 /*******************************************************************************
 * class aLayout_i
 *******************************************************************************/
 class aLayout_i
 {
+    // aBaseWin needs access to layoutMinDim
+    friend class aBaseWin;
+
     protected:
         aLayout_i();
+
 
     public:
         virtual ~aLayout_i();
 
-        virtual aDimension          layoutDemand() const = 0;
         virtual void                arrange(const aRect &_r) = 0;
 
+
     protected:
-        static aDimension           layoutDemandOfChild(const aBaseWin *_pChild);
+        virtual aDimension          layoutMinDim() const = 0;
 }; // class aLayout_i
 
 

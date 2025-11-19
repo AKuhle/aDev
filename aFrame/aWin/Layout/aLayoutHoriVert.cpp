@@ -14,7 +14,7 @@
 #include "aLayoutHoriVert.h"
 #include "aBaseWin.h"
 
-using namespace aFrame::aUtil;
+namespace U = aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -50,22 +50,6 @@ void aLayoutHoriVert::addChild(aBaseWin *_pWin)
 
 
 /*******************************************************************************
-* aLayoutHoriVert::layoutDemand
-*******************************************************************************/
-aDimension aLayoutHoriVert::layoutDemand() const
-{
-    if (m_eOrientation == enumOrientation::Hori)
-    {
-        return layoutDemandHori();
-    }
-    else
-    {
-        return layoutDemandVert();
-    }
-} // aLayoutHoriVert::layoutDemand
-
-
-/*******************************************************************************
 * aLayoutHoriVert::arrange
 *******************************************************************************/
 void aLayoutHoriVert::arrange(const aRect &_r)
@@ -82,29 +66,45 @@ void aLayoutHoriVert::arrange(const aRect &_r)
 
 
 /*******************************************************************************
-* aLayoutHoriVert::layoutDemandHori
+* aLayoutHoriVert::layoutMinDim
 *******************************************************************************/
-aDimension aLayoutHoriVert::layoutDemandHori() const
+aDimension aLayoutHoriVert::layoutMinDim() const
+{
+    if (m_eOrientation == enumOrientation::Hori)
+    {
+        return layoutMinDimHori();
+    }
+    else
+    {
+        return layoutMinDimVert();
+    }
+} // aLayoutHoriVert::layoutMinDim
+
+
+/*******************************************************************************
+* aLayoutHoriVert::layoutMinDimHori
+*******************************************************************************/
+aDimension aLayoutHoriVert::layoutMinDimHori() const
 {
     aDimension   dimDemand;
     aDimension   dimChild;
 
     for (const aBaseWin *pChild : m_lstChilds)
     {
-        dimChild = layoutDemandOfChild(pChild);
+        dimChild = pChild->minDim();
 
         dimDemand.w() += dimChild.w();
-        dimDemand.h() =aUtil::max(dimChild.h(), dimDemand.h());
+        dimDemand.h() = U::max(dimChild.h(), dimDemand.h());
     }
 
     return dimDemand;
-} // aLayoutHoriVert::layoutDemandHori
+} // aLayoutHoriVert::layoutMinDimHori
 
 
 /*******************************************************************************
-* aLayoutHoriVert::layoutDemandVert
+* aLayoutHoriVert::layoutMinDimVert
 *******************************************************************************/
-aDimension aLayoutHoriVert::layoutDemandVert() const
+aDimension aLayoutHoriVert::layoutMinDimVert() const
 {
     aDimension   dimDemand;
 
@@ -113,7 +113,7 @@ aDimension aLayoutHoriVert::layoutDemandVert() const
     // }
 
     return dimDemand;
-} // aLayoutHoriVert::layoutDemandVert
+} // aLayoutHoriVert::layoutMinDimVert
 
 
 /*******************************************************************************
@@ -124,18 +124,21 @@ void aLayoutHoriVert::arrangeHori(const aRect &_r)
     // win, idx, newW
     using SizeTuple = std::tuple<aBaseWin *, s32, s32>;
 
-    aDimension          demand  = aLayoutHoriVert::layoutDemand();
-    s32                 space   = _r.w() - demand.w();
+    aDimension          layoutMin = layoutMinDim();
+    s32                 space   = _r.w();
     s32                 l       = _r.l();
-    s32                 y;
+    s32                 y, w;
+    s32                 maxChildW, remainingChildNr;
     vector<SizeTuple>   vTup;
 
+    // initialize the tuple
     s32 idx = 0;
     for (auto pChild : m_lstChilds)
     {
         SizeTuple t = std::make_tuple(pChild, idx++, 0);
         vTup.push_back(t);
     }
+    remainingChildNr = vTup.size();
 
     // 1. sort the childs to their max width, lowest first
     std::sort(vTup.begin(), vTup.end(), [](const SizeTuple& a, const SizeTuple& b) {
@@ -151,6 +154,7 @@ void aLayoutHoriVert::arrangeHori(const aRect &_r)
 
             std::get<2>(tup) = w;
             space -= w;
+            remainingChildNr--;
         }
     }
 
@@ -159,7 +163,14 @@ void aLayoutHoriVert::arrangeHori(const aRect &_r)
     {
         if (!std::get<0>(tup)->isFixW())
         {
-            cout << "mima:" << std::get<0>(tup)->minW() << " - " << std::get<0>(tup)->maxW() << endl;
+            maxChildW = space / remainingChildNr;
+
+            // set the new width
+            w = U::min(maxChildW, std::get<0>(tup)->maxW());
+
+            std::get<2>(tup) = w;
+            space -= w;
+            remainingChildNr--;
         }
     }
 
@@ -168,15 +179,14 @@ void aLayoutHoriVert::arrangeHori(const aRect &_r)
          return std::get<1>(a) < std::get<1>(b);
     });
 
-    // 5. set thr new width and position of the childs
+    // 5. set the new width and position of the childs
     for (auto tup : vTup)
     {
         aBaseWin    *pChild     = std::get<0>(tup);
         s32         s32ChildW   = std::get<2>(tup);
         s32         s32ChildH   = pChild->minH();
 
-
-        y = (demand.h() - s32ChildH) / 2;
+        y = (_r.h() - s32ChildH) / 2;
 
         // set the child geometry
         pChild->setGeometry(l, y, s32ChildW, s32ChildH);

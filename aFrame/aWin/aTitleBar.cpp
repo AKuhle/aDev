@@ -49,6 +49,9 @@ bool aTitleBar::onSysCreateWin()
 {
     CHECK_PRE_CONDITION(aToolBar::onSysCreateWin(), false);
 
+    // set the minimin w, h
+    setMinDim(sysMetrics());
+
     addTool(make_unique<aParentCtrlTool> (this));
 
     return true;

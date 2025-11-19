@@ -29,8 +29,13 @@
         "border": "solidFrame(1, rgba(80, 80, 80, 255), rgba(10, 10, 10, 255), 5, 5, 5, 5)"
     },
 
+    "aToolBar": {
+        "bg": "solid(rgba(30, 30, 30, 255))",
+        "border": "solid(rgba(0, 0, 0, 255), 1, 1, 1, 1)"
+    },
+
     "aTitleBar": {
-        "bg": "solid(rgba(30, 30, 30, 255))"
+        "border": "solid(rgba(0, 0, 0, 255), 0, 0, 0, 0)"
     },
 
     "aBtn": {
