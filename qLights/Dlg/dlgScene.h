@@ -42,13 +42,21 @@ class DlgScene : public QDialog
 
         QString             name() const;
 
+        vector<QString>     fixtureNames() const;
+
         bool                isBlackStart() const;
 
 
     private:
         void                setCtrls(const shared_ptr<Scene> _pScene);
+        void                updateFixtureIcon(int    _iRow);
 
         virtual void        accept();
         virtual void        reject();
 
+
+    private slots:
+        void                onAddFixture(bool _bChecked);
+        void                onRemoveFixture(bool _bChecked);
+        void                onComboChanged(int _iIdx);
 }; // class DlgScene

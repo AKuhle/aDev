@@ -124,6 +124,8 @@ class MainWin : public QMainWindow
                                                shared_ptr<Universe> _pUniverse,
                                                s32                  _s32Adress);
 
+        shared_ptr<Fixture>         findFixture(const QString &_sName);
+
         const list<shared_ptr<Fixture>>&    getAllFixtures() const  { return m_lstFixture; }
 
         // banks
@@ -133,9 +135,10 @@ class MainWin : public QMainWindow
                                                   const QString &_sFixtureName);
 
         // scenes
-        void                        assignScene(SceneButton   *_pBankBtn,
-                                                const QString &_sSceneName,
-                                                bool          _bBlackStart);
+        void                        assignScene(SceneButton     *_pBankBtn,
+                                                const QString   &_sSceneName,
+                                                bool            _bBlackStart,
+                                                vector<QString> _vFixtureNames);
 
         shared_ptr<Scene>           findScene(const QString &_sName);
 
@@ -158,8 +161,6 @@ class MainWin : public QMainWindow
         // faders
         void                        assignFaders(shared_ptr<Fixture> _pFixture);
         //void                        updateAllChannelValuesFromUniverse();
-
-        shared_ptr<Fixture>         findFixture(const QString &_sName);
 
         // update
         void                        initGui();  // reset all active banks/scenes etc.

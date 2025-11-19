@@ -555,9 +555,10 @@ void MainWin::assignFixture(BankButton    *_pBankBtn,
 /*******************************************************************************
 * MainWin::assignScene
 *******************************************************************************/
-void MainWin::assignScene(SceneButton   *_pSceneBtn,
-                          const QString &_sSceneName,
-                          bool          _bBlackStart)
+void MainWin::assignScene(SceneButton       *_pSceneBtn,
+                          const QString     &_sSceneName,
+                          bool              _bBlackStart,
+                          vector<QString>   _vFixtureNames)
 {
     // search the scene in the vector of scene buttons
     for (stSceneBtn &sceneBtn : m_vvSceneButtons.at(m_s32ActiveScene))
@@ -566,7 +567,17 @@ void MainWin::assignScene(SceneButton   *_pSceneBtn,
         {
             // scene button found => create a new scene
             shared_ptr<Scene> pScene = make_shared<Scene> (_sSceneName, _bBlackStart);
-            //pScene->addUniverses(m_lstUniverse);
+
+            // add the fixtures to the scene
+            for (const QString &sFixName : _vFixtureNames)
+            {
+                shared_ptr<Fixture> pFix = findFixture(sFixName);
+
+                if (pFix)
+                {
+                    pScene->addFixture(pFix);
+                }
+            }
 
             // set the scene in the tuple of the current set
             sceneBtn.pScene = pScene;

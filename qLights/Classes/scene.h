@@ -44,10 +44,13 @@ class Scene
 
         ~Scene();
 
-        QString                     name() const                        { return m_sName; }
+        QString                             name() const                        { return m_sName; }
 
-        bool                        isBlackStart() const                { return m_bBlackStart; }
-        void                        setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
+        bool                                isBlackStart() const                { return m_bBlackStart; }
+        void                                setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
+
+        void                                addFixture(shared_ptr<Fixture>);
+        const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
 
         //const list<stUniverseInfo>& universes() const                   { return m_lstUniverse; }
 

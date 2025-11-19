@@ -42,6 +42,15 @@ Scene::~Scene()
 
 
 /*******************************************************************************
+* Scene::addFixture
+*******************************************************************************/
+void Scene::addFixture(shared_ptr<Fixture> _pFixture)
+{
+    m_vAffectedFixtures.push_back(_pFixture);
+} // Scene::addFixture
+
+
+/*******************************************************************************
 * Scene::addUniverses
 *******************************************************************************/
 // void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)

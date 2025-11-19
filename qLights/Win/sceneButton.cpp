@@ -79,7 +79,10 @@ void SceneButton::onAssignScene()
 
     if (dlg.exec() == QDialog::Accepted)
     {
-        MainWin::instance()->assignScene(this, dlg.name(), dlg.isBlackStart());
+        MainWin::instance()->assignScene(this,
+                                         dlg.name(),
+                                         dlg.isBlackStart(),
+                                         dlg.fixtureNames());
     }
 } // SceneButton::onAssignScene
 
