@@ -172,12 +172,27 @@ void MainWin::onFileOpen()
                 // load the blackStart
                 bool bBlackStart = f.readBoolValue(sKey + ":black_start");
 
-                // list<shared_ptr<Universe>> lstUniverses;
+                // load the fixture count
+                s32 s32fixCount = f.readIntValue(sKey + ":fixture_count");
 
-                // create the scene
+                // create the scene and add it to the scene button
                 shared_ptr<Scene> pScene = make_shared<Scene> (sSceneName, bBlackStart);
                 sceneBtn.pBtn->setScene(pScene);
                 sceneBtn.pScene = pScene;
+
+                // read the fixtures
+                for (int iFixIdx = 0; iFixIdx < s32fixCount; iFixIdx++)
+                {
+                    aString sFixKey = sKey + ":" +  aString::fromValue(iFixIdx);
+
+                    // read the fixture name => fixture
+                    QString             sFixName = f.readStringValue(sFixKey + ":fixture_name").toQString();
+                    shared_ptr<Fixture> pFix = findFixture(sFixName);
+                    if (pFix)
+                    {
+                        pScene->addFixture(pFix);
+                    }
+                }
 
 
                 // // read the universe count
@@ -421,6 +436,24 @@ void MainWin::onFileSave()
 
                 // save the blackStart
                 f.addValue(sKey + ":black_start", pScene->isBlackStart());
+
+                // save the fixtures for this scene
+                const vector<shared_ptr<Fixture>>   &vFix = pScene->fixtures();
+                f.addValue(sKey + ":fixture_count", (int) vFix.size());
+                int iFixIdx = 0;
+                for (const shared_ptr<Fixture>  &pFix : vFix)
+                {
+                    aString sFixKey = sKey + ":" +  aString::fromValue(iFixIdx);
+                    // save the fixture name
+                    f.addValue(sFixKey + ":fixture_name", aString::fromQString(pFix->name()));
+
+                    // add the channels and values
+                    std::map<int, u8> mapChannle = pFix->channelValues();
+                    f.addValue(sKey + ":channel_count", (int) vFix.size());
+                    for ()
+
+                    iFixIdx++;
+                }
 
                 // // save the universe count
                 // f.addValue(sKey + ":universe_count", (int) lstUniverses.size());

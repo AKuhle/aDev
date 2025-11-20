@@ -68,6 +68,10 @@ class Fixture
         void                                setChannelValue(shared_ptr<Channel> _pChannel,
                                                             u8                  _u8Value);
 
+        // returns a map with channel nr and according channel values for
+        // all channels of the fixture
+        std::map<int, u8>                   channelValues() const;
+
         void                                updateMasterBrightness();
         // void                                overrideBrightness(u8 _u8Brightness);
         // void                                restoreBrightness();

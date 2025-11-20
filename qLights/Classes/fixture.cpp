@@ -91,6 +91,23 @@ void Fixture::setChannelValue(shared_ptr<Channel>   _pChannel,
 
 
 /*******************************************************************************
+* Fixture::channelValues
+*******************************************************************************/
+std::map<int, u8> Fixture::channelValues() const
+{
+    std::map<int, u8>   mapValues;
+
+    for (const shared_ptr<Channel> &pChannel : m_vChannel)
+    {
+        mapValues[pChannel->nr()] = pChannel->channelValue();
+    }
+
+
+    return mapValues;
+} // Fixture::channelValues
+
+
+/*******************************************************************************
 * Fixture::updateMasterBrightness
 *******************************************************************************/
 void Fixture::updateMasterBrightness()

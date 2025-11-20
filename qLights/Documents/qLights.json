@@ -802,7 +802,17 @@
   },
   "scenes": {
     "0-0": {
+      "0": {
+        "fixture_name": "Washer left"
+      },
+      "1": {
+        "fixture_name": "Spot center"
+      },
+      "2": {
+        "fixture_name": "PAR right"
+      },
       "black_start": 1,
+      "fixture_count": 3,
       "name": "black"
     },
     "0-1": {
@@ -840,6 +850,7 @@
     },
     "0-2": {
       "black_start": 0,
+      "fixture_count": 0,
       "name": "no black"
     },
     "0-3": {

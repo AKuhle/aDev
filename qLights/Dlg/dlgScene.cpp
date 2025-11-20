@@ -110,6 +110,9 @@ void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
 
             pTable->insertRow(iRowIdx);
 
+            // set the row size to 64
+            pTable->setRowHeight(iRowIdx, 64);
+
             // add all fixture names to the combo box
             for (const shared_ptr<Fixture> &pAllFix : vFixtures)
             {
@@ -121,6 +124,11 @@ void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
             {
                 pCombo->setCurrentIndex(idx);
             }
+
+            pTable->setCellWidget(iRowIdx, 1, pCombo);
+
+            // update the fixture icon
+            updateFixtureIcon(iRowIdx);
         }
     }
 } // DlgScene::setCtrls

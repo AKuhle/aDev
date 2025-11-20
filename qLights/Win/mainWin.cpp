@@ -30,10 +30,6 @@ MainWin::MainWin(QWidget *parent)
 
     // prpare the gui
     m_pUi->setupUi(this);
-    // insert a spacer before fade in 1s
-    QWidget *pSpacer = new QWidget();
-    pSpacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
-    m_pUi->m_pToolbar->insertWidget(m_pUi->m_pActionFade_in_1s, pSpacer);
 
     // init the member variables
     initMember();
@@ -95,16 +91,16 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pChaseSelector_5, &QPushButton::clicked, this, &MainWin::onChaseSelector_5);
 
     // connect the fader buttons
-    connect(m_pUi->m_pActionFade_in_1s, &QAction::triggered, this, &MainWin::onFaderIn_1s);
-    connect(m_pUi->m_pActionFade_in_2s, &QAction::triggered, this, &MainWin::onFaderIn_2s);
-    connect(m_pUi->m_pActionFade_in_3s, &QAction::triggered, this, &MainWin::onFaderIn_3s);
-    connect(m_pUi->m_pActionFade_in_5s, &QAction::triggered, this, &MainWin::onFaderIn_5s);
-    connect(m_pUi->m_pActionFade_in_10s, &QAction::triggered, this, &MainWin::onFaderIn_10s);
-    connect(m_pUi->m_pActionFade_out_1s, &QAction::triggered, this, &MainWin::onFaderOut_1s);
-    connect(m_pUi->m_pActionFade_out_2s, &QAction::triggered, this, &MainWin::onFaderOut_2s);
-    connect(m_pUi->m_pActionFade_out_3s, &QAction::triggered, this, &MainWin::onFaderOut_3s);
-    connect(m_pUi->m_pActionFade_out_5s, &QAction::triggered, this, &MainWin::onFaderOut_5s);
-    connect(m_pUi->m_pActionFade_out_10s, &QAction::triggered, this, &MainWin::onFaderOut_10s);
+    connect(m_pUi->m_pFadeIn_1s, &QPushButton::clicked, this, &MainWin::onFaderIn_1s);
+    connect(m_pUi->m_pFadeIn_2s, &QPushButton::clicked, this, &MainWin::onFaderIn_2s);
+    connect(m_pUi->m_pFadeIn_3s, &QPushButton::clicked, this, &MainWin::onFaderIn_3s);
+    connect(m_pUi->m_pFadeIn_5s, &QPushButton::clicked, this, &MainWin::onFaderIn_5s);
+    connect(m_pUi->m_pFadeIn_10s, &QPushButton::clicked, this, &MainWin::onFaderIn_10s);
+    connect(m_pUi->m_pFadeOut_1s, &QPushButton::clicked, this, &MainWin::onFaderOut_1s);
+    connect(m_pUi->m_pFadeOut_2s, &QPushButton::clicked, this, &MainWin::onFaderOut_2s);
+    connect(m_pUi->m_pFadeOut_3s, &QPushButton::clicked, this, &MainWin::onFaderOut_3s);
+    connect(m_pUi->m_pFadeOut_5s, &QPushButton::clicked, this, &MainWin::onFaderOut_5s);
+    connect(m_pUi->m_pFadeOut_10s, &QPushButton::clicked, this, &MainWin::onFaderOut_10s);
 
     connect(m_pUi->m_pSwitchOn, &QPushButton::clicked, this, &MainWin::onSwitchOn);
     connect(m_pUi->m_pSwitchOff, &QPushButton::clicked, this, &MainWin::onSwitchOff);

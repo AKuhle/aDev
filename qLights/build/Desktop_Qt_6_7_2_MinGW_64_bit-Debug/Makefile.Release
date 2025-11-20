@@ -8510,6 +8510,53 @@ release/dlgScene.o: ../../Dlg/dlgScene.cpp ../../../../GeneratedFiles/qLights/ui
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
+		../../Win/mainWin.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QTableWidget \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtablewidget.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtableview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QComboBox \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcombobox.h \
+		../../Classes/controller.h \
+		../../Classes/universe.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QHostAddress \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
+		../../../aFrame/aUtil/aSynchronize.h \
+		../../Classes/device.h \
+		../../Classes/fader.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
+		../../Classes/scribbleStrip.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextdocument.h \
+		../../Classes/faderInfo.h \
 		../../Dlg/dlgScene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h

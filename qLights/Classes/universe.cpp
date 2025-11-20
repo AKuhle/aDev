@@ -132,6 +132,8 @@ void Universe::reset()
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
+    return;
+
     if (!m_hostAdr.isNull())
     {
         QUdpSocket      udpSocket;
