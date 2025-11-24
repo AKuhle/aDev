@@ -103,23 +103,6 @@ void SceneButton::onClicked()
 {
     CHECK_PRE_CONDITION_VOID(m_pScene);
 
-    // const list<stUniverseInfo> &lstUniverseInfo = m_pScene->universes();
-
-    // for (auto &uInfo : lstUniverseInfo)
-    // {
-    //     std::shared_ptr<Universe>   pUniverse = uInfo.pUniverse;
-
-    //     if (pUniverse)
-    //     {
-    //         // set the new universe data which was stored in the scene
-    //         pUniverse->setDmxData(uInfo.data);
-    //     }
-    // }
-
-    // // update all channel values
-    // MainWin::instance()->updateAllChannelValuesFromUniverse();
-
-    // // update the faders
-    // MainWin::instance()->updateFaders();
+    m_pScene->updateFixtures();
 
 } // SceneButton::onClicked

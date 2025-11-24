@@ -160,7 +160,7 @@ class MainWin : public QMainWindow
 
         // faders
         void                        assignFaders(shared_ptr<Fixture> _pFixture);
-        //void                        updateAllChannelValuesFromUniverse();
+        void                        updateFaders() const;
 
         // update
         void                        initGui();  // reset all active banks/scenes etc.

@@ -19,6 +19,7 @@
 #include <QString>
 #include "aFrame_def.h"
 #include "channel.h"
+#include "qLights_def.h"
 
 class Device;
 class Universe;
@@ -68,9 +69,10 @@ class Fixture
         void                                setChannelValue(shared_ptr<Channel> _pChannel,
                                                             u8                  _u8Value);
 
-        // returns a map with channel nr and according channel values for
+        // set/ returns a map with channel nr and according channel values for
         // all channels of the fixture
-        std::map<int, u8>                   channelValues() const;
+        mapChannelValue                     channelValues() const;
+        void                                setChannelValues(const mapChannelValue &_channelValues);
 
         void                                updateMasterBrightness();
         // void                                overrideBrightness(u8 _u8Brightness);

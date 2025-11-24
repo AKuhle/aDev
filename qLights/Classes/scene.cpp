@@ -20,6 +20,7 @@
 #include "fixture.h"
 #include "device.h"
 #include "channelDevice.h"
+#include "mainWin.h"
 
 
 /*******************************************************************************
@@ -44,60 +45,45 @@ Scene::~Scene()
 /*******************************************************************************
 * Scene::addFixture
 *******************************************************************************/
-void Scene::addFixture(shared_ptr<Fixture> _pFixture)
+void Scene::addFixture(shared_ptr<Fixture>      _pFixture,
+                       const mapChannelValue    &_channelValue)
 {
+    CHECK_PRE_CONDITION_VOID(_pFixture);
+
     m_vAffectedFixtures.push_back(_pFixture);
+
+    m_mapFixtureValues[_pFixture] = _channelValue;
 } // Scene::addFixture
 
 
 /*******************************************************************************
-* Scene::addUniverses
+* Scene::updateFixtures
 *******************************************************************************/
-// void Scene::addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse)
-// {
-//     for (auto pUniverse : _lstUniverse)
-//     {
-//         stUniverseInfo uInfo { pUniverse, pUniverse->dmxDataValue() };
-//         m_lstUniverse.push_back(uInfo);
-//     }
-// } // Scene::addUniverses
+void Scene::updateFixtures() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        auto it = m_mapFixtureValues.find(pFix);
+
+        if (it != m_mapFixtureValues.end())
+        {
+            pFix->setChannelValues(it->second);
+        }
+    }
+
+    // update the faders, thei maybe have changed
+    MainWin::instance()->updateFaders();
+} // Scene::updateFixtures
 
 
 /*******************************************************************************
-* Scene::channelValue
+* Scene::findChannelValues
 *******************************************************************************/
-// u8 Scene::channelValue(const shared_ptr<Universe>   _pUniverse,
-//                        s32                          _s32FixtureAdress,
-//                        s32                          _s32ChannelNr) const
-// {
-//     for (const stUniverseInfo &stU : m_lstUniverse)
-//     {
-//         if (stU.pUniverse == _pUniverse)
-//         {
-//             s32     dmxIdx = _s32FixtureAdress +_s32ChannelNr - 2;
+const mapChannelValue* Scene::findChannelValues(const shared_ptr<Fixture> &_pFixture) const
+{
+    // Prüfe, ob Fixture bereits in der Map existiert
+    auto it = m_mapFixtureValues.find(_pFixture);
 
-//             return static_cast<u8>(static_cast<unsigned char>(stU.data.at(dmxIdx)));
-//         }
-//     }
-
-//     cout << "!!!!! ERROR: no channel value found in Scene::channelValue" << endl;
-//     return 0;
-// } // Scene::channelValue
-
-
-/*******************************************************************************
-* Scene::applySceneData2Fixture
-*******************************************************************************/
-// void Scene::applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const
-// {
-//     const vector<shared_ptr<Channel>> &vChannel = _pFix->device()->channel();
-//     shared_ptr<Universe>              pUniverse = _pFix->universe();
-//     s32                               s32Adress = _pFix->adress();
-
-//     for (const shared_ptr<Channel> &pChannel : vChannel)
-//     {
-//         u8 u8ChannelValue = channelValue(pUniverse, s32Adress, pChannel->nr());
-
-//         pUniverse->setChannelValue(s32Adress, pChannel, u8ChannelValue);
-//     }
-// } // Scene::applySceneData2Fixture
+    return (it != m_mapFixtureValues.end())?   &(it->second) : nullptr;
+} // Scene::findChannelValues

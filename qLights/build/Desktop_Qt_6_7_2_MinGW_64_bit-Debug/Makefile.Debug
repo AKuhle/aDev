@@ -2525,6 +2525,8 @@ compiler_moc_header_clean:
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../GeneratedFiles/qLights/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	C:\Tools\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/qLights/moc_predefs.h -IC:/Tools/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/qLights -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Tools/aDev/qLights/Classes -IC:/Tools/aDev/qLights/Dlg -IC:/Tools/aDev/qLights/Win -IC:/Tools/Qt/6.7.2/mingw_64/include -IC:/Tools/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Tools/Qt/6.7.2/mingw_64/include/QtGui -IC:/Tools/Qt/6.7.2/mingw_64/include/QtNetwork -IC:/Tools/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Tools/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\Win\bankButton.h -o ..\..\..\..\GeneratedFiles\qLights\moc_bankButton.cpp
@@ -3386,6 +3388,8 @@ compiler_moc_header_clean:
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../GeneratedFiles/qLights/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	C:\Tools\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Tools/GeneratedFiles/qLights/moc_predefs.h -IC:/Tools/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/Tools/aDev/qLights -IC:/Tools/aDev/aFrame -IC:/Tools/aDev/aFrame/nlohmann_json/include -IC:/Tools/aDev/aFrame/aApp -IC:/Tools/aDev/aFrame/aApp/Qt -IC:/Tools/aDev/aFrame/aUtil -IC:/Tools/aDev/aFrame/aUtil/Cmds -IC:/Tools/aDev/aFrame/aUtil/Collection -IC:/Tools/aDev/aFrame/aUtil/Interface -IC:/Tools/aDev/aFrame/aUtil/Qt -IC:/Tools/aDev/aFrame/aUtil/VarPool -IC:/Tools/aDev/aFrame/aMath -IC:/Tools/aDev/aFrame/aMath/Obj2D -IC:/Tools/aDev/aFrame/aMath/Obj3D -IC:/Tools/aDev/aFrame/aGraphic -IC:/Tools/aDev/aFrame/aGraphic/Interface -IC:/Tools/aDev/aFrame/aGraphic/Qt -IC:/Tools/aDev/aFrame/aGraphic/Style -IC:/Tools/aDev/aFrame/aWin -IC:/Tools/aDev/aFrame/aWin/Ctrl -IC:/Tools/aDev/aFrame/aWin/Layout -IC:/Tools/aDev/aFrame/aWin/Qt -IC:/Tools/aDev/aFrame/aWin/Tools -IC:/Tools/aDev/qLights/Classes -IC:/Tools/aDev/qLights/Dlg -IC:/Tools/aDev/qLights/Win -IC:/Tools/Qt/6.7.2/mingw_64/include -IC:/Tools/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Tools/Qt/6.7.2/mingw_64/include/QtGui -IC:/Tools/Qt/6.7.2/mingw_64/include/QtNetwork -IC:/Tools/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Tools/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Tools/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\Win\sceneButton.h -o ..\..\..\..\GeneratedFiles\qLights\moc_sceneButton.cpp
@@ -3835,6 +3839,8 @@ compiler_uic_clean:
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QSlider \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -4420,6 +4426,8 @@ compiler_uic_clean:
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -6314,6 +6322,8 @@ debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../Classes/universe.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
@@ -6351,8 +6361,6 @@ debug/fixture.o: ../../Classes/fixture.cpp ../../Classes/fixture.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../qLights_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h \
 		../../Classes/device.h \
@@ -8506,9 +8514,9 @@ debug/dlgScene.o: ../../Dlg/dlgScene.cpp ../../../../GeneratedFiles/qLights/ui_d
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
-		../../Classes/scene.h \
 		../../qLights_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
+		../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
 		../../Win/mainWin.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
@@ -10538,11 +10546,11 @@ debug/sceneButton.o: ../../Win/sceneButton.cpp ../../../../Qt/6.7.2/mingw_64/inc
 		../../../aFrame/aUtil/aUtil_def.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../Dlg/dlgScene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
-		../../qLights_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../Classes/scene.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QByteArray \
 		../../Win/mainWin.h \

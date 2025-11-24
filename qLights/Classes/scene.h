@@ -34,9 +34,11 @@ class Universe;
 class Scene
 {
     private:
-        QString                     m_sName;
-        bool                        m_bBlackStart           { false };
-        vector<shared_ptr<Fixture>> m_vAffectedFixtures;
+        QString                                         m_sName;
+        bool                                            m_bBlackStart           { false };
+        vector<shared_ptr<Fixture>>                     m_vAffectedFixtures;
+        std::map<shared_ptr<Fixture>, mapChannelValue>  m_mapFixtureValues;
+
 
     public:
         Scene(const QString &_sName,
@@ -49,16 +51,12 @@ class Scene
         bool                                isBlackStart() const                { return m_bBlackStart; }
         void                                setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
 
-        void                                addFixture(shared_ptr<Fixture>);
+        void                                addFixture(shared_ptr<Fixture>      _pFixture,
+                                                       const mapChannelValue    &_channelValue);
         const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
 
-        //const list<stUniverseInfo>& universes() const                   { return m_lstUniverse; }
+        void                                updateFixtures() const;
 
-        //void                        addUniverses(const list<shared_ptr<Universe>>  &_lstUniverse);
+        const mapChannelValue*              findChannelValues(const shared_ptr<Fixture> &_pFixture) const;
 
-        //u8                          channelValue(const shared_ptr<Universe> _pUniverse,
-        //                                         s32                        _s32FixtureAdress,
-        //                                         s32                        _s32ChannelNr) const;
-
-        //void                        applySceneData2Fixture(shared_ptr<Fixture>  _pFix) const;
 }; // class Scene

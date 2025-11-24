@@ -183,42 +183,31 @@ void MainWin::onFileOpen()
                 // read the fixtures
                 for (int iFixIdx = 0; iFixIdx < s32fixCount; iFixIdx++)
                 {
-                    aString sFixKey = sKey + ":" +  aString::fromValue(iFixIdx);
+                    aString sFixKey = sKey + ":fixture-" +  aString::fromValue(iFixIdx);
 
-                    // read the fixture name => fixture
-                    QString             sFixName = f.readStringValue(sFixKey + ":fixture_name").toQString();
+                    // read the fixture parameter => fixture
+                    QString sFixName = f.readStringValue(sFixKey + ":fixture_name").toQString();
+                    s32     s32ChannelCount = f.readIntValue(sFixKey + ":channel_count");
+
                     shared_ptr<Fixture> pFix = findFixture(sFixName);
+
                     if (pFix)
                     {
-                        pScene->addFixture(pFix);
+                        mapChannelValue     channelValue;
+
+                        // read the channel values of the fixture
+                        for (int iChannel = 0; iChannel < s32ChannelCount; iChannel++)
+                        {
+                            u8 u8Value = static_cast<u8> (f.readIntValue(sFixKey + ":channel-" +  aString::fromValue(iChannel)));
+
+                            channelValue[iChannel] = u8Value;
+                        }
+
+                        // add the fixture to the scene
+                        pScene->addFixture(pFix, channelValue);
                     }
                 }
 
-
-                // // read the universe count
-                // s32 s32UniCount = f.readIntValue(sKey + ":universe_count");
-
-                // for (int iUni = 0; iUni < s32UniCount; iUni++)
-                // {
-                //     aString sKeyU = sKey + ":universe" + aString::fromValue(iUni);
-
-                //     // read the universe name
-                //     QString sUniName = f.readStringValue(sKeyU + ":name").toQString();
-                //     shared_ptr<Universe> pUni = findUniverse(sUniName);
-
-                //     std::vector<u8> vecDmxData = f.readVectorU8(sKeyU + ":data");
-                //     QByteArray arDmxData(reinterpret_cast<const char*>(vecDmxData.data()),
-                //                          static_cast<int>(vecDmxData.size()));
-
-                //     // set the dmx data in the universe
-                //     pUni->setDmxData(arDmxData);
-
-                //     // add the universe to the list
-                //     lstUniverses.push_back(pUni);
-                // }
-
-                // // add the universes with the data
-                // pScene->addUniverses(lstUniverses);
             }
             else
             {
@@ -427,10 +416,13 @@ void MainWin::onFileSave()
             const stSceneBtn &sceneBtn  = m_vvSceneButtons.at(iSet).at(iScene);
             shared_ptr<Scene> pScene = sceneBtn.pScene;
 
-            if (pScene)
+            if (!pScene)
             {
-                //const list<stUniverseInfo> &lstUniverses = pScene->universes();
-
+                // no scene for this button
+                f.addValue(sKey + ":name", aString("-"));
+            }
+            else
+            {
                 // save the scene name
                 f.addValue(sKey + ":name", aString::fromQString(pScene->name()));
 
@@ -440,48 +432,33 @@ void MainWin::onFileSave()
                 // save the fixtures for this scene
                 const vector<shared_ptr<Fixture>>   &vFix = pScene->fixtures();
                 f.addValue(sKey + ":fixture_count", (int) vFix.size());
+
                 int iFixIdx = 0;
                 for (const shared_ptr<Fixture>  &pFix : vFix)
                 {
-                    aString sFixKey = sKey + ":" +  aString::fromValue(iFixIdx);
+                    aString sFixKey = sKey + ":fixture-" +  aString::fromValue(iFixIdx);
                     // save the fixture name
                     f.addValue(sFixKey + ":fixture_name", aString::fromQString(pFix->name()));
 
                     // add the channels and values
-                    std::map<int, u8> mapChannle = pFix->channelValues();
-                    f.addValue(sKey + ":channel_count", (int) vFix.size());
-                    for ()
+                    const mapChannelValue *pMapChannelValue = pScene->findChannelValues(pFix);
+                    if (!pMapChannelValue)
+                    {
+                        f.addValue(sFixKey + ":channel_count", 0);
+                    }
+                    else
+                    {
+                        f.addValue(sFixKey + ":channel_count", (int) pMapChannelValue->size());
+
+                        for (const auto& [key, value] : (*pMapChannelValue))
+                        {
+                            // key is type int, value is type u8
+                            f.addValue(sFixKey + ":channel-" +  aString::fromValue(key), (int) value);
+                        }
+                    }
 
                     iFixIdx++;
                 }
-
-                // // save the universe count
-                // f.addValue(sKey + ":universe_count", (int) lstUniverses.size());
-
-                // int iUni = 0;
-                // for (const stUniverseInfo &uInfo : lstUniverses)
-                // {
-                //     shared_ptr<Universe>    pUni        = uInfo.pUniverse;
-                //     aString                 sKeyU       = sKey + ":universe" + aString::fromValue(iUni);
-
-                //     // create vector from dmx data
-                //     size_t count = uInfo.data.size() / sizeof(u8);
-                //     std::vector<u8> vDmxData(reinterpret_cast<const u8*> (uInfo.data.constData()),
-                //                              reinterpret_cast<const u8*> (uInfo.data.constData()) + count);
-
-                //     // add the universe name
-                //     f.addValue(sKeyU + ":name", aString::fromQString(pUni->name()));
-
-                //     // add the dmx data
-                //     f.addValue(sKeyU + ":data", vDmxData);
-
-                //     iUni++;
-                // }
-            }
-            else
-            {
-                // no scene for this button
-                f.addValue(sKey + ":name", aString("-"));
             }
         }
     }

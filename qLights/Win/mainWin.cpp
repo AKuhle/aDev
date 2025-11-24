@@ -571,7 +571,9 @@ void MainWin::assignScene(SceneButton       *_pSceneBtn,
 
                 if (pFix)
                 {
-                    pScene->addFixture(pFix);
+                    mapChannelValue mapChannelValue = pFix->channelValues();
+
+                    pScene->addFixture(pFix, mapChannelValue);
                 }
             }
 
@@ -821,15 +823,17 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
 
 
 /*******************************************************************************
-* MainWin::updateAllChannelValuesFromUniverse
+* MainWin::updateFaders
 *******************************************************************************/
-// void MainWin::updateAllChannelValuesFromUniverse()
-// {
-//     for (shared_ptr<Fixture> pF : m_lstFixture)
-//     {
-//         pF->updateAllChannelValuesFromUniverse();
-//     }
-// } // MainWin::updateAllChannelValuesFromUniverse
+void MainWin::updateFaders() const
+{
+    CHECK_PRE_CONDITION_VOID(m_pActiveFixture);
+
+    for (Fader *pFader : m_vFaders)
+    {
+        pFader->update();
+    }
+} // MainWin::updateFaders
 
 
 /*******************************************************************************
