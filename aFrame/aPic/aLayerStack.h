@@ -16,9 +16,12 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QImage>
+
 #include "aFrame_def.h"
 #include "aUtil_def.h"
 
+using namespace std;
 using namespace aFrame::aUtil;
 
 
@@ -33,20 +36,21 @@ namespace aPic {
 * \class aMargin
 * \brief baseclass for 2D math objects
 *******************************************************************************/
-class aPicture
+class aLayerStack
 {
     private:
+        shared_ptr<QImage>      m_pImage   { nullptr };
 
     public:
-        aPicture();
+        aLayerStack();
 
-        aPicture(const aString  &_sFileName);
+        virtual ~aLayerStack();
 
-        virtual ~aPicture();
+        bool                    isValid() const;
 
+        bool                    load(const aPath  &_sFileName);
 
-    private:
-        void            openFile(const aString  &_sFileName);
+        shared_ptr<QImage>      getQImage() const;
 }; // class aMargin
 
 

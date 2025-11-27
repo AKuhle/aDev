@@ -123,8 +123,8 @@ HEADERS += \
     aMath/Obj3D/aMathObj3D.h \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
+    aPic/aLayerStack.h \
     aPic/aPic_def.h \
-    aPic/aPicture.h \
     aUtil/Cmds/aCmd.h \
     aUtil/Cmds/aCmdBase.h \
     aUtil/Cmds/aCmdMgr.h \
@@ -216,7 +216,7 @@ SOURCES += \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
-    aPic/aPicture.cpp \
+    aPic/aLayerStack.cpp \
     aUtil/Cmds/aCmd.cpp \
     aUtil/Cmds/aCmdBase.cpp \
     aUtil/Cmds/aCmdMgr.cpp \

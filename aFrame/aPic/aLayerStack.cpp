@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aPicture.h
+* \file aLayerStack.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -16,7 +16,10 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aPicture.h"
+#include "aLayerStack.h"
+#include "aPath.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -27,35 +30,54 @@ namespace aPic {
 
 
 /*******************************************************************************
-* aPicture::aPicture
+* aLayerStack::aLayerStack
 *******************************************************************************/
-aPicture::aPicture()
+aLayerStack::aLayerStack()
 {
-} // aPicture::aPicture
+} // aLayerStack::aLayerStack
 
 
 /*******************************************************************************
-* aPicture::aPicture
+* aLayerStack::~aLayerStack
 *******************************************************************************/
-aPicture::aPicture(const aString  &_sFileName)
+aLayerStack::~aLayerStack()
 {
-} // aPicture::aPicture
+} // aLayerStack::~aLayerStack
 
 
 /*******************************************************************************
-* aPicture::~aPicture
+* aLayerStack::isValid
 *******************************************************************************/
-aPicture::~aPicture()
+bool aLayerStack::isValid() const
 {
-} // aPicture::~aPicture
+    return (m_pImage != nullptr) &&
+            !m_pImage->isNull();
+} // aLayerStack::isValid
 
 
 /*******************************************************************************
-* aPicture::openFile
+* aLayerStack::load
 *******************************************************************************/
-void aPicture::openFile(const aString  &_sFileName)
+bool aLayerStack::load(const aPath  &_sFileName)
 {
-} // aPicture::openFile
+    m_pImage = make_shared<QImage> ();
+
+    if (!m_pImage->load(_sFileName.canonicalPath().toQString()))
+    {
+        m_pImage = nullptr;
+    }
+
+    return m_pImage != nullptr;
+} // aLayerStack::load
+
+
+/*******************************************************************************
+* aLayerStack::getQImage
+*******************************************************************************/
+shared_ptr<QImage> aLayerStack::getQImage() const
+{
+    return m_pImage;
+} // aLayerStack::getQImage
 
 
 } // namespace aPic

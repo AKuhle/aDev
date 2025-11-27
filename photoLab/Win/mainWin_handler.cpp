@@ -19,6 +19,7 @@
 #include "mainWin.h"
 #include "aUrl.h"
 #include "aPath.h"
+#include "aPainter.h"
 
 using namespace aFrame::aUtil;
 
@@ -65,7 +66,14 @@ void MainWin::onOpenFile(aBtn */*_pBtn*/)
 *******************************************************************************/
 void MainWin::onPaintContent()
 {
-    //cout << __PRETTY_FUNCTION__ << endl;
+    shared_ptr<QImage> pImg = m_layerStack.getQImage();
+
+    if (pImg)
+    {
+        aPainter    p(this);
+
+        p.drawQImg(*pImg, 0, 0);
+    }
 } // MainWin::onPaintContent
 
 
@@ -76,8 +84,9 @@ void MainWin::onDropUrl(const aUrl  &_url)
 {
     aPath   path(_url.toLocalFile());
 
-    cout << path.canonicalPath() << endl;
-    //openFile(path);
+    m_layerStack.load(_url.toLocalFile());
+
+    update();
 } // MainWin::onDropUrl
 
 

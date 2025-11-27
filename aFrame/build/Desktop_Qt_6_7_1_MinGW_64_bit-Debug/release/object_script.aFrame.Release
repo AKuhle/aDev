@@ -18,6 +18,7 @@ release/aStyleItemFillSolid.o
 release/aMathObj2D.o
 release/aMathObj3D.o
 release/aMathObj.o
+release/aLayerStack.o
 release/aCmd.o
 release/aCmdBase.o
 release/aCmdMgr.o

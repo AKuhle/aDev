@@ -18,6 +18,7 @@
 *******************************************************************************/
 #include "photoLab_defs.h"
 #include "aMainWinMdi.h"
+#include "aLayerStack.h"
 
 // #include "aCmdMgr.h"
 // #include "aCtrlMgr.h"
@@ -33,6 +34,7 @@
 using namespace aFrame;
 using namespace aFrame::aWin;
 using namespace aFrame::aUtil;
+using namespace aFrame::aPic;
 
 class MainWin;
 class ViewBase;
@@ -79,6 +81,7 @@ class MainWin : public aMainWinMdi
 
         // true => app is busy, e.g. running a cmd
         bool                m_bBusy                     { false };
+        aLayerStack         m_layerStack;
 
     public:
         MainWin();
