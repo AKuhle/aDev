@@ -34,7 +34,7 @@ DESTDIR = ../../../../Apps
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-DEFINES += __NO_FRAME_main__
+#DEFINES += __NO_FRAME_main__
 
 DEFINES += AFRAME_LIBRARY
 DEFINES += _USE_QT_
@@ -70,6 +70,8 @@ INCLUDEPATH += aGraphic
 INCLUDEPATH += aGraphic/Interface
 INCLUDEPATH += aGraphic/Qt
 INCLUDEPATH += aGraphic/Style
+
+INCLUDEPATH += aPic
 
 INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Ctrl
@@ -121,6 +123,8 @@ HEADERS += \
     aMath/Obj3D/aMathObj3D.h \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
+    aPic/aPic_def.h \
+    aPic/aPicture.h \
     aUtil/Cmds/aCmd.h \
     aUtil/Cmds/aCmdBase.h \
     aUtil/Cmds/aCmdMgr.h \
@@ -212,6 +216,7 @@ SOURCES += \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
+    aPic/aPicture.cpp \
     aUtil/Cmds/aCmd.cpp \
     aUtil/Cmds/aCmdBase.cpp \
     aUtil/Cmds/aCmdMgr.cpp \

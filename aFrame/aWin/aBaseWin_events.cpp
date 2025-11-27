@@ -180,6 +180,14 @@ bool aBaseWin::onButtonReleaseEvent(u16            _u16Modifier,
 } // aBaseWin::onButtonReleaseEvent
 
 
+/*******************************************************************************
+* aBaseWin::onDropUrl
+*******************************************************************************/
+void aBaseWin::onDropUrl(const aUrl &_url)
+{
+} // aBaseWin::onDropUrl
+
+
 } // namespace aWin
 } // namespace aFrame
 

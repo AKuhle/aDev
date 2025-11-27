@@ -13,6 +13,7 @@
 * includes
 *******************************************************************************/
 #include <QApplication>
+#include <QMimeData>
 
 #include "aFrame_def.h"
 
@@ -23,6 +24,7 @@
 #include "aBaseWin.h"
 #include "aLayout_i.h"
 #include "aCursor.h"
+#include "aUrl.h"
 
 using namespace aFrame::aUtil;
 
@@ -289,6 +291,15 @@ void aBaseWin_sys::setMouseTracking(bool _bEnable)
 
 
 /*******************************************************************************
+* aBaseWin_sys::enableDragDrop
+*******************************************************************************/
+void aBaseWin_sys::enableDragDrop(bool _bEnable)
+{
+    return QWidget::setAcceptDrops(_bEnable);
+} // aBaseWin_sys::enableDragDrop
+
+
+/*******************************************************************************
 * aBaseWin_sys::setCursor
 *******************************************************************************/
 void aBaseWin_sys::setCursor(const aCursor &_cursor)
@@ -458,6 +469,52 @@ bool aBaseWin_sys::eventFilter(QObject *_pObj,
         //QEvent *pEvent = static_cast<QEvent *>(_pEvent);
 
         return onLeaveEvent(currentModifiers());
+    }
+
+    // drag enter event
+    else if (_pEvent->type() == QEvent::DragEnter)
+    {
+        QDragEnterEvent *pEvent = static_cast<QDragEnterEvent *> (_pEvent);
+
+        if (pEvent->mimeData()->hasUrls())
+        {
+            pEvent->acceptProposedAction();
+        }
+        else
+        {
+            pEvent->ignore();
+        }
+    }
+
+    // drag move event
+    else if (_pEvent->type() == QEvent::DragMove)
+    {
+        QDragMoveEvent *pEvent = static_cast<QDragMoveEvent *> (_pEvent);
+
+        if (pEvent->mimeData()->hasUrls())
+        {
+            pEvent->acceptProposedAction();
+        }
+        else
+        {
+            pEvent->ignore();
+        }
+    }
+
+    // drop event
+    else if (_pEvent->type() == QEvent::Drop)
+    {
+        QDropEvent *pEvent = static_cast<QDropEvent *> (_pEvent);
+
+        if (pEvent->mimeData()->hasUrls())
+        {
+            pEvent->acceptProposedAction();
+
+            foreach (QUrl url, pEvent->mimeData()->urls())
+            {
+               onDropUrl(aUrl(url));
+            }
+        }
     }
 
     // wheel events

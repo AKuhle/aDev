@@ -96,6 +96,8 @@ class aBaseWin_sys : public QWidget
 
         void                            setMouseTracking(bool _bEnable);
 
+        void                            enableDragDrop(bool _bEnable);
+
         void                            setCursor(const aCursor &_cursor);
 
 
@@ -135,7 +137,6 @@ class aBaseWin_sys : public QWidget
 
         virtual bool                    onLeaveEvent(u16 _u16Modifier) = 0;
 
-
         // resize event
         virtual void                    onResizeEvent(const aDimension   &_dOldDim,
                                                       const aDimension   &_dNewDim) = 0;
@@ -173,10 +174,9 @@ class aBaseWin_sys : public QWidget
                                                              const aPoint    &_pntLocal,
                                                              const aPoint    &_pntGlobal) = 0;
 
+        // drag/drop
+        virtual void                    onDropUrl(const aUrl &_url) = 0;
 
-
-
-    //     void                    onDropUrl(const aUrl  &_url) override;
 }; // class aBaseWin_sys
 
 

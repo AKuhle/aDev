@@ -18,6 +18,7 @@ debug/aStyleItemFillSolid.o
 debug/aMathObj2D.o
 debug/aMathObj3D.o
 debug/aMathObj.o
+debug/aPicture.o
 debug/aCmd.o
 debug/aCmdBase.o
 debug/aCmdMgr.o

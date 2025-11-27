@@ -17,6 +17,10 @@
 *******************************************************************************/
 #include "photoLab_defs.h"
 #include "mainWin.h"
+#include "aUrl.h"
+#include "aPath.h"
+
+using namespace aFrame::aUtil;
 
 
 
@@ -54,6 +58,27 @@ void MainWin::onOpenFile(aBtn */*_pBtn*/)
 {
     cout << __PRETTY_FUNCTION__ << endl;
 } // MainWin::onOpenFile
+
+
+/*******************************************************************************
+* MainWin::onPaintContent
+*******************************************************************************/
+void MainWin::onPaintContent()
+{
+    //cout << __PRETTY_FUNCTION__ << endl;
+} // MainWin::onPaintContent
+
+
+/*******************************************************************************
+* MainWin::onDropUrl
+*******************************************************************************/
+void MainWin::onDropUrl(const aUrl  &_url)
+{
+    aPath   path(_url.toLocalFile());
+
+    cout << path.canonicalPath() << endl;
+    //openFile(path);
+} // MainWin::onDropUrl
 
 
 // /*******************************************************************************
@@ -123,17 +148,6 @@ void MainWin::onOpenFile(aBtn */*_pBtn*/)
 //     } // switch (pCmd->id())
 
 // } // MainWin::onDoDone
-
-
-// /*******************************************************************************
-// * MainWin::onDropUrl
-// *******************************************************************************/
-// void MainWin::onDropUrl(const aUrl  &_url)
-// {
-//     aPath   path(_url.toLocalFile());
-
-//     openFile(path);
-// } // MainWin::onDropUrl
 
 
 // /*******************************************************************************

@@ -61,6 +61,8 @@ bool MainWin::onCreateWin()
 
     setGeometry(100, 100, 600, 400);
 
+    // activate drag/drop
+    enableDragDrop(true);
 
 //     // create the navigator dock win
 //     m_pNavigatorDockWin = new aDockWin(this);

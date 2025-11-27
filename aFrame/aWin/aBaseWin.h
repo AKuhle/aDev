@@ -102,6 +102,8 @@ class aBaseWin : public aBaseWin_sys,
 
         void                    setMouseTracking(bool _bEnable)     { aBaseWin_sys::setMouseTracking(_bEnable); }
 
+        void                    enableDragDrop(bool _bEnable)       { aBaseWin_sys::enableDragDrop(_bEnable); }
+
         void                    setCursor(const aCursor &_cursor)   { aBaseWin_sys::setCursor(_cursor); }
 
         bool                    isHover() const                     { return m_bHover; }
@@ -239,19 +241,19 @@ class aBaseWin : public aBaseWin_sys,
         // close event
         bool                    onCloseEvent() override; // return: true => window can be closed
 
-        // resize event
-        void                    onResizeEvent(const aDimension   &_dOldDim,
-                                              const aDimension   &_dNewDim) override;
-
-        // paint event
-        void                    onPaintEvent() override;
-
         // enter/leave event
         bool                    onEnterEvent(u16             _u16Modifier,
                                              const aPoint    &_pntLocal,
                                              const aPoint    &_pntGlobal) override;
 
         bool                    onLeaveEvent(u16 _u16Modifier) override;
+
+        // resize event
+        void                    onResizeEvent(const aDimension   &_dOldDim,
+                                              const aDimension   &_dNewDim) override;
+
+        // paint event
+        void                    onPaintEvent() override;
 
         // wheel event, true => event handled
         bool                    onWheelEvent(u16             _u16Modifier,
@@ -266,29 +268,25 @@ class aBaseWin : public aBaseWin_sys,
                                                    const aPoint  &_pntGlobal) override;
 
         // mouse pressed events, true => event handled
-        bool                    onButtonPressEvent(u16           _u16Modifier,
-                                                           u16           _u16Btn,
-                                                           const aPoint  &_pntLocal,
-                                                           const aPoint  &_pntGlobal) override;
+        bool                    onButtonPressEvent(u16          _u16Modifier,
+                                                   u16          _u16Btn,
+                                                   const aPoint &_pntLocal,
+                                                   const aPoint &_pntGlobal) override;
 
         // mouse move events, true => event handled
-        bool                    onMouseMoveEvent(u16             _u16Modifier,
-                                                         u16             _u16Btn,
-                                                         const aPoint    &_pntLocal,
-                                                         const aPoint    &_pntGlobal) override;
+        bool                    onMouseMoveEvent(u16            _u16Modifier,
+                                                 u16            _u16Btn,
+                                                 const aPoint   &_pntLocal,
+                                                 const aPoint   &_pntGlobal) override;
 
         // mouse release events, true => event handled
-        bool                    onButtonReleaseEvent(u16             _u16Modifier,
-                                                             u16             _u16Btn,
-                                                             const aPoint    &_pntLocal,
-                                                             const aPoint    &_pntGlobal) override;
+        bool                    onButtonReleaseEvent(u16            _u16Modifier,
+                                                     u16            _u16Btn,
+                                                     const aPoint   &_pntLocal,
+                                                     const aPoint   &_pntGlobal) override;
 
-
-        // void                    dragEnterEvent(QDragEnterEvent *_pEvent) override;
-        // void                    dragMoveEvent(QDragMoveEvent *_pEvent) override;
-        // void                    dropEvent(QDropEvent   *_pEvent) override;
-
-        // void                    wheelEvent(QWheelEvent *_pEvent) override;
+        // drag/drop
+        void                    onDropUrl(const aUrl &_url) override;
 
 
     /*******************************************************************************

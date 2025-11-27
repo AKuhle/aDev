@@ -134,13 +134,16 @@ class MainWin : public aMainWinMdi
 
 
     /*******************************************************************************
-    * aSysWin interface
+    * aBaseWin interface
     *******************************************************************************/
     protected:
         bool                onCreateWin() override;
         bool                onCreateChilds() override;
         bool                onCloseWin() override;
-        // void                onDropUrl(const aUrl  &_url) override;
+
+        void                onPaintContent() override;
+
+        void                onDropUrl(const aUrl &_url) override;
 
 
     /*******************************************************************************
