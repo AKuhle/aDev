@@ -17,6 +17,10 @@
 * includes
 *******************************************************************************/
 #include "aFrame_def.h"
+#include "aDimension.h"
+#include "aColor.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -37,15 +41,31 @@ namespace aPic {
 
 
 /*******************************************************************************
-* classes
+* aLayerI
 *******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+class aLayerI
+{
+    protected:
+        s32         m_s32W;
+        s32         m_s32H;
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+
+    public:
+        virtual ~aLayerI();
+
+        virtual void            setPixel(s32            _x,
+                                         s32            _y,
+                                         const aColor   &_col) = 0;
+
+        virtual void            pixel(s32       _x,
+                                      s32       _y,
+                                      aColor    &_col) const = 0;
+
+    protected:
+        aLayerI(s32   _s32W,
+                s32   _s32H);
+
+}; // class aLayerI
 
 
 } // namespace aPic

@@ -10,16 +10,17 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
+#ifdef _USE_QT_
+
 #pragma once
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include <QImage>
-
 #include "aFrame_def.h"
 #include "aUtil_def.h"
+#include "aLayerStack_i.h"
 
 using namespace std;
 using namespace aFrame::aUtil;
@@ -33,26 +34,30 @@ namespace aPic {
 
 
 /*******************************************************************************
-* \class aMargin
-* \brief baseclass for 2D math objects
+* \class aLayerStack
 *******************************************************************************/
-class aLayerStack
+class aLayerStack : public aLayerStackI
 {
     private:
-        shared_ptr<QImage>      m_pImage   { nullptr };
 
     public:
         aLayerStack();
 
         virtual ~aLayerStack();
 
-        bool                    isValid() const;
-
-        bool                    load(const aPath  &_sFileName);
+        bool                    load(const aPath  &_sFileName) override;
 
         shared_ptr<QImage>      getQImage() const;
-}; // class aMargin
+
+
+    private:
+        bool                    loadRgb_8bit(const QImage &_img);
+
+}; // class aLayerStack
 
 
 } // namespace aPic
 } // namespace aFrame
+
+
+#endif // _USE_QT_

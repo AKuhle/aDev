@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file mathDefs.h
+* \file BaseApp.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,43 +10,51 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#pragma once
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "renderInfo.h"
 
-
-/*******************************************************************************
-* namespace
-*******************************************************************************/
-namespace aFrame {
-namespace aPic {
 
 
 /*******************************************************************************
-* const
+* RenderInfo::RenderInfo
 *******************************************************************************/
+RenderInfo::RenderInfo()
+{
+} // RenderInfo::RenderInfo
 
 
 /*******************************************************************************
-* macros
+* RenderInfo::~RenderInfo
 *******************************************************************************/
+RenderInfo::~RenderInfo()
+{
+} // RenderInfo::~RenderInfo
 
 
 /*******************************************************************************
-* classes
+* RenderInfo::setLayerStack
 *******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+void RenderInfo::setLayerStack(const aLayerStack &_layerStack)
+{
+    m_layerStack = _layerStack;
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+    m_bModified = true;
+} // RenderInfo::setLayerStack
 
 
-} // namespace aPic
-} // namespace aFrame
+/*******************************************************************************
+* RenderInfo::getQImage
+*******************************************************************************/
+shared_ptr<QImage> RenderInfo::getQImage() const
+{
+    if (m_bModified)
+    {
+        m_pQImage = m_layerStack.getQImage();
+    }
+
+    return m_pQImage;
+} // RenderInfo::getQImage

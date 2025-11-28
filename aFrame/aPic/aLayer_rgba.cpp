@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file mathDefs.h
+* \file aLayerRgba.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,13 +10,15 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#pragma once
+
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "aLayer_rgba.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -27,25 +29,51 @@ namespace aPic {
 
 
 /*******************************************************************************
-* const
+* aLayerRgba::aLayerRgba
 *******************************************************************************/
+aLayerRgba::aLayerRgba(s32   _s32W,
+                       s32   _s32H)
+: aLayerI(_s32W, _s32H)
+{
+    m_pChannelR = make_shared<aChannel8Bit> (_s32W, _s32H);
+    m_pChannelG = make_shared<aChannel8Bit> (_s32W, _s32H);
+    m_pChannelB = make_shared<aChannel8Bit> (_s32W, _s32H);
+} // aLayerRgba::aLayerRgba
 
 
 /*******************************************************************************
-* macros
+* aLayerRgba::~aLayerRgba
 *******************************************************************************/
+aLayerRgba::~aLayerRgba()
+{
+} // aLayerRgba::~aLayerRgba
 
 
 /*******************************************************************************
-* classes
+* aLayerRgba::setPixel
 *******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+void aLayerRgba::setPixel(s32            _x,
+                          s32            _y,
+                          const aColor   &_col)
+{
+    m_pChannelR->setValue(_x, _y, _col.r());
+    m_pChannelG->setValue(_x, _y, _col.g());
+    m_pChannelB->setValue(_x, _y, _col.b());
+} // aLayerRgba::setPixel
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+
+/*******************************************************************************
+* aLayerRgba::pixel
+*******************************************************************************/
+void aLayerRgba::pixel(s32      _x,
+                       s32      _y,
+                       aColor   &_col) const
+{
+    _col.set(m_pChannelR->value(_x, _y),
+             m_pChannelG->value(_x, _y),
+             m_pChannelB->value(_x, _y));
+
+} // aLayerRgba::pixel
 
 
 } // namespace aPic

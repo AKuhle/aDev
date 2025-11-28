@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file aLayerStack.h
+* \file mathDefs.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,15 +10,18 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
-
+#pragma once
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aLayerStack.h"
-#include "aPath.h"
+#include "aFrame_def.h"
+#include "aDimension.h"
+#include "aChannel_8bit.h"
+#include "aLayer_i.h"
 
+using namespace std;
 using namespace aFrame::aUtil;
 
 
@@ -30,54 +33,43 @@ namespace aPic {
 
 
 /*******************************************************************************
-* aLayerStack::aLayerStack
+* const
 *******************************************************************************/
-aLayerStack::aLayerStack()
-{
-} // aLayerStack::aLayerStack
 
 
 /*******************************************************************************
-* aLayerStack::~aLayerStack
+* macros
 *******************************************************************************/
-aLayerStack::~aLayerStack()
-{
-} // aLayerStack::~aLayerStack
 
 
 /*******************************************************************************
-* aLayerStack::isValid
+* aLayerRgba
 *******************************************************************************/
-bool aLayerStack::isValid() const
+class aLayerRgba : aLayerI
 {
-    return (m_pImage != nullptr) &&
-            !m_pImage->isNull();
-} // aLayerStack::isValid
+    private:
+        shared_ptr<aChannel8Bit>    m_pChannelR;
+        shared_ptr<aChannel8Bit>    m_pChannelG;
+        shared_ptr<aChannel8Bit>    m_pChannelB;
 
+    public:
+        aLayerRgba(s32   _s32W,
+                   s32   _s32H);
 
-/*******************************************************************************
-* aLayerStack::load
-*******************************************************************************/
-bool aLayerStack::load(const aPath  &_sFileName)
-{
-    m_pImage = make_shared<QImage> ();
+        aLayerRgba(const aDimension &_dimension) : aLayerRgba(_dimension.w(),
+                                                              _dimension.h()) {}
 
-    if (!m_pImage->load(_sFileName.canonicalPath().toQString()))
-    {
-        m_pImage = nullptr;
-    }
+        virtual ~aLayerRgba();
 
-    return m_pImage != nullptr;
-} // aLayerStack::load
+        void                    setPixel(s32            _x,
+                                         s32            _y,
+                                         const aColor   &_col) override;
 
+        void                    pixel(s32       _x,
+                                      s32       _y,
+                                      aColor    &_col) const override;
 
-/*******************************************************************************
-* aLayerStack::getQImage
-*******************************************************************************/
-shared_ptr<QImage> aLayerStack::getQImage() const
-{
-    return m_pImage;
-} // aLayerStack::getQImage
+}; // class aLayerRgba
 
 
 } // namespace aPic

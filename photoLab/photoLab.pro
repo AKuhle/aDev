@@ -84,6 +84,7 @@ INCLUDEPATH += ../aFrame/aGraphic/Qt
 INCLUDEPATH += ../aFrame/aGraphic/Style
 
 INCLUDEPATH += ../aFrame/aPic
+INCLUDEPATH += ../aFrame/aPic/Qt
 
 INCLUDEPATH += ../aFrame/aWin
 INCLUDEPATH += ../aFrame/aWin/Ctrl
@@ -96,7 +97,7 @@ INCLUDEPATH += ../aFrame/aWin/Tools
 # include PhotoLab
 ########################################################################
 INCLUDEPATH += App
-# INCLUDEPATH += Classes
+INCLUDEPATH += Classes
 # INCLUDEPATH += Cmds
 # INCLUDEPATH += Cmds/File_io
 # INCLUDEPATH += Cmds/Transform
@@ -112,6 +113,7 @@ INCLUDEPATH += Win
 HEADERS += \
     App/photoLabApp.h \
     App/photoLab_defs.h \
+    Classes/renderInfo.h \
     Win/mainWin.h
 
 
@@ -120,6 +122,7 @@ HEADERS += \
 ########################################################################
 SOURCES += \
     App/photoLabApp.cpp \
+    Classes/renderInfo.cpp \
     Win/mainWin.cpp \
     Win/mainWin_handler.cpp \
     Win/mainWin_statics.cpp

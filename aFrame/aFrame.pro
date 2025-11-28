@@ -72,6 +72,7 @@ INCLUDEPATH += aGraphic/Qt
 INCLUDEPATH += aGraphic/Style
 
 INCLUDEPATH += aPic
+INCLUDEPATH += aPic/Qt
 
 INCLUDEPATH += aWin
 INCLUDEPATH += aWin/Ctrl
@@ -123,7 +124,12 @@ HEADERS += \
     aMath/Obj3D/aMathObj3D.h \
     aMath/aMathObj.h \
     aMath/aMath_def.h \
-    aPic/aLayerStack.h \
+    aPic/Qt/aLayerStack.h \
+    aPic/aChannel_8bit.h \
+    aPic/aChannel_i.h \
+    aPic/aLayerStack_i.h \
+    aPic/aLayer_i.h \
+    aPic/aLayer_rgba.h \
     aPic/aPic_def.h \
     aUtil/Cmds/aCmd.h \
     aUtil/Cmds/aCmdBase.h \
@@ -216,7 +222,12 @@ SOURCES += \
     aMath/Obj2D/aMathObj2D.cpp \
     aMath/Obj3D/aMathObj3D.cpp \
     aMath/aMathObj.cpp \
-    aPic/aLayerStack.cpp \
+    aPic/Qt/aLayerStack.cpp \
+    aPic/aChannel_8bit.cpp \
+    aPic/aChannel_i.cpp \
+    aPic/aLayerStack_i.cpp \
+    aPic/aLayer_i.cpp \
+    aPic/aLayer_rgba.cpp \
     aUtil/Cmds/aCmd.cpp \
     aUtil/Cmds/aCmdBase.cpp \
     aUtil/Cmds/aCmdMgr.cpp \

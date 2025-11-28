@@ -18,7 +18,12 @@ release/aStyleItemFillSolid.o
 release/aMathObj2D.o
 release/aMathObj3D.o
 release/aMathObj.o
-release/aPicture.o
+release/aLayerStack.o
+release/aChannel_8bit.o
+release/aChannel_i.o
+release/aLayerStack_i.o
+release/aLayer_i.o
+release/aLayer_rgba.o
 release/aCmd.o
 release/aCmdBase.o
 release/aCmdMgr.o

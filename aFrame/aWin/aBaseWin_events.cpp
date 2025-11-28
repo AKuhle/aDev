@@ -183,7 +183,7 @@ bool aBaseWin::onButtonReleaseEvent(u16            _u16Modifier,
 /*******************************************************************************
 * aBaseWin::onDropUrl
 *******************************************************************************/
-void aBaseWin::onDropUrl(const aUrl &_url)
+void aBaseWin::onDropUrl(const aUrl &/*_url*/)
 {
 } // aBaseWin::onDropUrl
 

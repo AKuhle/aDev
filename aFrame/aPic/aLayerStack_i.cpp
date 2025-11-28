@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file mathDefs.h
+* \file aLayerStackI.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,13 +10,16 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#pragma once
+
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "aLayerStack_i.h"
+#include "aPath.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -27,25 +30,39 @@ namespace aPic {
 
 
 /*******************************************************************************
-* const
+* aLayerStackI::aLayerStackI
 *******************************************************************************/
+aLayerStackI::aLayerStackI()
+{
+} // aLayerStackI::aLayerStackI
 
 
 /*******************************************************************************
-* macros
+* aLayerStackI::~aLayerStackI
 *******************************************************************************/
+aLayerStackI::~aLayerStackI()
+{
+} // aLayerStackI::~aLayerStackI
 
 
 /*******************************************************************************
-* classes
+* aLayerStackI::isValid
 *******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+bool aLayerStackI::isValid() const
+{
+    return m_vLayer.size() > 0;
+} // aLayerStackI::isValid
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+
+/*******************************************************************************
+* aLayerStackI::addLayer
+*******************************************************************************/
+void aLayerStackI::addLayer(shared_ptr<aLayerI> _pLayer)
+{
+    CHECK_PRE_CONDITION_VOID(_pLayer);
+
+    m_vLayer.push_back(_pLayer);
+} // aLayerStackI::addLayer
 
 
 } // namespace aPic

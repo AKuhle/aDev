@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file mathDefs.h
+* \file aChannelI.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -10,13 +10,15 @@
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#pragma once
+
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "aChannel_i.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -27,25 +29,24 @@ namespace aPic {
 
 
 /*******************************************************************************
-* const
+* aChannelI::aChannelI
 *******************************************************************************/
+aChannelI::aChannelI(s32   _s32W,
+                     s32   _s32H,
+                     s32   _s32RowSize_byte)
+: m_s32W(_s32W),
+  m_s32H(_s32H),
+  m_s32RowSize_byte(_s32RowSize_byte)
+{
+} // aChannelI::aChannelI
 
 
 /*******************************************************************************
-* macros
+* aChannelI::~aChannelI
 *******************************************************************************/
-
-
-/*******************************************************************************
-* classes
-*******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
-
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+aChannelI::~aChannelI()
+{
+} // aChannelI::~aChannelI
 
 
 } // namespace aPic

@@ -20,6 +20,7 @@
 #include "aUrl.h"
 #include "aPath.h"
 #include "aPainter.h"
+#include "renderInfo.h"
 
 using namespace aFrame::aUtil;
 
@@ -66,7 +67,7 @@ void MainWin::onOpenFile(aBtn */*_pBtn*/)
 *******************************************************************************/
 void MainWin::onPaintContent()
 {
-    shared_ptr<QImage> pImg = m_layerStack.getQImage();
+    shared_ptr<QImage> pImg = m_renderInfo.getQImage();
 
     if (pImg)
     {
@@ -84,7 +85,10 @@ void MainWin::onDropUrl(const aUrl  &_url)
 {
     aPath   path(_url.toLocalFile());
 
-    m_layerStack.load(_url.toLocalFile());
+    aLayerStack ls;
+    ls.load(_url.toLocalFile());
+
+    m_renderInfo.setLayerStack(ls);
 
     update();
 } // MainWin::onDropUrl

@@ -16,7 +16,9 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aFrame_def.h"
+#include "aChannel_i.h"
+
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -39,13 +41,29 @@ namespace aPic {
 /*******************************************************************************
 * classes
 *******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+class aChannel8Bit : public aChannelI
+{
+    protected:
+        unsigned char   *m_pData    { nullptr };
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+
+    public:
+        aChannel8Bit(s32   _s32W,
+                     s32   _s32H);
+
+        aChannel8Bit(const aDimension &_dimension) : aChannel8Bit(_dimension.w(),
+                                                                  _dimension.h()) {}
+
+        virtual ~aChannel8Bit();
+
+        color_t             value(s32   _s32X,
+                                  s32   _s32Y) const override;
+
+        void                setValue(s32       _s32X,
+                                     s32       _s32Y,
+                                     color_t   _value) override;
+
+}; // class aChannel8Bit
 
 
 } // namespace aPic

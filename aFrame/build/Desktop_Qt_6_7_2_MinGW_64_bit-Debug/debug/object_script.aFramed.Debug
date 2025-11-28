@@ -18,7 +18,12 @@ debug/aStyleItemFillSolid.o
 debug/aMathObj2D.o
 debug/aMathObj3D.o
 debug/aMathObj.o
-debug/aPicture.o
+debug/aLayerStack.o
+debug/aChannel_8bit.o
+debug/aChannel_i.o
+debug/aLayerStack_i.o
+debug/aLayer_i.o
+debug/aLayer_rgba.o
 debug/aCmd.o
 debug/aCmdBase.o
 debug/aCmdMgr.o

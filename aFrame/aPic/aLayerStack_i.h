@@ -1,5 +1,5 @@
 /*******************************************************************************
-* \file mathDefs.h
+* \file aMargin.h
 * \author Andreas Kuhlewind
 *
 * \brief
@@ -16,7 +16,14 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QImage>
+
 #include "aFrame_def.h"
+#include "aUtil_def.h"
+#include "aLayer_i.h"
+
+using namespace std;
+using namespace aFrame::aUtil;
 
 
 /*******************************************************************************
@@ -27,25 +34,26 @@ namespace aPic {
 
 
 /*******************************************************************************
-* const
+* \class aLayerStackI
 *******************************************************************************/
+class aLayerStackI
+{
+    private:
+        std::vector<shared_ptr<aLayerI>>    m_vLayer;
 
 
-/*******************************************************************************
-* macros
-*******************************************************************************/
+    public:
+        aLayerStackI();
 
+        virtual ~aLayerStackI();
 
-/*******************************************************************************
-* classes
-*******************************************************************************/
-class aLayerStack;
-class aChannelI;
-class aChannel8Bit;
+        bool                    isValid() const;
 
-class aLayerI;
-class aLayerRgba;
-// template<class T> class aDimension2D;
+        void                    addLayer(shared_ptr<aLayerI> _pLayer);
+
+        virtual bool            load(const aPath  &_sFileName) = 0;
+
+}; // class aLayerStackI
 
 
 } // namespace aPic

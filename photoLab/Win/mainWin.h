@@ -18,7 +18,7 @@
 *******************************************************************************/
 #include "photoLab_defs.h"
 #include "aMainWinMdi.h"
-#include "aLayerStack.h"
+#include "renderInfo.h"
 
 // #include "aCmdMgr.h"
 // #include "aCtrlMgr.h"
@@ -81,7 +81,7 @@ class MainWin : public aMainWinMdi
 
         // true => app is busy, e.g. running a cmd
         bool                m_bBusy                     { false };
-        aLayerStack         m_layerStack;
+        RenderInfo          m_renderInfo;
 
     public:
         MainWin();
