@@ -76,5 +76,14 @@ void aLayerRgba::pixel(s32      _x,
 } // aLayerRgba::pixel
 
 
+/*******************************************************************************
+* aLayerRgba::addToBuffer
+*******************************************************************************/
+void aLayerRgba::addToBuffer(aPicBuffer &_buf) const
+{
+
+} // aLayerRgba::addToBuffer
+
+
 } // namespace aPic
 } // namespace aFrame

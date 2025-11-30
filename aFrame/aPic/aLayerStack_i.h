@@ -18,7 +18,7 @@
 *******************************************************************************/
 #include <QImage>
 
-#include "aFrame_def.h"
+#include "aPic_def.h"
 #include "aUtil_def.h"
 #include "aLayer_i.h"
 
@@ -38,16 +38,22 @@ namespace aPic {
 *******************************************************************************/
 class aLayerStackI
 {
-    private:
+    protected:
+        enumLayerFormat                     m_eLayerFormat  { enumLayerFormat::None };
+        s32                                 m_s32W          { 0 };
+        s32                                 m_s32H          { 0 };
         std::vector<shared_ptr<aLayerI>>    m_vLayer;
 
 
     public:
-        aLayerStackI();
-
+        aLayerStackI(enumLayerFormat _eLayerFormat,
+                     s32             _s32W,
+                     s32             _s32H);
         virtual ~aLayerStackI();
 
         bool                    isValid() const;
+
+        enumLayerFormat         layerFormat() const   { return m_eLayerFormat; }
 
         void                    addLayer(shared_ptr<aLayerI> _pLayer);
 

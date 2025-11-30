@@ -33,9 +33,9 @@ namespace aPic {
 *******************************************************************************/
 aChannel8Bit::aChannel8Bit(s32   _s32W,
                            s32   _s32H)
-: aChannelI(_s32W, _s32H, _s32W * _s32H)
+: aChannelI(_s32W, _s32H)
 {
-    m_pData = new unsigned char[rowSize_byte() * _s32H];
+    m_pData = new unsigned char[m_s32W * _s32H];
 } // aChannel8Bit::aChannel8Bit
 
 
@@ -53,7 +53,7 @@ aChannel8Bit::~aChannel8Bit()
 color_t aChannel8Bit::value(s32   _s32X,
                             s32   _s32Y) const
 {
-    return (static_cast<color_t> (m_pData[m_s32RowSize_byte * _s32Y + _s32X])) / 255;
+    return (static_cast<color_t> (m_pData[m_s32W * _s32Y + _s32X])) / 255;
 } // aChannel8Bit::value
 
 
@@ -64,7 +64,7 @@ void aChannel8Bit::setValue(s32     _s32X,
                             s32     _s32Y,
                             color_t _value)
 {
-    m_pData[m_s32RowSize_byte * _s32Y + _s32X] = static_cast<unsigned char> (_value * 255);
+    m_pData[m_s32W * _s32Y + _s32X] = static_cast<unsigned char> (_value * 255);
 } // aChannel8Bit::setValue
 
 

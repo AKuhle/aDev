@@ -47,7 +47,6 @@ class aChannelI
     protected:
         s32     m_s32W              { 0 };
         s32     m_s32H              { 0 };
-        s32     m_s32RowSize_byte   { 0 };
 
     public:
         virtual ~aChannelI();
@@ -55,7 +54,6 @@ class aChannelI
         aDimension          dimension() const       { return aDimension(m_s32W, m_s32H); }
         s32                 w() const               { return m_s32W; }
         s32                 h() const               { return m_s32H; }
-        s32                 rowSize_byte() const    { return m_s32RowSize_byte; }
 
         virtual color_t     value(s32   _s32X,
                                   s32   _s32Y) const = 0;
@@ -67,8 +65,7 @@ class aChannelI
 
     protected:
         aChannelI(s32   _s32W,
-                  s32   _s32H,
-                  s32   _s32RowSize_byte);
+                  s32   _s32H);
 };
 
 

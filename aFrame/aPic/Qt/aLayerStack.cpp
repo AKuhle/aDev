@@ -34,7 +34,10 @@ namespace aPic {
 /*******************************************************************************
 * aLayerStack::aLayerStack
 *******************************************************************************/
-aLayerStack::aLayerStack()
+aLayerStack::aLayerStack(enumLayerFormat _eLayerFormat,
+                         s32             _s32W,
+                         s32             _s32H)
+: aLayerStackI(_eLayerFormat, _s32W, _s32H)
 {
 } // aLayerStack::aLayerStack
 
@@ -53,7 +56,6 @@ aLayerStack::~aLayerStack()
 bool aLayerStack::load(const aPath  &_sFileName)
 {
     QImage  img;
-    QColor  col;
 
     // try to load the image
     img.load(_sFileName.canonicalPath().toQString());
@@ -105,12 +107,21 @@ bool aLayerStack::load(const aPath  &_sFileName)
 *******************************************************************************/
 bool aLayerStack::loadRgb_8bit(const QImage &_img)
 {
-    s32                     s32W    = _img.width();
-    s32                     s32H    = _img.height();
-    shared_ptr<aLayerRgba>  pLayer  = make_shared<aLayerRgba> (s32W, s32H);
     QColor                  col;
 
-    for (s32 y = 0; y < s32H; y++)
+    // delete previous content
+    m_vLayer.clear();
+
+
+    // set new layer format
+    m_eLayerFormat = enumLayerFormat::RGB_8;
+    m_s32W = _img.width();
+    m_s32H = _img.height();
+
+    // create the background layer
+    shared_ptr<aLayerRgba>  pLayer  = make_shared<aLayerRgba> (m_s32W, m_s32H);
+
+    for (s32 y = 0; y < m_s32H; y++)
     {
         if (y % 100 == 0)
         {
@@ -118,9 +129,13 @@ bool aLayerStack::loadRgb_8bit(const QImage &_img)
                 y = y + 1;
         }
 
-        for (s32 x = 0; x < s32W; x++)
+        for (s32 x = 0; x < m_s32W; x++)
         {
             col = _img.pixel(x, y);
+
+            pLayer->setPixel(x, y, aColor::fromU8(col.red(),
+                                                  col.green(),
+                                                  col.blue()));
         }
     }
 

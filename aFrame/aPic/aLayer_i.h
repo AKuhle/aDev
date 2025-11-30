@@ -17,7 +17,7 @@
 * includes
 *******************************************************************************/
 #include "aFrame_def.h"
-#include "aDimension.h"
+#include "aPic_def.h"
 #include "aColor.h"
 
 using namespace aFrame::aUtil;
@@ -60,6 +60,9 @@ class aLayerI
         virtual void            pixel(s32       _x,
                                       s32       _y,
                                       aColor    &_col) const = 0;
+
+        virtual void            addToBuffer(aPicBuffer &_buf) const = 0;
+
 
     protected:
         aLayerI(s32   _s32W,

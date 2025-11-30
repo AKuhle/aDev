@@ -41,7 +41,11 @@ class aLayerStack : public aLayerStackI
     private:
 
     public:
-        aLayerStack();
+        aLayerStack(enumLayerFormat _eLayerFormat,
+                    s32             _s32W,
+                    s32             _s32H);
+
+        aLayerStack() : aLayerStack(enumLayerFormat::None, 0, 0) { }
 
         virtual ~aLayerStack();
 

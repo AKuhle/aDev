@@ -32,7 +32,12 @@ namespace aPic {
 /*******************************************************************************
 * aLayerStackI::aLayerStackI
 *******************************************************************************/
-aLayerStackI::aLayerStackI()
+aLayerStackI::aLayerStackI(enumLayerFormat _eLayerFormat,
+                           s32             _s32W,
+                           s32             _s32H)
+: m_eLayerFormat(_eLayerFormat),
+  m_s32W(_s32W),
+  m_s32H(_s32H)
 {
 } // aLayerStackI::aLayerStackI
 

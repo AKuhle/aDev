@@ -69,6 +69,8 @@ class aLayerRgba : aLayerI
                                       s32       _y,
                                       aColor    &_col) const override;
 
+        void                    addToBuffer(aPicBuffer &_buf) const override;
+
 }; // class aLayerRgba
 
 

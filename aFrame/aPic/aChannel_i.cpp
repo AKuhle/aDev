@@ -32,11 +32,9 @@ namespace aPic {
 * aChannelI::aChannelI
 *******************************************************************************/
 aChannelI::aChannelI(s32   _s32W,
-                     s32   _s32H,
-                     s32   _s32RowSize_byte)
+                     s32   _s32H)
 : m_s32W(_s32W),
-  m_s32H(_s32H),
-  m_s32RowSize_byte(_s32RowSize_byte)
+  m_s32H(_s32H)
 {
 } // aChannelI::aChannelI
 

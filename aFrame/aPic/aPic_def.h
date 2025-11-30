@@ -37,14 +37,30 @@ namespace aPic {
 
 
 /*******************************************************************************
+* enums
+*******************************************************************************/
+enum class enumLayerFormat
+{
+    None,
+    RGB_8
+}; // enumLayerFormat
+
+
+enum class enumPicBufferFormat
+{
+    None,
+    Format_RGB888
+}; // enumPicBufferFormat
+
+
+/*******************************************************************************
 * classes
 *******************************************************************************/
 class aLayerStack;
-class aChannelI;
 class aChannel8Bit;
 
-class aLayerI;
 class aLayerRgba;
+class aPicBuffer;
 // template<class T> class aDimension2D;
 
 

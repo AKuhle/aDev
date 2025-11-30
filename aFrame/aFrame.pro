@@ -34,7 +34,7 @@ DESTDIR = ../../../../Apps
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-#DEFINES += __NO_FRAME_main__
+DEFINES += __NO_FRAME_main__
 
 DEFINES += AFRAME_LIBRARY
 DEFINES += _USE_QT_
@@ -130,6 +130,7 @@ HEADERS += \
     aPic/aLayerStack_i.h \
     aPic/aLayer_i.h \
     aPic/aLayer_rgba.h \
+    aPic/aPicBuffer.h \
     aPic/aPic_def.h \
     aUtil/Cmds/aCmd.h \
     aUtil/Cmds/aCmdBase.h \
@@ -228,6 +229,7 @@ SOURCES += \
     aPic/aLayerStack_i.cpp \
     aPic/aLayer_i.cpp \
     aPic/aLayer_rgba.cpp \
+    aPic/aPicBuffer.cpp \
     aUtil/Cmds/aCmd.cpp \
     aUtil/Cmds/aCmdBase.cpp \
     aUtil/Cmds/aCmdMgr.cpp \
