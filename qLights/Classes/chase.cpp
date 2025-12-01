@@ -26,26 +26,16 @@
 * Chase::Chase
 *******************************************************************************/
 Chase::Chase(const QString              &_sName,
-             bool                       _bBlackStart)
-             // const vector<QString>      &_vFixture,
-             // const vector<stChaseStep>  &_vSteps)
+             bool                       _bBlackStart,
+             bool                       _bCycle,
+             const vector<stChaseStep>  &_vSteps)
 : m_sName(_sName),
-  m_bBlackStart(_bBlackStart)
-  //m_vSteps(_vSteps)
+  m_bBlackStart(_bBlackStart),
+  m_bCycle(_bCycle),
+  m_vSteps(_vSteps)
 {
-    // store affected fixtures
-    // for (const QString &_sFix : _vFixture)
-    // {
-    //     shared_ptr<Fixture> pFix = MainWin::instance()->findFixture(_sFix);
-
-    //     if (pFix)
-    //     {
-    //         m_vAffectedFixtures.push_back(pFix);
-    //     }
-    // }
-
-    // // create steps for activation
-    // createRunSteps();
+    // create steps for activation
+    createRunSteps();
 
     // // connect the timer
     // connect(&m_timer, &QTimer::timeout, this, &Chase::onTimeout);
@@ -118,48 +108,60 @@ Chase::~Chase()
 /*******************************************************************************
 * Chase::createRunSteps
 *******************************************************************************/
-// void Chase::createRunSteps()
-// {
-//     MainWin                         *pMainWin   = MainWin::instance();
+void Chase::createRunSteps()
+{
+    MainWin                         *pMainWin   = MainWin::instance();
 
-//     // delete previous stuff
-//     m_vRunSteps.clear();
+    // delete previous stuff
+    m_vRunSteps.clear();
 
-//     // iterate over all chase steps
-//     int iStepCount = m_vSteps.size();
-//     for (int iStep = 0; iStep < iStepCount-1; iStep++)
-//     {
-//         stRunStep runStep;
-//         runStep.pStartScene     = pMainWin->findScene(m_vSteps.at(iStep).sSceneName);
-//         runStep.pEndScene       = pMainWin->findScene(m_vSteps.at(iStep + 1).sSceneName);
-//         runStep.u32Duration_ms  = m_vSteps.at(iStep).u32Duration_ms;
+    // iterate over all chase steps
+    int iStepCount = m_vSteps.size();
+    for (int iStep = 0; iStep < iStepCount-1; iStep++)
+    {
+        stRunStep runStep;
+        runStep.pStartScene     = pMainWin->findScene(m_vSteps.at(iStep).sSceneName);
+        runStep.pEndScene       = pMainWin->findScene(m_vSteps.at(iStep + 1).sSceneName);
+        // the scenes must exist
+        CHECK_PRE_CONDITION_VOID(runStep.pStartScene);
+        CHECK_PRE_CONDITION_VOID(runStep.pEndScene);
 
-//         // iterate over all fixtures
-//         for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
-//         {
-//             shared_ptr<Universe>    pU      = pFix->universe();
-//             s32                     adress  = pFix->adress();
+        runStep.u32Duration_ms  = m_vSteps.at(iStep).u32Duration_ms;
 
-//             // iterate over all channels in the fixture
-//             const vector<shared_ptr<Channel>> &vChannel = pFix->device()->channel();
-//             for (const shared_ptr<Channel> &pChannel : vChannel)
-//             {
-//                 float startValue   = static_cast<float> (runStep.pStartScene->channelValue(pU, adress, pChannel->nr()));
-//                 float endValue     = static_cast<float> (runStep.pEndScene->channelValue(pU, adress, pChannel->nr()));
+        // find all fixtures which are in both scenes
+        const vector<shared_ptr<Fixture>>   &vStartFix = runStep.pStartScene->fixtures();
+        for (shared_ptr<Fixture> pStartFix : vStartFix)
+        {
+            if (runStep.pEndScene->hasFixture(pStartFix))
+            {
+                // get the cahnnel values of the start channel
+                const mapChannelValue *pStartValues = runStep.pStartScene->findChannelValues(pStartFix);
 
-//                 if (startValue != endValue)
-//                 {
-//                     stChannelStep channelStep { pU, adress, pChannel, startValue, endValue };
+                for (const auto &me : *pStartValues)
+                {
+                    int iChannelNr = me.first;
+                    int iStartValue = me.second;
+                    int iEndValue = runStep.pEndScene->channelValue(pStartFix, iChannelNr);
 
-//                     runStep.vChannelStep.push_back(channelStep);
-//                 }
-//             }
-//         }
+                    // start value of this fixture and channel != endvalue => add as a channel step
+                    if (iStartValue != iEndValue)
+                    {
+                        stChannelStep cs;
+                        cs.pFixture = pStartFix;
+                        cs.pChannel = pStartFix->findChannel(iChannelNr);
+                        cs.fStartValue = iStartValue;
+                        cs.fEndValue = iEndValue;
 
-//         m_vRunSteps.push_back(runStep);
-//     }
+                        runStep.vChannelStep.push_back(cs);
+                    }
 
-// } // Chase::createRunSteps
+                }
+            }
+        }
+
+        m_vRunSteps.push_back(runStep);
+    }
+} // Chase::createRunSteps
 
 
 /*******************************************************************************

@@ -82,20 +82,11 @@ void ChaseButton::onAssignChase()
     {
         QString             sChaseName  = dlg.name();
         bool                bBlackStart = dlg.isBlackStart();
-        vector<QString>     vFixture    = dlg.fixtureNames();
+        bool                bCycle      = dlg.isCycle();
         vector<stChaseStep> vSteps      = dlg.chaseSteps();
 
         // create the chase
-        shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart);//, vFixture, vSteps);
-
-        // iterate over all steps
-        for (const stChaseStep &step : vSteps)
-        {
-            if (step.u32Duration_ms == 0)
-            {
-
-            }
-        }
+        shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, bCycle, vSteps);
 
         MainWin::instance()->assignChase(this, pChase);
     }

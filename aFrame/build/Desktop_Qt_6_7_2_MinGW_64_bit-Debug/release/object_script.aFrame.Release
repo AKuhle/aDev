@@ -24,6 +24,7 @@ release/aChannel_i.o
 release/aLayerStack_i.o
 release/aLayer_i.o
 release/aLayer_rgba.o
+release/aPicBuffer.o
 release/aCmd.o
 release/aCmdBase.o
 release/aCmdMgr.o

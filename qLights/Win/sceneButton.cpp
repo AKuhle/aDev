@@ -47,7 +47,21 @@ void SceneButton::setScene(shared_ptr<Scene> _pScene)
 {
     m_pScene = _pScene;
 
-    setText((m_pScene)?   m_pScene->name() : "");
+    if (m_pScene)
+    {
+        if (m_pScene->isBlackStart())
+        {
+            setText(QString("!   ") + m_pScene->name());
+        }
+        else
+        {
+            setText(m_pScene->name());
+        }
+    }
+    else
+    {
+        setText("");
+    }
 } // SceneButton::setScene
 
 

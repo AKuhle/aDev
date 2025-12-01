@@ -41,8 +41,7 @@ class DlgChase : public QDialog
         QString                         name() const;
 
         bool                            isBlackStart() const;
-
-        vector<QString>                 fixtureNames() const;
+        bool                            isCycle() const;
 
         vector<stChaseStep>             chaseSteps() const;
 
@@ -53,9 +52,6 @@ class DlgChase : public QDialog
         virtual void                    reject();
 
     private slots:
-        void                            onAddFixture(bool _bChecked);
-        void                            onRemoveFixture(bool _bChecked);
-
         void                            onAddScene(bool _bChecked);
         void                            onRemoveScene(bool _bChecked);
 }; // class DlgChase

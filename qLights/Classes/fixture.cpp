@@ -65,6 +65,28 @@ Fixture::~Fixture()
 
 
 /*******************************************************************************
+* Fixture::findChannel
+*******************************************************************************/
+shared_ptr<Channel> Fixture::findChannel(s32 _s32ChannelNr) const
+{
+    auto it = std::find_if(m_vChannel.begin(),
+                           m_vChannel.end(),
+                           [_s32ChannelNr](const shared_ptr<Channel> &ch)
+                           {
+                               return ch->nr() == _s32ChannelNr;
+                           });
+
+    if (it != m_vChannel.end())
+    {
+        // Channel found
+        return *it;
+    }
+
+    return nullptr;
+} // Fixture::findChannel
+
+
+/*******************************************************************************
 * Fixture::setChannelValue
 *******************************************************************************/
 void Fixture::setChannelValue(shared_ptr<Channel>   _pChannel,
@@ -80,14 +102,52 @@ void Fixture::setChannelValue(shared_ptr<Channel>   _pChannel,
 
     if (_pChannel->isBrightnessChannel())
     {
-        // brightness channel => take master brightness into account
-        dbl dMaster = static_cast<dbl> (MainWin::instance()->masterBrightness());
-        dValue *= dMaster / 255.;
-
+        if (m_bSwitchedOff)
+        {
+            dValue = 0;
+        }
+        else
+        {
+            // brightness channel => take master brightness into account
+            dbl dMaster = static_cast<dbl> (MainWin::instance()->masterBrightness());
+            dValue *= dMaster / 255.;
+        }
     }
 
     m_pUniverse->setDmxValue(m_s32Adress, _pChannel->nr(), static_cast<u8> (dValue));
 } // Fixture::setChannelValue
+
+
+/*******************************************************************************
+* Fixture::switchOn
+*******************************************************************************/
+void Fixture::switchOn()
+{
+    // set the off flag and and set the channel value of the brightness channel
+    // again. This set the universe value to correct brightness value
+    if (m_pChannelBright)
+    {
+        m_bSwitchedOff = false;
+
+        setChannelValue(m_pChannelBright, m_pChannelBright->channelValue());
+    }
+} // Fixture::switchOn
+
+
+/*******************************************************************************
+* Fixture::switchOff
+*******************************************************************************/
+void Fixture::switchOff()
+{
+    // set the off flag and and set the channel value of the brightness channel
+    // again. This set the universe value to 0
+    if (m_pChannelBright)
+    {
+        m_bSwitchedOff = true;
+
+        setChannelValue(m_pChannelBright, m_pChannelBright->channelValue());
+    }
+} // Fixture::switchOff
 
 
 /*******************************************************************************

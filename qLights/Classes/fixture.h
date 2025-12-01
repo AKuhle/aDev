@@ -41,9 +41,8 @@ class Fixture
         s32                         m_s32Adress             { 1 };
         vector<shared_ptr<Channel>> m_vChannel;
         shared_ptr<Channel>         m_pChannelBright;   // for efficiency
+        bool                        m_bSwitchedOff          { false };
 
-        // bool                    m_bOverrideBrightness   { false };
-        // u8                      m_u8LastBrightness;
 
     public:
         Fixture(const QString           &_sName,
@@ -64,10 +63,15 @@ class Fixture
         s32                                 adress() const                                  { return m_s32Adress; }
         void                                setAdress(s32 _s32Adress)                       { m_s32Adress = _s32Adress; }
 
-        const vector<shared_ptr<Channel>>&  channel() const                                { return m_vChannel; }
+        const vector<shared_ptr<Channel>>&  channels() const                                { return m_vChannel; }
+        shared_ptr<Channel>                 findChannel(s32 _s32ChannelNr) const;
 
         void                                setChannelValue(shared_ptr<Channel> _pChannel,
                                                             u8                  _u8Value);
+
+        void                                switchOn();
+        void                                switchOff();
+
 
         // set/ returns a map with channel nr and according channel values for
         // all channels of the fixture

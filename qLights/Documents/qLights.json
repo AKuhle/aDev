@@ -105,10 +105,24 @@
   },
   "chases": {
     "0-0": {
-      "name": "-"
+      "black_start": 1,
+      "cycle": 0,
+      "name": "black ncc 444 b1",
+      "no_of_chase_steps": 2,
+      "step0": {
+        "duration": 1200,
+        "scene_name": "Bridge 1"
+      },
+      "step1": {
+        "duration": 0,
+        "scene_name": "Bridge 2"
+      }
     },
     "0-1": {
-      "name": "-"
+      "black_start": 1,
+      "cycle": 0,
+      "name": "cycle b1 555 b2",
+      "no_of_chase_steps": 0
     },
     "0-10": {
       "name": "-"
@@ -802,7 +816,7 @@
   },
   "scenes": {
     "0-0": {
-      "black_start": 0,
+      "black_start": 1,
       "fixture-0": {
         "channel-0": 0,
         "channel-1": 21,
@@ -1009,13 +1023,13 @@
     "0-3": {
       "black_start": 0,
       "fixture-0": {
+        "channel-0": 0,
         "channel-1": 137,
         "channel-10": 40,
         "channel-11": 0,
         "channel-12": 255,
+        "channel-13": 0,
         "channel-14": 0,
-        "channel-15": 0,
-        "channel-16": 0,
         "channel-2": 0,
         "channel-3": 72,
         "channel-4": 0,
@@ -1028,13 +1042,13 @@
         "fixture_name": "Washer left"
       },
       "fixture-1": {
+        "channel-0": 0,
         "channel-1": 132,
         "channel-10": 13,
         "channel-11": 0,
         "channel-12": 214,
+        "channel-13": 0,
         "channel-14": 0,
-        "channel-15": 0,
-        "channel-16": 0,
         "channel-2": 0,
         "channel-3": 71,
         "channel-4": 0,
@@ -1047,13 +1061,13 @@
         "fixture_name": "Washer center"
       },
       "fixture-2": {
+        "channel-0": 0,
         "channel-1": 125,
         "channel-10": 0,
         "channel-11": 0,
         "channel-12": 255,
+        "channel-13": 0,
         "channel-14": 0,
-        "channel-15": 0,
-        "channel-16": 0,
         "channel-2": 0,
         "channel-3": 82,
         "channel-4": 0,
@@ -1066,13 +1080,13 @@
         "fixture_name": "Washer right"
       },
       "fixture-3": {
+        "channel-0": 0,
         "channel-1": 33,
         "channel-10": 33,
         "channel-11": 202,
         "channel-12": 255,
         "channel-13": 137,
         "channel-14": 0,
-        "channel-15": 0,
         "channel-2": 0,
         "channel-3": 59,
         "channel-4": 0,

@@ -249,12 +249,14 @@ class MainWin : public QMainWindow
         void                        onSceneSelector_3(bool _bChecked);
         void                        onSceneSelector_4(bool _bChecked);
         void                        onSceneSelector_5(bool _bChecked);
+        void                        onClearScenes(bool _bChecked);
 
         void                        onChaseSelector_1(bool _bChecked);
         void                        onChaseSelector_2(bool _bChecked);
         void                        onChaseSelector_3(bool _bChecked);
         void                        onChaseSelector_4(bool _bChecked);
         void                        onChaseSelector_5(bool _bChecked);
+        void                        onClearChases(bool _bChecked);
 
         void                        onFaderIn_1s(bool _bChecked);
         void                        onFaderIn_2s(bool _bChecked);

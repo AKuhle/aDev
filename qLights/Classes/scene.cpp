@@ -15,6 +15,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QTimer>
+
 #include "scene.h"
 #include "universe.h"
 #include "fixture.h"
@@ -57,6 +59,17 @@ void Scene::addFixture(shared_ptr<Fixture>      _pFixture,
 
 
 /*******************************************************************************
+* Scene::hasFixture
+*******************************************************************************/
+bool Scene::hasFixture(shared_ptr<Fixture> _pFixture) const
+{
+    return std::find(m_vAffectedFixtures.begin(),
+                     m_vAffectedFixtures.end(),
+                     _pFixture) != m_vAffectedFixtures.end();
+} // Scene::hasFixture
+
+
+/*******************************************************************************
 * Scene::updateFixtures
 *******************************************************************************/
 void Scene::updateFixtures() const
@@ -64,6 +77,12 @@ void Scene::updateFixtures() const
     // iterate over all fixtures
     for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
     {
+        // black start -> switch fixture off
+        if (isBlackStart())
+        {
+            pFix->switchOff();
+        }
+
         auto it = m_mapFixtureValues.find(pFix);
 
         if (it != m_mapFixtureValues.end())
@@ -74,7 +93,40 @@ void Scene::updateFixtures() const
 
     // update the faders, thei maybe have changed
     MainWin::instance()->updateFaders();
+
+    // black start -> switch fixture on after 2 seconds
+    if (isBlackStart())
+    {
+        QTimer::singleShot(BLACK_START_TIME_MS, this, SLOT(switchFixturesOn()));
+    }
 } // Scene::updateFixtures
+
+
+/*******************************************************************************
+* Scene::channelValue
+*******************************************************************************/
+u8 Scene::channelValue(shared_ptr<Fixture>    _pFixture,
+                       s32                    _s32ChannelNr) const
+{
+    // find the map entry
+    auto itMap = m_mapFixtureValues.find(_pFixture);
+
+    if (itMap != m_mapFixtureValues.end())
+    {
+        // Entry found
+        const mapChannelValue &values = itMap->second;
+
+        // find the channel
+        auto itChannel = values.find(_s32ChannelNr);
+
+        if (itChannel != values.end())
+        {
+            return itChannel->second;
+        }
+    }
+
+    return 0;
+} // Scene::channelValue
 
 
 /*******************************************************************************
@@ -87,3 +139,16 @@ const mapChannelValue* Scene::findChannelValues(const shared_ptr<Fixture> &_pFix
 
     return (it != m_mapFixtureValues.end())?   &(it->second) : nullptr;
 } // Scene::findChannelValues
+
+
+/*******************************************************************************
+* Scene::switchFixturesOn
+*******************************************************************************/
+void Scene::switchFixturesOn() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        pFix->switchOn();
+    }
+} // Scene::switchFixturesOn

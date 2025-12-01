@@ -34,28 +34,27 @@ class Chase : public QObject
     Q_OBJECT
 
     private:
-        // struct stChannelStep
-        // {
-        //     shared_ptr<Universe>    pUniverse;
-        //     s32                     s32FixtureAdress;
-        //     shared_ptr<Channel>     pChannel;
-        //     float                   fStartValue;
-        //     float                   fEndValue;
-        // }; // stChannelStep
+        struct stChannelStep
+        {
+            shared_ptr<Fixture>     pFixture;
+            shared_ptr<Channel>     pChannel;
+            float                   fStartValue;
+            float                   fEndValue;
+        }; // stChannelStep
 
-        // struct stRunStep
-        // {
-        //     shared_ptr<Scene>           pStartScene;
-        //     shared_ptr<Scene>           pEndScene;
-        //     u32                         u32Duration_ms;
-        //     vector<stChannelStep>       vChannelStep;
-        // }; // stRunStep
+        struct stRunStep
+        {
+            shared_ptr<Scene>           pStartScene;
+            shared_ptr<Scene>           pEndScene;
+            u32                         u32Duration_ms;
+            vector<stChannelStep>       vChannelStep;
+        }; // stRunStep
 
         QString                     m_sName;
         bool                        m_bBlackStart       { false };
-        // vector<stChaseStep>         m_vSteps;
-        // vector<stRunStep>           m_vRunSteps;
-        // vector<shared_ptr<Fixture>> m_vAffectedFixtures;
+        bool                        m_bCycle            { false };
+        vector<stChaseStep>         m_vSteps;
+        vector<stRunStep>           m_vRunSteps;
 
         // member for running the chase
         // QTimer                      m_timer;
@@ -66,9 +65,9 @@ class Chase : public QObject
 
     public:
         Chase(const QString             &_sName,
-              bool                      _bBlackStart);
-              // const vector<QString>     &_vFixture,
-              // const vector<stChaseStep> &_vSteps);
+              bool                      _bBlackStart,
+              bool                      _bCycle,
+              const vector<stChaseStep> &_vSteps);
 
         ~Chase();
 
@@ -76,10 +75,13 @@ class Chase : public QObject
 
         //const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
 
-        // const vector<stChaseStep>&          chaseSteps() const                  { return m_vSteps; }
+        const vector<stChaseStep>&          chaseSteps() const                  { return m_vSteps; }
 
         bool                                isBlackStart() const                { return m_bBlackStart; }
         void                                setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
+
+        bool                                isCycle() const                     { return m_bCycle; }
+        void                                setCycle(bool _bCycle)              { m_bCycle = _bCycle; }
 
         // bool                                isSceneInChase(const QString &_sName);
 
@@ -87,7 +89,7 @@ class Chase : public QObject
 
 
     private:
-        // void                                createRunSteps();
+        void                                createRunSteps();
         // void                                executeRunStep(const stRunStep &_stRunStep);
 
     private slots:

@@ -236,35 +236,25 @@ void MainWin::onFileOpen()
 
             if (sChaseName != "-")
             {
-                // vector<QString>         vFixture;
-                // vector<stChaseStep>     vSteps;
+                vector<stChaseStep>     vSteps;
 
                 // load the blackStart
                 bool bBlackStart = f.readBoolValue(sKey + ":black_start");
+                bool bCycle = f.readBoolValue(sKey + ":cycle");
 
-                // // read the number of fixtures
-                // int iFixturesCount = f.readIntValue(sKey + ":no_of_fixtures");
-                // // read the fixture names
-                // for (int iFix = 0; iFix < iFixturesCount; iFix++)
-                // {
-                //     QString sFixName = f.readStringValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name").toQString();
+                // read the number of steps
+                int iSteps = f.readIntValue(sKey + ":no_of_chase_steps");
+                // read the steps
+                for (int i = 0; i < iSteps; i++)
+                {
+                     QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":scene_name").toQString();
+                     int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
 
-                //     vFixture.push_back(sFixName);
-                // }
-
-                // // read the number of steps
-                // int iSteps = f.readIntValue(sKey + ":no_of_steps");
-                // // read the steps
-                // for (int i = 0; i < iSteps; i++)
-                // {
-                //     QString sSceneName = f.readStringValue(sKey + ":step" + aString::fromValue(i) + ":scene_name").toQString();
-                //     int iDuration_ms = f.readIntValue(sKey + ":step" + aString::fromValue(i) + ":duration");
-
-                //     vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
-                // }
+                     vSteps.push_back(stChaseStep { sSceneName, static_cast<u32> (iDuration_ms) } );
+                }
 
                 // create the chase
-                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart);//, vFixture, vSteps);
+                shared_ptr<Chase> pChase = make_shared<Chase> (sChaseName, bBlackStart, bCycle, vSteps);
                 chaseBtn.pBtn->setChase(pChase);
                 chaseBtn.pChase = pChase;
             }
@@ -482,33 +472,24 @@ void MainWin::onFileSave()
 
             if (pChase)
             {
-                // const vector<shared_ptr<Fixture>>   &vFix = pChase->fixtures();
-                // const vector<stChaseStep>           &vSteps = pChase->chaseSteps();
-                // int                                 iStep   = 0;
-                // int                                 iFix   = 0;
+                const vector<stChaseStep>   &vSteps = pChase->chaseSteps();
+                int                         iStep   = 0;
 
                 // save the chase name
                 f.addValue(sKey + ":name", aString::fromQString(pChase->name()));
 
                 // save the blackStart
                 f.addValue(sKey + ":black_start", pChase->isBlackStart());
+                f.addValue(sKey + ":cycle", pChase->isCycle());
 
-                // // save number of fixtures and the names
-                // f.addValue(sKey + ":no_of_fixtures", (int) vFix.size());
-                // for (const shared_ptr<Fixture> &pFix : vFix)
-                // {
-                //     f.addValue(sKey + ":fixture" + aString::fromValue(iFix) + ":name", aString::fromQString(pFix->name()));
-                //     iFix++;
-                // }
-
-                // // save number of chase steps and the steps
-                // f.addValue(sKey + ":no_of_steps", (int) vSteps.size());
-                // for (const stChaseStep &step : vSteps)
-                // {
-                //     f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":scene_name", aString::fromQString(step.sSceneName));
-                //     f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
-                //     iStep++;
-                // }
+                // save number of chase steps and the steps
+                f.addValue(sKey + ":no_of_chase_steps", (int) vSteps.size());
+                for (const stChaseStep &step : vSteps)
+                {
+                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":scene_name", aString::fromQString(step.sSceneName));
+                    f.addValue(sKey + ":step" + aString::fromValue(iStep) + ":duration", (int) step.u32Duration_ms);
+                    iStep++;
+                }
             }
             else
             {
@@ -877,6 +858,13 @@ void MainWin::onBankSelector_5(bool /*_bChecked*/)
 *******************************************************************************/
 void MainWin::onClearBank(bool /*_bChecked*/)
 {
+    // confirm deletion
+    if (QMessageBox::question(this, "Delete Fixtures", "Really delete all\nfixtures in this set?",
+                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+    {
+        return;
+    }
+
     vector<stBankBtn> &vBankBtn = m_vvBankButtons.at(m_s32ActiveBank);
 
     for (stBankBtn &bankBtn : vBankBtn)
@@ -963,6 +951,30 @@ void MainWin::onSceneSelector_5(bool /*_bChecked*/)
 
 
 /*******************************************************************************
+* MainWin::onClearScenes
+*******************************************************************************/
+void MainWin::onClearScenes(bool /*_bChecked*/)
+{
+    // confirm deletion
+    if (QMessageBox::question(this, "Delete Scenes", "Really delete all\nscenes in this set?",
+                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+    {
+        return;
+    }
+
+    vector<stSceneBtn> &vSceneBtn = m_vvSceneButtons.at(m_s32ActiveScene);
+
+    for (stSceneBtn &sceneBtn : vSceneBtn)
+    {
+        sceneBtn.pBtn->setScene(nullptr);
+        sceneBtn.pScene = nullptr;
+    }
+
+    updateSceneButtons();
+} // MainWin::onClearScenes
+
+
+/*******************************************************************************
 * MainWin::onChaseSelector_1
 *******************************************************************************/
 void MainWin::onChaseSelector_1(bool /*_bChecked*/)
@@ -1010,6 +1022,30 @@ void MainWin::onChaseSelector_5(bool /*_bChecked*/)
     m_s32ActiveChase = CHASE_5;
     updateChaseButtons();
 } // MainWin::onChaseSelector_5
+
+
+/*******************************************************************************
+* MainWin::onClearChases
+*******************************************************************************/
+void MainWin::onClearChases(bool /*_bChecked*/)
+{
+    // confirm deletion
+    if (QMessageBox::question(this, "Delete Chases", "Really delete all\nchases in this set?",
+                              QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
+    {
+        return;
+    }
+
+    vector<stChaseBtn> &vChaseBtn = m_vvChaseButtons.at(m_s32ActiveChase);
+
+    for (stChaseBtn &chaseBtn : vChaseBtn)
+    {
+        chaseBtn.pBtn->setChase(nullptr);
+        chaseBtn.pChase = nullptr;
+    }
+
+    updateChaseButtons();
+} // MainWin::onClearChases
 
 
 /*******************************************************************************

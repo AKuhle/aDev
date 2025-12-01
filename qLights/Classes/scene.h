@@ -16,6 +16,8 @@
 /*******************************************************************************
 * includes
 *******************************************************************************/
+#include <QObject>
+
 #include "qLights_def.h"
 
 #include <QByteArray>
@@ -31,8 +33,10 @@ class Universe;
 /*******************************************************************************
 * class Scene
 *******************************************************************************/
-class Scene
+class Scene : public QObject
 {
+    Q_OBJECT
+
     private:
         QString                                         m_sName;
         bool                                            m_bBlackStart           { false };
@@ -54,9 +58,17 @@ class Scene
         void                                addFixture(shared_ptr<Fixture>      _pFixture,
                                                        const mapChannelValue    &_channelValue);
         const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
+        bool                                hasFixture(shared_ptr<Fixture> _pFixture) const;
 
         void                                updateFixtures() const;
 
+        u8                                  channelValue(shared_ptr<Fixture>    _pFixture,
+                                                         s32                    _s32ChannelNr) const;
+
         const mapChannelValue*              findChannelValues(const shared_ptr<Fixture> &_pFixture) const;
+
+
+    private slots:
+        void                                switchFixturesOn() const;
 
 }; // class Scene

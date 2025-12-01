@@ -82,6 +82,7 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pSceneSelector_3, &QPushButton::clicked, this, &MainWin::onSceneSelector_3);
     connect(m_pUi->m_pSceneSelector_4, &QPushButton::clicked, this, &MainWin::onSceneSelector_4);
     connect(m_pUi->m_pSceneSelector_5, &QPushButton::clicked, this, &MainWin::onSceneSelector_5);
+    connect(m_pUi->m_pClearScenes, &QPushButton::clicked, this, &MainWin::onClearScenes);
 
     // connect the Chase buttons
     connect(m_pUi->m_pChaseSelector_1, &QPushButton::clicked, this, &MainWin::onChaseSelector_1);
@@ -89,6 +90,7 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pChaseSelector_3, &QPushButton::clicked, this, &MainWin::onChaseSelector_3);
     connect(m_pUi->m_pChaseSelector_4, &QPushButton::clicked, this, &MainWin::onChaseSelector_4);
     connect(m_pUi->m_pChaseSelector_5, &QPushButton::clicked, this, &MainWin::onChaseSelector_5);
+    connect(m_pUi->m_pClearChases, &QPushButton::clicked, this, &MainWin::onClearChases);
 
     // connect the fader buttons
     connect(m_pUi->m_pFadeIn_1s, &QPushButton::clicked, this, &MainWin::onFaderIn_1s);
@@ -802,7 +804,7 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
     {
         if (_pFixture)
         {
-            const vector<shared_ptr<Channel>> &vChannel = _pFixture->channel();
+            const vector<shared_ptr<Channel>> &vChannel = _pFixture->channels();
 
             auto it = std::find_if(vChannel.begin(), vChannel.end(),
                                    [iChannelIdx](const std::shared_ptr<Channel> &ch)
