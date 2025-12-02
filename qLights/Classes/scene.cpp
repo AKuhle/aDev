@@ -70,15 +70,15 @@ bool Scene::hasFixture(shared_ptr<Fixture> _pFixture) const
 
 
 /*******************************************************************************
-* Scene::updateFixtures
+* Scene::showScene
 *******************************************************************************/
-void Scene::updateFixtures() const
+void Scene::showScene(bool _bIgnoreBlackStart) const
 {
     // iterate over all fixtures
     for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
     {
         // black start -> switch fixture off
-        if (isBlackStart())
+        if (!_bIgnoreBlackStart && isBlackStart())
         {
             pFix->switchOff();
         }
@@ -91,15 +91,49 @@ void Scene::updateFixtures() const
         }
     }
 
-    // update the faders, thei maybe have changed
+    // update the faders, they maybe have changed
     MainWin::instance()->updateFaders();
 
-    // black start -> switch fixture on after 2 seconds
-    if (isBlackStart())
+    // black start -> switch fixture on after BLACK_START_TIME_MS (2 seconds)
+    if (!_bIgnoreBlackStart && isBlackStart())
     {
         QTimer::singleShot(BLACK_START_TIME_MS, this, SLOT(switchFixturesOn()));
     }
-} // Scene::updateFixtures
+} // Scene::showScene
+
+
+/*******************************************************************************
+* Scene::switchAllFixturesOff
+*******************************************************************************/
+void Scene::switchAllFixturesOff() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        pFix->switchOff();
+    }
+
+    // update the faders, they maybe have changed
+    MainWin::instance()->updateFaders();
+
+} // Scene::switchAllFixturesOff
+
+
+/*******************************************************************************
+* Scene::switchAllFixturesOn
+*******************************************************************************/
+void Scene::switchAllFixturesOn() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        pFix->switchOn();
+    }
+
+    // update the faders, they maybe have changed
+    MainWin::instance()->updateFaders();
+
+} // Scene::switchAllFixturesOn
 
 
 /*******************************************************************************

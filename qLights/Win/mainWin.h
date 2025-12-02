@@ -211,11 +211,17 @@ class MainWin : public QMainWindow
         void                        onStartFaderOut(int    _iSteps,
                                                     int    _iDuration_ms);
 
+        void                        openFile(aPath _path);
+        void                        saveFile(aPath _path);
+
+
 
     private slots:
         // ctrl-bar
         void                        onFileOpen();
         void                        onFileSave();
+        void                        onBackupOpen();
+        void                        onBackupSave();
         void                        onPanel();
         void                        onShowValues();
 

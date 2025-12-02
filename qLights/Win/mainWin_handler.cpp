@@ -30,6 +30,64 @@ using namespace aFrame::aUtil;
 *******************************************************************************/
 void MainWin::onFileOpen()
 {
+    // set the path for the configuration
+    // aPath       sPath   = get_appPath();
+    // sPath.append("qLights.json");
+
+    aPath sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
+
+    openFile(sPath);
+} // onFileOpen
+
+
+/*******************************************************************************
+* MainWin::onFileSave
+*******************************************************************************/
+void MainWin::onFileSave()
+{
+    // aPath       sPath   = get_appPath();
+    // sPath.append("qLights.json");
+
+    aPath sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
+
+    saveFile(sPath);
+} // MainWin::onFileSave
+
+
+/*******************************************************************************
+* MainWin::onBackupOpen
+*******************************************************************************/
+void MainWin::onBackupOpen()
+{
+    // set the path for the configuration
+    // aPath       sPath   = get_appPath();
+    // sPath.append("qLights.json");
+
+    aPath sPath = "C:/Tools/aDev/qLights/Documents/qLightsBup.json";
+
+    openFile(sPath);
+} // onBackupOpen
+
+
+/*******************************************************************************
+* MainWin::onBackupSave
+*******************************************************************************/
+void MainWin::onBackupSave()
+{
+    // aPath       sPath   = get_appPath();
+    // sPath.append("qLights.json");
+
+    aPath sPath = "C:/Tools/aDev/qLights/Documents/qLightsBup.json";
+
+    saveFile(sPath);
+} // MainWin::onBackupSave
+
+
+/*******************************************************************************
+* MainWin::openFile
+*******************************************************************************/
+void MainWin::openFile(aPath _path)
+{
     // ask for loading
     if (QMessageBox::question(this, "Load", "Replace Current Configuration?",
                               QMessageBox::Yes | QMessageBox::No) == QMessageBox::No)
@@ -40,12 +98,7 @@ void MainWin::onFileOpen()
     aJsonFile   f;
     s32         count, idx;
 
-    // set the path for the configuration
-    aPath       sPath   = get_appPath();
-    sPath.append("qLights.json");
-    sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
-
-    if (f.readJsonFile(sPath))
+    if (f.readJsonFile(_path))
     {
         // reset the current gui
         initGui();
@@ -264,13 +317,13 @@ void MainWin::onFileOpen()
     // reset all universes and update all
     resetAllUniverses();
     updateAll();
-} // MainWin::onFileOpen
+} // MainWin::openFile
 
 
 /*******************************************************************************
-* MainWin::onFileSave
+* MainWin::saveFile
 *******************************************************************************/
-void MainWin::onFileSave()
+void MainWin::saveFile(aPath _path)
 {
     // ask for saving
     if (QMessageBox::question(this, "Save", "Overwrite Configuration?",
@@ -281,11 +334,6 @@ void MainWin::onFileSave()
 
     aJsonFile   f;
     s32         idx;
-
-    // set the path for the configuration
-    aPath       sPath   = get_appPath();
-    sPath.append("qLights.json");
-    sPath = "C:/Tools/aDev/qLights/Documents/qLights.json";
 
     // save the controllers
     f.addValue(aString("controller:count"), (int) m_lstController.size());
@@ -500,8 +548,8 @@ void MainWin::onFileSave()
     }
 
     // write the file to disk
-    f.writeJsonFile(sPath);
-} // MainWin::onFileSave
+    f.writeJsonFile(_path);
+} // MainWin::saveFile
 
 
 /*******************************************************************************

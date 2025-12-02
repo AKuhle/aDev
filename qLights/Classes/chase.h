@@ -46,22 +46,22 @@ class Chase : public QObject
         {
             shared_ptr<Scene>           pStartScene;
             shared_ptr<Scene>           pEndScene;
-            u32                         u32Duration_ms;
+            u32                         u32Duration_ms  { 0 };
             vector<stChannelStep>       vChannelStep;
         }; // stRunStep
 
         QString                     m_sName;
         bool                        m_bBlackStart       { false };
         bool                        m_bCycle            { false };
-        vector<stChaseStep>         m_vSteps;
+        vector<stChaseStep>         m_vChaseSteps;
         vector<stRunStep>           m_vRunSteps;
 
         // member for running the chase
-        // QTimer                      m_timer;
-        // s32                         m_s32RunStepIdx;
-        // s32                         m_s32Steps;
-        // s32                         m_s32CurrentStep;
-        // const u32                   m_u32StepTime_ms    { UNIVERSE_UPDATE_TIME_MS };
+        s32                         m_s32RunStepIdx;
+        s32                         m_s32Steps;
+        s32                         m_s32CurrentStep;
+        bool                        m_bNeedToSwitchAllFixturesOn;
+        bool                        m_bChaseStopped;
 
     public:
         Chase(const QString             &_sName,
@@ -73,9 +73,7 @@ class Chase : public QObject
 
         QString                             name() const                        { return m_sName; }
 
-        //const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
-
-        const vector<stChaseStep>&          chaseSteps() const                  { return m_vSteps; }
+        const vector<stChaseStep>&          chaseSteps() const                  { return m_vChaseSteps; }
 
         bool                                isBlackStart() const                { return m_bBlackStart; }
         void                                setBlackStart(bool _bBlackStart)    { m_bBlackStart = _bBlackStart; }
@@ -83,15 +81,13 @@ class Chase : public QObject
         bool                                isCycle() const                     { return m_bCycle; }
         void                                setCycle(bool _bCycle)              { m_bCycle = _bCycle; }
 
-        // bool                                isSceneInChase(const QString &_sName);
-
-        // void                                startChase();
+        void                                startChase();
+        void                                stopChase();
 
 
     private:
         void                                createRunSteps();
-        // void                                executeRunStep(const stRunStep &_stRunStep);
 
     private slots:
-        // void                                onTimeout();
+        void                                onTimeout();
 }; // class Chase

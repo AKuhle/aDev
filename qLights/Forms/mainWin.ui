@@ -3409,7 +3409,15 @@
      <string>Device</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="m_pActionOpenBackupFile"/>
+    <addaction name="m_pActionSaveBackupFile"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuDevice"/>
   </widget>
   <widget class="QDockWidget" name="m_pPanelDock">
@@ -3943,6 +3951,22 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="m_pActionSaveBackupFile">
+   <property name="text">
+    <string>Save Backup File</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="m_pActionOpenBackupFile">
+   <property name="text">
+    <string>Open Backup File</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -3982,8 +4006,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../aFrame/Resource/aFrame.qrc"/>
   <include location="../Resource/qLights.qrc"/>
+  <include location="../../aFrame/Resource/aFrame.qrc"/>
  </resources>
  <connections/>
 </ui>

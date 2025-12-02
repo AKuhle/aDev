@@ -60,7 +60,9 @@ class Scene : public QObject
         const vector<shared_ptr<Fixture>>&  fixtures() const                    { return m_vAffectedFixtures; }
         bool                                hasFixture(shared_ptr<Fixture> _pFixture) const;
 
-        void                                updateFixtures() const;
+        void                                showScene(bool _bIgnoreBlackStart) const;
+        void                                switchAllFixturesOff() const;
+        void                                switchAllFixturesOn() const;
 
         u8                                  channelValue(shared_ptr<Fixture>    _pFixture,
                                                          s32                    _s32ChannelNr) const;

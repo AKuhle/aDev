@@ -44,6 +44,8 @@ MainWin::MainWin(QWidget *parent)
     // connect the toolbar stuff
     connect(m_pUi->m_pActionOpenFile, &QAction::triggered, this, &MainWin::onFileOpen);
     connect(m_pUi->m_pActionSaveFile, &QAction::triggered, this, &MainWin::onFileSave);
+    connect(m_pUi->m_pActionOpenBackupFile, &QAction::triggered, this, &MainWin::onBackupOpen);
+    connect(m_pUi->m_pActionSaveBackupFile, &QAction::triggered, this, &MainWin::onBackupSave);
     connect(m_pUi->m_pActionPanelDock, &QAction::triggered, this, &MainWin::onPanel);
     connect(m_pUi->m_pActionShowValues, &QAction::triggered, this, &MainWin::onShowValues);
 

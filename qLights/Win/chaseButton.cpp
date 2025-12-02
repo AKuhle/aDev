@@ -38,7 +38,7 @@ void ChaseButton::init()
 *******************************************************************************/
 ChaseButton::~ChaseButton()
 {
-} // ChaseButton::~ChaseButtonß
+} // ChaseButton::~ChaseButton
 
 
 /*******************************************************************************
@@ -48,7 +48,21 @@ void ChaseButton::setChase(shared_ptr<Chase> _pChase)
 {
     m_pChase = _pChase;
 
-    setText((m_pChase)?   m_pChase->name() : "");
+    if (m_pChase)
+    {
+        if (m_pChase->isBlackStart())
+        {
+            setText(QString("!   ") + m_pChase->name());
+        }
+        else
+        {
+            setText(m_pChase->name());
+        }
+    }
+    else
+    {
+        setText("");
+    }
 } // ChaseButton::setChase
 
 
@@ -107,8 +121,8 @@ void ChaseButton::onRemoveChase()
 *******************************************************************************/
 void ChaseButton::onClicked()
 {
-    // if (m_pChase)
-    // {
-    //     m_pChase->startChase();
-    // }
+    if (m_pChase)
+    {
+        m_pChase->startChase();
+    }
 } // ChaseButton::onClicked

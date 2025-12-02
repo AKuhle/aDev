@@ -32,7 +32,7 @@ Chase::Chase(const QString              &_sName,
 : m_sName(_sName),
   m_bBlackStart(_bBlackStart),
   m_bCycle(_bCycle),
-  m_vSteps(_vSteps)
+  m_vChaseSteps(_vSteps)
 {
     // create steps for activation
     createRunSteps();
@@ -56,53 +56,64 @@ Chase::~Chase()
 *******************************************************************************/
 // bool Chase::isSceneInChase(const QString &_sName)
 // {
-//     auto it = std::find_if(m_vSteps.begin(), m_vSteps.end(),
+//     auto it = std::find_if(m_vChaseSteps.begin(), m_vChaseSteps.end(),
 //         [_sName](const stChaseStep &step) { return step.sSceneName == _sName; });
 
-//     return it != m_vSteps.end();
+//     return it != m_vChaseSteps.end();
 // } // Chase::isSceneInChase
 
 
 /*******************************************************************************
 * Chase::startChase
 *******************************************************************************/
-// void Chase::startChase()
-// {
-//     CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 0);
+void Chase::startChase()
+{
+    CHECK_PRE_CONDITION_VOID(m_vRunSteps.size() > 0);
 
-//     // initialize the fixtures with the start scene
-//     for (shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
-//     {
-//         m_vRunSteps.at(0).pStartScene->applySceneData2Fixture(pFix);
-//     }
+    const stRunStep   &runStep = m_vRunSteps.at(0);
 
-//     // prepare the timer
-//     m_s32RunStepIdx = 0;
+    // mark the active chasebutton as activated
+    MainWin::instance()->activateChaseButton(this, true);
 
-//     // mark the active chasebutton as activated
-//     MainWin::instance()->activateChaseButton(this, true);
+    // starting a chase begins with setting the start scene
+    // if the chase has black start, we need to wait
+    // until the fixtures are beeing switched on
+    m_s32RunStepIdx = 0;
+    m_s32CurrentStep = 0;
+    m_bChaseStopped = false;
 
-//     // execute the first step
-//     executeRunStep(m_vRunSteps.at(0));
-// } // Chase::startChase
+    // decrease the nr of steps about 10% to compensate the time which
+    // is neccessary for the calculation.
+    // this matches the duration time for the chase better
+    m_s32Steps = runStep.u32Duration_ms / CHASE_UPDATE_TIME_MS;    // m_u32StepTime_ms for each step
+    m_s32Steps = max(1, static_cast<s32> (0.9 * m_s32Steps));
+
+    // start the timer for the first step.
+    // isBlackStart: the delay is BLACK_START_TIME_MS to ensure, that
+    // the fixtures are switches on again
+    if (isBlackStart())
+    {
+        m_bNeedToSwitchAllFixturesOn = true;
+        runStep.pStartScene->switchAllFixturesOff();
+        runStep.pStartScene->showScene(true);
+        QTimer::singleShot(BLACK_START_TIME_MS, this, SLOT(onTimeout()));
+    }
+    else
+    {
+        m_bNeedToSwitchAllFixturesOn = false;
+        runStep.pStartScene->showScene(true);
+        QTimer::singleShot(CHASE_UPDATE_TIME_MS, this, SLOT(onTimeout()));
+    }
+} // Chase::startChase
 
 
 /*******************************************************************************
-* Chase::executeRunStep
+* Chase::stopChase
 *******************************************************************************/
-// void Chase::executeRunStep(const stRunStep &_stRunStep)
-// {
-//     // prepare the timer
-//     m_s32CurrentStep = 0;
-
-//     // decrease the nr of steps about 10% to compensate the time
-//     // which is neccessary for the calculation.
-//     // this matches the duration time for the chase better
-//     m_s32Steps = _stRunStep.u32Duration_ms / m_u32StepTime_ms;    // m_u32StepTime_ms for each step
-//     m_s32Steps = static_cast<s32> (0.9 * m_s32Steps);
-
-//     m_timer.start(m_u32StepTime_ms);
-// } // Chase::executeRunStep
+void Chase::stopChase()
+{
+    m_bChaseStopped = true;
+} // Chase::stopChase
 
 
 /*******************************************************************************
@@ -112,53 +123,67 @@ void Chase::createRunSteps()
 {
     MainWin                         *pMainWin   = MainWin::instance();
 
+    int iChaseStepCount = m_vChaseSteps.size();
+    CHECK_PRE_CONDITION_VOID(iChaseStepCount > 0);
+
     // delete previous stuff
     m_vRunSteps.clear();
 
     // iterate over all chase steps
-    int iStepCount = m_vSteps.size();
-    for (int iStep = 0; iStep < iStepCount-1; iStep++)
+    for (int iChaseStep = 0; iChaseStep < iChaseStepCount; iChaseStep++)
     {
         stRunStep runStep;
-        runStep.pStartScene     = pMainWin->findScene(m_vSteps.at(iStep).sSceneName);
-        runStep.pEndScene       = pMainWin->findScene(m_vSteps.at(iStep + 1).sSceneName);
-        // the scenes must exist
-        CHECK_PRE_CONDITION_VOID(runStep.pStartScene);
-        CHECK_PRE_CONDITION_VOID(runStep.pEndScene);
 
-        runStep.u32Duration_ms  = m_vSteps.at(iStep).u32Duration_ms;
+        // the start scene must exist and has a duration (maybe = 0)
+        runStep.pStartScene     = pMainWin->findScene(m_vChaseSteps.at(iChaseStep).sSceneName);
+        runStep.u32Duration_ms  = m_vChaseSteps.at(iChaseStep).u32Duration_ms;
 
-        // find all fixtures which are in both scenes
-        const vector<shared_ptr<Fixture>>   &vStartFix = runStep.pStartScene->fixtures();
-        for (shared_ptr<Fixture> pStartFix : vStartFix)
+        if (iChaseStep == iChaseStepCount - 1)
         {
-            if (runStep.pEndScene->hasFixture(pStartFix))
+            // last chase step (probably just one chase step)
+            // => just set the start scene for the duration time
+        }
+        else
+        {
+            // not the last chase step => calculate the transition of the channels with different values
+
+            // set the end scene
+            runStep.pEndScene = pMainWin->findScene(m_vChaseSteps.at(iChaseStep + 1).sSceneName);
+
+            // find all fixtures which are in both scenes
+            const vector<shared_ptr<Fixture>>   &vStartFix = runStep.pStartScene->fixtures();
+            for (shared_ptr<Fixture> pStartFix : vStartFix)
             {
-                // get the cahnnel values of the start channel
-                const mapChannelValue *pStartValues = runStep.pStartScene->findChannelValues(pStartFix);
-
-                for (const auto &me : *pStartValues)
+                // check, if the end scene has the same fixture
+                if (runStep.pEndScene->hasFixture(pStartFix))
                 {
-                    int iChannelNr = me.first;
-                    int iStartValue = me.second;
-                    int iEndValue = runStep.pEndScene->channelValue(pStartFix, iChannelNr);
-
-                    // start value of this fixture and channel != endvalue => add as a channel step
-                    if (iStartValue != iEndValue)
+                    // iterate over all channels and find channels with different values
+                    const mapChannelValue *pStartValues = runStep.pStartScene->findChannelValues(pStartFix);
+                    for (const auto &me : *pStartValues)
                     {
-                        stChannelStep cs;
-                        cs.pFixture = pStartFix;
-                        cs.pChannel = pStartFix->findChannel(iChannelNr);
-                        cs.fStartValue = iStartValue;
-                        cs.fEndValue = iEndValue;
+                        int iChannelNr = me.first;
+                        int iStartValue = me.second;
+                        int iEndValue = runStep.pEndScene->channelValue(pStartFix, iChannelNr);
 
-                        runStep.vChannelStep.push_back(cs);
+                        // start value of this fixture and channel != endvalue => add as a channel step
+                        if (iStartValue != iEndValue)
+                        {
+                            stChannelStep cs;
+
+                            cs.pFixture = pStartFix;
+                            cs.pChannel = pStartFix->findChannel(iChannelNr);
+                            cs.fStartValue = iStartValue;
+                            cs.fEndValue = iEndValue;
+
+                            runStep.vChannelStep.push_back(cs);
+                        }
+
                     }
-
                 }
             }
-        }
+        } // else
 
+        // add the run step to vector of steps
         m_vRunSteps.push_back(runStep);
     }
 } // Chase::createRunSteps
@@ -167,45 +192,80 @@ void Chase::createRunSteps()
 /*******************************************************************************
 * Chase::onTimeout
 *******************************************************************************/
-// void Chase::onTimeout()
-// {
-//     const stRunStep &runStep = m_vRunSteps.at(m_s32RunStepIdx);
+void Chase::onTimeout()
+{
+    const stRunStep &runStep = m_vRunSteps.at(m_s32RunStepIdx);
 
-//     for (const stChannelStep &channelStep : runStep.vChannelStep)
-//     {
-//         float fDelta = channelStep.fEndValue - channelStep.fStartValue;
+    // check, whether the fixtures must be switched on
+    if (m_bNeedToSwitchAllFixturesOn)
+    {
+        runStep.pStartScene->switchAllFixturesOn();
+        m_bNeedToSwitchAllFixturesOn = false;
+    }
 
-//         float fNewValue = channelStep.fStartValue + ((float) m_s32CurrentStep) / m_s32Steps * fDelta;
+    // if the chase is stopped => simply break the processing
+    if (m_bChaseStopped)
+    {
+        // no more steps => mark the active chasebutton as activated
+        MainWin::instance()->activateChaseButton(this, false);
+    }
+    else
+    {
+        // increase the step counter
+        m_s32CurrentStep++;
 
-//         channelStep.pUniverse->setChannelValue(channelStep.s32FixtureAdress,
-//                                                channelStep.pChannel,
-//                                                static_cast<u8> (fNewValue));
-//     }
+        // iterate over all channels with different start-/endvalue and set the
+        // value for this step
+        for (const stChannelStep &channelStep : runStep.vChannelStep)
+        {
+            float fDelta = channelStep.fEndValue - channelStep.fStartValue;
 
-//     // update the faders
-//     MainWin::instance()->updateFaders();
+            float fNewValue = channelStep.fStartValue + ((float) m_s32CurrentStep) / m_s32Steps * fDelta;
 
-//     // start the next step
-//     if (m_s32CurrentStep < m_s32Steps)
-//     {
-//         m_s32CurrentStep++;
+            channelStep.pFixture->setChannelValue(channelStep.pChannel,
+                                                  static_cast<u8> (fNewValue));
+        }
 
-//         m_timer.start(m_u32StepTime_ms);
-//     }
-//     else
-//     {
-//         // scene end reached => move to next run step
-//         if (m_s32RunStepIdx < ((s32) m_vRunSteps.size()) - 1)
-//         {
-//             m_s32RunStepIdx++;
+        // start the next step
+        if (m_s32CurrentStep < m_s32Steps)
+        {
+            QTimer::singleShot(CHASE_UPDATE_TIME_MS, this, SLOT(onTimeout()));
+        }
+        else
+        {
+            // if there is only one step
+            // => switch all fixtures off
+            if (runStep.pEndScene == nullptr)
+            {
+                // last step is reached
+                if (isCycle())
+                {
+                    // => cycle mode: start from beginning
+                }
+                else
+                {
+                    // => no cycle: switch scene off
+                    runStep.pStartScene->switchAllFixturesOff();
 
-//             executeRunStep(m_vRunSteps.at(m_s32RunStepIdx));
-//         }
-//         else
-//         {
-//             // no more steps => mark the active chasebutton as activated
-//             MainWin::instance()->activateChaseButton(this, false);
-//         }
-//     }
+                    // no more steps => mark the active chasebutton as activated
+                    MainWin::instance()->activateChaseButton(this, false);
+                }
+            }
+            else
+            {
+                // last run step not reached => move to next run step
+                m_s32RunStepIdx++;
 
-// } // Chase::onTimeout
+                m_s32Steps = m_vRunSteps.at(m_s32RunStepIdx).u32Duration_ms / CHASE_UPDATE_TIME_MS;
+                m_s32Steps = max(1, static_cast<s32> (0.9 * m_s32Steps));
+                m_s32CurrentStep = 0;
+
+                QTimer::singleShot(CHASE_UPDATE_TIME_MS, this, SLOT(onTimeout()));
+            }
+        }
+
+        // update the faders, they maybe have changed
+        MainWin::instance()->updateFaders();
+    }
+
+} // Chase::onTimeout

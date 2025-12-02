@@ -117,6 +117,6 @@ void SceneButton::onClicked()
 {
     CHECK_PRE_CONDITION_VOID(m_pScene);
 
-    m_pScene->updateFixtures();
+    m_pScene->showScene(false);
 
 } // SceneButton::onClicked

@@ -49,6 +49,7 @@ using mapChannelValue = std::map<int, u8>;
 constexpr QColor            colDeviceImageBg(120, 120, 120);
 
 constexpr aFrame::u32       UNIVERSE_UPDATE_TIME_MS     { 50 };
+constexpr aFrame::u32       CHASE_UPDATE_TIME_MS        { 50 };
 constexpr aFrame::u32       BLACK_START_TIME_MS         { 2000 };
 
 constexpr aFrame::u32       DMX_DATA_SIZE               { 512 };
