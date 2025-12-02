@@ -137,6 +137,40 @@ void Scene::switchAllFixturesOn() const
 
 
 /*******************************************************************************
+* Scene::resetAllFixtures
+*******************************************************************************/
+void Scene::resetAllFixtures() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        pFix->resetFixture();
+    }
+
+    // update the faders, they maybe have changed
+    MainWin::instance()->updateFaders();
+
+} // Scene::resetAllFixtures
+
+
+/*******************************************************************************
+* Scene::setAllFixtureBrightness0
+*******************************************************************************/
+void Scene::setAllFixtureBrightness0() const
+{
+    // iterate over all fixtures
+    for (const shared_ptr<Fixture> &pFix : m_vAffectedFixtures)
+    {
+        pFix->setBrightness0();
+    }
+
+    // update the faders, they maybe have changed
+    MainWin::instance()->updateFaders();
+
+} // Scene::setAllFixtureBrightness0
+
+
+/*******************************************************************************
 * Scene::channelValue
 *******************************************************************************/
 u8 Scene::channelValue(shared_ptr<Fixture>    _pFixture,

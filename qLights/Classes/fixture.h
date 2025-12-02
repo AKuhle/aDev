@@ -78,6 +78,7 @@ class Fixture
         mapChannelValue                     channelValues() const;
         void                                setChannelValues(const mapChannelValue &_channelValues);
 
+        void                                setBrightness0();
         void                                updateMasterBrightness();
         // void                                overrideBrightness(u8 _u8Brightness);
         // void                                restoreBrightness();

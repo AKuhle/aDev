@@ -190,6 +190,18 @@ void Fixture::setChannelValues(const mapChannelValue &_channelValues)
 
 
 /*******************************************************************************
+* Fixture::setBrightness0
+*******************************************************************************/
+void Fixture::setBrightness0()
+{
+    CHECK_PRE_CONDITION_VOID(m_pChannelBright);
+
+    setChannelValue(m_pChannelBright, 0);
+
+} // Fixture::setBrightness0
+
+
+/*******************************************************************************
 * Fixture::updateMasterBrightness
 *******************************************************************************/
 void Fixture::updateMasterBrightness()

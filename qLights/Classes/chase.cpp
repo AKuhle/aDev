@@ -72,6 +72,9 @@ void Chase::startChase()
 
     const stRunStep   &runStep = m_vRunSteps.at(0);
 
+    // chase is running
+    m_bRunning = true;
+
     // mark the active chasebutton as activated
     MainWin::instance()->activateChaseButton(this, true);
 
@@ -206,8 +209,10 @@ void Chase::onTimeout()
     // if the chase is stopped => simply break the processing
     if (m_bChaseStopped)
     {
+        runStep.pStartScene->setAllFixtureBrightness0();
         // no more steps => mark the active chasebutton as activated
         MainWin::instance()->activateChaseButton(this, false);
+        m_bRunning = false;
     }
     else
     {
@@ -241,24 +246,33 @@ void Chase::onTimeout()
                 if (isCycle())
                 {
                     // => cycle mode: start from beginning
+                    m_s32RunStepIdx = 0;
+                    m_s32CurrentStep = 0;
+
+                    m_s32Steps = m_vRunSteps.at(m_s32RunStepIdx).u32Duration_ms / CHASE_UPDATE_TIME_MS;
+                    m_s32Steps = max(1, static_cast<s32> (0.9 * m_s32Steps));
+
+                    QTimer::singleShot(CHASE_UPDATE_TIME_MS, this, SLOT(onTimeout()));
                 }
                 else
                 {
                     // => no cycle: switch scene off
-                    runStep.pStartScene->switchAllFixturesOff();
+                    runStep.pStartScene->setAllFixtureBrightness0();
 
                     // no more steps => mark the active chasebutton as activated
                     MainWin::instance()->activateChaseButton(this, false);
+
+                    m_bRunning = false;
                 }
             }
             else
             {
                 // last run step not reached => move to next run step
                 m_s32RunStepIdx++;
+                m_s32CurrentStep = 0;
 
                 m_s32Steps = m_vRunSteps.at(m_s32RunStepIdx).u32Duration_ms / CHASE_UPDATE_TIME_MS;
                 m_s32Steps = max(1, static_cast<s32> (0.9 * m_s32Steps));
-                m_s32CurrentStep = 0;
 
                 QTimer::singleShot(CHASE_UPDATE_TIME_MS, this, SLOT(onTimeout()));
             }

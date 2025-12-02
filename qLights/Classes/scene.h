@@ -63,6 +63,8 @@ class Scene : public QObject
         void                                showScene(bool _bIgnoreBlackStart) const;
         void                                switchAllFixturesOff() const;
         void                                switchAllFixturesOn() const;
+        void                                resetAllFixtures() const;
+        void                                setAllFixtureBrightness0() const;
 
         u8                                  channelValue(shared_ptr<Fixture>    _pFixture,
                                                          s32                    _s32ChannelNr) const;

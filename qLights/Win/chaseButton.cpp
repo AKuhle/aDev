@@ -123,6 +123,13 @@ void ChaseButton::onClicked()
 {
     if (m_pChase)
     {
-        m_pChase->startChase();
+        if (m_pChase->isRuning())
+        {
+            m_pChase->stopChase();
+        }
+        else
+        {
+            m_pChase->startChase();
+        }
     }
 } // ChaseButton::onClicked

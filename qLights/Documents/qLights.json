@@ -105,24 +105,10 @@
   },
   "chases": {
     "0-0": {
-      "black_start": 1,
-      "cycle": 0,
-      "name": "black ncc 444 b1",
-      "no_of_chase_steps": 2,
-      "step0": {
-        "duration": 1200,
-        "scene_name": "Bridge 1"
-      },
-      "step1": {
-        "duration": 0,
-        "scene_name": "Bridge 2"
-      }
+      "name": "-"
     },
     "0-1": {
-      "black_start": 1,
-      "cycle": 0,
-      "name": "cycle b1 555 b2",
-      "no_of_chase_steps": 0
+      "name": "-"
     },
     "0-10": {
       "name": "-"
@@ -164,18 +150,7 @@
       "name": "-"
     },
     "0-5": {
-      "black_start": 1,
-      "cycle": 0,
-      "name": "test->test2",
-      "no_of_chase_steps": 2,
-      "step0": {
-        "duration": 3000,
-        "scene_name": "test"
-      },
-      "step1": {
-        "duration": 0,
-        "scene_name": "test 2"
-      }
+      "name": "-"
     },
     "0-6": {
       "name": "-"
@@ -827,98 +802,24 @@
   },
   "scenes": {
     "0-0": {
-      "black_start": 1,
+      "black_start": 0,
       "fixture-0": {
-        "channel-0": 0,
-        "channel-1": 21,
-        "channel-10": 19,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 106,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 83,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer left"
-      },
-      "fixture-1": {
-        "channel-0": 0,
-        "channel-1": 122,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 214,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 153,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 95,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 15,
-        "channel_count": 15,
-        "fixture_name": "Washer center"
-      },
-      "fixture-2": {
-        "channel-0": 0,
-        "channel_count": 1,
-        "fixture_name": "PAR right"
-      },
-      "fixture-3": {
-        "channel-0": 0,
+        "channel-1": 8,
         "channel_count": 1,
         "fixture_name": "PAR left"
       },
-      "fixture-4": {
-        "channel-0": 0,
-        "channel-1": 176,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 111,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 50,
-        "channel-7": 0,
-        "channel-8": 61,
-        "channel-9": 53,
-        "channel_count": 15,
-        "fixture_name": "Washer right"
-      },
-      "fixture-5": {
-        "channel-0": 0,
-        "channel-1": 43,
-        "channel-10": 46,
-        "channel-11": 195,
-        "channel-12": 137,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 85,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 13,
-        "channel-7": 0,
-        "channel-8": 42,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Spot center"
-      },
-      "fixture_count": 6,
-      "name": "NCC 1701"
+      "fixture_count": 1,
+      "name": "par dark"
     },
     "0-1": {
-      "name": "-"
+      "black_start": 0,
+      "fixture-0": {
+        "channel-1": 64,
+        "channel_count": 1,
+        "fixture_name": "PAR left"
+      },
+      "fixture_count": 1,
+      "name": "par bright"
     },
     "0-10": {
       "name": "-"
@@ -951,217 +852,19 @@
       "name": "-"
     },
     "0-2": {
-      "black_start": 0,
-      "fixture-0": {
-        "channel-0": 0,
-        "channel-1": 137,
-        "channel-10": 40,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 72,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 83,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 12,
-        "channel_count": 15,
-        "fixture_name": "Washer left"
-      },
-      "fixture-1": {
-        "channel-0": 0,
-        "channel-1": 132,
-        "channel-10": 13,
-        "channel-11": 0,
-        "channel-12": 214,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 71,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 95,
-        "channel-7": 0,
-        "channel-8": 32,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer center"
-      },
-      "fixture-2": {
-        "channel-0": 0,
-        "channel-1": 142,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 82,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 50,
-        "channel-7": 0,
-        "channel-8": 84,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer right"
-      },
-      "fixture-3": {
-        "channel-0": 0,
-        "channel-1": 33,
-        "channel-10": 33,
-        "channel-11": 202,
-        "channel-12": 255,
-        "channel-13": 137,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 59,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 13,
-        "channel-7": 0,
-        "channel-8": 152,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Spot center"
-      },
-      "fixture_count": 4,
-      "name": "Bridge 1"
+      "name": "-"
     },
     "0-3": {
-      "black_start": 0,
-      "fixture-0": {
-        "channel-0": 0,
-        "channel-1": 137,
-        "channel-10": 40,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 72,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 83,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 12,
-        "channel_count": 15,
-        "fixture_name": "Washer left"
-      },
-      "fixture-1": {
-        "channel-0": 0,
-        "channel-1": 132,
-        "channel-10": 13,
-        "channel-11": 0,
-        "channel-12": 214,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 71,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 95,
-        "channel-7": 0,
-        "channel-8": 32,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer center"
-      },
-      "fixture-2": {
-        "channel-0": 0,
-        "channel-1": 125,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 255,
-        "channel-13": 0,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 82,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 50,
-        "channel-7": 0,
-        "channel-8": 84,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer right"
-      },
-      "fixture-3": {
-        "channel-0": 0,
-        "channel-1": 33,
-        "channel-10": 33,
-        "channel-11": 202,
-        "channel-12": 255,
-        "channel-13": 137,
-        "channel-14": 0,
-        "channel-2": 0,
-        "channel-3": 59,
-        "channel-4": 0,
-        "channel-5": 0,
-        "channel-6": 13,
-        "channel-7": 0,
-        "channel-8": 152,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Spot center"
-      },
-      "fixture_count": 4,
-      "name": "Bridge 2"
+      "name": "-"
     },
     "0-4": {
       "name": "-"
     },
     "0-5": {
-      "black_start": 1,
-      "fixture-0": {
-        "channel-1": 0,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 0,
-        "channel-14": 0,
-        "channel-15": 0,
-        "channel-16": 0,
-        "channel-2": 62,
-        "channel-3": 112,
-        "channel-4": 155,
-        "channel-5": 194,
-        "channel-6": 228,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer left"
-      },
-      "fixture_count": 1,
-      "name": "test"
+      "name": "-"
     },
     "0-6": {
-      "black_start": 0,
-      "fixture-0": {
-        "channel-1": 131,
-        "channel-10": 0,
-        "channel-11": 0,
-        "channel-12": 0,
-        "channel-14": 0,
-        "channel-15": 0,
-        "channel-16": 0,
-        "channel-2": 160,
-        "channel-3": 196,
-        "channel-4": 220,
-        "channel-5": 255,
-        "channel-6": 76,
-        "channel-7": 0,
-        "channel-8": 0,
-        "channel-9": 0,
-        "channel_count": 15,
-        "fixture_name": "Washer left"
-      },
-      "fixture_count": 1,
-      "name": "test 2"
+      "name": "-"
     },
     "0-7": {
       "name": "-"

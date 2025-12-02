@@ -62,6 +62,8 @@ class Chase : public QObject
         s32                         m_s32CurrentStep;
         bool                        m_bNeedToSwitchAllFixturesOn;
         bool                        m_bChaseStopped;
+        bool                        m_bRunning          { false };
+
 
     public:
         Chase(const QString             &_sName,
@@ -70,6 +72,8 @@ class Chase : public QObject
               const vector<stChaseStep> &_vSteps);
 
         ~Chase();
+
+        bool                                isRuning() const                    { return m_bRunning; }
 
         QString                             name() const                        { return m_sName; }
 
