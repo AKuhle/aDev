@@ -251,9 +251,11 @@ void MainWin::openFile(aPath _path)
                         // read the channel values of the fixture
                         for (int iChannel = 0; iChannel < s32ChannelCount; iChannel++)
                         {
-                            u8 u8Value = static_cast<u8> (f.readIntValue(sFixKey + ":channel-" +  aString::fromValue(iChannel)));
+                            aString sChannelKey = sFixKey + ":channel-" +  aString::fromValue(iChannel);
+                            s32     iChannelNr  = f.readIntValue(sChannelKey + ":channel-nr");
+                            u8      u8Value     = static_cast<u8> (f.readIntValue(sChannelKey + ":channel-value"));
 
-                            channelValue[iChannel] = u8Value;
+                            channelValue[iChannelNr] = u8Value;
                         }
 
                         // add the fixture to the scene
@@ -488,10 +490,13 @@ void MainWin::saveFile(aPath _path)
                     {
                         f.addValue(sFixKey + ":channel_count", (int) pMapChannelValue->size());
 
+                        int iChannel = 0;
                         for (const auto& [key, value] : (*pMapChannelValue))
                         {
-                            // key is type int, value is type u8
-                            f.addValue(sFixKey + ":channel-" +  aString::fromValue(key), (int) value);
+                            aString sChannelKey = sFixKey + ":channel-" +  aString::fromValue(iChannel);
+                            f.addValue(sChannelKey + ":channel-nr", (int) key);
+                            f.addValue(sChannelKey + ":channel-value", (int) value);
+                            iChannel++;
                         }
                     }
 

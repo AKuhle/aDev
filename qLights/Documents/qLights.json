@@ -804,25 +804,31 @@
     "0-0": {
       "black_start": 0,
       "fixture-0": {
-        "channel-1": 8,
+        "channel-0": {
+          "channel-nr": 1,
+          "channel-value": 42
+        },
         "channel_count": 1,
         "fixture_name": "PAR left"
       },
       "fixture_count": 1,
-      "name": "par dark"
+      "name": "PAR dark"
     },
     "0-1": {
+      "name": "-"
+    },
+    "0-10": {
       "black_start": 0,
       "fixture-0": {
-        "channel-1": 64,
+        "channel-0": {
+          "channel-nr": 1,
+          "channel-value": 178
+        },
         "channel_count": 1,
         "fixture_name": "PAR left"
       },
       "fixture_count": 1,
-      "name": "par bright"
-    },
-    "0-10": {
-      "name": "-"
+      "name": "PAR bright"
     },
     "0-11": {
       "name": "-"
