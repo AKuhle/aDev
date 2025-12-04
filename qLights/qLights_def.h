@@ -129,3 +129,14 @@ struct stChaseStep
     QString     sSceneName;
     u32         u32Duration_ms;
 }; // stChaseStep
+
+
+/*******************************************************************************
+* struct stRgbGroup
+*******************************************************************************/
+struct stRgbGroup
+{
+    s32     s32ChannelNr_r     { 0 };
+    s32     s32ChannelNr_g     { 0 };
+    s32     s32ChannelNr_b     { 0 };
+}; // stRgbGroup

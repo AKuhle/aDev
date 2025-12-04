@@ -49,6 +49,10 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pActionPanelDock, &QAction::triggered, this, &MainWin::onPanel);
     connect(m_pUi->m_pActionShowValues, &QAction::triggered, this, &MainWin::onShowValues);
 
+    connect(m_pUi->m_pActionRgbGroup1, &QAction::triggered, this, &MainWin::onRgbGroup1);
+    connect(m_pUi->m_pActionRgbGroup2, &QAction::triggered, this, &MainWin::onRgbGroup2);
+    connect(m_pUi->m_pActionRgbGroup3, &QAction::triggered, this, &MainWin::onRgbGroup3);
+
     // connect the controller stuff
     connect(m_pUi->m_pBtnAddController, &QToolButton::clicked, this, &MainWin::onAddController);
     connect(m_pUi->m_pBtnRemoveController, &QToolButton::clicked, this, &MainWin::onRemoveController);
@@ -466,9 +470,10 @@ void MainWin::setMasterBrightness(u8 _u8Value)
 *******************************************************************************/
 void MainWin::addDevice(const QString                           &_sName,
                         const QString                           &_sImage,
+                        s32                                     _s32RgbGroupCount,
                         const vector<shared_ptr<ChannelDevice>> &_vChannel)
 {
-    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _vChannel);
+    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _s32RgbGroupCount, _vChannel);
     m_lstDevice.push_back(std::move(pDevice));
 } // MainWin::addDevice
 
@@ -802,6 +807,9 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
     s32                                 iChannelIdx = 1;
     shared_ptr<Channel>                 pChannel;
 
+    // set the group box name to the fader fixture name
+    m_pUi->m_pFaderGroupBox->setTitle((_pFixture)?   _pFixture->name() : "No Fixture selected");
+
     for (Fader *pFader : m_vFaders)
     {
         if (_pFixture)
@@ -823,6 +831,8 @@ void MainWin::assignFaders(shared_ptr<Fixture> _pFixture)
 
         iChannelIdx++;
     }
+
+    updateAll();
 } // MainWin::assignFaders
 
 

@@ -114,6 +114,7 @@ class MainWin : public QMainWindow
         // device
         void                        addDevice(const QString                             &_sName,
                                               const QString                             &_sImage,
+                                              s32                                       _s32RgbGroupCount,
                                               const vector<shared_ptr<ChannelDevice>>   &_vChannel);
 
         shared_ptr<Device>          findDevice(const QString &_sName);
@@ -214,6 +215,7 @@ class MainWin : public QMainWindow
         void                        openFile(aPath _path);
         void                        saveFile(aPath _path);
 
+        void                        onRgbGroup(s32 _groupIdx);
 
 
     private slots:
@@ -224,6 +226,10 @@ class MainWin : public QMainWindow
         void                        onBackupSave();
         void                        onPanel();
         void                        onShowValues();
+
+        void                        onRgbGroup1();
+        void                        onRgbGroup2();
+        void                        onRgbGroup3();
 
         // controller panel
         void                        onAddController(bool _bChecked);

@@ -151,6 +151,18 @@ void Fixture::switchOff()
 
 
 /*******************************************************************************
+* Fixture::setBrightness0
+*******************************************************************************/
+void Fixture::setBrightness0()
+{
+    CHECK_PRE_CONDITION_VOID(m_pChannelBright);
+
+    setChannelValue(m_pChannelBright, 0);
+
+} // Fixture::setBrightness0
+
+
+/*******************************************************************************
 * Fixture::channelValues
 *******************************************************************************/
 mapChannelValue Fixture::channelValues() const
@@ -187,18 +199,6 @@ void Fixture::setChannelValues(const mapChannelValue &_channelValues)
     }
 
 } // Fixture::setChannelValues
-
-
-/*******************************************************************************
-* Fixture::setBrightness0
-*******************************************************************************/
-void Fixture::setBrightness0()
-{
-    CHECK_PRE_CONDITION_VOID(m_pChannelBright);
-
-    setChannelValue(m_pChannelBright, 0);
-
-} // Fixture::setBrightness0
 
 
 /*******************************************************************************

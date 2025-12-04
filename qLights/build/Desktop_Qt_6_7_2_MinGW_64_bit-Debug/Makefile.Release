@@ -250,12 +250,15 @@ release/qrc_qLights.cpp: ../../Resource/qLights.qrc \
 		../../../../Qt/6.7.2/mingw_64/bin/rcc.exe \
 		../../Resource/qLights/fade_out_10.png \
 		../../Resource/qLights/fade_out_2.png \
+		../../Resource/qLights/rainbow1.png \
 		../../Resource/qLights/fade_in_5.png \
 		../../Resource/qLights/fade_out_1.png \
+		../../Resource/qLights/rainbow2.png \
 		../../Resource/qLights/fade_out_5.png \
 		../../Resource/qLights/appIcon.png \
 		../../Resource/qLights/fade_in_1.png \
 		../../Resource/qLights/controller.png \
+		../../Resource/qLights/rainbow3.png \
 		../../Resource/qLights/fade_in_3.png \
 		../../Resource/qLights/fade_out_3.png \
 		../../Resource/qLights/showValue.png \
@@ -5761,37 +5764,34 @@ release/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringconverter_base.h \
 		../../../aFrame/aFrame_def.h \
-		../../Classes/channelDevice.h \
-		../../../aFrame/aUtil/aString.h \
-		../../../aFrame/aUtil/aUtil_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
+		../../qLights_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiterator.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringlist.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qalgorithms.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixmap.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiglobal.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtgui-config.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qtguiexports.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpaintdevice.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qfunctionaltools_impl.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qrect.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/q23utility.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qsize.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qpoint.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qcolor.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgb.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qimage.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtGui/qpixelformat.h \
@@ -5802,6 +5802,11 @@ release/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qline.h \
+		../../Classes/channelDevice.h \
+		../../../aFrame/aUtil/aString.h \
+		../../../aFrame/aUtil/aUtil_def.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/QUrl \
+		../../../../Qt/6.7.2/mingw_64/include/QtCore/qurl.h \
 		../../Classes/universe.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/QUdpSocket \
 		../../../../Qt/6.7.2/mingw_64/include/QtNetwork/qudpsocket.h \
@@ -5839,8 +5844,6 @@ release/device.o: ../../Classes/device.cpp ../../Classes/Device.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
-		../../qLights_def.h \
-		../../../../Qt/6.7.2/mingw_64/include/QtGui/QColor \
 		../../../aFrame/aUtil/aSynchronize.h \
 		../../Classes/controller.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\device.o ..\..\Classes\device.cpp
@@ -10204,6 +10207,8 @@ release/mainWin_handler.o: ../../Win/mainWin_handler.cpp ../../../../Qt/6.7.2/mi
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
 		../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QColorDialog \
+		../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qcolordialog.h \
 		../../../aFrame/aFrame_def.h \
 		../../../../GeneratedFiles/qLights/ui_mainWin.h \
 		../../../aFrame/aApp/aAppBase.h \

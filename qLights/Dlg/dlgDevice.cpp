@@ -126,6 +126,9 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
             // set the name
             pT->setItem(iNewRow, 1, new QTableWidgetItem(pChannel->name()));
 
+            // set the number of rgb groups
+            m_pUi->m_pRgbGroups->setValue(_pDevice->rgbGroupCount());
+
             // set the icon
             QTableWidgetItem *pItem = new QTableWidgetItem;
             pItem->setIcon(QIcon(pChannel->pixmap()));
@@ -208,6 +211,7 @@ void DlgDevice::accept()
         // add a new device
         MainWin::instance()->addDevice(m_pUi->m_pDeviceName->text(),
                                        m_lstDeviceIconName.at(m_s32ImageIdx),
+                                       m_pUi->m_pRgbGroups->value(),
                                        vChannel);
     }
     else
@@ -218,6 +222,10 @@ void DlgDevice::accept()
         // set the device name
         m_pDevice->setPixmap(m_lstDeviceIconName.at(m_s32ImageIdx));
 
+        // set the number of rgb groups
+        m_pDevice->setRgbGroupCount(m_pUi->m_pRgbGroups->value());
+
+        // set the channels
         m_pDevice->setChannel(vChannel);
 
         // modify the existing device

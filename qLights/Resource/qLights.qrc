@@ -16,5 +16,8 @@
         <file>qLights/fade_out_3.png</file>
         <file>qLights/fade_out_5.png</file>
         <file>qLights/fade_out_10.png</file>
+        <file>qLights/rainbow1.png</file>
+        <file>qLights/rainbow2.png</file>
+        <file>qLights/rainbow3.png</file>
     </qresource>
 </RCC>

@@ -26,8 +26,10 @@ using namespace aFrame;
 *******************************************************************************/
 Device::Device(const QString                            &_sName,
                const QString                            &_sPixmap,
+               const vector<stRgbGroup>                 &_vRgbGroups,
                const vector<shared_ptr<ChannelDevice>>  &_vChannel)
 : m_sName(_sName),
+  m_vRgbGroups(_vRgbGroups),
   m_vChannel(_vChannel)
 {
     setPixmap(_sPixmap);

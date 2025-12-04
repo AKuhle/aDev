@@ -103,6 +103,7 @@ void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
 
         // fill the fixture table
         const vector<shared_ptr<Fixture>> &vFixtures = _pScene->fixtures();
+        const list<shared_ptr<Fixture>> &vAllFixtures = MainWin::instance()->getAllFixtures();
         for (shared_ptr<Fixture> pFix : vFixtures)
         {
             QComboBox   *pCombo = new QComboBox();
@@ -114,7 +115,7 @@ void DlgScene::setCtrls(const shared_ptr<Scene> _pScene)
             pTable->setRowHeight(iRowIdx, 64);
 
             // add all fixture names to the combo box
-            for (const shared_ptr<Fixture> &pAllFix : vFixtures)
+            for (const shared_ptr<Fixture> &pAllFix : vAllFixtures)
             {
                 pCombo->addItem(pAllFix->name());
             }

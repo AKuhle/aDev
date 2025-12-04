@@ -19,6 +19,7 @@
 #include <QString>
 
 #include "aFrame_def.h"
+#include "qLights_def.h"
 #include "channelDevice.h"
 
 
@@ -37,11 +38,13 @@ class Device
         QString                             m_sName;
         QString                             m_sPixmapName;
         QPixmap                             m_pixmap;
+        vector<stRgbGroup>                  m_vRgbGroups;
         vector<shared_ptr<ChannelDevice>>   m_vChannel;
 
     public:
         Device(const QString                            &_sName,
                const QString                            &_sPixmap,
+               const vector<stRgbGroup>                 &_vRgbGroups,
                const vector<shared_ptr<ChannelDevice>>  &_vChannel);
         ~Device();
 
@@ -55,4 +58,7 @@ class Device
         const vector<shared_ptr<ChannelDevice>> &channel() const                                                { return m_vChannel; }
         s32                                     channelCount() const                                            { return m_vChannel.size(); }
         void                                    setChannel(const vector<shared_ptr<ChannelDevice>> &_vChannel)  { m_vChannel = _vChannel; }
+
+        const vector<stRgbGroup>&               rgbGroups() const                                               { return m_vRgbGroups; }
+        void                                    setRgbGroups(const vector<stRgbGroup>& _vRgbGroups)             { m_vRgbGroups = _vRgbGroups; }
 }; // class Device

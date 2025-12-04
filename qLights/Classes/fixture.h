@@ -66,24 +66,28 @@ class Fixture
         const vector<shared_ptr<Channel>>&  channels() const                                { return m_vChannel; }
         shared_ptr<Channel>                 findChannel(s32 _s32ChannelNr) const;
 
+        // set the channel value of the given channel to the value and update it
+        // in the universe.
+        // ! the brightness-value in the universe dependes on the master brightness and
+        // ! the state of the switch on/off flag
         void                                setChannelValue(shared_ptr<Channel> _pChannel,
                                                             u8                  _u8Value);
 
+        // set the switch flag but doesn't change the channel flag
+        //( this causes the brightness channel to be set to 0 inthe
+        // universe, and could be restored to the channel value (switchOn())
         void                                switchOn();
         void                                switchOff();
 
+        // set the channel value of the brightness channel (if exists) to 0
+        void                                setBrightness0();
 
         // set/ returns a map with channel nr and according channel values for
         // all channels of the fixture
         mapChannelValue                     channelValues() const;
         void                                setChannelValues(const mapChannelValue &_channelValues);
 
-        void                                setBrightness0();
         void                                updateMasterBrightness();
-        // void                                overrideBrightness(u8 _u8Brightness);
-        // void                                restoreBrightness();
 
         void                                resetFixture();
-
-        //void                                updateAllChannelValuesFromUniverse();
 }; // class Fixture

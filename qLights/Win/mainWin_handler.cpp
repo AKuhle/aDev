@@ -3,6 +3,7 @@
 *******************************************************************************/
 #include <QMessageBox>
 #include <QTimer>
+#include <QColorDialog>
 
 #include "aFrame_def.h"
 
@@ -142,10 +143,26 @@ void MainWin::openFile(aPath _path)
             // device image
             aString sImage = f.readStringValue(sPre + ":image");
 
+            // device rgb groups
+            s32 rgbGroupCount = f.readIntValue(sPre + ":rgb-group-count");
+            vector<stRgbGroup>rgbGroups;
+            for (s32 iRgbGroup = 0; iRgbGroup <  rgbGroupCount; iRgbGroup++)
+            {
+                stRgbGroup  st;
+
+                // read the channel numbers for this group
+                st.s32ChannelNr_r = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":r-channel-nr");
+                st.s32ChannelNr_g = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":g-channel-nr");
+                st.s32ChannelNr_b = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":b-channel-nr");
+
+                // add the group to the vector
+                rgbGroups.push_back(st);
+            }
+
             // device channels
             vector<shared_ptr<ChannelDevice>> vChannel;
 
-            s32 channelCount = f.readIntValue(sPre + aString(":channelCount"));
+            s32 channelCount = f.readIntValue(sPre + ":channelCount");
 
             for (s32 iChannelIdx = 0; iChannelIdx <  channelCount; iChannelIdx++)
             {
@@ -157,7 +174,7 @@ void MainWin::openFile(aPath _path)
                 vChannel.push_back(make_shared<ChannelDevice> (s32Nr, sName, sPixmapName, bBrightness));
             }
 
-            addDevice(sName.toQString(), sImage.toQString(), vChannel);
+            addDevice(sName.toQString(), sImage.toQString(), rgbGroups, vChannel);
         }
 
         // load the fixtures
@@ -375,10 +392,10 @@ void MainWin::saveFile(aPath _path)
 
     // save the devices
     f.addValue(aString("device:count"), (int) m_lstDevice.size());
-    idx = 0;
+    deviceIdx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
-        aString     sPre = aString("device:") + aString::fromValue(idx);
+        aString     sPre = aString("device:") + aString::fromValue(deviceIdx);
 
         // device name
         f.addValue(sPre + ":name", aString::fromQString(pD->name()));
@@ -401,7 +418,25 @@ void MainWin::saveFile(aPath _path)
             iChannelIdx++;
         }
 
-        idx++;
+        // device rgb groups
+        const vec   tor<shared_ptr<ChannelDevice>> &vChannel   = pD->channel();
+        s32 rgbGroupCount = f.readIntValue(sPre + ":rgb-group-count");
+        vector<stRgbGroup>rgbGroups;
+        for (s32 iRgbGroup = 0; iRgbGroup <  rgbGroupCount; iRgbGroup++)
+        {
+            stRgbGroup  st;
+
+            // read the channel numbers for this group
+            st.s32ChannelNr_r = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":r-channel-nr");
+            st.s32ChannelNr_g = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":g-channel-nr");
+            st.s32ChannelNr_b = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":b-channel-nr");
+
+            // add the group to the vector
+            rgbGroups.push_back(st);
+        }
+
+
+        deviceIdx++;
     }
 
     // save the fixtures
@@ -577,6 +612,48 @@ void MainWin::onShowValues()
     updateToolbar();
     updateFaders();
 } // MainWin::onShowValues
+
+
+/*******************************************************************************
+* MainWin::onRgbGroup1
+*******************************************************************************/
+void MainWin::onRgbGroup1()
+{
+    onRgbGroup(1);
+} // MainWin::onRgbGroup1
+
+
+/*******************************************************************************
+* MainWin::onRgbGroup2
+*******************************************************************************/
+void MainWin::onRgbGroup2()
+{
+    onRgbGroup(2);
+} // MainWin::onRgbGroup2
+
+
+/*******************************************************************************
+* MainWin::onRgbGroup3
+*******************************************************************************/
+void MainWin::onRgbGroup3()
+{
+    onRgbGroup(3);
+} // MainWin::onRgbGroup3
+
+
+/*******************************************************************************
+* MainWin::onRgbGroup
+*******************************************************************************/
+void MainWin::onRgbGroup(s32 /*_groupIdx*/)
+{
+    QColor col = QColorDialog::getColor();
+                // (const QColor &initial = Qt::white,
+                //  QWidget *parent = nullptr,
+                //  const QString &title = QString(),
+                //  QColorDialog::ColorDialogOptions options = ColorDialogOptions())
+
+    col.blackF();
+} // MainWin::onRgbGroup
 
 
 /*******************************************************************************
