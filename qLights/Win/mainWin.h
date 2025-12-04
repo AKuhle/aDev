@@ -114,7 +114,7 @@ class MainWin : public QMainWindow
         // device
         void                        addDevice(const QString                             &_sName,
                                               const QString                             &_sImage,
-                                              s32                                       _s32RgbGroupCount,
+                                              const vector<stRgbGroup>                  &_rgbGroups,
                                               const vector<shared_ptr<ChannelDevice>>   &_vChannel);
 
         shared_ptr<Device>          findDevice(const QString &_sName);
@@ -230,6 +230,7 @@ class MainWin : public QMainWindow
         void                        onRgbGroup1();
         void                        onRgbGroup2();
         void                        onRgbGroup3();
+        void                        onCurrentColorChanged(const QColor&);
 
         // controller panel
         void                        onAddController(bool _bChecked);

@@ -246,7 +246,7 @@
             <widget class="QSpinBox" name="m_pGroup1_r">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -257,7 +257,7 @@
               <string>r: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -265,7 +265,7 @@
             <widget class="QSpinBox" name="m_pGroup1_g">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -276,7 +276,7 @@
               <string>g: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -284,7 +284,7 @@
             <widget class="QSpinBox" name="m_pGroup1_b">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -295,7 +295,7 @@
               <string>b: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -333,7 +333,7 @@
             <widget class="QSpinBox" name="m_pGroup2_r">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -344,7 +344,7 @@
               <string>r: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -352,7 +352,7 @@
             <widget class="QSpinBox" name="m_pGroup2_g">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -363,7 +363,7 @@
               <string>g: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -371,7 +371,7 @@
             <widget class="QSpinBox" name="m_pGroup2_b">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -382,7 +382,7 @@
               <string>b: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -420,7 +420,7 @@
             <widget class="QSpinBox" name="m_pGroup3_r">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -431,7 +431,7 @@
               <string>r: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -439,7 +439,7 @@
             <widget class="QSpinBox" name="m_pGroup3_g">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -450,7 +450,7 @@
               <string>g: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>
@@ -458,7 +458,7 @@
             <widget class="QSpinBox" name="m_pGroup3_b">
              <property name="minimumSize">
               <size>
-               <width>45</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
@@ -469,7 +469,7 @@
               <string>b: </string>
              </property>
              <property name="maximum">
-              <number>3</number>
+              <number>32</number>
              </property>
             </widget>
            </item>

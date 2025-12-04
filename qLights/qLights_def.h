@@ -78,6 +78,8 @@ constexpr aFrame::s32       CHASE_3 { 2 };
 constexpr aFrame::s32       CHASE_4 { 3 };
 constexpr aFrame::s32       CHASE_5 { 4 };
 
+constexpr aFrame::s32       MAX_RGB_GROUP_COUNT { 3 };
+
 
 /*******************************************************************************
 * struct stBankBtn

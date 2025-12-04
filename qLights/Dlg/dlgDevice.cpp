@@ -113,7 +113,7 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
         pT->clearContents();
 
         // set the channel of the device
-        for (auto pChannel : vChannel)
+        for (auto &pChannel : vChannel)
         {
             int             iNewRow     = pT->rowCount();
 
@@ -126,8 +126,34 @@ void DlgDevice::setCtrls(const shared_ptr<Device> _pDevice)
             // set the name
             pT->setItem(iNewRow, 1, new QTableWidgetItem(pChannel->name()));
 
-            // set the number of rgb groups
-            m_pUi->m_pRgbGroups->setValue(_pDevice->rgbGroupCount());
+            // set the rgb groups
+            const vector<stRgbGroup> &vRgbGroups = _pDevice->rgbGroups();
+            s32 groupCount = vRgbGroups.size();
+
+            m_pUi->m_pRgbGroup1->setChecked(groupCount > 0);
+            m_pUi->m_pRgbGroup2->setChecked(groupCount > 1);
+            m_pUi->m_pRgbGroup3->setChecked(groupCount > 2);
+
+            if (groupCount > 0)
+            {
+                m_pUi->m_pGroup1_r->setValue(vRgbGroups.at(0).s32ChannelNr_r);
+                m_pUi->m_pGroup1_g->setValue(vRgbGroups.at(0).s32ChannelNr_g);
+                m_pUi->m_pGroup1_b->setValue(vRgbGroups.at(0).s32ChannelNr_b);
+            }
+
+            if (groupCount > 1)
+            {
+                m_pUi->m_pGroup2_r->setValue(vRgbGroups.at(1).s32ChannelNr_r);
+                m_pUi->m_pGroup2_g->setValue(vRgbGroups.at(1).s32ChannelNr_g);
+                m_pUi->m_pGroup2_b->setValue(vRgbGroups.at(1).s32ChannelNr_b);
+            }
+
+            if (groupCount > 2)
+            {
+                m_pUi->m_pGroup3_r->setValue(vRgbGroups.at(2).s32ChannelNr_r);
+                m_pUi->m_pGroup3_g->setValue(vRgbGroups.at(2).s32ChannelNr_g);
+                m_pUi->m_pGroup3_b->setValue(vRgbGroups.at(2).s32ChannelNr_b);
+            }
 
             // set the icon
             QTableWidgetItem *pItem = new QTableWidgetItem;
@@ -206,12 +232,45 @@ void DlgDevice::accept()
         vChannel.push_back(make_shared<ChannelDevice> (s32ChannelNr, s32ChannelName, sPixmapName, bBrightness));
     }
 
+    // set the rgb groups
+    vector<stRgbGroup> vRgbGroups;
+    if (m_pUi->m_pRgbGroup1->isChecked())
+    {
+        stRgbGroup st;
+
+        st.s32ChannelNr_r = m_pUi->m_pGroup1_r->value();
+        st.s32ChannelNr_g = m_pUi->m_pGroup1_g->value();
+        st.s32ChannelNr_b = m_pUi->m_pGroup1_b->value();
+        vRgbGroups.push_back(st);
+    }
+
+    if (m_pUi->m_pRgbGroup2->isChecked())
+    {
+        stRgbGroup st;
+
+        st.s32ChannelNr_r = m_pUi->m_pGroup2_r->value();
+        st.s32ChannelNr_g = m_pUi->m_pGroup2_g->value();
+        st.s32ChannelNr_b = m_pUi->m_pGroup2_b->value();
+        vRgbGroups.push_back(st);
+    }
+
+    if (m_pUi->m_pRgbGroup2->isChecked())
+    {
+        stRgbGroup st;
+
+        st.s32ChannelNr_r = m_pUi->m_pGroup3_r->value();
+        st.s32ChannelNr_g = m_pUi->m_pGroup3_g->value();
+        st.s32ChannelNr_b = m_pUi->m_pGroup3_b->value();
+        vRgbGroups.push_back(st);
+    }
+
+
     if (!m_pDevice)
     {
         // add a new device
         MainWin::instance()->addDevice(m_pUi->m_pDeviceName->text(),
                                        m_lstDeviceIconName.at(m_s32ImageIdx),
-                                       m_pUi->m_pRgbGroups->value(),
+                                       vRgbGroups,
                                        vChannel);
     }
     else
@@ -223,7 +282,7 @@ void DlgDevice::accept()
         m_pDevice->setPixmap(m_lstDeviceIconName.at(m_s32ImageIdx));
 
         // set the number of rgb groups
-        m_pDevice->setRgbGroupCount(m_pUi->m_pRgbGroups->value());
+        m_pDevice->setRgbGroups(vRgbGroups);
 
         // set the channels
         m_pDevice->setChannel(vChannel);

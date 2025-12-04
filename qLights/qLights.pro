@@ -174,4 +174,5 @@ RESOURCES += \
     Resource/qLights.qrc
 
 DISTFILES += \
-    Documents/qLights.json
+    Documents/qLights.json \
+    Documents/qLightsBup.json

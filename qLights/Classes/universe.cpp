@@ -132,7 +132,7 @@ void Universe::reset()
 *******************************************************************************/
 void Universe::sendValues2Controller() const
 {
-    return;
+    //return;
 
     if (!m_hostAdr.isNull())
     {

@@ -51,7 +51,7 @@ void DlgFixture::setCtrls(const shared_ptr<Fixture> _pFixture)
     m_pUi->m_pDevice->setIconSize(QSize(36, 36));
 
     // fill the combo box with the device icons
-    for (auto pDevice : m_lstDevice)
+    for (auto &pDevice : m_lstDevice)
     {
         const QString   &name   = pDevice->name();
         const QPixmap   &pixmap = pDevice->pixmap();
@@ -63,7 +63,7 @@ void DlgFixture::setCtrls(const shared_ptr<Fixture> _pFixture)
     }
 
     // fill the combo box with the universe names
-    for (auto pUniverse : m_lstUniverse)
+    for (auto &pUniverse : m_lstUniverse)
     {
         const QString   &name   = pUniverse->name();
 

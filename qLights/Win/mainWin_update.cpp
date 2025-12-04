@@ -56,11 +56,11 @@ void MainWin::updateToolbar()
 
     // action rgb groups
     m_pUi->m_pActionRgbGroup1->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupCount() >= 1);
+                                          m_pActiveFixture->device()->rgbGroupSize() >= 1);
     m_pUi->m_pActionRgbGroup2->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupCount() >= 2);
+                                          m_pActiveFixture->device()->rgbGroupSize() >= 2);
     m_pUi->m_pActionRgbGroup3->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupCount() >= 3);
+                                          m_pActiveFixture->device()->rgbGroupSize() >= 3);
 
     // ligth and fade buttons
     m_pUi->m_pSwitchOn->setVisible(!m_pUi->m_pPanelDock->isVisible());

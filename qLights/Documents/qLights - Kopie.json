@@ -642,12 +642,12 @@
       "channelCount": 15,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4.png",
       "name": "eurolite TMH-X4 / 16",
+      "rgb-group-count": 1,
       "rgb-group-0": {
-        "b-channel-nr": 10,
+        "r-channel-nr": 8,
         "g-channel-nr": 9,
-        "r-channel-nr": 8
-      },
-      "rgb-group-count": 1
+        "b-channel-nr": 10
+      }
     },
     "2": {
       "channel0": {
@@ -791,22 +791,22 @@
       "channelCount": 23,
       "image": "C:/Tools/aDev/qLights/Icons/Device/tmh-x4_24.png",
       "name": "eurolite TMH-X4 / 24",
+      "rgb-group-count": 3,
       "rgb-group-0": {
-        "b-channel-nr": 11,
+        "r-channel-nr": 9,
         "g-channel-nr": 10,
-        "r-channel-nr": 9
+        "b-channel-nr": 11
       },
       "rgb-group-1": {
-        "b-channel-nr": 15,
+        "r-channel-nr": 13,
         "g-channel-nr": 14,
-        "r-channel-nr": 13
+        "b-channel-nr": 15
       },
       "rgb-group-2": {
-        "b-channel-nr": 19,
+        "r-channel-nr": 17,
         "g-channel-nr": 18,
-        "r-channel-nr": 17
-      },
-      "rgb-group-count": 3
+        "b-channel-nr": 19
+      }
     },
     "3": {
       "channel0": {

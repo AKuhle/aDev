@@ -470,10 +470,10 @@ void MainWin::setMasterBrightness(u8 _u8Value)
 *******************************************************************************/
 void MainWin::addDevice(const QString                           &_sName,
                         const QString                           &_sImage,
-                        s32                                     _s32RgbGroupCount,
+                        const vector<stRgbGroup>                &_rgbGroups,
                         const vector<shared_ptr<ChannelDevice>> &_vChannel)
 {
-    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _s32RgbGroupCount, _vChannel);
+    shared_ptr<Device>  pDevice = make_shared<Device> (_sName, _sImage, _rgbGroups, _vChannel);
     m_lstDevice.push_back(std::move(pDevice));
 } // MainWin::addDevice
 

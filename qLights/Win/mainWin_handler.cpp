@@ -145,7 +145,7 @@ void MainWin::openFile(aPath _path)
 
             // device rgb groups
             s32 rgbGroupCount = f.readIntValue(sPre + ":rgb-group-count");
-            vector<stRgbGroup>rgbGroups;
+            vector<stRgbGroup> rgbGroups;
             for (s32 iRgbGroup = 0; iRgbGroup <  rgbGroupCount; iRgbGroup++)
             {
                 stRgbGroup  st;
@@ -392,7 +392,7 @@ void MainWin::saveFile(aPath _path)
 
     // save the devices
     f.addValue(aString("device:count"), (int) m_lstDevice.size());
-    deviceIdx = 0;
+    s32 deviceIdx = 0;
     for (const shared_ptr<Device> &pD : m_lstDevice)
     {
         aString     sPre = aString("device:") + aString::fromValue(deviceIdx);
@@ -407,7 +407,7 @@ void MainWin::saveFile(aPath _path)
         const vector<shared_ptr<ChannelDevice>> &vChannel   = pD->channel();
         s32                                     iChannelIdx = 0;
 
-        f.addValue(sPre + aString(":channelCount"), (int) vChannel.size()); // device channel count
+        f.addValue(sPre + aString(":channelCount"), (int) vChannel.size());
         for (auto pC : vChannel)
         {
             f.addValue(sPre + ":channel" + aString::fromValue(iChannelIdx) + ":nr", (int) pC->nr());
@@ -419,22 +419,18 @@ void MainWin::saveFile(aPath _path)
         }
 
         // device rgb groups
-        const vec   tor<shared_ptr<ChannelDevice>> &vChannel   = pD->channel();
-        s32 rgbGroupCount = f.readIntValue(sPre + ":rgb-group-count");
-        vector<stRgbGroup>rgbGroups;
-        for (s32 iRgbGroup = 0; iRgbGroup <  rgbGroupCount; iRgbGroup++)
+        const vector<stRgbGroup> &vRgbGroups = pD->rgbGroups();
+        int rgbGroupSize = vRgbGroups.size();
+        f.addValue(sPre + aString(":rgb-group-count"), rgbGroupSize);
+        for (int iRgbGroup = 0; iRgbGroup <  rgbGroupSize; iRgbGroup++)
         {
-            stRgbGroup  st;
+            const stRgbGroup  &st = vRgbGroups.at(iRgbGroup);
 
             // read the channel numbers for this group
-            st.s32ChannelNr_r = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":r-channel-nr");
-            st.s32ChannelNr_g = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":g-channel-nr");
-            st.s32ChannelNr_b = f.readIntValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":b-channel-nr");
-
-            // add the group to the vector
-            rgbGroups.push_back(st);
+            f.addValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":r-channel-nr", (int) st.s32ChannelNr_r);
+            f.addValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":g-channel-nr", (int) st.s32ChannelNr_g);
+            f.addValue(sPre + ":rgb-group-" + aString::fromValue(iRgbGroup) + ":b-channel-nr", (int) st.s32ChannelNr_b);
         }
-
 
         deviceIdx++;
     }
@@ -619,7 +615,7 @@ void MainWin::onShowValues()
 *******************************************************************************/
 void MainWin::onRgbGroup1()
 {
-    onRgbGroup(1);
+    onRgbGroup(0);
 } // MainWin::onRgbGroup1
 
 
@@ -628,8 +624,16 @@ void MainWin::onRgbGroup1()
 *******************************************************************************/
 void MainWin::onRgbGroup2()
 {
-    onRgbGroup(2);
+    onRgbGroup(1);
 } // MainWin::onRgbGroup2
+
+
+/*******************************************************************************
+* MainWin::onCurrentColorChanged
+*******************************************************************************/
+void MainWin::onCurrentColorChanged(const QColor&)
+{
+} // MainWin::onCurrentColorChanged
 
 
 /*******************************************************************************
@@ -637,22 +641,45 @@ void MainWin::onRgbGroup2()
 *******************************************************************************/
 void MainWin::onRgbGroup3()
 {
-    onRgbGroup(3);
+    onRgbGroup(2);
 } // MainWin::onRgbGroup3
 
 
 /*******************************************************************************
 * MainWin::onRgbGroup
 *******************************************************************************/
-void MainWin::onRgbGroup(s32 /*_groupIdx*/)
+void MainWin::onRgbGroup(s32 _groupIdx)
 {
+    CHECK_PRE_CONDITION_VOID(m_pActiveFixture);
+    CHECK_PRE_CONDITION_VOID(_groupIdx < m_pActiveFixture->device()->rgbGroupSize());
+
+    const stRgbGroup st = m_pActiveFixture->device()->rgbGroups().at(_groupIdx);
+
     QColor col = QColorDialog::getColor();
                 // (const QColor &initial = Qt::white,
                 //  QWidget *parent = nullptr,
                 //  const QString &title = QString(),
                 //  QColorDialog::ColorDialogOptions options = ColorDialogOptions())
 
-    col.blackF();
+    shared_ptr<Channel> pR = m_pActiveFixture->findChannel(st.s32ChannelNr_r);
+    if (pR)
+    {
+        m_pActiveFixture->setChannelValue(pR, static_cast<u8> (col.red()));
+    }
+
+    shared_ptr<Channel> pG = m_pActiveFixture->findChannel(st.s32ChannelNr_g);
+    if (pG)
+    {
+        m_pActiveFixture->setChannelValue(pG, static_cast<u8> (col.green()));
+    }
+
+    shared_ptr<Channel> pB = m_pActiveFixture->findChannel(st.s32ChannelNr_b);
+    if (pB)
+    {
+        m_pActiveFixture->setChannelValue(pB, static_cast<u8> (col.blue()));
+    }
+
+    updateFaders();
 } // MainWin::onRgbGroup
 
 

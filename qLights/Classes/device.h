@@ -61,4 +61,5 @@ class Device
 
         const vector<stRgbGroup>&               rgbGroups() const                                               { return m_vRgbGroups; }
         void                                    setRgbGroups(const vector<stRgbGroup>& _vRgbGroups)             { m_vRgbGroups = _vRgbGroups; }
+        s32                                     rgbGroupSize() const                                            { return m_vRgbGroups.size(); }
 }; // class Device
