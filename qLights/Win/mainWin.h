@@ -216,6 +216,9 @@ class MainWin : public QMainWindow
         void                        saveFile(aPath _path);
 
         void                        onRgbGroup(s32 _groupIdx);
+        void                        setFixtureColor(shared_ptr<Fixture>    _pFixture,
+                                                    const stRgbGroup       &_stRgbGroup,
+                                                    const QColor           &_color);
 
 
     private slots:
@@ -227,10 +230,9 @@ class MainWin : public QMainWindow
         void                        onPanel();
         void                        onShowValues();
 
-        void                        onRgbGroup1();
-        void                        onRgbGroup2();
-        void                        onRgbGroup3();
-        void                        onCurrentColorChanged(const QColor&);
+        void                        onRgbGroup1(bool _bChecked);
+        void                        onRgbGroup2(bool _bChecked);
+        void                        onRgbGroup3(bool _bChecked);
 
         // controller panel
         void                        onAddController(bool _bChecked);

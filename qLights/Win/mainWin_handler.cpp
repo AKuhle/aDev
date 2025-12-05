@@ -613,7 +613,7 @@ void MainWin::onShowValues()
 /*******************************************************************************
 * MainWin::onRgbGroup1
 *******************************************************************************/
-void MainWin::onRgbGroup1()
+void MainWin::onRgbGroup1(bool _bChecked)
 {
     onRgbGroup(0);
 } // MainWin::onRgbGroup1
@@ -622,24 +622,16 @@ void MainWin::onRgbGroup1()
 /*******************************************************************************
 * MainWin::onRgbGroup2
 *******************************************************************************/
-void MainWin::onRgbGroup2()
+void MainWin::onRgbGroup2(bool _bChecked)
 {
     onRgbGroup(1);
 } // MainWin::onRgbGroup2
 
 
 /*******************************************************************************
-* MainWin::onCurrentColorChanged
-*******************************************************************************/
-void MainWin::onCurrentColorChanged(const QColor&)
-{
-} // MainWin::onCurrentColorChanged
-
-
-/*******************************************************************************
 * MainWin::onRgbGroup3
 *******************************************************************************/
-void MainWin::onRgbGroup3()
+void MainWin::onRgbGroup3(bool _bChecked)
 {
     onRgbGroup(2);
 } // MainWin::onRgbGroup3
@@ -653,34 +645,62 @@ void MainWin::onRgbGroup(s32 _groupIdx)
     CHECK_PRE_CONDITION_VOID(m_pActiveFixture);
     CHECK_PRE_CONDITION_VOID(_groupIdx < m_pActiveFixture->device()->rgbGroupSize());
 
-    const stRgbGroup st = m_pActiveFixture->device()->rgbGroups().at(_groupIdx);
+    const stRgbGroup    st = m_pActiveFixture->device()->rgbGroups().at(_groupIdx);
+    QColor              prevCol(m_pActiveFixture->channelValue(st.s32ChannelNr_r),
+                                m_pActiveFixture->channelValue(st.s32ChannelNr_g),
+                                m_pActiveFixture->channelValue(st.s32ChannelNr_b));
 
-    QColor col = QColorDialog::getColor();
-                // (const QColor &initial = Qt::white,
-                //  QWidget *parent = nullptr,
-                //  const QString &title = QString(),
-                //  QColorDialog::ColorDialogOptions options = ColorDialogOptions())
+    QColorDialog colDlg(prevCol);
 
-    shared_ptr<Channel> pR = m_pActiveFixture->findChannel(st.s32ChannelNr_r);
-    if (pR)
+    connect(&colDlg, &QColorDialog::currentColorChanged,
+            [this, st](const QColor &_color)
+            {
+                setFixtureColor(m_pActiveFixture, st, _color);
+            });
+
+    if (colDlg.exec() == QDialog::Accepted)
     {
-        m_pActiveFixture->setChannelValue(pR, static_cast<u8> (col.red()));
+        QColor selectedColor = colDlg.selectedColor();
+
+        // use final color
+        setFixtureColor(m_pActiveFixture, st, selectedColor);
     }
-
-    shared_ptr<Channel> pG = m_pActiveFixture->findChannel(st.s32ChannelNr_g);
-    if (pG)
+    else
     {
-        m_pActiveFixture->setChannelValue(pG, static_cast<u8> (col.green()));
-    }
-
-    shared_ptr<Channel> pB = m_pActiveFixture->findChannel(st.s32ChannelNr_b);
-    if (pB)
-    {
-        m_pActiveFixture->setChannelValue(pB, static_cast<u8> (col.blue()));
+        // cancel => restore previous color
+        setFixtureColor(m_pActiveFixture, st, prevCol);
     }
 
     updateFaders();
 } // MainWin::onRgbGroup
+
+
+/*******************************************************************************
+* MainWin::setFixtureColor
+*******************************************************************************/
+void MainWin::setFixtureColor(shared_ptr<Fixture>    _pFixture,
+                              const stRgbGroup       &_stRgbGroup,
+                              const QColor           &_color)
+{
+    shared_ptr<Channel> pR = _pFixture->findChannel(_stRgbGroup.s32ChannelNr_r);
+    shared_ptr<Channel> pG = _pFixture->findChannel(_stRgbGroup.s32ChannelNr_g);
+    shared_ptr<Channel> pB = _pFixture->findChannel(_stRgbGroup.s32ChannelNr_b);
+
+    if (pR)
+    {
+        m_pActiveFixture->setChannelValue(pR, static_cast<u8> (_color.red()));
+    }
+
+    if (pG)
+    {
+        m_pActiveFixture->setChannelValue(pG, static_cast<u8> (_color.green()));
+    }
+
+    if (pB)
+    {
+        m_pActiveFixture->setChannelValue(pB, static_cast<u8> (_color.blue()));
+    }
+} // MainWin::setFixtureColor
 
 
 /*******************************************************************************

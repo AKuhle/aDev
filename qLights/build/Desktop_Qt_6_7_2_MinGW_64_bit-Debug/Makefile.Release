@@ -140,7 +140,8 @@ OBJECTS       = release/channel.o \
 		release/moc_mainWin.o \
 		release/moc_sceneButton.o
 
-DIST          = Documents/qLights.json ..\..\Classes\channel.h \
+DIST          = Documents/qLights.json \
+		Documents/qLightsBup.json ..\..\Classes\channel.h \
 		..\..\Classes\channelDevice.h \
 		..\..\Classes\chase.h \
 		..\..\Classes\controller.h \

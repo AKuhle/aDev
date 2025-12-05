@@ -72,6 +72,7 @@ class Fixture
         // ! the state of the switch on/off flag
         void                                setChannelValue(shared_ptr<Channel> _pChannel,
                                                             u8                  _u8Value);
+        u8                                  channelValue(s32 _s32ChannelNr) const;
 
         // set the switch flag but doesn't change the channel flag
         //( this causes the brightness channel to be set to 0 inthe

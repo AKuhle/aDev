@@ -49,9 +49,9 @@ MainWin::MainWin(QWidget *parent)
     connect(m_pUi->m_pActionPanelDock, &QAction::triggered, this, &MainWin::onPanel);
     connect(m_pUi->m_pActionShowValues, &QAction::triggered, this, &MainWin::onShowValues);
 
-    connect(m_pUi->m_pActionRgbGroup1, &QAction::triggered, this, &MainWin::onRgbGroup1);
-    connect(m_pUi->m_pActionRgbGroup2, &QAction::triggered, this, &MainWin::onRgbGroup2);
-    connect(m_pUi->m_pActionRgbGroup3, &QAction::triggered, this, &MainWin::onRgbGroup3);
+    connect(m_pUi->m_pRgbGroup1, &QToolButton::clicked, this, &MainWin::onRgbGroup1);
+    connect(m_pUi->m_pRgbGroup2, &QToolButton::clicked, this, &MainWin::onRgbGroup2);
+    connect(m_pUi->m_pRgbGroup3, &QToolButton::clicked, this, &MainWin::onRgbGroup3);
 
     // connect the controller stuff
     connect(m_pUi->m_pBtnAddController, &QToolButton::clicked, this, &MainWin::onAddController);

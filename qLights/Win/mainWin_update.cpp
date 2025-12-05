@@ -54,13 +54,17 @@ void MainWin::updateToolbar()
     // action show values
     m_pUi->m_pActionShowValues->setChecked(isShowValues());
 
-    // action rgb groups
-    m_pUi->m_pActionRgbGroup1->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupSize() >= 1);
-    m_pUi->m_pActionRgbGroup2->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupSize() >= 2);
-    m_pUi->m_pActionRgbGroup3->setEnabled(m_pActiveFixture != nullptr &&
-                                          m_pActiveFixture->device()->rgbGroupSize() >= 3);
+    // action rgb groups, only visible without panel dock
+    m_pUi->m_pRgbGroup1->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pRgbGroup2->setVisible(!m_pUi->m_pPanelDock->isVisible());
+    m_pUi->m_pRgbGroup3->setVisible(!m_pUi->m_pPanelDock->isVisible());
+
+    m_pUi->m_pRgbGroup1->setEnabled(m_pActiveFixture != nullptr &&
+                                    m_pActiveFixture->device()->rgbGroupSize() >= 1);
+    m_pUi->m_pRgbGroup2->setEnabled(m_pActiveFixture != nullptr &&
+                                    m_pActiveFixture->device()->rgbGroupSize() >= 2);
+    m_pUi->m_pRgbGroup3->setEnabled(m_pActiveFixture != nullptr &&
+                                    m_pActiveFixture->device()->rgbGroupSize() >= 3);
 
     // ligth and fade buttons
     m_pUi->m_pSwitchOn->setVisible(!m_pUi->m_pPanelDock->isVisible());

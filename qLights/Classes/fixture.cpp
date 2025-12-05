@@ -119,6 +119,17 @@ void Fixture::setChannelValue(shared_ptr<Channel>   _pChannel,
 
 
 /*******************************************************************************
+* Fixture::channelValue
+*******************************************************************************/
+u8 Fixture::channelValue(s32 _s32ChannelNr) const
+{
+    shared_ptr<Channel>pChannel = findChannel(_s32ChannelNr);
+
+    return (pChannel)?   pChannel->channelValue() : 0;
+} // Fixture::channelValue
+
+
+/*******************************************************************************
 * Fixture::switchOn
 *******************************************************************************/
 void Fixture::switchOn()
