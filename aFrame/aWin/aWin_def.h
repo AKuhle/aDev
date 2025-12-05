@@ -171,6 +171,9 @@ class aMainWinMdi;
 class aTitleBar;
 class aToolBar;
 
+class aMdiArea;
+class aMdiSubWin;
+
 class aStyleParser;
 class aStyleItem;
 class aStyleItemFill;

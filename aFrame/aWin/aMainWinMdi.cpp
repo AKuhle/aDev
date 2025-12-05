@@ -15,6 +15,7 @@
 #include "aWin_def.h"
 
 #include "aMainWinMdi.h"
+#include "aMdiArea.h"
 
 
 /*******************************************************************************
@@ -42,40 +43,52 @@ aMainWinMdi::~aMainWinMdi()
 
 
 /*******************************************************************************
+* aMainWinMdi::mdiArea
+*******************************************************************************/
+aMdiArea* aMainWinMdi::mdiArea()
+{
+    return dynamic_cast<aMdiArea *> (centralWin());
+} // aMainWinMdi::mdiArea
+
+
+/*******************************************************************************
+* aMainWinMdi::addMdiSubWin
+*******************************************************************************/
+void aMainWinMdi::addMdiSubWin(aMdiSubWin *_pSubWin)
+{
+    aMdiArea *pArea = mdiArea();
+
+    if (pArea)
+    {
+        pArea->addMdiSubWin(_pSubWin);
+    }
+} // aMainWinMdi::addMdiSubWin
+
+
+/*******************************************************************************
+* aMainWinMdi::mdiArea
+*******************************************************************************/
+const aMdiArea* aMainWinMdi::mdiArea() const
+{
+    return dynamic_cast<const aMdiArea *> (centralWin());
+} // aMainWinMdi::mdiArea
+
+
+/*******************************************************************************
 * aMainWinMdi::onSysCreateWin
 *******************************************************************************/
 bool aMainWinMdi::onSysCreateWin()
 {
     if (aMainWin::onSysCreateWin())
     {
-        //     aMdiArea *pMdiArea = new aMdiArea();
-        //     pMdiArea->createWin();
+        aMdiArea *pMdiArea = new aMdiArea();
+        pMdiArea->createWin();
 
-        //     setCentralWin(pMdiArea);
+        setCentralWin(pMdiArea);
     }
 
     return true;
 } // aMainWinMdi::onSysCreateWin
-
-
-// /*******************************************************************************
-// * aMainWinMdi::mdiArea
-// *******************************************************************************/
-// aMdiArea* aMainWinMdi::mdiArea()
-// {
-//     return dynamic_cast<aMdiArea *> (centralWin());
-//     //return (aMdiArea *) (centralWin());
-// } // aMainWinMdi::mdiArea
-
-
-// /*******************************************************************************
-// * aMainWinMdi::mdiArea
-// *******************************************************************************/
-// aMdiArea* aMainWinMdi::mdiArea() const
-// {
-//     return dynamic_cast<aMdiArea *> (centralWin());
-//     //return (aMdiArea *) (centralWin());
-// } // aMainWinMdi::mdiArea
 
 
 // /*******************************************************************************

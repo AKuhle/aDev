@@ -17,6 +17,7 @@
 *******************************************************************************/
 #include "photoLab_defs.h"
 #include "mainWin.h"
+#include "aMdiSubWin.h"
 #include "aUrl.h"
 #include "aPath.h"
 #include "aPainter.h"
@@ -67,14 +68,14 @@ void MainWin::onOpenFile(aBtn */*_pBtn*/)
 *******************************************************************************/
 void MainWin::onPaintContent()
 {
-    shared_ptr<QImage> pImg = m_renderInfo.getQImage();
+    // shared_ptr<QImage> pImg = m_renderInfo.getQImage();
 
-    if (pImg)
-    {
-        aPainter    p(this);
+    // if (pImg)
+    // {
+    //     aPainter    p(this);
 
-        p.drawQImg(*pImg, 0, 0);
-    }
+    //     p.drawQImg(*pImg, 0, 0);
+    // }
 } // MainWin::onPaintContent
 
 
@@ -85,12 +86,18 @@ void MainWin::onDropUrl(const aUrl  &_url)
 {
     aPath   path(_url.toLocalFile());
 
-    aLayerStack ls;
-    ls.load(_url.toLocalFile());
+    cout << path.canonicalPath() << endl;
 
-    m_renderInfo.setLayerStack(ls);
+    aMdiSubWin  *pSubWin = new aMdiSubWin();
+    pSubWin->createWin();
+    addMdiSubWin(pSubWin);
 
-    update();
+    // aLayerStack ls;
+    // ls.load(_url.toLocalFile());
+
+    // m_renderInfo.setLayerStack(ls);
+
+    // update();
 } // MainWin::onDropUrl
 
 

@@ -75,6 +75,8 @@ release/aBaseWin_events.o
 release/aBaseWin_handler.o
 release/aMainWin.o
 release/aMainWinMdi.o
+release/aMdiArea.o
+release/aMdiSubWin.o
 release/aTitleBar.o
 release/aToolBar.o
 release/aWinStyle.o

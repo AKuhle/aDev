@@ -8,13 +8,13 @@
 *******************************************************************************/
 #pragma once
 
-#ifdef _USE_QT_
-
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
-#include "aMainWin.h"
+#include "aWin_def.h"
+
+#include "aBaseWin.h"
 
 
 /*******************************************************************************
@@ -25,43 +25,35 @@ namespace aWin {
 
 
 /*******************************************************************************
-* class aMainWinMdi
+* class aMdiArea
 *******************************************************************************/
-class aMainWinMdi : public aMainWin
+class aMdiArea : public aBaseWin
 {
+    private:
+
+
     /*******************************************************************************
     * con-/destruction
     *******************************************************************************/
-    protected:
-        aMainWinMdi(aBaseWin *_pParent = nullptr);
-        ~aMainWinMdi();
-
-
-    /*******************************************************************************
-    * aMainWinI interface
-    *******************************************************************************/
     public:
-        aMdiArea*           mdiArea();
-        const aMdiArea*     mdiArea() const;
+        aMdiArea(aBaseWin *_pParent = nullptr);
+        virtual ~aMdiArea();
 
-        void                addMdiSubWin(aMdiSubWin *_pSubWin);
 
-    //     void                mdiChildList(aPtrList<aMdiChild> &_lstMdiChild) const override;
-    //     aMdiChild*          activeMdiChild() const override;
-    //     aMdiChild*          topmostMdiChild() const override;
+    public:
+        void                    addMdiSubWin(aMdiSubWin *_pWin);
 
 
     /*******************************************************************************
     * aBaseWin interface
     *******************************************************************************/
     protected:
-        virtual bool        onSysCreateWin() override;
+        // bool                    onSysCreateWin() override;
+        // virtual void            onPaintBorder() override;
+        // virtual aRect           paddingRect() const override;
 
-}; // class aMainWinMdi
+}; // class aMdiArea
 
 
 } // namespace aWin
 } // namespace aFrame
-
-
-#endif //_USE_QT_

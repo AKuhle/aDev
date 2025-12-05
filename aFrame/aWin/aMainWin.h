@@ -40,6 +40,10 @@ class aMainWin : public aBaseWin,
         const aTitleBar*    titleBar() const;
         aTitleBar*          titleBar();
 
+        void                setCentralWin(aBaseWin *_pWin);
+        aBaseWin*           centralWin();
+        const aBaseWin*     centralWin() const;
+
 
     /*******************************************************************************
     * aBaseWin interface

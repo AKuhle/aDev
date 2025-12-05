@@ -1,21 +1,19 @@
 /*******************************************************************************
-* \file aMainWin.cpp
+* \file aMdiSubWin.cpp
 * \author Andreas Kuhlewind
 *
 * \brief
 *
 *  Detailed description starts here.
 *******************************************************************************/
-#ifdef _USE_QT_
 
 
 /*******************************************************************************
 * includes
 *******************************************************************************/
 #include <QMainWindow>
-//#include <QSettings>
 
-#include "aMainWin.h"
+#include "aMdiSubWin.h"
 #include "aLayoutMainWin.h"
 #include "aLayoutHoriVert.h"
 #include "aTitleBar.h"
@@ -30,93 +28,57 @@ namespace aWin {
 
 
 /*******************************************************************************
-* aMainWin::aMainWin
+* aMdiSubWin::aMdiSubWin
 *******************************************************************************/
-aMainWin::aMainWin(aBaseWin *_pParent)
+aMdiSubWin::aMdiSubWin(aBaseWin *_pParent)
 : aBaseWin(_pParent)
 {
-} // aMainWin::_isVisible
+} // aMdiSubWin::_isVisible
 
 
 /*******************************************************************************
-* aMainWin::~aMainWin
+* aMdiSubWin::~aMdiSubWin
 *******************************************************************************/
-aMainWin::~aMainWin()
+aMdiSubWin::~aMdiSubWin()
 {
-} // aMainWin::~aMainWin
+} // aMdiSubWin::~aMdiSubWin
 
 
 /*******************************************************************************
-* aMainWin::titleBar
+* aMdiSubWin::titleBar
 *******************************************************************************/
-const aTitleBar* aMainWin::titleBar() const
+const aTitleBar* aMdiSubWin::titleBar() const
 {
     const aLayoutMainWin *pLayout = dynamic_cast<const aLayoutMainWin *> (layout());
     CHECK_PRE_CONDITION(pLayout, nullptr);
 
     return pLayout->titleBar();
-} // aMainWin::titleBar
+} // aMdiSubWin::titleBar
 
 
 /*******************************************************************************
-* aMainWin::titleBar
+* aMdiSubWin::titleBar
 *******************************************************************************/
-aTitleBar* aMainWin::titleBar()
+aTitleBar* aMdiSubWin::titleBar()
 {
     aLayoutMainWin *pLayout = dynamic_cast<aLayoutMainWin *> (layout());
     CHECK_PRE_CONDITION(pLayout, nullptr);
 
     return pLayout->titleBar();
-} // aMainWin::titleBar
+} // aMdiSubWin::titleBar
 
 
 /*******************************************************************************
-* aMainWin::setCentralWin
+* aMdiSubWin::onSysCreateWin
 *******************************************************************************/
-void aMainWin::setCentralWin(aBaseWin *_pWin)
-{
-    aLayoutMainWin *pLayout = dynamic_cast<aLayoutMainWin *> (layout());
-    CHECK_PRE_CONDITION_VOID(pLayout);
-
-    pLayout->setCentralWin(_pWin);
-} // aMainWin::setCentralWin
-
-
-/*******************************************************************************
-* aMainWin::centralWin
-*******************************************************************************/
-aBaseWin* aMainWin::centralWin()
-{
-    aLayoutMainWin *pLayout = dynamic_cast<aLayoutMainWin *> (layout());
-    CHECK_PRE_CONDITION(pLayout, nullptr);
-
-    return pLayout->centralWin();
-} // aMainWin::centralWin
-
-
-/*******************************************************************************
-* aMainWin::centralWin
-*******************************************************************************/
-const aBaseWin* aMainWin::centralWin() const
-{
-    const aLayoutMainWin *pLayout = dynamic_cast<const aLayoutMainWin *> (layout());
-    CHECK_PRE_CONDITION(pLayout, nullptr);
-
-    return pLayout->centralWin();
-} // aMainWin::centralWin
-
-
-/*******************************************************************************
-* aMainWin::onSysCreateWin
-*******************************************************************************/
-bool aMainWin::onSysCreateWin()
+bool aMdiSubWin::onSysCreateWin()
 {
     CHECK_PRE_CONDITION(aBaseWin::onSysCreateWin(), false);
 
-    #ifdef _USE_QT_
-        // Titelleiste entfernen (for top level windows)
-        asSysWin()->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    #endif // _USE_QT_
+    // #ifdef _USE_QT_
+    //     // Titelleiste entfernen (for top level windows)
+    //     asSysWin()->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    // #endif // _USE_QT_
 
     // create the layout
     unique_ptr<aLayoutMainWin>  pLayout = make_unique<aLayoutMainWin> ();
@@ -132,10 +94,8 @@ bool aMainWin::onSysCreateWin()
     addTool(make_unique<aBorderResizeTool> (this));
 
     return true;
-} // aMainWin::onSysCreateWin
+} // aMdiSubWin::onSysCreateWin
 
 
 } // namespace aWin
 } // namespace aFrame
-
-#endif //_USE_QT_

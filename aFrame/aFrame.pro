@@ -34,7 +34,7 @@ DESTDIR = ../../../../Apps
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-DEFINES += __NO_FRAME_main__
+#DEFINES += __NO_FRAME_main__
 
 DEFINES += AFRAME_LIBRARY
 DEFINES += _USE_QT_
@@ -193,6 +193,8 @@ HEADERS += \
     aWin/aBaseWin.h \
     aWin/aMainWin.h \
     aWin/aMainWinMdi.h \
+    aWin/aMdiArea.h \
+    aWin/aMdiSubWin.h \
     aWin/aTitleBar.h \
     aWin/aToolBar.h \
     aWin/aWinStyle.h \
@@ -280,6 +282,8 @@ SOURCES += \
     aWin/aBaseWin_handler.cpp \
     aWin/aMainWin.cpp \
     aWin/aMainWinMdi.cpp \
+    aWin/aMdiArea.cpp \
+    aWin/aMdiSubWin.cpp \
     aWin/aTitleBar.cpp \
     aWin/aToolBar.cpp \
     aWin/aWinStyle.cpp

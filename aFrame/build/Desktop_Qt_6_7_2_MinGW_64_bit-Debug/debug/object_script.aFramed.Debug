@@ -75,6 +75,8 @@ debug/aBaseWin_events.o
 debug/aBaseWin_handler.o
 debug/aMainWin.o
 debug/aMainWinMdi.o
+debug/aMdiArea.o
+debug/aMdiSubWin.o
 debug/aTitleBar.o
 debug/aToolBar.o
 debug/aWinStyle.o

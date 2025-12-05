@@ -81,7 +81,6 @@ class MainWin : public aMainWinMdi
 
         // true => app is busy, e.g. running a cmd
         bool                m_bBusy                     { false };
-        RenderInfo          m_renderInfo;
 
     public:
         MainWin();
